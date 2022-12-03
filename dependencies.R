@@ -23,6 +23,6 @@ library(robCompositions) #coda models
 library(tidyverse) #tidyverse
 library(tscount) #models for count data; see dissertation 
 library(parallel) #parallelisation
-library(ggplot2)
+library(ggplot2) #plots
 
 

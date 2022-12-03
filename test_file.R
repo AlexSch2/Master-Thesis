@@ -56,6 +56,8 @@ for(i in 1:4){
   print(dim(y))
 }
 
+test<-coda.data.preperation(test_data,zero_handling = "zero")
+View(test)
 
 
 
