@@ -34,6 +34,7 @@ windows<-function(timeseries,frame,method=c("non-overlapping","overlapping"),pre
   }
   
   else {stop("Enter valid method")}
+  
   return(res)
 }
 
@@ -45,7 +46,7 @@ windows<-function(timeseries,frame,method=c("non-overlapping","overlapping"),pre
 #Prepares the data for the VAR model (pivoting to wide format, handling the zeros and transforming to ilr coordinates)
 #For now written with dplyr, may be optimised later
 #Currently aggregating on the main categories
-coda.data.preperation<-function(data,zero_handling=c("all","zeros_only")){
+coda.data.preperation<-function(data,zero_handling=c("all","zeros_only"),tspace=TRUE){
   
   plusone<-function(x)return(x+1)
   zero_handling<-match.arg(zero_handling)
@@ -72,6 +73,13 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only")){
   else {stop("Enter valid zero handling option")}
   
   data_ilr<-cbind(data$week_date,pivotCoord(as.data.frame(data[,-1])))
+  
+  if(tspace){
+    
+    data_ilr$tsum<-rowSums(data[,-1])
+    
+  }
+  
   
   return(data_ilr)
 }
