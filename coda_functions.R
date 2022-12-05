@@ -1,6 +1,7 @@
 #Helper functions for the CODA model
 
 #This function splits the time series into appropriate windows to determine the optimal length for the model 
+
 windows<-function(timeseries,frame,method=c("non-overlapping","overlapping"),prediction_error_step=1){
   
   method<-match.arg(method)
@@ -49,7 +50,8 @@ windows<-function(timeseries,frame,method=c("non-overlapping","overlapping"),pre
 #Prepares the data for the VAR model (pivoting to wide format, handling the zeros and transforming to ilr coordinates)
 #For now written with dplyr, may be optimised later
 #Currently aggregating on the main categories
-coda.data.preperation<-function(data,zero_handling=c("all","zeros_only"),tspace=T){
+
+coda.data.preperation<-function(data,zero_handling=c("all","zeros_only"),tspace=F){
   
   plusone<-function(x)return(x+1)
   zero_handling<-match.arg(zero_handling)
@@ -91,6 +93,7 @@ Eucledian<-function(x,y)return(sum((x-y)^2))
 
 
 #Function for calculating the prediction error 
+
 prediction.error<-function(model,fitted_data,true_values,prediction_error_step,
                            measure="Eucledian"){
   
@@ -115,16 +118,21 @@ prediction.error<-function(model,fitted_data,true_values,prediction_error_step,
     if("tsum" %in% names(true_values)){
       
       tsum_index<-which(colnames(true_values)=="tsum")
-      predicted_values_inverse<-pivotCoordInv(matrix(predicted_values_vector[,-tsum_index],nrow = 1))
+      predicted_values_inverse<-pivotCoordInv(predicted_values_vector[,-tsum_index])
       
-      return(measure.fun(cbind(predicted_values_inverse,predicted_values_vector[,tsum_index]),true_values))
+      true_values_inverse<-pivotCoordInv(as.matrix(true_values[,-tsum_index]))
+      
+      return(measure.fun(cbind(predicted_values_inverse,predicted_values_vector[,tsum_index]),
+                         cbind(true_values_inverse,true_values[,tsum_index])))
       
     }
     
     else {
       
-      predicted_values_vector<-pivotCoordInv(predicted_values_vector)
-      return(measure.fun(predicted_values_vector,true_values))
+      predicted_values_inverse<-pivotCoordInv(predicted_values_vector)
+      true_values_inverse<-pivotCoordInv(as.matrix(true_values))
+      
+      return(measure.fun(predicted_values_inverse,true_values_inverse))
       
    }
     
@@ -266,9 +274,16 @@ coda.tuning<-function(data,timeframes,lag.max,information_criteria_lag="AIC",
   return(best_frame)
 }
 
+
+
+
+#Analysis function for coda data. The function tunes the model for the optimal frame and p on training data 
+#and then calculates the prediction error on test data. With aggregation the results can be further analysed 
+# for example with the mean, sd, median or no aggregation. 
+
+
 #If no aggregation is wanted
 none<-function(x)x
-
 
 coda.analysis<-function(data_raw,ids,prediction_error_step=1,aggregation="mean"){
   
@@ -331,10 +346,8 @@ coda.analysis<-function(data_raw,ids,prediction_error_step=1,aggregation="mean")
 }
 
 
-test_mean<-coda.analysis(data,ids,aggregation = "none")
-test
-ids<-c(1,2,3,4,6,7)
-coda.plots(test_mean,save=FALSE,plot.type = "boxplot")
+#Plotting function for the result of coda.analysis. Right now only scatterplots and boxplots can be made. 
+
 
 coda.plots<-function(analysis_results,plot.type="dots",save=TRUE,path=NULL){
   
