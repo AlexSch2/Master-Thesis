@@ -51,7 +51,7 @@ windows<-function(timeseries,frame,method=c("non-overlapping","overlapping"),pre
 #For now written with dplyr, may be optimised later
 #Currently aggregating on the main categories
 
-coda.data.preperation<-function(data,zero_handling=c("all","zeros_only"),tspace=F){
+coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),tspace=FALSE,transform=TRUE){
   
   plusone<-function(x)return(x+1)
   zero_handling<-match.arg(zero_handling)
@@ -62,6 +62,8 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only"),tspace=
     dplyr::distinct()%>%
     pivot_wider(names_from 
                 = main_category_id,values_from = sold)
+  
+  if(zero_handling=="none"){return(data)}
   
   if(zero_handling=="all"){
     
@@ -89,13 +91,14 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only"),tspace=
   return(data_ilr)
 }
 
-Eucledian<-function(x,y)return(sum((x-y)^2))
+Eucledian<-function(x,y,standardise=1)return(sum((x-y)/standardise)^2)
 
 
-#Function for calculating the prediction error 
+
+ #Function for calculating the prediction error 
 
 prediction.error<-function(model,fitted_data,true_values,prediction_error_step,
-                           measure="Eucledian"){
+                           measure="Eucledian",relative=TRUE){
   
   measure.fun<-match.fun(measure)
   
@@ -115,15 +118,31 @@ prediction.error<-function(model,fitted_data,true_values,prediction_error_step,
   
   else{
     
+    
     if("tsum" %in% names(true_values)){
       
       tsum_index<-which(colnames(true_values)=="tsum")
-      predicted_values_inverse<-pivotCoordInv(predicted_values_vector[,-tsum_index])
+      predicted_values_inverse<-pivotCoordInv(matrix(predicted_values_vector[,-tsum_index],nrow=1))
       
       true_values_inverse<-pivotCoordInv(as.matrix(true_values[,-tsum_index]))
       
-      return(measure.fun(cbind(predicted_values_inverse,predicted_values_vector[,tsum_index]),
-                         cbind(true_values_inverse,true_values[,tsum_index])))
+      res<-measure.fun(cbind(predicted_values_inverse,predicted_values_vector[,tsum_index]),
+                       cbind(true_values_inverse,true_values[,tsum_index]))
+      
+      if(relative){
+        
+        last_known_value<-fitted_data[length(fitted_data),]
+        difference<-abs(true_values-last_known_value)
+        
+        if(sum(difference<=1/1e6)>0)difference[difference<=1/1e6]<-1/1e4
+        
+        
+        res<-measure.fun(cbind(predicted_values_inverse,predicted_values_vector[,tsum_index]),
+                         cbind(true_values_inverse,true_values[,tsum_index]),
+                         standardise=difference)
+      }
+      
+      return(res)
       
     }
     
@@ -132,9 +151,22 @@ prediction.error<-function(model,fitted_data,true_values,prediction_error_step,
       predicted_values_inverse<-pivotCoordInv(predicted_values_vector)
       true_values_inverse<-pivotCoordInv(as.matrix(true_values))
       
-      return(measure.fun(predicted_values_inverse,true_values_inverse))
+      res<-measure.fun(predicted_values_inverse,true_values_inverse)
       
-   }
+      if(relative){
+        
+        last_known_value<-fitted_data[length(fitted_data),]
+        difference<-abs(true_values-last_known_value)
+        
+        if(sum(difference<=1/1e6)>0)difference[difference<=1/1e6]<-1/1e4
+        
+        res<-measure.fun(predicted_values_inverse,true_values_inverse,standardise=difference)
+        
+      }
+      
+      return(res)
+      
+    }
     
   }
 
@@ -143,7 +175,7 @@ prediction.error<-function(model,fitted_data,true_values,prediction_error_step,
 
 
 
-#Returns the best time frame length according to the specifified information criteria (ic)
+^#Returns the best time frame length according to the specifified information criteria (ic)
 
 #IMPORTANT NOTES:
 #
@@ -259,7 +291,7 @@ coda.tuning<-function(data,timeframes,lag.max,information_criteria_lag="AIC",
           information_criteria<-ic(coda_model)
         }
         return(c(ic=information_criteria,p=p))
-      }),1,mean)
+      }),1,mean,na.rm=TRUE)
       
      return(data.frame(ic=data_timeframe_mean["ic"],
                  frame=frame,
@@ -283,22 +315,25 @@ coda.tuning<-function(data,timeframes,lag.max,information_criteria_lag="AIC",
 
 
 #If no aggregation is wanted
-none<-function(x)x
+#none<-function(x)x
 
-coda.analysis<-function(data_raw,ids,prediction_error_step=1,aggregation="mean"){
+coda.analysis<-function(all_data,ids,prediction_error_step=1){
   
-  aggregation<-match.fun(aggregation)
+  #aggregation<-match.fun(aggregation)
   
   model_results_id<-bind_rows(lapply(ids,function(id){
     
-    data<-data_raw%>%
+    data_raw<-all_data%>%
       filter(fridge_id==id)%>%
       dplyr::select(week_date,main_category_id,sold)
     
-    
-    mean_prediction_error_methods<-bind_rows(lapply(c("all","zeros_only"),function(type,tspace){
+    combinations_zerohandling_tspace<-expand.grid(c("all","zeros_only"),c(TRUE,FALSE),stringsAsFactors = FALSE)
+    mean_prediction_error_methods<-bind_rows(lapply(c(1:dim(combinations_zerohandling_tspace)[1]),function(x){
       
-      data_prepared<-coda.data.preperation(data,zero_handling = type)
+      type<- combinations_zerohandling_tspace$Var1[x]
+      tspace<- combinations_zerohandling_tspace$Var2[x]
+      
+      data_prepared<-coda.data.preperation(data_raw,zero_handling =type,tspace = tspace)
       data_length<-dim(data_prepared)[1]
 
       data_prepared_train<-data_prepared[c(1:floor(data_length/2)),]
@@ -311,30 +346,76 @@ coda.analysis<-function(data_raw,ids,prediction_error_step=1,aggregation="mean")
                                                 information_criteria_frame = "prediction.error",
                                                 prediction_error_step = 1,multicore = FALSE)
       
+      data_prepared_notransf<-coda.data.preperation(data_raw,zero_handling="none",tspace=TRUE)
       
-      indexes<-windows(data_prepared_test,optimal_parameters$frame,method = "overlapping",
+      #data_raw_windows_train<-windows(data_prepared_notransf[c(1:floor(data_length/2)),],
+      #                                optimal_parameters$frame,method = "overlapping",
+      #                                prediction_error_step = prediction_error_step)
+      
+      data_notransf_test_windows<-windows(data_prepared_notransf[c((floor(data_length/2)+1):dim(data_raw)[1]),],
+                                     optimal_parameters$frame,method = "overlapping",
+                                     prediction_error_step = prediction_error_step)
+      
+      data_prepared_windows_test<-windows(data_prepared_test,optimal_parameters$frame,method = "overlapping",
                        prediction_error_step = prediction_error_step)
       
       
-      prediction_errors<-aggregation(sapply(c(1:length(indexes)),function(index){
+      prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),function(index){
 
-        fitting_data<-indexes[[index]]$fitting[,-1]
-        prediction_value<-indexes[[index]]$prediction_value[,-1]
+        fitting_data<-data_prepared_windows_test[[index]]$fitting[,-1]
+        true_value<-data_prepared_windows_test[[index]]$prediction_value[,-1]
         
         model<-VAR(fitting_data,p=optimal_parameters$p)
         
+        #prediction_error<-prediction.error(model,fitted_data = fitting_data,
+        #                                   true_values = true_value,
+        #                                   prediction_error_step = prediction_error_step)
         
-        prediction_error<-prediction.error(model,fitted_data = fitted_data,
-                                           true_values = prediction_value,
-                                           prediction_error_step = prediction_error_step)
+        predicted_value<-predict(model,fitting_data,n.ahead = prediction_error_step)
+        
+        if(sum(is.na(predicted_value))>0)predicted_value<-NA
+        
+        else {
+          size<-length(true_value)
+          
+          
+          predicted_values_vector<-matrix(data=NA,nrow=1,ncol=size)
+          
+          for(i in 1: size){
+            
+            predicted_values_vector[1,i]<-predicted_values$fcst[[i]][prediction_error_step]
+            
+          }
+          
+          predicted_values<-predicted_values_vector%>%matrix(nrow=1)%>%pivotCoordInv()
+        }
+                         
+        
+        tsums<-data_notransf_test_windows[[index]]$fitting[,"tsum"]
+        
+        if(tspace){
+          
+          tsums<-c(tsums,tsums*2)
+          category<-factor(c("1","2","3","4","tsum"))
+        }
+        
+        else{category<-factor(c("1","2","3","4"))}
+        
+        predicted_value<-predicted_value*tsums
+        
       
-        return(prediction_error)
+        return(data.frame(prediction_error=true_value-predicted_value,
+                          predicted_value=predicted_value,
+                          true_value=data_notransf_test_windows[[index]]$prediction_value[,-1],
+                          category=category))
       }))
       
-      return(data.frame(pred_error=prediction_errors,
-                        method=rep(type,length(prediction_errors))))
+      prediction_results$method=rep(type,length(prediction_results))
+      prediction_results$tspace=rep(tspace,length(prediction_results))
       
-    },tspace=FALSE))
+      return(prediction_results)
+      
+    }))
     
    mean_prediction_error_methods$id<-as.factor(id)
    mean_prediction_error_methods$method<-as.factor(mean_prediction_error_methods$method)
@@ -345,22 +426,25 @@ coda.analysis<-function(data_raw,ids,prediction_error_step=1,aggregation="mean")
   return(model_results_id)
 }
 
+test<-coda.analysis(weekly_category_data,ids=4)
 
 #Plotting function for the result of coda.analysis. Right now only scatterplots and boxplots can be made. 
 
 
 coda.plots<-function(analysis_results,plot.type="dots",save=TRUE,path=NULL){
   
-  basis_plot<-ggplot(data=analysis_results,aes(x=id,y=pred_error,colour=method))
+  basis_plot<-ggplot(data=analysis_results,aes(x=id,y=pred_error,colour=method))+facet_grid(~tspace)
   
   if(plot.type=="dots"){
     
     final_plot<-basis_plot+
-    geom_point(position=position_dodge(width = 0.1))
+    geom_point(position=position_dodge(width = 0.1))+
+      ylim(c(0,80))+scale_y_log10()+geom_hline(yintercept = 1)
   }
   else if(plot.type=="boxplot"){
     final_plot<-basis_plot+
-      geom_boxplot(position = "dodge")
+      geom_boxplot(position = "dodge")+
+      ylim(c(0,80))
   }
   
   else {
@@ -373,8 +457,6 @@ coda.plots<-function(analysis_results,plot.type="dots",save=TRUE,path=NULL){
   }
   return(final_plot)
 }
-
-´
   
   
 

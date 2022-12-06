@@ -31,9 +31,15 @@ data_time_windows<-windows(data_prepared_all_plus1,frame,method="overlapping",
 fitting_data<-data_time_windows[[1]]$fitting[,-1]
 future_data<-data_time_windows[[1]]$prediction_value[,-1]
 
-model<-VAR(data_prepared_all_plus1_tspace,lag.max = 2,ic="HQ")
+data_prepared_all_plus1<-coda.data.preperation(test_data)
 
-predicted_data<-predict(model,fitting_data,n.ahead = 2)
+model<-VAR(data_prepared_all_plus1[,-1])
+
+predicted_values<-predict(model,data_prepared_all_plus1)
+
+predicted_data<-pivotCoordInv(matrix(c(predict(model,fitting_data,n.ahead = 2)$fcst$X1[,1],
+                                           predict(model,fitting_data,n.ahead = 2)$fcst$X2[,1],
+                                           predict(model,fitting_data,n.ahead = 2)$fcst$X3[,1]),ncol=3,byrow=T))
 View(predicted_data)
 
 predicted_data<-c(predicted_data$fcst$X1[1],predicted_data$fcst$X2[1],predicted_data$fcst$X3[1])
@@ -60,6 +66,8 @@ test<-coda.data.preperation(test_data,zero_handling = "zero")
 View(test)
 
 
-
+lapply(c(1:dim(combinations_zerohandling_tspace)[1]),function(x){
+  paste("\n zero handling:",combinations_zerohandling_tspace$Var1[x],"Tspace:",combinations_zerohandling_tspace$Var2[x],sep=" ")
+})
 
 
