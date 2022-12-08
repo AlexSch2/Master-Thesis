@@ -1,0 +1,181 @@
+---
+title: "coda_analysis_script"
+author: "Alexander Schwaiger"
+date: "2022-12-08"
+output: pdf_document
+---
+```{r}
+#source("dependencies.R")
+#source("coda_functions.R")
+```
+
+
+```{r}
+id<-4
+type<-"all"
+tspace<-TRUE
+prediction_error_step<-1
+```
+
+Choosing and filtering relevant data
+```{r}
+data_raw<-weekly_category_data%>%
+      filter(fridge_id==id)%>%
+      dplyr::select(week_date,main_category_id,sold)
+```
+
+Transforming data
+```{r}
+data_prepared<-coda.data.preperation(data_raw,zero_handling =type,tspace = tspace)%>%
+                arrange(week_date)
+data_length<-dim(data_prepared)[1]
+```
+
+Splitting in test and training data
+```{r}
+data_prepared_train<-data_prepared[c(1:floor(data_length/3)),]
+data_prepared_test<-data_prepared[c((floor(data_length/3)+1):data_length),]
+
+data_length_train<-dim(data_prepared_train)[1]
+      
+timeframes<-floor(c(0.3*data_length_train,0.5*data_length_train,0.9*data_length_train))
+```
+
+Calculating optimal parameters
+```{r}
+optimal_parameters<-coda.tuning(data_prepared_train,timeframes = timeframes,
+                                                lag.max = 6,information_criteria_lag  ="AIC",
+                                information_criteria_frame="prediction.error",prediction_error_step = 1,multicore = FALSE)
+```
+
+
+Non-transformed data
+```{r}
+data_prepared_notransf<-coda.data.preperation(data_raw,zero_handling="none",tspace=TRUE)
+
+data_notransf_test_windows<-windows(data_prepared_notransf[c((floor(data_length/3)+1):data_length),],
+                                     optimal_parameters$frame,method = "overlapping",
+                                     prediction_error_step = prediction_error_step)
+      
+```
+
+Test windows for prepared data
+```{r}
+data_prepared_windows_test<-windows(data_prepared_test,optimal_parameters$frame,method = "overlapping",
+                       prediction_error_step = prediction_error_step)
+```
+
+```{r}
+prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),function(index){
+
+        fitting_data<-data_prepared_windows_test[[index]]$fitting[,-1]
+        true_value<-data_prepared_windows_test[[index]]$prediction_value[,-1]
+        prediction_date<-data_prepared_windows_test[[index]]$prediction_value[1,1]
+        
+        model<-VAR(fitting_data,p=optimal_parameters$p)
+        
+        #prediction_error<-prediction.error(model,fitted_data = fitting_data,
+        #                                   true_values = true_value,
+        #                                   prediction_error_step = prediction_error_step)
+        
+        predicted_value<-predict(model,fitting_data,n.ahead = prediction_error_step)
+        
+        if(sum(is.na(predicted_value$fcst))>0){
+          
+          predicted_value<-NA
+          } else {
+          size<-length(true_value)
+          
+          
+          predicted_values_vector<-matrix(data=NA,nrow=1,ncol=size)
+          
+          for(i in 1: size){
+            
+            predicted_values_vector[1,i]<-predicted_value$fcst[[i]][prediction_error_step]
+            
+          }
+        }
+                         
+        
+#        tsums<-data_notransf_test_windows[[index]]$fitting[max(which(!is.na(data_notransf_test_windows[[index]]$fitting$tsum))),"tsum"]
+        
+#        if(sum(is.na(tsums))>0){
+          
+          tsums<-median(data_prepared_notransf$tsum,na.rm=TRUE)
+          
+#        }else{
+            
+#         tsums<-as.numeric(tsums)
+#          }
+        
+        
+        
+        if(tspace){
+          
+          predicted_value<-predicted_values_vector[-size]%>%matrix(nrow=1)%>%pivotCoordInv()
+          predicted_value<-predicted_value*tsums
+          predicted_value<-(append(predicted_value,predicted_values_vector[size]))
+            
+          category<-factor(c("1","2","3","4","tsum"))
+          
+        }else{
+          
+          predicted_value<-predicted_values_vector%>%matrix(nrow=1)%>%pivotCoordInv()
+          predicted_value<-predicted_value*tsums
+          category<-factor(c("1","2","3","4"))
+            
+        }
+        
+        if(index==1){
+            naive_predicted_value<-apply(data_prepared_notransf[,-1],2,median,na.rm=TRUE)
+          }else{
+            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-1],1))
+            }
+        
+        predicted_value<-round(as.numeric(predicted_value))
+        true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-1])
+        prediction_error<-as.numeric(true_value-predicted_value)
+        prediction_error_naive<-as.numeric(true_value-naive_predicted_value)
+        
+          return(data.frame(prediction_error=prediction_error,
+                            prediction_error_naive=prediction_error_naive,
+                                  predicted_value=predicted_value,
+                          true_value=true_value,
+                          naive_predicted_value=naive_predicted_value,
+                         category=category,
+                         prediction_date=prediction_date)
+                          )
+      }))
+```
+
+
+
+Plotting results
+
+```{r}
+#View(prediction_results)
+ggplot(prediction_results,aes(x=prediction_date,y=predicted_value))+
+  facet_wrap(vars(category),nrow=5,scales = "free")+
+  geom_point(col="red")+
+  geom_line(col="red")+
+  geom_point(inherit.aes = FALSE,aes(x=prediction_date,y=true_value),col="black")+
+  geom_point(inherit.aes = FALSE,aes(x=prediction_date,y=naive_predicted_value),col="green")
+
+```
+
+
+```{r}
+ggplot(prediction_results,aes(x=prediction_date,y=prediction_error))+
+  facet_wrap(vars(category),nrow=5,scales = "free")+
+  geom_point(color="red")+
+  geom_point(inherit.aes = FALSE,aes(x=prediction_date,y=prediction_error_naive),color="green")+
+  geom_hline(yintercept = 0)
+```
+
+
+
+
+
+
+
+

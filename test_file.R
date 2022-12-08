@@ -70,4 +70,9 @@ lapply(c(1:dim(combinations_zerohandling_tspace)[1]),function(x){
   paste("\n zero handling:",combinations_zerohandling_tspace$Var1[x],"Tspace:",combinations_zerohandling_tspace$Var2[x],sep=" ")
 })
 
+for(index in 1:length(data_prepared_windows_test)){
+  
+x<-data_notransf_test_windows[[index]]$fitting[max(which(!is.na(data_notransf_test_windows[[index]]$fitting$tsum))),"tsum"]%>%as.numeric()
+cat(index,":",x,"\n")
+}
 
