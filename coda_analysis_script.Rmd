@@ -12,9 +12,10 @@ output: pdf_document
 
 ```{r}
 id<-4
-type<-"all"
-tspace<-TRUE
+type<-"zeros_only"
+tspace<-T
 prediction_error_step<-1
+take_log<-T
 ```
 
 Choosing and filtering relevant data
@@ -26,7 +27,7 @@ data_raw<-weekly_category_data%>%
 
 Transforming data
 ```{r}
-data_prepared<-coda.data.preperation(data_raw,zero_handling =type,tspace = tspace)%>%
+data_prepared<-coda.data.preperation(data_raw,zero_handling =type,tspace = tspace,log=take_log)%>%
                 arrange(week_date)
 data_length<-dim(data_prepared)[1]
 ```
@@ -74,10 +75,6 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
         
         model<-VAR(fitting_data,p=optimal_parameters$p)
         
-        #prediction_error<-prediction.error(model,fitted_data = fitting_data,
-        #                                   true_values = true_value,
-        #                                   prediction_error_step = prediction_error_step)
-        
         predicted_value<-predict(model,fitting_data,n.ahead = prediction_error_step)
         
         if(sum(is.na(predicted_value$fcst))>0){
@@ -96,56 +93,70 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
           }
         }
                          
-        
-#        tsums<-data_notransf_test_windows[[index]]$fitting[max(which(!is.na(data_notransf_test_windows[[index]]$fitting$tsum))),"tsum"]
-        
-#        if(sum(is.na(tsums))>0){
           
           tsums<-median(data_prepared_notransf$tsum,na.rm=TRUE)
-          
-#        }else{
-            
-#         tsums<-as.numeric(tsums)
-#          }
-        
+
         
         
         if(tspace){
           
-          predicted_value<-predicted_values_vector[-size]%>%matrix(nrow=1)%>%pivotCoordInv()
+                     predicted_value<-predicted_values_vector[-size]%>%matrix(nrow=1)%>%pivotCoordInv()
           predicted_value<-predicted_value*tsums
-          predicted_value<-(append(predicted_value,predicted_values_vector[size]))
+          
+          if(take_log){
+            
+          predicted_value<-(append(predicted_value,exp(predicted_values_vector[size])))
+            
+          }
+          else{
+
+          predicted_value<-(append(predicted_value,predicted_values_vector[size])) 
+          }
+          
+          true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-1])
             
           category<-factor(c("1","2","3","4","tsum"))
+          
+          if(index==1){
+            naive_predicted_value<-apply(data_prepared_notransf[,-1],2,median,na.rm=TRUE)
+          }else{
+            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-1],1))
+            }
           
         }else{
           
           predicted_value<-predicted_values_vector%>%matrix(nrow=1)%>%pivotCoordInv()
           predicted_value<-predicted_value*tsums
+          
+          true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-c(1,6)])
+          
           category<-factor(c("1","2","3","4"))
+          
+          if(index==1){
+            naive_predicted_value<-apply(data_prepared_notransf[,-c(1,6)],2,median,na.rm=TRUE)
+          }else{
+            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-c(1,6)],1))
+            }
             
         }
         
-        if(index==1){
-            naive_predicted_value<-apply(data_prepared_notransf[,-1],2,median,na.rm=TRUE)
-          }else{
-            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-1],1))
-            }
+        
         
         predicted_value<-round(as.numeric(predicted_value))
-        true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-1])
+
         prediction_error<-as.numeric(true_value-predicted_value)
         prediction_error_naive<-as.numeric(true_value-naive_predicted_value)
         
-          return(data.frame(prediction_error=prediction_error,
+        
+                  return(data.frame(prediction_error=prediction_error,
                             prediction_error_naive=prediction_error_naive,
                                   predicted_value=predicted_value,
                           true_value=true_value,
                           naive_predicted_value=naive_predicted_value,
-                         category=category,
+                           category=category,
                          prediction_date=prediction_date)
-                          )
-      }))
+                  )
+        }))
 ```
 
 
@@ -154,12 +165,22 @@ Plotting results
 
 ```{r}
 #View(prediction_results)
-ggplot(prediction_results,aes(x=prediction_date,y=predicted_value))+
+plot_data<-prediction_results%>%
+  pivot_longer(cols=predicted_value:naive_predicted_value,
+               names_to="type",values_to = "prediction_values")
+```
+
+```{r}
+my_color <- setNames(c("red", "green", "black"),
+                     c('predicted_value', 'naive_predicted_value', 'true_value'))
+
+ggplot(plot_data,aes(x=prediction_date,y=prediction_values,col=type))+
   facet_wrap(vars(category),nrow=5,scales = "free")+
-  geom_point(col="red")+
-  geom_line(col="red")+
-  geom_point(inherit.aes = FALSE,aes(x=prediction_date,y=true_value),col="black")+
-  geom_point(inherit.aes = FALSE,aes(x=prediction_date,y=naive_predicted_value),col="green")
+  geom_point()+
+  geom_line(data=filter(plot_data,type=="predicted_value"),
+            aes(x=prediction_date,y=prediction_values),col="red")+
+  scale_color_manual("Legend", values = my_color)
+
 
 ```
 
@@ -172,7 +193,16 @@ ggplot(prediction_results,aes(x=prediction_date,y=prediction_error))+
   geom_hline(yintercept = 0)
 ```
 
+```{r}
+hist(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)],
+     xlab="errors",
+     main="Histogram of 1-step ahead prediction errors")
+```
 
+```{r}
+qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE))
+qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)])
+```
 
 
 

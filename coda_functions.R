@@ -51,7 +51,7 @@ windows<-function(timeseries,frame,method=c("non-overlapping","overlapping"),pre
 #For now written with dplyr, may be optimised later
 #Currently aggregating on the main categories
 
-coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),tspace=FALSE,transform=TRUE){
+coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),tspace=FALSE,transform=TRUE,log=FALSE){
   
   plusone<-function(x)return(x+1)
   zero_handling<-match.arg(zero_handling)
@@ -89,9 +89,13 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),
   
   if(tspace){
     
-    data_ilr$tsum<-rowSums(data[,-1])
+    if(log){data_ilr$tsum<-log(rowSums(data[,-1]))}
+    
+    else {data_ilr$tsum<-rowSums(data[,-1])}
     
   }
+  
+  names(data_ilr)[1]<-"week_date"
   
   
   return(data_ilr)
@@ -457,7 +461,7 @@ coda.analysis<-function(all_data,ids,prediction_error_step=1){
   return(model_results_id)
 }
 
-test<-coda.analysis(weekly_category_data,ids=4)
+#test<-coda.analysis(weekly_category_data,ids=4)
 
 #Plotting function for the result of coda.analysis. Right now only scatterplots and boxplots can be made. 
 
