@@ -51,7 +51,7 @@ windows<-function(timeseries,frame,method=c("non-overlapping","overlapping"),pre
 #For now written with dplyr, may be optimised later
 #Currently aggregating on the main categories
 
-coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),tspace=FALSE,transform=TRUE){
+coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),tspace=FALSE,transform=TRUE,log=FALSE){
   
   plusone<-function(x)return(x+1)
   zero_handling<-match.arg(zero_handling)
@@ -63,7 +63,12 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),
     pivot_wider(names_from 
                 = main_category_id,values_from = sold)
   
-  if(zero_handling=="none"){return(data)}
+  if(zero_handling=="none"){
+      
+      data$tsum<-rowSums(data[,-1])
+    
+    return(data)
+    }
   
   if(zero_handling=="all"){
     
@@ -79,17 +84,24 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),
   }
   else {stop("Enter valid zero handling option")}
   
+  
   data_ilr<-cbind(data$week_date,pivotCoord(as.data.frame(data[,-1])))
   
   if(tspace){
     
-    data_ilr$tsum<-rowSums(data[,-1])
+    if(log){data_ilr$tsum<-log(rowSums(data[,-1]))}
+    
+    else {data_ilr$tsum<-rowSums(data[,-1])}
     
   }
+  
+  names(data_ilr)[1]<-"week_date"
   
   
   return(data_ilr)
 }
+
+
 
 Eucledian<-function(x,y,standardise=1)return(sum((x-y)/standardise)^2)
 
@@ -175,7 +187,7 @@ prediction.error<-function(model,fitted_data,true_values,prediction_error_step,
 
 
 
-^#Returns the best time frame length according to the specifified information criteria (ic)
+#Returns the best time frame length according to the specifified information criteria (ic)
 
 #IMPORTANT NOTES:
 #
@@ -225,10 +237,18 @@ coda.tuning<-function(data,timeframes,lag.max,information_criteria_lag="AIC",
         prediction_value<-data_time_windows[[i]]$prediction_value[,-1]
         fitting_data<-data_time_windows[[i]]$fitting[,-1]
         
-        lag.max<-min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1) # Note 1 
+        lag.max<-max(min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1),1)# Note 1 
+        if(lag.max==1){lag.max<-NULL}
+        
         coda_model<-VAR(fitting_data,lag.max=lag.max,ic=information_criteria_lag)
         
-        p<-coda_model$p
+        if(is.null(lag.max)){
+          
+          p<-1
+          
+        }else {
+          p<-coda_model$p
+        }
         if(information_criteria_frame=="prediction.error"){
           
           information_criteria<-ic(coda_model,fitted_data=fitting_data,
@@ -273,10 +293,24 @@ coda.tuning<-function(data,timeframes,lag.max,information_criteria_lag="AIC",
         prediction_value<-data_time_windows[[i]]$prediction_value[,-1]
         fitting_data<-data_time_windows[[i]]$fitting[,-1]
         
-        lag.max<-min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1) # Note 1
+        lag.max<-max(min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
+        
+        if(lag.max==1){
+          
+          lag.max<-NULL
+  
+        }
+        
         coda_model<-VAR(fitting_data,lag.max=lag.max,ic=information_criteria_lag)
         
-        p<-coda_model$p
+        if(is.null(lag.max)){
+          
+          p<-1
+          
+        }else {
+          p<-coda_model$p
+        }
+        names(p)<-""
         
         if(information_criteria_frame=="prediction.error"){
           
@@ -290,12 +324,13 @@ coda.tuning<-function(data,timeframes,lag.max,information_criteria_lag="AIC",
           
           information_criteria<-ic(coda_model)
         }
+        
         return(c(ic=information_criteria,p=p))
       }),1,mean,na.rm=TRUE)
       
      return(data.frame(ic=data_timeframe_mean["ic"],
                  frame=frame,
-                 p=data_timeframe_mean[paste("p",".",information_criteria_lag,"(n)",sep="")])) 
+                 p=data_timeframe_mean["p"])) 
     }))
     
     print("Stopping Calculations")
@@ -426,7 +461,7 @@ coda.analysis<-function(all_data,ids,prediction_error_step=1){
   return(model_results_id)
 }
 
-test<-coda.analysis(weekly_category_data,ids=4)
+#test<-coda.analysis(weekly_category_data,ids=4)
 
 #Plotting function for the result of coda.analysis. Right now only scatterplots and boxplots can be made. 
 
