@@ -326,7 +326,7 @@ coda.tuning<-function(data,timeframes,lag.max,information_criteria_lag="AIC",
         }
         
         return(c(ic=information_criteria,p=p))
-      }),1,mean,na.rm=TRUE)
+      }),1,median,na.rm=TRUE)
       
      return(data.frame(ic=data_timeframe_mean["ic"],
                  frame=frame,

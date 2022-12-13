@@ -12,11 +12,37 @@ output: pdf_document
 
 ```{r}
 id<-4
-type<-"zeros_only"
+zero_handling<-"zeros_only"
 tspace<-T
 prediction_error_step<-1
 take_log<-T
+
+
 ```
+
+Plot naming function
+
+```{r}
+coda.plot.name<-function(id,zero_handling,tspace,take_log){
+  if(tspace){
+    tspace_char<-"_tspace"
+    
+     if(take_log){
+    take_log_char<-"_log"
+  } else{
+    take_log_char<-""
+  }
+    
+  } else{
+    tspace_char<-""
+    take_log_char<-""
+  }
+  
+  name<-paste("fridge_","id",id,"_zero_handling_",zero_handling,take_log_char,tspace_char,sep="")
+  return(name)
+}
+```
+
 
 Choosing and filtering relevant data
 ```{r}
@@ -52,7 +78,7 @@ optimal_parameters<-coda.tuning(data_prepared_train,timeframes = timeframes,
 
 Non-transformed data
 ```{r}
-data_prepared_notransf<-coda.data.preperation(data_raw,zero_handling="none",tspace=TRUE)
+data_prepared_notransf<-coda.data.preperation(data_raw,zero_handling="none",tspace=T)
 
 data_notransf_test_windows<-windows(data_prepared_notransf[c((floor(data_length/3)+1):data_length),],
                                      optimal_parameters$frame,method = "overlapping",
@@ -166,42 +192,85 @@ Plotting results
 ```{r}
 #View(prediction_results)
 plot_data<-prediction_results%>%
+  dplyr::select(predicted_value:prediction_date)%>%
   pivot_longer(cols=predicted_value:naive_predicted_value,
                names_to="type",values_to = "prediction_values")
 ```
 
 ```{r}
-my_color <- setNames(c("red", "green", "black"),
+my_color <- setNames(c("red", "aquamarine", "black"),
                      c('predicted_value', 'naive_predicted_value', 'true_value'))
 
-ggplot(plot_data,aes(x=prediction_date,y=prediction_values,col=type))+
-  facet_wrap(vars(category),nrow=5,scales = "free")+
-  geom_point()+
-  geom_line(data=filter(plot_data,type=="predicted_value"),
-            aes(x=prediction_date,y=prediction_values),col="red")+
-  scale_color_manual("Legend", values = my_color)
+plot_name<-coda.plot.name(id=id,zero_handling = zero_handling,tspace=tspace,take_log = take_log)
 
+p1<-ggplot(plot_data,aes(x=prediction_date,y=prediction_values,col=type))+
+  facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+
+  geom_point(size=4)+
+  geom_line(data=plot_data,
+            aes(x=prediction_date,y=prediction_values,col=type))+
+  scale_color_manual("Legend", values = my_color)+
+  ggtitle("Actual Timeseries vs. predicted ",subtitle = paste("Fridge ID:",id,",zero handling:",zero_handling,sep=" "))
 
+p1
+
+ggsave(filename = paste("timeseries_",plot_name,".png",sep=""),plot=p1,height = 15,width = 20)
 ```
 
 
+
 ```{r}
-ggplot(prediction_results,aes(x=prediction_date,y=prediction_error))+
-  facet_wrap(vars(category),nrow=5,scales = "free")+
-  geom_point(color="red")+
-  geom_point(inherit.aes = FALSE,aes(x=prediction_date,y=prediction_error_naive),color="green")+
-  geom_hline(yintercept = 0)
+p2<-ggplot(prediction_results,aes(x=prediction_date,y=prediction_error))+
+  facet_wrap(vars(category),nrow=length(unique(prediction_results$category)),scales = "free")+
+  geom_point(color="red",size=4)+
+  geom_point(inherit.aes = FALSE,aes(x=prediction_date,y=prediction_error_naive),color="aquamarine",size=4)+
+  geom_hline(yintercept = 0)+
+  ggtitle("Prediction Error")
+
+p2
+
+ggsave(filename = paste("prediction_error_",plot_name,".png",sep=""),plot=p2,height = 15,width = 20)
 ```
 
 ```{r}
 hist(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)],
      xlab="errors",
      main="Histogram of 1-step ahead prediction errors")
+
+
+png(paste("histogram_prediction_error_",plot_name,".png",sep=""),height = 15,width = 20,units = "cm",res=300)
+hist(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)],
+     xlab="errors",
+     main="Histogram of 1-step ahead prediction errors")
+dev.off()
 ```
 
 ```{r}
 qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE))
 qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)])
+
+png(paste("qqplot_prediction_error_",plot_name,".png",sep=""),height = 15,width = 20,units = "cm",res=300)
+qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE))
+dev.off()
+
+```
+```{r}
+plot_data2<-prediction_results%>%
+  dplyr::select(-(predicted_value:naive_predicted_value))%>%
+  pivot_longer(cols=prediction_error:prediction_error_naive,
+               names_to="type",values_to = "prediction_error")
+
+plot_data2$type<-as.factor(plot_data2$type)
+levels(plot_data2$type)<-c("VAR_model","naive_method")
+```
+
+
+```{r}
+p3<-ggplot(plot_data2,aes(x=type,y=prediction_error))+
+  facet_wrap(vars(category),ncol=length(unique(plot_data2$category)),scales = "fixed")+
+  geom_boxplot()+
+  ggtitle("Prediction error per method and category")
+  
+ggsave(filename = paste("box_prediction_error_",plot_name,".png",sep=""),plot=p3,height = 15,width = 20)
 ```
 
 
