@@ -61,7 +61,8 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),
     dplyr::mutate(sold=sum(sold))%>%
     dplyr::distinct()%>%
     pivot_wider(names_from 
-                = main_category_id,values_from = sold)
+                = main_category_id,values_from = sold)%>%
+    dplyr::select("1","2","3","4")
   
   if(zero_handling=="none"){
       

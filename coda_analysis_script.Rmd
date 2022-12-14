@@ -11,7 +11,7 @@ output: pdf_document
 
 
 ```{r}
-id<-4
+id<-12
 zero_handling<-"zeros_only"
 tspace<-T
 prediction_error_step<-1
@@ -48,12 +48,13 @@ Choosing and filtering relevant data
 ```{r}
 data_raw<-weekly_category_data%>%
       filter(fridge_id==id)%>%
-      dplyr::select(week_date,main_category_id,sold)
+      dplyr::select(week_date,main_category_id,sold)%>%
+                arrange(week_date)
 ```
 
 Transforming data
 ```{r}
-data_prepared<-coda.data.preperation(data_raw,zero_handling =type,tspace = tspace,log=take_log)%>%
+data_prepared<-coda.data.preperation(data_raw,zero_handling =zero_handling,tspace = tspace,log=take_log)%>%
                 arrange(week_date)
 data_length<-dim(data_prepared)[1]
 ```
