@@ -11,8 +11,8 @@ output: pdf_document
 
 
 ```{r}
-id<-12
-zero_handling<-"zeros_only"
+id<-4
+zero_handling<-"all"
 tspace<-T
 prediction_error_step<-1
 take_log<-T
@@ -47,7 +47,7 @@ coda.plot.name<-function(id,zero_handling,tspace,take_log){
 Choosing and filtering relevant data
 ```{r}
 data_raw<-weekly_category_data%>%
-      filter(fridge_id==id)%>%
+      filter(fridge_id==id & main_category_id %in% c(1,2))%>%
       dplyr::select(week_date,main_category_id,sold)%>%
                 arrange(week_date)
 ```
@@ -61,35 +61,35 @@ data_length<-dim(data_prepared)[1]
 
 Splitting in test and training data
 ```{r}
-data_prepared_train<-data_prepared[c(1:floor(data_length/3)),]
-data_prepared_test<-data_prepared[c((floor(data_length/3)+1):data_length),]
+#data_prepared_train<-data_prepared[c(1:floor(data_length/3)),]
+#data_prepared_test<-data_prepared[c((floor(data_length/3)+1):data_length),]
 
-data_length_train<-dim(data_prepared_train)[1]
+#data_length_train<-dim(data_prepared_train)[1]
       
-timeframes<-floor(c(0.3*data_length_train,0.5*data_length_train,0.9*data_length_train))
+#timeframes<-floor(c(0.3*data_length_train,0.5*data_length_train,0.9*data_length_train))
 ```
 
 Calculating optimal parameters
 ```{r}
-optimal_parameters<-coda.tuning(data_prepared_train,timeframes = timeframes,
-                                                lag.max = 6,information_criteria_lag  ="AIC",
-                                information_criteria_frame="prediction.error",prediction_error_step = 1,multicore = FALSE)
+#optimal_parameters<-coda.tuning(data_prepared_train,timeframes = timeframes,
+#                                                lag.max = 6,information_criteria_lag  ="AIC",
+#                                information_criteria_frame="prediction.error",prediction_error_step #= 1,multicore = FALSE)
 ```
 
 
 Non-transformed data
 ```{r}
-data_prepared_notransf<-coda.data.preperation(data_raw,zero_handling="none",tspace=T)
+data_prepared_notransf<-coda.data.preperation(data_raw,zero_handling="none",tspace=tspace)
 
-data_notransf_test_windows<-windows(data_prepared_notransf[c((floor(data_length/3)+1):data_length),],
-                                     optimal_parameters$frame,method = "overlapping",
+data_notransf_test_windows<-windows(data_prepared_notransf,
+                                     20,method = "overlapping",
                                      prediction_error_step = prediction_error_step)
       
 ```
 
 Test windows for prepared data
 ```{r}
-data_prepared_windows_test<-windows(data_prepared_test,optimal_parameters$frame,method = "overlapping",
+data_prepared_windows_test<-windows(data_prepared,20,method = "overlapping",
                        prediction_error_step = prediction_error_step)
 ```
 
@@ -97,37 +97,49 @@ data_prepared_windows_test<-windows(data_prepared_test,optimal_parameters$frame,
 prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),function(index){
 
         fitting_data<-data_prepared_windows_test[[index]]$fitting[,-1]
-        true_value<-data_prepared_windows_test[[index]]$prediction_value[,-1]
         prediction_date<-data_prepared_windows_test[[index]]$prediction_value[1,1]
         
-        model<-VAR(fitting_data,p=optimal_parameters$p)
+        if(tspace){
+          model<-VAR(fitting_data,p=1)
+          
+          predicted_value<-predict(model,fitting_data,n.ahead = prediction_error_step)
+          
+          size=2
+        }
         
-        predicted_value<-predict(model,fitting_data,n.ahead = prediction_error_step)
+        else{
+          model<-ar(fitting_data,aic=F,order.max = 1)
+          
+          predicted_value<-predict(model,fitting_data,n.ahead = prediction_error_step)
+          
+          size=1
+        }
         
-        if(sum(is.na(predicted_value$fcst))>0){
+        
+        if(sum(is.na(predicted_value[[1]]))>0){
           
           predicted_value<-NA
           } else {
-          size<-length(true_value)
-          
           
           predicted_values_vector<-matrix(data=NA,nrow=1,ncol=size)
           
           for(i in 1: size){
             
-            predicted_values_vector[1,i]<-predicted_value$fcst[[i]][prediction_error_step]
+            predicted_values_vector[1,i]<-predicted_value[[1]][[i]][prediction_error_step]
             
           }
         }
                          
-          
           tsums<-median(data_prepared_notransf$tsum,na.rm=TRUE)
 
-        
-        
+      
         if(tspace){
           
-                     predicted_value<-predicted_values_vector[-size]%>%matrix(nrow=1)%>%pivotCoordInv()
+          predicted_value<-predicted_values_vector[-size]%>%
+            matrix(nrow=1)%>%
+            #pivotCoordInv()
+            D2invPC()
+          
           predicted_value<-predicted_value*tsums
           
           if(take_log){
@@ -142,7 +154,7 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
           
           true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-1])
             
-          category<-factor(c("1","2","3","4","tsum"))
+          category<-factor(c("1","2","tsum"))
           
           if(index==1){
             naive_predicted_value<-apply(data_prepared_notransf[,-1],2,median,na.rm=TRUE)
@@ -152,22 +164,23 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
           
         }else{
           
-          predicted_value<-predicted_values_vector%>%matrix(nrow=1)%>%pivotCoordInv()
+          predicted_value<-predicted_values_vector%>%
+            matrix(nrow=1)%>%
+            #pivotCoordInv()
+            D2invPC()
           predicted_value<-predicted_value*tsums
           
-          true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-c(1,6)])
+          true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-c(1,4)])
           
-          category<-factor(c("1","2","3","4"))
+          category<-factor(c("1","2"))
           
           if(index==1){
-            naive_predicted_value<-apply(data_prepared_notransf[,-c(1,6)],2,median,na.rm=TRUE)
+            naive_predicted_value<-apply(data_prepared_notransf[,-c(1,4)],2,median,na.rm=TRUE)
           }else{
-            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-c(1,6)],1))
+            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-c(1,4)],1))
             }
             
         }
-        
-        
         
         predicted_value<-round(as.numeric(predicted_value))
 
@@ -206,7 +219,7 @@ plot_name<-coda.plot.name(id=id,zero_handling = zero_handling,tspace=tspace,take
 
 p1<-ggplot(plot_data,aes(x=prediction_date,y=prediction_values,col=type))+
   facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+
-  geom_point(size=4)+
+  geom_point(size=1)+
   geom_line(data=plot_data,
             aes(x=prediction_date,y=prediction_values,col=type))+
   scale_color_manual("Legend", values = my_color)+
@@ -214,7 +227,7 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=prediction_values,col=type))+
 
 p1
 
-ggsave(filename = paste("timeseries_",plot_name,".png",sep=""),plot=p1,height = 15,width = 20)
+#ggsave(filename = paste("timeseries_",plot_name,".png",sep=""),plot=p1,height = 15,width = 20)
 ```
 
 

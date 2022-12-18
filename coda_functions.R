@@ -62,11 +62,12 @@ coda.data.preperation<-function(data,zero_handling=c("all","zeros_only","none"),
     dplyr::distinct()%>%
     pivot_wider(names_from 
                 = main_category_id,values_from = sold)%>%
-    dplyr::select("1","2","3","4")
+    dplyr::select("1","2")
   
   if(zero_handling=="none"){
       
       data$tsum<-rowSums(data[,-1])
+
     
     return(data)
     }
@@ -492,6 +493,18 @@ coda.plots<-function(analysis_results,plot.type="dots",save=TRUE,path=NULL){
            width = 20,heigh=15,units="cm")
   }
   return(final_plot)
+}
+
+## Inverse Pivot coordinates in the case of D=2
+## See Coda1 pdf p 4
+
+D2invPC<-function(x){
+  result<-vector(mode="numeric",length=2)
+  
+  result[1]<-exp(sqrt(1/2)*x)
+  result[2]<-exp(-sqrt(1/2)*x)
+  
+  return(result)
 }
   
   
