@@ -11,11 +11,11 @@ output: pdf_document
 
 
 ```{r}
-id<-4
-zero_handling<-"all"
+id<-6
+zero_handling<-"zeros_only"
 tspace<-T
 prediction_error_step<-1
-take_log<-T
+take_log<-F
 
 
 ```
