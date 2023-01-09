@@ -498,13 +498,38 @@ coda.plots<-function(analysis_results,plot.type="dots",save=TRUE,path=NULL){
 ## Inverse Pivot coordinates in the case of D=2
 ## See Coda1 pdf p 4
 
-D2invPC<-function(x){
-  result<-vector(mode="numeric",length=2)
-  
-  result[1]<-exp(sqrt(1/2)*x)
-  result[2]<-exp(-sqrt(1/2)*x)
-  
-  return(result)
+D2invPC<-function(x,norm="orthonormal"){
+
+    if (!(norm %in% c("orthogonal", "orthonormal"))) 
+      stop("only orthogonal and orthonormal is allowd for norm")
+    x <- -x
+    y <- matrix(0, nrow = nrow(x), ncol = ncol(x) + 1)
+    D <- ncol(x) + 1
+    if (norm == "orthonormal") 
+      y[, 1] <- -sqrt((D - 1)/D) * x[, 1]
+    else y[, 1] <- x[, 1]
+    for (i in 2:ncol(y)) {
+      for (j in 1:(i - 1)) {
+        y[, i] = y[, i] + x[, j]/if (norm == "orthonormal") 
+          sqrt((D - j + 1) * (D - j))
+        else 1
+      }
+    }
+    
+    if(ncol(y)>2){
+      for (i in 2:(ncol(y) - 1)) {
+        y[, i] = y[, i] - x[, i] * if (norm == "orthonormal") 
+          sqrt((D - i)/(D - i + 1))
+        else 1
+      }
+    }
+    
+    yexp = exp(y)
+    x.back = yexp/apply(yexp, 1, sum)
+    if (is.data.frame(x)) 
+      x.back <- data.frame(x.back)
+    return(x.back)
+
 }
   
   

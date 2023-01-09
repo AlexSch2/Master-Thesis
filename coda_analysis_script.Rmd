@@ -11,11 +11,11 @@ output: pdf_document
 
 
 ```{r}
-id<-6
+id<-20
 zero_handling<-"zeros_only"
 tspace<-T
 prediction_error_step<-1
-take_log<-F
+take_log<-T
 
 
 ```
@@ -130,8 +130,8 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
           }
         }
                          
-          tsums<-median(data_prepared_notransf$tsum,na.rm=TRUE)
-
+        # tsums<-median(data_prepared_notransf$tsum,na.rm=TRUE)
+        tsums<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting$tsum,1))
       
         if(tspace){
           
@@ -140,27 +140,33 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
             #pivotCoordInv()
             D2invPC()
           
-          predicted_value<-predicted_value*tsums
+         
+          
+          #predicted_value<-predicted_value*tsums
           
           if(take_log){
             
+          predicted_value<-predicted_value*exp(predicted_values_vector[size]) 
           predicted_value<-(append(predicted_value,exp(predicted_values_vector[size])))
             
           }
           else{
-
-          predicted_value<-(append(predicted_value,predicted_values_vector[size])) 
+            
+            predicted_value<-predicted_value*predicted_values_vector[size]
+            predicted_value<-(append(predicted_value,predicted_values_vector[size])) 
           }
+          
+           if(index==1){
+            naive_predicted_value<-apply(data_prepared_notransf[,-1],2,median,na.rm=TRUE)
+          }else{
+            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-1],1))
+            }
           
           true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-1])
             
           category<-factor(c("1","2","tsum"))
           
-          if(index==1){
-            naive_predicted_value<-apply(data_prepared_notransf[,-1],2,median,na.rm=TRUE)
-          }else{
-            naive_predicted_value<-as.numeric(tail(data_notransf_test_windows[[index]]$fitting[,-1],1))
-            }
+          
           
         }else{
           
@@ -223,11 +229,12 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=prediction_values,col=type))+
   geom_line(data=plot_data,
             aes(x=prediction_date,y=prediction_values,col=type))+
   scale_color_manual("Legend", values = my_color)+
-  ggtitle("Actual Timeseries vs. predicted ",subtitle = paste("Fridge ID:",id,",zero handling:",zero_handling,sep=" "))
+  ggtitle("Actual Timeseries vs. predicted ",subtitle = paste("Fridge ID:",id,",zero handling:",zero_handling,sep=" "))+ 
+  theme(text = element_text(size = 20))  
 
 p1
 
-#ggsave(filename = paste("timeseries_",plot_name,".png",sep=""),plot=p1,height = 15,width = 20)
+ggsave(filename = paste("timeseries_",plot_name,".png",sep=""),plot=p1,height = 15,width = 20)
 ```
 
 

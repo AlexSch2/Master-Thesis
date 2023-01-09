@@ -18,3 +18,22 @@ good.pred<-matrix(c(0.166,-0.0699),ncol=2)
 
 pivotCoordInv(dummy.pred)
 pivotCoordInv(good.pred)
+
+
+data_raw$`4`[1:28]<-c(rep(c(3:16),2))
+data_raw$`3`[1:28]<-c(rep(c(13:26),2))
+
+raw_length<-dim(data_raw)[1]
+
+data_prep<-cbind(data_raw[-1,-1],data_raw[-raw_length,-1])
+
+names(data_prep)<-c("y1","y2","y3","y4",
+                    "x1","x2","x3","x4")
+
+fit_length<-round(dim(data_raw)[1]*2/3)
+
+data_fit<-data_prep[1:fit_length,]
+
+
+model<-vgam(cbind(y1,y2,y3,y4)~s(x1)+s(x2)+s(x3)+s(x4),data=data_fit,family = poissonff(link = "identitylink"),
+            control = vgam.control(criterion = "coefficients",maxit = 30))

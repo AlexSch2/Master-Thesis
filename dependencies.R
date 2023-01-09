@@ -12,6 +12,7 @@
 #install.packages("tscount")
 #install.packages("parallel")
 #install.packages("ggplot2")
+#install.packages("VGAM")
 
 #Loading Packages
 
@@ -24,5 +25,5 @@ library(tidyverse) #tidyverse
 library(tscount) #models for count data; see dissertation 
 library(parallel) #parallelisation
 library(ggplot2) #plots
-
+library(VGAM)
 
