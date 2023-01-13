@@ -9,11 +9,13 @@ Preparation
 id<-12
 frame<-10
 
-distr<-"nbinom"
+distr<-"poisson"
+
+model_type<-"loglin"
 ```
 
 ```{r}
-data_raw<-weekly_category_data%>%
+"data_raw<-weekly_category_data%>%
       filter(fridge_id==id)%>%
       dplyr::select(week_date,main_category_id,sold)%>%
                 arrange(week_date)%>%
@@ -21,7 +23,22 @@ data_raw<-weekly_category_data%>%
     dplyr::mutate(sold=sum(sold))%>%
     dplyr::distinct()%>%
     pivot_wider(names_from 
-                = main_category_id,values_from = sold)%>%ungroup()
+                = main_category_id,values_from = sold)%>%ungroup()"
+
+data_raw<-weekly_category_data%>%
+      filter(fridge_id==id)%>%
+      dplyr::select(week_date,main_category_id,sold)%>%
+                arrange(week_date)%>%
+      group_by(main_category_id,week_date)%>%
+      dplyr::mutate(sold=sum(sold))%>%
+      dplyr::distinct()%>%
+      pivot_wider(names_from 
+                = main_category_id,values_from = sold)%>%
+      ungroup()%>%
+      dplyr::select("week_date","1","2","3","4")%>%
+  setnafill(type="const",fill=0)%>%
+  dplyr::mutate(other = dplyr::select(.,"2","3","4")%>%rowSums(na.rm=TRUE))%>%
+  dplyr::select("week_date","1","other")
 
 ```
 
@@ -51,8 +68,8 @@ test_data_windows_group4<-windows(test_data_group4,frame = frame,"overlapping",p
 
 
 ```{r warning=FALSE}
-
-par(mfrow=c(2,2))
+png(filename=paste("diagnostic_plots_loglin_",distr,"_",id,".png",sep=""), width = 25, height = 20, units = "cm",res=200)
+par(mfrow=c(4,5))
 
 prediction_results<-bind_rows(lapply(c(1:4),function(group_index){
   
@@ -67,7 +84,7 @@ prediction_results<-bind_rows(lapply(c(1:4),function(group_index){
     fitting_values<-data_window[[window_index]]$fitting
     true_value<-data_window[[window_index]]$prediction_value[[2]]
     
-    model<-tsglm(fitting_values[[2]],model = list("past_obs"=1,"past_mean"=2),link="log",distr = distr)
+    model<<-tsglm(fitting_values[[2]],model = list("past_obs"=1,"past_mean"=2),link="log",distr = distr)
     
     predicted_value<-predict(model,n.ahead=1)$pred
     
@@ -78,6 +95,7 @@ prediction_results<-bind_rows(lapply(c(1:4),function(group_index){
     
   }))
   
+  plot(model,ask=F)
   
   return(predicted_values)
   
@@ -104,10 +122,10 @@ p1<-ggplot(plot_data,aes(x=week_date,y=prediction_values,col=type))+
   geom_line(data=plot_data,
             aes(x=week_date,y=prediction_values,col=type))+
   scale_color_manual("Legend", values = my_color)+
-  ggtitle("Actual Timeseries vs. predicted ",subtitle = paste("Fridge ID:",id,sep=" "))+ 
+  ggtitle(paste(model_type,distr,": Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+ 
   theme(text = element_text(size = 20))  
 
 p1
 
-ggsave(filename = paste("timeseries_loglin_",distr,"_id_",id,".png",sep=""),plot=p1,height = 15,width = 20)
+ggsave(filename =paste("timeseries_",model_type,distr,"_id_",id,".png",sep=""),plot=p1,height = 15,width = 20)
 ```

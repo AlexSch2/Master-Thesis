@@ -11,12 +11,13 @@ output: pdf_document
 
 
 ```{r}
-id<-20
+id<-12
 zero_handling<-"zeros_only"
 tspace<-T
 prediction_error_step<-1
 take_log<-T
 
+model_type<-"coda_one_vs_all"
 
 ```
 
@@ -47,9 +48,26 @@ coda.plot.name<-function(id,zero_handling,tspace,take_log){
 Choosing and filtering relevant data
 ```{r}
 data_raw<-weekly_category_data%>%
-      filter(fridge_id==id & main_category_id %in% c(1,2))%>%
+      filter(fridge_id==id & main_category_id %in% c(1,2,3,4))%>%
       dplyr::select(week_date,main_category_id,sold)%>%
                 arrange(week_date)
+
+
+#one vs all code parts
+data_raw$main_category_id<-as.factor(data_raw$main_category_id)
+
+levels(data_raw$main_category_id)<-c(levels(data_raw$main_category_id),"other")
+
+data_raw<-data_raw%>%
+          group_by(week_date)%>%
+          dplyr::filter(main_category_id !="1")%>%
+          dplyr::summarise(main_category_id= 'other', 
+            sold = sum(sold)-sum()) %>%
+          bind_rows(data_raw) %>%
+          arrange(week_date)%>% 
+          dplyr::filter(main_category_id %in% c("1","other"))
+  
+  
 ```
 
 Transforming data
@@ -164,7 +182,7 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
           
           true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-1])
             
-          category<-factor(c("1","2","tsum"))
+          category<-factor(c("1","other","tsum"))
           
           
           
@@ -178,7 +196,7 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
           
           true_value<-as.numeric(data_notransf_test_windows[[index]]$prediction_value[,-c(1,4)])
           
-          category<-factor(c("1","2"))
+          category<-factor(c("1","other"))
           
           if(index==1){
             naive_predicted_value<-apply(data_prepared_notransf[,-c(1,4)],2,median,na.rm=TRUE)
@@ -229,17 +247,17 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=prediction_values,col=type))+
   geom_line(data=plot_data,
             aes(x=prediction_date,y=prediction_values,col=type))+
   scale_color_manual("Legend", values = my_color)+
-  ggtitle("Actual Timeseries vs. predicted ",subtitle = paste("Fridge ID:",id,",zero handling:",zero_handling,sep=" "))+ 
+  ggtitle(paste(model_type,": Actual Timeseries vs. predicted ",sep=""),subtitle = paste("Fridge ID:",id,",zero handling:",zero_handling,sep=" "))+ 
   theme(text = element_text(size = 20))  
 
 p1
 
-ggsave(filename = paste("timeseries_",plot_name,".png",sep=""),plot=p1,height = 15,width = 20)
+ggsave(filename = paste("timeseries_",model_type,"_",plot_name,".png",sep=""),plot=p1,height = 15,width = 20)
 ```
 
 
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 p2<-ggplot(prediction_results,aes(x=prediction_date,y=prediction_error))+
   facet_wrap(vars(category),nrow=length(unique(prediction_results$category)),scales = "free")+
   geom_point(color="red",size=4)+
@@ -249,10 +267,10 @@ p2<-ggplot(prediction_results,aes(x=prediction_date,y=prediction_error))+
 
 p2
 
-ggsave(filename = paste("prediction_error_",plot_name,".png",sep=""),plot=p2,height = 15,width = 20)
+#ggsave(filename = paste("prediction_error_",plot_name,".png",sep=""),plot=p2,height = 15,width = 20)
 ```
 
-```{r}
+```{r eval=FALSE}
 hist(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)],
      xlab="errors",
      main="Histogram of 1-step ahead prediction errors")
@@ -265,7 +283,7 @@ hist(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)],
 dev.off()
 ```
 
-```{r}
+```{r eval=FALSE}
 qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE))
 qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE)[-c(1:3)])
 
@@ -274,7 +292,7 @@ qqnorm(sort(prediction_results$prediction_error,decreasing=TRUE))
 dev.off()
 
 ```
-```{r}
+```{r eval=FALSE}
 plot_data2<-prediction_results%>%
   dplyr::select(-(predicted_value:naive_predicted_value))%>%
   pivot_longer(cols=prediction_error:prediction_error_naive,
@@ -285,7 +303,7 @@ levels(plot_data2$type)<-c("VAR_model","naive_method")
 ```
 
 
-```{r}
+```{r eval=FALSE}
 p3<-ggplot(plot_data2,aes(x=type,y=prediction_error))+
   facet_wrap(vars(category),ncol=length(unique(plot_data2$category)),scales = "fixed")+
   geom_boxplot()+

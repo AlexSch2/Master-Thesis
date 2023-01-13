@@ -15,12 +15,14 @@ Preparation
 ```{r}
 id<-12
 frame<-10
-
+model_type<-"ingarch_one_vs_all"
 distr<-"nbinom"
 ```
 
+
+
 ```{r}
-data_raw<-weekly_category_data%>%
+"data_raw<-weekly_category_data%>%
       filter(fridge_id==id)%>%
       dplyr::select(week_date,main_category_id,sold)%>%
                 arrange(week_date)%>%
@@ -28,7 +30,22 @@ data_raw<-weekly_category_data%>%
     dplyr::mutate(sold=sum(sold))%>%
     dplyr::distinct()%>%
     pivot_wider(names_from 
-                = main_category_id,values_from = sold)%>%ungroup()
+                = main_category_id,values_from = sold)%>%ungroup()"
+
+data_raw<-weekly_category_data%>%
+      filter(fridge_id==id)%>%
+      dplyr::select(week_date,main_category_id,sold)%>%
+                arrange(week_date)%>%
+      group_by(main_category_id,week_date)%>%
+      dplyr::mutate(sold=sum(sold))%>%
+      dplyr::distinct()%>%
+      pivot_wider(names_from 
+                = main_category_id,values_from = sold)%>%
+      ungroup()%>%
+      dplyr::select("week_date","1","2","3","4")%>%
+  setnafill(type="const",fill=0)%>%
+  dplyr::mutate(other = dplyr::select(.,"2","3","4")%>%rowSums(na.rm=TRUE))%>%
+  dplyr::select("week_date","1","other")
 
 ```
 
@@ -38,11 +55,11 @@ Timeseries for each group
 ```{r}
 test_data_group1<-data_raw%>%dplyr::select(c("week_date","1"))%>%na.omit()
 
-test_data_group2<-data_raw%>%dplyr::select(c("week_date","2"))%>%na.omit()
+test_data_group2<-data_raw%>%dplyr::select(c("week_date","other"))%>%na.omit()
 
-test_data_group3<-data_raw%>%dplyr::select(c("week_date","3"))%>%na.omit()
+#test_data_group3<-data_raw%>%dplyr::select(c("week_date","3"))%>%na.omit()
    
-test_data_group4<-data_raw%>%dplyr::select(c("week_date","4"))%>%na.omit()
+#test_data_group4<-data_raw%>%dplyr::select(c("week_date","4"))%>%na.omit()
       
 ```
 
@@ -52,16 +69,16 @@ Model for each group
 ```{r}
 test_data_windows_group1<-windows(test_data_group1,frame = frame,"overlapping",prediction_error_step = 1)
 test_data_windows_group2<-windows(test_data_group2,frame = frame,"overlapping",prediction_error_step = 1)
-test_data_windows_group3<-windows(test_data_group3,frame = frame,"overlapping",prediction_error_step = 1)
-test_data_windows_group4<-windows(test_data_group4,frame = frame,"overlapping",prediction_error_step = 1)
+#test_data_windows_group3<-windows(test_data_group3,frame = frame,"overlapping",prediction_error_step = 1)
+#test_data_windows_group4<-windows(test_data_group4,frame = frame,"overlapping",prediction_error_step = 1)
 ```
 
 
 ```{r warning=FALSE}
-png(filename="diagnostic_plots_ingarch.png", width = 25, height = 20, units = "cm",res=200)
+png(filename=paste("diagnostic_plots_ingarch_",distr,"_",id,".png",sep=""), width = 25, height = 20, units = "cm",res=200)
 par(mfrow=c(4,5))
 
-prediction_results<-bind_rows(lapply(c(1:4),function(group_index){
+prediction_results<-bind_rows(lapply(c(1,"other"),function(group_index){
   
   data<-data_raw%>%dplyr::select(c("week_date",paste(group_index)))%>%na.omit()
   
@@ -116,12 +133,12 @@ p1<-ggplot(plot_data,aes(x=week_date,y=prediction_values,col=type))+
   geom_line(data=plot_data,
             aes(x=week_date,y=prediction_values,col=type))+
   scale_color_manual("Legend", values = my_color)+
-  ggtitle("Actual Timeseries vs. predicted ",subtitle = paste("Fridge ID:",id,sep=" "))+
+  ggtitle(paste(model_type,distr,": Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
   theme(text = element_text(size = 20))  
 
 p1
 
-ggsave(filename = paste("timeseries_ingarch_",distr,"_id_",id,".png",sep=""),plot=p1,height = 15,width = 20)
+ggsave(filename = paste("timeseries_",model_type,distr,"_id_",id,".png",sep=""),plot=p1,height = 15,width = 20)
 ```
 
 

@@ -12,7 +12,9 @@ output: pdf_document
 
 Preparation
 ```{r}
-id<-12
+id<-8
+
+model_type<-"vgam"
 distr<-"poisson"
 ```
 
@@ -58,11 +60,11 @@ data_fit<-dplyr::select(data_fit,y1,y2,y3,y4,x1,x2,x3,x4)
 
 
 ```{r}
-model<-vgam(cbind(y1,y2,y3,y4)~s(x1)+s(x2)+x3+x4,data=data_fit,family = poissonff(link = "identitylink",imethod = 3,imu = 10),
+model<-vgam(cbind(y1,y2,y3,y4)~s(x1)+s(x2)+x3+x4,data=data_fit,family = poissonff(link = "identitylink",imethod=1),
             control = vgam.control(criterion = "coefficients",maxit = 30))
 
 #model<-vgam(cbind(y1,y2,y3,y4)~s(x1)+s(x2)+x3+x4,data=data_fit,family = negbinomial(lmu="identitylink",lsize = "identitylink"),
-#           control = vgam.control(criterion = "AIC",maxit = 30))
+#           control = vgam.control(criterion = "coefficients",maxit = 30))
 ```
 
 
@@ -99,12 +101,12 @@ p1<-ggplot(plot_data,aes(x=week_date,y=prediction_values,col=type))+
   geom_line(data=plot_data,
             aes(x=week_date,y=prediction_values,col=type))+
   scale_color_manual("Legend", values = my_color)+
-  ggtitle("Actual Timeseries vs. predicted ",subtitle = paste("Fridge ID:",id,sep=" "))#+
-  #theme(text = element_text(size = 20))  
+  ggtitle(paste(model_type,distr,": Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
+  theme(text = element_text(size = 20))  
 
 p1
 
-#ggsave(filename = paste("timeseries_vgam_",distr,"_id_",id,".png",sep=""),plot=p1,height = 15,width = 20)
+ggsave(filename = paste("timeseries_",model_type,distr,"_id_",id,".png",sep=""),plot=p1,height = 15,width = 20)
 ```
 
 
