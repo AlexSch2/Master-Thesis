@@ -4,9 +4,9 @@ author: "Alexander Schwaiger"
 date: "2023-01-03"
 output: pdf_document
 ---
-```{r}
-#source("dependencies.R")
-#source("coda_functions.R")
+```{r eval=FALSE}
+source("dependencies.R")
+source("coda_functions.R")
 ```
 
 

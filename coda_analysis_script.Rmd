@@ -4,9 +4,9 @@ author: "Alexander Schwaiger"
 date: "2022-12-08"
 output: pdf_document
 ---
-```{r}
-#source("dependencies.R")
-#source("coda_functions.R")
+```{r eval=FALSE}
+source("dependencies.R")
+source("coda_functions.R")
 ```
 
 
@@ -17,7 +17,7 @@ tspace<-T
 prediction_error_step<-1
 take_log<-T
 
-model_type<-"coda_one_vs_all"
+model_type<-"coda"
 
 ```
 
@@ -61,18 +61,18 @@ levels(data_raw$main_category_id)<-c(levels(data_raw$main_category_id),"other")
 data_raw<-data_raw%>%
           group_by(week_date)%>%
           dplyr::filter(main_category_id !="1")%>%
-          dplyr::summarise(main_category_id= 'other', 
+          dplyr::summarise(main_category_id= 'other',
             sold = sum(sold)-sum()) %>%
           bind_rows(data_raw) %>%
-          arrange(week_date)%>% 
+          arrange(week_date)%>%
           dplyr::filter(main_category_id %in% c("1","other"))
-  
+
   
 ```
 
 Transforming data
 ```{r}
-data_prepared<-coda.data.preperation(data_raw,zero_handling =zero_handling,tspace = tspace,log=take_log)%>%
+data_prepared<-coda.data.preperation(data_raw,zero_handling =zero_handling,tspace = tspace,log=take_log,one_vs_all = T)%>%
                 arrange(week_date)
 data_length<-dim(data_prepared)[1]
 ```
@@ -212,14 +212,17 @@ prediction_results<-bind_rows(lapply(c(1:length(data_prepared_windows_test)),fun
         prediction_error_naive<-as.numeric(true_value-naive_predicted_value)
         
         
-                  return(data.frame(prediction_error=prediction_error,
-                            prediction_error_naive=prediction_error_naive,
-                                  predicted_value=predicted_value,
-                          true_value=true_value,
-                          naive_predicted_value=naive_predicted_value,
-                           category=category,
-                         prediction_date=prediction_date)
-                  )
+        return(
+          data.frame(
+            prediction_error = prediction_error,
+            prediction_error_naive = prediction_error_naive,
+            predicted_value = predicted_value,
+            true_value = true_value,
+            naive_predicted_value = naive_predicted_value,
+            category = category,
+            prediction_date = prediction_date
+          )
+        )
         }))
 ```
 

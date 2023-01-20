@@ -37,3 +37,9 @@ data_fit<-data_prep[1:fit_length,]
 
 model<-vgam(cbind(y1,y2,y3,y4)~s(x1)+s(x2)+s(x3)+s(x4),data=data_fit,family = poissonff(link = "identitylink"),
             control = vgam.control(criterion = "coefficients",maxit = 30))
+
+
+test<-coda.analysis(weekly_category_data = weekly_category_data,ids=c(4,6),one_vs_all = F,
+                    pivot_groups = c("1","2"),tspace = T,take_log = T)
+test2<-ingarch.analysis(weekly_category_data = weekly_category_data,ids=c(4,6),distribution = "poisson",categories = c("1","2"))
+View(test2)

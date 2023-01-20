@@ -4,8 +4,8 @@ output: pdf_document
 date: '2023-01-10'
 ---
 
-```{r}
-#source("dependencies.R")
+```{r eval=FALSE}
+source("dependencies.R")
 ```
 
 
