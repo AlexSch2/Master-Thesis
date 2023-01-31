@@ -67,8 +67,9 @@ coda.data.preperation <- function(data,
   
 #    stopifnot(is.character(pivot_group))
     
-    plusone <- function(x)
-      return(x + 1)
+    plus <- function(x,value=0.5)
+      return(x + value)
+    
     zero_handling <- match.arg(zero_handling)
     
     if (one_vs_all) {
@@ -92,7 +93,8 @@ coda.data.preperation <- function(data,
         dplyr::distinct() %>%
         pivot_wider(names_from
                     = main_category_id, values_from = sold) %>%
-        dplyr::select(all_of(pivot_group), "other")
+        dplyr::select(all_of(pivot_group), "other")%>%
+        setnafill(type = "const", fill = 0)
       
     }
     
@@ -103,7 +105,9 @@ coda.data.preperation <- function(data,
         dplyr::distinct() %>%
         pivot_wider(names_from
                     = main_category_id, values_from = sold) %>%
-        dplyr::select("1", "2")
+        dplyr::select("1", "2")%>%
+        setnafill(type = "const", fill = 0)
+      
       
     }
     
@@ -116,8 +120,8 @@ coda.data.preperation <- function(data,
     }
     
     if (zero_handling == "all") {
-      data <- data %>% mutate_if(is.numeric, plusone) %>%
-        mutate_all( ~ replace(., is.na(.), 1))
+      data <- data %>% mutate_if(is.numeric, plus) %>%
+        mutate_all( ~ replace(., is.na(.), 0.5))
     }
     
     else if (zero_handling == "zeros_only") {
@@ -238,11 +242,11 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
         predicted_value <- predicted_value * exp(predicted_values_vector[size])
         predicted_value <- (append(predicted_value, exp(predicted_values_vector[size])))
         
-        lower_bound <- lower_bound * exp(lower_bounds_vector[size])
-        lower_bound <- (append(lower_bound, exp(lower_bounds_vector[size])))
+        lower_bound <- lower_bound * exp(predicted_values_vector[size])
+        lower_bound <- (append(lower_bound, exp(predicted_values_vector[size])))
         
-        upper_bound <- upper_bound * exp(upper_bounds_vector[size])
-        upper_bound <- (append(upper_bound, exp(upper_bounds_vector[size])))
+        upper_bound <- upper_bound * exp(predicted_values_vector[size])
+        upper_bound <- (append(upper_bound, exp(predicted_values_vector[size])))
         
       }
       # Normal back transformations
@@ -250,11 +254,11 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
         predicted_value <- predicted_value * predicted_values_vector[size]
         predicted_value <- (append(predicted_value, predicted_values_vector[size]))
         
-        lower_bound <- lower_bound * lower_bounds_vector[size]
-        lower_bound <- (append(lower_bound, lower_bounds_vector[size]))
+        lower_bound <- lower_bound * predicted_values_vector[size]
+        lower_bound <- (append(lower_bound, predicted_values_vector[size]))
         
-        upper_bound <- upper_bound * upper_bounds_vector[size]
-        upper_bound <- (append(upper_bound, upper_bounds_vector[size]))
+        upper_bound <- upper_bound * predicted_values_vector[size]
+        upper_bound <- (append(upper_bound, predicted_values_vector[size]))
       }
       
       #Naive prediction values. For the first time point this is the median, for the rest it is the last known value
@@ -476,7 +480,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         
         #Preparing non transformed data 
         
-        data_prepared_notransf <- coda.data.preperation(data_raw,zero_handling="none",tspace=tspace, log=F, 
+        data_prepared_notransf <- coda.data.preperation(data_raw,zero_handling="none",tspace=tspace, log=take_log, 
                                                         one_vs_all = one_vs_all) %>%
           arrange(week_date)
         

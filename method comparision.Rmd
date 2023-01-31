@@ -13,13 +13,13 @@ source("ingarch_functions.R")
 
 Preparation
 ```{r}
-id<-4
+id<-12
 prediction_error_step<-1
-frame<-20
+frame<-10
 
 #Ingarch specifications
 
-distr<-"nbinom"
+distr<-"poisson"
 
 #Coda specifications
 
@@ -67,7 +67,7 @@ plot_data_coda<-coda_result%>%dplyr::filter(category %in% c(1,2,3,4))%>%dplyr::s
 
 all_dates_and_categories<-plot_data_coda[,c("category","prediction_date")]
 
-plot_data_ingarch<-full_join(ingarch_result,all_dates_and_categories)#%>%
+plot_data_ingarch<-full_join(ingarch_result$results,all_dates_and_categories)#%>%
 #     dplyr::filter(prediction_date %in% common$prediction_date)
 
 plot_data_ingarch$model<-"ingarch"
@@ -76,7 +76,7 @@ plot_data<-bind_rows(plot_data_coda,plot_data_ingarch)%>%dplyr::select(!c(distri
 
 
 ```
-Coda Timeseries with prediction intervals
+Ingarch Timeseries with prediction intervals
 
 ```{r}
 p<-ggplot(plot_data_ingarch,aes(x=prediction_date,y=predicted_value),col="blue")+
@@ -87,12 +87,16 @@ p<-ggplot(plot_data_ingarch,aes(x=prediction_date,y=predicted_value),col="blue")
   geom_line(data=plot_data_ingarch,
             aes(x=prediction_date,y=predicted_value),col="blue")+
   geom_line(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
-  geom_point(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")
+  geom_point(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
+  theme(text = element_text(size = 20))  
+
 
 p
+
+ggsave(filename = paste("timeseries_ingarch_id_",id,"_",distr,"_pi",".png",sep=""),plot=p,height = 15,width = 20)
 ```
 
-
+Coda Timeseries with prediction intervals
 ```{r}
 p0<-ggplot(plot_data_coda,aes(x=prediction_date,y=predicted_value),col="red")+
   facet_wrap(vars(category),nrow=length(unique(plot_data_coda$category)),scales = "free")+
@@ -102,9 +106,13 @@ p0<-ggplot(plot_data_coda,aes(x=prediction_date,y=predicted_value),col="red")+
   geom_line(data=plot_data_coda,
             aes(x=prediction_date,y=predicted_value),col="red")+
   geom_line(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
-  geom_point(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")
+  geom_point(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
+  theme(text = element_text(size = 20))  
+
 
 p0
+
+ggsave(filename = paste("timeseries_coda_id_",id,"_pi",".png",sep=""),plot=p0,height = 15,width = 20)
 ```
 
 Comparing the timeseries with prediction intervals
@@ -118,8 +126,8 @@ my_color <- setNames(c("red", "blue"),
 p1<-ggplot(plot_data,aes(x=prediction_date,y=predicted_value,col=model))+
   facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+
   geom_point(size=1)+
-  geom_ribbon(aes(x=prediction_date,y=predicted_value,col=model,ymin=lower_bound,ymax=upper_bound),
-              data=plot_data,inherit.aes = F,fill="grey90",linetype="dashed")+
+  geom_ribbon(aes(x=prediction_date,y=predicted_value,col=model,ymin=lower_bound,ymax=upper_bound,fill=model),
+              data=plot_data,alpha=0.15,inherit.aes = F,linetype="dashed")+
   geom_line(data=plot_data,
             aes(x=prediction_date,y=predicted_value,col=model))+
   geom_line(data=plot_data,aes(x=prediction_date,y=true_value),col="black")+
@@ -129,6 +137,8 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=predicted_value,col=model))+
   theme(text = element_text(size = 20))  
 
 p1
+
+ggsave(filename = paste("timeseries_both_id_",id,"_pi",".png",sep=""),plot=p1,height = 15,width = 20)
 ```
 
 
@@ -139,17 +149,30 @@ Comparing the prediction errors of the models
 p2<-ggplot(plot_data,aes(x=model,y=prediction_error))+
   facet_wrap(vars(category),ncol=length(unique(plot_data$category)),scales = "fixed")+
   geom_boxplot()+
-  ggtitle("Prediction error per method and category")
+  ggtitle("Prediction error per method and category")+
+  theme(text = element_text(size = 20))  
+
 
 p2
   
-#ggsave(filename = paste("box_prediction_error_",plot_name,".png",sep=""),plot=p3,height = 15,width = 20)
+ggsave(filename = paste("box_prediction_error_id",id,".png",sep=""),plot=p2,height = 15,width = 20)
 ```
 
 
+Ingarch Parameter / Model Check
 
+```{r}
 
+for(category in c(1:4)){
+  
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "default")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "histogram")
+  
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "default",func="mean")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "histogram",func="mean")
+}
 
+```
 
 
 

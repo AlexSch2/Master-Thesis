@@ -12,7 +12,8 @@ ingarch.data.preperation <- function(weekly_category_data,one_vs_all=F,pivot_gro
     dplyr::distinct() %>%
     pivot_wider(names_from
                 = main_category_id, values_from = sold) %>%
-    ungroup()
+    ungroup()%>% 
+    setnafill(type = "const", fill = 0)
   
   if (one_vs_all) {
     data_raw <-
@@ -41,12 +42,14 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
   
   number_of_windows <- length(data_window)
   
-  predicted_values <- bind_rows(lapply(c(1:number_of_windows),function(window_index){
+  result <<- lapply(c(1:number_of_windows),function(window_index){
     
     fitting_values <- data_window[[window_index]]$fitting
     true_value <- data_window[[window_index]]$prediction_value[[2]]
     
-    model <<- tsglm(fitting_values[[2]],model = list("past_obs"=1,"past_mean"=2),distr = distribution)
+    model <- tsglm(fitting_values[[2]],model = list("past_obs"=1,"past_mean"=2),distr = distribution)
+    
+    
     
     prediction_result <- predict(model,n.ahead=prediction_error_step,type="shortest",level=0.90)
     
@@ -57,8 +60,8 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
     
     prediction_error <- as.numeric(true_value-predicted_value)
     
-    return(
-      data.frame(
+    return(list(
+      prediction = data.frame(
         prediction_error = prediction_error,
         predicted_value = predicted_value,
         lower_bound = prediction_interval_lower,
@@ -67,16 +70,26 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
         category = category,
         prediction_date = data_window[[window_index]]$prediction_value[[1]],
         distribution = distribution
-      )
-    )
+      ),
+      model = model
+    ))
     
-  }))
+  })
+  
+  
+  result_prediction <- bind_rows(unlist.result(result,"prediction"))
+  
+  
+  result_model <- unlist.result(result,"model")
+  
+  names(result_model) <- sapply(c(1:number_of_windows),function(i){paste("window",i,sep="")})
   
   if (plot) {
     plot(model, ask = F)
   }
   
-  return(predicted_values)
+  return(list(results=result_prediction,
+              models=result_model))
   
 }
 
@@ -88,31 +101,128 @@ ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,
   stopifnot(model_type %in% c("ingarch","ingarch_one_vs_all"))
   
   #Preparing data
-  data_raw<-ingarch.data.preperation(weekly_category_data = weekly_category_data,
-                                     pivot_group = pivot_group)
+  data_raw<-ingarch.data.preperation(weekly_category_data = weekly_category_data)
   
   
   #Calculating Prediction results for all ids and each category
-  prediction_results_all_combinations<-bind_rows(lapply(ids,function(id){
-    prediction_results_all_categories<-bind_rows(lapply(categories,function(category){
+  prediction_results_all_combinations <- lapply(ids,function(id){
+    
+    
+    
+    prediction_results_all_categories<-lapply(categories,function(category){
       
-      prediction_result<-ingarch.prediction(data=data_raw,category=category,prediction_error_step = prediction_error_step,
+      prediction_result <- ingarch.prediction(data=data_raw,category=category,prediction_error_step = prediction_error_step,
                                             frame=frame,plot=F,distribution=distribution)
       
-      return(prediction_result)
       
-    }))
+      
+      return(list(results=bind_rows(prediction_result$results),
+                  models=prediction_result$models))
+      
+    })
     
-    prediction_results_all_categories$id<-id
+    result_prediction <- bind_rows(unlist.result(prediction_results_all_categories,"results"))
     
-    return(prediction_results_all_categories)
-  }))
+    result_model <- unlist.result(prediction_results_all_categories,"models")
+    
+    names(result_model) <- categories
+    
+    
+    result_prediction$id<-id
+    
+    return(list(results=result_prediction,
+                models=result_model))
+  })
   
-  prediction_results_all_combinations$model<-model_type
   
-  return(prediction_results_all_combinations)
+  result_prediction <- bind_rows(unlist.result(prediction_results_all_combinations,"results"))
+  
+  result_model <- unlist.result(prediction_results_all_combinations,"models")
+  
+  names(result_model) <- ids
+  
+  
+  
+  result_prediction$model <- model_type
+  
+  return(list(results=result_prediction,
+              models=result_model))
+  
+ 
   
 }
+
+
+
+##Helper function for cleaner code
+
+unlist.result <- function(x,element){
+  
+  list.length <- length(x)
+  
+  res <- lapply(c(1:list.length),function(i){
+    
+    return(x[[i]][[element]])
+  })
+  
+  return(res)
+}
+
+
+idf <- function(x)x 
+
+
+## Plotting a specified model result
+
+ingarch.parameter.plot <- function(result,category,element,func="idf",save=TRUE,plot.type=c("default","histogram")){
+  
+  
+  plot.type <- match.arg(plot.type)
+  
+  ids <- unique(result$results$id)
+  
+  distributions <- unique(result$results$distribution)
+  
+  
+  
+  for (id in ids){
+    for ( distribution in distributions){
+      
+      if(save){
+        png(paste("Ingarch_plot_id",id,distribution,"category",category,plot.type,func,".png",sep=""),height = 15,width = 20,units = "cm",res=300)
+      }
+      
+      plot_data <- result$models[[paste(id)]][[category]]
+      
+      plot_data <- unlist(lapply(c(1:length(plot_data)),function(i)return(do.call(func,list(plot_data[[i]][[element]])))))
+      
+      if(plot.type=="default"){
+        
+        plot(plot_data,type="l",ylab=paste("Distribution mean",func,sep=" "),main=paste("Ingarch_",distribution,"_id_",id,sep=""),
+             sub=paste("Category: ",category,sep=""))
+        
+      }
+      
+      else if (plot.type =="histogram") {
+        
+        hist(plot_data,xlab=paste("Distribution mean",func,sep=" "),main=paste("Ingarch_",distribution,"_id_",id,sep=""),
+             sub=paste("Category: ",category,sep=""))
+        
+      }else {
+        
+        stop("Enter valid plot type") 
+        
+      }
+
+    }
+    
+  }
+  if(save){
+    dev.off()
+  }
+  
+}
+
 
 
 

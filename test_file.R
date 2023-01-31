@@ -43,3 +43,9 @@ test<-coda.analysis(weekly_category_data = weekly_category_data,ids=c(4,6),one_v
                     pivot_groups = c("1","2"),tspace = T,take_log = T)
 test2<-ingarch.analysis(weekly_category_data = weekly_category_data,ids=c(4,6),distribution = "poisson",categories = c("1","2"))
 View(test2)
+
+test<-ingarch.prediction(data_raw,1)
+
+test<-unlist(ingarch_result[[2]],recursive = F)
+
+View(test)
