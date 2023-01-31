@@ -1,0 +1,176 @@
+---
+title: "Method comparision"
+author: "Alexander Schwaiger"
+date: "2023-01-20"
+output: pdf_document
+---
+```{r eval=FALSE}
+source("dependencies.R")
+source("coda_functions.R") 
+source("ingarch_functions.R")
+source("general_helper_functions.R")
+```
+
+
+Preparation
+```{r}
+id<-12
+prediction_error_step<-1
+frame<-10
+
+#Ingarch specifications
+
+distr<-"poisson"
+
+#Coda specifications
+
+zero_handling<-"zeros_only"
+tspace<-T
+take_log<-T
+```
+
+
+Performing the Analysis
+```{r}
+coda_result <-
+  coda.analysis(
+    weekly_category_data = weekly_category_data,
+    ids = id,
+    frame = frame,
+    one_vs_all = T,
+    pivot_groups = c("1", "2", "3", "4"),
+    tspace = T,
+    take_log = T,
+    zero_handling = zero_handling
+  )
+
+
+ingarch_result <-
+  ingarch.analysis(
+    weekly_category_data = weekly_category_data,
+    ids = id,
+    frame = frame,
+    distribution = distr,
+    categories = c("1","2","3","4")
+  )
+```
+
+
+Preparing Data for plotting
+
+```{r}
+
+plot_data_coda<-coda_result%>%dplyr::filter(category %in% c(1,2,3,4))%>%dplyr::select(!c(naive_predicted_value,prediction_error_naive))
+all_dates_and_categories<-plot_data_coda[,c("category","prediction_date")]
+
+
+plot_data_ingarch<-full_join(ingarch_result$results,all_dates_and_categories)
+plot_data_ingarch$model<-"ingarch"
+
+
+plot_data<-bind_rows(plot_data_coda,plot_data_ingarch)%>%dplyr::select(!c(distribution,pivot_group))
+
+
+```
+Ingarch Timeseries with prediction intervals
+
+```{r}
+p<-ggplot(plot_data_ingarch,aes(x=prediction_date,y=predicted_value),col="blue")+
+  facet_wrap(vars(category),nrow=length(unique(plot_data_ingarch$category)),scales = "free")+
+  geom_point(size=1)+
+  geom_ribbon(aes(x=prediction_date,y=predicted_value,ymin=lower_bound,ymax=upper_bound),
+              data=plot_data_ingarch,inherit.aes = F,fill="grey90",linetype="dashed",col="blue")+
+  geom_line(data=plot_data_ingarch,
+            aes(x=prediction_date,y=predicted_value),col="blue")+
+  geom_line(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
+  geom_point(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
+  theme(text = element_text(size = 20))  
+
+
+p
+
+#ggsave(filename = paste("timeseries_ingarch_id_",id,"_",distr,"_pi",".png",sep=""),plot=p,height = 15,width = 20)
+```
+
+Coda Timeseries with prediction intervals
+```{r}
+p0<-ggplot(plot_data_coda,aes(x=prediction_date,y=predicted_value),col="red")+
+  facet_wrap(vars(category),nrow=length(unique(plot_data_coda$category)),scales = "free")+
+  geom_point(size=1)+
+  geom_ribbon(aes(x=prediction_date,y=predicted_value,ymin=lower_bound,ymax=upper_bound),
+              data=plot_data_coda,inherit.aes = F,fill="grey90",linetype="dashed",col="red")+
+  geom_line(data=plot_data_coda,
+            aes(x=prediction_date,y=predicted_value),col="red")+
+  geom_line(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
+  geom_point(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
+  theme(text = element_text(size = 20))  
+
+
+p0
+
+#ggsave(filename = paste("timeseries_coda_id_",id,"_pi",".png",sep=""),plot=p0,height = 15,width = 20)
+```
+
+Comparing the timeseries with prediction intervals
+
+```{r}
+my_color <- setNames(c("red", "blue"),
+                     c("coda","ingarch"))
+#fill <- setNames(c("red30", "blue30"),
+#                     c("coda","ingarch"))
+
+p1<-ggplot(plot_data,aes(x=prediction_date,y=predicted_value,col=model))+
+  facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+
+  geom_point(size=1)+
+  geom_ribbon(aes(x=prediction_date,y=predicted_value,col=model,ymin=lower_bound,ymax=upper_bound,fill=model),
+              data=plot_data,alpha=0.15,inherit.aes = F,linetype="dashed")+
+  geom_line(data=plot_data,
+            aes(x=prediction_date,y=predicted_value,col=model))+
+  geom_line(data=plot_data,aes(x=prediction_date,y=true_value),col="black")+
+  geom_point(data=plot_data,aes(x=prediction_date,y=true_value),col="black")+
+  scale_color_manual("Legend", values = c(my_color))+
+  ggtitle(paste("Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
+  theme(text = element_text(size = 20))  
+
+p1
+
+#ggsave(filename = paste("timeseries_both_id_",id,"_pi",".png",sep=""),plot=p1,height = 15,width = 20)
+```
+
+
+
+Comparing the prediction errors of the models
+
+```{r}
+p2<-ggplot(plot_data,aes(x=model,y=prediction_error))+
+  facet_wrap(vars(category),ncol=length(unique(plot_data$category)),scales = "fixed")+
+  geom_boxplot()+
+  ggtitle("Prediction error per method and category")+
+  theme(text = element_text(size = 20))  
+
+
+p2
+  
+#ggsave(filename = paste("box_prediction_error_id",id,".png",sep=""),plot=p2,height = 15,width = 20)
+```
+
+
+Ingarch Parameter / Model Check
+
+```{r}
+
+for(category in c(1:4)){
+  
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "default")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "histogram")
+  
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "default",func="mean")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "histogram",func="mean")
+}
+
+```
+
+
+
+
+

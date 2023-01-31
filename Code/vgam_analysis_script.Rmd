@@ -1,0 +1,115 @@
+---
+title: "vgam_analysis_script"
+author: "Alexander Schwaiger"
+date: "2023-01-03"
+output: pdf_document
+---
+```{r eval=FALSE}
+source("dependencies.R")
+source("coda_functions.R")
+```
+
+
+Preparation
+```{r}
+id<-8
+
+model_type<-"vgam"
+distr<-"poisson"
+```
+
+```{r}
+data_raw<-weekly_category_data%>%
+      filter(fridge_id==id)%>%
+      dplyr::select(week_date,main_category_id,sold)%>%
+                arrange(week_date)%>%
+      group_by(main_category_id,week_date)%>%
+      dplyr::mutate(sold=sum(sold))%>%
+      dplyr::distinct()%>%
+      pivot_wider(names_from 
+                = main_category_id,values_from = sold)%>%
+      ungroup()%>%
+      dplyr::select("week_date","1","2","3","4")%>%
+  setnafill(type="const",fill=0)
+  
+  
+
+```
+
+
+Preparing the data
+
+```{r}
+raw_length<-dim(data_raw)[1]
+
+data_prep<-cbind(data_raw[-1,-1],data_raw[-raw_length,-1])
+
+names(data_prep)<-c("y1","y2","y3","y4",
+                   "x1","x2","x3","x4")
+
+fit_length<-round(dim(data_raw)[1]*2/3)
+
+data_fit<-data_prep[1:fit_length,]
+
+data_fit<-dplyr::select(data_fit,y1,y2,y3,y4,x1,x2,x3,x4)
+
+#data_fit$X<-cbind(data_fit$x1,data_fit$x2,
+#                  data_fit$x3,data_fit$x4)
+
+```
+
+
+```{r}
+model<-vgam(cbind(y1,y2,y3,y4)~s(x1)+s(x2)+x3+x4,data=data_fit,family = poissonff(link = "identitylink",imethod=1),
+            control = vgam.control(criterion = "coefficients",maxit = 30))
+
+#model<-vgam(cbind(y1,y2,y3,y4)~s(x1)+s(x2)+x3+x4,data=data_fit,family = negbinomial(lmu="identitylink",lsize = "identitylink"),
+#           control = vgam.control(criterion = "coefficients",maxit = 30))
+```
+
+
+Predicting results
+
+```{r}
+prediction_results<-bind_rows(lapply(c((fit_length+1):(raw_length-1)),function(index){
+  
+  data_test<-data_prep[index,c("x1","x2","x3","x4")]
+  
+  predicted_values<-as.vector(predict(model,data_test))
+  
+  true_values<-as.vector(unlist(data_prep[index,c("y1","y2","y3","y4")]))
+  
+  return(data.frame(group=factor(rep(c("1","2","3","4"),2)),
+                    type=rep(c("predicted_value","true_value"),each=4),
+                    prediction_values=c(predicted_values,true_values)))
+  
+}))
+prediction_results$week_date<-rep(data_raw$week_date[(fit_length+1):(raw_length-1)],each=8)
+```
+
+
+```{r}
+plot_data<-prediction_results
+
+my_color <- setNames(c("red","black"),
+                     c('predicted_value', 'true_value'))
+
+
+p1<-ggplot(plot_data,aes(x=week_date,y=prediction_values,col=type))+
+  facet_wrap(vars(group),nrow=length(unique(plot_data$group)),scales = "free")+
+  geom_point(size=1)+
+  geom_line(data=plot_data,
+            aes(x=week_date,y=prediction_values,col=type))+
+  scale_color_manual("Legend", values = my_color)+
+  ggtitle(paste(model_type,distr,": Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
+  theme(text = element_text(size = 20))  
+
+p1
+
+ggsave(filename = paste("timeseries_",model_type,distr,"_id_",id,".png",sep=""),plot=p1,height = 15,width = 20)
+```
+
+
+
+
+
