@@ -12,6 +12,12 @@ source("general_helper_functions.R")
 ```
 
 
+Plot parameters 
+```{r}
+text_size <- 30
+```
+
+
 Preparation
 ```{r}
 id<-12
@@ -84,7 +90,7 @@ p<-ggplot(plot_data_ingarch,aes(x=prediction_date,y=predicted_value),col="blue")
             aes(x=prediction_date,y=predicted_value),col="blue")+
   geom_line(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
   geom_point(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
-  theme(text = element_text(size = 20))  
+  theme(text = element_text(size = text_size))  
 
 
 p
@@ -103,7 +109,7 @@ p0<-ggplot(plot_data_coda,aes(x=prediction_date,y=predicted_value),col="red")+
             aes(x=prediction_date,y=predicted_value),col="red")+
   geom_line(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
   geom_point(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
-  theme(text = element_text(size = 20))  
+  theme(text = element_text(size = text_size))  
 
 
 p0
@@ -130,7 +136,7 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=predicted_value,col=model))+
   geom_point(data=plot_data,aes(x=prediction_date,y=true_value),col="black")+
   scale_color_manual("Legend", values = c(my_color))+
   ggtitle(paste("Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
-  theme(text = element_text(size = 20))  
+  theme(text = element_text(size = text_size))  
 
 p1
 
@@ -141,12 +147,12 @@ p1
 
 Comparing the prediction errors of the models
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 p2<-ggplot(plot_data,aes(x=model,y=prediction_error))+
   facet_wrap(vars(category),ncol=length(unique(plot_data$category)),scales = "fixed")+
   geom_boxplot()+
   ggtitle("Prediction error per method and category")+
-  theme(text = element_text(size = 20))  
+  theme(text = element_text(size = text_size))  
 
 
 p2
@@ -157,20 +163,45 @@ p2
 
 Ingarch Parameter / Model Check
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 
 for(category in c(1:4)){
   
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "default")
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "histogram")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "default")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "histogram")
   
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "default",func="mean")
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=T,plot.type = "histogram",func="mean")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "default",func="mean")
+  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "histogram",func="mean")
 }
 
 ```
 
 
 
+```{r}
+p3 <- ggplot(plot_data,aes(x=prediction_date,y=prediction_error_normed,col=model))+
+  facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+
+  geom_point(size=1.5,aes(shape=model))+
+  geom_line()+
+  theme(text = element_text(size = text_size))+
+  geom_line(aes(y=0),col="black")+
+  ggtitle(paste("Normed prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
+  scale_color_manual("Legend", values = c(my_color))+
+  theme(text = element_text(size = text_size))  
+
+p3
+```
 
 
+```{r eval=FALSE, include=FALSE}
+p4<-ggplot(plot_data,aes(x=model,y=prediction_error_normed))+
+  facet_wrap(vars(category),ncol=length(unique(plot_data$category)),scales = "fixed")+
+  geom_boxplot()+
+  ggtitle("Prediction error per method and category")+
+  theme(text = element_text(size = text_size))  
+
+
+p4
+  
+#ggsave(filename = paste("box_prediction_error_id",id,".png",sep=""),plot=p2,height = 15,width = 20)
+```

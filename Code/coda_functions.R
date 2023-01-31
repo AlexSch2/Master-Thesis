@@ -167,8 +167,10 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
         naive_predicted_value <- as.numeric(tail(data_notransf_windows[[index]]$fitting[,-1], 1))
       }
   
-          
+      #Getting true value and last known values
+      frame <- dim(data_notransf_windows[[index]]$fitting)[1]
       true_value <- as.numeric(data_notransf_windows[[index]]$prediction_value[,-1])
+      last_known_value <- as.numeric(data_notransf_windows[[index]]$fitting[frame,-1])
       
       
       if (one_vs_all) {
@@ -223,6 +225,11 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
     prediction_error <- as.numeric(true_value - predicted_value)
     prediction_error_naive <- as.numeric(true_value - naive_predicted_value)
     
+    #Calculating the normed prediction error
+    div <- ((true_value - last_known_value)^2)
+    if(0 %in% div ) div[div==0] <- 0.8
+    prediction_error_normed <- prediction_error/div
+    
     
     if(one_vs_all){
       
@@ -230,10 +237,12 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
         data.frame(
           prediction_error = prediction_error,
           prediction_error_naive = prediction_error_naive,
+          prediction_error_normed = prediction_error_normed,
           predicted_value = predicted_value,
           lower_bound = lower_bound,
           upper_bound = upper_bound,
           true_value = true_value,
+          last_known_value = last_known_value,
           naive_predicted_value = naive_predicted_value,
           category = category,
           prediction_date = prediction_date,
@@ -247,10 +256,12 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
         data.frame(
           prediction_error = prediction_error,
           prediction_error_naive = prediction_error_naive,
+          prediction_error_normed = prediction_error_normed,
           predicted_value = predicted_value,
           lower_bound = lower_bound,
           upper_bound = upper_bound,
           true_value = true_value,
+          last_known_value = last_known_value,
           naive_predicted_value = naive_predicted_value,
           category = category,
           prediction_date = prediction_date
@@ -402,27 +413,6 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
     
   }
   
-}
-
-#Function for naming the plot of a coda model
-coda.plot.name<-function(id,zero_handling,tspace,take_log){
-  if(tspace){
-    tspace_char<-"_tspace"
-    
-    if(take_log){
-      take_log_char<-"_log"
-    } else{
-      take_log_char<-""
-    }
-    
-  } 
-  else{
-    tspace_char<-""
-    take_log_char<-""
-  }
-  
-  name<-paste("fridge_","id",id,"_zero_handling_",zero_handling,take_log_char,tspace_char,sep="")
-  return(name)
 }
 
 
