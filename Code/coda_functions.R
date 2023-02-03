@@ -79,15 +79,15 @@ Eucledian <- function(x, y, standardise = 1) return(sum((x - y) / standardise) ^
 
 
 ## Fits the model and calculates the predictions based on the prediction windows for coda timeseries
-coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_prepared_notransf, prediction_error_step,
+coda.prediction <- function(data_transformed_windows, data_notransformed_windows, data_notransformed, prediction_error_step,
                             one_vs_all,tspace, take_log, pivot_group) {
   
-  prediction_results <- bind_rows(lapply(c(1:length(data_prepared_windows)), function(index) {
+  prediction_results <- bind_rows(lapply(c(1:length(data_transformed_windows)), function(index) {
     
     
     # Selecting the fitting data and the data which should be predicted 
-    fitting_data <- data_prepared_windows[[index]]$fitting[,-1]
-    prediction_date <- data_prepared_windows[[index]]$prediction_value[1, 1]
+    fitting_data <- data_transformed_windows[[index]]$fitting[,-1]
+    prediction_date <- data_transformed_windows[[index]]$prediction_value[1, 1]
     
     
     #Depending on whether we have tspace or not we fit a VAR model or an AR model
@@ -116,7 +116,7 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
     
     
     
-    tsums <- as.numeric(tail(data_notransf_windows[[index]]$fitting$tsum, 1))
+    tsums <- as.numeric(tail(data_notransformed_windows[[index]]$fitting$tsum, 1))
     
     #Back transformations in case we use tspace
     if (tspace) {
@@ -160,17 +160,19 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
       
       
       #Naive prediction values. For the first time point this is the median, for the rest it is the last known value
-      if (index == 1) {
-        naive_predicted_value <- apply(data_prepared_notransf[,-1], 2, median, na.rm = TRUE)
-      } 
-      else{
-        naive_predicted_value <- as.numeric(tail(data_notransf_windows[[index]]$fitting[,-1], 1))
-      }
+      # if (index == 1) {
+      #   naive_predicted_value <- apply(data_notransformed[,-1], 2, median, na.rm = TRUE)
+      # } 
+      # else{
+      #   naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1], 1))
+      # }
+      
+      naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1], 1))
   
       #Getting true value and last known values
-      frame <- dim(data_notransf_windows[[index]]$fitting)[1]
-      true_value <- as.numeric(data_notransf_windows[[index]]$prediction_value[,-1])
-      last_known_value <- as.numeric(data_notransf_windows[[index]]$fitting[frame,-1])
+      frame <- dim(data_notransformed_windows[[index]]$fitting)[1]
+      true_value <- as.numeric(data_notransformed_windows[[index]]$prediction_value[,-1])
+      last_known_value <- as.numeric(data_notransformed_windows[[index]]$fitting[frame,-1])
       
       
       if (one_vs_all) {
@@ -201,7 +203,7 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
       upper_bound <- upper_bound * tsums
       
       
-      true_value <- as.numeric(data_notransf_windows[[index]]$prediction_value[,-c(1, 4)])
+      true_value <- as.numeric(data_notransformed_windows[[index]]$prediction_value[,-c(1, 4)])
       
       if (one_vs_all) {
         category <- factor(c(pivot_group, "other"))
@@ -212,12 +214,14 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
       
   
       #Naive prediction values. For the first time point this is the median, for the rest it is the last known value
-      if (index == 1) {
-        naive_predicted_value <- apply(data_prepared_notransf[,-c(1, 4)], 2, median, na.rm = TRUE)
-        } 
-      else{
-          naive_predicted_value <- as.numeric(tail(data_notransf_windows[[index]]$fitting[,-c(1, 4)], 1))
-      }
+      # if (index == 1) {
+      #   naive_predicted_value <- apply(data_notransformed[,-c(1, 4)], 2, median, na.rm = TRUE)
+      #   } 
+      # else{
+      #     naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-c(1, 4)], 1))
+      # }
+      
+      naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-c(1, 4)], 1))
     }
     
     
@@ -226,9 +230,7 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
     prediction_error_naive <- as.numeric(true_value - naive_predicted_value)
     
     #Calculating the normed prediction error
-    div <- ((true_value - last_known_value)^2)
-    if(0 %in% div ) div[div==0] <- 0.8
-    prediction_error_normed <- prediction_error/div
+    prediction_error_normed <- prediction_error
     
     
     if(one_vs_all){
@@ -273,6 +275,16 @@ coda.prediction <- function(data_prepared_windows, data_notransf_windows, data_p
    
     }))
   
+  #Calculating the predictione error
+  div <- sapply(c(1:length(data_transformed_windows)),function(i){
+    
+    return(normation(x = prediction_results$true_value[1:i],
+                     y = prediction_results$naive_predicted_value[1:i]))}
+    
+    )
+  if(0 %in% div ) div[div==0] <- 0.5
+  prediction_results$prediction_error_normed <- prediction_results$prediction_error_normed/div
+  
   return(prediction_results)
 }
 
@@ -302,7 +314,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         
         
         #Preparing transformed data
-        data_prepared <- coda.data.preparation(data_raw, 
+        data_transformed <- coda.data.preparation(data_raw, 
                                                zero_handling = zero_handling,
                                                tspace = tspace, 
                                                log = take_log,
@@ -310,7 +322,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
                                                pivot_group = pivot_group) %>%
           arrange(week_date)
         #Splitting transformed data into windows
-        data_prepared_windows <- windows(data_prepared,
+        data_transformed_windows <- windows(data_transformed,
                                          frame=frame,
                                          method = "overlapping",
                                          prediction_error_step = prediction_error_step)
@@ -318,21 +330,21 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         
         
         #Preparing non transformed data 
-        data_prepared_notransf <- coda.data.preparation(data_raw,
+        data_notransformed <- coda.data.preparation(data_raw,
                                                         zero_handling="none",
                                                         tspace=tspace, log=F, 
                                                         one_vs_all = T,
                                                         pivot_group = pivot_group) %>%
           arrange(week_date)
         #Splitting non transformed data into windows
-        data_notransf_windows <- windows(data_prepared_notransf,
+        data_notransformed_windows <- windows(data_notransformed,
                                             frame=frame,method = "overlapping",
                                             prediction_error_step = prediction_error_step)
         
         
-        prediction_results<-coda.prediction(data_prepared_windows = data_prepared_windows, 
-                                            data_notransf_windows = data_notransf_windows, 
-                                            data_prepared_notransf = data_prepared_notransf, 
+        prediction_results<-coda.prediction(data_transformed_windows = data_transformed_windows, 
+                                            data_notransformed_windows = data_notransformed_windows, 
+                                            data_notransformed = data_notransformed, 
                                             prediction_error_step = prediction_error_step,
                                             one_vs_all = T,
                                             tspace = tspace,
@@ -367,13 +379,13 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         
         
         #Preparing transformed data
-        data_prepared <- coda.data.preparation(data_raw, 
+        data_transformed <- coda.data.preparation(data_raw, 
                                                zero_handling = zero_handling,
                                                tspace = tspace, 
                                                log = take_log,
-                                               one_vs_all = one_vs_all) %>% arrange(week_date)
+                                               one_vs_all = F) %>% arrange(week_date)
         #Splitting transformed data into windows
-        data_prepared_windows <- windows(data_prepared,
+        data_transformed_windows <- windows(data_transformed,
                                          frame= 20 ,
                                          method = "overlapping",
                                          prediction_error_step = prediction_error_step)
@@ -381,21 +393,21 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         
         
         #Preparing non transformed data 
-        data_prepared_notransf <- coda.data.preparation(data_raw,
+        data_notransformed <- coda.data.preparation(data_raw,
                                                         zero_handling="none",
                                                         tspace=tspace,
                                                         log=take_log, 
-                                                        one_vs_all = one_vs_all) %>% arrange(week_date)
+                                                        one_vs_all = F) %>% arrange(week_date)
         #Splitting non transformed data into windows
-        data_notransf_windows <- windows(data_prepared_notransf,
+        data_notransformed_windows <- windows(data_notransformed,
                                          frame = 20,
                                          method = "overlapping",
                                          prediction_error_step = prediction_error_step)
         
         
-        prediction_results <- coda.prediction(data_prepared_windows = data_prepared_windows, 
-                                            data_notransf_windows = data_notransf_windows, 
-                                            data_prepared_notransf = data_prepared_notransf, 
+        prediction_results <- coda.prediction(data_transformed_windows = data_transformed_windows, 
+                                            data_notransformed_windows = data_notransformed_windows, 
+                                            data_notransformed = data_notransformed, 
                                             prediction_error_step = prediction_error_step,
                                             one_vs_all = F,
                                             tspace = tspace,

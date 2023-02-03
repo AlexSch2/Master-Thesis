@@ -177,7 +177,7 @@ for(category in c(1:4)){
 ```
 
 
-
+Normed Prediction errors 
 ```{r}
 p3 <- ggplot(plot_data,aes(x=prediction_date,y=prediction_error_normed,col=model))+
   facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+

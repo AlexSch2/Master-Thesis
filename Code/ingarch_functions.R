@@ -58,9 +58,7 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
     
   
     #Calculating the normed prediction error
-    div <- ((true_value - last_known_value)^2)
-    if(div == 0) div <- 0.8
-    prediction_error_normed <- prediction_error/div
+    prediction_error_normed <- prediction_error
     
     return(list(
       prediction = data.frame(
@@ -84,6 +82,16 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
   result_prediction <- bind_rows(unlist.element(result,"prediction"))
   result_model <- unlist.element(result,"model")
   names(result_model) <- sapply(c(1:number_of_windows),function(i){paste("window",i,sep="")})
+  
+  
+  #Calculation the normed prediction error 
+  div <- sapply(c(1:length(result_prediction)),function(i){
+    
+    return(normation(x = result_prediction$true_value[1:i],
+                     y = result_prediction$last_known_value[1:i]))}
+    )
+  if(0 %in% div ) div[div==0] <- 0.5
+  result_prediction$prediction_error_normed <- result_prediction$prediction_error_normed/div
   
   
   #Plotting diagnostic plots or not

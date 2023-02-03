@@ -47,7 +47,7 @@ windows <- function(timeseries,frame,method = c("non-overlapping", "overlapping"
   return(res)
 }
 
-
+#Function to transform the data into the right format
 data.preparation <- function(data_raw,one_vs_all=F,pivot_group="1",categories=c(1,2,3,4),nas_to=0){
   
   columns <- c("week_date",as.character(categories))
@@ -75,6 +75,20 @@ data.preparation <- function(data_raw,one_vs_all=F,pivot_group="1",categories=c(
   return(data_raw)
   
   
+}
+
+
+
+## Normation function for the normed prediction error 
+normation <- function(x, y) {
+  i <- length(x)
+  result <- 0
+  for (j in 1:i) {
+    summand <- (x[j] - y[j]) ^ 2 / i
+    result <- result + summand
+    
+  }
+  return(result)
 }
 
 
