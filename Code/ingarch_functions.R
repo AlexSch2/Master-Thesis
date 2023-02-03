@@ -14,7 +14,7 @@ ingarch.data.preparation <- function(data_raw,one_vs_all=F,pivot_group="1") {
 
 #Prediction function for INGARCH models. Fits the model for the specified category and calculates the predicted value, 
 #prediction errors and PREDICTIVE INTERVALS (NOT CIs)
-ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,distribution="nbinom",plot=F){
+ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,distribution="nbinom",plot=F,window_method="extending"){
   
   #Selecting the group
   data <- data %>% 
@@ -22,7 +22,7 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
   
   
   #Creating fitting and prediction windows
-  data_window <- windows(data,frame = frame,"overlapping",prediction_error_step = prediction_error_step)
+  data_window <- windows(data,frame = frame,method=window_method,prediction_error_step = prediction_error_step)
   number_of_windows <- length(data_window)
   
   
@@ -108,7 +108,7 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
 
 #Wrapper function for the analysis of the data with an Ingarch model
 ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,distribution="nbinom",
-                           model_type="ingarch",plot=F,categories=c("1","2","3","4"),frame=10){
+                           model_type="ingarch",plot=F,categories=c("1","2","3","4"),frame=10,window_method="extending"){
   
   stopifnot(model_type %in% c("ingarch","ingarch_one_vs_all"))
   
@@ -135,7 +135,8 @@ ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,
                                               prediction_error_step = prediction_error_step,
                                               frame=frame,
                                               plot=F,
-                                              distribution=distribution)
+                                              distribution=distribution,
+                                              window_method="extending")
       
       return(list(results=bind_rows(prediction_result$results),
                   models=prediction_result$models))
@@ -148,7 +149,8 @@ ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,
     result_prediction <- bind_rows(unlist.element(prediction_results_all_categories,"results"))
     result_model <- unlist.element(prediction_results_all_categories,"models")
     names(result_model) <- categories
-    result_prediction$id<-id
+    result_prediction$id <- id
+    result_prediction$window_method <- window_method
     
     return(list(results=result_prediction,
                 models=result_model))

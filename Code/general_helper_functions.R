@@ -2,11 +2,17 @@
 
 #This function splits the time series into appropriate windows to determine the optimal length for the model
 
-windows <- function(timeseries,frame,method = c("non-overlapping", "overlapping"),
+windows <- function(timeseries,frame,method = c("non-overlapping", "overlapping", "extending"),
                     prediction_error_step = 1) {
   
   method <- match.arg(method)
   timeseries_length <- dim(timeseries)[1]
+  if (is.null(timeseries_length)) {
+    timeseries <- as.matrix(timeseries, ncol = 1)
+    timeseries_length <- dim(timeseries)[1]
+  }
+  if (is.null(timeseries_length))
+    stop("Enter valid timeseries")
   
   stopifnot(timeseries_length >= frame)
   
@@ -29,12 +35,22 @@ windows <- function(timeseries,frame,method = c("non-overlapping", "overlapping"
   }
   
   else if (method == "overlapping") {
-    #Length of the series - length of the window - prediction step equals the number of windows
-    window_number <- timeseries_length - frame - prediction_error_step +
-      1
+    #Length of the series - length of the window + prediction step equals the number of windows
+    window_number <- timeseries_length - frame - prediction_error_step + 1
     
     res <- lapply(c(1:window_number), function(i) {
       return(list(fitting = timeseries[i:(frame + i - 1), ],
+                  prediction_value = timeseries[(frame + i - 1 + prediction_error_step), ]))
+    })
+    names(res) <- c(1:window_number)
+  }
+  
+  else if (method == "extending") {
+    #Length of the series - length of the first window + prediction step equals the number of windows
+    window_number <- timeseries_length - frame - prediction_error_step + 1
+    
+    res <- lapply(c(1:window_number), function(i) {
+      return(list(fitting = timeseries[1:(frame + i - 1), ],
                   prediction_value = timeseries[(frame + i - 1 + prediction_error_step), ]))
     })
     names(res) <- c(1:window_number)

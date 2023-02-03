@@ -20,9 +20,10 @@ text_size <- 30
 
 Preparation
 ```{r}
-id<-12
-prediction_error_step<-1
-frame<-10
+id <- 12
+prediction_error_step <- 1
+frame <- 10
+window_method <- "extending"
 
 #Ingarch specifications
 
@@ -47,7 +48,8 @@ coda_result <-
     pivot_groups = c("1", "2", "3", "4"),
     tspace = T,
     take_log = T,
-    zero_handling = zero_handling
+    zero_handling = zero_handling,
+    window_method = window_method
   )
 
 
@@ -57,7 +59,8 @@ ingarch_result <-
     ids = id,
     frame = frame,
     distribution = distr,
-    categories = c("1","2","3","4")
+    categories = c("1","2","3","4"),
+    window_method = window_method
   )
 ```
 
@@ -78,6 +81,20 @@ plot_data<-bind_rows(plot_data_coda,plot_data_ingarch)%>%dplyr::select(!c(distri
 
 
 ```
+
+Show whole timeseries
+```{r}
+data_raw <- weekly_category_data %>%
+          filter(fridge_id == id &
+                   main_category_id %in% c(1, 2, 3, 4)) %>%
+          dplyr::select(week_date, main_category_id, sold) %>%
+          data.preparation() %>% 
+          pivot_longer(cols=c("1","2","3","4"),names_to="category",values_to="true_value")
+names(data_raw)[1] <- c("prediction_date")
+        
+```
+
+
 Ingarch Timeseries with prediction intervals
 
 ```{r}
@@ -88,7 +105,8 @@ p<-ggplot(plot_data_ingarch,aes(x=prediction_date,y=predicted_value),col="blue")
               data=plot_data_ingarch,inherit.aes = F,fill="grey90",linetype="dashed",col="blue")+
   geom_line(data=plot_data_ingarch,
             aes(x=prediction_date,y=predicted_value),col="blue")+
-  geom_line(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
+  geom_line(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
+  geom_point(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   geom_point(data=plot_data_ingarch,aes(x=prediction_date,y=true_value),col="black")+
   theme(text = element_text(size = text_size))  
 
@@ -107,8 +125,8 @@ p0<-ggplot(plot_data_coda,aes(x=prediction_date,y=predicted_value),col="red")+
               data=plot_data_coda,inherit.aes = F,fill="grey90",linetype="dashed",col="red")+
   geom_line(data=plot_data_coda,
             aes(x=prediction_date,y=predicted_value),col="red")+
-  geom_line(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
-  geom_point(data=plot_data_coda,aes(x=prediction_date,y=true_value),col="black")+
+  geom_line(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
+  geom_point(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   theme(text = element_text(size = text_size))  
 
 
@@ -132,8 +150,8 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=predicted_value,col=model))+
               data=plot_data,alpha=0.15,inherit.aes = F,linetype="dashed")+
   geom_line(data=plot_data,
             aes(x=prediction_date,y=predicted_value,col=model))+
-  geom_line(data=plot_data,aes(x=prediction_date,y=true_value),col="black")+
-  geom_point(data=plot_data,aes(x=prediction_date,y=true_value),col="black")+
+  geom_line(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
+  geom_point(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   scale_color_manual("Legend", values = c(my_color))+
   ggtitle(paste("Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
   theme(text = element_text(size = text_size))  

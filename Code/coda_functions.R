@@ -294,7 +294,7 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
 ## Standard CI is 95%
 
 coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "zeros_only", prediction_error_step = 1, take_log = T,
-                        tspace = T, one_vs_all = F , pivot_groups = c("1"), model_type = "coda") {
+                        tspace = T, one_vs_all = F , pivot_groups = c("1"), model_type = "coda", window_method ="extending") {
   
   stopifnot(model_type %in% c("coda","coda_one_vs_all"))
   
@@ -324,7 +324,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         #Splitting transformed data into windows
         data_transformed_windows <- windows(data_transformed,
                                          frame=frame,
-                                         method = "overlapping",
+                                         method = window_method,
                                          prediction_error_step = prediction_error_step)
         
         
@@ -338,20 +338,22 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
           arrange(week_date)
         #Splitting non transformed data into windows
         data_notransformed_windows <- windows(data_notransformed,
-                                            frame=frame,method = "overlapping",
+                                            frame=frame,
+                                            method = window_method,
                                             prediction_error_step = prediction_error_step)
         
         
-        prediction_results<-coda.prediction(data_transformed_windows = data_transformed_windows, 
-                                            data_notransformed_windows = data_notransformed_windows, 
-                                            data_notransformed = data_notransformed, 
-                                            prediction_error_step = prediction_error_step,
-                                            one_vs_all = T,
-                                            tspace = tspace,
-                                            take_log =  take_log,
-                                            pivot_group = pivot_group)
+        prediction_results <- coda.prediction(data_transformed_windows = data_transformed_windows, 
+                                              data_notransformed_windows = data_notransformed_windows, 
+                                              data_notransformed = data_notransformed, 
+                                              prediction_error_step = prediction_error_step,
+                                              one_vs_all = T,
+                                              tspace = tspace,
+                                              take_log =  take_log,
+                                              pivot_group = pivot_group)
         
         prediction_results$id <- id
+        prediction_results$window_method <- window_method
         
         return(prediction_results)
     
@@ -387,7 +389,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         #Splitting transformed data into windows
         data_transformed_windows <- windows(data_transformed,
                                          frame= 20 ,
-                                         method = "overlapping",
+                                         method = window_method,
                                          prediction_error_step = prediction_error_step)
         
         
@@ -401,19 +403,20 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         #Splitting non transformed data into windows
         data_notransformed_windows <- windows(data_notransformed,
                                          frame = 20,
-                                         method = "overlapping",
+                                         method = window_method,
                                          prediction_error_step = prediction_error_step)
         
         
         prediction_results <- coda.prediction(data_transformed_windows = data_transformed_windows, 
-                                            data_notransformed_windows = data_notransformed_windows, 
-                                            data_notransformed = data_notransformed, 
-                                            prediction_error_step = prediction_error_step,
-                                            one_vs_all = F,
-                                            tspace = tspace,
-                                            take_log =  take_log)
+                                              data_notransformed_windows = data_notransformed_windows, 
+                                              data_notransformed = data_notransformed, 
+                                              prediction_error_step = prediction_error_step,
+                                              one_vs_all = F,
+                                              tspace = tspace,
+                                              take_log =  take_log)
         
         prediction_results$id <- id
+        prediction_results$window_method <- window_method
         
         return(prediction_results)
         
