@@ -51,8 +51,11 @@ test<-unlist(ingarch_result[[2]],recursive = F)
 View(test)
 
 
-
-for (i in 1:33){
+div <- sapply(c(1:dim(coda_result)[1]),function(i){
   
-  print(predict(ingarch_result$models$`12`$`3`[[i]])$pred)
-}
+  return(normation(x = coda_result$true_value[1:i],
+                   y = coda_result$naive_predicted_value[1:i]))
+  })
+
+
+

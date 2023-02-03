@@ -85,7 +85,7 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
   
   
   #Calculation the normed prediction error 
-  div <- sapply(c(1:length(result_prediction)),function(i){
+  div <- sapply(c(1:dim(result_prediction)[1]),function(i){
     
     return(normation(x = result_prediction$true_value[1:i],
                      y = result_prediction$last_known_value[1:i]))}
@@ -169,22 +169,6 @@ ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,
  
   
 }
-
-
-
-##Helper function for cleaner code
-unlist.element <- function(x,element){
-  
-  list.length <- length(x)
-  res <- lapply(c(1:list.length),function(i){
-    return(x[[i]][[element]])
-  })
-  return(res)
-}
-
-
-idf <- function(x)x 
-
 
 
 

@@ -69,7 +69,7 @@ Preparing Data for plotting
 
 ```{r}
 
-plot_data_coda<-coda_result%>%dplyr::filter(category %in% c(1,2,3,4))%>%dplyr::select(!c(naive_predicted_value,prediction_error_naive))
+plot_data_coda<-coda_result$results%>%dplyr::filter(category %in% c(1,2,3,4))%>%dplyr::select(!c(naive_predicted_value,prediction_error_naive))
 all_dates_and_categories<-plot_data_coda[,c("category","prediction_date")]
 
 
@@ -204,8 +204,7 @@ p3 <- ggplot(plot_data,aes(x=prediction_date,y=prediction_error_normed,col=model
   theme(text = element_text(size = text_size))+
   geom_line(aes(y=0),col="black")+
   ggtitle(paste("Normed prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
-  scale_color_manual("Legend", values = c(my_color))+
-  theme(text = element_text(size = text_size))  
+  scale_color_manual("Legend", values = c(my_color))
 
 p3
 ```
@@ -223,3 +222,17 @@ p4
   
 #ggsave(filename = paste("box_prediction_error_id",id,".png",sep=""),plot=p2,height = 15,width = 20)
 ```
+
+
+Lag order of coda model
+
+```{r}
+plot_coda_lag <- coda.get.lag(coda_result)
+p5 <- ggplot(plot_coda_lag,aes(x=window,y=lag))+
+  facet_wrap(vars(category),nrow=length(unique((plot_coda_lag$category))),scales = "free")+
+  geom_point(size=1.5)+
+  geom_line()+
+  ggtitle(paste("Coda model lag per window",sep=" "),subtitle = paste("Fridge ID:",id,sep=" "))+
+  theme(text = element_text(size = text_size))
+```
+

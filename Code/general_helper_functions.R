@@ -108,3 +108,18 @@ normation <- function(x, y) {
 }
 
 
+##Helper function for cleaner code
+unlist.element <- function(x,element){
+  
+  list.length <- length(x)
+  res <- lapply(c(1:list.length),function(i){
+    return(x[[i]][[element]])
+  })
+  return(res)
+}
+
+
+idf <- function(x)x 
+
+
+
