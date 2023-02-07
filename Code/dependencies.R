@@ -14,6 +14,7 @@
 #install.packages("ggplot2")
 #install.packages("VGAM")
 #install.packages("here")
+#install.packages("pscl")
 
 #Loading Packages
 
@@ -28,4 +29,5 @@ library(parallel) #parallelisation
 library(ggplot2) #plots
 library(VGAM) #VGAMS
 library(here) #for paths of plots
+library(pscl) #alternative for zim models
 
