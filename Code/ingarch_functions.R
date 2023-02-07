@@ -71,7 +71,8 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
         last_known_value = last_known_value,
         category = category,
         prediction_date = data_window[[window_index]]$prediction_value[[1]],
-        distribution = distribution
+        distribution = distribution,
+        window = window_index
       ),
       model = model
     ))

@@ -58,4 +58,11 @@ div <- sapply(c(1:dim(coda_result)[1]),function(i){
   })
 
 
+model <- coda_result[["models"]][[1]][["window30"]]
 
+predicted_value <-  predict(model, fitting_data, n.ahead = prediction_error_step)
+
+B <- Bcoef(model)
+Z <- as.matrix(model$datamat[, -c(1:model$K)])
+B%*%Z
+size = 2

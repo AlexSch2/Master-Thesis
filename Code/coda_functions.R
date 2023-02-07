@@ -48,7 +48,7 @@ coda.data.preparation <- function(data,
     }
     
     if (zero_handling == "all") {
-      data <- data %>% mutate(across(.fns = plus))
+      data <- data %>% mutate(across(where(is.numeric),.fns = plus))
     }
     else if (zero_handling == "zeros_only") {
       data[data == 0] <- 0.5
@@ -100,7 +100,8 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     frame <- dim(fitting_data)[1]
     
     # Calculating the max possible lag. Note 1
-    lag.max <- 5
+    D <- dim(fitting_data)[2]
+    lag.max <- (frame-1)/D-1
     lag.max <- max(min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
     
     if(lag.max==1) {
@@ -110,7 +111,7 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     
     #Depending on whether we have tspace or not we fit a VAR model or an AR model
     if (tspace) {
-      model <- VAR(fitting_data, lag.max = lag.max)
+      model <- VAR(fitting_data, lag.max = lag.max, ic= "AIC")
       predicted_value <-  predict(model, fitting_data, n.ahead = prediction_error_step)
       size = 2
     }
@@ -267,7 +268,8 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
             naive_predicted_value = naive_predicted_value,
             category = category,
             prediction_date = prediction_date,
-            pivot_group = pivot_group
+            pivot_group = pivot_group,
+            window = index
           ),
           model = model
         )
@@ -287,7 +289,8 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
             last_known_value = last_known_value,
             naive_predicted_value = naive_predicted_value,
             category = category,
-            prediction_date = prediction_date
+            prediction_date = prediction_date,
+            window = index
         ),
         model = model
         )
@@ -378,7 +381,6 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
                                               tspace = tspace,
                                               take_log =  take_log,
                                               pivot_group = pivot_group)
-        
         prediction_results$result$id <- id
         prediction_results$result$window_method <- window_method
         prediction_results$result$model <- model_type 
@@ -416,7 +418,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
   #Not one vs all
   else {
     
-    prediction_results_all_ids <- bind_rows(lapply(ids,function(id){
+    prediction_results_all_ids <- lapply(ids,function(id){
         #Preparing raw data
         data_raw <- weekly_category_data %>%
           filter(fridge_id == id &
@@ -459,17 +461,27 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
                                               one_vs_all = F,
                                               tspace = tspace,
                                               take_log =  take_log)
+        prediction_results$result$id <- id
+        prediction_results$result$window_method <- window_method
+        prediction_results$result$model <- model_type 
         
-        prediction_results$id <- id
-        prediction_results$window_method <- window_method
         
-        return(prediction_results)
+        #Tidying up data
+        result_prediction <- prediction_results$result
+        result_model <- prediction_results$model
         
-    }))
+        return(list(results = result_prediction,
+                    models = result_model))
+        
+    })
     
-    prediction_results_all_ids$model <- model_type
+    #Tidying up data
+    result_prediction <- bind_rows(unlist.element(prediction_results_all_ids,"results"))
+    result_model <- unlist.element(prediction_results_all_ids,"models")
+    names(result_model) <- ids
     
-    return(prediction_results_all_ids)
+    return(list(results = result_prediction,
+                models = result_model))
     
   }
   
@@ -545,18 +557,91 @@ coda.get.lag <- function (coda_result) {
   ids <- names(coda_result_model)
   pivot_groups <- unique(coda_result$results$pivot_group)
   lags <- NULL
-  window_number <- length(coda_result_model$`12`$`1`)
+
   
-  for(id in ids){
-    for(pivot_group in pivot_groups){
-      lags <- append(lags,unlist(unlist.element(coda_result_model[[id]][[pivot_group]],element= "p")))
-      
+  if (is.null(pivot_groups)) {
+    
+    for (id in ids) {
+      window_number <- length(coda_result_model[[id]])
+      lags <-
+        append(lags, unlist(unlist.element(coda_result_model[[id]], element = "p")))
     }
+    id <- rep(ids, each = (window_number))
+    return(data.frame(
+      lag = lags,
+      id = id,
+      window = c(1:window_number)
+    ))
   }
-  category <- rep(pivot_groups,each=window_number)
-  id <- rep(ids,each=(length(pivot_groups)*window_number))
-  return(data.frame(lag=lags,
-                    id=id,
-                    category=category,
-                    window=c(1:window_number)))
+  else{
+    
+    for(id in ids){
+      window_number <- length(coda_result_model[[id]][[1]])
+      for(pivot_group in pivot_groups){
+        lags <- append(lags,unlist(unlist.element(coda_result_model[[id]][[pivot_group]],element= "p")))
+        
+      }
+    }
+    category <- rep(pivot_groups,each=window_number)
+    id <- rep(ids,each=(length(pivot_groups)*window_number))
+    return(data.frame(lag=lags,
+                      id=id,
+                      category=category,
+                      window=c(1:window_number)))
+  }
+}
+
+
+
+
+coda.get.coefficients <- function(coda_result) {
+  
+  coda_result_model <- coda_result$models
+  id <- names(coda_result_model)
+  pivot_groups <- unique(coda_result$results$pivot_group)
+  model_det <- NULL
+  lags <- NULL
+  window_all <- NULL
+  
+  if (is.null(pivot_groups)) {
+  
+      window_number <- length(coda_result_model[[id]])
+      for(window in 1:window_number){
+        lags[window] <- coda_result_model[[id]][[window]][["p"]]
+        
+        x <- sapply(Acoef(coda_result_model[[id]][[window]]),norm,type="F")
+
+        window_all <- append(window_all,rep(window,length(x)))
+        
+        model_det <- append(model_det, x)
+      }
+       
+    return(data.frame(
+      determinant =  model_det,
+      id = id,
+      window = window_all))
+  }
+  else{
+    category <- NULL
+      for(pivot_group in pivot_groups){
+        window_number <- length(coda_result_model[[id]][[pivot_group]])
+        for(window in 1:window_number){
+          lags[window] <- coda_result_model[[id]][[pivot_group]][[window]][["p"]]
+          
+          x<-sapply(Acoef(coda_result_model[[id]][[pivot_group]][[window]]),norm,type="F")
+          
+          category <- append(category,rep(pivot_group,length(x)))
+          
+          window_all <- append(window_all,rep(window,length(x)))
+          
+          model_det <- append(model_det, x)
+        }
+
+      }
+    return(data.frame(model_det=model_det,
+                      id=id,
+                      category=category,
+                      window=window_all))
+  }
+  
 }
