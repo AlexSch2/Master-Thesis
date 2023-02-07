@@ -66,3 +66,26 @@ B <- Bcoef(model)
 Z <- as.matrix(model$datamat[, -c(1:model$K)])
 B%*%Z
 size = 2
+
+
+div_coda <- sapply(c(1:dim(plot_data_coda)[1]),function(i){
+  
+  return(normation(x = plot_data_coda$true_value[1:i],
+                   y = plot_data_coda$last_known_value[1:i]))}
+)
+
+if(0 %in% div_coda ) div_coda[div_coda==0] <- 0.5
+
+div_ingarch <- sapply(c(1:dim(plot_data_ingarch)[1]),function(i){
+  
+  return(normation(x = plot_data_ingarch$true_value[1:i],
+                   y = plot_data_ingarch$last_known_value[1:i]))}
+)
+
+if(0 %in% div_ingarch ) div_ingarch[div_ingarch==0] <- 0.5
+result_prediction$prediction_error_normed <- result_prediction$prediction_error_normed/div
+
+
+
+
+

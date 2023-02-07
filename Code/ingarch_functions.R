@@ -1,6 +1,11 @@
 
 #Data preparation for INGARCH models
-ingarch.data.preparation <- function(data_raw,one_vs_all=F,pivot_group="1") {
+ingarch.data.preparation <- function(data_raw, 
+                                     one_vs_all = F, 
+                                     pivot_group = "1",
+                                     zero_handling = c("none","zero_to_one")){
+  
+  zero_handling <- match.arg(zero_handling)
   
   data_raw <- data.preparation(data_raw=data_raw,
                                one_vs_all = one_vs_all,
@@ -8,13 +13,28 @@ ingarch.data.preparation <- function(data_raw,one_vs_all=F,pivot_group="1") {
                                categories = c(1,2,3,4),
                                nas_to=0)
   
-  return(data_raw)
+  if (zero_handling == "none") {
+    return(data_raw)
+  }
+  else if (zero_handling == "zero_to_one") {
+    data_raw[data_raw == 0] <- 1
+    return(data_raw)
+  }
+  else{
+    stop("Enter valid zero handling method")
+    }
 }
 
 
 #Prediction function for INGARCH models. Fits the model for the specified category and calculates the predicted value, 
 #prediction errors and PREDICTIVE INTERVALS (NOT CIs)
-ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,distribution="nbinom",plot=F,window_method="extending"){
+ingarch.prediction <- function(data,
+                               category,
+                               prediction_error_step=1,
+                               frame=10,
+                               distribution="nbinom",
+                               plot=F,
+                               window_method="extending"){
   
   #Selecting the group
   data <- data %>% 
@@ -33,7 +53,7 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
     #Extracting fitting values, true value and last known value
     fitting_values <- data_window[[window_index]]$fitting
     true_value <- data_window[[window_index]]$prediction_value[[2]]
-    last_known_value <- fitting_values[[2]][frame]
+    last_known_value <- tail(fitting_values[[2]],n=1)
     
     
     #Fitting the model
@@ -108,8 +128,17 @@ ingarch.prediction <- function(data,category,prediction_error_step=1,frame=10,di
 
 
 #Wrapper function for the analysis of the data with an Ingarch model
-ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,distribution="nbinom",
-                           model_type="ingarch",plot=F,categories=c("1","2","3","4"),frame=10,window_method="extending"){
+ingarch.analysis <- function(weekly_category_data,
+                             ids,
+                             prediction_error_step = 1,
+                             distribution = "nbinom",
+                             model_type = "ingarch",
+                             plot = F,
+                             categories = c("1", "2", "3", "4"),
+                             frame = 10,
+                             window_method = "extending",
+                             zero_handling = "none") {
+  
   
   stopifnot(model_type %in% c("ingarch","ingarch_one_vs_all"))
   
@@ -125,7 +154,7 @@ ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,
                main_category_id %in% as.integer(categories)) %>%
       dplyr::select(week_date, main_category_id, sold) %>%
       arrange(week_date) %>%
-      ingarch.data.preparation()
+      ingarch.data.preparation(zero_handling=zero_handling)
     
     
     #Calculating Prediction results for each category   
@@ -137,7 +166,7 @@ ingarch.analysis<-function(weekly_category_data, ids, prediction_error_step = 1,
                                               frame=frame,
                                               plot=F,
                                               distribution=distribution,
-                                              window_method="extending")
+                                              window_method=window_method)
       
       return(list(results=bind_rows(prediction_result$results),
                   models=prediction_result$models))

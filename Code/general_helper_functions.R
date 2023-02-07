@@ -97,6 +97,7 @@ data.preparation <- function(data_raw,one_vs_all=F,pivot_group="1",categories=c(
 
 ## Normation function for the normed prediction error 
 normation <- function(x, y) {
+  stopifnot(length(x)==length(y))
   i <- length(x)
   result <- 0
   for (j in 1:i) {

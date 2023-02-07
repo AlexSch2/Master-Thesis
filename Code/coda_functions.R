@@ -88,6 +88,13 @@ Eucledian <- function(x, y, standardise = 1) return(sum((x - y) / standardise) ^
 #This is necessary for computing the error covariance matrix sigma see Literature chapter 5
 #Not sure why but the hard bound also does not work. Hence -1 is added
 #
+#NOTE 2:
+#
+#To ensure stability we also implement the restriction to the max lag to hold n > 10*max(p,m) where 
+# n...frame
+# p...lag.max
+# m... 2
+# See Multivariate Linear Regression pdf
 coda.prediction <- function(data_transformed_windows, data_notransformed_windows, data_notransformed, prediction_error_step,
                             one_vs_all,tspace, take_log, pivot_group) {
   
@@ -103,6 +110,10 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     D <- dim(fitting_data)[2]
     lag.max <- (frame-1)/D-1
     lag.max <- max(min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
+    lag.max <- max(min(frame/10-1,lag.max),1) #Note 2
+    
+    #Note 2
+    if(frame/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")
     
     if(lag.max==1) {
       lag.max <- NULL
@@ -177,21 +188,12 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
         upper_bound <- (append(upper_bound, predicted_values_vector[size]))
       }
       
-      
-      #Naive prediction values. For the first time point this is the median, for the rest it is the last known value
-      # if (index == 1) {
-      #   naive_predicted_value <- apply(data_notransformed[,-1], 2, median, na.rm = TRUE)
-      # } 
-      # else{
-      #   naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1], 1))
-      # }
-      
       naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1], 1))
   
       #Getting true value and last known values
       frame <- dim(data_notransformed_windows[[index]]$fitting)[1]
       true_value <- as.numeric(data_notransformed_windows[[index]]$prediction_value[,-1])
-      last_known_value <- as.numeric(data_notransformed_windows[[index]]$fitting[frame,-1])
+      last_known_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1],n=1))
       
       
       if (one_vs_all) {
@@ -303,14 +305,23 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
   result_model <- unlist.element(prediction_results,"model")
   names(result_model) <- sapply(c(1:length(result_model)),function(i){paste("window",i,sep="")})
   
-  #Calculation the normed prediction error 
-  div <- sapply(c(1:dim(result_prediction)[1]),function(i){
+  #Calculation the normed prediction error
+  for (catg in unique(result_prediction$category)) {
+    x <- result_prediction %>% filter(category==catg)
     
-    return(normation(x = result_prediction$true_value[1:i],
-                     y = result_prediction$last_known_value[1:i]))}
-  )
-  if(0 %in% div ) div[div==0] <- 0.5
-  result_prediction$prediction_error_normed <- result_prediction$prediction_error_normed/div
+    div <- sapply(c(1:dim(x)[1]), function(i) {
+      return(normation(
+        x = x$true_value[1:i],
+        y = x$last_known_value[1:i]
+      ))
+    })
+    if (0 %in% div)
+      div[div == 0] <- 0.5
+    result_prediction[result_prediction$category == catg, "prediction_error_normed"] <-
+      result_prediction[result_prediction$category == catg, "prediction_error_normed"] / div
+    
+    
+  }
   
   
   return(list(result = result_prediction,
@@ -550,22 +561,19 @@ coda.plot.name <- function(id,zero_handling,tspace,take_log){
 
 
 
-coda.get.lag <- function (coda_result) {
+coda.get.lag <- function (coda_result,id) {
   
   coda_result_model <- coda_result$models
-  
-  ids <- names(coda_result_model)
   pivot_groups <- unique(coda_result$results$pivot_group)
   lags <- NULL
+  id <- as.character(id)
 
   
   if (is.null(pivot_groups)) {
-    
-    for (id in ids) {
       window_number <- length(coda_result_model[[id]])
       lags <-
         append(lags, unlist(unlist.element(coda_result_model[[id]], element = "p")))
-    }
+      
     id <- rep(ids, each = (window_number))
     return(data.frame(
       lag = lags,
@@ -574,14 +582,11 @@ coda.get.lag <- function (coda_result) {
     ))
   }
   else{
-    
-    for(id in ids){
       window_number <- length(coda_result_model[[id]][[1]])
       for(pivot_group in pivot_groups){
         lags <- append(lags,unlist(unlist.element(coda_result_model[[id]][[pivot_group]],element= "p")))
         
       }
-    }
     category <- rep(pivot_groups,each=window_number)
     id <- rep(ids,each=(length(pivot_groups)*window_number))
     return(data.frame(lag=lags,
@@ -594,14 +599,15 @@ coda.get.lag <- function (coda_result) {
 
 
 
-coda.get.coefficients <- function(coda_result) {
+coda.get.coefficients <- function(coda_result,id,fnc="det",...) {
   
+  fnc <- match.fun(fnc)
   coda_result_model <- coda_result$models
-  id <- names(coda_result_model)
   pivot_groups <- unique(coda_result$results$pivot_group)
-  model_det <- NULL
+  value <- NULL
   lags <- NULL
   window_all <- NULL
+  id <- as.character(id)
   
   if (is.null(pivot_groups)) {
   
@@ -609,15 +615,15 @@ coda.get.coefficients <- function(coda_result) {
       for(window in 1:window_number){
         lags[window] <- coda_result_model[[id]][[window]][["p"]]
         
-        x <- sapply(Acoef(coda_result_model[[id]][[window]]),norm,type="F")
+        x <- sapply(Acoef(coda_result_model[[id]][[window]]),fnc,...)
 
         window_all <- append(window_all,rep(window,length(x)))
         
-        model_det <- append(model_det, x)
+        value <- append(value, x)
       }
        
     return(data.frame(
-      determinant =  model_det,
+      determinant =  value,
       id = id,
       window = window_all))
   }
@@ -628,17 +634,17 @@ coda.get.coefficients <- function(coda_result) {
         for(window in 1:window_number){
           lags[window] <- coda_result_model[[id]][[pivot_group]][[window]][["p"]]
           
-          x<-sapply(Acoef(coda_result_model[[id]][[pivot_group]][[window]]),norm,type="F")
+          x<-sapply(Acoef(coda_result_model[[id]][[pivot_group]][[window]]),fnc,...)
           
           category <- append(category,rep(pivot_group,length(x)))
           
           window_all <- append(window_all,rep(window,length(x)))
           
-          model_det <- append(model_det, x)
+          value <- append(value, x)
         }
 
       }
-    return(data.frame(model_det=model_det,
+    return(data.frame(value=value,
                       id=id,
                       category=category,
                       window=window_all))
