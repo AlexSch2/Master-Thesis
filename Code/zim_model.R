@@ -29,3 +29,6 @@ data_fit<-dplyr::select(data_fit,y1,y2,y3,y4,x1,x2,x3,x4)
 
 model_zim<-zim(y1~x1+x2+x3+x4, data=data_fit,control = zim.control(type="ginv"))
 
+data_test<-data_prep[fit_length+1,]
+
+predict.zeroinfl(model_zim)

@@ -92,7 +92,7 @@ Eucledian <- function(x, y, standardise = 1) return(sum((x - y) / standardise) ^
 #
 #To ensure stability we also implement the restriction to the max lag to hold n > 10*max(p,m) where 
 # n...frame
-# p...lag.max
+# p...lag.max*2 (since we have p summands each with dimension 2)
 # m... 2
 # See Multivariate Linear Regression pdf
 coda.prediction <- function(data_transformed_windows, data_notransformed_windows, data_notransformed, prediction_error_step,
@@ -110,7 +110,7 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     D <- dim(fitting_data)[2]
     lag.max <- (frame-1)/D-1
     lag.max <- max(min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
-    lag.max <- max(min(frame/10-1,lag.max),1) #Note 2
+    lag.max <- max(min(frame/10-1,lag.max*D),1) #Note 2
     
     #Note 2
     if(frame/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")

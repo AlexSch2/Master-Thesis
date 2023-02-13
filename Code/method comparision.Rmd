@@ -21,10 +21,10 @@ save_plots <- TRUE
 
 Preparation
 ```{r eval = FALSE}
-ids <- c(4,6,8,12)
+ids <- 4
 prediction_error_step <- 1
 frame <- 30
-window_method <- "overlapping"
+window_method <- "extending"
 
 #Ingarch specifications
 
@@ -71,7 +71,7 @@ ingarch_result <-
 Preparing Data for plotting
 
 ```{r}
-FID <- 12
+FID <- 4
 
 plot_data_coda<-coda_result$results%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
@@ -226,7 +226,7 @@ ggsave(filename = here("Plots",paste("prediction_error_normed_id",FID,".png",sep
 p4<-ggplot(plot_data,aes(x=model,y=prediction_error_normed))+
   facet_wrap(vars(category),ncol=length(unique(plot_data$category)),scales = "fixed")+
   geom_boxplot()+
-  ggtitle("Normed prediction error per method and category")+
+  ggtitle("Normed prediction error per method and category",subtitle = paste("Fridge ID:",FID,sep=" "))+
   theme(text = element_text(size = text_size))+
   geom_hline(yintercept = 0,col="green")
 ```
