@@ -15,19 +15,15 @@ coda.data.preparation <- function(data,
            log = FALSE,
            one_vs_all = FALSE,
            pivot_group = "1") {
-  
-    
+
     plus <- function(x,value=0.5){
          x[is.na(x)] <- 0
       x <- x + value
       return(x)
     }
-      
-    
     zero_handling <- match.arg(zero_handling)
     
     #If we compare one category to all the others we use all categories. Otherwise we only use the first 2
-    
     if(one_vs_all) {
       categories <- c(1,2,3,4)
     }
@@ -96,7 +92,7 @@ Eucledian <- function(x, y, standardise = 1) return(sum((x - y) / standardise) ^
 # m... 2
 # See Multivariate Linear Regression pdf
 coda.prediction <- function(data_transformed_windows, data_notransformed_windows, data_notransformed, prediction_error_step,
-                            one_vs_all,tspace, take_log, pivot_group) {
+                            one_vs_all,tspace, take_log, pivot_group, frame = 10) {
   
   prediction_results <- lapply(c(1:length(data_transformed_windows)), function(index) {
     
@@ -104,16 +100,16 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     # Selecting the fitting data and the data which should be predicted 
     fitting_data <- data_transformed_windows[[index]]$fitting[,-1]
     prediction_date <- data_transformed_windows[[index]]$prediction_value[1, 1]
-    frame <- dim(fitting_data)[1]
+    window_length <- dim(fitting_data)[1]
     
     # Calculating the max possible lag. Note 1
     D <- dim(fitting_data)[2]
-    lag.max <- (frame-1)/D-1
-    lag.max <- max(min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
-    lag.max <- floor(max(min(frame/10-1,lag.max*D),1)) #Note 2
+    lag.max <- (window_length-1)/D-1
+    lag.max <- max(min(lag.max,floor((window_length-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
+    lag.max <- floor(max(min(window_length/10-1,lag.max*D),1)) #Note 2
     
     #Note 2
-    if(frame/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")
+    if(window_length/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")
     
     if(lag.max==1) {
       lag.max <- NULL
@@ -191,7 +187,7 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
       naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1], 1))
   
       #Getting true value and last known values
-      frame <- dim(data_notransformed_windows[[index]]$fitting)[1]
+      window_length <- dim(data_notransformed_windows[[index]]$fitting)[1]
       true_value <- as.numeric(data_notransformed_windows[[index]]$prediction_value[,-1])
       last_known_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1],n=1))
       
@@ -247,8 +243,8 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     
     
     predicted_value <- round(as.numeric(predicted_value))
-    prediction_error <- as.numeric(true_value - predicted_value)
-    prediction_error_naive <- as.numeric(true_value - naive_predicted_value)
+    prediction_error <- as.numeric(predicted_value - true_value)
+    prediction_error_naive <- as.numeric(naive_predicted_value - true_value)
     
     #Calculating the normed prediction error
     prediction_error_normed <- prediction_error
@@ -271,7 +267,9 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
             category = category,
             prediction_date = prediction_date,
             pivot_group = pivot_group,
-            window = index
+            window = index,
+            window_length = dim(fitting_data)[1],
+            window_length_base = frame
           ),
           model = model
         )
@@ -292,7 +290,9 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
             naive_predicted_value = naive_predicted_value,
             category = category,
             prediction_date = prediction_date,
-            window = index
+            window = index,
+            window_length = dim(fitting_data)[1],
+            window_length_base = frame
         ),
         model = model
         )
@@ -391,7 +391,8 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
                                               one_vs_all = T,
                                               tspace = tspace,
                                               take_log =  take_log,
-                                              pivot_group = pivot_group)
+                                              pivot_group = pivot_group,
+                                              frame = frame)
         prediction_results$result$id <- id
         prediction_results$result$window_method <- window_method
         prediction_results$result$model <- model_type 
@@ -446,7 +447,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
                                                one_vs_all = F) %>% arrange(week_date)
         #Splitting transformed data into windows
         data_transformed_windows <- windows(data_transformed,
-                                         frame= 20 ,
+                                         frame= frame ,
                                          method = window_method,
                                          prediction_error_step = prediction_error_step)
         
@@ -460,7 +461,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
                                                         one_vs_all = F) %>% arrange(week_date)
         #Splitting non transformed data into windows
         data_notransformed_windows <- windows(data_notransformed,
-                                         frame = 20,
+                                         frame = frame,
                                          method = window_method,
                                          prediction_error_step = prediction_error_step)
         
@@ -471,7 +472,8 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
                                               prediction_error_step = prediction_error_step,
                                               one_vs_all = F,
                                               tspace = tspace,
-                                              take_log =  take_log)
+                                              take_log =  take_log, 
+                                              frame = frame)
         prediction_results$result$id <- id
         prediction_results$result$window_method <- window_method
         prediction_results$result$model <- model_type 

@@ -28,21 +28,15 @@ ingarch.data.preparation <- function(data_raw,
 
 #Prediction function for INGARCH models. Fits the model for the specified category and calculates the predicted value, 
 #prediction errors and PREDICTIVE INTERVALS (NOT CIs)
-ingarch.prediction <- function(data,
+ingarch.prediction <- function(data_window,
                                category,
                                prediction_error_step=1,
                                frame=10,
                                distribution="nbinom",
                                plot=F,
-                               window_method="extending"){
+                               window_method="extending",
+                               external = TRUE){
   
-  #Selecting the group
-  data <- data %>% 
-          dplyr::select(c("week_date",all_of(category))) 
-  
-  
-  #Creating fitting and prediction windows
-  data_window <- windows(data,frame = frame,method=window_method,prediction_error_step = prediction_error_step)
   number_of_windows <- length(data_window)
   
   
@@ -51,13 +45,23 @@ ingarch.prediction <- function(data,
     
     
     #Extracting fitting values, true value and last known value
-    fitting_values <- data_window[[window_index]]$fitting
-    true_value <- data_window[[window_index]]$prediction_value[[2]]
-    last_known_value <- tail(fitting_values[[2]],n=1)
+    fitting_values <- data_window[[window_index]]$fitting[c("week_date",category)]
+    true_value <- data_window[[window_index]]$prediction_value[[category]]
+    last_known_value <- tail(fitting_values[[category]],n=1)
     
+    if(external){
+      xreg <- data_window[[window_index]]$fitting %>% dplyr::select(-c("week_date",all_of(category))) %>% as.matrix()
+    }
+    else{
+      xreg <-NULL
+    }
     
     #Fitting the model
-    model <- tsglm(fitting_values[[2]],model = list("past_obs"=1,"past_mean"=c(1)),distr = distribution)
+    model <- tsglm(fitting_values[[category]],
+                   model = list("past_obs"=1,"past_mean"=c(1),external=ncol(xreg)),
+                   xreg=xreg,
+                   distr = distribution,
+                   link = "identity")
     
     
     #Predicting the future value depending on prediction_error_step
@@ -74,7 +78,7 @@ ingarch.prediction <- function(data,
     
     
     #Calculating the prediction error
-    prediction_error <- as.numeric(true_value-predicted_value)
+    prediction_error <- as.numeric(predicted_value-true_value)
     
   
     #Calculating the normed prediction error
@@ -92,7 +96,9 @@ ingarch.prediction <- function(data,
         category = category,
         prediction_date = data_window[[window_index]]$prediction_value[[1]],
         distribution = distribution,
-        window = window_index
+        window = window_index,
+        window_length = dim(fitting_values)[1],
+        window_length_base = frame
       ),
       model = model
     ))
@@ -137,7 +143,11 @@ ingarch.analysis <- function(weekly_category_data,
                              categories = c("1", "2", "3", "4"),
                              frame = 10,
                              window_method = "extending",
-                             zero_handling = "none") {
+                             zero_handling = "none",
+                             external = TRUE,
+                             multicore = TRUE,
+                             n_cores = 2
+                             ) {
   
   
   stopifnot(model_type %in% c("ingarch","ingarch_one_vs_all"))
@@ -147,33 +157,69 @@ ingarch.analysis <- function(weekly_category_data,
   #Calculating Prediction results for all ids and each category
   prediction_results_all_combinations <- lapply(ids,function(id){
     
-    
     #Preparing data
     data_raw <- weekly_category_data %>%
       filter(fridge_id == id &
                main_category_id %in% as.integer(categories)) %>%
       dplyr::select(week_date, main_category_id, sold) %>%
       arrange(week_date) %>%
-      ingarch.data.preparation(zero_handling=zero_handling)
+      ingarch.data.preparation(zero_handling = zero_handling)
     
     
-    #Calculating Prediction results for each category   
+    #Creating fitting and prediction windows
+    data_window <- windows(data_raw,frame = frame,method=window_method,prediction_error_step = prediction_error_step)
+    
+    
+    #Calculating Prediction results for each category 
+    if(multicore==TRUE){
+      
+      cluster1<-makeCluster(n_cores)
+      print("Initiating cluster")
+      
+      invisible(clusterCall(cluster1,function(){
+        source("dependencies.R")
+        source("general_helper_functions.R")
+      }))
+      
+      invisible(clusterExport(cluster1,list("windows","ingarch.data.preparation","ingarch.prediction","data_window"),
+                              envir = environment()))
+      print("Starting Calculations")
     prediction_results_all_categories<-lapply(categories,function(category){
       
-      prediction_result <- ingarch.prediction(data=data_raw,
+      prediction_result <- ingarch.prediction(data=data_window,
                                               category=category,
                                               prediction_error_step = prediction_error_step,
                                               frame=frame,
                                               plot=F,
                                               distribution=distribution,
-                                              window_method=window_method)
+                                              window_method=window_method,
+                                              external = external)
       
       return(list(results=bind_rows(prediction_result$results),
                   models=prediction_result$models))
       
     })
-    
-    
+    print("Stopping Calculations")
+    print("Stopping Cluster")
+    stopCluster(cluster1)
+    } 
+    else {
+      prediction_results_all_categories<-lapply(categories,function(category){
+        
+        prediction_result <- ingarch.prediction(data=data_window,
+                                                category=category,
+                                                prediction_error_step = prediction_error_step,
+                                                frame=frame,
+                                                plot=F,
+                                                distribution=distribution,
+                                                window_method=window_method,
+                                                external = external)
+        
+        return(list(results=bind_rows(prediction_result$results),
+                    models=prediction_result$models))
+        
+      })
+    }
     
     #Transforming data in nicer format
     result_prediction <- bind_rows(unlist.element(prediction_results_all_categories,"results"))
@@ -185,6 +231,7 @@ ingarch.analysis <- function(weekly_category_data,
     return(list(results=result_prediction,
                 models=result_model))
   })
+
   
   
   #Transforming data in nicer format

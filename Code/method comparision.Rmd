@@ -15,20 +15,25 @@ source("general_helper_functions.R")
 Plot parameters 
 ```{r eval = FALSE}
 text_size <- 50
-save_plots <- F
+save_plots <- T
 ```
 
 
 Preparation
 ```{r eval = FALSE}
-ids <- 4
+ids <- c(4,6,8,12)
 prediction_error_step <- 1
-frame <- 30
+frame <- 5
 window_method <- "extending"
+save_results <- TRUE
 
 #Ingarch specifications
 distr<-"poisson"
 zero_handling_ingarch <- "zero_to_one"
+external <- F
+if(external){
+  external_plot <-"with external factors"
+}else external_plot <- ""
 
 #Coda specifications
 zero_handling_coda<-"all"
@@ -62,15 +67,23 @@ ingarch_result <-
     distribution = distr,
     categories = c("1","2","3","4"),
     window_method = window_method,
-    zero_handling = zero_handling_ingarch
+    zero_handling = zero_handling_ingarch,
+    external = external,
+    multicore = TRUE,
+    n_cores = 3
   )
+
+if(save_results){
+  save(coda_result,file=here("Code",paste("coda_result_ids",paste(ids,collapse="-"),"_ext","_",external,"win_lgth",frame,".RData",sep="")))
+  save(ingarch_result,file=here("Code",paste("ingarch_result_ids",paste(ids,collapse="-"),"_ext","_",external,"win_lgth",frame,".RData",sep="")))
+}
 ```
 
 
 Preparing Data for plotting
 
 ```{r}
-FID <- 4
+FID <- 6
 
 plot_data_coda<-coda_result$results%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
@@ -120,10 +133,10 @@ p<-ggplot(plot_data_ingarch,aes(x=prediction_date,y=predicted_value),col="blue")
   geom_line(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   geom_point(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   theme(text = element_text(size = text_size))+
-  ggtitle(paste("Ingarch Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))
+  ggtitle(paste("Ingarch Timeseries",external_plot,sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("timeseries_ingarch_id_",FID,"_",distr,"_pi",".png",sep="")),plot=p,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("ts_ing_id_",FID,"_",distr,"_pi","_ext","_",external,"win_lgth",frame,".png",sep="")),plot=p,height = 15,width = 20)
 }
 
 ```
@@ -143,10 +156,10 @@ p0<-ggplot(plot_data_coda,aes(x=prediction_date,y=predicted_value),col="red")+
   geom_line(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   geom_point(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   theme(text = element_text(size = text_size))+
-  ggtitle(paste("Coda Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))
+  ggtitle(paste("Coda Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("timeseries_coda_id_",FID,"_pi",".png",sep="")),plot=p0,height = 15,width = 20) 
+ ggsave(filename = here("Plots",paste("ts_coda_id_",FID,"_pi","win_lgth",frame,".png",sep="")),plot=p0,height = 15,width = 20) 
 }
 
 ```
@@ -167,11 +180,11 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=predicted_value,col=model))+
   geom_line(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   geom_point(data=data_raw,aes(x=prediction_date,y=true_value),col="black",inherit.aes = F)+
   scale_color_manual("Legend", values = c(my_color))+
-  ggtitle(paste("Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))+
+  ggtitle(paste("Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))+
   theme(text = element_text(size = text_size))  
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("timeseries_both_id_",FID,"_pi",".png",sep="")),plot=p1,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("ts_both_id_",FID,"_pi","ing_ext",external,"win_lgth",frame,".png",sep="")),plot=p1,height = 15,width = 20)
   
 }
 ```
@@ -184,12 +197,12 @@ Comparing the prediction errors of the models
 p2<-ggplot(plot_data,aes(x=model,y=prediction_error))+
   facet_wrap(vars(category),ncol=length(unique(plot_data$category)),scales = "fixed")+
   geom_boxplot()+
-  ggtitle("Prediction error",subtitle = paste("Fridge ID:",FID,sep=" "))+
+  ggtitle("Prediction error",subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))+
   theme(text = element_text(size = text_size))+
   geom_hline(yintercept = 0,col="green")
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("box_prediction_error_id",FID,".png",sep="")),plot=p2,height = 15,width = 20)
+ ggsave(filename = here("Plots",paste("box_pred_err_id",FID,"win_lgth",frame,".png",sep="")),plot=p2,height = 15,width = 20)
  
 }
 ```
@@ -219,11 +232,11 @@ p3 <- ggplot(plot_data,aes(x=prediction_date,y=prediction_error_normed,col=model
   geom_line()+
   theme(text = element_text(size = text_size))+
   geom_line(aes(y=0),col="black")+
-  ggtitle(paste("Normed prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))+
+  ggtitle(paste("Normed prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))+
   scale_color_manual("Legend", values = c(my_color))
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("prediction_error_normed_id",FID,".png",sep="")),plot=p3,height = 15,width = 20)
+ ggsave(filename = here("Plots",paste("pred_err_norm_id",FID,"win_lgth",frame,".png",sep="")),plot=p3,height = 15,width = 20)
  
 }
 ```
@@ -234,12 +247,12 @@ if(save_plots){
 p4<-ggplot(plot_data,aes(x=model,y=prediction_error_normed))+
   facet_wrap(vars(category),ncol=length(unique(plot_data$category)),scales = "fixed")+
   geom_boxplot()+
-  ggtitle("Normed prediction error per method and category",subtitle = paste("Fridge ID:",FID,sep=" "))+
+  ggtitle("Normed prediction error per method and category",subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))+
   theme(text = element_text(size = text_size))+
   geom_hline(yintercept = 0,col="green")
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("box_prediction_error_normed_id",FID,".png",sep="")),plot=p4,height = 15,width = 20)
+ ggsave(filename = here("Plots",paste("box_pred_err_norm_id",FID,"win_lgth",frame,".png",sep="")),plot=p4,height = 15,width = 20)
  
 }
 ```
@@ -254,7 +267,7 @@ p5 <- ggplot(plot_coda_lag, aes(x = window, y = lag)) +
   geom_point(size = 1.5) +
   geom_line() +
   ggtitle(paste("Coda model lag per window", sep = " "),
-          subtitle = paste("Fridge ID:", FID, sep = " ")) +
+          subtitle = paste("Fridge ID:", FID,",base window length:",frame, sep = " ")) +
   theme(text = element_text(size = text_size))
 
 if (one_vs_all)
@@ -263,7 +276,7 @@ if (one_vs_all)
   ))), scales = "free")
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("Coda_lag_id",FID,".png",sep="")),plot=p5,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("Coda_lag_id",FID,"win_lgth",frame,".png",sep="")),plot=p5,height = 15,width = 20)
   
 }
 ```
@@ -295,11 +308,11 @@ p6 <- ggplot(plot_data,aes(x=prediction_date,y=prediction_error,col=model))+
   geom_line()+
   theme(text = element_text(size = text_size))+
   geom_line(aes(y=0),col="black")+
-  ggtitle(paste("Prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))+
+  ggtitle(paste("Prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))+
   scale_color_manual("Legend", values = c(my_color))
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("prediction_error_id",FID,".png",sep="")),plot=p6,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("pred_err_id",FID,"win_lgth",frame,".png",sep="")),plot=p6,height = 15,width = 20)
   
 }
 ```
@@ -311,7 +324,7 @@ plot_coda_det <- coda.get.coefficients(coda_result,fnc="det",id=FID)
 p7 <- ggplot(plot_coda_det,aes(x=window,y=value))+
   geom_point(size=1.5)+
   theme(text = element_text(size = text_size))+
-  ggtitle(paste("Determinant of the coefficient matrices",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))
+  ggtitle(paste("Determinant of the coefficient matrices",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
 
 if (one_vs_all)
   p7<- p7 + facet_wrap(vars(category), nrow = length(unique((
@@ -319,7 +332,7 @@ if (one_vs_all)
   ))), scales = "free")
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("coda_det_id",FID,".png",sep="")),plot=p7,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("coda_det_id",FID,"win_lgth",frame,".png",sep="")),plot=p7,height = 15,width = 20)
   
 }
 ```

@@ -1,7 +1,6 @@
 #General Helper Functions
 
 #This function splits the time series into appropriate windows to determine the optimal length for the model
-
 windows <- function(timeseries,frame,method = c("non-overlapping", "overlapping", "extending"),
                     prediction_error_step = 1) {
   
@@ -63,6 +62,8 @@ windows <- function(timeseries,frame,method = c("non-overlapping", "overlapping"
   return(res)
 }
 
+
+
 #Function to transform the data into the right format
 data.preparation <- function(data_raw,one_vs_all=F,pivot_group="1",categories=c(1,2,3,4),nas_to=0){
   
@@ -109,6 +110,7 @@ normation <- function(x, y) {
 }
 
 
+
 ##Helper function for cleaner code
 unlist.element <- function(x,element){
   
@@ -124,3 +126,4 @@ idf <- function(x)x
 
 
 
+#
