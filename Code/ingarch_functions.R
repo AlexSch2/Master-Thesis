@@ -57,7 +57,7 @@ ingarch.prediction <- function(data,
     
     
     #Fitting the model
-    model <- tsglm(fitting_values[[2]],model = list("past_obs"=1,"past_mean"=c(1,2)),distr = distribution)
+    model <- tsglm(fitting_values[[2]],model = list("past_obs"=1,"past_mean"=c(1)),distr = distribution)
     
     
     #Predicting the future value depending on prediction_error_step

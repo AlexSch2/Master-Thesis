@@ -17,7 +17,7 @@ coda.data.preparation <- function(data,
            pivot_group = "1") {
   
     
-    plus <- function(x,value=1){
+    plus <- function(x,value=0.5){
          x[is.na(x)] <- 0
       x <- x + value
       return(x)
@@ -110,7 +110,7 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     D <- dim(fitting_data)[2]
     lag.max <- (frame-1)/D-1
     lag.max <- max(min(lag.max,floor((frame-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
-    lag.max <- max(min(frame/10-1,lag.max*D),1) #Note 2
+    lag.max <- floor(max(min(frame/10-1,lag.max*D),1)) #Note 2
     
     #Note 2
     if(frame/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")
@@ -118,7 +118,7 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     if(lag.max==1) {
       lag.max <- NULL
     }
-    
+  
     
     #Depending on whether we have tspace or not we fit a VAR model or an AR model
     if (tspace) {

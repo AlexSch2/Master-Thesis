@@ -15,7 +15,7 @@ source("general_helper_functions.R")
 Plot parameters 
 ```{r eval = FALSE}
 text_size <- 50
-save_plots <- TRUE
+save_plots <- F
 ```
 
 
@@ -27,11 +27,10 @@ frame <- 30
 window_method <- "extending"
 
 #Ingarch specifications
-
 distr<-"poisson"
 zero_handling_ingarch <- "zero_to_one"
-#Coda specifications
 
+#Coda specifications
 zero_handling_coda<-"all"
 tspace<-T
 take_log<-T
@@ -123,10 +122,12 @@ p<-ggplot(plot_data_ingarch,aes(x=prediction_date,y=predicted_value),col="blue")
   theme(text = element_text(size = text_size))+
   ggtitle(paste("Ingarch Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))
 
+if(save_plots){
+  ggsave(filename = here("Plots",paste("timeseries_ingarch_id_",FID,"_",distr,"_pi",".png",sep="")),plot=p,height = 15,width = 20)
+}
+
 ```
-```{r eval =save_plots}
-ggsave(filename = here("Plots",paste("timeseries_ingarch_id_",FID,"_",distr,"_pi",".png",sep="")),plot=p,height = 15,width = 20)
-```
+
 
 
 
@@ -144,7 +145,10 @@ p0<-ggplot(plot_data_coda,aes(x=prediction_date,y=predicted_value),col="red")+
   theme(text = element_text(size = text_size))+
   ggtitle(paste("Coda Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))
 
-ggsave(filename = here("Plots",paste("timeseries_coda_id_",FID,"_pi",".png",sep="")),plot=p0,height = 15,width = 20)
+if(save_plots){
+ ggsave(filename = here("Plots",paste("timeseries_coda_id_",FID,"_pi",".png",sep="")),plot=p0,height = 15,width = 20) 
+}
+
 ```
 
 Comparing the timeseries with prediction intervals
@@ -166,9 +170,10 @@ p1<-ggplot(plot_data,aes(x=prediction_date,y=predicted_value,col=model))+
   ggtitle(paste("Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))+
   theme(text = element_text(size = text_size))  
 
-```
-```{r eval=save_plot}
+if(save_plots){
 ggsave(filename = here("Plots",paste("timeseries_both_id_",FID,"_pi",".png",sep="")),plot=p1,height = 15,width = 20)
+  
+}
 ```
 
 
@@ -182,9 +187,11 @@ p2<-ggplot(plot_data,aes(x=model,y=prediction_error))+
   ggtitle("Prediction error",subtitle = paste("Fridge ID:",FID,sep=" "))+
   theme(text = element_text(size = text_size))+
   geom_hline(yintercept = 0,col="green")
-```
-```{r eval=save_plots}
-ggsave(filename = here("Plots",paste("box_prediction_error_id",FID,".png",sep="")),plot=p2,height = 15,width = 20)
+
+if(save_plots){
+ ggsave(filename = here("Plots",paste("box_prediction_error_id",FID,".png",sep="")),plot=p2,height = 15,width = 20)
+ 
+}
 ```
 
 
@@ -215,9 +222,10 @@ p3 <- ggplot(plot_data,aes(x=prediction_date,y=prediction_error_normed,col=model
   ggtitle(paste("Normed prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))+
   scale_color_manual("Legend", values = c(my_color))
 
-```
-```{r eval=save_plots}
-ggsave(filename = here("Plots",paste("prediction_error_normed_id",FID,".png",sep="")),plot=p3,height = 15,width = 20)
+if(save_plots){
+ ggsave(filename = here("Plots",paste("prediction_error_normed_id",FID,".png",sep="")),plot=p3,height = 15,width = 20)
+ 
+}
 ```
 
 
@@ -229,9 +237,11 @@ p4<-ggplot(plot_data,aes(x=model,y=prediction_error_normed))+
   ggtitle("Normed prediction error per method and category",subtitle = paste("Fridge ID:",FID,sep=" "))+
   theme(text = element_text(size = text_size))+
   geom_hline(yintercept = 0,col="green")
-```
-```{r eval=save_plots}
-ggsave(filename = here("Plots",paste("box_prediction_error_normed_id",FID,".png",sep="")),plot=p4,height = 15,width = 20)
+
+if(save_plots){
+ ggsave(filename = here("Plots",paste("box_prediction_error_normed_id",FID,".png",sep="")),plot=p4,height = 15,width = 20)
+ 
+}
 ```
 
 
@@ -251,9 +261,11 @@ if (one_vs_all)
   p5<- p5 + facet_wrap(vars(category), nrow = length(unique((
     plot_coda_lag$category
   ))), scales = "free")
-```
-```{r eval=save_plots}
+
+if(save_plots){
 ggsave(filename = here("Plots",paste("Coda_lag_id",FID,".png",sep="")),plot=p5,height = 15,width = 20)
+  
+}
 ```
 
 
@@ -286,9 +298,10 @@ p6 <- ggplot(plot_data,aes(x=prediction_date,y=prediction_error,col=model))+
   ggtitle(paste("Prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))+
   scale_color_manual("Legend", values = c(my_color))
 
-```
-```{r eval=save_plots}
+if(save_plots){
 ggsave(filename = here("Plots",paste("prediction_error_id",FID,".png",sep="")),plot=p6,height = 15,width = 20)
+  
+}
 ```
 
 Coda coefficients over windows 
@@ -304,7 +317,9 @@ if (one_vs_all)
   p7<- p7 + facet_wrap(vars(category), nrow = length(unique((
     plot_coda_det$category
   ))), scales = "free")
-```
-```{r eval=save_plots}
+
+if(save_plots){
 ggsave(filename = here("Plots",paste("coda_det_id",FID,".png",sep="")),plot=p7,height = 15,width = 20)
+  
+}
 ```
