@@ -396,6 +396,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         prediction_results$result$id <- id
         prediction_results$result$window_method <- window_method
         prediction_results$result$model <- model_type 
+        prediction_results$result$zero_handling <- zero_handling
       
           
         #Tidying up data
@@ -477,6 +478,7 @@ coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "ze
         prediction_results$result$id <- id
         prediction_results$result$window_method <- window_method
         prediction_results$result$model <- model_type 
+        prediction_results$result$zero_handling <- zero_handling
         
         
         #Tidying up data

@@ -21,11 +21,11 @@ save_plots <- T
 
 Preparation
 ```{r eval = FALSE}
-ids <- 4
+ids <- c(4,6,8,12)
 prediction_error_step <- 1
 frame <- 30
 window_method <- "extending"
-save_results <- F
+save_results <- T
 
 #Ingarch specifications
 distr<-"poisson"
@@ -34,6 +34,10 @@ external <- F
 if(external){
   external_plot <-"with external factors"
 }else external_plot <- ""
+past_means <- c(0,1,2)
+past_obs <- c(1,2)
+ingarch_settings <- expand_grid(past_means,past_obs)
+
 
 #Coda specifications
 zero_handling_coda<-"all"
@@ -58,8 +62,19 @@ coda_result <-
     window_method = window_method
   )
 
+if(save_results){
+  save(coda_result,file=here(paste("coda_result_ids",paste(ids,collapse="-"),"win_lgth",frame,".RData",sep="")))
+}
 
-ingarch_result <-
+
+
+
+for (i in 3:dim(ingarch_settings)[1]){
+  
+  past_obs <- ingarch_settings[[i,2]]
+  past_mean <- ingarch_settings[[i,1]]
+  
+  ingarch_result <-
   ingarch.analysis(
     weekly_category_data = weekly_category_data,
     ids = ids,
@@ -69,21 +84,39 @@ ingarch_result <-
     window_method = window_method,
     zero_handling = zero_handling_ingarch,
     external = external,
-    multicore = TRUE,
-    n_cores = 4
+    multicore = T,
+    n_cores = 4,
+    past_obs = past_obs,
+    past_mean = past_mean
   )
-
-if(save_results){
-  save(coda_result,file=here("Code",paste("coda_result_ids",paste(ids,collapse="-"),"_ext","_",external,"win_lgth",frame,".RData",sep="")))
-  save(ingarch_result,file=here("Code",paste("ingarch_result_ids",paste(ids,collapse="-"),"_ext","_",external,"win_lgth",frame,".RData",sep="")))
+  
+  if(save_results){
+  save(ingarch_result,file=here(paste("ingarch_result_ids",paste(ids,collapse="-"),"_ext","_",external,
+                                             "win_lgth",frame,"_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
 }
+}
+
+
+```
+
+
+
+Error measure calculations
+```{r}
+
+coda_model_error <- model.error(coda_result,fnct = "mse") %>% model.error.overall(fnct = "sum")
+ingarch_model_error <- model.error(ingarch_result,fnct = "mse") %>% model.error.overall(fnct = "sum")
+
+coda_model_error
+ingarch_model_error
+                                  
 ```
 
 
 Preparing Data for plotting
 
 ```{r}
-FID <- 4
+FID <- 100401
 
 plot_data_coda<-coda_result$results%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%

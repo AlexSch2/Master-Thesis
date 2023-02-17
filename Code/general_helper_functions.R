@@ -126,4 +126,46 @@ idf <- function(x)x
 
 
 
-#
+#MSE
+mse <- function(y,yhat){
+  return(mean((y-yhat)^2))
+}
+
+
+#Error calculation
+model.error <- function(model_result,fnct = "mse"){
+  
+  f <- match.fun(fnct)
+  
+  error_measures <- model_result$results %>%
+    dplyr::filter(category %in% c(1, 2, 3, 4)) %>%
+    group_by(id, category) %>%
+    dplyr::summarise(error = f(predicted_value,true_value),.groups = "keep")
+  
+  error_measures_naive <- model_result$results %>%
+    dplyr::filter(category %in% c(1, 2, 3, 4)) %>%
+    group_by(id, category) %>%
+    dplyr::summarise(naive_error = f(last_known_value,true_value),.groups = "keep")
+  
+  result <- full_join(error_measures,
+                                   error_measures_naive,by = c("id","category") )
+  
+  result$model <- unique(model_result$results$model)
+  
+  return(result)
+}
+
+#Function to compare the MSEs of each fridge
+model.error.overall <- function(error_result,fnct = "mean"){
+  
+  f <- match.fun(fnct)
+  
+  error_measures <- error_result %>%
+                    dplyr::group_by(id) %>%
+                    dplyr::summarise(error = f(error)/f(naive_error),.groups = "keep")
+  error_measures$model <- unique(error_result$model)
+  return(error_measures)
+}
+
+
+

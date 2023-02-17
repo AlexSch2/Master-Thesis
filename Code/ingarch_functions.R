@@ -35,7 +35,9 @@ ingarch.prediction <- function(data_window,
                                distribution="nbinom",
                                plot=F,
                                window_method="extending",
-                               external = TRUE){
+                               external = TRUE,
+                               past_obs = 1,
+                               past_mean = 1){
   
   number_of_windows <- length(data_window)
   
@@ -57,8 +59,16 @@ ingarch.prediction <- function(data_window,
     }
     
     #Fitting the model
+   
+    past_obs_used <<- c(1:past_obs)
+    if(past_mean==0){
+      past_mean_used <- NULL
+    } else{
+      past_mean_used <<- c(1:past_mean)
+    }
+    
     model <- tsglm(fitting_values[[category]],
-                   model = list("past_obs"=1,"past_mean"=c(1),external=ncol(xreg)),
+                   model = list("past_obs"= past_obs_used,"past_mean"= past_mean_used,external=ncol(xreg)),
                    xreg=xreg,
                    distr = distribution,
                    link = "identity")
@@ -98,7 +108,10 @@ ingarch.prediction <- function(data_window,
         distribution = distribution,
         window = window_index,
         window_length = dim(fitting_values)[1],
-        window_length_base = frame
+        window_length_base = frame,
+        past_obs = past_obs,
+        past_mean = past_mean,
+        external = external 
       ),
       model = model
     ))
@@ -144,6 +157,8 @@ ingarch.analysis <- function(weekly_category_data,
                              frame = 10,
                              window_method = "extending",
                              zero_handling = "none",
+                             past_obs = 1,
+                             past_mean = 1,
                              external = TRUE,
                              multicore = TRUE,
                              n_cores = 2
@@ -193,7 +208,9 @@ ingarch.analysis <- function(weekly_category_data,
                                               plot=F,
                                               distribution=distribution,
                                               window_method=window_method,
-                                              external = external)
+                                              external = external,
+                                              past_obs = past_obs,
+                                              past_mean = past_mean)
       
       return(list(results=bind_rows(prediction_result$results),
                   models=prediction_result$models))
@@ -213,7 +230,9 @@ ingarch.analysis <- function(weekly_category_data,
                                                 plot=F,
                                                 distribution=distribution,
                                                 window_method=window_method,
-                                                external = external)
+                                                external = external,
+                                                past_obs = past_obs,
+                                                past_mean = past_mean)
         
         return(list(results=bind_rows(prediction_result$results),
                     models=prediction_result$models))
@@ -227,6 +246,7 @@ ingarch.analysis <- function(weekly_category_data,
     names(result_model) <- categories
     result_prediction$id <- id
     result_prediction$window_method <- window_method
+    result_prediction$zero_handling <- zero_handling
     
     return(list(results=result_prediction,
                 models=result_model))
