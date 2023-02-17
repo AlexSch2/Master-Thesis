@@ -21,11 +21,11 @@ save_plots <- T
 
 Preparation
 ```{r eval = FALSE}
-ids <- c(4,6,8,12)
+ids <- 4
 prediction_error_step <- 1
-frame <- 5
+frame <- 30
 window_method <- "extending"
-save_results <- TRUE
+save_results <- F
 
 #Ingarch specifications
 distr<-"poisson"
@@ -70,7 +70,7 @@ ingarch_result <-
     zero_handling = zero_handling_ingarch,
     external = external,
     multicore = TRUE,
-    n_cores = 3
+    n_cores = 4
   )
 
 if(save_results){
@@ -83,7 +83,7 @@ if(save_results){
 Preparing Data for plotting
 
 ```{r}
-FID <- 6
+FID <- 4
 
 plot_data_coda<-coda_result$results%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
