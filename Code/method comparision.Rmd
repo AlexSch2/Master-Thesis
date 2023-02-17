@@ -20,11 +20,12 @@ save_plots <- TRUE
 
 
 Preparation
+*Note* This settings will produce a spike for category 3 and 4 due to the window_method. Changing it from "overlapping" to "extending" or bounding the lag.max at 1 will solve it.
 ```{r eval = FALSE}
 ids <- 4
 prediction_error_step <- 1
 frame <- 30
-window_method <- "extending"
+window_method <- "overlapping"
 
 #Ingarch specifications
 
