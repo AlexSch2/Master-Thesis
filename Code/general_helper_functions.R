@@ -168,4 +168,44 @@ model.error.overall <- function(error_result,fnct = "mean"){
 }
 
 
+#Function to calculate the cumulative MSE from right to left
+mse.cumulated <- function(data_raw){
+  
+  count_index <- 1
+  model <- category <- vector("character",length=dim(data_raw)[1])
+  mse_cum <- window <- vector("numeric",length=dim(data_raw)[1])
+  
+  for(m in unique(data_raw$model)){
+    for(cat in unique(data_raw$category)){
+      
+      data <- data_raw %>% filter(model==m & category ==cat)
+      
+      for(i in 1:dim(data)[1]){
+        
+        mse_cum[count_index] <- mse(data[1:i,"true_value"],data[1:i,"predicted_value"])
+        category[count_index] <- cat
+        model[count_index] <- m
+        window[count_index] <- dim(data)[1] - (i-1)
+        count_index <- count_index + 1
+        
+      }
+    }
+  }
+  result <- data.frame(mse_cum = mse_cum,
+                       category = category,
+                       model = model,
+                       window = window,
+                       id = unique(data_raw$id))
+  return(result)
+}
+
+
+#For loading RData files
+load_obj <- function(f)
+{
+  env <- new.env()
+  nm <- load(f, env)[1]
+  env[[nm]]
+}
+
 

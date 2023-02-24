@@ -63,7 +63,7 @@ coda_result <-
   )
 
 if(save_results){
-  save(coda_result,file=here(paste("coda_result_ids",paste(ids,collapse="-"),"win_lgth",frame,".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids,collapse="-"),"win_lgth",frame,".RData",sep="")))
 }
 
 
@@ -91,7 +91,7 @@ for (i in 3:dim(ingarch_settings)[1]){
   )
   
   if(save_results){
-  save(ingarch_result,file=here(paste("ingarch_result_ids",paste(ids,collapse="-"),"_ext","_",external,
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids,collapse="-"),"_ext","_",external,
                                              "win_lgth",frame,"_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
 }
 }
@@ -99,6 +99,38 @@ for (i in 3:dim(ingarch_settings)[1]){
 
 ```
 
+Loading previous results
+```{r eval=FALSE, include=FALSE}
+ids <- unique(coda_result$results$id)
+prediction_error_step <- 1
+frame <- unique(coda_result$results$window_length_base)
+window_method <- unique(coda_result$results$window_method)
+save_results <- T
+
+#Ingarch specifications
+distr<-unique(ingarch_result$results$distribution)
+zero_handling_ingarch <- unique(ingarch_result$results$zero_handling)
+external <- unique(ingarch_result$results$external)
+if(external){
+  external_plot <-"with external factors"
+}else external_plot <- ""
+past_means <- unique(ingarch_result$results$past_mean)
+past_obs <- unique(ingarch_result$results$past_obs)
+ingarch_settings <- expand_grid(past_means,past_obs)
+
+
+#Coda specifications
+#zero_handling_coda<-unique(coda_result$results$zero_handling)
+tspace<-T
+take_log<-T
+one_vs_all<-T
+
+if(!identical(ids,unique(ingarch_result$results$id)) || 
+   frame != unique(ingarch_result$results$window_length_base) ||
+   window_method != unique(ingarch_result$results$window_method)) {
+  stop("Ingarch and Coda base specifications differ")
+}
+```
 
 
 Error measure calculations
@@ -109,7 +141,21 @@ ingarch_model_error <- model.error(ingarch_result,fnct = "mse") %>% model.error.
 
 coda_model_error
 ingarch_model_error
+
+model_error <- rbind(coda_model_error,ingarch_model_error)
                                   
+```
+
+
+```{r}
+ps<-ggplot(model_error,aes(x=id,y=error,col=model))+
+  geom_point(size=3)+
+  theme(text = element_text(size = text_size))+
+  ggtitle(paste("Ingarch Timeseries",external_plot,sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Fridge_error_measure",paste(unique(model_error$id),collapse="-"),"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=ps,height = 15,width = 20)
+}
 ```
 
 
@@ -369,3 +415,26 @@ ggsave(filename = here("Plots",paste("coda_det_id",FID,"win_lgth",frame,".png",s
   
 }
 ```
+
+
+Cumulated MSEs 
+```{r}
+plot_mse_cum <- mse.cumulated(plot_data)
+plot_mse_cum$window <- factor(as.character(plot_mse_cum$window),levels=unique(plot_mse_cum$window))
+
+
+p8 <- ggplot(plot_mse_cum, aes(y=mse_cum,x=window,group=model,col=model))+
+  facet_wrap(vars(category),nrow=length(unique(plot_mse_cum$category)),scales = "free")+
+  geom_line()+
+  geom_point(size=1.5)+
+  theme(text = element_text(size = 30),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1))+
+    ggtitle(paste("Cumulated MSE from right to left",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
+
+p8
+
+if(save_plots){
+ggsave(filename = here("Plots",paste("mse_cum",FID,"win_lgth",frame,".png",sep="")),plot=p7,height = 15,width = 20)
+  
+}
+```
+
