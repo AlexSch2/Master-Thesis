@@ -21,21 +21,21 @@ save_plots <- T
 
 Preparation
 ```{r eval = FALSE}
-ids <- c(4,6,8,12)
+ids <- c(100401,100402,100404,100761)
 prediction_error_step <- 1
-frame <- 30
+frame <- 5
 window_method <- "extending"
 save_results <- T
 
 #Ingarch specifications
 distr<-"poisson"
 zero_handling_ingarch <- "zero_to_one"
-external <- T
+external <- F
 if(external){
   external_plot <-"with external factors"
 }else external_plot <- ""
 past_means <- c(1)
-past_obs <- c(2)
+past_obs <- c(1)
 ingarch_settings <- expand_grid(past_means,past_obs)
 
 
@@ -162,7 +162,7 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 100401
+FID <- 12
 
 plot_data_coda<-coda_result$results%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
@@ -433,7 +433,7 @@ p8 <- ggplot(plot_mse_cum, aes(y=mse_cum,x=window,group=model,col=model))+
 p8
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("mse_cum",FID,"win_lgth",frame,".png",sep="")),plot=p7,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("mse_cum",FID,"win_lgth",frame,".png",sep="")),plot=p8,height = 15,width = 20)
   
 }
 ```
