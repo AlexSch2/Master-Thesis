@@ -32,10 +32,10 @@ ingarch.prediction <- function(data_window,
                                category,
                                prediction_error_step=1,
                                frame=10,
-                               distribution="nbinom",
+                               distribution="poisson",
                                plot=F,
                                window_method="extending",
-                               external = TRUE,
+                               external = FALSE,
                                past_obs = 1,
                                past_mean = 1){
   
@@ -64,7 +64,7 @@ ingarch.prediction <- function(data_window,
     if(past_mean==0){
       past_mean_used <- NULL
     } else{
-      past_mean_used <<- c(1:past_mean)
+      past_mean_used <- c(1:past_mean)
     }
     
     model <- tsglm(fitting_values[[category]],
@@ -150,7 +150,7 @@ ingarch.prediction <- function(data_window,
 ingarch.analysis <- function(weekly_category_data,
                              ids,
                              prediction_error_step = 1,
-                             distribution = "nbinom",
+                             distribution = "poisson",
                              model_type = "ingarch",
                              plot = F,
                              categories = c("1", "2", "3", "4"),
@@ -159,7 +159,7 @@ ingarch.analysis <- function(weekly_category_data,
                              zero_handling = "none",
                              past_obs = 1,
                              past_mean = 1,
-                             external = TRUE,
+                             external = FALSE,
                              multicore = TRUE,
                              n_cores = 2
                              ) {
@@ -196,10 +196,11 @@ ingarch.analysis <- function(weekly_category_data,
         source("general_helper_functions.R")
       }))
       
-      invisible(clusterExport(cluster1,list("windows","ingarch.data.preparation","ingarch.prediction","data_window"),
+      invisible(clusterExport(cluster1,list("windows","ingarch.data.preparation","ingarch.prediction","data_window",
+                                            "external","past_obs","past_mean","distribution","plot"),
                               envir = environment()))
       print("Starting Calculations")
-    prediction_results_all_categories<-lapply(categories,function(category){
+    prediction_results_all_categories <- parLapply(cluster1, categories,function(category){
       
       prediction_result <- ingarch.prediction(data=data_window,
                                               category=category,
@@ -221,7 +222,7 @@ ingarch.analysis <- function(weekly_category_data,
     stopCluster(cluster1)
     } 
     else {
-      prediction_results_all_categories<-lapply(categories,function(category){
+      prediction_results_all_categories <- lapply(categories,function(category){
         
         prediction_result <- ingarch.prediction(data=data_window,
                                                 category=category,

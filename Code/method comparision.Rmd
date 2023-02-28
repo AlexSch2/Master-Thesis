@@ -30,12 +30,12 @@ save_results <- T
 #Ingarch specifications
 distr<-"poisson"
 zero_handling_ingarch <- "zero_to_one"
-external <- F
+external <- T
 if(external){
   external_plot <-"with external factors"
 }else external_plot <- ""
-past_means <- c(0,1,2)
-past_obs <- c(1,2)
+past_means <- c(1)
+past_obs <- c(2)
 ingarch_settings <- expand_grid(past_means,past_obs)
 
 
@@ -69,7 +69,7 @@ if(save_results){
 
 
 
-for (i in 3:dim(ingarch_settings)[1]){
+for (i in 1:dim(ingarch_settings)[1]){
   
   past_obs <- ingarch_settings[[i,2]]
   past_mean <- ingarch_settings[[i,1]]
@@ -85,7 +85,7 @@ for (i in 3:dim(ingarch_settings)[1]){
     zero_handling = zero_handling_ingarch,
     external = external,
     multicore = T,
-    n_cores = 4,
+    n_cores = 3,
     past_obs = past_obs,
     past_mean = past_mean
   )
