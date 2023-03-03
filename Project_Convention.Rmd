@@ -39,7 +39,12 @@ Function names follow the same general rules like variables and files. The first
 
 ### Simulation Results
 
-Since Simulation Results are files, they follow the File naming structure (i.e. "coda_result","ingarch_result"). Then the ids of the fridges are added. Further characteristics can be added as needed. Multiple words in one part are separated by a dash "-" and the characteristics themselves are separated by "_". 
+Since Simulation Results are files, they follow the File naming structure (i.e. "coda_result","ingarch_result"). Then the ids of the fridges are added. Further characteristics can be added as needed. Multiple words in one part are separated by a dash "-" and the characteristics themselves are separated by "_".
+
+
+### Columns and Rows in objects
+
+Column and Row names follow the same principal as variable names, with the distinction that they are written in lower case letters in order to be distinguished from variable names. Multiple words in one part of the name can still be written with upper case letters, however, the first letter of the name must be lower case. 
 
 
 

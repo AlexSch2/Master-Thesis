@@ -1,24 +1,24 @@
 
 #Data preparation for INGARCH models
-ingarch.data.preparation <- function(data_raw, 
-                                     one_vs_all = F, 
-                                     pivot_group = "1",
-                                     zero_handling = c("none","zero_to_one")){
+Ingarch.DataPreparation <- function(Data_Raw, 
+                                     OneVsAll = F, 
+                                     PivotGroup = "1",
+                                     ZeroHandling = c("none","zero_to_one")){
   
-  zero_handling <- match.arg(zero_handling)
+  ZeroHandling <- match.arg(ZeroHandling)
   
-  data_raw <- data.preparation(data_raw=data_raw,
-                               one_vs_all = one_vs_all,
-                               pivot_group = pivot_group,
-                               categories = c(1,2,3,4),
-                               nas_to=0)
+  Data_Raw <- Data.Preparation(Data_Raw = Data_Raw,
+                               OneVsAll = OneVsAll,
+                               PivotGroup = PivotGroup,
+                               Category = c(1,2,3,4),
+                               NA_to = 0)
   
-  if (zero_handling == "none") {
-    return(data_raw)
+  if (ZeroHandling == "none") {
+    return(Data_Raw)
   }
-  else if (zero_handling == "zero_to_one") {
-    data_raw[data_raw == 0] <- 1
-    return(data_raw)
+  else if (ZeroHandling == "zero_to_one") {
+    Data_Raw[Data_Raw == 0] <- 1
+    return(Data_Raw)
   }
   else{
     stop("Enter valid zero handling method")
@@ -28,241 +28,245 @@ ingarch.data.preparation <- function(data_raw,
 
 #Prediction function for INGARCH models. Fits the model for the specified category and calculates the predicted value, 
 #prediction errors and PREDICTIVE INTERVALS (NOT CIs)
-ingarch.prediction <- function(data_window,
-                               category,
-                               prediction_error_step=1,
-                               frame=10,
-                               distribution="poisson",
-                               plot=F,
-                               window_method="extending",
-                               external = FALSE,
-                               past_obs = 1,
-                               past_mean = 1){
+Ingarch.Prediction <- function(Data_Window,
+                               Category,
+                               PredictionStep = 1,
+                               Frame = 10,
+                               Distribution = "poisson",
+                               Plot = F,
+                               WindowMethod = "extending",
+                               External = FALSE,
+                               PastOb = 1,
+                               PastMean = 1){
   
-  number_of_windows <- length(data_window)
+  NumberOfWindows <- length(Data_Window)
   
   
   #Calculating the prediction for each window
-  result <- lapply(c(1:number_of_windows),function(window_index){
+  Result <- lapply(c(1:NumberOfWindows),function(WindowIndex){
     
     
     #Extracting fitting values, true value and last known value
-    fitting_values <- data_window[[window_index]]$fitting[c("week_date",category)]
-    true_value <- data_window[[window_index]]$prediction_value[[category]]
-    last_known_value <- tail(fitting_values[[category]],n=1)
+    TimeSeriesValue_Window <- Data_Window[[WindowIndex]]$timeSeriesValue_window[c("week_date",Category)]
+    TimeseriesValue_Future <- Data_Window[[WindowIndex]]$timeSeriesValue_future[[Category]]
+    TimeSeriesValue_LastKnown <- tail(TimeSeriesValue_Window[[Category]],n=1)
     
-    if(external){
-      xreg <- data_window[[window_index]]$fitting %>% dplyr::select(-c("week_date",all_of(category))) %>% as.matrix()
+    if(External){
+      Xreg <- Data_Window[[WindowIndex]]$timeSeriesValue_window %>%
+              dplyr::select(-c("week_date", all_of(Category))) %>%
+              as.matrix()
     }
     else{
-      xreg <-NULL
+      Xreg <-NULL
     }
     
     #Fitting the model
    
-    past_obs_used <- c(1:past_obs)
-    if(past_mean==0){
-      past_mean_used <- NULL
+    PastOb_Used <- c(1:PastOb)
+    if (PastMean == 0) {
+      PastMean_Used <- NULL
     } else{
-      past_mean_used <- c(1:past_mean)
+      PastMean_Used <- c(1:PastMean)
     }
     
-    model <- tsglm(fitting_values[[category]],
-                   model = list("past_obs"= past_obs_used,"past_mean"= past_mean_used,external=ncol(xreg)),
-                   xreg=xreg,
-                   distr = distribution,
+    Model <- tsglm(TimeSeriesValue_Window[[Category]],
+                   model = list("past_obs" = PastOb_Used,
+                                "past_mean" = PastMean_Used,
+                                external = ncol(Xreg)),
+                   xreg = Xreg,
+                   distr = Distribution,
                    link = "identity")
     
     
-    #Predicting the future value depending on prediction_error_step
-    prediction_result <- predict(model,n.ahead=prediction_error_step,type="shortest",level=0.90)
+    #Predicting the future value depending on PredictionStep
+    PredictionResult <- predict(Model,n.ahead = PredictionStep,type = "shortest",level = 0.90)
     
     
     #Rounding it since we only have integers
-    predicted_value <- round(prediction_result$pred)
+    PredictedValue <- round(PredictionResult$pred)
     
     
     #Extracting the lower and upper prediction interval 
-    prediction_interval_lower <- prediction_result$interval[1,"lower"]
-    prediction_interval_upper <- prediction_result$interval[1,"upper"]
+    PredictionInterval_Lower <- PredictionResult$interval[1,"lower"]
+    PredictionInterval_Upper <- PredictionResult$interval[1,"upper"]
     
     
     #Calculating the prediction error
-    prediction_error <- as.numeric(predicted_value-true_value)
+    PredictionError <- as.numeric(PredictedValue - TimeseriesValue_Future)
     
   
     #Calculating the normed prediction error
-    prediction_error_normed <- prediction_error
+    PredictionError_Normed <- PredictionError
     
     return(list(
       prediction = data.frame(
-        prediction_error = prediction_error,
-        predicted_value = predicted_value,
-        prediction_error_normed = prediction_error_normed,
-        lower_bound = prediction_interval_lower,
-        upper_bound = prediction_interval_upper,
-        true_value = true_value,
-        last_known_value = last_known_value,
-        category = category,
-        prediction_date = data_window[[window_index]]$prediction_value[[1]],
-        distribution = distribution,
-        window = window_index,
-        window_length = dim(fitting_values)[1],
-        window_length_base = frame,
-        past_obs = past_obs,
-        past_mean = past_mean,
-        external = external 
+        predictionError = PredictionError,
+        predictedValue = PredictedValue,
+        predictionError_normed = PredictionError_Normed,
+        lower_bound = PredictionInterval_Lower,
+        upper_bound = PredictionInterval_Upper,
+        trueValue = TimeseriesValue_Future,
+        lastKnownValue = TimeSeriesValue_LastKnown,
+        category = Category,
+        predictionDate = Data_Window[[WindowIndex]]$timeSeriesValue_future[[1]],
+        distribution = Distribution,
+        window = WindowIndex,
+        window_length = dim(TimeSeriesValue_Window)[1],
+        window_baseLength = Frame,
+        pastOb = PastOb,
+        pastMean = PastMean,
+        external = External
       ),
-      model = model
+      model = Model
     ))
     
   })
   
   #Transforming result in a nicer format
-  result_prediction <- bind_rows(unlist.element(result,"prediction"))
-  result_model <- unlist.element(result,"model")
-  names(result_model) <- sapply(c(1:number_of_windows),function(i){paste("window",i,sep="")})
+  ResultPrediction <- bind_rows(UnlistListElement(Result, "prediction"))
+  ResultModel <- UnlistListElement(Result, "model")
+  names(ResultModel) <- sapply(c(1:NumberOfWindows),function(i){paste("window",i,sep = "")})
   
   
   #Calculation the normed prediction error 
-  div <- sapply(c(1:dim(result_prediction)[1]),function(i){
+  div <- sapply(c(1:dim(ResultPrediction)[1]),function(i){
     
-    return(normation(x = result_prediction$true_value[1:i],
-                     y = result_prediction$last_known_value[1:i]))}
+    return(Normation(x = ResultPrediction$trueValue[1:i],
+                     y = ResultPrediction$lastKnownValue[1:i]))}
     )
-  if(0 %in% div ) div[div==0] <- 0.5
-  result_prediction$prediction_error_normed <- result_prediction$prediction_error_normed/div
+  if(0 %in% div ) div[div == 0] <- 0.5
+  ResultPrediction$predictionError_normed <- ResultPrediction$predictionError_normed/div
   
   
   #Plotting diagnostic plots or not
-  if (plot) {
-    plot(model, ask = F)
-  }
+  #if (Plot) {
+  #  plot(model, ask = F)
+  #}
   
-  return(list(results=result_prediction,
-              models=result_model))
+  return(list(result = ResultPrediction,
+              model = ResultModel))
   
 }
 
 
 
 #Wrapper function for the analysis of the data with an Ingarch model
-ingarch.analysis <- function(weekly_category_data,
-                             ids,
-                             prediction_error_step = 1,
-                             distribution = "poisson",
-                             model_type = "ingarch",
-                             plot = F,
-                             categories = c("1", "2", "3", "4"),
-                             frame = 10,
-                             window_method = "extending",
-                             zero_handling = "none",
-                             past_obs = 1,
-                             past_mean = 1,
-                             external = FALSE,
-                             multicore = TRUE,
-                             n_cores = 2
+Ingarch.Analysis <- function(DataRaw,
+                             Id,
+                             PredictionStep = 1,
+                             Distribution = "poisson",
+                             ModelType = "ingarch",
+                             Plot = F,
+                             Category = c("1", "2", "3", "4"),
+                             Frame = 10,
+                             WindowMethod = "extending",
+                             ZeroHandling = "none",
+                             PastOb = 1,
+                             PastMean = 1,
+                             External = FALSE,
+                             Multicore = TRUE,
+                             NCores = 2
                              ) {
   
   
-  stopifnot(model_type %in% c("ingarch","ingarch_one_vs_all"))
+  stopifnot(ModelType %in% c("ingarch","ingarch_OneVsAll"))
   
   
   
   #Calculating Prediction results for all ids and each category
-  prediction_results_all_combinations <- lapply(ids,function(id){
+  PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_RunVariable){
     
     #Preparing data
-    data_raw <- weekly_category_data %>%
-      filter(fridge_id == id &
-               main_category_id %in% as.integer(categories)) %>%
+    DataPrepared <- DataRaw %>%
+      filter(fridge_id == Id_RunVariable &
+               main_category_id %in% as.integer(Category)) %>%
       dplyr::select(week_date, main_category_id, sold) %>%
       arrange(week_date) %>%
-      ingarch.data.preparation(zero_handling = zero_handling)
+      Ingarch.DataPreparation(ZeroHandling = ZeroHandling)
     
     
     #Creating fitting and prediction windows
-    data_window <- windows(data_raw,frame = frame,method=window_method,prediction_error_step = prediction_error_step)
+    Data_Window <- Data.Window(DataPrepared,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
     
     
     #Calculating Prediction results for each category 
-    if(multicore==TRUE){
+    if(Multicore == TRUE){
       
-      cluster1<-makeCluster(n_cores)
+      Cluster1 <- makeCluster(NCores)
       print("Initiating cluster")
       
-      invisible(clusterCall(cluster1,function(){
-        source("dependencies.R")
-        source("general_helper_functions.R")
+      invisible(clusterCall(Cluster1, function() {
+        source("General_Dependency.R")
+        source("General_Function.R")
       }))
       
-      invisible(clusterExport(cluster1,list("windows","ingarch.data.preparation","ingarch.prediction","data_window",
-                                            "external","past_obs","past_mean","distribution","plot"),
+      invisible(clusterExport(Cluster1,list("Data.Window","Ingarch.DataPreparation","Ingarch.Prediction","Data_Window",
+                                            "External","PastOb","PastMean","Distribution","Plot"),
                               envir = environment()))
       print("Starting Calculations")
-    prediction_results_all_categories <- parLapply(cluster1, categories,function(category){
+    PredictionResult_AllCategory <- parLapply(Cluster1, Category,function(Category_RunVariable){
       
-      prediction_result <- ingarch.prediction(data=data_window,
-                                              category=category,
-                                              prediction_error_step = prediction_error_step,
-                                              frame=frame,
-                                              plot=F,
-                                              distribution=distribution,
-                                              window_method=window_method,
-                                              external = external,
-                                              past_obs = past_obs,
-                                              past_mean = past_mean)
+      PredictionResult <- Ingarch.Prediction(Data_Window = Data_Window,
+                                             Category = Category_RunVariable,
+                                             PredictionStep = PredictionStep,
+                                             Frame = Frame,
+                                             Plot = F,
+                                             Distribution = Distribution,
+                                             WindowMethod = WindowMethod,
+                                             External = External,
+                                             PastOb = PastOb,
+                                             PastMean = PastMean)
       
-      return(list(results=bind_rows(prediction_result$results),
-                  models=prediction_result$models))
+      return(list(result=bind_rows(PredictionResult$result),
+                  model=PredictionResult$model))
       
     })
     print("Stopping Calculations")
     print("Stopping Cluster")
-    stopCluster(cluster1)
+    stopCluster(Cluster1)
     } 
     else {
-      prediction_results_all_categories <- lapply(categories,function(category){
+      PredictionResult_AllCategory <- lapply(Category,function(Category_RunVariable){
         
-        prediction_result <- ingarch.prediction(data=data_window,
-                                                category=category,
-                                                prediction_error_step = prediction_error_step,
-                                                frame=frame,
-                                                plot=F,
-                                                distribution=distribution,
-                                                window_method=window_method,
-                                                external = external,
-                                                past_obs = past_obs,
-                                                past_mean = past_mean)
+        PredictionResult <- Ingarch.Prediction(Data_Window = Data_Window,
+                                               Category = Category_RunVariable,
+                                               PredictionStep = PredictionStep,
+                                               Frame = Frame,
+                                               Plot = F,
+                                               Distribution = Distribution,
+                                               WindowMethod = WindowMethod,
+                                               External = External,
+                                               PastOb = PastOb,
+                                               PastMean = PastMean)
         
-        return(list(results=bind_rows(prediction_result$results),
-                    models=prediction_result$models))
+        return(list(result = bind_rows(PredictionResult$result),
+                    model = PredictionResult$model))
         
       })
     }
     
     #Transforming data in nicer format
-    result_prediction <- bind_rows(unlist.element(prediction_results_all_categories,"results"))
-    result_model <- unlist.element(prediction_results_all_categories,"models")
-    names(result_model) <- categories
-    result_prediction$id <- id
-    result_prediction$window_method <- window_method
-    result_prediction$zero_handling <- zero_handling
+    ResultPrediction <- bind_rows(UnlistListElement(PredictionResult_AllCategory,"result"))
+    ResultModel <- UnlistListElement(PredictionResult_AllCategory,"model")
+    names(ResultModel) <- Category
+    ResultPrediction$id <- Id_RunVariable
+    ResultPrediction$windowMethod <- WindowMethod
+    ResultPrediction$zeroHandling <- ZeroHandling
     
-    return(list(results=result_prediction,
-                models=result_model))
+    return(list(result = ResultPrediction,
+                model = ResultModel))
   })
 
   
   
   #Transforming data in nicer format
-  result_prediction <- bind_rows(unlist.element(prediction_results_all_combinations,"results"))
-  result_model <- unlist.element(prediction_results_all_combinations,"models")
-  names(result_model) <- ids
-  result_prediction$model <- model_type
+  ResultPrediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllCategory,"result"))
+  ResultModel <- UnlistListElement(PredictionResult_AllIDAllCategory,"model")
+  names(ResultModel) <- Id
+  ResultPrediction$model <- ModelType
   
-  return(list(results=result_prediction,
-              models=result_model))
+  return(list(result = ResultPrediction,
+              model = ResultModel))
   
  
   
@@ -271,36 +275,41 @@ ingarch.analysis <- function(weekly_category_data,
 
 
 ## Plotting a specified model result
-ingarch.parameter.plot <- function(result,category,element,func="idf",save=TRUE,plot.type=c("default","histogram")){
+Ingarch.ParameterPlot <- function(Ingarch_Result, Category, Element, Fnct = "idf", Save = TRUE, Plot_Type =
+                                    c("default", "histogram")){
   
   
-  plot.type <- match.arg(plot.type)
-  ids <- unique(result$results$id)
-  distributions <- unique(result$results$distribution)
+  Plot_Type <- match.arg(Plot_Type)
+  Id_all <- unique(Ingarch_Result$result$id)
+  Distribution_all <- unique(Ingarch_Result$result$distribution)
   
   
   
-  for (id in ids){
-    for ( distribution in distributions){
+  for (Id_RunVariable in Id_all){
+    for (Distribution_RunVariable in Distribution_All){
       
-      if(save){
-        png(paste("Ingarch_plot_id",id,distribution,"category",category,plot.type,func,".png",sep=""),height = 15,width = 20,units = "cm",res=300)
+      if(Save){
+        png(paste("Ingarch_plot_id", Id_RunVariable, Distribution_RunVariable, "category", Category, Plot_Type, Fnct, ".png", sep = ""), 
+            height = 15,width = 20,units = "cm",res = 300)
       }
       
-      plot_data <- result$models[[paste(id)]][[category]]
-      plot_data <- unlist(lapply(c(1:length(plot_data)),function(i)return(do.call(func,list(plot_data[[i]][[element]])))))
+      Data_Plot <- Ingarch_Result$models[[paste(Id_RunVariable)]][[Category]]
+      Data_Plot <- unlist(lapply(c(1:length(Data_Plot)),function(i)return(do.call(Fnct,list(Data_Plot[[i]][[Element]])))))
       
-      if(plot.type=="default"){
+      if(Plot_Type == "default"){
         
-        plot(plot_data,type="l",ylab=paste("Distribution mean",func,sep=" "),main=paste("Ingarch_",distribution,"_id_",id,sep=""),
-             sub=paste("Category: ",category,sep=""))
+        plot(Data_Plot,type = "l",ylab = paste("Distribution mean",Fnct,sep = " "),
+             main = paste("Ingarch_", Distribution_RunVariable, "_id_", Id_RunVariable, sep = ""),
+             sub = paste("Category: ", Category, sep = ""))
         
       }
       
-      else if (plot.type =="histogram") {
+      else if (Plot_Type =="histogram") {
         
-        hist(plot_data,xlab=paste("Distribution mean",func,sep=" "),main=paste("Ingarch_",distribution,"_id_",id,sep=""),
-             sub=paste("Category: ",category,sep=""))
+        hist(Data_Plot,
+             xlab = paste("Distribution mean", Fnct, sep = " "), 
+             main = paste("Ingarch_", Distribution_RunVariable, "_id_", Id_RunVariable, sep = ""),
+             sub = paste("Category: ", Category, sep = ""))
         
       }else {
         
@@ -311,7 +320,7 @@ ingarch.parameter.plot <- function(result,category,element,func="idf",save=TRUE,
     }
     
   }
-  if(save){
+  if(Save){
     dev.off()
   }
   
