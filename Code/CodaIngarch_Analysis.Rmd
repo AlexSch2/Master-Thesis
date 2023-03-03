@@ -21,7 +21,7 @@ save_plots <- T
 
 Preparation
 ```{r eval = FALSE}
-ids <- c(100401,100402,100404,100761)
+ids <- c(4,6)
 prediction_error_step <- 1
 frame <- 5
 window_method <- "extending"
@@ -162,7 +162,7 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 12
+FID <- 4
 
 plot_data_coda<-coda_result$results%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%

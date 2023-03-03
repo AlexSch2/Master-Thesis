@@ -60,7 +60,7 @@ ingarch.prediction <- function(data_window,
     
     #Fitting the model
    
-    past_obs_used <<- c(1:past_obs)
+    past_obs_used <- c(1:past_obs)
     if(past_mean==0){
       past_mean_used <- NULL
     } else{

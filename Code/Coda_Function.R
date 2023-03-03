@@ -84,6 +84,8 @@ Eucledian <- function(x, y, standardise = 1) return(sum((x - y) / standardise) ^
 #This is necessary for computing the error covariance matrix sigma see Literature chapter 5
 #Not sure why but the hard bound also does not work. Hence -1 is added
 #
+#UPDATE: lag.max is set to 1 to ensure stability
+#
 #NOTE 2:
 #
 #To ensure stability we also implement the restriction to the max lag to hold n > 10*max(p,m) where 
@@ -102,23 +104,23 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
     prediction_date <- data_transformed_windows[[index]]$prediction_value[1, 1]
     window_length <- dim(fitting_data)[1]
     
-    # Calculating the max possible lag. Note 1
-    D <- dim(fitting_data)[2]
-    lag.max <- (window_length-1)/D-1
-    lag.max <- max(min(lag.max,floor((window_length-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
-    lag.max <- floor(max(min(window_length/10-1,lag.max*D),1)) #Note 2
-    
-    #Note 2
-    if(window_length/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")
-    
-    if(lag.max==1) {
-      lag.max <- NULL
-    }
-  
+    # # Calculating the max possible lag. Note 1
+    # D <- dim(fitting_data)[2]
+    # lag.max <- (window_length-1)/D-1
+    # lag.max <- max(min(lag.max,floor((window_length-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
+    # lag.max <- floor(max(min(window_length/10-1,lag.max*D),1)) #Note 2
+    # 
+    # #Note 2
+    # if(window_length/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")
+    # 
+    # if(lag.max==1) {
+    #   lag.max <- NULL
+    # }
+    # 
     
     #Depending on whether we have tspace or not we fit a VAR model or an AR model
     if (tspace) {
-      model <- VAR(fitting_data, lag.max = lag.max, ic= "AIC")
+      model <- VAR(fitting_data, lag.max = 1, ic= "AIC")
       predicted_value <-  predict(model, fitting_data, n.ahead = prediction_error_step)
       size = 2
     }

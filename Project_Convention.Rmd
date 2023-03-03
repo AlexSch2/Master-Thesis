@@ -1,0 +1,63 @@
+---
+title: "Naming and Structure Conventions"
+author: "Alexander Schwaiger"
+date: "2023-03-03"
+output: pdf_document
+---
+
+# Version Control
+
+We use a trunk based approach with a release branch being created for each presentation / meeting. This way we can ensure reproducible results for each stage of the project.
+
+
+
+# Repo Structure
+
+We separate the repo in Code, Simulation Results and Plots. We further add a obsolete folder to store obsolete files
+
+
+
+# Naming conventions
+
+## Files
+
+File names are in English and compromise of two parts separated by a dash "_". The first part specifies what the file is for (i.e. for coda, ingarch, general) and the second part describes what the file does (functions, analysis, plots, tests). For verbs the infinitive version of the word is chosen. For nouns the singular is chosen. The first letter of each word is capitalised. 
+
+
+
+## Code
+
+### Variables
+
+Variable names should be short but descriptive. Verbs are in the infinitive, nouns in singular. Multiple parts are separated by an underline "_". The first part describes what the object is, the second part can describe an attribute of the object (i.e. variables named "window" and "window_length" ). The first letter is capitalised. If more words are needed to describe a part, the first letter of the words are capitalised. For example to save the step size of the prediction the variable could be named "PredictionErrorStep". 
+
+
+### Functions
+
+Function names follow the same general rules like variables and files. The first part specifies what the function is for (i.e. for coda, ingarch, window) and the second part describes what the function does (analysis,prediction,preparation). Parts are separated by periods ".". Again if more words are needed to describe a part, the first letter of the words are capitalised. For example a function to prepare the data for the ingarch model could be named "Ingarch.DataPreperation". 
+
+
+### Simulation Results
+
+Since Simulation Results are files, they follow the File naming structure (i.e. "coda_result","ingarch_result"). Then the ids of the fridges are added. Further characteristics can be added as needed. Multiple words in one part are separated by a dash "-" and the characteristics themselves are separated by "_". 
+
+
+
+## Plots
+
+Plots are files again, so they follow the conventions of them. In addition they follow the same principal of the Simulation Results. The first part describes the type of the plot (time series, box plot,histogram, ect.), followed by the ids and window lengths. Other characteristics are then added as needed. 
+
+Since names can get quite long, abrivations can be used to shorten the names. The following lists includes the abrivations included:
+
+ * ts: time series
+ * box: box plot
+ * hist: histogram
+ * prediction error: pred-err
+ * coda: cod
+ * ingarch: ing
+ * normed: norm 
+ * cumulated cum
+ * window: win
+ * length: lgth
+ * number of past means: pm
+ * number of past observations: po
