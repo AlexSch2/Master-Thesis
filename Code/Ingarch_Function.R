@@ -7,18 +7,18 @@ Ingarch.DataPreparation <- function(Data_Raw,
   
   ZeroHandling <- match.arg(ZeroHandling)
   
-  Data_Raw <- Data.Preparation(Data_Raw = Data_Raw,
+  Data_Prepared <- Data.Preparation(Data_Raw = Data_Raw,
                                OneVsAll = OneVsAll,
                                PivotGroup = PivotGroup,
                                Category = c(1,2,3,4),
                                NA_to = 0)
   
   if (ZeroHandling == "none") {
-    return(Data_Raw)
+    return(Data_Prepared)
   }
   else if (ZeroHandling == "zero_to_one") {
-    Data_Raw[Data_Raw == 0] <- 1
-    return(Data_Raw)
+    Data_Prepared[Data_Prepared == 0] <- 1
+    return(Data_Prepared)
   }
   else{
     stop("Enter valid zero handling method")
@@ -83,7 +83,7 @@ Ingarch.Prediction <- function(Data_Window,
     
     
     #Rounding it since we only have integers
-    PredictedValue <- round(PredictionResult$pred)
+    ValuePredict <- round(PredictionResult$pred)
     
     
     #Extracting the lower and upper prediction interval 
@@ -92,7 +92,7 @@ Ingarch.Prediction <- function(Data_Window,
     
     
     #Calculating the prediction error
-    PredictionError <- as.numeric(PredictedValue - TimeseriesValue_Future)
+    PredictionError <- as.numeric(ValuePredict - TimeseriesValue_Future)
     
   
     #Calculating the normed prediction error
@@ -101,14 +101,14 @@ Ingarch.Prediction <- function(Data_Window,
     return(list(
       prediction = data.frame(
         predictionError = PredictionError,
-        predictedValue = PredictedValue,
+        ValuePredict = ValuePredict,
         predictionError_normed = PredictionError_Normed,
         lower_bound = PredictionInterval_Lower,
         upper_bound = PredictionInterval_Upper,
-        trueValue = TimeseriesValue_Future,
-        lastKnownValue = TimeSeriesValue_LastKnown,
+        valueTrue = TimeseriesValue_Future,
+        valueLastKnown = TimeSeriesValue_LastKnown,
         category = Category,
-        predictionDate = Data_Window[[WindowIndex]]$timeSeriesValue_future[[1]],
+        date = Data_Window[[WindowIndex]]$timeSeriesValue_future[[1]],
         distribution = Distribution,
         window = WindowIndex,
         window_length = dim(TimeSeriesValue_Window)[1],
@@ -131,8 +131,8 @@ Ingarch.Prediction <- function(Data_Window,
   #Calculation the normed prediction error 
   div <- sapply(c(1:dim(ResultPrediction)[1]),function(i){
     
-    return(Normation(x = ResultPrediction$trueValue[1:i],
-                     y = ResultPrediction$lastKnownValue[1:i]))}
+    return(Normation(x = ResultPrediction$valueTrue[1:i],
+                     y = ResultPrediction$valueLastKnown[1:i]))}
     )
   if(0 %in% div ) div[div == 0] <- 0.5
   ResultPrediction$predictionError_normed <- ResultPrediction$predictionError_normed/div
@@ -151,7 +151,7 @@ Ingarch.Prediction <- function(Data_Window,
 
 
 #Wrapper function for the analysis of the data with an Ingarch model
-Ingarch.Analysis <- function(DataRaw,
+Ingarch.Analysis <- function(Data_Raw,
                              Id,
                              PredictionStep = 1,
                              Distribution = "poisson",
@@ -177,7 +177,7 @@ Ingarch.Analysis <- function(DataRaw,
   PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_RunVariable){
     
     #Preparing data
-    DataPrepared <- DataRaw %>%
+    Data_Prepared <- Data_Raw %>%
       filter(fridge_id == Id_RunVariable &
                main_category_id %in% as.integer(Category)) %>%
       dplyr::select(week_date, main_category_id, sold) %>%
@@ -186,7 +186,7 @@ Ingarch.Analysis <- function(DataRaw,
     
     
     #Creating fitting and prediction windows
-    Data_Window <- Data.Window(DataPrepared,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
+    Data_Window <- Data.Window(Data_Prepared,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
     
     
     #Calculating Prediction results for each category 

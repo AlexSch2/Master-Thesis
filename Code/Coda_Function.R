@@ -8,70 +8,70 @@
 #Currently aggregating on the main categories
 #If one vs all is chosen, pivot groups have to be supplied as a character
 
-coda.data.preparation <- function(data,
-           zero_handling = c("all", "zeros_only", "none"),
-           tspace = FALSE,
-           transform = TRUE,
-           log = FALSE,
-           one_vs_all = FALSE,
-           pivot_group = "1") {
+Coda.DataPreparation <- function(Data_Raw,
+           ZeroHandling = c("all", "zeros_only", "none"),
+           TSpace = FALSE,
+           Transform = TRUE,
+           Log = FALSE,
+           OneVsAll = FALSE,
+           PivotGroup = "1") {
 
-    plus <- function(x,value=0.5){
+    Plus <- function(x,Value=0.5){
          x[is.na(x)] <- 0
-      x <- x + value
+      x <- x + Value
       return(x)
     }
-    zero_handling <- match.arg(zero_handling)
+    ZeroHandling <- match.arg(ZeroHandling)
     
     #If we compare one category to all the others we use all categories. Otherwise we only use the first 2
-    if(one_vs_all) {
-      categories <- c(1,2,3,4)
+    if(OneVsAll) {
+      Category <- c(1,2,3,4)
     }
     else {
-      categories <- c(1,2)
+      Category <- c(1,2)
     }
 
-    data <- data.preparation(data_raw=data,
-                             one_vs_all = one_vs_all,
-                             pivot_group = pivot_group,
-                             nas_to=0,
-                             categories = categories)
+    Data_Prepared <- Data.Preparation(Data_Raw = Data_Raw,
+                             OneVsAll = OneVsAll,
+                             PivotGroup = PivotGroup,
+                             NA_to=0,
+                             Category = Category)
 
     
-    if (zero_handling == "none") {
-      data$tsum <- rowSums(data[,-1])
-      return(data)
+    if (ZeroHandling == "none") {
+      Data_Prepared$tsum <- rowSums(Data_Prepared[,-1])
+      return(Data_Prepared)
     }
     
-    if (zero_handling == "all") {
-      data <- data %>% mutate(across(where(is.numeric),.fns = plus))
+    if (ZeroHandling == "all") {
+      Data_Prepared <- Data_Prepared %>% mutate(across(where(is.numeric),.fns = Plus))
     }
-    else if (zero_handling == "zeros_only") {
-      data[data == 0] <- 0.5
+    else if (ZeroHandling == "zeros_only") {
+      Data_Prepared[Data_Prepared == 0] <- 0.5
     }
     else {
       stop("Enter valid zero handling option")
     }
     
-    data_ilr <- cbind(data$week_date, pivotCoord(as.data.frame(data[,-1])))
+    Data_Ilr <- cbind(Data_Prepared$week_date, pivotCoord(as.data.frame(Data_Prepared[,-1])))
     
-    if (tspace) {
-      if (log) {
-        data_ilr$tsum <- log(rowSums(data[,-1]))
+    if (TSpace) {
+      if (Log) {
+        Data_Ilr$tsum <- log(rowSums(Data_Prepared[,-1]))
       }
       else {
-        data_ilr$tsum <- rowSums(data[,-1])
+        Data_Ilr$tsum <- rowSums(Data_Prepared[,-1])
       }
     }
     
-    names(data_ilr)[1] <- "week_date"
+    names(Data_Ilr)[1] <- "week_date"
     
-    return(data_ilr)
+    return(Data_Ilr)
   }
 
 
 
-Eucledian <- function(x, y, standardise = 1) return(sum((x - y) / standardise) ^ 2)
+Eucledian <- function(x, y, Standardise = 1) return(sum((x - y) / Standardise) ^ 2)
 
 
 ## Fits the model and calculates the predictions based on the prediction windows for coda timeseries
@@ -93,187 +93,187 @@ Eucledian <- function(x, y, standardise = 1) return(sum((x - y) / standardise) ^
 # p...lag.max*2 (since we have p summands each with dimension 2)
 # m... 2
 # See Multivariate Linear Regression pdf
-coda.prediction <- function(data_transformed_windows, data_notransformed_windows, data_notransformed, prediction_error_step,
-                            one_vs_all,tspace, take_log, pivot_group, frame = 10) {
+Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_NoTransform, PredictionStep,
+                            OneVsAll,TSpace, Log, PivotGroup, Frame = 10) {
   
-  prediction_results <- lapply(c(1:length(data_transformed_windows)), function(index) {
+  PredictionResult <- lapply(c(1:length(Data_TransformWindow)), function(WindowIndex) {
     
     
     # Selecting the fitting data and the data which should be predicted 
-    fitting_data <- data_transformed_windows[[index]]$fitting[,-1]
-    prediction_date <- data_transformed_windows[[index]]$prediction_value[1, 1]
-    window_length <- dim(fitting_data)[1]
+    TimeSeriesValue_Window <- Data_TransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1]
+    Date <- Data_TransformWindow[[WindowIndex]]$timeSeriesValue_future[1, 1]
+    Window_Length <- dim(TimeSeriesValue_Window)[1]
     
     # # Calculating the max possible lag. Note 1
-    # D <- dim(fitting_data)[2]
-    # lag.max <- (window_length-1)/D-1
-    # lag.max <- max(min(lag.max,floor((window_length-1)/(ncol(fitting_data[,-1])+1))-1),1) # Note 1
-    # lag.max <- floor(max(min(window_length/10-1,lag.max*D),1)) #Note 2
+    # D <- dim(TimeSeriesValue_Window)[2]
+    # lag.max <- (Window_Length-1)/D-1
+    # lag.max <- max(min(lag.max,floor((Window_Length-1)/(ncol(TimeSeriesValue_Window[,-1])+1))-1),1) # Note 1
+    # lag.max <- floor(max(min(Window_Length/10-1,lag.max*D),1)) #Note 2
     # 
     # #Note 2
-    # if(window_length/10 < (dim(fitting_data)[2]-1))print("Choose a bigger frame if possible")
+    # if(Window_Length/10 < (dim(TimeSeriesValue_Window)[2]-1))print("Choose a bigger frame if possible")
     # 
     # if(lag.max==1) {
     #   lag.max <- NULL
     # }
     # 
     
-    #Depending on whether we have tspace or not we fit a VAR model or an AR model
-    if (tspace) {
-      model <- VAR(fitting_data, lag.max = 1, ic= "AIC")
-      predicted_value <-  predict(model, fitting_data, n.ahead = prediction_error_step)
-      size = 2
+    #Depending on whether we have TSpace or not we fit a VAR model or an AR model
+    if (TSpace) {
+      Model <- VAR(TimeSeriesValue_Window, lag.max = 1, ic= "AIC")
+      ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
+      Size = 2
     }
     else{
-      model <- ar(fitting_data, aic = F, order.max = 1)
-      predicted_value <- predict(model, fitting_data, n.ahead = prediction_error_step)
-      size = 1
+      Model <- ar(TimeSeriesValue_Window, aic = F, order.max = 1)
+      ValuePredict <- predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
+      Size = 1
     }
     
     #Initialising result vectors
-    predicted_values_vector <-matrix(data = NA,nrow = 1,ncol = size)
-    lower_bounds_vector<- upper_bounds_vector <- vector(mode="numeric",length=size)
+    ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
+    LowerBound_Vector<- UpperBound_Vector <- vector(mode="numeric",length=Size)
     
     
     #Filling up result vectors
-    for (i in 1:size) {
-      predicted_values_vector[1, i] <-  predicted_value[[1]][[i]][prediction_error_step]
-      lower_bounds_vector[i] <-  predicted_value[[1]][[i]][prediction_error_step+1]
-      upper_bounds_vector[i] <-  predicted_value[[1]][[i]][prediction_error_step+2]
+    for (i in 1:Size) {
+      ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
+      LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
+      UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
     }
     
     
     
-    tsums <- as.numeric(tail(data_notransformed_windows[[index]]$fitting$tsum, 1))
+    TSum <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
     
-    #Back transformations in case we use tspace
-    if (tspace) {
-      predicted_value <- predicted_values_vector[-size] %>%
+    #Back transformations in case we use TSpace
+    if (TSpace) {
+      ValuePredict <- ValuePredict_Vector[-Size] %>%
         matrix(nrow = 1) %>%
         D2invPC()
       
-      lower_bound <- lower_bounds_vector[-size] %>% 
+      LowerBound <- LowerBound_Vector[-Size] %>% 
         
         matrix(nrow = 1) %>%
         D2invPC()
       
-      upper_bound <- upper_bounds_vector[-size] %>% 
+      UpperBound <- UpperBound_Vector[-Size] %>% 
         matrix(nrow = 1) %>%
         D2invPC()
       
     
       # Back transformations when we use the log of the total sum
-      if (take_log) {
-        predicted_value <- predicted_value * exp(predicted_values_vector[size])
-        predicted_value <- (append(predicted_value, exp(predicted_values_vector[size])))
+      if (Log) {
+        ValuePredict <- ValuePredict * exp(ValuePredict_Vector[Size])
+        ValuePredict <- (append(ValuePredict, exp(ValuePredict_Vector[Size])))
         
-        lower_bound <- lower_bound * exp(predicted_values_vector[size])
-        lower_bound <- (append(lower_bound, exp(predicted_values_vector[size])))
+        LowerBound <- LowerBound * exp(ValuePredict_Vector[Size])
+        LowerBound <- (append(LowerBound, exp(ValuePredict_Vector[Size])))
         
-        upper_bound <- upper_bound * exp(predicted_values_vector[size])
-        upper_bound <- (append(upper_bound, exp(predicted_values_vector[size])))
+        UpperBound <- UpperBound * exp(ValuePredict_Vector[Size])
+        UpperBound <- (append(UpperBound, exp(ValuePredict_Vector[Size])))
         
       }
       # Normal back transformations
       else{
-        predicted_value <- predicted_value * predicted_values_vector[size]
-        predicted_value <- (append(predicted_value, predicted_values_vector[size]))
+        ValuePredict <- ValuePredict * ValuePredict_Vector[Size]
+        ValuePredict <- (append(ValuePredict, ValuePredict_Vector[Size]))
         
-        lower_bound <- lower_bound * predicted_values_vector[size]
-        lower_bound <- (append(lower_bound, predicted_values_vector[size]))
+        LowerBound <- LowerBound * ValuePredict_Vector[Size]
+        LowerBound <- (append(LowerBound, ValuePredict_Vector[Size]))
         
-        upper_bound <- upper_bound * predicted_values_vector[size]
-        upper_bound <- (append(upper_bound, predicted_values_vector[size]))
+        UpperBound <- UpperBound * ValuePredict_Vector[Size]
+        UpperBound <- (append(UpperBound, ValuePredict_Vector[Size]))
       }
       
-      naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1], 1))
+      ValuePredict_Naive <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1], 1))
   
       #Getting true value and last known values
-      window_length <- dim(data_notransformed_windows[[index]]$fitting)[1]
-      true_value <- as.numeric(data_notransformed_windows[[index]]$prediction_value[,-1])
-      last_known_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-1],n=1))
+      Window_Length <- dim(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window)[1]
+      ValueTrue <- as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[,-1])
+      ValueLastKnown <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1],n=1))
       
       
-      if (one_vs_all) {
-        category <- factor(c(pivot_group, "other", "tsum"))
+      if (OneVsAll) {
+        Category <- factor(c(PivotGroup, "other", "tsum"))
       } 
       else{
-        category <- factor(c("1", "2", "tsum"))
+        Category <- factor(c("1", "2", "tsum"))
       }
       
     }
-    #Back transformation if no tspace was used 
+    #Back transformation if no TSpace was used 
     else{
-      predicted_value <- predicted_values_vector %>%
+      ValuePredict <- ValuePredict_Vector %>%
         matrix(nrow = 1) %>%
         D2invPC()
-      predicted_value <- predicted_value * tsums
+      ValuePredict <- ValuePredict * TSum
       
       
-      lower_bound <- lower_bounds_vector %>% 
+      LowerBound <- LowerBound_Vector %>% 
         matrix(nrow = 1) %>%
         D2invPC()
-      lower_bound <- lower_bound * tsums
+      LowerBound <- LowerBound * TSum
       
       
-      upper_bound <- upper_bounds_vector %>% 
+      UpperBound <- UpperBound_Vector %>% 
         matrix(nrow = 1) %>%
         D2invPC()
-      upper_bound <- upper_bound * tsums
+      UpperBound <- UpperBound * TSum
       
       
-      true_value <- as.numeric(data_notransformed_windows[[index]]$prediction_value[,-c(1, 4)])
+      ValueTrue <- as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[,-c(1, 4)])
       
-      if (one_vs_all) {
-        category <- factor(c(pivot_group, "other"))
+      if (OneVsAll) {
+        Category <- factor(c(PivotGroup, "other"))
       } 
       else{
-        category <- factor(c("1", "2"))
+        Category <- factor(c("1", "2"))
       }
       
   
       #Naive prediction values. For the first time point this is the median, for the rest it is the last known value
-      # if (index == 1) {
-      #   naive_predicted_value <- apply(data_notransformed[,-c(1, 4)], 2, median, na.rm = TRUE)
+      # if (WindowIndex == 1) {
+      #   ValuePredict_Naive <- apply(Data_NoTransform[,-c(1, 4)], 2, median, na.rm = TRUE)
       #   } 
       # else{
-      #     naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-c(1, 4)], 1))
+      #     ValuePredict_Naive <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-c(1, 4)], 1))
       # }
       
-      naive_predicted_value <- as.numeric(tail(data_notransformed_windows[[index]]$fitting[,-c(1, 4)], 1))
+      ValuePredict_Naive <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-c(1, 4)], 1))
     }
     
     
-    predicted_value <- round(as.numeric(predicted_value))
-    prediction_error <- as.numeric(predicted_value - true_value)
-    prediction_error_naive <- as.numeric(naive_predicted_value - true_value)
+    ValuePredict <- round(as.numeric(ValuePredict))
+    PredictionError <- as.numeric(ValuePredict - ValueTrue)
+    PredictionError_Naive <- as.numeric(ValuePredict_Naive - ValueTrue)
     
     #Calculating the normed prediction error
-    prediction_error_normed <- prediction_error
+    PredictionError_Normed <- PredictionError
     
     
-    if(one_vs_all){
+    if(OneVsAll){
       
       return(
         list(
           prediction = data.frame(
-            prediction_error = prediction_error,
-            prediction_error_naive = prediction_error_naive,
-            prediction_error_normed = prediction_error_normed,
-            predicted_value = predicted_value,
-            lower_bound = lower_bound,
-            upper_bound = upper_bound,
-            true_value = true_value,
-            last_known_value = last_known_value,
-            naive_predicted_value = naive_predicted_value,
-            category = category,
-            prediction_date = prediction_date,
-            pivot_group = pivot_group,
-            window = index,
-            window_length = dim(fitting_data)[1],
-            window_length_base = frame
+            predictionError = PredictionError,
+            predictionError_naive = PredictionError_Naive,
+            predictionError_normed = PredictionError_Normed,
+            valuePredict = ValuePredict,
+            lowerBound = LowerBound,
+            upperBound = UpperBound,
+            valueTrue = ValueTrue,
+            valueLastKnown = ValueLastKnown,
+            valuePredict_naive = ValuePredict_Naive,
+            category = Category,
+            date = Date,
+            pivotGroup = PivotGroup,
+            window = WindowIndex,
+            window_length = dim(TimeSeriesValue_Window)[1],
+            window_baseLength = Frame
           ),
-          model = model
+          model = Model
         )
       )
     } 
@@ -281,53 +281,53 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
       return(
         list(
           prediction = data.frame(
-            prediction_error = prediction_error,
-            prediction_error_naive = prediction_error_naive,
-            prediction_error_normed = prediction_error_normed,
-            predicted_value = predicted_value,
-            lower_bound = lower_bound,
-            upper_bound = upper_bound,
-            true_value = true_value,
-            last_known_value = last_known_value,
-            naive_predicted_value = naive_predicted_value,
-            category = category,
-            prediction_date = prediction_date,
-            window = index,
-            window_length = dim(fitting_data)[1],
-            window_length_base = frame
+            predictionError = PredictionError,
+            predictionError_naive = PredictionError_Naive,
+            predictionError_normed = PredictionError_Normed,
+            valuePredict = ValuePredict,
+            lowerBound = LowerBound,
+            upperBound = UpperBound,
+            valueTrue = ValueTrue,
+            valueLastKnown = ValueLastKnown,
+            valuePredict_naive = ValuePredict_Naive,
+            category = Category,
+            date = Date,
+            window = WindowIndex,
+            window_length = dim(TimeSeriesValue_Window)[1],
+            window_baseLength = Frame
         ),
-        model = model
+        model = Model
         )
       )
     }
     })
   
   
-  result_prediction <- bind_rows(unlist.element(prediction_results,"prediction"))
-  result_model <- unlist.element(prediction_results,"model")
-  names(result_model) <- sapply(c(1:length(result_model)),function(i){paste("window",i,sep="")})
+  Result_Prediction <- bind_rows(UnlistListElement(PredictionResult,"prediction"))
+  Result_Model <- UnlistListElement(PredictionResult,"model")
+  names(Result_Model) <- sapply(c(1:length(Result_Model)),function(i){paste("window",i,sep="")})
   
   #Calculation the normed prediction error
-  for (catg in unique(result_prediction$category)) {
-    x <- result_prediction %>% filter(category==catg)
+  for (catg in unique(Result_Prediction$category)) {
+    x <- Result_Prediction %>% filter(category==catg)
     
     div <- sapply(c(1:dim(x)[1]), function(i) {
-      return(normation(
-        x = x$true_value[1:i],
-        y = x$last_known_value[1:i]
+      return(Normation(
+        x = x$valueTrue[1:i],
+        y = x$valueLastKnown[1:i]
       ))
     })
     if (0 %in% div)
       div[div == 0] <- 0.5
-    result_prediction[result_prediction$category == catg, "prediction_error_normed"] <-
-      result_prediction[result_prediction$category == catg, "prediction_error_normed"] / div
+    Result_Prediction[Result_Prediction$category == catg, "predictionError_normed"] <-
+      Result_Prediction[Result_Prediction$category == catg, "predictionError_normed"] / div
     
     
   }
   
   
-  return(list(result = result_prediction,
-              model= result_model))
+  return(list(result = Result_Prediction,
+              model= Result_Model))
 }
 
 
@@ -335,170 +335,173 @@ coda.prediction <- function(data_transformed_windows, data_notransformed_windows
 ## Wrapper function for the coda analysis. Still WIP
 ## Standard CI is 95%
 
-coda.analysis<-function(weekly_category_data, ids, frame=10, zero_handling = "zeros_only", prediction_error_step = 1, take_log = T,
-                        tspace = T, one_vs_all = F , pivot_groups = c("1"), model_type = "coda", window_method ="extending") {
+Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", PredictionStep = 1, Log = T,
+                        TSpace = T, OneVsAll = F , PivotGroup = c("1"), ModelType = "coda", WindowMethod ="extending") {
   
-  stopifnot(model_type %in% c("coda","coda_one_vs_all"))
+  stopifnot(ModelType %in% c("coda","coda_OneVsAll"))
   
   #one vs all for all pivot groups
   
-  if(one_vs_all) {
+  if(OneVsAll) {
   
-  prediction_results_all_pivot_groups_all_ids<-lapply(ids,function(id){
-    prediction_results_all_pivot_groups<-lapply(pivot_groups,function(pivot_group){
+  PredictionResult_AllIDAllPivotGroup <- lapply(Id,function(Id_Index){
+    PredictionResult_AllPivotGroup <- lapply(PivotGroup,function(PivotGroup_Index){
       
         #Preparing raw data
-        data_raw <- weekly_category_data %>%
-          filter(fridge_id == id &
+        Data_Prepared <- Data_Raw %>%
+          filter(fridge_id == Id_Index &
                    main_category_id %in% c(1, 2, 3, 4)) %>%
           dplyr::select(week_date, main_category_id, sold) %>%
           arrange(week_date)
         
         
         #Preparing transformed data
-        data_transformed <- coda.data.preparation(data_raw, 
-                                               zero_handling = zero_handling,
-                                               tspace = tspace, 
-                                               log = take_log,
-                                               one_vs_all = T,
-                                               pivot_group = pivot_group) %>%
+        Data_Transform <- Coda.DataPreparation(Data_Prepared, 
+                                               ZeroHandling = ZeroHandling,
+                                               TSpace = TSpace, 
+                                               Log = Log,
+                                               OneVsAll = T,
+                                               PivotGroup = PivotGroup_Index) %>%
           arrange(week_date)
         #Splitting transformed data into windows
-        data_transformed_windows <- windows(data_transformed,
-                                         frame=frame,
-                                         method = window_method,
-                                         prediction_error_step = prediction_error_step)
+        Data_TransformWindow <- Data.Window(Data_Transform,
+                                         Frame=Frame,
+                                         Method = WindowMethod,
+                                         PredictionStep = PredictionStep)
         
         
         
         #Preparing non transformed data 
-        data_notransformed <- coda.data.preparation(data_raw,
-                                                        zero_handling="none",
-                                                        tspace=tspace, log=F, 
-                                                        one_vs_all = T,
-                                                        pivot_group = pivot_group) %>%
+        Data_NoTransform <- Coda.DataPreparation(Data_Prepared,
+                                                        ZeroHandling="none",
+                                                        TSpace=TSpace, 
+                                                        Log=F, 
+                                                        OneVsAll = T,
+                                                        PivotGroup = PivotGroup_Index) %>%
           arrange(week_date)
         #Splitting non transformed data into windows
-        data_notransformed_windows <- windows(data_notransformed,
-                                            frame=frame,
-                                            method = window_method,
-                                            prediction_error_step = prediction_error_step)
+        Data_NoTransformWindow <- Data.Window(Data_NoTransform,
+                                            Frame=Frame,
+                                            Method = WindowMethod,
+                                            PredictionStep = PredictionStep)
         
         
         #Carrying out model fitting and prediction
-        prediction_results <- coda.prediction(data_transformed_windows = data_transformed_windows, 
-                                              data_notransformed_windows = data_notransformed_windows, 
-                                              data_notransformed = data_notransformed, 
-                                              prediction_error_step = prediction_error_step,
-                                              one_vs_all = T,
-                                              tspace = tspace,
-                                              take_log =  take_log,
-                                              pivot_group = pivot_group,
-                                              frame = frame)
-        prediction_results$result$id <- id
-        prediction_results$result$window_method <- window_method
-        prediction_results$result$model <- model_type 
-        prediction_results$result$zero_handling <- zero_handling
+        PredictionResult <- Coda.Prediction(Data_TransformWindow = Data_TransformWindow, 
+                                              Data_NoTransformWindow = Data_NoTransformWindow, 
+                                              Data_NoTransform = Data_NoTransform, 
+                                              PredictionStep = PredictionStep,
+                                              OneVsAll = T,
+                                              TSpace = TSpace,
+                                              Log =  Log,
+                                              PivotGroup = PivotGroup_Index,
+                                              Frame = Frame)
+        PredictionResult$result$id <- Id_Index
+        PredictionResult$result$windowMethod <- WindowMethod
+        PredictionResult$result$model <- ModelType 
+        PredictionResult$result$zeroHandling <- ZeroHandling
       
           
         #Tidying up data
-        result_prediction <- prediction_results$result
-        result_model <- prediction_results$model
+        Result_Prediction <- PredictionResult$result
+        Result_Model <- PredictionResult$model
         
+        x <- list(result = Result_Prediction,
+                  model = Result_Model)
         
-        return(list(results = result_prediction,
-                    model = result_model))
+        return(list(result = Result_Prediction,
+                    model = Result_Model))
     
 
      })
     
       #Tidying up data
-      result_prediction <- bind_rows(unlist.element(prediction_results_all_pivot_groups,"results"))
-      result_model <- unlist.element(prediction_results_all_pivot_groups,"model")
-      names(result_model) <- pivot_groups
+      Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllPivotGroup,"result"))
+      Result_Model <- UnlistListElement(PredictionResult_AllPivotGroup,"model")
+      names(Result_Model) <- PivotGroup_Index
     
-      return(list(results = result_prediction,
-                  models = result_model))
+      return(list(result = Result_Prediction,
+                  model = Result_Model))
     
     })
   
     #Tidying up data
-    result_prediction <- bind_rows(unlist.element(prediction_results_all_pivot_groups_all_ids,"results"))
-    result_model <- unlist.element(prediction_results_all_pivot_groups_all_ids,"models")
-    names(result_model) <- ids
+    Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllPivotGroup,"result"))
+    Result_Model <- UnlistListElement(PredictionResult_AllIDAllPivotGroup,"model")
+    names(Result_Model) <- Id
   
-    return(list(results = result_prediction,
-                models = result_model))
+    return(list(result = Result_Prediction,
+                model = Result_Model))
   }
   #Not one vs all
   else {
     
-    prediction_results_all_ids <- lapply(ids,function(id){
+    PredictionResult_AllID <- lapply(Id,function(Id_Index){
         #Preparing raw data
-        data_raw <- weekly_category_data %>%
-          filter(fridge_id == id &
+        Data_Prepared <- Data_Raw %>%
+          filter(fridge_id == Id_Index &
                    main_category_id %in% c(1, 2, 3, 4)) %>%
           dplyr::select(week_date, main_category_id, sold) %>%
           arrange(week_date)
         
         
         #Preparing transformed data
-        data_transformed <- coda.data.preparation(data_raw, 
-                                               zero_handling = zero_handling,
-                                               tspace = tspace, 
-                                               log = take_log,
-                                               one_vs_all = F) %>% arrange(week_date)
+        Data_Transform <- Coda.DataPreparation(Data_Prepared, 
+                                               ZeroHandling = ZeroHandling,
+                                               TSpace = TSpace, 
+                                               Log = Log,
+                                               OneVsAll = F) %>% arrange(week_date)
         #Splitting transformed data into windows
-        data_transformed_windows <- windows(data_transformed,
-                                         frame= frame ,
-                                         method = window_method,
-                                         prediction_error_step = prediction_error_step)
+        Data_TransformWindow <- Data.Window(Data_Transform,
+                                         Frame= Frame ,
+                                         Method = WindowMethod,
+                                         PredictionStep = PredictionStep)
         
         
         
         #Preparing non transformed data 
-        data_notransformed <- coda.data.preparation(data_raw,
-                                                        zero_handling="none",
-                                                        tspace=tspace,
-                                                        log=take_log, 
-                                                        one_vs_all = F) %>% arrange(week_date)
+        Data_NoTransform <- Coda.DataPreparation(Data_Prepared,
+                                                        ZeroHandling="none",
+                                                        TSpace=TSpace,
+                                                        Log=F, 
+                                                        OneVsAll = F) %>% arrange(week_date)
         #Splitting non transformed data into windows
-        data_notransformed_windows <- windows(data_notransformed,
-                                         frame = frame,
-                                         method = window_method,
-                                         prediction_error_step = prediction_error_step)
+        Data_NoTransformWindow <- Data.Window(Data_NoTransform,
+                                         Frame = Frame,
+                                         Method = WindowMethod,
+                                         PredictionStep = PredictionStep)
         
         
-        prediction_results <- coda.prediction(data_transformed_windows = data_transformed_windows, 
-                                              data_notransformed_windows = data_notransformed_windows, 
-                                              data_notransformed = data_notransformed, 
-                                              prediction_error_step = prediction_error_step,
-                                              one_vs_all = F,
-                                              tspace = tspace,
-                                              take_log =  take_log, 
-                                              frame = frame)
-        prediction_results$result$id <- id
-        prediction_results$result$window_method <- window_method
-        prediction_results$result$model <- model_type 
-        prediction_results$result$zero_handling <- zero_handling
+        PredictionResult <- Coda.Prediction(Data_TransformWindow = Data_TransformWindow, 
+                                              Data_NoTransformWindow = Data_NoTransformWindow, 
+                                              Data_NoTransform = Data_NoTransform, 
+                                              PredictionStep = PredictionStep,
+                                              OneVsAll = F,
+                                              TSpace = TSpace,
+                                              Log =  Log, 
+                                              Frame = Frame)
+        PredictionResult$result$id <- Id_Index
+        PredictionResult$result$WindowMethod <- WindowMethod
+        PredictionResult$result$model <- ModelType 
+        PredictionResult$result$ZeroHandling <- ZeroHandling
         
         
         #Tidying up data
-        result_prediction <- prediction_results$result
-        result_model <- prediction_results$model
+        Result_Prediction <- PredictionResult$result
+        Result_Model <- PredictionResult$model
         
-        return(list(results = result_prediction,
-                    models = result_model))
+        return(list(result = Result_Prediction,
+                    model = Result_Model))
         
     })
     
     #Tidying up data
-    result_prediction <- bind_rows(unlist.element(prediction_results_all_ids,"results"))
-    result_model <- unlist.element(prediction_results_all_ids,"models")
-    names(result_model) <- ids
+    Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllID,"result"))
+    Result_Model <- UnlistListElement(PredictionResult_AllID,"model")
+    names(Result_Model) <- Id
     
-    return(list(results = result_prediction,
-                models = result_model))
+    return(list(result = Result_Prediction,
+                model = Result_Model))
     
   }
   
@@ -544,116 +547,116 @@ D2invPC <- function(x, norm = "orthonormal") {
   
 }
 
-coda.plot.name <- function(id,zero_handling,tspace,take_log){
-  if(tspace){
-    tspace_char<-"_tspace"
+Coda.PlotName <- function(Id,ZeroHandling,TSpace,Log){
+  if(TSpace){
+    TSpace_char<-"_TSpace"
     
-    if(take_log){
-      take_log_char<-"_log"
+    if(Log){
+      Log_char<-"_log"
     } 
     else{
-      take_log_char<-""
+      Log_char<-""
     }
     
   } 
   else{
-    tspace_char<-""
-    take_log_char<-""
+    TSpace_char<-""
+    Log_char<-""
   }
   
-  name<-paste("fridge_","id",id,"_zero_handling_",zero_handling,take_log_char,tspace_char,sep="")
+  name<-paste("fridge_","id",Id,"_ZeroHandling_",ZeroHandling,Log_char,TSpace_char,sep="")
   return(name)
 }
 
 
 
-coda.get.lag <- function (coda_result,id) {
+Coda.GetLag <- function (Coda_Result,Id) {
   
-  coda_result_model <- coda_result$models
-  pivot_groups <- unique(coda_result$results$pivot_group)
-  lags <- NULL
-  id <- as.character(id)
+  Coda_ResultModel <- Coda_Result$model
+  PivotGroup <- unique(Coda_Result$result$PivotGroup)
+  Lag <- NULL
+  Id <- as.character(Id)
 
   
-  if (is.null(pivot_groups)) {
-      window_number <- length(coda_result_model[[id]])
-      lags <-
-        append(lags, unlist(unlist.element(coda_result_model[[id]], element = "p")))
+  if (is.null(PivotGroup)) {
+      Window_Number <- length(Coda_ResultModel[[Id]])
+      Lag <-
+        append(Lag, unlist(UnlistListElement(Coda_ResultModel[[Id]], element = "p")))
       
-    id <- rep(ids, each = (window_number))
+    Id <- rep(Id, each = (Window_Number))
     return(data.frame(
-      lag = lags,
-      id = id,
-      window = c(1:window_number)
+      lag = Lag,
+      id = Id,
+      window = c(1:Window_Number)
     ))
   }
   else{
-      window_number <- length(coda_result_model[[id]][[1]])
-      for(pivot_group in pivot_groups){
-        lags <- append(lags,unlist(unlist.element(coda_result_model[[id]][[pivot_group]],element= "p")))
+      Window_Number <- length(Coda_ResultModel[[Id]][[1]])
+      for(PivotGroup in PivotGroup){
+        Lag <- append(Lag,unlist(UnlistListElement(Coda_ResultModel[[Id]][[PivotGroup]],element= "p")))
         
       }
-    category <- rep(pivot_groups,each=window_number)
-    id <- rep(ids,each=(length(pivot_groups)*window_number))
-    return(data.frame(lag=lags,
-                      id=id,
-                      category=category,
-                      window=c(1:window_number)))
+    Category <- rep(PivotGroup,each=Window_Number)
+    Id <- rep(Id,each=(length(PivotGroup)*Window_Number))
+    return(data.frame(lag=Lag,
+                      id=Id,
+                      category=Category,
+                      window=c(1:Window_Number)))
   }
 }
 
 
 
 
-coda.get.coefficients <- function(coda_result,id,fnc="det",...) {
+Coda.GetCoefficients <- function(Coda_Result,Id,Fnc="det",...) {
   
-  fnc <- match.fun(fnc)
-  coda_result_model <- coda_result$models
-  pivot_groups <- unique(coda_result$results$pivot_group)
-  value <- NULL
-  lags <- NULL
-  window_all <- NULL
-  id <- as.character(id)
+  Fnc <- match.fun(Fnc)
+  Coda_ResultModel <- Coda_Result$model
+  PivotGroup <- unique(Coda_Result$result$PivotGroup)
+  Value <- NULL
+  Lag <- NULL
+  Window_All <- NULL
+  Id <- as.character(Id)
   
-  if (is.null(pivot_groups)) {
+  if (is.null(PivotGroup)) {
   
-      window_number <- length(coda_result_model[[id]])
-      for(window in 1:window_number){
-        lags[window] <- coda_result_model[[id]][[window]][["p"]]
+      Window_Number <- length(Coda_ResultModel[[Id]])
+      for(window in 1:Window_Number){
+        Lag[window] <- Coda_ResultModel[[Id]][[window]][["p"]]
         
-        x <- sapply(Acoef(coda_result_model[[id]][[window]]),fnc,...)
+        x <- sapply(Acoef(Coda_ResultModel[[Id]][[window]]),Fnc,...)
 
-        window_all <- append(window_all,rep(window,length(x)))
+        Window_All <- append(Window_All,rep(window,length(x)))
         
-        value <- append(value, x)
+        Value <- append(Value, x)
       }
        
     return(data.frame(
-      determinant =  value,
-      id = id,
-      window = window_all))
+      determinant =  Value,
+      id = Id,
+      window = Window_All))
   }
   else{
     category <- NULL
-      for(pivot_group in pivot_groups){
-        window_number <- length(coda_result_model[[id]][[pivot_group]])
-        for(window in 1:window_number){
-          lags[window] <- coda_result_model[[id]][[pivot_group]][[window]][["p"]]
+      for(PivotGroup_Index in PivotGroup){
+        Window_Number <- length(Coda_ResultModel[[Id]][[PivotGroup_Index]])
+        for(window in 1:Window_Number){
+          Lag[window] <- Coda_ResultModel[[Id]][[PivotGroup_Index]][[window]][["p"]]
           
-          x<-sapply(Acoef(coda_result_model[[id]][[pivot_group]][[window]]),fnc,...)
+          x<-sapply(Acoef(Coda_ResultModel[[Id]][[PivotGroup_Index]][[window]]),Fnc,...)
           
-          category <- append(category,rep(pivot_group,length(x)))
+          category <- append(category,rep(PivotGroup,length(x)))
           
-          window_all <- append(window_all,rep(window,length(x)))
+          Window_All <- append(Window_All,rep(window,length(x)))
           
-          value <- append(value, x)
+          Value <- append(Value, x)
         }
 
       }
-    return(data.frame(value=value,
-                      id=id,
+    return(data.frame(value=Value,
+                      id=Id,
                       category=category,
-                      window=window_all))
+                      window=Window_All))
   }
   
 }

@@ -25,7 +25,7 @@ ids <- c(4)
 prediction_error_step <- 1
 frame <- 5
 window_method <- "extending"
-save_results <- T
+save_results <- F
 
 #Ingarch specifications
 distr<-"poisson"
@@ -50,16 +50,16 @@ one_vs_all<-T
 Performing the Analysis
 ```{r eval=FALSE, include=FALSE}
 coda_result <-
-  coda.analysis(
-    weekly_category_data = weekly_category_data,
-    ids = ids,
-    frame = frame,
-    one_vs_all = one_vs_all,
-    pivot_groups = c("1", "2", "3", "4"),
-    tspace = T,
-    take_log = T,
-    zero_handling = zero_handling_coda,
-    window_method = window_method
+  Coda.Analysis(
+    Data_Raw  = weekly_category_data,
+    Id = ids,
+    Frame = frame,
+    OneVsAll = one_vs_all,
+    PivotGroup =  c("1", "2", "3", "4"),
+    TSpace = T,
+    Log = T,
+    ZeroHandling = zero_handling_coda,
+    WindowMethod = window_method
   )
 
 if(save_results){
