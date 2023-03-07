@@ -101,10 +101,10 @@ Ingarch.Prediction <- function(Data_Window,
     return(list(
       prediction = data.frame(
         predictionError = PredictionError,
-        ValuePredict = ValuePredict,
+        valuePredict = ValuePredict,
         predictionError_normed = PredictionError_Normed,
-        lower_bound = PredictionInterval_Lower,
-        upper_bound = PredictionInterval_Upper,
+        lowerBound = PredictionInterval_Lower,
+        upperBound = PredictionInterval_Upper,
         valueTrue = TimeseriesValue_Future,
         valueLastKnown = TimeSeriesValue_LastKnown,
         category = Category,
@@ -123,19 +123,19 @@ Ingarch.Prediction <- function(Data_Window,
   })
   
   #Transforming result in a nicer format
-  ResultPrediction <- bind_rows(UnlistListElement(Result, "prediction"))
-  ResultModel <- UnlistListElement(Result, "model")
-  names(ResultModel) <- sapply(c(1:NumberOfWindows),function(i){paste("window",i,sep = "")})
+  Result_Prediction <- bind_rows(UnlistListElement(Result, "prediction"))
+  Result_Model <- UnlistListElement(Result, "model")
+  names(Result_Model) <- sapply(c(1:NumberOfWindows),function(i){paste("window",i,sep = "")})
   
   
   #Calculation the normed prediction error 
-  div <- sapply(c(1:dim(ResultPrediction)[1]),function(i){
+  div <- sapply(c(1:dim(Result_Prediction)[1]),function(i){
     
-    return(Normation(x = ResultPrediction$valueTrue[1:i],
-                     y = ResultPrediction$valueLastKnown[1:i]))}
+    return(Normation(x = Result_Prediction$valueTrue[1:i],
+                     y = Result_Prediction$valueLastKnown[1:i]))}
     )
   if(0 %in% div ) div[div == 0] <- 0.5
-  ResultPrediction$predictionError_normed <- ResultPrediction$predictionError_normed/div
+  Result_Prediction$predictionError_normed <- Result_Prediction$predictionError_normed/div
   
   
   #Plotting diagnostic plots or not
@@ -143,8 +143,8 @@ Ingarch.Prediction <- function(Data_Window,
   #  plot(model, ask = F)
   #}
   
-  return(list(result = ResultPrediction,
-              model = ResultModel))
+  return(list(result = Result_Prediction,
+              model = Result_Model))
   
 }
 
@@ -246,27 +246,28 @@ Ingarch.Analysis <- function(Data_Raw,
     }
     
     #Transforming data in nicer format
-    ResultPrediction <- bind_rows(UnlistListElement(PredictionResult_AllCategory,"result"))
-    ResultModel <- UnlistListElement(PredictionResult_AllCategory,"model")
-    names(ResultModel) <- Category
-    ResultPrediction$id <- Id_RunVariable
-    ResultPrediction$windowMethod <- WindowMethod
-    ResultPrediction$zeroHandling <- ZeroHandling
+    Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllCategory,"result"))
+    Result_Model <- UnlistListElement(PredictionResult_AllCategory,"model")
+    names(Result_Model) <- Category
+    Result_Prediction$id <- Id_RunVariable
+    Result_Prediction$windowMethod <- WindowMethod
+    Result_Prediction$zeroHandling <- ZeroHandling
     
-    return(list(result = ResultPrediction,
-                model = ResultModel))
+    return(list(result = Result_Prediction,
+                model = Result_Model))
   })
 
   
   
   #Transforming data in nicer format
-  ResultPrediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllCategory,"result"))
-  ResultModel <- UnlistListElement(PredictionResult_AllIDAllCategory,"model")
-  names(ResultModel) <- Id
-  ResultPrediction$model <- ModelType
+  Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllCategory,"result"))
+  Result_Prediction$id <- as.factor(Result_Prediction$id)
+  Result_Model <- UnlistListElement(PredictionResult_AllIDAllCategory,"model")
+  names(Result_Model) <- Id
+  Result_Prediction$model <- ModelType
   
-  return(list(result = ResultPrediction,
-              model = ResultModel))
+  return(list(result = Result_Prediction,
+              model = Result_Model))
   
  
   

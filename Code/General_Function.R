@@ -136,20 +136,20 @@ Model.Error <- function(Model_Result,Fnct = "Mse"){
   
   f <- match.fun(Fnct)
   
-  ErrorMeasure <- Model_Result$results %>%
+  ErrorMeasure <- Model_Result$result %>%
     dplyr::filter(category %in% c(1, 2, 3, 4)) %>%
     group_by(id, category) %>%
-    dplyr::summarise(error = f(predicted_value,true_value),.groups = "keep")
+    dplyr::summarise(error = f(valuePredict,valueTrue),.groups = "keep")
   
-  ErrorMeasure_Naive <- Model_Result$results %>%
+  ErrorMeasure_Naive <- Model_Result$result %>%
     dplyr::filter(category %in% c(1, 2, 3, 4)) %>%
     group_by(id, category) %>%
-    dplyr::summarise(error_naive = f(last_known_value,true_value),.groups = "keep")
+    dplyr::summarise(error_naive = f(valueLastKnown,valueTrue),.groups = "keep")
   
   Result <- full_join(ErrorMeasure,
                                    ErrorMeasure_Naive,by = c("id","category") )
   
-  Result$model <- unique(Model_Result$results$model)
+  Result$model <- unique(Model_Result$result$model)
   
   return(Result)
 }
@@ -163,7 +163,7 @@ Model.ErrorOverall <- function(Error_Result,Fnct = "mean"){
   
   ErrorMeasure <- Error_Result %>%
                     dplyr::group_by(id) %>%
-                    dplyr::summarise(error = f(error)/f(Error_Naive),.groups = "keep")
+                    dplyr::summarise(error = f(error)/f(error_naive),.groups = "keep")
   ErrorMeasure$model <- unique(Error_Result$model)
   return(ErrorMeasure)
 }
@@ -178,13 +178,13 @@ Mse.Cumulated <- function(Data_Raw){
   Mse_Cumulated <- Window <- vector("numeric",length=dim(Data_Raw)[1])
   
   for(m in unique(Data_Raw$model)){
-    for(cat in unique(Data_Raw$Category)){
+    for(cat in unique(Data_Raw$category)){
       
       data <- Data_Raw %>% filter(model==m & category ==cat)
       
       for(i in 1:dim(data)[1]){
         
-        Mse_Cumulated[CountIndex] <- mse(data[1:i,"true_value"],data[1:i,"predicted_value"])
+        Mse_Cumulated[CountIndex] <- Mse(data[1:i,"valueTrue"],data[1:i,"valuePredict"])
         Category[CountIndex] <- cat
         Model[CountIndex] <- m
         Window[CountIndex] <- dim(data)[1] - (i-1)

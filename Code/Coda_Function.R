@@ -344,12 +344,12 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
   
   if(OneVsAll) {
   
-  PredictionResult_AllIDAllPivotGroup <- lapply(Id,function(Id_Index){
-    PredictionResult_AllPivotGroup <- lapply(PivotGroup,function(PivotGroup_Index){
+  PredictionResult_AllIDAllPivotGroup <- lapply(Id,function(Id_RunVariable){
+    PredictionResult_AllPivotGroup <- lapply(PivotGroup,function(PivotGroup_RunVariable){
       
         #Preparing raw data
         Data_Prepared <- Data_Raw %>%
-          filter(fridge_id == Id_Index &
+          filter(fridge_id == Id_RunVariable &
                    main_category_id %in% c(1, 2, 3, 4)) %>%
           dplyr::select(week_date, main_category_id, sold) %>%
           arrange(week_date)
@@ -361,7 +361,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                TSpace = TSpace, 
                                                Log = Log,
                                                OneVsAll = T,
-                                               PivotGroup = PivotGroup_Index) %>%
+                                               PivotGroup = PivotGroup_RunVariable) %>%
           arrange(week_date)
         #Splitting transformed data into windows
         Data_TransformWindow <- Data.Window(Data_Transform,
@@ -377,7 +377,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                         TSpace=TSpace, 
                                                         Log=F, 
                                                         OneVsAll = T,
-                                                        PivotGroup = PivotGroup_Index) %>%
+                                                        PivotGroup = PivotGroup_RunVariable) %>%
           arrange(week_date)
         #Splitting non transformed data into windows
         Data_NoTransformWindow <- Data.Window(Data_NoTransform,
@@ -394,9 +394,9 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                               OneVsAll = T,
                                               TSpace = TSpace,
                                               Log =  Log,
-                                              PivotGroup = PivotGroup_Index,
+                                              PivotGroup = PivotGroup_RunVariable,
                                               Frame = Frame)
-        PredictionResult$result$id <- Id_Index
+        PredictionResult$result$id <- Id_RunVariable
         PredictionResult$result$windowMethod <- WindowMethod
         PredictionResult$result$model <- ModelType 
         PredictionResult$result$zeroHandling <- ZeroHandling
@@ -406,19 +406,16 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         Result_Prediction <- PredictionResult$result
         Result_Model <- PredictionResult$model
         
-        x <- list(result = Result_Prediction,
-                  model = Result_Model)
-        
         return(list(result = Result_Prediction,
                     model = Result_Model))
-    
-
+        
      })
     
       #Tidying up data
       Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllPivotGroup,"result"))
+      Result_Prediction$id <- as.factor(Result_Prediction$id)
       Result_Model <- UnlistListElement(PredictionResult_AllPivotGroup,"model")
-      names(Result_Model) <- PivotGroup_Index
+      names(Result_Model) <- PivotGroup
     
       return(list(result = Result_Prediction,
                   model = Result_Model))
@@ -436,10 +433,10 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
   #Not one vs all
   else {
     
-    PredictionResult_AllID <- lapply(Id,function(Id_Index){
+    PredictionResult_AllID <- lapply(Id,function(Id_RunVariable){
         #Preparing raw data
         Data_Prepared <- Data_Raw %>%
-          filter(fridge_id == Id_Index &
+          filter(fridge_id == Id_RunVariable &
                    main_category_id %in% c(1, 2, 3, 4)) %>%
           dplyr::select(week_date, main_category_id, sold) %>%
           arrange(week_date)
@@ -480,7 +477,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                               TSpace = TSpace,
                                               Log =  Log, 
                                               Frame = Frame)
-        PredictionResult$result$id <- Id_Index
+        PredictionResult$result$id <- Id_RunVariable
         PredictionResult$result$WindowMethod <- WindowMethod
         PredictionResult$result$model <- ModelType 
         PredictionResult$result$ZeroHandling <- ZeroHandling
@@ -573,7 +570,7 @@ Coda.PlotName <- function(Id,ZeroHandling,TSpace,Log){
 Coda.GetLag <- function (Coda_Result,Id) {
   
   Coda_ResultModel <- Coda_Result$model
-  PivotGroup <- unique(Coda_Result$result$PivotGroup)
+  PivotGroup <- unique(Coda_Result$result$pivotGroup)
   Lag <- NULL
   Id <- as.character(Id)
 
@@ -581,7 +578,7 @@ Coda.GetLag <- function (Coda_Result,Id) {
   if (is.null(PivotGroup)) {
       Window_Number <- length(Coda_ResultModel[[Id]])
       Lag <-
-        append(Lag, unlist(UnlistListElement(Coda_ResultModel[[Id]], element = "p")))
+        append(Lag, unlist(UnlistListElement(Coda_ResultModel[[Id]], Element = "p")))
       
     Id <- rep(Id, each = (Window_Number))
     return(data.frame(
@@ -593,7 +590,7 @@ Coda.GetLag <- function (Coda_Result,Id) {
   else{
       Window_Number <- length(Coda_ResultModel[[Id]][[1]])
       for(PivotGroup in PivotGroup){
-        Lag <- append(Lag,unlist(UnlistListElement(Coda_ResultModel[[Id]][[PivotGroup]],element= "p")))
+        Lag <- append(Lag,unlist(UnlistListElement(Coda_ResultModel[[Id]][[PivotGroup]],Element= "p")))
         
       }
     Category <- rep(PivotGroup,each=Window_Number)
@@ -638,12 +635,12 @@ Coda.GetCoefficients <- function(Coda_Result,Id,Fnc="det",...) {
   }
   else{
     category <- NULL
-      for(PivotGroup_Index in PivotGroup){
-        Window_Number <- length(Coda_ResultModel[[Id]][[PivotGroup_Index]])
+      for(PivotGroup_RunVariable in PivotGroup){
+        Window_Number <- length(Coda_ResultModel[[Id]][[PivotGroup_RunVariable]])
         for(window in 1:Window_Number){
-          Lag[window] <- Coda_ResultModel[[Id]][[PivotGroup_Index]][[window]][["p"]]
+          Lag[window] <- Coda_ResultModel[[Id]][[PivotGroup_RunVariable]][[window]][["p"]]
           
-          x<-sapply(Acoef(Coda_ResultModel[[Id]][[PivotGroup_Index]][[window]]),Fnc,...)
+          x<-sapply(Acoef(Coda_ResultModel[[Id]][[PivotGroup_RunVariable]][[window]]),Fnc,...)
           
           category <- append(category,rep(PivotGroup,length(x)))
           
