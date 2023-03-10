@@ -41,7 +41,7 @@ save_results <- T
 #Ingarch specifications
 distr<-"poisson"
 zero_handling_ingarch <- "zero_to_one"
-external <- T
+external <- F
 if(external){
   external_plot <-"with external factors"
 }else external_plot <- ""
@@ -64,7 +64,7 @@ coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
     Id = ids,
-    Frame = 5,
+    Frame = frame,
     OneVsAll = one_vs_all,
     PivotGroup =  c("1", "2", "3", "4"),
     TSpace = T,
@@ -85,16 +85,16 @@ for (i in 1:dim(ingarch_settings)[1]){
   ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 3,
+    Id = ids,
     Frame = frame,
     Distribution = distr,
     Category = c("1","2","3","4"),
     WindowMethod = window_method,
     ZeroHandling = zero_handling_ingarch,
-    External = external,
-    Multicore = F,
+    External = F,
+    Multicore = T,
     NCores = 4,
-    PastOb = 2,
+    PastOb = past_obs,
     PastMean = past_mean
   )
   
@@ -146,19 +146,26 @@ Error measure calculations
 
 coda_model_error <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum")
 ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum")
-
-coda_model_error
-ingarch_model_error
-
 model_error <- rbind(coda_model_error,ingarch_model_error)
 
-                                  
+
+
+coda_model_error_split <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
+ingarch_model_error_split <- Model.Error(ingarch_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
+model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split)
+
+                                             
 ```
 
 
 ```{r}
-ps<-ggplot(model_error,aes(x=id,y=error,col=model))+
-  geom_point(size=3)+
+my_color <- setNames(c("black", "white"),
+                     c("1,2","3,4"))
+
+ps<-ggplot(model_error_split,aes(x=id,y=error))+
+  geom_point(size=5,shape=21,aes(fill=model,colour=group),stroke=2)+
+  scale_y_continuous(limits=c(0,3))+
+  scale_colour_manual("Legend", values = c(my_color))+
   theme(text = element_text(size = text_size))+
   ggtitle(paste("Fridge_error_measures",sep=" "),subtitle = paste("Base window length:",frame,sep=" "))
 
@@ -167,6 +174,63 @@ if(save_plots){
 }
 ```
 
+```{r}
+my_color <- setNames(c("yellow", "green"),
+                     c("1,2","3,4"))
+phc <- ggplot(coda_model_error_split,aes(x=error,colour=group,fill=group))+
+  geom_histogram(bins=100,position = "identity",alpha=0.3)+
+  scale_x_continuous(limits=c(0,5))+
+  scale_color_manual("Legend", values = c(my_color))+
+  scale_fill_manual("Legend", values = c(my_color))+
+  theme(text = element_text(size = text_size))+
+  ggtitle(paste("Fridge_error_measures",sep=" "),subtitle = paste("Base window length:",frame,sep=" "))
+phc
+```
+```{r}
+my_color <- setNames(c("yellow", "green"),
+                     c("1,2","3,4"))
+phi <- ggplot(ingarch_model_error_split,aes(x=error,colour=group,fill=group))+
+  geom_histogram(bins=100,position = "identity",alpha=0.3)+
+  scale_x_continuous(limits=c(0,5))+
+  scale_color_manual("Legend", values = c(my_color))+
+  scale_fill_manual("Legend", values = c(my_color))+
+  theme(text = element_text(size = text_size))+
+  ggtitle(paste("Fridge_error_measures",sep=" "),subtitle = paste("Base window length:",frame,sep=" "))
+phi
+```
+
+
+```{r}
+my_color <- setNames(c("yellow", "green"),
+                     c("1,2","3,4"))
+
+psc<-ggplot(coda_model_error_split,aes(x=id,y=error,col=group))+
+  geom_point(size=3)+
+  scale_y_continuous(limits=c(0,3))+
+  theme(text = element_text(size = text_size))+
+  scale_color_manual("Legend", values = c(my_color))+
+  ggtitle(paste("Fridge_error_measures",sep=" "),subtitle = paste("Base window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Fridge_error_measure",paste(unique(model_error$id),collapse="-"),"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=ps,height = 15,width = 20)
+}
+```
+
+```{r}
+my_color <- setNames(c("yellow", "green"),
+                     c("1,2","3,4"))
+
+psi<-ggplot(ingarch_model_error_split,aes(x=id,y=error,col=group))+
+  geom_point(size=3)+
+  scale_y_continuous(limits=c(0,3))+
+  theme(text = element_text(size = text_size))+
+  scale_color_manual("Legend", values = c(my_color))+
+  ggtitle(paste("Fridge_error_measures",sep=" "),subtitle = paste("Base window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Fridge_error_measure",paste(unique(model_error$id),collapse="-"),"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=ps,height = 15,width = 20)
+}
+```
 
 Preparing Data for plotting
 

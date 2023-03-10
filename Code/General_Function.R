@@ -163,14 +163,39 @@ Model.Error <- function(Model_Result,Fnct = "Rmse"){
 
 
 #Function to compare the MSEs/RMSEs of each fridge
-Model.ErrorOverall <- function(Error_Result,Fnct = "mean"){
+Model.ErrorOverall <- function(Error_Result,Fnct = "sum",SplitByGroup=T,Group1=c(1,2),Group2=c(3,4)){
   
   f <- match.fun(Fnct)
   
-  ErrorMeasure <- Error_Result %>%
-                    dplyr::group_by(id) %>%
-                    dplyr::summarise(error = f(error)/f(error_naive),.groups = "keep")
-  ErrorMeasure$model <- unique(Error_Result$model)
+  if(SplitByGroup){
+    
+    ErrorMeasure_Group1 <- Error_Result %>%
+      dplyr::filter(category %in% Group1)%>%
+      dplyr::group_by(id) %>%
+      dplyr::summarise(error = f(error)/f(error_naive),.groups = "keep")
+    ErrorMeasure_Group1$model <- unique(Error_Result$model)
+    ErrorMeasure_Group1$group <- paste(Group1,collapse=",")
+    
+    ErrorMeasure_Group2 <- Error_Result %>%
+      dplyr::filter(category %in% Group2)%>%
+      dplyr::group_by(id) %>%
+      dplyr::summarise(error = f(error)/f(error_naive),.groups = "keep")
+    ErrorMeasure_Group2$model <- unique(Error_Result$model)
+    ErrorMeasure_Group2$group <- paste(Group2,collapse=",")
+    
+    ErrorMeasure <- rbind(ErrorMeasure_Group1,
+                          ErrorMeasure_Group2)
+    
+  }else{
+    
+    ErrorMeasure<- Error_Result %>%
+      dplyr::filter(category %in% c(1,2,3,4))%>%
+      dplyr::group_by(id) %>%
+      dplyr::summarise(error = f(error)/f(error_naive),.groups = "keep")
+    ErrorMeasure$model <- unique(Error_Result$model)
+    ErrorMeasure$group <- "all"
+  }
+
   return(ErrorMeasure)
 }
 
