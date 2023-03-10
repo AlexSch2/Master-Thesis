@@ -105,22 +105,22 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
     Window_Length <- dim(TimeSeriesValue_Window)[1]
     
     # # Calculating the max possible lag. Note 1
-    # D <- dim(TimeSeriesValue_Window)[2]
-    # lag.max <- (Window_Length-1)/D-1
-    # lag.max <- max(min(lag.max,floor((Window_Length-1)/(ncol(TimeSeriesValue_Window[,-1])+1))-1),1) # Note 1
-    # lag.max <- floor(max(min(Window_Length/10-1,lag.max*D),1)) #Note 2
-    # 
-    # #Note 2
-    # if(Window_Length/10 < (dim(TimeSeriesValue_Window)[2]-1))print("Choose a bigger frame if possible")
-    # 
-    # if(lag.max==1) {
-    #   lag.max <- NULL
-    # }
-    # 
+     D <- dim(TimeSeriesValue_Window)[2]
+     lag.max <- (Window_Length-1)/D-1
+     lag.max <- max(min(lag.max,floor((Window_Length-1)/(ncol(TimeSeriesValue_Window[,-1])+1))-1),1) # Note 1
+     lag.max <- floor(max(min(Window_Length/10-1,lag.max*D),1)) #Note 2
+     
+     #Note 2
+     if(Window_Length/10 < (dim(TimeSeriesValue_Window)[2]-1))print("Choose a bigger frame if possible")
+     
+     if(lag.max==1) {
+       lag.max <- NULL
+     }
+     
     
     #Depending on whether we have TSpace or not we fit a VAR model or an AR model
     if (TSpace) {
-      Model <- VAR(TimeSeriesValue_Window, lag.max = 1, ic= "AIC")
+      Model <- VAR(TimeSeriesValue_Window, lag.max = lag.max, ic= "AIC")
       ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
       Size = 2
     }
