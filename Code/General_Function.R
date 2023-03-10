@@ -130,9 +130,15 @@ Mse <- function(y,yhat){
   return(mean((y-yhat)^2))
 }
 
+#RMSE
+Rmse <- function(y,yhat){
+  return(sqrt(mean((y-yhat)^2)))
+}
+
+
 
 #Error calculation
-Model.Error <- function(Model_Result,Fnct = "Mse"){
+Model.Error <- function(Model_Result,Fnct = "Rmse"){
   
   f <- match.fun(Fnct)
   
@@ -156,7 +162,7 @@ Model.Error <- function(Model_Result,Fnct = "Mse"){
 
 
 
-#Function to compare the MSEs of each fridge
+#Function to compare the MSEs/RMSEs of each fridge
 Model.ErrorOverall <- function(Error_Result,Fnct = "mean"){
   
   f <- match.fun(Fnct)
@@ -170,12 +176,14 @@ Model.ErrorOverall <- function(Error_Result,Fnct = "mean"){
 
 
 
-#Function to calculate the cumulative MSE from right to left
-Mse.Cumulated <- function(Data_Raw){
+#Function to calculate the cumulative MSE/RMSE from right to left
+ErrorMeasure.Cumulated <- function(Data_Raw,Fnct="Rmse"){
+  
+  f <- match.fun(Fnct)
   
   CountIndex <- 1
   Model <- Category <- vector("character",length=dim(Data_Raw)[1])
-  Mse_Cumulated <- Window <- vector("numeric",length=dim(Data_Raw)[1])
+  ErrorMeasure <- Window <- vector("numeric",length=dim(Data_Raw)[1])
   
   for(m in unique(Data_Raw$model)){
     for(cat in unique(Data_Raw$category)){
@@ -184,7 +192,7 @@ Mse.Cumulated <- function(Data_Raw){
       
       for(i in 1:dim(data)[1]){
         
-        Mse_Cumulated[CountIndex] <- Mse(data[1:i,"valueTrue"],data[1:i,"valuePredict"])
+        ErrorMeasure[CountIndex] <- f(data[1:i,"valueTrue"],data[1:i,"valuePredict"])
         Category[CountIndex] <- cat
         Model[CountIndex] <- m
         Window[CountIndex] <- dim(data)[1] - (i-1)
@@ -193,7 +201,7 @@ Mse.Cumulated <- function(Data_Raw){
       }
     }
   }
-  Result <- data.frame(mse_cumulated = Mse_Cumulated,
+  Result <- data.frame(errorMeasure = ErrorMeasure,
                        category = Category,
                        model = Model,
                        window = Window,
@@ -209,5 +217,83 @@ Object.Load <- function(f)
   nm <- load(f, env)[1]
   env[[nm]]
 }
+
+
+
+# Analysis.Wrapper <- function(Data,
+#                              Id,
+#                              Frame,
+#                              OneVsAll = T,
+#                              PivotGroup = c("1", "2", "3", "4"),
+#                              TSpace = T,
+#                              Log = T,
+#                              ZeroHandling_Coda = "all",
+#                              ZeroHandling_Ingarch ="zero_to_one",
+#                              WindowMethod = "extending",
+#                              External = T,
+#                              Multicore = T,
+#                              NCores = 3,
+#                              IngarchSetting = data.frame(pastObs=1,pastMean=1),
+#                              Distribution = "poisson",
+#                              SaveResult = T){
+#   
+#   coda_result <-
+#     Coda.Analysis(
+#       Data_Raw  = Data,
+#       Id = Id,
+#       Frame = Frame,
+#       OneVsAll = OneVsAll,
+#       PivotGroup =  PivotGroup,
+#       TSpace = TSpace,
+#       Log = Log,
+#       ZeroHandling = ZeroHandling_Coda,
+#       WindowMethod = WindowMethod
+#     )
+#   
+#   if(SaveResult){
+#     save(coda_result,file=here("Code/result",paste("coda_result_ids",paste(ids,collapse="-"),"winlgth",frame,".RData",sep="")))
+#   }
+#   
+#   
+#   
+#   
+#   for (i in 1:dim(ingarch_settings)[1]){
+#     
+#     PastOb <- ingarch_settings[[i,2]]
+#     PastMean <- ingarch_settings[[i,1]]
+#     
+#     ingarch_result <-
+#       Ingarch.Analysis(
+#         Data_Raw= Data,
+#         Id = Id,
+#         Frame = Frame,
+#         Distribution = Distribution,
+#         Category = c("1","2","3","4"),
+#         WindowMethod =  WindowMethod,
+#         ZeroHandling = ZeroHandling_Ingarch,
+#         External = External,
+#         Multicore = Multicore,
+#         NCores = NCores,
+#         PastOb = PastOb,
+#         PastMean = PastMean
+#       )
+#     
+#     if(save_results){
+#       save(ingarch_result,file=here("Code/result",paste("ingarch_result_ids",paste(ids,collapse="-"),"_ext","_",external,
+#                                                         "_winlgth",frame,"_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
+#     }
+#   }
+#   
+# }
+
+
+
+
+
+
+
+
+
+
 
 

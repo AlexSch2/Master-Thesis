@@ -120,7 +120,7 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
     
     #Depending on whether we have TSpace or not we fit a VAR model or an AR model
     if (TSpace) {
-      Model <- VAR(TimeSeriesValue_Window, lag.max = 1, ic= "AIC")
+      Model <- VAR(TimeSeriesValue_Window, p=1 ,lag.max = NULL, ic= "AIC")
       ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
       Size = 2
     }
@@ -345,6 +345,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
   if(OneVsAll) {
   
   PredictionResult_AllIDAllPivotGroup <- lapply(Id,function(Id_RunVariable){
+    print(paste("Calculating for ID:",Id_RunVariable))
     PredictionResult_AllPivotGroup <- lapply(PivotGroup,function(PivotGroup_RunVariable){
       
         #Preparing raw data
@@ -363,6 +364,18 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                OneVsAll = T,
                                                PivotGroup = PivotGroup_RunVariable) %>%
           arrange(week_date)
+        
+        
+        #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
+        if(dim(Data_Transform)[1]<5)return(NA)
+        if(Frame < 1){
+          Frame = round(Frame*dim(Data_Transform)[1])
+          if(Frame < 5){
+            Frame = 5
+          }
+        }
+        
+        
         #Splitting transformed data into windows
         Data_TransformWindow <- Data.Window(Data_Transform,
                                          Frame=Frame,
@@ -410,6 +423,9 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                     model = Result_Model))
         
      })
+      
+      #Removing NA (aka Timeseries which are too short)
+      PredictionResult_AllPivotGroup <- PredictionResult_AllPivotGroup[!is.na(PredictionResult_AllPivotGroup)]
     
       #Tidying up data
       Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllPivotGroup,"result"))
@@ -421,6 +437,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                   model = Result_Model))
     
     })
+  
   
     #Tidying up data
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllPivotGroup,"result"))
@@ -434,6 +451,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
   else {
     
     PredictionResult_AllID <- lapply(Id,function(Id_RunVariable){
+      print(paste("Calculating for ID:",Id_RunVariable))
         #Preparing raw data
         Data_Prepared <- Data_Raw %>%
           filter(fridge_id == Id_RunVariable &
@@ -448,6 +466,18 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                TSpace = TSpace, 
                                                Log = Log,
                                                OneVsAll = F) %>% arrange(week_date)
+        
+        
+        #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
+        if(dim(Data_Transform)[1]<5)return(NA)
+        if(Frame < 1){
+          Frame = round(Frame*dim(Data_Transform)[1])
+          if(Frame < 5){
+            Frame = 5
+          }
+        }
+        
+        
         #Splitting transformed data into windows
         Data_TransformWindow <- Data.Window(Data_Transform,
                                          Frame= Frame ,
@@ -491,6 +521,9 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                     model = Result_Model))
         
     })
+    
+    #Removing NA (aka Timeseries which are too short)
+    PredictionResult_AllID <- PredictionResult_AllID[!is.na(PredictionResult_AllID)]
     
     #Tidying up data
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllID,"result"))

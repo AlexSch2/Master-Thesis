@@ -21,21 +21,32 @@ save_plots <- F
 
 Preparation
 ```{r eval = FALSE}
-ids <- c(4)
+ids <- 100401
+
+#Choosing only fridges with all 4 categories
+help1 <- weekly_category_data%>%
+  group_by(fridge_id)%>%
+  dplyr::select(main_category_id)%>%
+  unique()%>%
+  count(fridge_id)
+  
+ids <- help1$fridge_id[help1$n ==4]
+
+ids_save <- "_all_"
 PredictionStep <- 1
-frame <- 30
+frame <- 0.5
 window_method <- "extending"
-save_results <- F
+save_results <- T
 
 #Ingarch specifications
 distr<-"poisson"
 zero_handling_ingarch <- "zero_to_one"
-external <- F
+external <- T
 if(external){
   external_plot <-"with external factors"
 }else external_plot <- ""
 past_means <- c(1)
-past_obs <- c(1)
+past_obs <- c(2)
 ingarch_settings <- expand_grid(past_means,past_obs)
 
 
@@ -53,7 +64,7 @@ coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
     Id = ids,
-    Frame = frame,
+    Frame = 5,
     OneVsAll = one_vs_all,
     PivotGroup =  c("1", "2", "3", "4"),
     TSpace = T,
@@ -63,36 +74,33 @@ coda_result <-
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/result",paste("coda_result_ids",paste(ids,collapse="-"),"win_lgth",frame,".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"win_lgth",gsub("[.]","",frame),".RData",sep="")))
 }
 
 
-
-
 for (i in 1:dim(ingarch_settings)[1]){
-  
   past_obs <- ingarch_settings[[i,2]]
   past_mean <- ingarch_settings[[i,1]]
   
   ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids,
+    Id = 3,
     Frame = frame,
     Distribution = distr,
     Category = c("1","2","3","4"),
     WindowMethod = window_method,
     ZeroHandling = zero_handling_ingarch,
     External = external,
-    Multicore = T,
-    NCores = 3,
-    PastOb = past_obs,
+    Multicore = F,
+    NCores = 4,
+    PastOb = 2,
     PastMean = past_mean
   )
   
   if(save_results){
-  save(ingarch_result,file=here("Code/result",paste("ingarch_result_ids",paste(ids,collapse="-"),"_ext","_",external,
-                                             "win_lgth",frame,"_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"_ext","_",external,
+                                             "_win_lgth",gsub("[.]","",frame),"_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
 }
 }
 
@@ -417,23 +425,23 @@ ggsave(filename = here("Plots",paste("coda_det_id",FID,"win_lgth",frame,".png",s
 ```
 
 
-Cumulated MSEs 
+Cumulated RMSEs 
 ```{r}
-plot_mse_cum <- Mse.Cumulated(plot_data)
-plot_mse_cum$window <- factor(as.character(plot_mse_cum$window),levels=unique(plot_mse_cum$window))
+PlotErrorMeasure_Cum <- ErrorMeasure.Cumulated(plot_data,Fnct="Rmse")
+PlotErrorMeasure_Cum$window <- factor(as.character(PlotErrorMeasure_Cum$window),levels=unique(PlotErrorMeasure_Cum$window))
 
 
-p8 <- ggplot(plot_mse_cum, aes(y=mse_cumulated,x=window,group=model,col=model))+
-  facet_wrap(vars(category),nrow=length(unique(plot_mse_cum$category)),scales = "free")+
+p8 <- ggplot(PlotErrorMeasure_Cum, aes(y=errorMeasure,x=window,group=model,col=model))+
+  facet_wrap(vars(category),nrow=length(unique(PlotErrorMeasure_Cum$category)),scales = "free")+
   geom_line()+
   geom_point(size=1.5)+
   theme(text = element_text(size = 30),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1))+
-    ggtitle(paste("Cumulated MSE from right to left",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
+    ggtitle(paste("Cumulated RMSE from right to left",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
 
 p8
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("mse_cum",FID,"win_lgth",frame,".png",sep="")),plot=p8,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("rmse_cum",FID,"win_lgth",frame,".png",sep="")),plot=p8,height = 15,width = 20)
   
 }
 ```

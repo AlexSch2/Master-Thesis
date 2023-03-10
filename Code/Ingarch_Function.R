@@ -51,13 +51,17 @@ Ingarch.Prediction <- function(Data_Window,
     TimeseriesValue_Future <- Data_Window[[WindowIndex]]$timeSeriesValue_future[[Category]]
     TimeSeriesValue_LastKnown <- tail(TimeSeriesValue_Window[[Category]],n=1)
     
+    Xreg <-NULL
+    Ext <- NULL
+    XregFuture <- NULL
+    
     if(External){
       Xreg <- Data_Window[[WindowIndex]]$timeSeriesValue_window %>%
               dplyr::select(-c("week_date", all_of(Category))) %>%
               as.matrix()
-    }
-    else{
-      Xreg <-NULL
+      Ext <- rep(TRUE,ncol(Xreg))
+      XregFuture <- matrix(round(apply(tail(Xreg,n=5),2,mean)),nrow=1)
+      names(XregFuture) <- colnames(Xreg)
     }
     
     #Fitting the model
@@ -72,14 +76,15 @@ Ingarch.Prediction <- function(Data_Window,
     Model <- tsglm(TimeSeriesValue_Window[[Category]],
                    model = list("past_obs" = PastOb_Used,
                                 "past_mean" = PastMean_Used,
-                                external = ncol(Xreg)),
+                                external = Ext),
                    xreg = Xreg,
                    distr = Distribution,
                    link = "identity")
     
     
     #Predicting the future value depending on PredictionStep
-    PredictionResult <- predict(Model,n.ahead = PredictionStep,type = "shortest",level = 0.90)
+    PredictionResult <- predict(Model,n.ahead = PredictionStep,type = "shortest",
+                                level = 0.90,newxreg = XregFuture)
     
     
     #Rounding it since we only have integers
@@ -175,7 +180,7 @@ Ingarch.Analysis <- function(Data_Raw,
   
   #Calculating Prediction results for all ids and each category
   PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_RunVariable){
-    
+    print(paste("Calculating for ID:",Id_RunVariable))
     #Preparing data
     Data_Prepared <- Data_Raw %>%
       filter(fridge_id == Id_RunVariable &
@@ -183,6 +188,16 @@ Ingarch.Analysis <- function(Data_Raw,
       dplyr::select(week_date, main_category_id, sold) %>%
       arrange(week_date) %>%
       Ingarch.DataPreparation(ZeroHandling = ZeroHandling)
+    
+    
+    #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
+    if(dim(Data_Prepared)[1]<5)return(NA)
+    if(Frame < 1){
+      Frame = round(Frame*dim(Data_Prepared)[1])
+      if(Frame < 5){
+        Frame = 5
+      }
+    }
     
     
     #Creating fitting and prediction windows
@@ -257,7 +272,8 @@ Ingarch.Analysis <- function(Data_Raw,
                 model = Result_Model))
   })
 
-  
+  #Removing NA (aka Timeseries which are too short)
+  PredictionResult_AllIDAllCategory <- PredictionResult_AllIDAllCategory[!is.na(PredictionResult_AllIDAllCategory)]
   
   #Transforming data in nicer format
   Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllCategory,"result"))

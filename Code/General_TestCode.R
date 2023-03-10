@@ -86,5 +86,6 @@ if(0 %in% div_ingarch ) div_ingarch[div_ingarch==0] <- 0.5
 result_prediction$prediction_error_normed <- result_prediction$prediction_error_normed/div
 
 
-
-
+ingarch_model<- ingarch_result[["model"]][["4"]][["2"]][["window37"]]
+summary(ingarch_model)
+summary(Model)
