@@ -266,7 +266,7 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 100404
+FID <- 20
 
 plot_data_coda<-coda_result$result%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
