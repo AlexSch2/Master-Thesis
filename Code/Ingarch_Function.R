@@ -79,7 +79,8 @@ Ingarch.Prediction <- function(Data_Window,
                                 external = Ext),
                    xreg = Xreg,
                    distr = Distribution,
-                   link = "identity")
+                   link = "identity",
+                   init.method = "firstobs")
     
     
     #Predicting the future value depending on PredictionStep
@@ -190,9 +191,11 @@ Ingarch.Analysis <- function(Data_Raw,
       Ingarch.DataPreparation(ZeroHandling = ZeroHandling)
     
     
-    #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
+    #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed.
+    Frame_Help <- "fixed"
     if(dim(Data_Prepared)[1]<5)return(NA)
     if(Frame < 1){
+      Frame_Help <- Frame
       Frame = round(Frame*dim(Data_Prepared)[1])
       if(Frame < 5){
         Frame = 5
@@ -267,6 +270,7 @@ Ingarch.Analysis <- function(Data_Raw,
     Result_Prediction$id <- Id_RunVariable
     Result_Prediction$windowMethod <- WindowMethod
     Result_Prediction$zeroHandling <- ZeroHandling
+    Result_Prediction$frame <- Frame_Help
     
     return(list(result = Result_Prediction,
                 model = Result_Model))

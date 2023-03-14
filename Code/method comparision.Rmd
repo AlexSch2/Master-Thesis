@@ -31,7 +31,7 @@ help1 <- weekly_category_data%>%
   
 ids_all <- help1$fridge_id[help1$n ==4]
 
-ids <- ids_all
+ids <- 4
 
 if(all(ids == ids_all)){
   ids_save <- "_all_"
@@ -42,7 +42,7 @@ if(all(ids == ids_all)){
 PredictionStep <- 1
 frame <- 0.7
 window_method <- "extending"
-save_results <- T
+save_results <- F
 
 #Ingarch specifications
 distr<-"poisson"
@@ -104,14 +104,14 @@ ingarch_result <-
   save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"_ext","_",external,
                                              "_win_lgth",gsub("[.]","",frame),"_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
 
-
+}
 ```
 
 Loading previous result
 ```{r eval=FALSE, include=FALSE}
 ids <- unique(coda_result$result$id)
 PredictionStep <- 1
-frame <- unique(coda_result$result$window_baseLength)
+frame <- unique(coda_result$result$frame)
 window_method <- unique(coda_result$result$windowMethod)
 save_results <- F
 
@@ -134,7 +134,7 @@ take_log<-T
 one_vs_all<-T
 
 if(!identical(ids,unique(ingarch_result$result$id)) || 
-   frame != unique(ingarch_result$result$window_baseLength) ||
+   frame != unique(ingarch_result$result$frame) ||
    window_method != unique(ingarch_result$result$windowMethod)) {
   stop("Ingarch and Coda base specifications differ")
 }
@@ -144,8 +144,8 @@ if(!identical(ids,unique(ingarch_result$result$id)) ||
 Error measure calculations
 ```{r}
 
-coda_model_error <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum")
-ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum")
+coda_model_error <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
 model_error <- rbind(coda_model_error,ingarch_model_error)
 
 
@@ -157,13 +157,25 @@ model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split)
                                              
 ```
 
+```{r}
+psa<-ggplot(model_error,aes(x=id,y=error,col=model))+
+  geom_point(size=5)+
+  scale_y_continuous(limits=c(0,3))+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  ggtitle(paste("Fridge_error_measures",sep=" "),subtitle = paste("Base window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+}
+```
 
 ```{r}
-my_color <- setNames(c("darkorange", "blue4"),
+my_color <- setNames(c("darkgreen", "blue4"),
                      c("1,2","3,4"))
 
 ps<-ggplot(model_error_split,aes(x=id,y=error))+
-  geom_point(size=5,shape=21,aes(fill=model,colour=group),stroke=2)+
+  geom_point(size=7,shape=21,aes(fill=model,colour=group),stroke=4)+
   scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+
   scale_colour_manual("Legend", values = c(my_color))+
@@ -176,11 +188,12 @@ if(save_plots){
 ```
 
 ```{r}
-my_color <- setNames(c("darkorange", "blue4"),
+my_color <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
 phc <- ggplot(coda_model_error_split,aes(x=error,colour=group,fill=group))+
   geom_histogram(bins=100,position = "identity",alpha=0.3,linewidth=1)+
   scale_x_continuous(limits=c(0,5))+
+  scale_y_continuous(limits=c(0,12))+
   geom_vline(xintercept = 1,linewidth=2)+
   scale_color_manual("Legend", values = c(my_color))+
   scale_fill_manual("Legend", values = c(my_color))+
@@ -196,11 +209,12 @@ if(save_plots){
 
 
 ```{r}
-my_color <- setNames(c("darkorange", "blue4"),
+my_color <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
 phi <- ggplot(ingarch_model_error_split,aes(x=error,colour=group,fill=group))+
   geom_histogram(bins=100,position = "identity",alpha=0.3)+
   scale_x_continuous(limits=c(0,5))+
+  scale_y_continuous(limits=c(0,12))+
   geom_vline(xintercept = 1,linewidth=2)+
   scale_color_manual("Legend", values = c(my_color))+
   scale_fill_manual("Legend", values = c(my_color))+
@@ -214,7 +228,7 @@ if(save_plots){
 
 
 ```{r}
-my_color <- setNames(c("darkorange", "blue4"),
+my_color <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
 
 psc<-ggplot(coda_model_error_split,aes(x=id,y=error,col=group))+
@@ -232,7 +246,7 @@ if(save_plots){
 ```
 
 ```{r}
-my_color <- setNames(c("darkorange", "blue4"),
+my_color <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
 
 psi<-ggplot(ingarch_model_error_split,aes(x=id,y=error,col=group))+
@@ -252,7 +266,7 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 3
+FID <- 100404
 
 plot_data_coda<-coda_result$result%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%

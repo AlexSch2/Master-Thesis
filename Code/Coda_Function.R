@@ -367,8 +367,10 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
+        Frame_Help <- "fixed"
         if(dim(Data_Transform)[1]<5)return(NA)
         if(Frame < 1){
+          Frame_Help <- as.character(Frame)
           Frame = round(Frame*dim(Data_Transform)[1])
           if(Frame < 5){
             Frame = 5
@@ -413,6 +415,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$windowMethod <- WindowMethod
         PredictionResult$result$model <- ModelType 
         PredictionResult$result$zeroHandling <- ZeroHandling
+        PredictionResult$result$frame <- Frame_Help
       
           
         #Tidying up data
@@ -511,7 +514,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$WindowMethod <- WindowMethod
         PredictionResult$result$model <- ModelType 
         PredictionResult$result$ZeroHandling <- ZeroHandling
-        
+        PredictionResult$result$frame <- Frame_Help
         
         #Tidying up data
         Result_Prediction <- PredictionResult$result
