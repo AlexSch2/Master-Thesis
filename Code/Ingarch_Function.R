@@ -73,15 +73,37 @@ Ingarch.Prediction <- function(Data_Window,
       PastMean_Used <- c(1:PastMean)
     }
     
-    Model <- tsglm(TimeSeriesValue_Window[[Category]],
-                   model = list("past_obs" = PastOb_Used,
-                                "past_mean" = PastMean_Used,
-                                external = Ext),
-                   xreg = Xreg,
-                   distr = Distribution,
-                   link = "identity",
-                   init.method = "firstobs")
+    #Determining init.method. If none works, we skip this fridge 
+    SkipWindow <- FALSE
     
+    for (method in c("marginal", "iid", "firstobs", "zero")) {
+      
+      Model <- tryCatch(
+        expr = {tsglm(TimeSeriesValue_Window[[Category]],
+                      model = list("past_obs" = PastOb_Used,
+                                   "past_mean" = PastMean_Used,
+                                   external = Ext),
+                      xreg = Xreg,
+                      distr = Distribution,
+                      link = "identity",
+                      init.method = method)},
+        error = function (e) e
+      )
+      
+    if(inherits(Model,"error")){
+      if(method == "zero") {
+        SkipWindow <- TRUE
+        print("No init.method works. Skipping Window.")
+        break
+      }
+      next
+    }else{
+      initMethod <- method
+      break 
+    }
+    }
+    
+    if(SkipWindow)return(list(prediction=NA,model=NA))
     
     #Predicting the future value depending on PredictionStep
     PredictionResult <- predict(Model,n.ahead = PredictionStep,type = "shortest",
@@ -121,7 +143,8 @@ Ingarch.Prediction <- function(Data_Window,
         window_baseLength = Frame,
         pastOb = PastOb,
         pastMean = PastMean,
-        external = External
+        external = External,
+        initMethod = initMethod
       ),
       model = Model
     ))
@@ -129,6 +152,7 @@ Ingarch.Prediction <- function(Data_Window,
   })
   
   #Transforming result in a nicer format
+  Result <- discard(Result, ~all(is.na(.x)))
   Result_Prediction <- bind_rows(UnlistListElement(Result, "prediction"))
   Result_Model <- UnlistListElement(Result, "model")
   names(Result_Model) <- sapply(c(1:NumberOfWindows),function(i){paste("window",i,sep = "")})
@@ -234,6 +258,7 @@ Ingarch.Analysis <- function(Data_Raw,
                                              External = External,
                                              PastOb = PastOb,
                                              PastMean = PastMean)
+      #PredictionResult <- discard( PredictionResult, ~all(is.na(.x)))
       
       return(list(result=bind_rows(PredictionResult$result),
                   model=PredictionResult$model))
@@ -256,6 +281,7 @@ Ingarch.Analysis <- function(Data_Raw,
                                                External = External,
                                                PastOb = PastOb,
                                                PastMean = PastMean)
+        #PredictionResult <- discard( PredictionResult, ~all(is.na(.x)))
         
         return(list(result = bind_rows(PredictionResult$result),
                     model = PredictionResult$model))
