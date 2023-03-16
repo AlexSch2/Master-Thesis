@@ -31,7 +31,7 @@ help1 <- weekly_category_data%>%
   
 ids_all <- help1$fridge_id[help1$n ==4]
 
-ids <- 4
+ids <- ids_all
 
 if(all(ids == ids_all)){
   ids_save <- "_all_"
@@ -40,9 +40,9 @@ if(all(ids == ids_all)){
 }
 
 PredictionStep <- 1
-frame <- 0.7
+frame <- 0.3
 window_method <- "extending"
-save_results <- F
+save_results <- T
 
 #Ingarch specifications
 distr<-"poisson"
@@ -94,7 +94,7 @@ ingarch_result <-
     WindowMethod = window_method,
     ZeroHandling = zero_handling_ingarch,
     External = external,
-    Multicore = F,
+    Multicore = T,
     NCores = 10,
     PastOb = past_obs,
     PastMean = past_means
@@ -163,7 +163,7 @@ psa<-ggplot(model_error,aes(x=id,y=error,col=model))+
   scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Fridge_error_measures",sep=" "),subtitle = paste("Base window length:",frame,sep=" "))
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
   ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
@@ -171,14 +171,18 @@ if(save_plots){
 ```
 
 ```{r}
-my_color <- setNames(c("darkgreen", "blue4"),
+my_color_groups <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
 
+my_color_methods <- setNames(c("red", "blue"),
+                     c("ingarch","coda"))
+
 ps<-ggplot(model_error_split,aes(x=id,y=error))+
-  geom_point(size=7,shape=21,aes(fill=model,colour=group),stroke=4)+
+  geom_point(size=7,shape=21,aes(colour=model,fill=group),stroke=4)+
   scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+
-  scale_colour_manual("Legend", values = c(my_color))+
+  scale_fill_manual("Legend", values = c(my_color_groups),aesthetics = "fill")+
+  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
   ggtitle(paste("Error measures ",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
@@ -266,7 +270,7 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 20
+FID <- 8
 
 plot_data_coda<-coda_result$result%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
@@ -289,6 +293,77 @@ if(one_vs_all) {
 
 
 ```
+
+```{r eval=FALSE, include=FALSE}
+FID = 4
+
+ingarch_ext <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_FALSE_win_lgth05_pobs2_pmeansu1.RData")
+ingarch_norm <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_TRUE_win_lgth05_pobs1_pmeansu1.RData")
+frame <- 0.5
+
+plot_data_ingarch_ext <- ingarch_ext$result %>% dplyr::filter(id==FID)
+plot_data_ingarch_norm <- ingarch_norm$result %>% dplyr::filter(id==FID)
+
+plot_data_ingarch_norm$model<-"NoExternal"
+plot_data_ingarch_ext$model<-"External"
+
+plot_data<-bind_rows(plot_data_ingarch_ext,plot_data_ingarch_norm)
+
+```
+
+```{r eval=FALSE, include=FALSE}
+
+ingarch_ext_error <- Model.Error(ingarch_ext,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+ingarch_ext_error$model <- "External"
+ingarch_norm_error <- Model.Error(ingarch_norm ,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+ingarch_norm_error$model <- "NoExternal"
+model_error <- rbind(ingarch_ext_error,ingarch_norm_error)
+
+
+
+ingarch_ext_error_split <- Model.Error(ingarch_ext,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
+ingarch_ext_error_split$model <- "External"
+ingarch_norm_error_split <- Model.Error(ingarch_norm,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
+ingarch_norm_error_split$model <- "NoExternal"
+model_error_split <- rbind(ingarch_ext_error_split,ingarch_norm_error_split)
+
+                                             
+```
+
+```{r eval=FALSE, include=FALSE}
+psa<-ggplot(model_error,aes(x=id,y=error,col=model))+
+  geom_point(size=5)+
+  scale_y_continuous(limits=c(0,3))+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Ingarch_Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+}
+```
+
+```{r eval=FALSE, include=FALSE}
+my_color_groups <- setNames(c("seagreen2", "blue4"),
+                     c("1,2","3,4"))
+
+my_color_methods <- setNames(c("red", "blue"),
+                     c("External","NoExternal"))
+
+ps<-ggplot(model_error_split,aes(x=id,y=error))+
+  geom_point(size=7,shape=21,aes(colour=model,fill=group),stroke=4)+
+  scale_y_continuous(limits=c(0,3))+
+  geom_hline(yintercept =1,linewidth=2)+
+  scale_fill_manual("Legend", values = c(my_color_groups),aesthetics = "fill")+
+  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  ggtitle(paste("Error measures ",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Ingarch_Both_ErrorMeasure_PointPlot",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=ps,height = 15,width = 20)
+}
+```
+
 Cumulated RMSEs 
 ```{r}
 PlotErrorMeasure_Cum <- ErrorMeasure.Cumulated(plot_data,Fnct="Rmse")
@@ -305,7 +380,7 @@ p8 <- ggplot(PlotErrorMeasure_Cum, aes(y=errorMeasure,x=window,group=model,col=m
 p8
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("rmse_cum",FID,"win_lgth",frame,".png",sep="")),plot=p8,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("Ingarch_rmse_cum",FID,"win_lgth",frame,".png",sep="")),plot=p8,height = 15,width = 20)
   
 }
 ```
@@ -369,8 +444,8 @@ if(save_plots){
 Comparing the timeseries with prediction intervals
 
 ```{r}
-my_color <- setNames(c("red", "blue"),
-                     c("coda","ingarch"))
+#my_color <- setNames(c("red", "blue"),
+#                     c("coda","ingarch"))
 
 p1<-ggplot(plot_data,aes(x=date,y=valuePredict,col=model))+
   facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+
@@ -381,12 +456,12 @@ p1<-ggplot(plot_data,aes(x=date,y=valuePredict,col=model))+
             aes(x=date,y=valuePredict,col=model))+
   geom_line(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
   geom_point(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-  scale_color_manual("Legend", values = c(my_color))+
+  #scale_color_manual("Legend", values = c(my_color))+
   ggtitle(paste("Actual Timeseries vs. predicted ",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))+
   theme(text = element_text(size = text_size))  
 
 if(save_plots){
-ggsave(filename = here("Plots",paste("ts_both_id_",FID,"_pi","ing_ext",external,"win_lgth",frame,".png",sep="")),plot=p1,height = 15,width = 20)
+ggsave(filename = here("Plots",paste("Ingarch_ts_both_id_",FID,"_pi","ing_ext",external,"win_lgth",frame,".png",sep="")),plot=p1,height = 15,width = 20)
   
 }
 ```
@@ -433,11 +508,11 @@ p3 <- ggplot(plot_data,aes(x=date,y=predictionError_normed,col=model))+
   geom_line()+
   theme(text = element_text(size = text_size))+
   geom_line(aes(y=0),col="black")+
-  ggtitle(paste("Normed prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))+
-  scale_color_manual("Legend", values = c(my_color))
+  ggtitle(paste("Normed prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))#+
+ # scale_color_manual("Legend", values = c(my_color))
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("pred_err_norm_id",FID,"win_lgth",frame,".png",sep="")),plot=p3,height = 15,width = 20)
+ ggsave(filename = here("Plots",paste("Ingarch_pred_err_norm_id",FID,"win_lgth",frame,".png",sep="")),plot=p3,height = 15,width = 20)
  
 }
 ```
@@ -453,7 +528,7 @@ p4<-ggplot(plot_data,aes(x=model,y=predictionError_normed))+
   geom_hline(yintercept = 0,col="blue4")
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("box_pred_err_norm_id",FID,"win_lgth",frame,".png",sep="")),plot=p4,height = 15,width = 20)
+ ggsave(filename = here("Plots",paste("Ingarch_box_pred_err_norm_id",FID,"win_lgth",frame,".png",sep="")),plot=p4,height = 15,width = 20)
  
 }
 ```
