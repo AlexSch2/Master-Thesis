@@ -1,5 +1,8 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-.pdf
+$ cat .gitignore
+
+*.Rproj.user
+*.Rhistory
+*.RData
+*.Ruserdata
+*.pdf
+*.png
