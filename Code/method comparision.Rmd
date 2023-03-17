@@ -295,7 +295,7 @@ if(one_vs_all) {
 ```
 
 ```{r eval=FALSE, include=FALSE}
-FID = 4
+FID = 100761
 
 ingarch_ext <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_FALSE_win_lgth05_pobs2_pmeansu1.RData")
 ingarch_norm <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_TRUE_win_lgth05_pobs1_pmeansu1.RData")
