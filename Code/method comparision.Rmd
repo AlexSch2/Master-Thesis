@@ -47,7 +47,7 @@ save_results <- T
 #Ingarch specifications
 distr<-"poisson"
 zero_handling_ingarch <- "zero_to_one"
-external <- T
+external <- F
 if(external){
   external_plot <-"with external factors"
 }else external_plot <- ""
@@ -93,7 +93,7 @@ ingarch_result <-
     Category = c("1","2","3","4"),
     WindowMethod = window_method,
     ZeroHandling = zero_handling_ingarch,
-    External = external,
+    External = F,
     Multicore = T,
     NCores = 10,
     PastOb = past_obs,
@@ -160,7 +160,6 @@ model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split)
 ```{r}
 psa<-ggplot(model_error,aes(x=id,y=error,col=model))+
   geom_point(size=5)+
-  scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
@@ -169,6 +168,72 @@ if(save_plots){
   ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
 }
 ```
+
+
+```{r}
+psb<-ggplot(model_error,aes(x=model,y=error))+
+  geom_boxplot()+
+  #scale_y_continuous(limits=c(0,3))+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+}
+```
+
+
+```{r}
+psbs<-ggplot(model_error_split,aes(x=model,y=error))+
+  facet_wrap(vars(group),ncol=length(unique(model_error_split$group)),scales = "fixed")+
+  geom_boxplot()+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+}
+```
+
+
+```{r}
+
+psbs_zoomed<-ggplot(model_error_split,aes(x=model,y=error))+
+  facet_wrap(vars(group),ncol=length(unique(model_error_split$group)),scales = "fixed")+
+  geom_boxplot()+
+  scale_y_continuous(limits=c(0,5))+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+}
+
+```
+
+
+```{r}
+IngarchError_Sorted <- model_error %>% filter(model=="ingarch")%>%arrange(.,error)
+IngarchQuantiles <- quantile(IngarchError_Sorted$error)
+IngarchError_Sorted$index <- seq(1:dim(IngarchError_Sorted)[1])
+
+Quantiles_Index <- data.frame(quant_ind=findInterval(IngarchQuantiles,IngarchError_Sorted$error))
+
+CodaError_Sorted <- model_error %>% filter(model=="coda")%>%arrange(.,error)
+CodaQuantiles <- quantile(CodaError_Sorted$error)
+CodaError_Sorted$index <- seq(1:dim(CodaError_Sorted)[1])
+
+
+plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error))+
+  geom_point(colour="blue")+
+  geom_point(data = CodaError_Sorted,aes(x=index,y=error),colour="red")+
+  geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+```
+
 
 ```{r}
 my_color_groups <- setNames(c("seagreen2", "blue4"),
@@ -194,11 +259,20 @@ if(save_plots){
 ```{r}
 my_color <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
+
+mean_median_df <- data.frame(value = c(median(coda_model_error_split$error[coda_model_error_split$group=="1,2"]),
+                                       median(coda_model_error_split$error[coda_model_error_split$group=="3,4"]),
+                                       mean(coda_model_error_split$error[coda_model_error_split$group=="1,2"]),
+                                        mean(coda_model_error_split$error[coda_model_error_split$group=="3,4"])),
+                             Lines = rep(c("median","mean"),each=2),
+                             group = rep(c("1,2","3,4"),2))
+
 phc <- ggplot(coda_model_error_split,aes(x=error,colour=group,fill=group))+
   geom_histogram(bins=100,position = "identity",alpha=0.3,linewidth=1)+
   scale_x_continuous(limits=c(0,5))+
   scale_y_continuous(limits=c(0,12))+
   geom_vline(xintercept = 1,linewidth=2)+
+  geom_vline(aes(xintercept=value,colour=group,linetype=Lines),data = mean_median_df,linewidth=2)+
   scale_color_manual("Legend", values = c(my_color))+
   scale_fill_manual("Legend", values = c(my_color))+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1))+
@@ -485,19 +559,6 @@ if(save_plots){
 ```
 
 
-Ingarch Parameter / Model Check
-
-```{r eval=FALSE, include=FALSE}
-for(category in c(1:4)){
-  
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "default")
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "histogram")
-  
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "default",func="mean")
-  ingarch.parameter.plot(ingarch_result,category=category,element="fitted.values",save=F,plot.type = "histogram",func="mean")
-}
-
-```
 
 
 Normed Prediction errors 
@@ -533,49 +594,6 @@ if(save_plots){
 }
 ```
 
-
-Lag order of coda model
-
-```{r}
-
-plot_coda_lag <- Coda.GetLag(coda_result,Id=FID)
-p5 <- ggplot(plot_coda_lag, aes(x = window, y = lag)) +
-  geom_point(size = 1.5) +
-  geom_line() +
-  ggtitle(paste("Coda model lag per window", sep = " "),
-          subtitle = paste("Fridge ID:", FID,",base window length:",frame, sep = " ")) +
-  theme(text = element_text(size = text_size))
-
-if (one_vs_all)
-  p5<- p5 + facet_wrap(vars(category), nrow = length(unique((
-    plot_coda_lag$category
-  ))), scales = "free")
-
-if(save_plots){
-ggsave(filename = here("Plots",paste("Coda_lag_id",FID,"win_lgth",frame,".png",sep="")),plot=p5,height = 15,width = 20)
-  
-}
-```
-
-
-```{r eval=FALSE, include=FALSE}
-par(mfrow=c(3,2))
-worst_windows <- coda_result$result%>%filter(category%in%c("1","2","3","4"))%>%slice_max(n=3,order_by=abs(predictionError_normed))%>%dplyr::select(window,category)
-best_windows <- coda_result$result%>%filter(category%in%c("1","2","3","4"))%>%slice_min(n=3,order_by=abs(predictionError_normed))%>%dplyr::select(window,category)
-
-windows <-c(best_windows$window[1:3],worst_windows$window[1:3])
-categories <- c(best_windows$category[1:3],worst_windows$category[1:3])
-value <- rep(c("best","worst"),each=3)
-
-for(i in 1:6){
-plot_coda_det <- Coda.GetCoefficients(coda_result) %>% filter(window==windows[i],category==categories[i])
-plot(plot_coda_det$model_det,main=paste("window",i,value[i]),ylim=c(0,2))
-abline(h=1)  
-}
-
-```
-
-
 Prediction error over time
 ```{r}
 p6 <- ggplot(plot_data,aes(x=date,y=predictionError,col=model))+
@@ -592,27 +610,5 @@ ggsave(filename = here("Plots",paste("pred_err_id",FID,"win_lgth",frame,".png",s
   
 }
 ```
-
-Coda coefficients over windows 
-```{r}
-plot_coda_det <- Coda.GetCoefficients(coda_result,fnc="det",Id=FID)
-
-p7 <- ggplot(plot_coda_det,aes(x=window,y=value))+
-  geom_point(size=1.5)+
-  theme(text = element_text(size = text_size))+
-  ggtitle(paste("Determinant of the coefficient matrices",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
-
-if (one_vs_all)
-  p7<- p7 + facet_wrap(vars(category), nrow = length(unique((
-    plot_coda_det$category
-  ))), scales = "free")
-
-if(save_plots){
-ggsave(filename = here("Plots",paste("coda_det_id",FID,"win_lgth",frame,".png",sep="")),plot=p7,height = 15,width = 20)
-  
-}
-```
-
-
 
 
