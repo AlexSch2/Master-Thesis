@@ -39,28 +39,16 @@ if(all(ids == ids_all)){
   ids_save <- paste(ids,collapse = "-")
 }
 
-PredictionStep <- 1
 frame <- 0.7
 window_method <- "extending"
 save_results <- T
+HistoryLength <- 0.5
 
 #Ingarch specifications
-distr<-"poisson"
-zero_handling_ingarch <- "zero_to_one"
-external <- F
-if(external){
-  external_plot <-"with external factors"
-}else external_plot <- ""
-past_means <- c(1)
-past_obs <- c(1)
-ingarch_settings <- expand_grid(past_means,past_obs)
 
 
 #Coda specifications
-zero_handling_coda<-"all"
-tspace<-T
-take_log<-T
-one_vs_all<-T
+
 ```
 
 
@@ -71,38 +59,42 @@ coda_result <-
     Data_Raw  = weekly_category_data,
     Id = ids,
     Frame = frame,
-    OneVsAll = one_vs_all,
+    OneVsAll = T,
     PivotGroup =  c("1", "2", "3", "4"),
     TSpace = T,
     Log = T,
-    ZeroHandling = zero_handling_coda,
-    WindowMethod = window_method
+    ZeroHandling = "all",
+    WindowMethod = "extending",
+    HistoryLength = HistoryLength
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"win_lgth",gsub("[.]","",frame),".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"win_lgth",gsub("[.]","",frame),
+                                                  "_history_lght",gsub("[.]","",HistoryLength),".RData",sep="")))
 }
 
 
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids,
+    Id = ids[40:44],
     Frame = frame,
-    Distribution = distr,
+    Distribution = "poisson",
     Category = c("1","2","3","4"),
-    WindowMethod = window_method,
-    ZeroHandling = zero_handling_ingarch,
+    WindowMethod = "extending",
+    ZeroHandling = "zero_to_one",
     External = F,
     Multicore = T,
     NCores = 10,
-    PastOb = past_obs,
-    PastMean = past_means
+    PastOb = 1,
+    PastMean = 1,
+    HistoryLength = HistoryLength
   )
   
   if(save_results){
   save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"_ext","_",external,
-                                             "_win_lgth",gsub("[.]","",frame),"_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
+                                             "_win_lgth",gsub("[.]","",frame),"_history_lght",gsub("[.]","",HistoryLength),
+                                             "_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
 
 }
 ```

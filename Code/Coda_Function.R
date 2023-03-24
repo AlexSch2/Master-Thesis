@@ -14,7 +14,8 @@ Coda.DataPreparation <- function(Data_Raw,
            Transform = TRUE,
            Log = FALSE,
            OneVsAll = FALSE,
-           PivotGroup = "1") {
+           PivotGroup = "1",
+           HistoryLength = 1) {
 
     Plus <- function(x,Value=0.5){
          x[is.na(x)] <- 0
@@ -35,7 +36,8 @@ Coda.DataPreparation <- function(Data_Raw,
                              OneVsAll = OneVsAll,
                              PivotGroup = PivotGroup,
                              NA_to=0,
-                             Category = Category)
+                             Category = Category,
+                             HistoryLength = HistoryLength)
 
     
     if (ZeroHandling == "none") {
@@ -336,11 +338,15 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
 ## Standard CI is 95%
 
 Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", PredictionStep = 1, Log = T,
-                        TSpace = T, OneVsAll = F , PivotGroup = c("1"), ModelType = "coda", WindowMethod ="extending") {
+                        TSpace = T, OneVsAll = F , PivotGroup = c("1"), HistoryLength = 1,
+                        ModelType = "coda", WindowMethod ="extending") {
   
   stopifnot(ModelType %in% c("coda","coda_OneVsAll"))
   
   #one vs all for all pivot groups
+  
+  #Only return IDs with results
+  Id_Result <- Id
   
   if(OneVsAll) {
   
@@ -362,7 +368,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                TSpace = TSpace, 
                                                Log = Log,
                                                OneVsAll = T,
-                                               PivotGroup = PivotGroup_RunVariable) %>%
+                                               PivotGroup = PivotGroup_RunVariable,
+                                               HistoryLength = HistoryLength) %>%
           arrange(week_date)
         
         
@@ -392,7 +399,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                         TSpace=TSpace, 
                                                         Log=F, 
                                                         OneVsAll = T,
-                                                        PivotGroup = PivotGroup_RunVariable) %>%
+                                                        PivotGroup = PivotGroup_RunVariable,
+                                                 HistoryLength = HistoryLength) %>%
           arrange(week_date)
         #Splitting non transformed data into windows
         Data_NoTransformWindow <- Data.Window(Data_NoTransform,
@@ -416,6 +424,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$model <- ModelType 
         PredictionResult$result$zeroHandling <- ZeroHandling
         PredictionResult$result$frame <- Frame_Help
+        PredictionResult$result$history <- as.character(HistoryLength)
       
           
         #Tidying up data
@@ -429,6 +438,11 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
       
       #Removing NA (aka Timeseries which are too short)
       PredictionResult_AllPivotGroup <- PredictionResult_AllPivotGroup[!is.na(PredictionResult_AllPivotGroup)]
+      
+      if(length(PredictionResult_AllPivotGroup)==0){
+        Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
+        return(NA)
+      }
     
       #Tidying up data
       Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllPivotGroup,"result"))
@@ -439,16 +453,23 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
       return(list(result = Result_Prediction,
                   model = Result_Model))
     
+      
     })
+  
+    #Removing NA (aka Timeseries which are too short)
+  PredictionResult_AllIDAllPivotGroup <- PredictionResult_AllIDAllPivotGroup[!is.na(PredictionResult_AllIDAllPivotGroup)]
+  
+    if(length(PredictionResult_AllIDAllPivotGroup)==0)return(NA)
   
   
     #Tidying up data
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllPivotGroup,"result"))
     Result_Model <- UnlistListElement(PredictionResult_AllIDAllPivotGroup,"model")
-    names(Result_Model) <- Id
+    names(Result_Model) <- Id_Result
   
     return(list(result = Result_Prediction,
                 model = Result_Model))
+    
   }
   #Not one vs all
   else {
@@ -468,7 +489,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                ZeroHandling = ZeroHandling,
                                                TSpace = TSpace, 
                                                Log = Log,
-                                               OneVsAll = F) %>% arrange(week_date)
+                                               OneVsAll = F,
+                                               HistoryLength = HistoryLength) %>% arrange(week_date)
         
         
         #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
@@ -494,7 +516,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                         ZeroHandling="none",
                                                         TSpace=TSpace,
                                                         Log=F, 
-                                                        OneVsAll = F) %>% arrange(week_date)
+                                                        OneVsAll = F,
+                                                 HistoryLength = HistoryLength) %>% arrange(week_date)
         #Splitting non transformed data into windows
         Data_NoTransformWindow <- Data.Window(Data_NoTransform,
                                          Frame = Frame,
@@ -515,6 +538,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$model <- ModelType 
         PredictionResult$result$ZeroHandling <- ZeroHandling
         PredictionResult$result$frame <- Frame_Help
+        PredictionResult$result$history <- as.character(HistoryLength)
         
         #Tidying up data
         Result_Prediction <- PredictionResult$result
@@ -528,10 +552,15 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
     #Removing NA (aka Timeseries which are too short)
     PredictionResult_AllID <- PredictionResult_AllID[!is.na(PredictionResult_AllID)]
     
+    if(length(PredictionResult_AllID)==0){
+      return(NA)
+      Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
+    }
+    
     #Tidying up data
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllID,"result"))
     Result_Model <- UnlistListElement(PredictionResult_AllID,"model")
-    names(Result_Model) <- Id
+    names(Result_Model) <- Id_Result
     
     return(list(result = Result_Prediction,
                 model = Result_Model))

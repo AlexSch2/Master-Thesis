@@ -6,6 +6,7 @@ Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "overlapp
   
   Method <- match.arg(Method)
   Timeseries_Length <- dim(Timeseries)[1]
+  
   if (is.null(Timeseries_Length)) {
     Timeseries <- as.matrix(Timeseries, ncol = 1)
     Timeseries_Length <- dim(Timeseries)[1]
@@ -65,7 +66,9 @@ Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "overlapp
 
 
 #Function to transform the data into the right format
-Data.Preparation <- function(Data_Raw,OneVsAll=F,PivotGroup="1",Category=c(1,2,3,4),NA_to=0){
+Data.Preparation <- function(Data_Raw,OneVsAll=F,PivotGroup="1",Category=c(1,2,3,4),NA_to=0,HistoryLength = 1){
+  
+
   
   columns <- c("week_date", as.character(Category))
   
@@ -80,6 +83,17 @@ Data.Preparation <- function(Data_Raw,OneVsAll=F,PivotGroup="1",Category=c(1,2,3
     setnafill(type = "const", fill = NA_to) %>%
     dplyr::select(any_of(columns)) %>%
     dplyr::mutate(across(.cols = as.character(Category), .fns = as.double))
+  
+  #Determining the length of the Timeseries
+  DataRaw_Length <- dim(Data_Raw)[1]
+  
+  if(between(HistoryLength,0,1)){
+    DataRaw_Start <- round(DataRaw_Length * (1-HistoryLength) + 1)
+  }else {
+    DataRaw_Start <- DataRaw_Length - HistoryLength
+  }
+  
+  Data_Raw <- Data_Raw[DataRaw_Start:DataRaw_Length,]
   
   if (OneVsAll) {
     Data_Raw <- Data_Raw %>%
@@ -119,6 +133,7 @@ UnlistListElement <- function(x,Element){
   })
   return(Result)
 }
+
 
 #Identity function
 Idf <- function(x)x 
@@ -231,7 +246,7 @@ Model.ErrorOverall <- function(Error_Result,Fnct = "sum",SplitByGroup=T,Group1=c
       dplyr::filter(category %in% c(1,2,3,4))%>%
       dplyr::group_by(id) %>%
       dplyr::summarise(error_naive = f(error_naive),.groups = "keep")
-    ErrorNaiveSummarised$error_naive[ErrorNaiveSummarised_Group2$error_naive==0] <- 0.000001
+    ErrorNaiveSummarised$error_naive[ErrorNaiveSummarised$error_naive==0] <- 0.000001
     
     #Calculating the summarised Error
     ErrorSummarised <- Error_Result %>%

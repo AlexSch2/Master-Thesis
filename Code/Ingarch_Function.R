@@ -3,7 +3,8 @@
 Ingarch.DataPreparation <- function(Data_Raw, 
                                      OneVsAll = F, 
                                      PivotGroup = "1",
-                                     ZeroHandling = c("none","zero_to_one")){
+                                     ZeroHandling = c("none","zero_to_one"),
+                                    HistoryLength = 1){
   
   ZeroHandling <- match.arg(ZeroHandling)
   
@@ -11,7 +12,8 @@ Ingarch.DataPreparation <- function(Data_Raw,
                                OneVsAll = OneVsAll,
                                PivotGroup = PivotGroup,
                                Category = c(1,2,3,4),
-                               NA_to = 0)
+                               NA_to = 0,
+                               HistoryLength = HistoryLength)
   
   if (ZeroHandling == "none") {
     return(Data_Prepared)
@@ -194,6 +196,7 @@ Ingarch.Analysis <- function(Data_Raw,
                              PastOb = 1,
                              PastMean = 1,
                              External = FALSE,
+                             HistoryLength = 1,
                              Multicore = TRUE,
                              NCores = 2
                              ) {
@@ -201,6 +204,8 @@ Ingarch.Analysis <- function(Data_Raw,
   
   stopifnot(ModelType %in% c("ingarch","ingarch_OneVsAll"))
   
+  #Only return IDs with results
+  Id_Result <- Id
   
   
   #Calculating Prediction results for all ids and each category
@@ -212,12 +217,16 @@ Ingarch.Analysis <- function(Data_Raw,
                main_category_id %in% as.integer(Category)) %>%
       dplyr::select(week_date, main_category_id, sold) %>%
       arrange(week_date) %>%
-      Ingarch.DataPreparation(ZeroHandling = ZeroHandling)
+      Ingarch.DataPreparation(ZeroHandling = ZeroHandling,
+                              HistoryLength = HistoryLength)
     
     
     #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed.
     Frame_Help <- "fixed"
-    if(dim(Data_Prepared)[1]<5)return(NA)
+    if(dim(Data_Prepared)[1]<5){
+      Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
+      return(NA)
+    }
     if(Frame < 1){
       Frame_Help <- Frame
       Frame = round(Frame*dim(Data_Prepared)[1])
@@ -297,6 +306,7 @@ Ingarch.Analysis <- function(Data_Raw,
     Result_Prediction$windowMethod <- WindowMethod
     Result_Prediction$zeroHandling <- ZeroHandling
     Result_Prediction$frame <- Frame_Help
+    Result_Prediction$history <- as.character(HistoryLength)
     
     return(list(result = Result_Prediction,
                 model = Result_Model))
@@ -309,7 +319,7 @@ Ingarch.Analysis <- function(Data_Raw,
   Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllIDAllCategory,"result"))
   Result_Prediction$id <- as.factor(Result_Prediction$id)
   Result_Model <- UnlistListElement(PredictionResult_AllIDAllCategory,"model")
-  names(Result_Model) <- Id
+  names(Result_Model) <- Id_Result
   Result_Prediction$model <- ModelType
   
   return(list(result = Result_Prediction,

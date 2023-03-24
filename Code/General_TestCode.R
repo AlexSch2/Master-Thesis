@@ -89,3 +89,15 @@ result_prediction$prediction_error_normed <- result_prediction$prediction_error_
 ingarch_model<- ingarch_result[["model"]][["4"]][["2"]][["window37"]]
 summary(ingarch_model)
 summary(Model)
+
+
+
+
+res <- lapply(1:5,function(i){
+  
+  if(i%%2==0)return(NA)
+  return(list(a=1,b=2))
+  
+})
+
+res <- res[!is.na(res)]
