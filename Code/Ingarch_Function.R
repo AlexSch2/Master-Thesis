@@ -228,7 +228,7 @@ Ingarch.Analysis <- function(Data_Raw,
       return(NA)
     }
     if(Frame < 1){
-      Frame_Help <- Frame
+      Frame_Help <- as.character(Frame)
       Frame = round(Frame*dim(Data_Prepared)[1])
       if(Frame < 5){
         Frame = 5
