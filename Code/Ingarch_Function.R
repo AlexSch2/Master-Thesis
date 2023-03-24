@@ -224,14 +224,15 @@ Ingarch.Analysis <- function(Data_Raw,
     #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed.
     Frame_Help <- "fixed"
     if(dim(Data_Prepared)[1]<5){
+      print(paste("Insufficient data. Skipping ID: ",Id_RunVariable))
       Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
       return(NA)
     }
     if(Frame < 1){
       Frame_Help <- as.character(Frame)
       Frame = round(Frame*dim(Data_Prepared)[1])
-      if(Frame < 5){
-        Frame = 5
+      if(Frame < 4){
+        Frame = 4
       }
     }
     

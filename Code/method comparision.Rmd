@@ -39,10 +39,10 @@ if(all(ids == ids_all)){
   ids_save <- paste(ids,collapse = "-")
 }
 
-frame <- 0.7
+frame <- 0.5
 window_method <- "extending"
 save_results <- T
-HistoryLength <- 0.5
+HistoryLength <- 1
 
 #Ingarch specifications
 
@@ -77,7 +77,7 @@ if(save_results){
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids[40:44],
+    Id = ids,
     Frame = frame,
     Distribution = "poisson",
     Category = c("1","2","3","4"),
@@ -92,9 +92,9 @@ ingarch_result <-
   )
   
   if(save_results){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"_ext","_",external,
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"_ext","_",F,
                                              "_win_lgth",gsub("[.]","",frame),"_history_lght",gsub("[.]","",HistoryLength),
-                                             "_pobs",past_obs,"_pmeansu",past_mean,".RData",sep="")))
+                                             "_pobs",1,"_pmeansu",1,".RData",sep="")))
 
 }
 ```
@@ -106,6 +106,7 @@ PredictionStep <- 1
 frame <- unique(coda_result$result$frame)
 window_method <- unique(coda_result$result$windowMethod)
 save_results <- F
+HistoryLength <- unique(coda_result$result$history)
 
 #Ingarch specifications
 distr<-unique(ingarch_result$result$distribution)
@@ -127,7 +128,8 @@ one_vs_all<-T
 
 if(!identical(ids,unique(ingarch_result$result$id)) || 
    frame != unique(ingarch_result$result$frame) ||
-   window_method != unique(ingarch_result$result$windowMethod)) {
+   window_method != unique(ingarch_result$result$windowMethod ||
+   HistoryLength != unique(ingarch_result$result$history))) {
   stop("Ingarch and Coda base specifications differ")
 }
 ```
@@ -171,10 +173,22 @@ psb<-ggplot(model_error,aes(x=model,y=error))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psb,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psb,height = 15,width = 20)
 }
 ```
 
+```{r}
+psb_zoomed<-ggplot(model_error,aes(x=model,y=error))+
+  geom_boxplot()+
+  scale_y_continuous(limits=c(0,3))+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined_zoomed",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psb_zoomed,height = 15,width = 20)
+}
+```
 
 ```{r}
 psbs<-ggplot(model_error_split,aes(x=model,y=error))+
@@ -185,7 +199,7 @@ psbs<-ggplot(model_error_split,aes(x=model,y=error))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psbs,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_histlgth",HistoryLength,"_win_lgth",frame,".png",sep="")),plot=psbs,height = 15,width = 20)
 }
 ```
 
@@ -201,7 +215,7 @@ psbs_zoomed<-ggplot(model_error_split,aes(x=model,y=error))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined_zoomed",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psbs_zoomed,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_split_zoomed",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psbs_zoomed,height = 15,width = 20)
 }
 
 ```
@@ -224,14 +238,15 @@ CodaError_Sorted$index <- seq(1:dim(CodaError_Sorted)[1])
 
 plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error,colour=model))+
   geom_point(size=3)+
+  scale_y_continuous(limits=c(0,10))+
   geom_point(data = CodaError_Sorted,aes(x=index,y=error,colour=model),size=3)+
   geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
   theme(text = element_text(size = text_size))+
   scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
-  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Quantile_Plot",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=plot_quant,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Quantile_Plot",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=plot_quant,height = 15,width = 20)
 }
 ```
 
@@ -239,28 +254,37 @@ if(save_plots){
 my_color_methods <- setNames(c("red", "blue"),
                      c("coda","ingarch"))
 
-IngarchError_Sorted_split <- model_error_split %>% filter(model=="ingarch")%>%arrange(.,error)
+IngarchError_Sorted_split <- model_error_split %>% filter(model=="ingarch")%>%group_by(group)%>%arrange(.,error)
 IngarchQuantiles_split  <- quantile(IngarchError_Sorted_split $error,na.rm = T)
-IngarchError_Sorted_split $index <- seq(1:dim(IngarchError_Sorted_split )[1])
 
-Quantiles_Index_split  <- data.frame(quant_ind=findInterval(IngarchQuantiles_split ,IngarchError_Sorted_split $error))
+IngarchError_Sorted_split$index <- NA
+IngarchError_Sorted_split[IngarchError_Sorted_split$group=="1,2",]$index <- seq(1:round(dim(IngarchError_Sorted_split )[1]/2))
+IngarchError_Sorted_split[IngarchError_Sorted_split$group=="3,4",]$index <- seq(1:round(dim(IngarchError_Sorted_split )[1]/2))
+
+Quantiles_Index_split  <- data.frame(quant_ind=findInterval(IngarchQuantiles_split ,IngarchError_Sorted_split$error))
 
 CodaError_Sorted_split  <- model_error_split  %>% filter(model=="coda")%>%arrange(.,error)
 CodaQuantiles_split  <- quantile(CodaError_Sorted_split $error,na.rm = T)
-CodaError_Sorted_split $index <- seq(1:dim(CodaError_Sorted_split )[1])
 
+CodaError_Sorted_split$index <- NA
+CodaError_Sorted_split[CodaError_Sorted_split$group=="1,2",]$index <- seq(1:round(dim(CodaError_Sorted_split )[1]/2))
+CodaError_Sorted_split[CodaError_Sorted_split$group=="3,4",]$index <- seq(1:round(dim(CodaError_Sorted_split )[1]/2))
 
-plot_quant_split <- ggplot(IngarchError_Sorted_split ,aes(x=index,y=error,colour=model))+
+Error_Sorted_split <- rbind(CodaError_Sorted_split,IngarchError_Sorted_split)
+Error_Sorted_split$group <- as.factor(Error_Sorted_split$group)
+
+plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model))+
   facet_wrap(vars(group),nrow=length(unique(IngarchError_Sorted_split$group)),scales = "free")+
   geom_point(size=3)+
-  geom_point(data = CodaError_Sorted_split,aes(x=index,y=error,colour=model),size=3)+
+  scale_y_continuous(limits=c(0,10))+
+#  geom_point(data = CodaError_Sorted_split,aes(x=index,y=error,colour=model),size=3)+
   geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
   theme(text = element_text(size = text_size))+
   scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
-  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Quantile_Plot",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=plot_quant_split,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Quantile_Plot_Split",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=plot_quant_split,height = 15,width = 20)
 }
 ```
 
@@ -280,10 +304,10 @@ ps<-ggplot(model_error_split,aes(x=id,y=error))+
   scale_fill_manual("Legend", values = c(my_color_groups),aesthetics = "fill")+
   scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Error measures ",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Error measures sorted, History:",HistoryLength,sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_PointPlot",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=ps,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_PointPlot",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=ps,height = 15,width = 20)
 }
 ```
 
@@ -308,12 +332,12 @@ phc <- ggplot(coda_model_error_split,aes(x=error,colour=group,fill=group))+
   geom_vline(aes(xintercept=value,colour=group,linetype=Lines),data = mean_median_df,linewidth=2)+
   scale_color_manual("Legend", values = c(my_color))+
   scale_fill_manual("Legend", values = c(my_color))+
-  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1))+
-  ggtitle(paste("Coda Error measures per group",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  theme(text = element_text(size = text_size))+
+  ggtitle(paste("Coda Error measures per group",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,sep=" "))
 phc
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Coda_ErrorMeasure_PerGroup_Histogram",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=phc,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Coda_ErrorMeasure_PerGroup_Histogram",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=phc,height = 15,width = 20)
 }
 ```
 
@@ -342,10 +366,10 @@ phi <- ggplot(ingarch_model_error_split,aes(x=error,colour=group,fill=group))+
   scale_color_manual("Legend", values = c(my_color))+
   scale_fill_manual("Legend", values = c(my_color))+
   theme(text = element_text(size = text_size))+
-  ggtitle(paste("Ingarch Error measures per group",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Ingarch Error measures per group",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,sep=" "))
 phi
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Ingarch_ErrorMeasure_PerGroup_Histogram",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=phi,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Ingarch_ErrorMeasure_PerGroup_Histogram",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=phi,height = 15,width = 20)
 }
 ```
 
@@ -389,7 +413,7 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 8
+FID <- 100405
 
 plot_data_coda<-coda_result$result%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
@@ -401,13 +425,9 @@ plot_data_ingarch <- ingarch_result$result %>% dplyr::filter(id==FID)
 plot_data_ingarch<-full_join(plot_data_ingarch,all_dates_and_categories)
 plot_data_ingarch$model<-"ingarch"
 
-if(one_vs_all) {
-  plot_data <-
-    bind_rows(plot_data_coda, plot_data_ingarch) %>% dplyr::select(!c(distribution, pivotGroup))
-} else{
-  plot_data <-
-    bind_rows(plot_data_coda, plot_data_ingarch) %>% dplyr::select(!c(distribution))
-}
+plot_data <- bind_rows(plot_data_coda, plot_data_ingarch) %>% dplyr::select(!c(distribution, pivotGroup))
+
+
 
 
 
@@ -529,7 +549,7 @@ p<-ggplot(plot_data_ingarch,aes(x=date,y=valuePredict),col="blue")+
   geom_line(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
   geom_point(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
   theme(text = element_text(size = text_size))+
-  ggtitle(paste("Ingarch Timeseries",external_plot,sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
+  ggtitle(paste("Ingarch Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
 
 if(save_plots){
   ggsave(filename = here("Plots",paste("ts_ing_id_",FID,"_",distr,"_pi","_ext","_",external,"win_lgth",frame,".png",sep="")),plot=p,height = 15,width = 20)
