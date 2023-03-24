@@ -40,7 +40,7 @@ if(all(ids == ids_all)){
 }
 
 PredictionStep <- 1
-frame <- 0.3
+frame <- 0.7
 window_method <- "extending"
 save_results <- T
 
@@ -179,7 +179,7 @@ psb<-ggplot(model_error,aes(x=model,y=error))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psb,height = 15,width = 20)
 }
 ```
 
@@ -193,7 +193,7 @@ psbs<-ggplot(model_error_split,aes(x=model,y=error))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psbs,height = 15,width = 20)
 }
 ```
 
@@ -209,30 +209,69 @@ psbs_zoomed<-ggplot(model_error_split,aes(x=model,y=error))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined_zoomed",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psbs_zoomed,height = 15,width = 20)
 }
 
 ```
 
 
 ```{r}
+my_color_methods <- setNames(c("red", "blue"),
+                     c("coda","ingarch"))
+
 IngarchError_Sorted <- model_error %>% filter(model=="ingarch")%>%arrange(.,error)
-IngarchQuantiles <- quantile(IngarchError_Sorted$error)
+IngarchQuantiles <- quantile(IngarchError_Sorted$error,na.rm = T)
 IngarchError_Sorted$index <- seq(1:dim(IngarchError_Sorted)[1])
 
 Quantiles_Index <- data.frame(quant_ind=findInterval(IngarchQuantiles,IngarchError_Sorted$error))
 
 CodaError_Sorted <- model_error %>% filter(model=="coda")%>%arrange(.,error)
-CodaQuantiles <- quantile(CodaError_Sorted$error)
+CodaQuantiles <- quantile(CodaError_Sorted$error,na.rm = T)
 CodaError_Sorted$index <- seq(1:dim(CodaError_Sorted)[1])
 
 
-plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error))+
-  geom_point(colour="blue")+
-  geom_point(data = CodaError_Sorted,aes(x=index,y=error),colour="red")+
+plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error,colour=model))+
+  geom_point(size=3)+
+  geom_point(data = CodaError_Sorted,aes(x=index,y=error,colour=model),size=3)+
   geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+  theme(text = element_text(size = text_size))+
+  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
   ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Quantile_Plot",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=plot_quant,height = 15,width = 20)
+}
 ```
+
+```{r}
+my_color_methods <- setNames(c("red", "blue"),
+                     c("coda","ingarch"))
+
+IngarchError_Sorted_split <- model_error_split %>% filter(model=="ingarch")%>%arrange(.,error)
+IngarchQuantiles_split  <- quantile(IngarchError_Sorted_split $error,na.rm = T)
+IngarchError_Sorted_split $index <- seq(1:dim(IngarchError_Sorted_split )[1])
+
+Quantiles_Index_split  <- data.frame(quant_ind=findInterval(IngarchQuantiles_split ,IngarchError_Sorted_split $error))
+
+CodaError_Sorted_split  <- model_error_split  %>% filter(model=="coda")%>%arrange(.,error)
+CodaQuantiles_split  <- quantile(CodaError_Sorted_split $error,na.rm = T)
+CodaError_Sorted_split $index <- seq(1:dim(CodaError_Sorted_split )[1])
+
+
+plot_quant_split <- ggplot(IngarchError_Sorted_split ,aes(x=index,y=error,colour=model))+
+  facet_wrap(vars(group),nrow=length(unique(IngarchError_Sorted_split$group)),scales = "free")+
+  geom_point(size=3)+
+  geom_point(data = CodaError_Sorted_split,aes(x=index,y=error,colour=model),size=3)+
+  geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+  theme(text = element_text(size = text_size))+
+  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
+  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Quantile_Plot",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=plot_quant_split,height = 15,width = 20)
+}
+```
+
 
 
 ```{r}
@@ -260,16 +299,18 @@ if(save_plots){
 my_color <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
 
-mean_median_df <- data.frame(value = c(median(coda_model_error_split$error[coda_model_error_split$group=="1,2"]),
-                                       median(coda_model_error_split$error[coda_model_error_split$group=="3,4"]),
-                                       mean(coda_model_error_split$error[coda_model_error_split$group=="1,2"]),
-                                        mean(coda_model_error_split$error[coda_model_error_split$group=="3,4"])),
+coda_model_error_split$error[!is.finite(coda_model_error_split$error)] <- NA
+
+mean_median_df <- data.frame(value = c(median(coda_model_error_split$error[coda_model_error_split$group=="1,2"],na.rm = T),
+                                       median(coda_model_error_split$error[coda_model_error_split$group=="3,4"],na.rm = T),
+                                       mean(coda_model_error_split$error[coda_model_error_split$group=="1,2"],na.rm = T),
+                                        mean(coda_model_error_split$error[coda_model_error_split$group=="3,4"],na.rm = T)),
                              Lines = rep(c("median","mean"),each=2),
                              group = rep(c("1,2","3,4"),2))
 
 phc <- ggplot(coda_model_error_split,aes(x=error,colour=group,fill=group))+
   geom_histogram(bins=100,position = "identity",alpha=0.3,linewidth=1)+
-  scale_x_continuous(limits=c(0,5))+
+  scale_x_continuous(limits=c(0,8))+
   scale_y_continuous(limits=c(0,12))+
   geom_vline(xintercept = 1,linewidth=2)+
   geom_vline(aes(xintercept=value,colour=group,linetype=Lines),data = mean_median_df,linewidth=2)+
@@ -289,11 +330,23 @@ if(save_plots){
 ```{r}
 my_color <- setNames(c("seagreen2", "blue4"),
                      c("1,2","3,4"))
+
+ingarch_model_error_split$error[!is.finite(ingarch_model_error_split$error)] <- NA
+
+mean_median_df <- data.frame(value = c(median(ingarch_model_error_split$error[ingarch_model_error_split$group=="1,2"],na.rm = T),
+                                       median(ingarch_model_error_split$error[ingarch_model_error_split$group=="3,4"],na.rm = T),
+                                       mean(ingarch_model_error_split$error[ingarch_model_error_split$group=="1,2"],na.rm = T),
+                                        mean(ingarch_model_error_split$error[ingarch_model_error_split$group=="3,4"],na.rm = T)),
+                             Lines = rep(c("median","mean"),each=2),
+                             group = rep(c("1,2","3,4"),2))
+
+
 phi <- ggplot(ingarch_model_error_split,aes(x=error,colour=group,fill=group))+
   geom_histogram(bins=100,position = "identity",alpha=0.3)+
-  scale_x_continuous(limits=c(0,5))+
+  scale_x_continuous(limits=c(0,8))+
   scale_y_continuous(limits=c(0,12))+
   geom_vline(xintercept = 1,linewidth=2)+
+  geom_vline(aes(xintercept=value,colour=group,linetype=Lines),data = mean_median_df,linewidth=2)+
   scale_color_manual("Legend", values = c(my_color))+
   scale_fill_manual("Legend", values = c(my_color))+
   theme(text = element_text(size = text_size))+
