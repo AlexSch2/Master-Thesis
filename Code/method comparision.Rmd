@@ -128,8 +128,8 @@ one_vs_all<-T
 
 if(!identical(ids,unique(ingarch_result$result$id)) || 
    frame != unique(ingarch_result$result$frame) ||
-   window_method != unique(ingarch_result$result$windowMethod ||
-   HistoryLength != unique(ingarch_result$result$history))) {
+   window_method != unique(ingarch_result$result$windowMethod) ||
+   HistoryLength != unique(ingarch_result$result$history)) {
   stop("Ingarch and Coda base specifications differ")
 }
 ```
@@ -152,25 +152,12 @@ model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split)
 ```
 
 ```{r}
-psa<-ggplot(model_error,aes(x=id,y=error,col=model))+
-  geom_point(size=5)+
-  geom_hline(yintercept =1,linewidth=2)+
-  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
-
-if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_ext","_",external,"win_lgth",frame,".png",sep="")),plot=psa,height = 15,width = 20)
-}
-```
-
-
-```{r}
 psb<-ggplot(model_error,aes(x=model,y=error))+
   geom_boxplot()+
   #scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
   ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psb,height = 15,width = 20)
@@ -183,7 +170,7 @@ psb_zoomed<-ggplot(model_error,aes(x=model,y=error))+
   scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
   ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined_zoomed",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psb_zoomed,height = 15,width = 20)
@@ -196,7 +183,7 @@ psbs<-ggplot(model_error_split,aes(x=model,y=error))+
   geom_boxplot()+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
   ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_histlgth",HistoryLength,"_win_lgth",frame,".png",sep="")),plot=psbs,height = 15,width = 20)
@@ -212,7 +199,7 @@ psbs_zoomed<-ggplot(model_error_split,aes(x=model,y=error))+
   scale_y_continuous(limits=c(0,5))+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame,sep=" "))
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
   ggsave(filename = here("Plots",paste("Both_ErrorMeasure_split_zoomed",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psbs_zoomed,height = 15,width = 20)
@@ -288,28 +275,6 @@ if(save_plots){
 }
 ```
 
-
-
-```{r}
-my_color_groups <- setNames(c("seagreen2", "blue4"),
-                     c("1,2","3,4"))
-
-my_color_methods <- setNames(c("red", "blue"),
-                     c("ingarch","coda"))
-
-ps<-ggplot(model_error_split,aes(x=id,y=error))+
-  geom_point(size=7,shape=21,aes(colour=model,fill=group),stroke=4)+
-  scale_y_continuous(limits=c(0,3))+
-  geom_hline(yintercept =1,linewidth=2)+
-  scale_fill_manual("Legend", values = c(my_color_groups),aesthetics = "fill")+
-  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
-  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
-  ggtitle(paste("Error measures sorted, History:",HistoryLength,sep=" "),subtitle = paste("Window length:",frame,sep=" "))
-
-if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_PointPlot",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=ps,height = 15,width = 20)
-}
-```
 
 ```{r}
 my_color <- setNames(c("seagreen2", "blue4"),
