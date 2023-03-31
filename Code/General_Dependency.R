@@ -15,6 +15,7 @@
 #install.packages("VGAM")
 #install.packages("here")
 #install.packages("pscl")
+#install.packags("miceadds)
 
 #Loading Packages
 
@@ -30,4 +31,4 @@ library(ggplot2) #plots
 library(VGAM) #VGAMS
 library(here) #for paths of plots
 library(pscl) #alternative for zim models
-
+library(miceadds) #for loading RData 

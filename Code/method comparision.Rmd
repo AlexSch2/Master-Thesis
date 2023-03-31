@@ -169,7 +169,7 @@ psb_zoomed<-ggplot(model_error,aes(x=model,y=error))+
   geom_boxplot()+
   scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+
-  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(size=30))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
@@ -182,7 +182,7 @@ psbs<-ggplot(model_error_split,aes(x=model,y=error))+
   facet_wrap(vars(group),ncol=length(unique(model_error_split$group)),scales = "fixed")+
   geom_boxplot()+
   geom_hline(yintercept =1,linewidth=2)+
-  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(size=30))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
@@ -198,7 +198,7 @@ psbs_zoomed<-ggplot(model_error_split,aes(x=model,y=error))+
   geom_boxplot()+
   scale_y_continuous(limits=c(0,5))+
   geom_hline(yintercept =1,linewidth=2)+
-  theme(text = element_text(size = text_size),axis.text.x = element_text(angle = 45, vjust = 0.7, hjust=1,size=10))+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(size=30))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
