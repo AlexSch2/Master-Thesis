@@ -166,17 +166,17 @@ Rmse <- function(y,yhat){
 
 
 #Error calculation
-Model.Error <- function(Model_Result,Fnct = "Rmse"){
+Model.Error <- function(Model_Result,Fnct = "Rmse", Category = c(1,2,3,4)){
   
   f <- match.fun(Fnct)
   
   ErrorMeasure <- Model_Result$result %>%
-    dplyr::filter(category %in% c(1, 2, 3, 4)) %>%
+    dplyr::filter(category %in% Category) %>%
     group_by(id, category) %>%
     dplyr::summarise(error = f(valuePredict,valueTrue),.groups = "keep")
   
   ErrorMeasure_Naive <- Model_Result$result %>%
-    dplyr::filter(category %in% c(1, 2, 3, 4)) %>%
+    dplyr::filter(category %in% Category) %>%
     group_by(id, category) %>%
     dplyr::summarise(error_naive = f(valueLastKnown,valueTrue),.groups = "keep")
   
@@ -191,79 +191,59 @@ Model.Error <- function(Model_Result,Fnct = "Rmse"){
 
 
 #Function to compare the MSEs/RMSEs of each fridge
-Model.ErrorOverall <- function(Error_Result,Fnct = "sum",SplitByGroup=T,Group1=c(1,2),Group2=c(3,4)){
+Model.ErrorOverall <- function(Error_Result,Fnct = "sum",SplitByGroup=T,Groups=list(Group1=c(1,2),Group2=c(3,4)),Category=c(1,2,3,4)){
   
   f <- match.fun(Fnct)
   
   if(SplitByGroup){
     
-    #Group 1
-    
-    #Calculating the summarised Naive Error and replacing 0 values with 0.000001
-    ErrorNaiveSummarised_Group1 <- Error_Result %>%
-      dplyr::filter(category %in% Group1)%>%
-      dplyr::group_by(id) %>%
-      dplyr::summarise(error_naive = f(error_naive),.groups = "keep")
-    ErrorNaiveSummarised_Group1$error_naive[ErrorNaiveSummarised_Group1$error_naive==0] <- 0.000001
-    
-    #Calculating the summarised Error
-    ErrorSummarised_Group1 <- Error_Result %>%
-      dplyr::filter(category %in% Group1)%>%
-      dplyr::group_by(id) %>%
-      dplyr::summarise(error = f(error),.groups = "keep")
-    
-    #Joining the data frames
-    ErrorMeasure_Group1 <- full_join(ErrorNaiveSummarised_Group1,ErrorSummarised_Group1,by="id")
-    
-    #Calculating the Error Measure
-    ErrorMeasure_Group1 <- ErrorMeasure_Group1 %>%
-      dplyr::group_by(id) %>%
-      dplyr::summarise(error = error/error_naive,.groups = "keep")
-    ErrorMeasure_Group1$model <- unique(Error_Result$model)
-    ErrorMeasure_Group1$group <- paste(Group1,collapse=",")
-    
-    
-    #Group 2
-    
-    #Calculating the summarised Naive Error and replacing 0 values with 0.000001
-    ErrorNaiveSummarised_Group2 <- Error_Result %>%
-      dplyr::filter(category %in% Group2)%>%
-      dplyr::group_by(id) %>%
-      dplyr::summarise(error_naive = f(error_naive),.groups = "keep")
-    ErrorNaiveSummarised_Group2$error_naive[ErrorNaiveSummarised_Group2$error_naive==0] <- 0.000001
-    
-    #Calculating the summarised Error
-    ErrorSummarised_Group2 <- Error_Result %>%
-      dplyr::filter(category %in% Group2)%>%
-      dplyr::group_by(id) %>%
-      dplyr::summarise(error = f(error),.groups = "keep")
-    
-    #Joining the data frames
-    ErrorMeasure_Group2 <- full_join(ErrorNaiveSummarised_Group2,ErrorSummarised_Group2,by="id")
-    
-    #Calculating the Error Measure
-    ErrorMeasure_Group2 <- ErrorMeasure_Group2 %>%
-      dplyr::group_by(id) %>%
-      dplyr::summarise(error = error/error_naive,.groups = "keep")
-    ErrorMeasure_Group2$model <- unique(Error_Result$model)
-    ErrorMeasure_Group2$group <- paste(Group2,collapse=",")
-    
-    #Combining the Groups
-    ErrorMeasure <- rbind(ErrorMeasure_Group1,
-                          ErrorMeasure_Group2)
+    for(i in 1:length(Groups))
+    {
+      Group <- Groups[[i]]
+      #Calculating the summarised Naive Error and replacing 0 values with 0.000001
+      ErrorNaiveSummarised_Group <- Error_Result %>%
+        dplyr::filter(category %in% Group)%>%
+        dplyr::group_by(id) %>%
+        dplyr::summarise(error_naive = f(error_naive),.groups = "keep")
+      ErrorNaiveSummarised_Group$error_naive[ErrorNaiveSummarised_Group$error_naive==0] <- 0.000001
+      
+      #Calculating the summarised Error
+      ErrorSummarised_Group <- Error_Result %>%
+        dplyr::filter(category %in% Group)%>%
+        dplyr::group_by(id) %>%
+        dplyr::summarise(error = f(error),.groups = "keep")
+      
+      #Joining the data frames
+      ErrorMeasure_Group <- full_join(ErrorNaiveSummarised_Group,ErrorSummarised_Group,by="id")
+      
+      #Calculating the Error Measure
+      ErrorMeasure_Group <- ErrorMeasure_Group %>%
+        dplyr::group_by(id) %>%
+        dplyr::summarise(error = error/error_naive,.groups = "keep")
+      ErrorMeasure_Group$model <- unique(Error_Result$model)
+      ErrorMeasure_Group$group <- paste(Group,collapse=",")
+      
+      #Combining the Groups
+      if(i==1){
+        ErrorMeasure <- ErrorMeasure_Group
+      }
+      else{
+        ErrorMeasure <- rbind(ErrorMeasure,ErrorMeasure_Group)
+      }
+    }
     
   }else{
     
     #Calculating the summarised Naive Error and replacing 0 values with 0.000001
     ErrorNaiveSummarised <- Error_Result %>%
-      dplyr::filter(category %in% c(1,2,3,4))%>%
+      dplyr::filter(category %in% Category)%>%
       dplyr::group_by(id) %>%
       dplyr::summarise(error_naive = f(error_naive),.groups = "keep")
     ErrorNaiveSummarised$error_naive[ErrorNaiveSummarised$error_naive==0] <- 0.000001
     
     #Calculating the summarised Error
     ErrorSummarised <- Error_Result %>%
-      dplyr::filter(category %in% c(1,2,3,4))%>%
+      dplyr::filter(category %in% Category)%>%
       dplyr::group_by(id) %>%
       dplyr::summarise(error = f(error),.groups = "keep")
     
