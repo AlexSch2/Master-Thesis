@@ -1,5 +1,4 @@
 $ cat .gitignore
-
 *.Rproj.user
 *.Rhistory
 *.RData
@@ -7,3 +6,4 @@ $ cat .gitignore
 *.pdf
 *.png
 .Rproj.user
+*.csv
