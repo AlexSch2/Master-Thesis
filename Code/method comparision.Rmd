@@ -31,7 +31,7 @@ help1 <- weekly_category_data%>%
   
 ids_all <- help1$fridge_id[help1$n ==4]
 
-ids <- ids_all
+ids <- 4
 
 if(all(ids == ids_all)){
   ids_save <- "_all_"
@@ -80,7 +80,7 @@ ingarch_result <-
     Id = ids,
     Frame = frame,
     Distribution = "poisson",
-    Category = c("1","2","3","4"),
+    Category_Main = "2",
     WindowMethod = "extending",
     ZeroHandling = "zero_to_one",
     External = F,
@@ -88,7 +88,8 @@ ingarch_result <-
     NCores = 10,
     PastOb = 1,
     PastMean = 1,
-    HistoryLength = HistoryLength
+    HistoryLength = HistoryLength,
+    TakeSubCategory = T
   )
   
   if(save_results){
@@ -100,7 +101,7 @@ ingarch_result <-
 ```
 
 Loading previous result
-```{r eval=FALSE, include=FALSE}
+```{r}
 ids <- unique(coda_result$result$id)
 PredictionStep <- 1
 frame <- unique(coda_result$result$frame)
@@ -209,24 +210,35 @@ if(save_plots){
 
 
 ```{r}
+length <- ingarch_result$result %>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
+
+TimeSeries_Length <- data.frame(id = unique(ingarch_result$result$id),
+                                length = length$n/
+                                  (as.numeric(unique(ingarch_result$result$frame))*as.numeric(unique(ingarch_result$result$history))))
+```
+
+
+```{r}
 my_color_methods <- setNames(c("red", "blue"),
                      c("coda","ingarch"))
 
 IngarchError_Sorted <- model_error %>% filter(model=="ingarch")%>%arrange(.,error)
 IngarchQuantiles <- quantile(IngarchError_Sorted$error,na.rm = T)
 IngarchError_Sorted$index <- seq(1:dim(IngarchError_Sorted)[1])
+IngarchError_Sorted <- full_join(IngarchError_Sorted,TimeSeries_Length,bye ="id")
 
 Quantiles_Index <- data.frame(quant_ind=findInterval(IngarchQuantiles,IngarchError_Sorted$error))
 
 CodaError_Sorted <- model_error %>% filter(model=="coda")%>%arrange(.,error)
 CodaQuantiles <- quantile(CodaError_Sorted$error,na.rm = T)
 CodaError_Sorted$index <- seq(1:dim(CodaError_Sorted)[1])
+CodaError_Sorted <- full_join(CodaError_Sorted,TimeSeries_Length,bye ="id")
 
-
-plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error,colour=model))+
-  geom_point(size=3)+
-  scale_y_continuous(limits=c(0,10))+
-  geom_point(data = CodaError_Sorted,aes(x=index,y=error,colour=model),size=3)+
+plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error,colour=model,size=length))+
+  geom_point()+
+  scale_y_continuous(limits=c(0,5))+
+  geom_point(data = CodaError_Sorted,aes(x=index,y=error,colour=model,size=length))+
+  geom_hline(yintercept=1,linewidth=2)+
   geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
   theme(text = element_text(size = text_size))+
   scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
@@ -247,6 +259,7 @@ IngarchQuantiles_split  <- quantile(IngarchError_Sorted_split $error,na.rm = T)
 IngarchError_Sorted_split$index <- NA
 IngarchError_Sorted_split[IngarchError_Sorted_split$group=="1,2",]$index <- seq(1:round(dim(IngarchError_Sorted_split )[1]/2))
 IngarchError_Sorted_split[IngarchError_Sorted_split$group=="3,4",]$index <- seq(1:round(dim(IngarchError_Sorted_split )[1]/2))
+IngarchError_Sorted_split <- full_join(IngarchError_Sorted_split,TimeSeries_Length,bye ="id")
 
 Quantiles_Index_split  <- data.frame(quant_ind=findInterval(IngarchQuantiles_split ,IngarchError_Sorted_split$error))
 
@@ -256,15 +269,17 @@ CodaQuantiles_split  <- quantile(CodaError_Sorted_split $error,na.rm = T)
 CodaError_Sorted_split$index <- NA
 CodaError_Sorted_split[CodaError_Sorted_split$group=="1,2",]$index <- seq(1:round(dim(CodaError_Sorted_split )[1]/2))
 CodaError_Sorted_split[CodaError_Sorted_split$group=="3,4",]$index <- seq(1:round(dim(CodaError_Sorted_split )[1]/2))
+CodaError_Sorted_split <- full_join(CodaError_Sorted_split,TimeSeries_Length,bye ="id")
 
 Error_Sorted_split <- rbind(CodaError_Sorted_split,IngarchError_Sorted_split)
 Error_Sorted_split$group <- as.factor(Error_Sorted_split$group)
 
-plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model))+
+plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model,size=length))+
   facet_wrap(vars(group),nrow=length(unique(IngarchError_Sorted_split$group)),scales = "free")+
-  geom_point(size=3)+
-  scale_y_continuous(limits=c(0,10))+
-#  geom_point(data = CodaError_Sorted_split,aes(x=index,y=error,colour=model),size=3)+
+  geom_point()+
+  scale_y_continuous(limits=c(0,5))+
+  geom_hline(yintercept=1,linewidth=2)+
+# geom_point(data = CodaError_Sorted_split,aes(x=index,y=error,colour=model),size=3)+
   geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
   theme(text = element_text(size = text_size))+
   scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+

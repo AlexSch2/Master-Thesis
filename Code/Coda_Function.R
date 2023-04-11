@@ -361,6 +361,9 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
           dplyr::select(week_date, main_category_id, sold) %>%
           arrange(week_date)
         
+        #Calculating the length of the timeseries
+        TimeSeries_Length <- length(unique(Data_Prepared$week_date))
+        
         
         #Preparing transformed data
         Data_Transform <- Coda.DataPreparation(Data_Prepared, 
@@ -372,6 +375,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                HistoryLength = HistoryLength) %>%
           arrange(week_date)
         
+
         
         #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
         Frame_Help <- "fixed"
@@ -427,6 +431,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$zeroHandling <- ZeroHandling
         PredictionResult$result$frame <- Frame_Help
         PredictionResult$result$history <- as.character(HistoryLength)
+        PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
       
           
         #Tidying up data
@@ -486,6 +491,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
           dplyr::select(week_date, main_category_id, sold) %>%
           arrange(week_date)
         
+        #Calculating the length of the timeseries
+        TimeSeries_Length <- length(unique(Data_Prepared$week_date))
         
         #Preparing transformed data
         Data_Transform <- Coda.DataPreparation(Data_Prepared, 
@@ -545,6 +552,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$ZeroHandling <- ZeroHandling
         PredictionResult$result$frame <- Frame_Help
         PredictionResult$result$history <- as.character(HistoryLength)
+        PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
         
         #Tidying up data
         Result_Prediction <- PredictionResult$result

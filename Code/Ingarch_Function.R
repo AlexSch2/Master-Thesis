@@ -1,19 +1,25 @@
 
 #Data preparation for INGARCH models
-Ingarch.DataPreparation <- function(Data_Raw, 
-                                     OneVsAll = F, 
-                                     PivotGroup = "1",
+Ingarch.DataPreparation <- function(Data_Raw,
                                      ZeroHandling = c("none","zero_to_one"),
-                                    HistoryLength = 1){
+                                    HistoryLength = 1,
+                                    TakeSubCategory = F){
   
   ZeroHandling <- match.arg(ZeroHandling)
   
+  if(TakeSubCategory){
+    Category <- sort(unique(Data_Raw$sub_category_id))
+  }
+  else{
+    Category <- sort(unique(Data_Raw$main_category_id))
+  }
+  
   Data_Prepared <- Data.Preparation(Data_Raw = Data_Raw,
-                               OneVsAll = OneVsAll,
-                               PivotGroup = PivotGroup,
-                               Category = c(1,2,3,4),
+                               OneVsAll = F,
+                               Category = Category,
                                NA_to = 0,
-                               HistoryLength = HistoryLength)
+                               HistoryLength = HistoryLength,
+                               TakeSubCategory = TakeSubCategory)
   
   if (ZeroHandling == "none") {
     return(Data_Prepared)
@@ -189,7 +195,9 @@ Ingarch.Analysis <- function(Data_Raw,
                              Distribution = "poisson",
                              ModelType = "ingarch",
                              Plot = F,
-                             Category = c("1", "2", "3", "4"),
+                             Category_Main = c("1", "2", "3", "4"),
+                             TakeSubCategory = F,
+                             Category_Sub = NULL,
                              Frame = 10,
                              WindowMethod = "extending",
                              ZeroHandling = "none",
@@ -207,6 +215,15 @@ Ingarch.Analysis <- function(Data_Raw,
   #Only return IDs with results
   Id_Result <- Id
   
+  #Operating on Sub category Level
+  SubCategory_Column  <- NULL
+  if(TakeSubCategory){
+    SubCategory_Column <- "sub_category_id"
+    stopifnot(length(Category_Main)==1)
+    if(is.null(Category_Sub)){
+      Category_Sub <- unique(Data_Raw$sub_category_id)
+    }
+  }
   
   #Calculating Prediction results for all ids and each category
   PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_RunVariable){
@@ -214,12 +231,18 @@ Ingarch.Analysis <- function(Data_Raw,
     #Preparing data
     Data_Prepared <- Data_Raw %>%
       filter(fridge_id == Id_RunVariable &
-               main_category_id %in% as.integer(Category)) %>%
-      dplyr::select(week_date, main_category_id, sold) %>%
+               main_category_id %in% as.integer(Category_Main) &
+               sub_category_id %in% as.integer(Category_Sub)) %>%
+      dplyr::select(week_date, main_category_id, any_of(SubCategory_Column) ,sold) %>%
       arrange(week_date) %>%
       Ingarch.DataPreparation(ZeroHandling = ZeroHandling,
-                              HistoryLength = HistoryLength)
+                              HistoryLength = HistoryLength,
+                              TakeSubCategory = TakeSubCategory)
     
+    Category <- names(Data_Prepared)[-1]
+    
+    #Calculating the length of the timeseries
+    TimeSeries_Length <- length(unique(Data_Prepared$week_date))
     
     #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed.
     Frame_Help <- "fixed"
@@ -308,6 +331,11 @@ Ingarch.Analysis <- function(Data_Raw,
     Result_Prediction$zeroHandling <- ZeroHandling
     Result_Prediction$frame <- Frame_Help
     Result_Prediction$history <- as.character(HistoryLength)
+    Result_Prediction$timeseriesLength <- as.character(TimeSeries_Length)
+    
+    if(TakeSubCategory){
+      Result_Prediction$main_category <- Category_Main
+    }
     
     return(list(result = Result_Prediction,
                 model = Result_Model))
@@ -330,59 +358,6 @@ Ingarch.Analysis <- function(Data_Raw,
   
 }
 
-
-
-## Plotting a specified model result
-Ingarch.ParameterPlot <- function(Ingarch_Result, Category, Element, Fnct = "idf", Save = TRUE, Plot_Type =
-                                    c("default", "histogram")){
-  
-  
-  Plot_Type <- match.arg(Plot_Type)
-  Id_all <- unique(Ingarch_Result$result$id)
-  Distribution_all <- unique(Ingarch_Result$result$distribution)
-  
-  
-  
-  for (Id_RunVariable in Id_all){
-    for (Distribution_RunVariable in Distribution_All){
-      
-      if(Save){
-        png(paste("Ingarch_plot_id", Id_RunVariable, Distribution_RunVariable, "category", Category, Plot_Type, Fnct, ".png", sep = ""), 
-            height = 15,width = 20,units = "cm",res = 300)
-      }
-      
-      Data_Plot <- Ingarch_Result$models[[paste(Id_RunVariable)]][[Category]]
-      Data_Plot <- unlist(lapply(c(1:length(Data_Plot)),function(i)return(do.call(Fnct,list(Data_Plot[[i]][[Element]])))))
-      
-      if(Plot_Type == "default"){
-        
-        plot(Data_Plot,type = "l",ylab = paste("Distribution mean",Fnct,sep = " "),
-             main = paste("Ingarch_", Distribution_RunVariable, "_id_", Id_RunVariable, sep = ""),
-             sub = paste("Category: ", Category, sep = ""))
-        
-      }
-      
-      else if (Plot_Type =="histogram") {
-        
-        hist(Data_Plot,
-             xlab = paste("Distribution mean", Fnct, sep = " "), 
-             main = paste("Ingarch_", Distribution_RunVariable, "_id_", Id_RunVariable, sep = ""),
-             sub = paste("Category: ", Category, sep = ""))
-        
-      }else {
-        
-        stop("Enter valid plot type") 
-        
-      }
-
-    }
-    
-  }
-  if(Save){
-    dev.off()
-  }
-  
-}
 
 
 

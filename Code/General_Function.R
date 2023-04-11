@@ -66,19 +66,32 @@ Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "overlapp
 
 
 #Function to transform the data into the right format
-Data.Preparation <- function(Data_Raw,OneVsAll=F,PivotGroup="1",Category=c(1,2,3,4),NA_to=0,HistoryLength = 1){
+Data.Preparation <- function(Data_Raw,
+                             OneVsAll=F,
+                             PivotGroup="1",
+                             Category=c(1,2,3,4),
+                             NA_to=0,
+                             HistoryLength = 1,
+                             TakeSubCategory = FALSE){
   
+  #Sub or Main Category
+  if(TakeSubCategory){
+    Category_Var <- "sub_category_id"
+    Data_Raw <- subset(Data_Raw,select = -main_category_id)
+  }else{
+    Category_Var <- "main_category_id"
+  }
 
   
   columns <- c("week_date", as.character(Category))
   
-  Data_Raw <- Data_Raw %>%
-    dplyr::filter(main_category_id %in% Category) %>%
-    group_by(main_category_id, week_date) %>%
+    Data_Raw <- Data_Raw %>%
+    dplyr::filter(get(Category_Var) %in% Category) %>%
+    group_by(across(all_of(Category_Var)), week_date) %>%
     dplyr::mutate(sold = sum(sold)) %>%
     dplyr::distinct() %>%
     pivot_wider(names_from
-                = main_category_id, values_from = sold) %>%
+                = Category_Var, values_from = sold) %>%
     ungroup() %>%
     setnafill(type = "const", fill = NA_to) %>%
     dplyr::select(any_of(columns)) %>%
