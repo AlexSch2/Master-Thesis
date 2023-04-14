@@ -1,0 +1,19 @@
+TY  - JOUR
+AU  - Egozcue, J. J.
+AU  - Pawlowsky-Glahn, V.
+AU  - Mateu-Figueras, G.
+AU  - Barceló-Vidal, C.
+PY  - 2003
+DA  - 2003/04/01
+TI  - Isometric Logratio Transformations for Compositional Data Analysis
+JO  - Mathematical Geology
+SP  - 279
+EP  - 300
+VL  - 35
+IS  - 3
+AB  - Geometry in the simplex has been developed in the last 15 years mainly based on the contributions due to J. Aitchison. The main goal was to develop analytical tools for the statistical analysis of compositional data. Our present aim is to get a further insight into some aspects of this geometry in order to clarify the way for more complex statistical approaches. This is done by way of orthonormal bases, which allow for a straightforward handling of geometric elements in the simplex. The transformation into real coordinates preserves all metric properties and is thus called isometric logratio transformation (ilr). An important result is the decomposition of the simplex, as a vector space, into orthogonal subspaces associated with nonoverlapping subcompositions. This gives the key to join compositions with different parts into a single composition by using a balancing element. The relationship between ilr transformations and the centered-logratio (clr) and additive-logratio (alr) transformations is also studied. Exponential growth or decay of mass is used to illustrate compositional linear processes, parallelism and orthogonality in the simplex.
+SN  - 1573-8868
+UR  - https://doi.org/10.1023/A:1023818214614
+DO  - 10.1023/A:1023818214614
+ID  - Egozcue2003
+ER  - 

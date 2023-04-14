@@ -1,0 +1,15 @@
+@article{10.2307/1391639,
+ ISSN = {07350015},
+ URL = {http://www.jstor.org/stable/1391639},
+ abstract = {Time series sometimes consist of count data in which the number of events occurring in a given time interval is recorded. Such data are necessarily nonnegative integers, and an assumption of a Poisson or negative binomial distribution is often appropriate. This article sets ups a model in which the level of the process generating the observations changes over time. A recursion analogous to the Kalman filter is used to construct the likelihood function and to make predictions of future observations. Qualitative variables, based on a binomial or multinomial distribution, may be handled in a similar way. The model for count data may be extended to include explanatory variables. This enables nonstochastic slope and seasonal components to be included in the model, as well as permitting intervention analysis. The techniques are illustrated with a number of applications, and an attempt is made to develop a model-selection strategy along the lines of that used for Gaussian structural time series models. The applications include an analysis of the results of international football matches played between England and Scotland and an assessment of the effect of the British seat-belt law on the drivers of light-goods vehicles.},
+ author = {A. C. Harvey and C. Fernandes},
+ journal = {Journal of Business & Economic Statistics},
+ number = {4},
+ pages = {407--417},
+ publisher = {[American Statistical Association, Taylor & Francis, Ltd.]},
+ title = {Time Series Models for Count or Qualitative Observations},
+ urldate = {2023-04-04},
+ volume = {7},
+ year = {1989}
+}
+

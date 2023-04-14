@@ -1,0 +1,644 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Biswas:2009}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a60b050ab12f80c13579e0988404e9e0}{%
+           family={Biswas},
+           familyi={B\bibinitperiod},
+           given={Atanu},
+           giveni={A\bibinitperiod}}}%
+        {{hash=f69b3865e1a5eedae9904f058570e30a}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Peter\bibnamedelima X.-K.},
+           giveni={P\bibinitperiod\bibinitdelim X\bibinithyphendelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{3d4e6f6b9f9762dc5070b38dd3ec1e26}
+      \strng{fullhash}{3d4e6f6b9f9762dc5070b38dd3ec1e26}
+      \strng{bibnamehash}{3d4e6f6b9f9762dc5070b38dd3ec1e26}
+      \strng{authorbibnamehash}{3d4e6f6b9f9762dc5070b38dd3ec1e26}
+      \strng{authornamehash}{3d4e6f6b9f9762dc5070b38dd3ec1e26}
+      \strng{authorfullhash}{3d4e6f6b9f9762dc5070b38dd3ec1e26}
+      \field{labelalpha}{BS09}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents a unified framework of stationary ARMA processes for discrete-valued time series based on Pegram’s [Pegram, G.G.S., 1980. An autoregressive model for multilag markov chains. J. Appl. Probab. 17, 350–362] mixing operator. Such a stochastic operator appears to be more flexible than the currently popular thinning operator to construct Box and Jenkins’ type stationary ARMA processes with arbitrary discrete marginal distributions. This flexibility allows us to yield an ARMA model for time series of binomial or categorical observations as a special case, which was unavailable with the extended thinning operator [Joe, H., 1996. Time series models with univariate margins in the convolution-closed infinitely divisible class. J. Appl. Probab. 33, 664–677] because the binomial/categorical distribution is not infinitely divisible. We also study parameter estimation and comparison with the thinning operator based method, whenever applicable. Real data examples are used to examine and illustrate the proposed method.}
+      \field{issn}{0167-7152}
+      \field{journaltitle}{Statistics \& Probability Letters}
+      \field{number}{17}
+      \field{title}{Discrete-valued ARMA processes}
+      \field{volume}{79}
+      \field{year}{2009}
+      \field{pages}{1884\bibrangedash 1889}
+      \range{pages}{6}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.spl.2009.05.025
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167715209001977
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167715209001977
+      \endverb
+    \endentry
+    \entry{Chang:1987}{article}{}
+      \name{author}{3}{}{%
+        {{hash=a1b93542a7cd5aa25495e22de02ff703}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Tiao\bibnamedelima J.},
+           giveni={T\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=ce118fc545cb49a451aa52f1d268b94e}{%
+           family={Delleur},
+           familyi={D\bibinitperiod},
+           given={J.W.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=364642af332f850ebc5f54e9bbacda5f}{%
+           family={Kavvas},
+           familyi={K\bibinitperiod},
+           given={M.L.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{84799e73a263ec348c024f780ff50a2e}
+      \strng{fullhash}{84799e73a263ec348c024f780ff50a2e}
+      \strng{bibnamehash}{84799e73a263ec348c024f780ff50a2e}
+      \strng{authorbibnamehash}{84799e73a263ec348c024f780ff50a2e}
+      \strng{authornamehash}{84799e73a263ec348c024f780ff50a2e}
+      \strng{authorfullhash}{84799e73a263ec348c024f780ff50a2e}
+      \field{labelalpha}{CDK87}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Daily precipitation has been successfully modeled by the Discrete Autoregressive Moving Average (DARMA) family of models. One of these models is used in the estimation of daily streamflows by means of a linear transfer function. The statistical properties of the chosen DARMA precipitation process and the first- and second-order statistics of the relationships between daily precipitation and the corresponding streamflow are used in the determination of the transfer function parameters. The constructed process is applied to a watershed located in Indiana. The model identification, the parameter estimation, and the diagnostic checking are illustrated. This transfer model has the merit that it couples the first- and second-order statistics of the rainfall input and runoff output. The model limitations stem from the stationarity of the DARMA models used for the description of daily rainfall sequences. This requires the division of the year into stationary seasons and introduces minor inaccuracies at the season crossings.}
+      \field{issn}{0022-1694}
+      \field{journaltitle}{Journal of Hydrology}
+      \field{number}{1}
+      \field{title}{Application of Discrete Autoregressive Moving Average models for estimation of daily runoff}
+      \field{volume}{91}
+      \field{year}{1987}
+      \field{pages}{119\bibrangedash 135}
+      \range{pages}{17}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0022-1694(87)90132-6
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0022169487901326
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0022169487901326
+      \endverb
+    \endentry
+    \entry{Doukhan:2012}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b56d3f1bb6a728b76afa43443e8a0723}{%
+           family={Doukhan},
+           familyi={D\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
+           family={Fokianos},
+           familyi={F\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+        {{hash=bef86b20d26f1ca869b076275b55f9ae}{%
+           family={Tjøstheim},
+           familyi={T\bibinitperiod},
+           given={Dag},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{7732bbdc2b76589455a82357103bb7e9}
+      \strng{fullhash}{7732bbdc2b76589455a82357103bb7e9}
+      \strng{bibnamehash}{7732bbdc2b76589455a82357103bb7e9}
+      \strng{authorbibnamehash}{7732bbdc2b76589455a82357103bb7e9}
+      \strng{authornamehash}{7732bbdc2b76589455a82357103bb7e9}
+      \strng{authorfullhash}{7732bbdc2b76589455a82357103bb7e9}
+      \field{labelalpha}{DFT12}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We consider generalized linear models for regression modeling of count time series. We give easily verifiable conditions for obtaining weak dependence for such models. These results enable the development of maximum likelihood inference under minimal conditions. Some examples which are useful to applications are discussed in detail.}
+      \field{issn}{0167-7152}
+      \field{journaltitle}{Statistics \& Probability Letters}
+      \field{number}{5}
+      \field{title}{On weak dependence conditions for Poisson autoregressions}
+      \field{volume}{82}
+      \field{year}{2012}
+      \field{pages}{942\bibrangedash 948}
+      \range{pages}{7}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.spl.2012.01.015
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167715212000259
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167715212000259
+      \endverb
+      \keyw{Autocorrelation,Generalized linear models,Limit theorems,Prediction,Stationarity}
+    \endentry
+    \entry{Egozcue:2003}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c1b64e1cc2fbaf10ecf21361df5a2ae8}{%
+           family={Egozcue},
+           familyi={E\bibinitperiod},
+           given={Juan\bibnamedelima Jose},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=2eea4c7d7a1051871715333c665f5c27}{%
+           family={Pawlowsky-Glahn},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Vera},
+           giveni={V\bibinitperiod}}}%
+        {{hash=1f078f51fbe7757339a9861f1ca0dd56}{%
+           family={Figueras},
+           familyi={F\bibinitperiod},
+           given={Glòria},
+           giveni={G\bibinitperiod}}}%
+        {{hash=1ce01cdc4ed9d093749b76e149235254}{%
+           family={Vidal},
+           familyi={V\bibinitperiod},
+           given={Carles},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{e4f4a01bb2c2c135841e40098cd3b6f3}
+      \strng{fullhash}{2e04c4b160a580b7c3c46edf3a229914}
+      \strng{bibnamehash}{e4f4a01bb2c2c135841e40098cd3b6f3}
+      \strng{authorbibnamehash}{e4f4a01bb2c2c135841e40098cd3b6f3}
+      \strng{authornamehash}{e4f4a01bb2c2c135841e40098cd3b6f3}
+      \strng{authorfullhash}{2e04c4b160a580b7c3c46edf3a229914}
+      \field{labelalpha}{Ego+03}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Geology}
+      \field{month}{04}
+      \field{title}{Isometric Logratio Transformations for Compositional Data Analysis}
+      \field{volume}{35}
+      \field{year}{2003}
+      \field{pages}{279\bibrangedash 300}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1023/A:1023818214614
+      \endverb
+    \endentry
+    \entry{Ferland:2006}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b79c2babcd53f22b000fe263dc619648}{%
+           family={Ferland},
+           familyi={F\bibinitperiod},
+           given={René},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a30565861d6e9f01582d7ab528198c89}{%
+           family={Latour},
+           familyi={L\bibinitperiod},
+           given={Alain},
+           giveni={A\bibinitperiod}}}%
+        {{hash=adc062bf272dc1919c1ed51eb53b65d2}{%
+           family={Oraichi},
+           familyi={O\bibinitperiod},
+           given={Driss},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{ec72de1e2af9ff4fd4d2d80c50d02f62}
+      \strng{fullhash}{ec72de1e2af9ff4fd4d2d80c50d02f62}
+      \strng{bibnamehash}{ec72de1e2af9ff4fd4d2d80c50d02f62}
+      \strng{authorbibnamehash}{ec72de1e2af9ff4fd4d2d80c50d02f62}
+      \strng{authornamehash}{ec72de1e2af9ff4fd4d2d80c50d02f62}
+      \strng{authorfullhash}{ec72de1e2af9ff4fd4d2d80c50d02f62}
+      \field{labelalpha}{FLO06}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract.  An integer-valued analogue of the classical generalized autoregressive conditional heteroskedastic (GARCH) (p,q) model with Poisson deviates is proposed and a condition for the existence of such a process is given. For the case p = 1, q = 1, it is explicitly shown that an integer-valued GARCH process is a standard autoregressive moving average (1, 1) process. The problem of maximum likelihood estimation of parameters is treated. An application of the model to a real time series with a numerical example is given.}
+      \field{journaltitle}{Journal of Time Series Analysis}
+      \field{number}{6}
+      \field{title}{Integer-Valued GARCH Process}
+      \field{volume}{27}
+      \field{year}{2006}
+      \field{pages}{923\bibrangedash 942}
+      \range{pages}{20}
+      \verb{doi}
+      \verb https://doi.org/10.1111/j.1467-9892.2006.00496.x
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-9892.2006.00496.x
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.2006.00496.x
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.2006.00496.x
+      \endverb
+      \keyw{Integer-valued time series,GARCH model,heteroskedastic}
+    \endentry
+    \entry{Filzmoser:2020}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=440840cf1a958f86ce96afdf0ed33447}{%
+           family={Filzmoser},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=49b157272ea2bc1f4c5617e4a013ae2f}{%
+           family={Hron},
+           familyi={H\bibinitperiod},
+           given={Karel},
+           giveni={K\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=ad5fc362d91d54a4e0c800d22a6711c5}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=dee04c3e356e159533dc55ac9dd9318f}{%
+           family={Tauler},
+           familyi={T\bibinitperiod},
+           given={Romà},
+           giveni={R\bibinitperiod}}}%
+        {{hash=89c54da251189fe0e870680d9b96c3e3}{%
+           family={Walczak},
+           familyi={W\bibinitperiod},
+           given={Beata},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{074f651d4f288616b23e35a2cee6ef30}
+      \strng{fullhash}{074f651d4f288616b23e35a2cee6ef30}
+      \strng{bibnamehash}{074f651d4f288616b23e35a2cee6ef30}
+      \strng{authorbibnamehash}{074f651d4f288616b23e35a2cee6ef30}
+      \strng{authornamehash}{074f651d4f288616b23e35a2cee6ef30}
+      \strng{authorfullhash}{074f651d4f288616b23e35a2cee6ef30}
+      \strng{editorbibnamehash}{519a800a6c025553be7ca628557abf5a}
+      \strng{editornamehash}{519a800a6c025553be7ca628557abf5a}
+      \strng{editorfullhash}{519a800a6c025553be7ca628557abf5a}
+      \field{labelalpha}{FH20}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article presents an introduction to the field and methods of compositional data analysis. The basic concepts and ideas are explained, and the approach is motivated from a geometrical perspective. Multivariate methods that are relevant in chemometrics are considered from the point of view of compositional data analysis, such as principal component analysis, multivariate outlier detection, as well as regression and classification, also for the high-dimensional case. The article includes several examples which illustrate the use of this methodology for practical data analysis.}
+      \field{booktitle}{Comprehensive Chemometrics (Second Edition)}
+      \field{edition}{Second Edition}
+      \field{isbn}{978-0-444-64166-3}
+      \field{title}{2.30 - Compositional Data Analysis in Chemometrics}
+      \field{year}{2020}
+      \field{pages}{641\bibrangedash 662}
+      \range{pages}{22}
+      \verb{doi}
+      \verb https://doi.org/10.1016/B978-0-12-409547-2.14591-3
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/B9780124095472145913
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/B9780124095472145913
+      \endverb
+      \keyw{Aitchison geometry,Bootstrap,Classification,Compositional data,Linear discriminant analysis,Partial least squares,PLS-DA,Principal component analysis,Regression,Relative information,Validation}
+    \endentry
+    \entry{Fokianos:2009}{article}{}
+      \name{author}{3}{}{%
+        {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
+           family={Fokianos},
+           familyi={F\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+        {{hash=66d95daeca57d4a41f026cca8dd6224e}{%
+           family={Rahbek},
+           familyi={R\bibinitperiod},
+           given={Anders},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bef86b20d26f1ca869b076275b55f9ae}{%
+           family={Tjøstheim},
+           familyi={T\bibinitperiod},
+           given={Dag},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{f1c96d7dad76968d5beb729d9fd5ff62}
+      \strng{fullhash}{f1c96d7dad76968d5beb729d9fd5ff62}
+      \strng{bibnamehash}{f1c96d7dad76968d5beb729d9fd5ff62}
+      \strng{authorbibnamehash}{f1c96d7dad76968d5beb729d9fd5ff62}
+      \strng{authornamehash}{f1c96d7dad76968d5beb729d9fd5ff62}
+      \strng{authorfullhash}{f1c96d7dad76968d5beb729d9fd5ff62}
+      \field{labelalpha}{FRT09}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{488}
+      \field{title}{Poisson Autoregression}
+      \field{volume}{104}
+      \field{year}{2009}
+      \field{pages}{1430\bibrangedash 1439}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1198/jasa.2009.tm08270
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1198/jasa.2009.tm08270
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1198/jasa.2009.tm08270
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1198/jasa.2009.tm08270
+      \endverb
+    \endentry
+    \entry{Harvey:1989}{article}{}
+      \name{author}{2}{}{%
+        {{hash=8b5397bf9e5e04cda1789b21aeef1dba}{%
+           family={Harvey},
+           familyi={H\bibinitperiod},
+           given={A.\bibnamedelimi C.},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=447b148e9de7b57ac212ba41489f6e1d}{%
+           family={Fernandes},
+           familyi={F\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {[American Statistical Association, Taylor \& Francis, Ltd.]}%
+      }
+      \strng{namehash}{c05abadd79c74f70d7c2ae9f03f1af36}
+      \strng{fullhash}{c05abadd79c74f70d7c2ae9f03f1af36}
+      \strng{bibnamehash}{c05abadd79c74f70d7c2ae9f03f1af36}
+      \strng{authorbibnamehash}{c05abadd79c74f70d7c2ae9f03f1af36}
+      \strng{authornamehash}{c05abadd79c74f70d7c2ae9f03f1af36}
+      \strng{authorfullhash}{c05abadd79c74f70d7c2ae9f03f1af36}
+      \field{labelalpha}{HF89}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Time series sometimes consist of count data in which the number of events occurring in a given time interval is recorded. Such data are necessarily nonnegative integers, and an assumption of a Poisson or negative binomial distribution is often appropriate. This article sets ups a model in which the level of the process generating the observations changes over time. A recursion analogous to the Kalman filter is used to construct the likelihood function and to make predictions of future observations. Qualitative variables, based on a binomial or multinomial distribution, may be handled in a similar way. The model for count data may be extended to include explanatory variables. This enables nonstochastic slope and seasonal components to be included in the model, as well as permitting intervention analysis. The techniques are illustrated with a number of applications, and an attempt is made to develop a model-selection strategy along the lines of that used for Gaussian structural time series models. The applications include an analysis of the results of international football matches played between England and Scotland and an assessment of the effect of the British seat-belt law on the drivers of light-goods vehicles.}
+      \field{issn}{07350015}
+      \field{journaltitle}{Journal of Business \& Economic Statistics}
+      \field{number}{4}
+      \field{title}{Time Series Models for Count or Qualitative Observations}
+      \field{urlday}{4}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{volume}{7}
+      \field{year}{1989}
+      \field{urldateera}{ce}
+      \field{pages}{407\bibrangedash 417}
+      \range{pages}{11}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/1391639
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/1391639
+      \endverb
+    \endentry
+    \entry{Heinen:2003}{report}{}
+      \name{author}{1}{}{%
+        {{hash=292f2c267addac66b406ea4cbb077aa4}{%
+           family={Heinen},
+           familyi={H\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University Library of Munich, Germany}%
+      }
+      \strng{namehash}{292f2c267addac66b406ea4cbb077aa4}
+      \strng{fullhash}{292f2c267addac66b406ea4cbb077aa4}
+      \strng{bibnamehash}{292f2c267addac66b406ea4cbb077aa4}
+      \strng{authorbibnamehash}{292f2c267addac66b406ea4cbb077aa4}
+      \strng{authornamehash}{292f2c267addac66b406ea4cbb077aa4}
+      \strng{authorfullhash}{292f2c267addac66b406ea4cbb077aa4}
+      \field{labelalpha}{Hei03}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper introduces and evaluates new models for time series count data. The Autoregressive Conditional Poisson model (ACP) makes it possible to deal with issues of discreteness, overdispersion (variance greater than the mean) and serial correlation. A fully parametric approach is taken and a marginal distribution for the counts is specified, where conditional on past observations the mean is autoregressive. This enables to attain improved inference on coefficients of exogenous regressors relative to static Poisson regression, which is the main concern of the existing literature, while modelling the serial correlation in a flexible way. A variety of models, based on the double Poisson distribution of Efron (1986) is introduced, which in a first step introduce an additional dispersion parameter and in a second step make this dispersion parameter time-varying. All models are estimated using maximum likelihood which makes the usual tests available. In this framework autocorrelation can be tested with a straightforward likelihood ratio test, whose simplicity is in sharp contrast with test procedures in the latent variable time series count model of Zeger (1988). The models are applied to the time series of monthly polio cases in the U.S between 1970 and 1983 as well as to the daily number of price change durations of :75$ on the IBM stock. A .75$ price change duration is defined as the time it takes the stock price to move by at least .75$. The variable of interest is the daily number of such durations, which is a measure of intradaily volatility, since the more volatile the stock price is within a day, the larger the counts will be. The ACP models provide good density forecasts of this measure of volatility.}
+      \field{month}{7}
+      \field{number}{8113}
+      \field{title}{{Modelling Time Series Count Data: An Autoregressive Conditional Poisson Model}}
+      \field{type}{MPRA Paper}
+      \field{year}{2003}
+      \verb{urlraw}
+      \verb https://ideas.repec.org/p/pra/mprapa/8113.html
+      \endverb
+      \verb{url}
+      \verb https://ideas.repec.org/p/pra/mprapa/8113.html
+      \endverb
+      \keyw{Forecast; volatility; transactions data}
+    \endentry
+    \entry{Kynclova:2015}{article}{}
+      \name{author}{3}{}{%
+        {{hash=0545d5e6a07a5843e8443d7665f0dbc4}{%
+           family={Kynčlová},
+           familyi={K\bibinitperiod},
+           given={Petra},
+           giveni={P\bibinitperiod}}}%
+        {{hash=440840cf1a958f86ce96afdf0ed33447}{%
+           family={Filzmoser},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=49b157272ea2bc1f4c5617e4a013ae2f}{%
+           family={Hron},
+           familyi={H\bibinitperiod},
+           given={Karel},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{2897c7dceb1cebda99bd29f523d0c75d}
+      \strng{fullhash}{2897c7dceb1cebda99bd29f523d0c75d}
+      \strng{bibnamehash}{2897c7dceb1cebda99bd29f523d0c75d}
+      \strng{authorbibnamehash}{2897c7dceb1cebda99bd29f523d0c75d}
+      \strng{authornamehash}{2897c7dceb1cebda99bd29f523d0c75d}
+      \strng{authorfullhash}{2897c7dceb1cebda99bd29f523d0c75d}
+      \field{labelalpha}{KFH15}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Multivariate time series describing relative contributions to a total (like proportional data) are called compositional time series. They need to be transformed first to the usual Euclidean geometry before a time series model is fitted. It is shown how an appropriate transformation can be chosen, resulting in coordinates with respect to the Aitchison geometry of compositional data. Using vector autoregressive models, the standard approach based on raw data is compared with the compositional approach based on transformed data. The results from the compositional approach are consistent with the relative nature of the observations, while the analysis of the raw data leads to several inconsistencies and artifacts. The compositional approach is extended to the case when also the total of the compositional parts is of interest. Moreover, a concise methodology for an interpretation of the coordinates in the transformed space together with the corresponding statistical inference (like hypotheses testing) is provided. Copyright © 2015 John Wiley \& Sons, Ltd.}
+      \field{journaltitle}{Journal of Forecasting}
+      \field{number}{4}
+      \field{title}{Modeling Compositional Time Series with Vector Autoregressive Models}
+      \field{volume}{34}
+      \field{year}{2015}
+      \field{pages}{303\bibrangedash 314}
+      \range{pages}{12}
+      \verb{doi}
+      \verb https://doi.org/10.1002/for.2336
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/for.2336
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/for.2336
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/for.2336
+      \endverb
+      \keyw{VAR model,compositional data,isometric log-ratio transformation,Granger causality}
+    \endentry
+    \entry{Liboschik:2016}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=5f6ee9f4581227d4f04ae7c035b6dac8}{%
+           family={Liboschik},
+           familyi={L\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{5f6ee9f4581227d4f04ae7c035b6dac8}
+      \strng{fullhash}{5f6ee9f4581227d4f04ae7c035b6dac8}
+      \strng{bibnamehash}{5f6ee9f4581227d4f04ae7c035b6dac8}
+      \strng{authorbibnamehash}{5f6ee9f4581227d4f04ae7c035b6dac8}
+      \strng{authornamehash}{5f6ee9f4581227d4f04ae7c035b6dac8}
+      \strng{authorfullhash}{5f6ee9f4581227d4f04ae7c035b6dac8}
+      \field{labelalpha}{Lib16}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Modeling count time series following generalized linear models}
+      \field{year}{2016}
+    \endentry
+    \entry{Luetkepohl:2007}{book}{}
+      \name{author}{1}{}{%
+        {{hash=fabf6fc976497f6f73e23fb22dd67753}{%
+           family={Lütkepohl},
+           familyi={L\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{fabf6fc976497f6f73e23fb22dd67753}
+      \strng{fullhash}{fabf6fc976497f6f73e23fb22dd67753}
+      \strng{bibnamehash}{fabf6fc976497f6f73e23fb22dd67753}
+      \strng{authorbibnamehash}{fabf6fc976497f6f73e23fb22dd67753}
+      \strng{authornamehash}{fabf6fc976497f6f73e23fb22dd67753}
+      \strng{authorfullhash}{fabf6fc976497f6f73e23fb22dd67753}
+      \field{labelalpha}{Lüt07}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783540262398}
+      \field{title}{New Introduction to Multiple Time Series Analysis}
+      \field{year}{2007}
+      \verb{urlraw}
+      \verb https://books.google.at/books?id=muorJ6FHIiEC
+      \endverb
+      \verb{url}
+      \verb https://books.google.at/books?id=muorJ6FHIiEC
+      \endverb
+    \endentry
+    \entry{Zucchini:1997}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=0818c7dcf3ff3d2f062e5d0036cb70a6}{%
+           family={Macdonald},
+           familyi={M\bibinitperiod},
+           given={Lain},
+           giveni={L\bibinitperiod}}}%
+        {{hash=adfa66e4ce19b6784c6032d8668c823f}{%
+           family={MacDonald},
+           familyi={M\bibinitperiod},
+           given={Iain\bibnamedelima L.},
+           giveni={I\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=adfa66e4ce19b6784c6032d8668c823f}{%
+           family={MacDonald},
+           familyi={M\bibinitperiod},
+           given={Iain\bibnamedelima L.},
+           giveni={I\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{0852796eab31fa2b084a71d1095df03f}
+      \strng{fullhash}{0852796eab31fa2b084a71d1095df03f}
+      \strng{bibnamehash}{0852796eab31fa2b084a71d1095df03f}
+      \strng{authorbibnamehash}{0852796eab31fa2b084a71d1095df03f}
+      \strng{authornamehash}{0852796eab31fa2b084a71d1095df03f}
+      \strng{authorfullhash}{0852796eab31fa2b084a71d1095df03f}
+      \field{labelalpha}{MMM97}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Hidden Markov and Other Models for Discrete- valued Time Series}
+      \field{year}{1997}
+    \endentry
+    \entry{Qaqish:1988}{article}{}
+      \name{author}{1}{}{%
+        {{hash=022dfc2e1071d95c0df10b84f7f84ef1}{%
+           family={Zeger},
+           familyi={Z\bibinitperiod},
+           given={Scott\bibnamedelima L.},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {[Oxford University Press, Biometrika Trust]}%
+      }
+      \strng{namehash}{022dfc2e1071d95c0df10b84f7f84ef1}
+      \strng{fullhash}{022dfc2e1071d95c0df10b84f7f84ef1}
+      \strng{bibnamehash}{022dfc2e1071d95c0df10b84f7f84ef1}
+      \strng{authorbibnamehash}{022dfc2e1071d95c0df10b84f7f84ef1}
+      \strng{authornamehash}{022dfc2e1071d95c0df10b84f7f84ef1}
+      \strng{authorfullhash}{022dfc2e1071d95c0df10b84f7f84ef1}
+      \field{labelalpha}{Zeg88}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper discusses a model for regression analysis with a time series of counts. Correlation is assumed to arise from an unobservable process added to the linear predictor in a log linear model. An estimating equation approach used for parameter estimation leads to an iterative weighted and filtered least-squares algorithm. Asymptotic properties for the regression coefficients are presented. We illustrate the technique with an analysis of trends in U.S. polio incidence since 1970.}
+      \field{issn}{00063444}
+      \field{journaltitle}{Biometrika}
+      \field{number}{4}
+      \field{title}{A Regression Model for Time Series of Counts}
+      \field{urlday}{4}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{volume}{75}
+      \field{year}{1988}
+      \field{urldateera}{ce}
+      \field{pages}{621\bibrangedash 629}
+      \range{pages}{9}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/2336303
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/2336303
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

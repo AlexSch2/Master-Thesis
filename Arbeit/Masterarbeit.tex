@@ -1,0 +1,113 @@
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,twoside,12pt]{scrbook}
+
+
+%% Sprache Anpassungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[british]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{lmodern} %Type1-Schriftart für nicht-englische Texte
+
+
+%% Packages für Grafiken & Abbildungen %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%Zum Laden von Grafiken
+\usepackage{subfig} %%Teilabbildungen in einer Abbildung
+
+
+%% Packages für Formeln %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
+\usepackage{bbm} %für fette Ziffern, Nummern ect. 
+\usepackage{bm} %fette griechische Buchstaben
+
+
+%% Zeilenabstand %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{setspace}
+%\singlespacing        %% 1-zeilig (Standard)
+%\onehalfspacing       %% 1,5-zeilig
+%\doublespacing        %% 2-zeilig
+
+%% Verzeichnisse
+
+%Biblatex
+\usepackage[citestyle=alphabetic,bibstyle=authortitle]{biblatex}
+\usepackage{csquotes}
+\addbibresource{Literatur.bib}
+
+\usepackage{hyperref} %For clickable references
+
+
+%% Andere Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%Pdf Version for pdflatex
+\pdfminorversion=7
+
+%%Custom Commands
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%ABS
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%Norm
+\newcommand{\ClOp}{\mathcal{C}} %geschwungenes C für CoDA Funktion
+\newcommand{\SigA}{\mathcal{F}} %geschwungenes F für die Sigma Algebren
+\newcommand{\loglik}{\ell} %geschwungenes l für die log likelihood function
+\newcommand{\Tsp}{\mathcal{T}} %geschwungenes T für den T-Space
+
+
+%%
+\makeindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOKUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{empty} %%Keine Kopf-/Fusszeilen auf den ersten Seiten.
+
+%\input{deckblatt}
+
+%% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents %Inhaltsverzeichnis
+\cleardoublepage %Das erste Kapitel soll auf einer ungeraden Seite beginnen.
+
+\pagestyle{plain} %%Ab hier die Kopf-/Fusszeilen
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HAUPTTEIL MIT KAPITEL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+
+\chapter{Methodology }
+\input{Methode_Coda}
+
+\input{Methode_Ingarch}
+
+\input{Other_methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LITERATUR UND ANDERE VERZEICHNISSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addtocontents{toc}{\protect\vspace*{\baselineskip}}
+
+%% Literaturverzeichnis
+\printbibliography
+
+%% Abbildungsverzeichnis
+\clearpage
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+
+%% Tabellenverzeichnis
+\clearpage
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\listoftables
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ANHÄNGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+
+\end{document}
+
+
