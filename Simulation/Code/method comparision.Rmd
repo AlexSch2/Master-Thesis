@@ -41,7 +41,7 @@ if(all(ids == ids_all)){
 
 frame <- 0.5
 window_method <- "extending"
-save_results <- T
+save_results <- F
 HistoryLength <- 1
 
 #Ingarch specifications
@@ -57,7 +57,7 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = ids,
+    Id = 4,
     Frame = frame,
     OneVsAll = T,
     PivotGroup =  c("1", "2", "3", "4"),

@@ -104,147 +104,154 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
     # Selecting the fitting data and the data which should be predicted 
     TimeSeriesValue_Window <- Data_TransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1]
     Date <- Data_TransformWindow[[WindowIndex]]$timeSeriesValue_future[1, 1]
-    Window_Length <- dim(TimeSeriesValue_Window)[1]
-    
-    # # Calculating the max possible lag. Note 1
-    # D <- dim(TimeSeriesValue_Window)[2]
-    # lag.max <- (Window_Length-1)/D-1
-    # lag.max <- max(min(lag.max,floor((Window_Length-1)/(ncol(TimeSeriesValue_Window[,-1])+1))-1),1) # Note 1
-    # lag.max <- floor(max(min(Window_Length/10-1,lag.max*D),1)) #Note 2
-    # 
-    # #Note 2
-    # if(Window_Length/10 < (dim(TimeSeriesValue_Window)[2]-1))print("Choose a bigger frame if possible")
-    # 
-    # if(lag.max==1) {
-    #   lag.max <- NULL
-    # }
-    # 
     
     #Depending on whether we have TSpace or not we fit a VAR model or an AR model
+    ####TSPACE
     if (TSpace) {
+      Window_Length <- dim(TimeSeriesValue_Window)[1]
+      
       Model <- VAR(TimeSeriesValue_Window, p=1 ,lag.max = NULL, ic= "AIC")
       ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
       Size = 2
-    }
-    else{
-      Model <- ar(TimeSeriesValue_Window, aic = F, order.max = 1)
-      ValuePredict <- predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
-      Size = 1
-    }
-    
-    #Initialising result vectors
-    ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
-    LowerBound_Vector<- UpperBound_Vector <- vector(mode="numeric",length=Size)
-    
-    
-    #Filling up result vectors
-    for (i in 1:Size) {
-      ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
-      LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
-      UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
-    }
-    
-    
-    
-    TSum <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
-    
-    #Back transformations in case we use TSpace
-    if (TSpace) {
+      
+      #Initialising result vectors
+      ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
+      LowerBound_Vector<- UpperBound_Vector <- vector(mode="numeric",length=Size)
+      
+      #Filling up result vectors
+      for (i in 1:Size) {
+        ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
+        LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
+        UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
+      }
+      
+      
+      TSum <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
+      
+      #Back transformations
       ValuePredict <- ValuePredict_Vector[-Size] %>%
         matrix(nrow = 1) %>%
         D2invPC()
       
-      LowerBound <- LowerBound_Vector[-Size] %>% 
+      LowerBound <- LowerBound_Vector[-Size] %>%
         
         matrix(nrow = 1) %>%
         D2invPC()
       
-      UpperBound <- UpperBound_Vector[-Size] %>% 
+      UpperBound <- UpperBound_Vector[-Size] %>%
         matrix(nrow = 1) %>%
         D2invPC()
       
-    
+      
       # Back transformations when we use the log of the total sum
       if (Log) {
         ValuePredict <- ValuePredict * exp(ValuePredict_Vector[Size])
-        ValuePredict <- (append(ValuePredict, exp(ValuePredict_Vector[Size])))
+        ValuePredict <-
+          (append(ValuePredict, exp(ValuePredict_Vector[Size])))
         
         LowerBound <- LowerBound * exp(ValuePredict_Vector[Size])
-        LowerBound <- (append(LowerBound, exp(ValuePredict_Vector[Size])))
+        LowerBound <-
+          (append(LowerBound, exp(ValuePredict_Vector[Size])))
         
         UpperBound <- UpperBound * exp(ValuePredict_Vector[Size])
-        UpperBound <- (append(UpperBound, exp(ValuePredict_Vector[Size])))
+        UpperBound <-
+          (append(UpperBound, exp(ValuePredict_Vector[Size])))
         
       }
       # Normal back transformations
       else{
         ValuePredict <- ValuePredict * ValuePredict_Vector[Size]
-        ValuePredict <- (append(ValuePredict, ValuePredict_Vector[Size]))
+        ValuePredict <-
+          (append(ValuePredict, ValuePredict_Vector[Size]))
         
         LowerBound <- LowerBound * ValuePredict_Vector[Size]
-        LowerBound <- (append(LowerBound, ValuePredict_Vector[Size]))
+        LowerBound <-
+          (append(LowerBound, ValuePredict_Vector[Size]))
         
         UpperBound <- UpperBound * ValuePredict_Vector[Size]
-        UpperBound <- (append(UpperBound, ValuePredict_Vector[Size]))
+        UpperBound <-
+          (append(UpperBound, ValuePredict_Vector[Size]))
       }
       
-      ValuePredict_Naive <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1], 1))
-  
+      ValuePredict_Naive <-
+        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -1], 1))
+      
       #Getting true value and last known values
-      Window_Length <- dim(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window)[1]
-      ValueTrue <- as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[,-1])
-      ValueLastKnown <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1],n=1))
+      Window_Length <-
+        dim(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window)[1]
+      ValueTrue <-
+        as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[, -1])
+      ValueLastKnown <-
+        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -1], n =
+                          1))
       
       
       if (OneVsAll) {
         Category <- factor(c(PivotGroup, "other", "tsum"))
-      } 
+      }
       else{
         Category <- factor(c("1", "2", "tsum"))
       }
       
     }
-    #Back transformation if no TSpace was used 
+    ###No TSPACE
     else{
+      Window_Length <- length(TimeSeriesValue_Window)
+      
+      Model <- ar(TimeSeriesValue_Window, aic = F, order.max = 1)
+      ValuePredict <- predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
+      Size = 1
+      
+      #Initialising result vectors
+      ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
+      LowerBound_Vector<- UpperBound_Vector <- vector(mode="numeric",length=Size)
+      
+      #Filling up result vectors
+      for (i in 1:Size) {
+        ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
+        LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
+        UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
+      }
+      
+      
+      TSum <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
+      
+      #Back transformations
+      
       ValuePredict <- ValuePredict_Vector %>%
         matrix(nrow = 1) %>%
         D2invPC()
       ValuePredict <- ValuePredict * TSum
       
       
-      LowerBound <- LowerBound_Vector %>% 
+      LowerBound <- LowerBound_Vector %>%
         matrix(nrow = 1) %>%
         D2invPC()
-      LowerBound <- LowerBound * TSum
+      LowerBound <- as.vector(LowerBound * TSum)
       
       
-      UpperBound <- UpperBound_Vector %>% 
+      UpperBound <- UpperBound_Vector %>%
         matrix(nrow = 1) %>%
         D2invPC()
-      UpperBound <- UpperBound * TSum
+      UpperBound <- as.vector(UpperBound * TSum)
       
       
-      ValueTrue <- as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[,-c(1, 4)])
+      ValueTrue <-
+        as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[, -c(1, 4)])
+      ValueLastKnown <-
+        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], n =
+                          1))
       
       if (OneVsAll) {
         Category <- factor(c(PivotGroup, "other"))
-      } 
+      }
       else{
         Category <- factor(c("1", "2"))
       }
       
-  
-      #Naive prediction values. For the first time point this is the median, for the rest it is the last known value
-      # if (WindowIndex == 1) {
-      #   ValuePredict_Naive <- apply(Data_NoTransform[,-c(1, 4)], 2, median, na.rm = TRUE)
-      #   } 
-      # else{
-      #     ValuePredict_Naive <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-c(1, 4)], 1))
-      # }
-      
-      ValuePredict_Naive <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-c(1, 4)], 1))
+      ValuePredict_Naive <-
+        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], 1))
     }
-    
     
     ValuePredict <- round(as.numeric(ValuePredict))
     PredictionError <- as.numeric(ValuePredict - ValueTrue)
@@ -295,7 +302,7 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
             category = Category,
             date = Date,
             window = WindowIndex,
-            window_length = dim(TimeSeriesValue_Window)[1],
+            window_length = length(TimeSeriesValue_Window),
             window_baseLength = Frame
         ),
         model = Model
@@ -503,12 +510,13 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                HistoryLength = HistoryLength) %>% arrange(week_date)
         
         
-        #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
+        #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed.
+        Frame_Help <- "fixed"
         if(dim(Data_Transform)[1]<5){
-          print(paste("Insufficient data. Skipping ID: ",Id_RunVariable))
           return(NA)
         }
         if(Frame < 1){
+          Frame_Help <- as.character(Frame)
           Frame = round(Frame*dim(Data_Transform)[1])
           if(Frame < 4){
             Frame = 4
