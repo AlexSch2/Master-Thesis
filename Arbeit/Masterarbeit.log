@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  14 APR 2023 08:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  14 APR 2023 14:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1097,36 +1097,45 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 188.
 
 ) (Methode_Ingarch.tex [9] [10] [11]) (Other_methods.tex) [12]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
-3.
+chapter 3.
+(Model_Specification.tex [13
 
-(C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd
+
+]
+
+LaTeX Warning: Reference `eq: Ingarch model with external effect' on page 14 un
+defined on input line 34.
+
+) [14]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
+6.
+ (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (7.2189pt too wide) in paragraph at lines 94--94
+Overfull \hbox (7.2189pt too wide) in paragraph at lines 97--97
 \T1/lmr/m/sc/12 url\T1/lmr/m/n/12 : []$\T1/lmtt/m/n/12 https : / / www . scienc
 edirect . com / science / article / pii / S0167715212000259$[]\T1/lmr/m/n/12 . 
 
  []
 
-[13
+[15
 
 
 ]
-Overfull \hbox (0.56573pt too wide) in paragraph at lines 94--94
+Overfull \hbox (0.56573pt too wide) in paragraph at lines 97--97
 [][]\T1/lmr/m/n/12 Lütkepohl, H. \T1/lmr/m/it/12 New In-tro-duc-tion to Mul-tip
 le Time Series Ana-lysis\T1/lmr/m/n/12 . Springer Ber-lin Heidel-
  []
 
-[14] (Masterarbeit.lof)
+[16] (Masterarbeit.lof)
 \tf@lof=\write7
 \openout7 = `Masterarbeit.lof'.
 
- [15
+ [17
 
 
 
-] [16
+] [18
 
 
 
@@ -1134,7 +1143,10 @@ le Time Series Ana-lysis\T1/lmr/m/n/12 . Springer Ber-lin Heidel-
 \tf@lot=\write8
 \openout8 = `Masterarbeit.lot'.
 
- [17] (Masterarbeit.aux)
+ [19] (Masterarbeit.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `Masterarbeit.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
@@ -1142,10 +1154,10 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24935 strings out of 476300
- 466197 string characters out of 5784939
+ 24956 strings out of 476300
+ 466875 string characters out of 5784939
  1867382 words of memory out of 5000000
- 44960 multiletter control sequences out of 15000+600000
+ 44972 multiletter control sequences out of 15000+600000
  599252 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,15n,106p,10609b,2361s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1173,9 +1185,9 @@ ograms/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Alex/AppData/Local
 al/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppData/L
 ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/AppDat
 a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Masterarbeit.pdf (17 pages, 327713 bytes).
+Output written on Masterarbeit.pdf (19 pages, 338608 bytes).
 PDF statistics:
- 374 PDF objects out of 1000 (max. 8388607)
- 67 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 407 PDF objects out of 1000 (max. 8388607)
+ 73 named destinations out of 1000 (max. 500000)
+ 145 words of extra memory for PDF output out of 10000 (max. 10000000)
 

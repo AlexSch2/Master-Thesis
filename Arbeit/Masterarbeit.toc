@@ -15,8 +15,12 @@
 \contentsline {subsection}{\numberline {2.2.1}Motivation}{9}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}INGARCH Model}{10}{subsection.2.2.2}%
 \contentsline {subsubsection}{\nonumberline Estimation of the INGARCH Model}{11}{subsubsection*.11}%
-\contentsline {section}{\numberline {2.3}Other methods}{12}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Other Methods}{12}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Application}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Model Specifications}{13}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}CoDA Specifications}{13}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}INGARCH Specifications}{14}{subsection.3.1.2}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{Abbildungsverzeichnis}{15}{chapter*.12}%
-\contentsline {chapter}{Tabellenverzeichnis}{16}{chapter*.13}%
+\contentsline {chapter}{Abbildungsverzeichnis}{17}{chapter*.12}%
+\contentsline {chapter}{Tabellenverzeichnis}{18}{chapter*.13}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

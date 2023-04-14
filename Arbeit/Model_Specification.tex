@@ -1,4 +1,34 @@
-\section{Model Specification}
+\section{Model Specifications}
 \label{sec: Model Specification}
 
-As our data has a specific structure, some transformations can be made to increase performance and stability. The most prominent characteristic of our data is its amount of 0 or null values. As both CoDA and INGARCH can't handle an excessive amount of 0 values, we have to accommodate for this. 
+As our data has a specific structure, some transformations can be made to increase performance and stability. The most prominent characteristic of our data is its amount of 0 or null values. As both CoDA and INGARCH can't handle an excessive amount of 0 values, we have to accommodate for this. The concrete way to do this will be described in the following subsections. 
+
+Another varying factor is the length of the history. We define as history the length of the timeseries. While at first it may seem obvious to use as much data as possible, it may actually not always result in a better model. Older values may contain outdated information which influences the estimation the of parameters. Therefore we compare the performance of the models with various history lengths. 
+
+Closely related to the length of the history, is the shape of the window used. The window determines which values are used to estimate the parameters at each point in time. This includes both the initial length of it and the way it handles new values. As the different timeseries vary in length, we choose the possible window length as a fraction of the timeseries history. For the way how new values are handled, we focused on two different approaches. The first one uses a fixed window length. This means when a new time point is available, it will be included in the estimation while simultaneously the oldest time point will be removed from the estimation. This has the advantage of only using the most recent and relevant information. The second approach, extends the window at each point in time. When a new value is available, it is included in the estimation of the parameter. With this approach we have more data available at each step and combined with the varying history length we don't have to rely on information that is too old.
+
+\subsection{CoDA Specifications}
+\label{sec: Coda Specifications}
+
+As mentioned above the CoDA model must not include any zero values. Since in the CoDA context we see our data as relative data, a value of zero is not defined. Therefore we need to replace them. In order to keep things simple, we consider two options. The first one adds $0.5$ to all timeseries values. The second one only replaces zero values with $0.5$.
+
+As already hinted in the description of the methodology we consider the use of $\Tsp$-Spaces. For this, at each time point, we calculate the total amount and include it as an additional variable in the model. In addition we can choose to take the logarithm of the sum. 
+
+Another characteristic of our data are the low values for some categories of it. Even at the aggregated main category level there are instances with low values for some of the categories. This is the case especially for category 3 and 4. As such, we inspected a method which we call in the following one-vs-all. The principle is the following. A category is chosen as the pivot category. For all the chosen time points, at each point, the values of the other categories get summed up. Together with the pivot category, the sum of the other categories are then transformed as usual and the VAR model is calculated. All categories are chosen as a pivot category at one point and the predicted values of the pivot groups are then used as the final result. 
+
+
+\subsection{INGARCH Specifications}
+\label{sec: Ingarch Specifications}
+
+As with the CoDA model, we need to take care of the zero values. Again to keep things simple, we replace missing and zero values with 1. 
+
+As an alternative to the Poisson distribution in \ref{eq:Ingarch Distribution}, a negative binomial distribution can be used as well. This would change \ref{eq:Ingarch Distribution} to 
+
+\begin{equation*}
+p_t(y;\bm{\theta})=\mathbb{P}(Y_t=y | \SigA_{t-1}) = \frac{\Gamma(\phi+y)}{\Gamma(y+1)\Gamma(\phi)}\left(\frac{\phi}{\phi+\lambda_t}\right)^\phi\left(\frac{\lambda_t}{\phi+\lambda_t}\right)^y, \hspace{0.2cm} y \in \mathbb{N}_0.
+\label{eq:Ingarch negbinom Distribution}
+\end{equation*}
+
+With the negative Binomial Distribution the conditional variance can be larger than the conditional mean $\lambda_t = \mathbb{V}\left[Y_t | \SigA_{t-1}\right] > \mathbb{E}\left[Y_t | \SigA_{t-1}\right]$.
+
+As seen in the model \ref{eq: Ingarch model with external effect} we can also choose too include external factors or not. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. The values $p$ and $q$ are also varying parameters which have to be chosen. 
