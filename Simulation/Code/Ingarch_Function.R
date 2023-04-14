@@ -220,9 +220,9 @@ Ingarch.Analysis <- function(Data_Raw,
   if(TakeSubCategory){
     SubCategory_Column <- "sub_category_id"
     stopifnot(length(Category_Main)==1)
-    if(is.null(Category_Sub)){
-      Category_Sub <- unique(Data_Raw$sub_category_id)
-    }
+  }
+  if(is.null(Category_Sub)){
+    Category_Sub <- unique(Data_Raw$sub_category_id)
   }
   
   #Calculating Prediction results for all ids and each category

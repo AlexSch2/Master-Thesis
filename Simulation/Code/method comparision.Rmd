@@ -57,7 +57,7 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = 4,
+    Id = ids,
     Frame = frame,
     OneVsAll = T,
     PivotGroup =  c("1", "2", "3", "4"),
@@ -74,22 +74,22 @@ if(save_results){
 }
 
 
-ingarch_result <-
+ingarch_result4 <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids,
+    Id = 4,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = "2",
-    WindowMethod = "extending",
+    Category_Main = c("1","2","3","4"),
+    WindowMethod = "overlapping",
     ZeroHandling = "zero_to_one",
     External = F,
-    Multicore = T,
+    Multicore = F,
     NCores = 10,
     PastOb = 1,
     PastMean = 1,
     HistoryLength = HistoryLength,
-    TakeSubCategory = T
+    TakeSubCategory = F
   )
   
   if(save_results){
