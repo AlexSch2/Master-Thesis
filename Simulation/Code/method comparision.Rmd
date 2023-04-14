@@ -57,11 +57,11 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = ids,
+    Id = 4,
     Frame = frame,
     OneVsAll = T,
     PivotGroup =  c("1", "2", "3", "4"),
-    TSpace = T,
+    TSpace = F,
     Log = T,
     ZeroHandling = "all",
     WindowMethod = "extending",

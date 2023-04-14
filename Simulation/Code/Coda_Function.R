@@ -279,7 +279,7 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
             date = Date,
             pivotGroup = PivotGroup,
             window = WindowIndex,
-            window_length = dim(TimeSeriesValue_Window)[1],
+            window_length = Window_Length,
             window_baseLength = Frame
           ),
           model = Model
@@ -302,7 +302,7 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
             category = Category,
             date = Date,
             window = WindowIndex,
-            window_length = length(TimeSeriesValue_Window),
+            window_length = Window_Length,
             window_baseLength = Frame
         ),
         model = Model
