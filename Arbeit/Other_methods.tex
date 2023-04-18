@@ -1,2 +1,14 @@
 \section{Other Methods}
 \label{sec: Other methods}
+
+\subsection{Naive Random Walk}
+\label{sec: Naive Random Walk}
+
+This method acts as kind of benchmark model and is what is currently used for forecasting. Let $\left\{Y_t:t\in \mathbb{N}\right\}$ be again our timeseries. Then
+
+\begin{equation}
+\hat{Y}_{t+1} = Y_t ,\hspace{0.2cm} \forall t \in \mathbb{N}
+\label{eq: Random Walk Model}
+\end{equation}
+
+where $\hat{Y}_{t}$ is the predicted value at time $t$. In other words, the last known value is the predicted value. 

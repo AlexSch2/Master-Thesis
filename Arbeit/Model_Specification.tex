@@ -32,3 +32,46 @@ p_t(y;\bm{\theta})=\mathbb{P}(Y_t=y | \SigA_{t-1}) = \frac{\Gamma(\phi+y)}{\Gamm
 With the negative Binomial Distribution the conditional variance can be larger than the conditional mean $\lambda_t = \mathbb{V}\left[Y_t | \SigA_{t-1}\right] > \mathbb{E}\left[Y_t | \SigA_{t-1}\right]$.
 
 As seen in the model \ref{eq: Ingarch model with external effect} we can also choose too include external factors or not. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. The values $p$ and $q$ are also varying parameters which have to be chosen. 
+
+
+\subsection{Error Measure}
+\label{sec: Error Measure}
+
+In order to compare the results of the methods with each other we will introduce a new error measure. The goal of this measure is to get a performance indicator for each fridge which can then be compared and summarised. Since the scales of the fridges vary, the measure should be scale independent. Because our data contains many zeros, we cannot use a percentage error measure. In addition we want to penalise big absolute difference between the predicted values and actual values. This leads us to the following measure.
+
+Let $i = 1,\ldots,T$ denote the point in time and $k=1,\ldots,K$ the category. Then $y_{ik}$ is the $i-th$ true value of the time series for category $k$, $\hat{y}_{ik}$ the predicted value and $y_{n_{ij}}$ the naive predicted value . Then we define our measure as
+
+\begin{equation}
+\frac{\sum_{k=1}^{K}\sum_{i}^T(y_{ik}-\hat{y}_{ik})^2}{\sum_{k=1}^{K}\sum_{i}^T(y_{ik}-y_{naive_{ik}})^2}.
+\label{eq: Error Measure}
+\end{equation}
+
+With the use of the squared difference we penalise big deviations from the true value. By taking the naive random walk model as a benchmark, we achieve scale independence and are able to compare the performance of our model over different timeseries. This error measure is basically the ration of the mean MSEs for the chosen model and the naive random walk model
+
+\begin{equation}
+\frac{\frac{1}{K}\sum_{k=1}^K MSE_k}{\frac{1}{K}\sum_{k=1}^K MSE_{naive_k}}.
+\label{eq: Error Measure MSE}
+\end{equation}
+
+If the ratio is below 1, the mean of the MSEs of our methods is lower than that of the naive method and vice versa. This provides a performance indicator for our models. 
+
+\subsubsection{Extension of the Error Measure}
+\label{sec:Error Measure Extension}
+
+The measure in \ref{eq: Error Measure} can be further extended. For example, by allowing to use a subset of all possible categories instead of all. Let $G_K \subset \left\{1,\ldots,K\right\}$ then
+
+\begin{equation}
+\frac{\sum_{k \in G_K}\sum_{i}^T(y_{ik}-\hat{y}_{ik})^2}{\sum_{k \in G_K}\sum_{i}^T(y_{ik}-y_{naive_{ik}})^2}.
+\label{eq: Error Measure Subsets}
+\end{equation}
+
+This allows us to compare the performance on the subset of categories over various fridges. 
+
+Another possible extension is to take the square root
+
+\begin{equation}
+\frac{\sum_{k=1}^{K}\sqrt{\sum_{i}^T(y_{ik}-\hat{y}_{ik})^2}}{\sum_{k=1}^{K}\sqrt{\sum_{i}^T(y_{ik}-y_{naive_{ik}})^2}}.
+\label{eq: Error Measure Sqrt} 
+\end{equation}
+
+One future extension which can be investigated is the introduction of weights. This could be used for example when the performance of the model in one category should be put more into focus. 
