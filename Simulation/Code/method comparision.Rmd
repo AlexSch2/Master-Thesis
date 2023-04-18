@@ -559,9 +559,9 @@ Show whole timeseries
 ```{r}
 data_raw <- weekly_category_data %>%
           filter(fridge_id == FID&
-                   main_category_id %in% unique(ingarch_result$result$main_category)) %>%
+                   main_category_id %in% unique(ingarch_result$result$category)) %>%
           dplyr::select(week_date, main_category_id, sub_category_id, sold) %>%
-          Data.Preparation(Category = unique(ingarch_result$result$category),TakeSubCategory = T) %>% 
+          Data.Preparation(Category = unique(ingarch_result$result$category),TakeSubCategory = F) %>% 
           pivot_longer(cols=unique(ingarch_result$result$category),names_to="category",values_to="valueTrue")
 names(data_raw)[1] <- c("date")
         

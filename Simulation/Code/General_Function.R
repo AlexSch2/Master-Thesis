@@ -80,6 +80,7 @@ Data.Preparation <- function(Data_Raw,
     Data_Raw <- subset(Data_Raw,select = -main_category_id)
   }else{
     Category_Var <- "main_category_id"
+    Data_Raw <- subset(Data_Raw,select = -sub_category_id)
   }
 
   
@@ -88,7 +89,8 @@ Data.Preparation <- function(Data_Raw,
     Data_Raw <- Data_Raw %>%
     dplyr::filter(get(Category_Var) %in% Category) %>%
     group_by(across(all_of(Category_Var)), week_date) %>%
-    dplyr::mutate(sold = sum(sold)) %>%
+    dplyr::mutate(sold = sum(sold)) %>% 
+    dplyr::select(any_of(c("week_date",Category_Var,"sold"))) %>%
     dplyr::distinct() %>%
     pivot_wider(names_from
                 = Category_Var, values_from = sold) %>%
