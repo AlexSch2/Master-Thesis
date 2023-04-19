@@ -1,0 +1,136 @@
+\documentclass[a4paper,11pt,bibliography=totoc,listof=totoc,headinclude=true,cleardoublepage=empty,oneside]{scrbook}
+% Option "oneside" für einseitigen Druck. Weglassen, falls die Arbeit doppelseitig gedruckt wird
+
+\usepackage[english,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{color}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{psfrag}
+
+% links in pdf
+%\usepackage[unicode,colorlinks=true,pagebackref=false]{hyperref}
+
+% Zum Druck verwende schwarze Links!
+%\usepackage[unicode,colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black,pagebackref=false]{hyperref} 
+	% colorlinks=false umrahmt Links statt einzufaerben, 
+
+
+% document style
+\KOMAoptions{footinclude=false} % Fusszeile wird nicht zu Satzspiegel gezaehlt
+\KOMAoptions{headsepline=true} % Trennlinie zwischen Kopfzeile und Text
+\KOMAoptions{DIV=12} % beeinflusst Satzspiegel
+\KOMAoptions{BCOR=8mm} % Bindekorrektur
+\pagestyle{headings} % mit Kopfzeilen
+
+\recalctypearea % berechne Satzspiegel neu
+
+%\definecolor{change}{rgb}{0,.55,.55}
+\definecolor{change}{rgb}{1,0,0}
+
+\def\revision#1{{\color{red}#1}}
+
+%%%%MEINS%%%%%
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Satz}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Bemerkung}[section]
+
+\theoremstyle{example}
+\newtheorem{example}{Beispiel}[section]
+
+\theoremstyle{lemma}
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{corollary}
+\newtheorem{corollary}{Korollar}[section]
+
+\theoremstyle{proposition}
+\newtheorem{proposition}{Proposition}[section]
+
+\usepackage{dsfont}%indikatorfunkt
+\usepackage{subfig}
+
+\usepackage{mathtools}
+\usepackage{float} %um Bild an eine Position zu forcen
+\usepackage{bm}% bold math
+\usepackage{stmaryrd} %Widerspruchzeichen
+\usepackage{censor} %zensieren von Adresse
+\usepackage[autostyle]{csquotes} %englische Anfürungszeichen
+
+
+%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITELSEITE [OBLIGATORISCH]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{Alph}
+\selectlanguage{ngerman}
+
+\begin{titlepage}
+  %\vspace*{-2cm}
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{TULogo.eps}
+    \vskip 1cm
+    {\LARGE D~\Large I~P~L~O~M~A~R~B~E~I~T}
+    \vskip 8mm
+    {\huge\bfseries Edgeworth-Entwicklung von Optionspreisen}
+    \vskip 8mm
+    \large 
+    Zur Erlangung des akademischen Grades
+    \vskip 5mm
+    {\Large\bfseries Diplom-Ingenieur}
+    \vskip 5mm
+    Im Rahmen des Masterstudiums
+    \vskip 5mm
+    {\Large\bfseries Finanz- und Versicherungsmathematik}
+    \vskip 5mm
+    {Ausgef\"uhrt am}
+    \vskip 5mm
+    {\Large Institut f\"ur Stochastik und Wirtschaftsmathematik}\\[1ex]
+    {\Large Fakult\"at f\"ur Mathematik und Geoinformation}\\[1ex]
+    {\Large Technische Universit\"at Wien}
+    \vskip 5mm
+    Unter der Anleitung von
+    \vskip 5mm
+    {\Large\bfseries Univ.Prof. Dipl.-Ing. Dr.techn. Stefan Gerhold}
+    \vskip 5mm
+    Eingereicht von
+    \vskip 5mm
+    {\Large\bfseries Markus Feyertag, BSc}\\[1ex]
+    Matrikelnummer: {11778904}
+  \end{center}
+  
+  \vfill
+  
+  \small
+\begin{tabular}{cccc}
+Wien, am 15. November 2022 & & \makebox[4.21cm]{\hrulefill} & \makebox[4.21cm]{\hrulefill}\\
+ & & Markus Feyertag (Verfasser) & Stefan Gerhold (Betreuer)
+\end{tabular}
+\end{titlepage}
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% KURZFASSUNG AUF DEUTSCH [OBLIGATORISCH]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

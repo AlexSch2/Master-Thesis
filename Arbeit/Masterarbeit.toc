@@ -1,29 +1,30 @@
 \babel@toc {british}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Methodology}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1}CoDA}{5}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Motivation}{5}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Preliminaries}{5}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Common Transformations}{6}{subsection.2.1.3}%
-\contentsline {subsubsection}{\nonumberline alr Coordinates}{6}{subsubsection*.3}%
-\contentsline {subsubsection}{\nonumberline clr Coefficients}{6}{subsubsection*.5}%
-\contentsline {subsubsection}{\nonumberline ilr Coordinates}{7}{subsubsection*.7}%
-\contentsline {subsection}{\numberline {2.1.4}The VAR Model}{8}{subsection.2.1.4}%
-\contentsline {subsubsection}{\nonumberline Estimation of the VAR Model}{9}{subsubsection*.9}%
-\contentsline {subsection}{\numberline {2.1.5}$\mathcal {T}$-Spaces}{9}{subsection.2.1.5}%
-\contentsline {section}{\numberline {2.2}INGARCH}{9}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Motivation}{9}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}INGARCH Model}{10}{subsection.2.2.2}%
-\contentsline {subsubsection}{\nonumberline Estimation of the INGARCH Model}{11}{subsubsection*.11}%
-\contentsline {section}{\numberline {2.3}Other Methods}{12}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Naive Random Walk}{12}{subsection.2.3.1}%
-\contentsline {chapter}{\numberline {3}Application}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Model Specifications}{13}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}CoDA Specifications}{13}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}INGARCH Specifications}{14}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Error Measure}{14}{subsection.3.1.3}%
-\contentsline {subsubsection}{\nonumberline Extension of the Error Measure}{15}{subsubsection*.13}%
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Methodology}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}CoDA}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Motivation}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Preliminaries}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Common Transformations}{8}{subsection.2.1.3}%
+\contentsline {subsubsection}{\nonumberline alr Coordinates}{8}{subsubsection*.3}%
+\contentsline {subsubsection}{\nonumberline clr Coefficients}{8}{subsubsection*.5}%
+\contentsline {subsubsection}{\nonumberline ilr Coordinates}{9}{subsubsection*.7}%
+\contentsline {subsection}{\numberline {2.1.4}The VAR Model}{10}{subsection.2.1.4}%
+\contentsline {subsubsection}{\nonumberline Estimation of the VAR Model}{11}{subsubsection*.9}%
+\contentsline {subsection}{\numberline {2.1.5}$\mathcal {T}$-Spaces}{11}{subsection.2.1.5}%
+\contentsline {section}{\numberline {2.2}INGARCH}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Motivation}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}INGARCH Model}{12}{subsection.2.2.2}%
+\contentsline {subsubsection}{\nonumberline Estimation of the INGARCH Model}{13}{subsubsection*.11}%
+\contentsline {section}{\numberline {2.3}Other Methods}{14}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Naive Random Walk}{14}{subsection.2.3.1}%
+\contentsline {chapter}{\numberline {3}Application}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Model Specifications}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}CoDA Specifications}{15}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}INGARCH Specifications}{16}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Error Measure}{16}{subsection.3.1.3}%
+\contentsline {subsubsection}{\nonumberline Extension of the Error Measure}{17}{subsubsection*.13}%
+\contentsline {section}{\numberline {3.2}Examples of model application}{17}{section.3.2}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{Abbildungsverzeichnis}{19}{chapter*.14}%
-\contentsline {chapter}{Tabellenverzeichnis}{20}{chapter*.15}%
+\contentsline {chapter}{List of Figures}{25}{chapter*.19}%
+\contentsline {chapter}{List of Tables}{26}{chapter*.20}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

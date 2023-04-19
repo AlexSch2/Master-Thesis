@@ -31,8 +31,8 @@ Plot.Timeseries <- function(Data_Raw,Id,Save=T,SubCategory=F,MainCategory=1,Text
       geom_line()+
       geom_point()+
       theme(text = element_text(size = TextSize))+
-      ggtitle(paste("Timeseries",sep=" "),subtitle = paste("Fride ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Value")+
+      ggtitle(paste("Timeseries",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
+      ylab("Units Sold")+
       xlab("Time")
       
     
@@ -73,16 +73,22 @@ Plot.TimeseriesIngarch <- function(Data_Raw,IngarchResult,Id,Save=T,SubCategory=
     PlotDataIngarch <- IngarchResult$result %>% filter(id==Id_RunVariable)
     
     #Creating the plot
-    Plot <- ggplot(PlotDataIngarch,aes(x=date,y=valuePredict))+
+    MyColour <- setNames(c("blue"),
+                         c("ingarch"))
+    MyNames <- setNames(c("INGARCH"),
+                        c("ingarch"))
+    
+    Plot <- ggplot(PlotDataIngarch,aes(x=date,y=valuePredict,col=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataIngarch$category)),scales = "free")+
-      geom_point(col="blue")+
-      geom_line(col="blue")+
+      geom_point()+
+      geom_line()+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       theme(text = element_text(size =TextSize))+
       ggtitle(paste("Timeseries with INGARCH Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Value")+
-      xlab("Time")
+      ylab("Units Sold")+
+      xlab("Time")+
+      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
     
     
     #Saving of the plot
@@ -114,16 +120,22 @@ Plot.TimeseriesCoda <- function(Data_Raw,CodaResult,Id,Save=T,TextSize=50){
     PlotDataCoda <- CodaResult$result %>% filter(id==Id_RunVariable & category %in% c(1,2,3,4))
     
     #Creating the plot
-    Plot <- ggplot(PlotDataCoda,aes(x=date,y=valuePredict))+
+    MyColour <- setNames(c("red" ),
+                         c("coda"))
+    MyNames <- setNames(c("CoDA"),
+                        c("coda"))
+    
+    Plot <- ggplot(PlotDataCoda,aes(x=date,y=valuePredict,col=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataCoda$category)),scales = "free")+
-      geom_point(col="red")+
-      geom_line(col="red")+
+      geom_point()+
+      geom_line()+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       theme(text = element_text(size =TextSize))+
       ggtitle(paste("Timeseries with CoDA Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Value")+
-      xlab("Time")
+      ylab("Units Sold")+
+      xlab("Time")+
+      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
     
     
     #Saving of the plot
@@ -173,12 +185,12 @@ Plot.TimeseriesCodaIngarch <- function(Data_Raw,CodaResult,IngarchResult,Id,Save
     Plot <- ggplot(PlotDataBoth,aes(x=date,y=valuePredict,col=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataCoda$category)),scales = "free")+
       geom_point()+
-      geom_line(data=PlotDataBoth,aes(x=date,y=valuePredict,col=model))+
+      geom_line()+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       theme(text = element_text(size =TextSize))+
       ggtitle(paste("Timeseries with both models",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Value")+
+      ylab("Units Sold")+
       xlab("Time")+
       scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
     
@@ -237,7 +249,7 @@ Plot.TimeseriesCodaIngarchPI <- function(Data_Raw,CodaResult,IngarchResult,Id,Sa
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       theme(text = element_text(size =TextSize))+
       ggtitle(paste("Timeseries with both models",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Value")+
+      ylab("Units Sold")+
       xlab("Time")+
       scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))+
       guides(fill="none")
