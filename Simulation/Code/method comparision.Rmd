@@ -9,6 +9,7 @@ source("General_Dependency.R")
 source("Coda_Function.R") 
 source("Ingarch_Function.R")
 source("General_Function.R")
+source("General_PlotFunctions.R")
 ```
 
 
