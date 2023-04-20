@@ -5,69 +5,205 @@ date: "2022-12-20"
 output: pdf_document
 ---
 
-```{r eval=FALSE}
-source("dependencies.R")
-source("coda_functions.R") #needed for windows function
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+source("General_Dependency.R")
+source("Coda_Function.R") 
+source("Ingarch_Function.R")
+source("General_Function.R")
+source("General_PlotFunctions.R")
 ```
 
 
+Plot parameters 
+```{r eval = FALSE}
+text_size <- 50
+save_plots <- F
+```
+
+
+Preparation
+```{r eval = FALSE}
+
+#Choosing only fridges with all 4 categories
+help1 <- weekly_category_data%>%
+  group_by(fridge_id)%>%
+  dplyr::select(main_category_id)%>%
+  unique()%>%
+  count(fridge_id)
+  
+ids_all <- help1$fridge_id[help1$n ==4]
+
+ids <- ids_all
+
+if(all(ids == ids_all)){
+  ids_save <- "_all_"
+}else {
+  ids_save <- paste(ids,collapse = "-")
+}
+
+frame <- 0.5
+window_method <- "extending"
+save_results <- F
+HistoryLength <- 1
+
+#Ingarch specifications
+MainCat <- 2
+
+```
+
+
+```{r r eval=FALSE, include=FALSE}
+ingarch_result <-
+  Ingarch.Analysis(
+    Data_Raw= weekly_category_data,
+    Id = 6,
+    Frame = frame,
+    Distribution = "poisson",
+    Category_Main = c("1"),
+    WindowMethod = "overlapping",
+    ZeroHandling = "zero_to_one",
+    External = F,
+    Multicore = F,
+    NCores = 10,
+    PastOb = 1,
+    PastMean = 1,
+    HistoryLength = HistoryLength,
+    TakeSubCategory = T
+  )
+  
+  if(save_results){
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),
+                                             "_win_lgth",gsub("[.]","",frame),"_history_lght",gsub("[.]","",HistoryLength),
+                                             "_MainCat",MainCat,".RData",sep="")))
+
+}
+```
+
+
+Loading previous results
 ```{r}
-ingarch10 <- load_obj("ingarch_result_ids4-6-8-12_ext_FALSEwin_lgth30_pobs1_pmeansu0.RData")
-ingarch11 <- load_obj("ingarch_result_ids4-6-8-12_ext_FALSEwin_lgth30_pobs1_pmeansu1.RData")
-ingarch12 <- load_obj("ingarch_result_ids4-6-8-12_ext_FALSEwin_lgth30_pobs1_pmeansu2.RData")
-ingarch20 <- load_obj("ingarch_result_ids4-6-8-12_ext_FALSEwin_lgth30_pobs2_pmeansu0.RData")
-ingarch21 <- load_obj("ingarch_result_ids4-6-8-12_ext_FALSEwin_lgth30_pobs2_pmeansu1.RData")
-ingarch22 <- load_obj("ingarch_result_ids4-6-8-12_ext_FALSEwin_lgth30_pobs2_pmeansu2.RData")
+ids <- unique(ingarch_result$result$id)
+PredictionStep <- 1
+frame <- unique(ingarch_result$result$frame)
+window_method <- unique(ingarch_result$result$windowMethod)
+save_results <- F
+HistoryLength <- unique(ingarch_result$result$history)
 
-ingarch_all_result<- rbind(ingarch10$results,
-                        ingarch11$results,
-                        ingarch12$results,
-                        ingarch20$results,
-                        ingarch21$results,
-                        ingarch22$results)
-
-
-distr<-unique(ingarch_all_result$distribution)
-zero_handling_ingarch <- unique(ingarch_all_result$zero_handling)
-external <- unique(ingarch_all_result$external)
+#Ingarch specifications
+distr<-unique(ingarch_result$result$distribution)
+zero_handling_ingarch <- unique(ingarch_result$result$zeroHandling)
+external <- unique(ingarch_result$result$external)
 if(external){
   external_plot <-"with external factors"
 }else external_plot <- ""
-past_means <- unique(ingarch_all_result$past_mean)
-past_obs <- unique(ingarch_all_result$past_obs)
+past_means <- unique(ingarch_result$result$pastMean)
+past_obs <- unique(ingarch_result$result$pastOb)
 ingarch_settings <- expand_grid(past_means,past_obs)
-
-
-
+MainCat <- unique(ingarch_result$result$main_category)
 ```
 
 
+Error measure calculations
 ```{r}
-for(FID in unique(ingarch_all_result$id)){
-  
-  
+Category <- as.numeric(unique(ingarch_result$result$category))
+
+ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse",Category = Category ) %>% 
+                       Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = Category )
+
+ingarch_model_error_split <- Model.Error(ingarch_result,Fnct = "Mse",Category =Category ) %>% 
+                             Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = as.list(Category))
+```
 
 
-plot_data_ingarch <- ingarch_all_result %>% dplyr::filter(id==FID)
-plot_data_ingarch<-full_join(plot_data_ingarch,all_dates_and_categories)
-plot_data_ingarch$model<-"ingarch"
-
-
-plot_data_ingarch <- tidyr::unite(plot_data_ingarch,"parameter",past_obs,past_mean,remove = F)
-
-p_ing <- ggplot(plot_data_ingarch,aes(y=prediction_error,x=prediction_date,col=parameter))+
-  facet_wrap(vars(category),nrow=length(unique(plot_data$category)),scales = "free")+
-  geom_point(size=1.5,aes(shape=model))+
-  geom_line()+
-  theme(text = element_text(size = text_size))+
-  geom_line(aes(y=0),col="black")+
-  ggtitle(paste("Prediction error over time ",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
+Error Boxplot by category
+```{r}
+psbs<-ggplot(ingarch_model_error_split,aes(x=model,y=error))+
+  facet_wrap(vars(group),ncol=length(unique(ingarch_model_error_split$group)),scales = "fixed")+
+  geom_boxplot()+
+  scale_y_continuous(limits=c(0,5))+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = text_size),axis.text.x = element_text(size=30))+
+  ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,"Main Cat.:",MainCat,sep=" "))
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("pred_err_ing_par_id",FID,"win_lgth",frame,".png",sep="")),plot=p_ing,height = 15,width = 20)
- 
-}
-  
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined",ids_save,"_histlgth",HistoryLength,"_win_lgth",frame,"_maincat",MainCat,".png",sep="")),plot=psbs,height = 15,width = 20)
 }
 ```
 
+
+Split Quantile Plot
+```{r}
+length <- ingarch_result$result %>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
+
+TimeSeries_Length <- data.frame(id = unique(ingarch_result$result$id),
+                                length = length$n/
+                                  (as.numeric(unique(ingarch_result$result$frame))*as.numeric(unique(ingarch_result$result$history))))
+```
+
+```{r}
+my_color_methods <- setNames(c("blue"),
+                     c("ingarch"))
+
+IngarchError_Sorted_split <- ingarch_model_error_split%>%group_by(group)%>%arrange(.,error)
+IngarchQuantiles_split  <- quantile(IngarchError_Sorted_split $error,na.rm = T)
+
+IngarchError_Sorted_split$index <- rep()
+
+for(group_runvar in IngarchError_Sorted_split$group){
+  IngarchError_Sorted_split$index[IngarchError_Sorted_split$group==group_runvar] <- seq(1:length(IngarchError_Sorted_split$index[IngarchError_Sorted_split$group==group_runvar]))
+}
+
+
+IngarchError_Sorted_split <- full_join(IngarchError_Sorted_split,TimeSeries_Length,bye ="id")
+
+Quantiles_Index_split  <- data.frame(quant_ind=round(quantile(1:length(unique(IngarchError_Sorted_split$id)))))
+
+
+Error_Sorted_split <- IngarchError_Sorted_split
+Error_Sorted_split$group <- as.factor(Error_Sorted_split$group)
+
+plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model,size=length))+
+  facet_wrap(vars(group),nrow=round(length(unique(IngarchError_Sorted_split$group))/2),scales = "free")+
+  geom_point()+
+  scale_y_continuous(limits=c(0,5))+
+  geom_hline(yintercept=1,linewidth=2)+
+# geom_point(data = CodaError_Sorted_split,aes(x=index,y=error,colour=model),size=3)+
+  geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index_split)+
+  theme(text = element_text(size = text_size))+
+  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
+  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,"Main Cat.:",MainCat,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Quantile_Plot_Split",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,"_maincat",MainCat,".png",sep="")),
+         plot=plot_quant_split,height = 15,width = 20)
+}
+```
+
+
+Quantile Plot
+```{r}
+my_color_methods <- setNames(c("blue"),
+                     c("ingarch"))
+
+IngarchError_Sorted <- ingarch_model_error %>% filter(model=="ingarch")%>%arrange(.,error)
+IngarchQuantiles <- quantile(IngarchError_Sorted$error,na.rm = T)
+IngarchError_Sorted$index <- seq(1:dim(IngarchError_Sorted)[1])
+IngarchError_Sorted <- full_join(IngarchError_Sorted,TimeSeries_Length,bye ="id")
+
+Quantiles_Index <- data.frame(quant_ind=findInterval(IngarchQuantiles,IngarchError_Sorted$error))
+
+plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error,colour=model,size=length))+
+  geom_point()+
+  scale_y_continuous(limits=c(0,5))+
+# geom_point(data = CodaError_Sorted,aes(x=index,y=error,colour=model,size=length))+
+  geom_hline(yintercept=1,linewidth=2)+
+  geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+  theme(text = element_text(size = text_size))+
+  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
+  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,"Main Cat.:",MainCat,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Quantile_Plot",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,"_maincat",MainCat,".png",sep="")),
+         plot=plot_quant,height = 15,width = 20)
+}
+```

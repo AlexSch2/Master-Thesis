@@ -46,7 +46,7 @@ save_results <- F
 HistoryLength <- 1
 
 #Ingarch specifications
-
+MainCat <- 2
 
 #Coda specifications
 
@@ -75,13 +75,13 @@ if(save_results){
 }
 
 
-ingarch_result4 <-
+ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 4,
+    Id = 6,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("1","2","3","4"),
+    Category_Main = c("1"),
     WindowMethod = "overlapping",
     ZeroHandling = "zero_to_one",
     External = F,
@@ -90,7 +90,7 @@ ingarch_result4 <-
     PastOb = 1,
     PastMean = 1,
     HistoryLength = HistoryLength,
-    TakeSubCategory = F
+    TakeSubCategory = T
   )
   
   if(save_results){
@@ -142,13 +142,13 @@ Error measure calculations
 ```{r}
 
 coda_model_error <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
-ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ingarch_result$result$category)))
 model_error <- rbind(coda_model_error,ingarch_model_error)
 
 
 
 coda_model_error_split <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
-ingarch_model_error_split <- Model.Error(ingarch_result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(6,7,9,10,13))
+ingarch_model_error_split <- Model.Error(ingarch_result,Fnct = "Mse",Category =as.numeric(unique(ingarch_result$result$category))) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(6,7,9,10,13))
 model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split)
 
                                              
@@ -306,8 +306,8 @@ TimeSeries_Length <- data.frame(id = unique(ingarch_result$result$id),
 ```
 
 ```{r}
-my_color_methods <- setNames(c("red", "blue"),
-                     c("coda","ingarch"))
+my_color_methods <- setNames(c("blue"),
+                     c("ingarch"))
 
 IngarchError_Sorted_split <- ingarch_model_error_split%>%group_by(group)%>%arrange(.,error)
 IngarchQuantiles_split  <- quantile(IngarchError_Sorted_split $error,na.rm = T)
@@ -328,7 +328,7 @@ Error_Sorted_split <- IngarchError_Sorted_split
 Error_Sorted_split$group <- as.factor(Error_Sorted_split$group)
 
 plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model,size=length))+
-  facet_wrap(vars(group),nrow=length(unique(IngarchError_Sorted_split$group)),scales = "free")+
+  facet_wrap(vars(group),nrow=round(length(unique(IngarchError_Sorted_split$group))/2),scales = "free")+
   geom_point()+
   scale_y_continuous(limits=c(0,5))+
   geom_hline(yintercept=1,linewidth=2)+
@@ -340,6 +340,34 @@ plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model,
 
 if(save_plots){
   ggsave(filename = here("Plots",paste("Quantile_Plot_Split",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,"_maincat",MainCat,".png",sep="")),plot=plot_quant_split,height = 15,width = 20)
+}
+```
+
+
+
+```{r}
+my_color_methods <- setNames(c("blue"),
+                     c("ingarch"))
+
+IngarchError_Sorted <- ingarch_model_error %>% filter(model=="ingarch")%>%arrange(.,error)
+IngarchQuantiles <- quantile(IngarchError_Sorted$error,na.rm = T)
+IngarchError_Sorted$index <- seq(1:dim(IngarchError_Sorted)[1])
+IngarchError_Sorted <- full_join(IngarchError_Sorted,TimeSeries_Length,bye ="id")
+
+Quantiles_Index <- data.frame(quant_ind=findInterval(IngarchQuantiles,IngarchError_Sorted$error))
+
+plot_quant <- ggplot(IngarchError_Sorted,aes(x=index,y=error,colour=model,size=length))+
+  geom_point()+
+  scale_y_continuous(limits=c(0,5))+
+# geom_point(data = CodaError_Sorted,aes(x=index,y=error,colour=model,size=length))+
+  geom_hline(yintercept=1,linewidth=2)+
+  geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+  theme(text = element_text(size = text_size))+
+  scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
+  ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,"Main Cat.:",MainCat,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("Quantile_Plot",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,"_maincat",MainCat,".png",sep="")),plot=plot_quant,height = 15,width = 20)
 }
 ```
 
