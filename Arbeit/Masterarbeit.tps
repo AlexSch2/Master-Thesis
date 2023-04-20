@@ -125,8 +125,8 @@ Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame6_View0,0]
-TopLine=0
-Cursor=4280
+TopLine=45
+Cursor=6691
 
 [Frame7]
 Flags=0
@@ -143,10 +143,10 @@ Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame7_View0,0]
-TopLine=68
-Cursor=4397
+TopLine=0
+Cursor=1796
 
 [SessionInfo]
 FrameCount=8
-ActiveFrame=7
+ActiveFrame=0
 

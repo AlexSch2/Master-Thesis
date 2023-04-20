@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  19 APR 2023 14:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  20 APR 2023 14:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1178,8 +1178,13 @@ ID24.png>
 Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
 /Ingarch_Timeseries_ID24.png  used on input line 60.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+ [18 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID4
+.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID
+24.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries
+_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseri
+es_ID24.png>]
 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID4.png
-, id=243, 1445.4pt x 1084.05pt>
+, id=253, 1445.4pt x 1084.05pt>
 File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID
 4.png Graphic file (type png)
 <use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID4
@@ -1188,7 +1193,7 @@ Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
 /Both_Timeseries_ID4.png  used on input line 74.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID24.pn
-g, id=244, 1445.4pt x 1084.05pt>
+g, id=254, 1445.4pt x 1084.05pt>
 File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID
 24.png Graphic file (type png)
 <use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID2
@@ -1197,7 +1202,7 @@ Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
 /Both_Timeseries_ID24.png  used on input line 80.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_ID4.p
-ng, id=247, 1445.4pt x 1084.05pt>
+ng, id=257, 1445.4pt x 1084.05pt>
 File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_
 ID4.png Graphic file (type png)
 <use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_I
@@ -1206,7 +1211,7 @@ Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
 /BothPI_Timeseries_ID4.png  used on input line 93.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_ID24.
-png, id=248, 1445.4pt x 1084.05pt>
+png, id=258, 1445.4pt x 1084.05pt>
 File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_
 ID24.png Graphic file (type png)
 <use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_I
@@ -1214,17 +1219,13 @@ D24.png>
 Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
 /BothPI_Timeseries_ID24.png  used on input line 99.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-) [18 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID
-4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_I
-D24.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeserie
-s_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeser
-ies_ID24.png>] [19 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Inga
-rch_Timeseries_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Ingarch_Timeseries_ID24.png>] [20 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbei
-t/Graphiken/Both_Timeseries_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arb
-eit/Graphiken/Both_Timeseries_ID24.png>] [21 <F:/Uni/Masterarbeit/Master-Thesis
-_git/Arbeit/Graphiken/BothPI_Timeseries_ID4.png> <F:/Uni/Masterarbeit/Master-Th
-esis_git/Arbeit/Graphiken/BothPI_Timeseries_ID24.png>] [22
+) [19 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeserie
+s_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Time
+series_ID24.png>] [20 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/B
+oth_Timeseries_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
+/Both_Timeseries_ID24.png>] [21 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/G
+raphiken/BothPI_Timeseries_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbe
+it/Graphiken/BothPI_Timeseries_ID24.png>] [22
 
 
 ]
@@ -1304,7 +1305,7 @@ ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Alex/AppData
 ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/Ap
 pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 
-Output written on Masterarbeit.pdf (27 pages, 2711065 bytes).
+Output written on Masterarbeit.pdf (27 pages, 2710630 bytes).
 PDF statistics:
  526 PDF objects out of 1000 (max. 8388607)
  96 named destinations out of 1000 (max. 500000)
