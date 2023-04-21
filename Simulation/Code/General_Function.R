@@ -80,7 +80,7 @@ Data.Preparation <- function(Data_Raw,
     Data_Raw <- subset(Data_Raw,select = -main_category_id)
   }else{
     Category_Var <- "main_category_id"
-    Data_Raw <- subset(Data_Raw,select = -sub_category_id)
+#    Data_Raw <- subset(Data_Raw,select = -sub_category_id)
   }
 
   

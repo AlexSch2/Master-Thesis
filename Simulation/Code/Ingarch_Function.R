@@ -281,18 +281,24 @@ Ingarch.Analysis <- function(Data_Raw,
       print("Starting Calculations")
     PredictionResult_AllCategory <- parLapply(Cluster1, Category,function(Category_RunVariable){
       
-      PredictionResult <- Ingarch.Prediction(Data_Window = Data_Window,
-                                             Category = Category_RunVariable,
-                                             PredictionStep = PredictionStep,
-                                             Frame = Frame,
-                                             Plot = F,
-                                             Distribution = Distribution,
-                                             WindowMethod = WindowMethod,
-                                             External = External,
-                                             PastOb = PastOb,
-                                             PastMean = PastMean)
-      #PredictionResult <- discard( PredictionResult, ~all(is.na(.x)))
-      
+      PredictionResult <- tryCatch(
+        expr = { Ingarch.Prediction(Data_Window = Data_Window,
+                                    Category = Category_RunVariable,
+                                    PredictionStep = PredictionStep,
+                                    Frame = Frame,
+                                    Plot = F,
+                                    Distribution = Distribution,
+                                    WindowMethod = WindowMethod,
+                                    External = External,
+                                    PastOb = PastOb,
+                                    PastMean = PastMean)},
+        error = function (e) e
+      )
+      if(inherits(PredictionResult,"error")){
+        print(paste("Error occured in prediction: ID",Id_RunVariable,", Category",Category_RunVariable,PredictionResult))
+        return(NA)
+      }
+
       return(list(result=bind_rows(PredictionResult$result),
                   model=PredictionResult$model))
       
@@ -304,17 +310,23 @@ Ingarch.Analysis <- function(Data_Raw,
     else {
       PredictionResult_AllCategory <- lapply(Category,function(Category_RunVariable){
         
-        PredictionResult <- Ingarch.Prediction(Data_Window = Data_Window,
-                                               Category = Category_RunVariable,
-                                               PredictionStep = PredictionStep,
-                                               Frame = Frame,
-                                               Plot = F,
-                                               Distribution = Distribution,
-                                               WindowMethod = WindowMethod,
-                                               External = External,
-                                               PastOb = PastOb,
-                                               PastMean = PastMean)
-        #PredictionResult <- discard( PredictionResult, ~all(is.na(.x)))
+        PredictionResult <- tryCatch(
+          expr = { Ingarch.Prediction(Data_Window = Data_Window,
+                                      Category = Category_RunVariable,
+                                      PredictionStep = PredictionStep,
+                                      Frame = Frame,
+                                      Plot = F,
+                                      Distribution = Distribution,
+                                      WindowMethod = WindowMethod,
+                                      External = External,
+                                      PastOb = PastOb,
+                                      PastMean = PastMean)},
+          error = function (e) e
+        )
+        if(inherits(PredictionResult,"error")){
+          print(paste("Error occured in prediction: ID",Id_RunVariable,", Category",Category_RunVariable,PredictionResult))
+          return(NA)
+        }
         
         return(list(result = bind_rows(PredictionResult$result),
                     model = PredictionResult$model))
@@ -322,10 +334,12 @@ Ingarch.Analysis <- function(Data_Raw,
       })
     }
     
-    #Transforming data in nicer format
+    #Transforming data in nicer format and removing NA values
+    NA_Index <- which(is.na(PredictionResult_AllCategory)==TRUE)
+    PredictionResult_AllCategory <- PredictionResult_AllCategory[!is.na(PredictionResult_AllCategory)]
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllCategory,"result"))
     Result_Model <- UnlistListElement(PredictionResult_AllCategory,"model")
-    names(Result_Model) <- Category
+    names(Result_Model) <- Category[-NA_Index]
     Result_Prediction$id <- Id_RunVariable
     Result_Prediction$windowMethod <- WindowMethod
     Result_Prediction$zeroHandling <- ZeroHandling

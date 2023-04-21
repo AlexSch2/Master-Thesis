@@ -100,4 +100,6 @@ res <- lapply(1:5,function(i){
   
 })
 
-res <- res[!is.na(res)]
+res_index <- which(is.na(res)==TRUE)
+
+

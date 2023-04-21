@@ -78,19 +78,19 @@ if(save_results){
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 6,
+    Id = 4,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("1"),
+    Category_Main = c("1","2","3","4"),
     WindowMethod = "overlapping",
-    ZeroHandling = "zero_to_one",
+    ZeroHandling = "none",
     External = F,
     Multicore = F,
     NCores = 10,
     PastOb = 1,
     PastMean = 1,
     HistoryLength = HistoryLength,
-    TakeSubCategory = T
+    TakeSubCategory = F
   )
   
   if(save_results){
