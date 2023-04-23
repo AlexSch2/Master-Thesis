@@ -1,0 +1,15 @@
+\section{Motivation}
+\label{sec:Motivation}
+
+\section{Data Description}
+\label{sec: Data Description}
+
+The foundation and starting step of our analysis is the structure of our data. Roughly speaking, we have multiple multivariate count data timeseries. Each timeseries represents a fridge and its values represent the number of items sold. The items sold, are categorised in 4 main categories and each main category is further split up in various sub categories. For a fridge $f$ denote this timeseries with 
+
+\begin{equation}
+\left\{\bm{Y}_t:t\in \mathbb{N}, \bm{Y}_t \in \mathbb{N}_0^K \right\}_f
+\label{eq:Timeseries definition}
+\end{equation}
+
+where $K$ stands for the number of categories and $\mathbb{N}_0^K := \underbrace{\mathbb{N}_0 \times \mathbb{N}_0}_{K-times}$. 
+The data is measured weekly and hence our points in time are equidistant. A special feature of our data is the amount of 0 and NA values. How they are handled is explained in later sections. 

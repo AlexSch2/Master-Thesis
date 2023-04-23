@@ -4,11 +4,11 @@
 \subsection{Naive Random Walk}
 \label{sec: Naive Random Walk}
 
-This method acts as kind of benchmark model and is what is currently used for forecasting. Let $\left\{Y_t:t\in \mathbb{N}\right\}$ be again our timeseries. Then
+This method acts as kind of benchmark model and is what is currently used for forecasting. Let $\left\{Y_{k_t}:t\in \mathbb{N}, Y_{k_t} \in \mathbb{N}_0\right\}_f$ be again the univariate timeseries for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then
 
 \begin{equation}
-\hat{Y}_{t+1} = Y_t ,\hspace{0.2cm} \forall t \in \mathbb{N}
+\hat{Y}_{k_{t+1}}= Y_{k_t} ,\hspace{0.2cm} \forall t \in \mathbb{N}, k=1,\ldots,K
 \label{eq: Random Walk Model}
 \end{equation}
 
-where $\hat{Y}_{t}$ is the predicted value at time $t$. In other words, the last known value is the predicted value. 
+where $\hat{Y}_{k_{t+1}}$ is the predicted value at time $t$. In other words, the last known value is the predicted value. 

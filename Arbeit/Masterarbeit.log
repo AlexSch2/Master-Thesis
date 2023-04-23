@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  20 APR 2023 14:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  23 APR 2023 14:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -878,7 +878,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'british'.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 62
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 64
 .
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -886,34 +886,34 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 (Masterarbeit.aux)
 \openout1 = `Masterarbeit.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-Package scrbase Info: activating british \partname on input line 62.
-Package scrbase Info: activating british \chaptername on input line 62.
-Package scrbase Info: activating british \appendixname on input line 62.
-Package scrbase Info: activating british \figurename on input line 62.
-Package scrbase Info: activating british \tablename on input line 62.
-Package scrbase Info: activating british \contentsname on input line 62.
-Package scrbase Info: activating british \listfigurename on input line 62.
-Package scrbase Info: activating british \listtablename on input line 62.
-Package scrbase Info: activating british \bibname on input line 62.
-Package scrbase Info: activating british \indexname on input line 62.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+Package scrbase Info: activating british \partname on input line 64.
+Package scrbase Info: activating british \chaptername on input line 64.
+Package scrbase Info: activating british \appendixname on input line 64.
+Package scrbase Info: activating british \figurename on input line 64.
+Package scrbase Info: activating british \tablename on input line 64.
+Package scrbase Info: activating british \contentsname on input line 64.
+Package scrbase Info: activating british \listfigurename on input line 64.
+Package scrbase Info: activating british \listtablename on input line 64.
+Package scrbase Info: activating british \bibname on input line 64.
+Package scrbase Info: activating british \indexname on input line 64.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
@@ -964,9 +964,9 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Masterarbeit.bbl' found.
  (Masterarbeit.bbl)
-Package biblatex Info: Reference section=0 on input line 62.
-Package biblatex Info: Reference segment=0 on input line 62.
-Package hyperref Info: Link coloring OFF on input line 62.
+Package biblatex Info: Reference section=0 on input line 64.
+Package biblatex Info: Reference segment=0 on input line 64.
+Package hyperref Info: Link coloring OFF on input line 64.
  (Masterarbeit.out) (Masterarbeit.out)
 \@outlinefile=\write5
 \openout5 = `Masterarbeit.out'.
@@ -978,7 +978,7 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 62.
+(scrbook)           before \begin{document} on input line 64.
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/bookmark\bookmark.st
 y
@@ -1046,7 +1046,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (20.41878pt too wide) in paragraph at lines 38--42
+Overfull \hbox (20.44907pt too wide) in paragraph at lines 38--42
 [][] 
  []
 
@@ -1059,15 +1059,15 @@ eps-converted-to.pdf>] [2
 
 
 ])
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 6
-9.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 7
+1.
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 (Masterarbeit.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 4.
+(Font)              <12> on input line 3.
 )
 \tf@toc=\write6
 \openout6 = `Masterarbeit.toc'.
@@ -1080,7 +1080,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 ]
 chapter 1.
-[5
+(Einleitung.tex) [5
 
 
 ] [6
@@ -1103,28 +1103,34 @@ lmm/b/it/12 x[] \OT1/lmr/m/n/12 = [][] \OMS/lmsy/m/n/12 2
 
 [10]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 188.
+(Font)              <14.4> on input line 189.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 188.
+(Font)              <10> on input line 189.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 188.
+(Font)              <7> on input line 189.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 188.
+(hyperref)                removing `math shift' on input line 189.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 188.
+(hyperref)                removing `math shift' on input line 189.
 
-) (Methode_Ingarch.tex [11] [12] [13]) (Other_methods.tex) [14]
+) (Methode_Ingarch.tex [11]
+Overfull \hbox (60.72424pt too wide) in paragraph at lines 22--23
+\T1/lmr/m/n/12 Take again our timeser-ies $[][]$ for fridge $\OML/lmm/m/it/12 f
+$ \T1/lmr/m/n/12 and de-note with $[][]$
+ []
+
+[12] [13]) (Other_methods.tex) [14]
 chapter 3.
 (Model_Specification.tex [15
 
 
-] [16]) (Examples_Applications.tex
+] [16]) (Examples_Applications.tex [17]
 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID4.png,
- id=216, 1445.4pt x 1084.05pt>
+ id=232, 1445.4pt x 1084.05pt>
 File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID4
 .png Graphic file (type png)
 <use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID4.
@@ -1133,7 +1139,7 @@ Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
 /Raw_Timeseries_ID4.png  used on input line 11.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID24.png
-, id=217, 1445.4pt x 1084.05pt>
+, id=233, 1445.4pt x 1084.05pt>
 File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID2
 4.png Graphic file (type png)
 <use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID24
@@ -1141,108 +1147,80 @@ File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID2
 Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
 /Raw_Timeseries_ID24.png  used on input line 17.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
- [17]
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID4.png
-, id=235, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID
-4.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID4
-.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Coda_Timeseries_ID4.png  used on input line 33.
+<Graphiken//Coda_Timeseries_ID4.png, id=240, 1445.4pt x 1084.05pt>
+File: Graphiken//Coda_Timeseries_ID4.png Graphic file (type png)
+<use Graphiken//Coda_Timeseries_ID4.png>
+Package pdftex.def Info: Graphiken//Coda_Timeseries_ID4.png  used on input line
+ 33.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID24.pn
-g, id=236, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID
-24.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID2
-4.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Coda_Timeseries_ID24.png  used on input line 39.
+<Graphiken//Coda_Timeseries_ID24.png, id=241, 1445.4pt x 1084.05pt>
+File: Graphiken//Coda_Timeseries_ID24.png Graphic file (type png)
+<use Graphiken//Coda_Timeseries_ID24.png>
+Package pdftex.def Info: Graphiken//Coda_Timeseries_ID24.png  used on input lin
+e 39.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries_ID4.
-png, id=240, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries
-_ID4.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries_
-ID4.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Ingarch_Timeseries_ID4.png  used on input line 54.
+<Graphiken//Ingarch_Timeseries_ID4.png, id=245, 1445.4pt x 1084.05pt>
+File: Graphiken//Ingarch_Timeseries_ID4.png Graphic file (type png)
+<use Graphiken//Ingarch_Timeseries_ID4.png>
+Package pdftex.def Info: Graphiken//Ingarch_Timeseries_ID4.png  used on input l
+ine 54.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries_ID24
-.png, id=241, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries
-_ID24.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries_
-ID24.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Ingarch_Timeseries_ID24.png  used on input line 60.
+<Graphiken//Ingarch_Timeseries_ID24.png, id=246, 1445.4pt x 1084.05pt>
+File: Graphiken//Ingarch_Timeseries_ID24.png Graphic file (type png)
+<use Graphiken//Ingarch_Timeseries_ID24.png>
+Package pdftex.def Info: Graphiken//Ingarch_Timeseries_ID24.png  used on input 
+line 60.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
  [18 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID4
 .png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Raw_Timeseries_ID
-24.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries
-_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseri
-es_ID24.png>]
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID4.png
-, id=253, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID
-4.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID4
-.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Both_Timeseries_ID4.png  used on input line 74.
+24.png>]
+<Graphiken//Both_Timeseries_ID4.png, id=257, 1445.4pt x 1084.05pt>
+File: Graphiken//Both_Timeseries_ID4.png Graphic file (type png)
+<use Graphiken//Both_Timeseries_ID4.png>
+Package pdftex.def Info: Graphiken//Both_Timeseries_ID4.png  used on input line
+ 74.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID24.pn
-g, id=254, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID
-24.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID2
-4.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Both_Timeseries_ID24.png  used on input line 80.
+<Graphiken//Both_Timeseries_ID24.png, id=258, 1445.4pt x 1084.05pt>
+File: Graphiken//Both_Timeseries_ID24.png Graphic file (type png)
+<use Graphiken//Both_Timeseries_ID24.png>
+Package pdftex.def Info: Graphiken//Both_Timeseries_ID24.png  used on input lin
+e 80.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_ID4.p
-ng, id=257, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_
-ID4.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_I
-D4.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/BothPI_Timeseries_ID4.png  used on input line 93.
+<Graphiken//BothPI_Timeseries_ID4.png, id=261, 1445.4pt x 1084.05pt>
+File: Graphiken//BothPI_Timeseries_ID4.png Graphic file (type png)
+<use Graphiken//BothPI_Timeseries_ID4.png>
+Package pdftex.def Info: Graphiken//BothPI_Timeseries_ID4.png  used on input li
+ne 93.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_ID24.
-png, id=258, 1445.4pt x 1084.05pt>
-File: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_
-ID24.png Graphic file (type png)
-<use F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_I
-D24.png>
-Package pdftex.def Info: F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/BothPI_Timeseries_ID24.png  used on input line 99.
+<Graphiken//BothPI_Timeseries_ID24.png, id=262, 1445.4pt x 1084.05pt>
+File: Graphiken//BothPI_Timeseries_ID24.png Graphic file (type png)
+<use Graphiken//BothPI_Timeseries_ID24.png>
+Package pdftex.def Info: Graphiken//BothPI_Timeseries_ID24.png  used on input l
+ine 99.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-) [19 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeserie
-s_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Time
-series_ID24.png>] [20 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/B
-oth_Timeseries_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken
-/Both_Timeseries_ID24.png>] [21 <F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/G
-raphiken/BothPI_Timeseries_ID4.png> <F:/Uni/Masterarbeit/Master-Thesis_git/Arbe
-it/Graphiken/BothPI_Timeseries_ID24.png>] [22
+)
+[19 <./Graphiken//Coda_Timeseries_ID4.png> <./Graphiken//Coda_Timeseries_ID24.p
+ng> <./Graphiken//Ingarch_Timeseries_ID4.png> <./Graphiken//Ingarch_Timeseries_
+ID24.png>] [20 <./Graphiken//Both_Timeseries_ID4.png> <./Graphiken//Both_Timese
+ries_ID24.png>] [21 <./Graphiken//BothPI_Timeseries_ID4.png> <./Graphiken//Both
+PI_Timeseries_ID24.png>] [22
 
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
-7.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+00.
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (7.2189pt too wide) in paragraph at lines 98--98
+Overfull \hbox (7.2189pt too wide) in paragraph at lines 101--101
 \T1/lmr/m/sc/12 url\T1/lmr/m/n/12 : []$\T1/lmtt/m/n/12 https : / / www . scienc
 edirect . com / science / article / pii / S0167715212000259$[]\T1/lmr/m/n/12 . 
 
  []
 
 [23]
-Overfull \hbox (0.56573pt too wide) in paragraph at lines 98--98
+Overfull \hbox (0.56573pt too wide) in paragraph at lines 101--101
 [][]\T1/lmr/m/n/12 Lütkepohl, H. \T1/lmr/m/it/12 New In-tro-duc-tion to Mul-tip
 le Time Series Ana-lysis\T1/lmr/m/n/12 . Springer Ber-lin Heidel-
  []
@@ -1271,10 +1249,10 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25092 strings out of 476300
- 473728 string characters out of 5784939
+ 25126 strings out of 476300
+ 472424 string characters out of 5784939
  1867382 words of memory out of 5000000
- 45066 multiletter control sequences out of 15000+600000
+ 45093 multiletter control sequences out of 15000+600000
  627900 words of font info for 118 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,15n,106p,10609b,2361s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1282,9 +1260,9 @@ Here is how much of TeX's memory you used:
 }{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}
 {C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.e
 nc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathi
-t.enc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ma
-thex.enc} <C:\Users\Alex\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dp
-i600\bbm12.pk><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
+t.enc} <C:\Users\Alex\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dpi60
+0\bbm12.pk>{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
+lm-mathex.enc}<C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
 ic/lm/lmbx12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
 ublic/lm/lmbx8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
 /public/lm/lmcsc10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/t
@@ -1296,18 +1274,19 @@ onts/type1/public/lm/lmmi6.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9
 eX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/Alex/AppData/Local/Programs/Mi
 KTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/Alex/AppData/Local/Programs/
 MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/Alex/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/Alex/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/Alex/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Alex/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Alex/AppData/L
-ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Alex/AppData
-/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppDa
-ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-
-Output written on Masterarbeit.pdf (27 pages, 2710630 bytes).
+s/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/Alex/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/Alex/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/Alex/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Alex/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Alex/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Alex/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppD
+ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+>
+Output written on Masterarbeit.pdf (27 pages, 2736126 bytes).
 PDF statistics:
- 526 PDF objects out of 1000 (max. 8388607)
- 96 named destinations out of 1000 (max. 500000)
- 224 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 544 PDF objects out of 1000 (max. 8388607)
+ 99 named destinations out of 1000 (max. 500000)
+ 240 words of extra memory for PDF output out of 10000 (max. 10000000)
 

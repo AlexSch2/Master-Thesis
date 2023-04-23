@@ -57,14 +57,14 @@ MainCat <- 2
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids_all,
+    Id = 10,
     Frame = frame,
-    Distribution = "poisson",
+    Distribution = "nbinom",
     Category_Main = c("1","2","3","4"),
     WindowMethod = "overlapping",
     ZeroHandling = "none",
     External = F,
-    Multicore = T,
+    Multicore = F,
     NCores = 10,
     PastOb = 1,
     PastMean = 1,

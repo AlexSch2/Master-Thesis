@@ -1,9 +1,9 @@
 \section{Examples of model application}
 \label{sec:Examples of model applicatio}
 
-To improve understanding of our data and the models we show some application of the models on some exemplary fridges. 
+To improve understanding of our data and the models we show some application of the models on some exemplary fridges. We choose fridges 4 and 24. Hence $f \in \left\{4,24\right\}$. Furthermore we start with analysing the aggregated 4 main categories which means $K=4$. 
 
-We first begin with plotting the values of timeseries. The x-axis shows the time and the y-axis the number of units sold. Since we have four main categories for each fridge, we have four subplots. 
+We first begin with plotting the values of timeseries. The x-axis shows the time and the y-axis the number of units sold. Since we have four main categorie for each fridge, we have four subplots. 
 
 \begin{figure}[htb]
 \centering
@@ -30,13 +30,13 @@ Next in figure \ref{fig:TS Coda}, we add the predictions of the CoDA model. For 
 \begin{figure}[htb]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID4.png}
+\includegraphics[width=\textwidth]{Coda_Timeseries_ID4.png}
 \caption{Fridge 4 with the CoDA model}
 \label{fig:Coda Fridge 4}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Coda_Timeseries_ID24.png}
+\includegraphics[width=\textwidth]{Coda_Timeseries_ID24.png}
 \caption{Fridge 24 with the CoDA model}
 \label{fig:Coda Fridge 24}
 \end{subfigure}
@@ -46,18 +46,18 @@ Next in figure \ref{fig:TS Coda}, we add the predictions of the CoDA model. For 
 
 
 
-In figure \ref{fig:TS Ingarch} we apply the INGARCH model to the timeseries. For this, we used the whole history, half of the data for the window length, extend the window at every time point, add one to all zero values and used the poisson distribution. We used no external factors and set $p=1, q=1$ in model \ref{eq:Ingarch model with external effect}. The general trend is again captured well and in the instance of \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
+In figure \ref{fig:TS Ingarch} we apply the INGARCH model to the timeseries. For this, we used the whole history $T_f$, half of the data for the initial window length $w_f=\frac{T_f}{2}$, extend the window at every time point, add one to all zero values and used the poisson distribution. We used no external factors and set $p=1, q=1$ in model \ref{eq:Ingarch model with external effect}. The general trend is again captured well and in the instance of \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
 
 \begin{figure}[htb]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries_ID4.png}
+\includegraphics[width=\textwidth]{Ingarch_Timeseries_ID4.png}
 \caption{Fridge 4 with the INGARCH model}
 \label{fig:Ingarch Fridge 4}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Ingarch_Timeseries_ID24.png}
+\includegraphics[width=\textwidth]{Ingarch_Timeseries_ID24.png}
 \caption{Fridge 24 with the INGARCH model}
 \label{fig:Ingarch Fridge 24}
 \end{subfigure}
@@ -71,13 +71,13 @@ To directly compare both models, we plot the predictions in one figure \ref{fig:
 \begin{figure}[htb]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID4.png}
+\includegraphics[width=\textwidth]{Both_Timeseries_ID4.png}
 \caption{Fridge 4 with the both models}
 \label{fig:Both Fridge 4}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.8\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/Both_Timeseries_ID24.png}
+\includegraphics[width=\textwidth]{Both_Timeseries_ID24.png}
 \caption{Fridge 24 with the both models}
 \label{fig:Both Fridge 24}
 \end{subfigure}
@@ -90,13 +90,13 @@ In order to get some further insight in the accuracy of our predictions, we adde
 \begin{figure}[htb]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_ID4.png}
+\includegraphics[width=\textwidth]{BothPI_Timeseries_ID4.png}
 \caption{Fridge 4 with the both models and their prediction intervals}
 \label{fig:BothPI Fridge 4}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.8\textwidth}
-\includegraphics[width=\textwidth]{F:/Uni/Masterarbeit/Master-Thesis_git/Arbeit/Graphiken/BothPI_Timeseries_ID24.png}
+\includegraphics[width=\textwidth]{BothPI_Timeseries_ID24.png}
 \caption{Fridge 24 with the both models and their prediction intervals}
 \label{fig:BothPI Fridge 24}
 \end{subfigure}
