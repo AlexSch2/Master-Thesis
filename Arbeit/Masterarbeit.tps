@@ -89,7 +89,7 @@ Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame4_View0,0]
-TopLine=158
+TopLine=167
 Cursor=9690
 
 [Frame5]

@@ -1,15 +1,15 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'Masterarbeit.blg'
-[139] biber-MSWIN64:340> INFO - === 
-[193] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
-[362] Biber.pm:979> INFO - Found 14 citekeys in bib section 0
+[138] biber-MSWIN64:340> INFO - === 
+[196] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
+[351] Biber.pm:979> INFO - Found 14 citekeys in bib section 0
 [378] Biber.pm:4419> INFO - Processing section 0
-[389] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
-[474] bibtex.pm:1713> INFO - LaTeX decoding ...
-[499] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
-[629] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[629] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
-[629] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-GB'
-[629] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
-[647] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
-[657] bbl.pm:763> INFO - Output to Masterarbeit.bbl
+[392] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
+[487] bibtex.pm:1713> INFO - LaTeX decoding ...
+[516] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
+[663] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
+[663] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[663] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-GB'
+[663] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
+[686] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
+[695] bbl.pm:763> INFO - Output to Masterarbeit.bbl
