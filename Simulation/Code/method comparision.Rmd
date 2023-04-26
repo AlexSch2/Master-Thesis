@@ -40,7 +40,7 @@ if(all(ids == ids_all)){
   ids_save <- paste(ids,collapse = "-")
 }
 
-frame <- 0.7
+frame <- 0.3
 window_method <- "extending"
 save_results <- F
 HistoryLength <- 1
@@ -86,7 +86,7 @@ ingarch_result <-
     ZeroHandling = "none",
     External = F,
     Multicore = T,
-    NCores = 4,
+    NCores = 10,
     PastOb = 1,
     PastMean = 1,
     HistoryLength = HistoryLength,
