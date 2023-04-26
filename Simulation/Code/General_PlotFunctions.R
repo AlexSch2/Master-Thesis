@@ -264,40 +264,130 @@ Plot.TimeseriesCodaIngarchPI <- function(Data_Raw,CodaResult,IngarchResult,Id,Sa
 
 
 
-#This function plots the boxplots of the error measures either by group or in total
+#This function plots the boxplot/quantile plot and histogram of the error measures either by group or in total
 
-Plot.ErrorMeasureBox <- function(CodaResult,IngarchResult,Split=T,Groups=list(1,2,3,4)){
+Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "history",Values,Split=T,
+                                 Groups=list(Group1=c(1,2),Group2=c(3,4))){
   
   if(Split){
+
+  }else{
     
-    coda_model_error_split <-Model.Error(CodaResult, Fnct = "Mse")%>% 
-      Model.ErrorOverall(Fnct = "sum", SplitByGroup = T)
-    
-    ingarch_model_error_split <- Model.Error(IngarchResult,Fnct = "Mse",Category = as.numeric(unique(IngarchResult$result$category))) %>% 
-      Model.ErrorOverall(Fnct = "sum",
-                         SplitByGroup = T,
-                         Groups = Groups)
-    
-    model_error_split <-rbind(coda_model_error_split, 
-                              ingarch_model_error_split)
-    
-    psb_zoomed<-ggplot(model_error,aes(x=model,y=error))+
-      geom_boxplot()+
-      scale_y_continuous(limits=c(0,3))+
-      geom_hline(yintercept =1,linewidth=2)+
-      theme(text = element_text(size = text_size),axis.text.x = element_text(size=30))+
-      ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
-    
-    if(save_plots){
-      ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined_zoomed",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psb_zoomed,height = 15,width = 20)
+    #Calculating the Error measure
+    i <- 1
+    for(Variation_RunVariable in Values){
+      CodaData <- Coda_Combined %>% filter(!!as.symbol(Variation) == Variation_RunVariable)
+      CodaModelError_Single <- Model.Error(CodaData,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+      CodaModelError_Single[paste(Variation)] <- Variation_RunVariable
+      
+      IngarchData <- Ingarch_Combined %>% filter(!!as.symbol(Variation) == Variation_RunVariable)
+      IngarchModelError_Single <- Model.Error(IngarchData,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+      IngarchModelError_Single[paste(Variation)] <- Variation_RunVariable
+      
+      if(i==1){
+        CodaModelError_All <- CodaModelError_Single
+        IngarchModelError_All <- IngarchModelError_Single
+      }
+      else{
+        CodaModelError_All <- rbind(CodaModelError_All,CodaModelError_Single)
+        IngarchModelError_All <- rbind(IngarchModelError_All,IngarchModelError_Single)
+      }
+      i <- i+1
     }
     
-  }
-  coda_model_error <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
-  ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ingarch_result$result$category)))
-  model_error <- rbind(coda_model_error,ingarch_model_error)
+    ModelErrorAll <- rbind(CodaModelError_All,IngarchModelError_All)
+    ModelErrorAll$model <- as.factor(ModelErrorAll$model)
+    levels(ModelErrorAll$model) <- list(CoDA = "coda", INGARCH = "ingarch")
   
-  
+    #Boxplot
+    BoxPlot <- ggplot(ModelErrorAll ,aes(x=model,y=error))+
+      facet_wrap(vars(!!as.symbol(Variation)),ncol=length(Values),scales = "fixed")+
+      geom_boxplot()+
+      scale_y_continuous(limits=c(0,5))+
+      geom_hline(yintercept =1,linewidth=2)+
+      theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
+      ggtitle(paste("Error measure Boxplot",sep=" "))+
+      xlab("Models")+
+      ylab("Errors")
+    
+      ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Box",ids_save,"_Variation_",Variation,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
+      
+      
+    #Quantile Plot
+    MyColour <- setNames(c("red", "blue"),
+                         c("CoDA","INGARCH"))
+      
+    i <- 1
+    for(Variation_RunVariable in Values){
+        
+        Ingarch_Combined_Single <- Ingarch_Combined %>% filter(!!as.symbol(Variation)==Variation_RunVariable)
+        length <- Ingarch_Combined_Single%>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
+        
+        TimeSeries_Length <- Ingarch_Combined_Single%>% group_by(id) %>% dplyr::summarise(n=unique(timeseriesLength))
+        
+        names(TimeSeries_Length) <- c("id","Length")
+        TimeSeries_Length$Length <- as.numeric(TimeSeries_Length$Length)
+        
+        
+        IngarchError_Sorted <- ModelErrorAll %>% filter(model=="INGARCH" & !!as.symbol(Variation)==Variation_RunVariable)%>%arrange(.,error)
+        IngarchQuantiles <- quantile(IngarchError_Sorted$error,na.rm = T)
+        IngarchError_Sorted$index <- seq(1:dim(IngarchError_Sorted)[1])
+        IngarchError_Sorted <- full_join(IngarchError_Sorted,TimeSeries_Length,bye ="id")
+        
+        Quantiles_Index <- data.frame(quant_ind=findInterval(IngarchQuantiles,IngarchError_Sorted$error))
+        
+        CodaError_Sorted <- ModelErrorAll  %>% filter(model=="CoDA" & !!as.symbol(Variation)==Variation_RunVariable)%>%arrange(.,error)
+        CodaQuantiles <- quantile(CodaError_Sorted$error,na.rm = T)
+        CodaError_Sorted$index <- seq(1:dim(CodaError_Sorted)[1])
+        CodaError_Sorted <- full_join(CodaError_Sorted,TimeSeries_Length,bye ="id")
+        
+        if(i==1){
+          CodaError_Sorted_All <- CodaError_Sorted
+          IngarchError_Sorted_All <- IngarchError_Sorted
+        }else{
+          CodaError_Sorted_All  <- rbind(CodaError_Sorted_All ,CodaError_Sorted)
+          IngarchError_Sorted_All <- rbind(IngarchError_Sorted_All,IngarchError_Sorted)
+        }
+        i <- i+1
+      }
+      
+      
+    QuantPlot <- ggplot(IngarchError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
+        facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free")+
+        geom_point()+
+        scale_y_continuous(limits=c(0,5))+
+        geom_point(data = CodaError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
+        geom_hline(yintercept=1,linewidth=2)+
+        geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+        theme(text = element_text(size = 50))+
+        scale_color_manual("Model", values = c(MyColour))+
+        ggtitle(paste("Error Measure sorted",sep=" "))
+      
+        ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Quant",ids_save,"_Variation_",Variation,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
+        
+        
+    #Histogram 
+        ModelErrorAll_Median <- ModelErrorAll %>% dplyr::group_by(!!as.symbol(Variation),model) %>% summarise(Median=median(error,na.rm=T))
+        ModelErrorAll_Mean <- ModelErrorAll %>% dplyr::group_by(!!as.symbol(Variation),model) %>% summarise(Mean=mean(error,na.rm=T))
+        
+        ModelErrorAll_MM <- full_join(ModelErrorAll_Mean,ModelErrorAll_Median,by=c("model",Variation)) %>% pivot_longer(cols=c("Mean","Median"),names_to="Type",values_to = "value")
+        
+        HistPlot <- ggplot(ModelErrorAll,aes(x=error,colour=model,fill=model))+
+          facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free")+
+          geom_histogram(bins=100,position = "identity",alpha=0.3,linewidth=1)+
+          scale_x_continuous(limits=c(0,8))+
+          scale_y_continuous(limits=c(0,12))+
+          geom_vline(xintercept = 1,linewidth=2)+
+          geom_vline(aes(xintercept=value,colour=model,linetype=Type),data = ModelErrorAll_MM ,linewidth=2)+
+          scale_color_manual("Legend", values = c(MyColour ))+
+          scale_fill_manual("Legend", values = c(MyColour ))+
+          theme(text = element_text(size = 50))+
+          ggtitle(paste("Error Measure Histogram",sep=" "))
+        
+          ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Histogram",ids_save,"_Variation_",Variation,".png",sep="")),plot=HistPlot,height = 15,width = 20)
 
   
+  
+  }
+
 }

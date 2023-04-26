@@ -103,3 +103,8 @@ res <- lapply(1:5,function(i){
 res_index <- which(is.na(res)==TRUE)
 
 
+test <- "namet"
+
+ x <- data.frame(y=1)
+x[paste(test)] <- 2
+x
