@@ -4,8 +4,10 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Time series for two fridges\relax }}{18}{figure.caption.16}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Time series with CoDA model\relax }}{19}{figure.caption.17}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Time series with INGARCH model\relax }}{19}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Time series with both models\relax }}{20}{figure.caption.19}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Time series with both models and their prediction intervals\relax }}{21}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Time series with INGARCH model\relax }}{20}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Time series with both models\relax }}{21}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Time series with both models and their prediction intervals\relax }}{22}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Comparison of different history lengths\relax }}{23}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Quantile Plot for different history lengths\relax }}{24}{figure.caption.24}%
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

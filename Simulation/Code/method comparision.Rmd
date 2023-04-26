@@ -40,10 +40,10 @@ if(all(ids == ids_all)){
   ids_save <- paste(ids,collapse = "-")
 }
 
-frame <- 0.5
+frame <- 0.7
 window_method <- "extending"
 save_results <- F
-HistoryLength <- 0.5
+HistoryLength <- 1
 
 #Ingarch specifications
 MainCat <- 2
