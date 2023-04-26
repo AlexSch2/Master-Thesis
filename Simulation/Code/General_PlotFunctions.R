@@ -261,3 +261,43 @@ Plot.TimeseriesCodaIngarchPI <- function(Data_Raw,CodaResult,IngarchResult,Id,Sa
     }
   }
 }
+
+
+
+#This function plots the boxplots of the error measures either by group or in total
+
+Plot.ErrorMeasureBox <- function(CodaResult,IngarchResult,Split=T,Groups=list(1,2,3,4)){
+  
+  if(Split){
+    
+    coda_model_error_split <-Model.Error(CodaResult, Fnct = "Mse")%>% 
+      Model.ErrorOverall(Fnct = "sum", SplitByGroup = T)
+    
+    ingarch_model_error_split <- Model.Error(IngarchResult,Fnct = "Mse",Category = as.numeric(unique(IngarchResult$result$category))) %>% 
+      Model.ErrorOverall(Fnct = "sum",
+                         SplitByGroup = T,
+                         Groups = Groups)
+    
+    model_error_split <-rbind(coda_model_error_split, 
+                              ingarch_model_error_split)
+    
+    psb_zoomed<-ggplot(model_error,aes(x=model,y=error))+
+      geom_boxplot()+
+      scale_y_continuous(limits=c(0,3))+
+      geom_hline(yintercept =1,linewidth=2)+
+      theme(text = element_text(size = text_size),axis.text.x = element_text(size=30))+
+      ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
+    
+    if(save_plots){
+      ggsave(filename = here("Plots",paste("Both_ErrorMeasure_combined_zoomed",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psb_zoomed,height = 15,width = 20)
+    }
+    
+  }
+  coda_model_error <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+  ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ingarch_result$result$category)))
+  model_error <- rbind(coda_model_error,ingarch_model_error)
+  
+  
+
+  
+}

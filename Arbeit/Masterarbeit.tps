@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=76
-Cursor=2439
+TopLine=83
+Cursor=2749
 
 [Frame1]
 Flags=0
@@ -36,7 +36,7 @@ Document=Deckblatt.tex
 
 [Frame1_View0,0]
 TopLine=1
-Cursor=1028
+Cursor=989
 
 [Frame2]
 Flags=0
@@ -54,7 +54,7 @@ Document=Einleitung.tex
 
 [Frame2_View0,0]
 TopLine=0
-Cursor=786
+Cursor=1315
 
 [Frame3]
 Flags=0
@@ -68,11 +68,11 @@ NormalPos.top=26
 NormalPos.right=2556
 NormalPos.bottom=875
 Class=LaTeXView
-Document=Methode_Coda.tex
+Document=Methode_Ingarch.tex
 
 [Frame3_View0,0]
-TopLine=138
-Cursor=10309
+TopLine=24
+Cursor=3690
 
 [Frame4]
 Flags=0
@@ -86,11 +86,11 @@ NormalPos.top=26
 NormalPos.right=2556
 NormalPos.bottom=875
 Class=LaTeXView
-Document=Methode_Ingarch.tex
+Document=Methode_Coda.tex
 
 [Frame4_View0,0]
-TopLine=0
-Cursor=3707
+TopLine=158
+Cursor=9690
 
 [Frame5]
 Flags=0
@@ -108,7 +108,7 @@ Document=Other_methods.tex
 
 [Frame5_View0,0]
 TopLine=0
-Cursor=273
+Cursor=32
 
 [Frame6]
 Flags=0
@@ -125,8 +125,8 @@ Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame6_View0,0]
-TopLine=21
-Cursor=3764
+TopLine=0
+Cursor=271
 
 [Frame7]
 Flags=0
@@ -143,10 +143,46 @@ Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame7_View0,0]
-TopLine=68
-Cursor=3017
+TopLine=0
+Cursor=3039
 
 [Frame8]
+Flags=0
+ShowCmd=1
+MinPos.x=-1
+MinPos.y=-1
+MaxPos.x=-1
+MaxPos.y=-1
+NormalPos.left=4
+NormalPos.top=26
+NormalPos.right=2556
+NormalPos.bottom=875
+Class=LaTeXView
+Document=Results.tex
+
+[Frame8_View0,0]
+TopLine=0
+Cursor=256
+
+[Frame9]
+Flags=0
+ShowCmd=1
+MinPos.x=-1
+MinPos.y=-1
+MaxPos.x=-1
+MaxPos.y=-1
+NormalPos.left=4
+NormalPos.top=26
+NormalPos.right=2556
+NormalPos.bottom=875
+Class=LaTeXView
+Document=Conclusion.tex
+
+[Frame9_View0,0]
+TopLine=0
+Cursor=0
+
+[Frame10]
 Flags=0
 ShowCmd=1
 MinPos.x=-1
@@ -160,11 +196,11 @@ NormalPos.bottom=875
 Class=BibTeXView
 Document=Literatur.bib
 
-[Frame8_View0,0]
+[Frame10_View0,0]
 TopLine=2
 Cursor=12909
 
 [SessionInfo]
-FrameCount=9
-ActiveFrame=2
+FrameCount=11
+ActiveFrame=0
 

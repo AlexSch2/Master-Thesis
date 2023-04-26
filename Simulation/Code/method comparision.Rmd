@@ -58,11 +58,11 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = 4,
+    Id = ids,
     Frame = frame,
     OneVsAll = T,
     PivotGroup =  c("1", "2", "3", "4"),
-    TSpace = F,
+    TSpace = T,
     Log = T,
     ZeroHandling = "all",
     WindowMethod = "extending",
@@ -78,14 +78,14 @@ if(save_results){
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 4,
+    Id = ids,
     Frame = frame,
     Distribution = "poisson",
     Category_Main = c("1","2","3","4"),
-    WindowMethod = "overlapping",
+    WindowMethod = "extending",
     ZeroHandling = "none",
     External = F,
-    Multicore = F,
+    Multicore = T,
     NCores = 10,
     PastOb = 1,
     PastMean = 1,
@@ -95,8 +95,7 @@ ingarch_result <-
   
   if(save_results){
   save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),
-                                             "_win_lgth",gsub("[.]","",frame),"_history_lght",gsub("[.]","",HistoryLength),
-                                             "_MainCat",MainCat,".RData",sep="")))
+                                             "_win_lgth",gsub("[.]","",frame),"_history_lght",gsub("[.]","",HistoryLength),".RData",sep="")))
 
 }
 ```
@@ -136,6 +135,43 @@ if(!identical(ids,unique(ingarch_result$result$id)) ||
   stop("Ingarch and Coda base specifications differ")
 }
 ```
+```{r}
+Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth05_history_lght1.RData")
+Coda05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth05_history_lght05.RData")
+
+Ingarch1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_win_lgth05_history_lght1.RData")
+Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_win_lgth05_history_lght05.RData")
+
+Coda_Combined <- rbind(Coda1$result,Coda05$result)
+Ingarch_Combined <- rbind(Ingarch1$result,Ingarch05$result)
+
+History <- unique(coda_combined$history)
+
+
+i <- 1
+for(History_RunVariable in History){
+  CodaData <- Coda_Combined %>% filter(history == History_RunVariable)
+  CodaModelError_Single <- Model.Error(CodaData,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+  CodaModelError_Single$history <- History_RunVariable
+  
+  IngarchData <- Ingarch_Combined %>% filter(history == History_RunVariable)
+  IngarchModelError_Single <- Model.Error(IngarchData,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+  IngarchModelError_Single$history <- History_RunVariable
+  
+  if(i==1){
+    CodaModelError_All <- CodaModelError_Single
+    IngarchModelError_All <- IngarchModelError_Single
+  }
+  else{
+    CodaModelError_All <- rbind(CodaModelError_All,CodaModelError_Single)
+    IngarchModelError_All <- rbind(IngarchModelError_All,IngarchModelError_Single)
+  }
+  i <- i+1
+}
+
+```
+
+
 
 
 Error measure calculations
@@ -497,8 +533,8 @@ plot_data <- bind_rows(plot_data_coda, plot_data_ingarch) %>% dplyr::select(!c(d
 ```{r eval=FALSE, include=FALSE}
 FID = 6
 
-ingarch_ext <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_FALSE_win_lgth05_pobs2_pmeansu1.RData")
-ingarch_norm <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_TRUE_win_lgth05_pobs1_pmeansu1.RData")
+ingarch1 <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_FALSE_win_lgth05_pobs2_pmeansu1.RData")
+ingarch2 <- Object.Load("F:/Uni/Masterarbeit/Simulation/Master-Thesis/Code/results/ingarch_result_ids_all__ext_TRUE_win_lgth05_pobs1_pmeansu1.RData")
 frame <- 0.5
 
 plot_data_ingarch_ext <- ingarch_ext$result %>% dplyr::filter(id==FID)

@@ -90,7 +90,7 @@ Data.Preparation <- function(Data_Raw,
     dplyr::filter(get(Category_Var) %in% Category) %>%
     group_by(across(all_of(Category_Var)), week_date) %>%
     dplyr::mutate(sold = sum(sold)) %>% 
-    dplyr::select(any_of(c("week_date",Category_Var,"sold"))) %>%
+    dplyr::select(all_of(c("week_date",Category_Var,"sold"))) %>%
     dplyr::distinct() %>%
     pivot_wider(names_from
                 = Category_Var, values_from = sold) %>%
@@ -172,12 +172,12 @@ Model.Error <- function(Model_Result,Fnct = "Rmse", Category = c(1,2,3,4)){
   
   f <- match.fun(Fnct)
   
-  ErrorMeasure <- Model_Result$result %>%
+  ErrorMeasure <- Model_Result %>%
     dplyr::filter(category %in% Category) %>%
     group_by(id, category) %>%
     dplyr::summarise(error = f(valuePredict,valueTrue),.groups = "keep")
   
-  ErrorMeasure_Naive <- Model_Result$result %>%
+  ErrorMeasure_Naive <- Model_Result%>%
     dplyr::filter(category %in% Category) %>%
     group_by(id, category) %>%
     dplyr::summarise(error_naive = f(valueLastKnown,valueTrue),.groups = "keep")
@@ -185,7 +185,7 @@ Model.Error <- function(Model_Result,Fnct = "Rmse", Category = c(1,2,3,4)){
   Result <- full_join(ErrorMeasure,
                                    ErrorMeasure_Naive,by = c("id","category") )
   
-  Result$model <- unique(Model_Result$result$model)
+  Result$model <- unique(Model_Result$model)
   
   return(Result)
 }

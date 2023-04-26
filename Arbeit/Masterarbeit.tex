@@ -15,6 +15,7 @@
 \usepackage{caption}
 \usepackage{subcaption}%%Teilabbildungen in einer Abbildung
 \usepackage{graphicx} %%Zum Laden von Grafiken
+\usepackage[table,xcdraw]{xcolor}
 
 %% Packages für Formeln %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
@@ -78,21 +79,30 @@
 %% HAUPTTEIL MIT KAPITEL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
+\label{sec:Introduction}
 \input{Einleitung}
 
-\chapter{Methodology }
+\chapter{Methodology}
+\label{sec:Methodology}
 
-\input{Methode_Coda}
 \input{Methode_Ingarch}
+\input{Methode_Coda}
 \input{Other_methods}
 
 \chapter{Application}
+\label{sec:Application}
 
 \input{Model_Specification}
 \input{Examples_Applications}
+\input{Results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% LITERATUR UND ANDERE VERZEICHNISSE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusion}
+\label{sec: Conclusion}
+
+\input{Conclusion}
 
 \addtocontents{toc}{\protect\vspace*{\baselineskip}}
 
