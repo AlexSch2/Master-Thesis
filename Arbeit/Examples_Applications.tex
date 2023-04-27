@@ -68,7 +68,7 @@ In figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. Fo
 
 To directly compare both models, we plot the predictions in one figure \ref{fig:TS Both}. The model specifications are the same as above. We can see that the models produce similar results to each other. In this instances it appears that INGARCH predicts slightly higher values than CoDA. 
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
 \includegraphics[width=\textwidth]{Both_timeseries_ID4.png}
@@ -87,7 +87,7 @@ To directly compare both models, we plot the predictions in one figure \ref{fig:
 
 
 In order to get some further insight in the accuracy of our predictions, we added 95 \% prediction intervals \ref{fig:TS BothPI}. Here we can see some differences between the intervals. While for categories with bigger values the bands are quite similar in width, for categories with lower values, CoDA has much wider bands. This is especially visible in \ref{fig:BothPI Fridge 4} for category 3 and 4. However, most data points are covered by both bands.
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
 \includegraphics[width=\textwidth]{BothPI_timeseries_ID4.png}

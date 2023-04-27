@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  26 APR 2023 19:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  27 APR 2023 17:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1229,41 +1229,103 @@ Underfull \vbox (badness 1946) has occurred while \output is active []
  [19 <./Graphiken//Coda_Timeseries_ID4.png> <./Graphiken//Coda_timeseries_ID24.
 png> <./Graphiken//Ingarch_timeseries_ID4.png> <./Graphiken//Ingarch_Timeseries
 _ID24.png>]
-<Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png, id=291, 1445.4
+
+LaTeX Warning: Text page 20 contains only floats.
+
+[20 <./Graphiken//Both_timeseries_ID4.png> <./Graphiken//Both_timeseries_ID24.p
+ng>]
+
+LaTeX Warning: Text page 21 contains only floats.
+
+[21 <./Graphiken//BothPI_timeseries_ID4.png> <./Graphiken//BothPI_timeseries_ID
+24.png>]
+<Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png, id=302, 1445.4
 pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png Graphic fi
 le (type png)
 <use Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png>
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_his
 tory.png  used on input line 14.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png, id=292, 
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png, id=303, 
 1445.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png Grap
 hic file (type png)
 <use Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png>
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
 on_history.png  used on input line 20.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png, id=293, 1445
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png, id=304, 1445
 .4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png Graphic 
 file (type png)
 <use Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png>
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_h
-istory.png  used on input line 30.
+istory.png  used on input line 26.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-) [20] [21 <./Graphiken//Both_timeseries_ID4.png> <./Graphiken//Both_timeseries
-_ID24.png>] [22 <./Graphiken//BothPI_timeseries_ID4.png> <./Graphiken//BothPI_t
-imeseries_ID24.png>] [23 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_
-history.png> <./Graphiken//ErrorMeasureCombined_Histogram_all__Variation_histor
-y.png (PNG copy)>] [24 <./Graphiken//ErrorMeasureCombined_Quant_all__Variation_
-history.png (PNG copy)>]
+ [22 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png> <./Grap
+hiken//ErrorMeasureCombined_Histogram_all__Variation_history.png (PNG copy)> <.
+/Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png (PNG copy)>]
+<Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png, id=319, 1445.4pt
+ x 1084.05pt>
+File: Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png Graphic file
+ (type png)
+<use Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png>
+Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_fra
+me.png  used on input line 45.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png, id=320, 14
+45.4pt x 1084.05pt>
+File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png Graphi
+c file (type png)
+<use Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png>
+Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
+on_frame.png  used on input line 51.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png, id=321, 1445.4
+pt x 1084.05pt>
+File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png Graphic fi
+le (type png)
+<use Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png>
+Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_f
+rame.png  used on input line 57.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+<Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png, id=325, 1
+445.4pt x 1084.05pt>
+File: Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png Graph
+ic file (type png)
+<use Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png>
+Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_win
+dowMethod.png  used on input line 75.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png, id=
+326, 1445.4pt x 1084.05pt>
+File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png
+ Graphic file (type png)
+<use Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png>
+
+Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
+on_windowMethod.png  used on input line 81.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png, id=327,
+ 1445.4pt x 1084.05pt>
+File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png Gra
+phic file (type png)
+<use Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png>
+Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_w
+indowMethod.png  used on input line 87.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+) [23] [24 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png> <./
+Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png> <./Graphike
+n//ErrorMeasureCombined_Quant_all__Variation_frame.png>] [25 <./Graphiken//Erro
+rMeasureCombined_Box_all__Variation_windowMethod.png> <./Graphiken//ErrorMeasur
+eCombined_Histogram_all__Variation_windowMethod.png> <./Graphiken//ErrorMeasure
+Combined_Quant_all__Variation_windowMethod.png>] [26
+
+
+]
 chapter 4.
-(Conclusion.tex) [25
-
-
-] [26
+(Conclusion.tex) [27] [28
 
 
 ]
@@ -1279,21 +1341,21 @@ edirect . com / science / article / pii / S0167715212000259$[]\T1/lmr/m/n/12 .
 
  []
 
-[27]
+[29]
 Overfull \hbox (0.56573pt too wide) in paragraph at lines 111--111
 [][]\T1/lmr/m/n/12 Lütkepohl, H. \T1/lmr/m/it/12 New In-tro-duc-tion to Mul-tip
 le Time Series Ana-lysis\T1/lmr/m/n/12 . Springer Ber-lin Heidel-
  []
 
-[28] (Masterarbeit.lof)
+[30] (Masterarbeit.lof)
 \tf@lof=\write7
 \openout7 = `Masterarbeit.lof'.
 
- [29
+ [31
 
 
 
-] [30
+] [32
 
 
 
@@ -1301,7 +1363,7 @@ le Time Series Ana-lysis\T1/lmr/m/n/12 . Springer Ber-lin Heidel-
 \tf@lot=\write8
 \openout8 = `Masterarbeit.lot'.
 
- [31] (Masterarbeit.aux)
+ [33] (Masterarbeit.aux)
 Package rerunfilecheck Info: File `Masterarbeit.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
@@ -1309,10 +1371,10 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25813 strings out of 476300
- 482992 string characters out of 5784939
+ 25891 strings out of 476300
+ 487077 string characters out of 5784939
  1867382 words of memory out of 5000000
- 45744 multiletter control sequences out of 15000+600000
+ 45809 multiletter control sequences out of 15000+600000
  627900 words of font info for 118 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,15n,106p,10609b,2361s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1344,9 +1406,9 @@ a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/A
 ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 >
-Output written on Masterarbeit.pdf (31 pages, 3726093 bytes).
+Output written on Masterarbeit.pdf (33 pages, 4705242 bytes).
 PDF statistics:
- 606 PDF objects out of 1000 (max. 8388607)
- 112 named destinations out of 1000 (max. 500000)
- 279 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 637 PDF objects out of 1000 (max. 8388607)
+ 119 named destinations out of 1000 (max. 500000)
+ 309 words of extra memory for PDF output out of 10000 (max. 10000000)
 

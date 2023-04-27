@@ -1,7 +1,7 @@
 #General Helper Functions
 
 #This function splits the time series into appropriate windows to fit the model
-Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "overlapping", "extending"),
+Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "fixed", "extending"),
                     PredictionStep = 1) {
   
   Method <- match.arg(Method)
@@ -34,7 +34,7 @@ Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "overlapp
     names(Result) <- c(1:Window_Number)
   }
   
-  else if (Method == "overlapping") {
+  else if (Method == "fixed") {
     #Length of the series - length of the window + prediction step equals the Number of windows
     Window_Number <- Timeseries_Length - Frame - PredictionStep + 1
     

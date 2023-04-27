@@ -40,8 +40,8 @@ if(all(ids == ids_all)){
   ids_save <- paste(ids,collapse = "-")
 }
 
-frame <- 0.3
-window_method <- "extending"
+frame <- 0.5
+window_method <- "overlapping"
 save_results <- F
 HistoryLength <- 1
 
@@ -65,13 +65,12 @@ coda_result <-
     TSpace = T,
     Log = T,
     ZeroHandling = "all",
-    WindowMethod = "extending",
+    WindowMethod = window_method,
     HistoryLength = HistoryLength
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"win_lgth",gsub("[.]","",frame),
-                                                  "_history_lght",gsub("[.]","",HistoryLength),".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"_frame_method_",window_method,".RData",sep="")))
 }
 
 
@@ -82,7 +81,7 @@ ingarch_result <-
     Frame = frame,
     Distribution = "poisson",
     Category_Main = c("1","2","3","4"),
-    WindowMethod = "extending",
+    WindowMethod = window_method,
     ZeroHandling = "none",
     External = F,
     Multicore = T,
@@ -94,8 +93,7 @@ ingarch_result <-
   )
   
   if(save_results){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),
-                                             "_win_lgth",gsub("[.]","",frame),"_history_lght",gsub("[.]","",HistoryLength),".RData",sep="")))
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"_frame_method_",window_method,".RData",sep="")))
 
 }
 ```
@@ -138,16 +136,19 @@ if(!identical(ids,unique(ingarch_result$result$id)) ||
 
 
 ```{r}
-Coda1 <- Object.Load("~/Documents/Uni/Masterarbeit/Simulation/Code/Master-Thesis/Simulation/Code/results/coda_result_ids_all_win_lgth05_history_lght1.RData")
-Coda05 <- Object.Load("~/Documents/Uni/Masterarbeit/Simulation/Code/Master-Thesis/Simulation/Code/results/coda_result_ids_all_win_lgth05_history_lght05.RData")
+Coda03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all__frame_method_overlapping.RData")
+Coda05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth05_history_lght1.RData")
+#Coda07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth07_history_lght1.RData")
 
-Ingarch1 <- Object.Load("~/Documents/Uni/Masterarbeit/Simulation/Code/Master-Thesis/Simulation/Code/results/ingarch_result_ids_all__win_lgth05_history_lght1.RData")
-Ingarch05 <- Object.Load("~/Documents/Uni/Masterarbeit/Simulation/Code/Master-Thesis/Simulation/Code/results/ingarch_result_ids_all__win_lgth05_history_lght05.RData")
 
-Coda_Combined <- rbind(Coda1$result,Coda05$result)
-Ingarch_Combined <- rbind(Ingarch1$result,Ingarch05$result)
+Ingarch03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__frame_method_overlapping.RData")
+Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__win_lgth05_history_lght1.RData")
+#Ingarch07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__win_lgth07_history_lght1.RData")
 
-Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("0.5","1"),Split=F,Variation = "history")
+Coda_Combined <- rbind(Coda03$result,Coda05$result)
+Ingarch_Combined <- rbind(Ingarch03$result,Ingarch05$result)
+
+Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("extending","overlapping"),Split=F,Variation = "windowMethod")
 
 History <- unique(Coda_Combined $history)
 

@@ -28,9 +28,11 @@
 \contentsline {subsubsection}{\nonumberline Extension of the Error Measure}{17}{subsubsection*.15}%
 \contentsline {section}{\numberline {3.2}Examples of model application}{17}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Results}{19}{section.3.3}%
-\contentsline {subsubsection}{\nonumberline History}{20}{subsubsection*.22}%
-\contentsline {chapter}{\numberline {4}Conclusion}{25}{chapter.4}%
+\contentsline {subsubsection}{\nonumberline History}{22}{subsubsection*.22}%
+\contentsline {subsubsection}{\nonumberline Frame}{23}{subsubsection*.25}%
+\contentsline {subsubsection}{\nonumberline Window Shape}{23}{subsubsection*.28}%
+\contentsline {chapter}{\numberline {4}Conclusion}{27}{chapter.4}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{List of Figures}{29}{chapter*.25}%
-\contentsline {chapter}{List of Tables}{30}{chapter*.26}%
+\contentsline {chapter}{List of Figures}{31}{chapter*.30}%
+\contentsline {chapter}{List of Tables}{32}{chapter*.31}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
