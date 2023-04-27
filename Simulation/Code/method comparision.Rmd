@@ -148,7 +148,7 @@ Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/
 Coda_Combined <- rbind(Coda03$result,Coda05$result)
 Ingarch_Combined <- rbind(Ingarch03$result,Ingarch05$result)
 
-Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("extending","overlapping"),Split=F,Variation = "windowMethod")
+Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("extending","fixed"),Split=F,Variation = "windowMethod")
 
 History <- unique(Coda_Combined $history)
 

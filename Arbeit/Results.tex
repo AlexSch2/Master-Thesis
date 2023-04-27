@@ -8,7 +8,7 @@ In this section we present and describe the results for our methods with their v
 
 As mentioned various times throughout this thesis, the length of the history is one of the parameters which can be adjusted. Since we deal with time series with different lengths, we take the history as a fraction of the total length. In figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot and a histogram. 
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_history.png}
@@ -39,7 +39,7 @@ For INGARCH, the results are very similar. For a factor of 1 we get slightly hig
 \label{sec:Frame}
 
 Next, we vary the initial frame length $w_f$. We choose to extend the frame with each new data point. In addition, we take the frame as a fraction of the history used. For example, the value $w_f=0.3$ means that 30\% of the data points are chosen for the first estimation. The results are portrayed in \ref{fig:Frame Comp1}. In general, there is not much difference between the different frames. INGARCH seems to perform better for all three values. In figure \ref{fig:Frame Quant} we can see that for CoDA some time series yielded very high errors or couldn't calculate at all. 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_frame.png}
@@ -69,7 +69,7 @@ Next, we vary the initial frame length $w_f$. We choose to extend the frame with
 
 We also vary the shape of the window. As explained in \ref{sec: Model Specification} we either use a fixed amount of points and add and remove points as time goes on, or we continuously add points to the window. The results are in figures \ref{fig:window methods Comp1}. We can see that there are no big differences between the methods. For CoDA it seems that the fixed methods has some struggles for certain fridges \ref{fig:window methods Hist}. For INGARCH there is no notable difference. 
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_windowMethod.png}

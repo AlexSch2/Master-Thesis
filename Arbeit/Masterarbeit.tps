@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=83
-Cursor=2749
+TopLine=87
+Cursor=2023
 
 [Frame1]
 Flags=0
@@ -89,7 +89,7 @@ Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame4_View0,0]
-TopLine=167
+TopLine=170
 Cursor=9690
 
 [Frame5]
@@ -126,7 +126,7 @@ Document=Model_Specification.tex
 
 [Frame6_View0,0]
 TopLine=0
-Cursor=271
+Cursor=1879
 
 [Frame7]
 Flags=0
@@ -143,8 +143,8 @@ Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame7_View0,0]
-TopLine=0
-Cursor=3039
+TopLine=68
+Cursor=5177
 
 [Frame8]
 Flags=0
@@ -161,8 +161,8 @@ Class=LaTeXView
 Document=Results.tex
 
 [Frame8_View0,0]
-TopLine=0
-Cursor=256
+TopLine=7
+Cursor=791
 
 [Frame9]
 Flags=0
@@ -203,4 +203,7 @@ Cursor=12909
 [SessionInfo]
 FrameCount=11
 ActiveFrame=0
+
+[Bookmarks]
+Results.tex=81 
 
