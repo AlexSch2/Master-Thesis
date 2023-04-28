@@ -55,29 +55,81 @@ Zim.Prediction <- function(Data_Window,
     TimeSeriesValue_LastKnown <- tail(TimeSeriesValue_Window[[Category_Future]],n=1)
     names(TimeSeriesValue_LastKnown) <- Category_Past
     
-    #Safe Catching
-    SkipWindow <- FALSE
-    Formula <- formula(paste(Category_Future,"~",Category_Past))
+    #We implement a first version of alternative models. If we have only 0 or no 0 values we cannot use a ZIM model.
+    #Hence, if we have only 0 we predict the next value with 0 as well. 
+    #If we have no 0, we use a normal INGARCH(1,1) model. 
+    CheckForOnlyZeros <- (sum(TimeSeriesValue_Window[Category_Future]==0)>(Frame-1) || 
+                          sum(TimeSeriesValue_Window[Category_Past]==0)>(Frame-1)) 
+    UseIngarch <- sum(TimeSeriesValue_Window[Category_Past]==0)<Frame/5
     
-      Model <- tryCatch(
-        expr = {zeroinfl(Formula, data=TimeSeriesValue_Window[Category_Both],dist = Distribution)},
-        error = function (e) e
-      )
+    
+    #Choosing one of the three models. 
+    if(CheckForOnlyZeros){
+      print("Setting 0 for prediction")
+      ValuePredict <- 0
+      Model <- NA
+    }else{
       
-      if (inherits(Model, "error")) {
-        SkipWindow <- TRUE
-        print("Skipping Window.")
+      #Safe Catching
+      SkipWindow <- FALSE
+      UseZIM <- TRUE
+      Formula <- formula(paste(Category_Future,"~",Category_Past,"| 1"))
+      
+      if(UseIngarch){
+        UseZIM <- FALSE
+        print("Using INGARCH(1,1) model.")
+        Model <- tryCatch(
+          expr = {tsglm(TimeSeriesValue_Window[[Category_Future]],
+                        model = list("past_obs" = 1,
+                                     "past_mean" = 1,
+                                     external = NULL),
+                        xreg = NULL,
+                        distr = Distribution,
+                        link = "identity",
+                        init.method = "marginal")},
+          error = function (e) e
+        )
+        
+        if (inherits(Model, "error")) {
+          SkipWindow <- TRUE
+          print("Skipping Window.")
+        }
+        
+      }else{
+        print("Using Zim Model.")
+        Model <- tryCatch(
+          expr = {zeroinfl(Formula, data=TimeSeriesValue_Window[Category_Both],dist = Distribution)},
+          error = function (e) e
+        )
+        
+        if (inherits(Model, "error")) {
+          SkipWindow <- TRUE
+          print("Skipping Window.")
+        }
       }
+      
+      
+      if(SkipWindow)return(list(prediction=NA,model=NA))
+      
+      #Predicting the future value depending on PredictionStep
+      if(UseZIM){
+        
+        PredictionResult <- predict(Model,newdata = data.frame(as.list(TimeSeriesValue_LastKnown)))
+        #Rounding it since we only have integers
+        ValuePredict <- round(PredictionResult)
+      }else{
+        PredictionResult <- predict(Model,n.ahead = PredictionStep,type = "shortest",
+                                    level = 0.90)
+        #Rounding it since we only have integers
+        ValuePredict <- round(PredictionResult$pred)
+      }
+      
+    }
+
 
     
-    if(SkipWindow)return(list(prediction=NA,model=NA))
     
-    #Predicting the future value depending on PredictionStep
-    PredictionResult <- predict(Model,newdata = data.frame(as.list(TimeSeriesValue_LastKnown)))
-    
-    
-    #Rounding it since we only have integers
-    ValuePredict <- round(PredictionResult)
+
     
     
     #Extracting the lower and upper prediction interval 
@@ -185,7 +237,7 @@ Zim.Analysis <- function(Data_Raw,
     
     Data_Prepared <- Zim.DataPreparation(Data_Raw = Data_Processed,
                                              HistoryLength = HistoryLength,
-                                             TakeSubCategory = TakeSubCategory)
+                                             TakeSubCategory = TakeSubCategory) %>%dplyr::select(week_date,"y4","x4")
     
     Category <- unique(gsub("\\D", "", names(Data_Prepared)[-1]))
     

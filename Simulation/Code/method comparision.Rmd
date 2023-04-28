@@ -78,14 +78,14 @@ if(save_results){
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids_all,
+    Id = 100402,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("1","2","3","4"),
+    Category_Main = c("4"),
     WindowMethod = window_method,
     ZeroHandling = "none",
     External = F,
-    Multicore = T,
+    Multicore = F,
     NCores = 10,
     PastOb = 1,
     PastMean = 1,
@@ -103,7 +103,7 @@ zim_result <- Zim.Analysis(
     Id = ids_all,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = "4",
+    Category_Main = c("1","2","3","4"),
     WindowMethod = window_method,
     Multicore = F,
     HistoryLength = 1,
@@ -370,7 +370,7 @@ psbs_zoomed<-ggplot(model_error_split,aes(x=model,y=error))+
   ggtitle(paste("Error measures",sep=" "),subtitle = paste("Window length:",frame, "History:",HistoryLength,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_split_zoomed",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=psbs_zoomed,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Both_ErrorMeasure_split_zoomed",ids_save,"_all_models",".png",sep="")),plot=psbs_zoomed,height = 15,width = 20)
 }
 
 ```
@@ -420,25 +420,30 @@ if(save_plots){
 my_color_methods <- setNames(c("red", "blue","green"),
                      c("coda","ingarch","zim"))
 
-IngarchError_Sorted_split <- model_error_split %>% filter(model=="ingarch")%>%group_by(group)%>%arrange(.,error)
+IngarchError_Sorted_split <- model_error_split %>% filter(model=="ingarch" & group =="4")%>%arrange(.,error)
 IngarchQuantiles_split  <- quantile(IngarchError_Sorted_split $error,na.rm = T)
 
 IngarchError_Sorted_split$index <- NA
-IngarchError_Sorted_split[IngarchError_Sorted_split$group=="1,2",]$index <- seq(1:round(dim(IngarchError_Sorted_split )[1]/2))
-IngarchError_Sorted_split[IngarchError_Sorted_split$group=="3,4",]$index <- seq(1:round(dim(IngarchError_Sorted_split )[1]/2))
-IngarchError_Sorted_split <- full_join(IngarchError_Sorted_split,TimeSeries_Length,bye ="id")
+IngarchError_Sorted_split[IngarchError_Sorted_split$group=="4",]$index <- seq(1:round(dim(IngarchError_Sorted_split )[1]))
+IngarchError_Sorted_split <- inner_join(IngarchError_Sorted_split,TimeSeries_Length,bye ="id")
 
 Quantiles_Index_split  <- data.frame(quant_ind=findInterval(IngarchQuantiles_split ,IngarchError_Sorted_split$error))
 
-CodaError_Sorted_split  <- model_error_split  %>% filter(model=="coda")%>%arrange(.,error)
+CodaError_Sorted_split  <- model_error_split  %>% filter(model=="coda"& group =="4")%>%arrange(.,error)
 CodaQuantiles_split  <- quantile(CodaError_Sorted_split $error,na.rm = T)
 
 CodaError_Sorted_split$index <- NA
-CodaError_Sorted_split[CodaError_Sorted_split$group=="1,2",]$index <- seq(1:round(dim(CodaError_Sorted_split )[1]/2))
-CodaError_Sorted_split[CodaError_Sorted_split$group=="3,4",]$index <- seq(1:round(dim(CodaError_Sorted_split )[1]/2))
-CodaError_Sorted_split <- full_join(CodaError_Sorted_split,TimeSeries_Length,bye ="id")
+CodaError_Sorted_split[CodaError_Sorted_split$group=="4",]$index <- seq(1:round(dim(CodaError_Sorted_split )[1]))
+CodaError_Sorted_split <- inner_join(CodaError_Sorted_split,TimeSeries_Length,bye ="id")
 
-Error_Sorted_split <- rbind(CodaError_Sorted_split,IngarchError_Sorted_split)
+zimError_Sorted_split  <- model_error_split  %>% filter(model=="zim"& group =="4")%>%arrange(.,error)
+zimQuantiles_split  <- quantile(zimError_Sorted_split $error,na.rm = T)
+
+zimError_Sorted_split$index <- NA
+zimError_Sorted_split[zimError_Sorted_split$group=="4",]$index <- seq(1:round(dim(zimError_Sorted_split )[1]))
+zimError_Sorted_split <- inner_join(zimError_Sorted_split,TimeSeries_Length,bye ="id")
+
+Error_Sorted_split <- na.omit(rbind(CodaError_Sorted_split,IngarchError_Sorted_split,zimError_Sorted_split))
 Error_Sorted_split$group <- as.factor(Error_Sorted_split$group)
 
 plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model,size=length))+
@@ -447,13 +452,13 @@ plot_quant_split <- ggplot(Error_Sorted_split ,aes(x=index,y=error,colour=model,
   scale_y_continuous(limits=c(0,5))+
   geom_hline(yintercept=1,linewidth=2)+
 # geom_point(data = CodaError_Sorted_split,aes(x=index,y=error,colour=model),size=3)+
-  geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+  geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index_split)+
   theme(text = element_text(size = text_size))+
   scale_colour_manual("Legend", values = c(my_color_methods),aesthetics = "colour")+
   ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,sep=" "))
 
 if(save_plots){
-  ggsave(filename = here("Plots",paste("Quantile_Plot_Split",ids_save,"_histlgth",HistoryLength,"win_lgth",frame,".png",sep="")),plot=plot_quant_split,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Quantile_Plot_Split",ids_save,"_all_models",".png",sep="")),plot=plot_quant_split,height = 15,width = 20)
 }
 ```
 

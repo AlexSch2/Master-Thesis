@@ -108,3 +108,40 @@ test <- "namet"
  x <- data.frame(y=1)
 x[paste(test)] <- 2
 x
+
+
+
+
+#Choosing random fridge as test data
+test_data<-weekly_category_data%>%filter(fridge_id==8)
+View(test_data)
+
+test_data_prep <- weekly_category_data %>%
+  filter(fridge_id == 8) %>%
+  dplyr::select(week_date, main_category_id, sold) %>%
+  arrange(week_date) %>% Data.Preparation()
+
+raw_length<-dim(test_data_prep)[1]
+
+data_prep<-cbind(test_data_prep[-1,-1],test_data_prep[-raw_length,-1])
+
+names(data_prep)<-c("y1","y2","y3","y4",
+                    "x1","x2","x3","x4")
+
+fit_length<-round(dim(test_data_prep)[1]*1/2)
+
+data_fit<-data_prep[1:fit_length,]
+
+data_fit<-dplyr::select(data_fit,y1,y2,y3,y4,x1,x2,x3,x4)
+
+data_fit <- data.frame(y4=c(1,rep(0,10)),x4=c(0,1,rep(0,9)))
+
+model_zim<-zim(y1~x1+x2+x3+x4, data=data_fit,control = zim.control(type="ginv"))
+
+model_zeroinfl <- zeroinfl(y4 ~x4,data=data_fit,dist = "poisson")
+
+yhat <- predict(model_zeroinfl,newdata = data.frame(x4=0),type="zero")
+
+test <- Zim.Analysis(Data_Raw = weekly_category_data,Id=10,Multicore = F,Category_Main = "4")
+
+z <- lapply(1,function(x)return(NA))
