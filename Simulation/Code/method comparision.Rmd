@@ -41,7 +41,7 @@ if(all(ids == ids_all)){
 }
 
 frame <- 0.5
-window_method <- "overlapping"
+window_method <- "extending"
 save_results <- F
 HistoryLength <- 1
 
@@ -58,7 +58,7 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = 10,
+    Id = ids_all,
     Frame = frame,
     OneVsAll = T,
     PivotGroup =  c("1", "2", "3", "4"),
@@ -77,7 +77,7 @@ if(save_results){
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 10,
+    Id = ids_all,
     Frame = frame,
     Distribution = "poisson",
     Category_Main = c("1","2","3","4"),
@@ -278,21 +278,21 @@ plot(c(1:length(sort(CodaError_Sorted_All$error[CodaError_Sorted_All$error < x &
 Error measure calculations
 ```{r}
 
-coda_model_error <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
-ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ingarch_result$result$category)))
+coda_model_error <- Model.Error(coda_result$result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+ingarch_model_error <- Model.Error(ingarch_result$result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ingarch_result$result$category)))
 model_error <- rbind(coda_model_error,ingarch_model_error)
 
 
 
-coda_model_error_split <- Model.Error(coda_result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
-ingarch_model_error_split <- Model.Error(ingarch_result,Fnct = "Mse",Category =as.numeric(unique(ingarch_result$result$category))) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(6,7,9,10,13))
+coda_model_error_split <- Model.Error(coda_result$result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
+ingarch_model_error_split <- Model.Error(ingarch_result$result,Fnct = "Mse",Category =as.numeric(unique(ingarch_result$result$category))) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(6,7,9,10,13))
 model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split)
 
                                              
 ```
 
 ```{r}
-psb<-ggplot(ingarch_model_error,aes(x=model,y=error))+
+psb<-ggplot(model_error,aes(x=model,y=error))+
   geom_boxplot()+
   #scale_y_continuous(limits=c(0,3))+
   geom_hline(yintercept =1,linewidth=2)+

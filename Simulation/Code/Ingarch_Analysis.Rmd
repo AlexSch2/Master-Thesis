@@ -108,10 +108,10 @@ Error measure calculations
 ```{r}
 Category <- as.numeric(unique(ingarch_result$result$category))
 
-ingarch_model_error <- Model.Error(ingarch_result,Fnct = "Mse",Category = Category ) %>% 
+ingarch_model_error <- Model.Error(ingarch_result$result,Fnct = "Mse",Category = Category ) %>% 
                        Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = Category )
 
-ingarch_model_error_split <- Model.Error(ingarch_result,Fnct = "Mse",Category =Category ) %>% 
+ingarch_model_error_split <- Model.Error(ingarch_result$result,Fnct = "Mse",Category =Category ) %>% 
                              Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = as.list(Category))
 ```
 
@@ -231,8 +231,8 @@ p<-ggplot(plot_data_ingarch,aes(x=date,y=valuePredict),col="blue")+
               data=plot_data_ingarch,inherit.aes = F,fill="grey90",linetype="dashed",col="blue")+
   geom_line(data=plot_data_ingarch,
             aes(x=date,y=valuePredict),col="blue")+
-  geom_line(data=data_raw,aes(x=date,y=valuePredict),col="black",inherit.aes = F)+
-  geom_point(data=data_raw,aes(x=date,y=valuePredict),col="black",inherit.aes = F)+
+  geom_line(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
+  geom_point(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
   theme(text = element_text(size = text_size))+
   ggtitle(paste("Ingarch Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,",Zero handling",zero_handling_ingarch,sep=" "))
 
