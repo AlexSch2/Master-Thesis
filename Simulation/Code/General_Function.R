@@ -67,10 +67,10 @@ Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "fixed", 
 
 #Function to transform the data into the right format
 Data.Preparation <- function(Data_Raw,
-                             OneVsAll=F,
-                             PivotGroup="1",
-                             Category=c(1,2,3,4),
-                             NA_to=0,
+                             OneVsAll = F,
+                             PivotGroup = "1",
+                             Category = c(1, 2, 3, 4),
+                             NA_to = 0,
                              HistoryLength = 1,
                              TakeSubCategory = FALSE){
   

@@ -274,7 +274,7 @@ Ingarch.Analysis <- function(Data_Raw,
     if(Multicore == TRUE){
       
       Cluster1 <- makeCluster(NCores)
-      print("Initiating cluster")
+      print("Initiating Cluster")
       
       invisible(clusterCall(Cluster1, function() {
         source("General_Dependency.R")
