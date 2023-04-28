@@ -8,6 +8,7 @@ output: pdf_document
 source("General_Dependency.R")
 source("Coda_Function.R") 
 source("Ingarch_Function.R")
+source("ZIM_Function.R")
 source("General_Function.R")
 source("General_PlotFunctions.R")
 ```
@@ -70,7 +71,7 @@ coda_result <-
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"_frame_method_",window_method,".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
 }
 
 
@@ -82,7 +83,7 @@ ingarch_result <-
     Distribution = "poisson",
     Category_Main = c("1","2","3","4"),
     WindowMethod = window_method,
-    ZeroHandling = "zero_to_one",
+    ZeroHandling = "none",
     External = F,
     Multicore = T,
     NCores = 10,
@@ -93,9 +94,26 @@ ingarch_result <-
   )
   
   if(save_results){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"_frame_method_",window_method,".RData",sep="")))
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
 
-}
+  }
+
+zim_result <- Zim.Analysis(
+    Data_Raw = weekly_category_data,
+    Id = ids_all,
+    Frame = frame,
+    Distribution = "poisson",
+    Category_Main = "4",
+    WindowMethod = window_method,
+    Multicore = F,
+    HistoryLength = 1,
+    TakeSubCategory = F
+  )
+
+  if(save_results){
+  save(zim_result,file=here("Code/results",paste("zim_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
+
+  }
 ```
 
 Loading previous result
@@ -281,12 +299,21 @@ Error measure calculations
 coda_model_error <- Model.Error(coda_result$result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
 ingarch_model_error <- Model.Error(ingarch_result$result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ingarch_result$result$category)))
 model_error <- rbind(coda_model_error,ingarch_model_error)
+zim_model_error <- Model.Error(zim_result$result,Fnct = "Mse",Category = unique(zim_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(zim_result$result$category)))
+
+model_error <- rbind(coda_model_error,ingarch_model_error,zim_model_error)
 
 
+coda_model_error_split <- Model.Error(coda_result$result,Fnct = "Mse") %>% 
+  Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(1,2,3,4))
 
-coda_model_error_split <- Model.Error(coda_result$result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T)
-ingarch_model_error_split <- Model.Error(ingarch_result$result,Fnct = "Mse",Category =as.numeric(unique(ingarch_result$result$category))) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(6,7,9,10,13))
-model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split)
+ingarch_model_error_split <- Model.Error(ingarch_result$result,Fnct = "Mse",Category =as.numeric(unique(ingarch_result$result$category))) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(1,2,3,4))
+
+zim_model_error_split <- Model.Error(zim_result$result,Fnct = "Mse",Category = unique(zim_result$result$category)) %>% 
+  Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(4))
+
+model_error_split <- rbind(coda_model_error_split,ingarch_model_error_split,zim_model_error_split)
+
 
                                              
 ```
@@ -318,7 +345,7 @@ if(save_plots){
 ```
 
 ```{r}
-psbs<-ggplot(ingarch_model_error_split,aes(x=model,y=error))+
+psbs<-ggplot(model_error_split,aes(x=model,y=error))+
   facet_wrap(vars(group),ncol=length(unique(ingarch_model_error_split$group)),scales = "fixed")+
   geom_boxplot()+
   scale_y_continuous(limits=c(0,5))+
@@ -390,8 +417,8 @@ if(save_plots){
 ```
 
 ```{r}
-my_color_methods <- setNames(c("red", "blue"),
-                     c("coda","ingarch"))
+my_color_methods <- setNames(c("red", "blue","green"),
+                     c("coda","ingarch","zim"))
 
 IngarchError_Sorted_split <- model_error_split %>% filter(model=="ingarch")%>%group_by(group)%>%arrange(.,error)
 IngarchQuantiles_split  <- quantile(IngarchError_Sorted_split $error,na.rm = T)

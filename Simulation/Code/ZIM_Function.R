@@ -276,6 +276,13 @@ Zim.Analysis <- function(Data_Raw,
     
     #Transforming data in nicer format and removing NA values
     NA_Index <- which(is.na(PredictionResult_AllCategory)==TRUE)
+    
+    if(length(NA_Index)==length(Category)){
+      print("Skipping ID: No results could be calculated.")
+      Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
+      return(NA)
+    }
+    
     PredictionResult_AllCategory <- PredictionResult_AllCategory[!is.na(PredictionResult_AllCategory)]
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllCategory,"result"))
     Result_Model <- UnlistListElement(PredictionResult_AllCategory,"model")
@@ -295,7 +302,7 @@ Zim.Analysis <- function(Data_Raw,
                 model = Result_Model))
   })
   
-  #Removing NA (aka Timeseries which are too short)
+  #Removing NA (aka Timeseries which could not be calculated)
   PredictionResult_AllIDAllCategory <- PredictionResult_AllIDAllCategory[!is.na(PredictionResult_AllIDAllCategory)]
   
   #Transforming data in nicer format
