@@ -58,7 +58,7 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = ids,
+    Id = 10,
     Frame = frame,
     OneVsAll = T,
     PivotGroup =  c("1", "2", "3", "4"),
@@ -77,12 +77,12 @@ if(save_results){
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids,
+    Id = 10,
     Frame = frame,
     Distribution = "poisson",
     Category_Main = c("1","2","3","4"),
     WindowMethod = window_method,
-    ZeroHandling = "none",
+    ZeroHandling = "zero_to_one",
     External = F,
     Multicore = T,
     NCores = 10,

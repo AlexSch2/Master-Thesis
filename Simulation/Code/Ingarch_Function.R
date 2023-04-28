@@ -37,6 +37,7 @@ Ingarch.DataPreparation <- function(Data_Raw,
 #Prediction function for INGARCH models. Fits the model for the specified category and calculates the predicted value, 
 #prediction errors and PREDICTIVE INTERVALS (NOT CIs)
 Ingarch.Prediction <- function(Data_Window,
+                               Data_WindowNoTransform,
                                Category,
                                PredictionStep = 1,
                                Frame = 10,
@@ -56,7 +57,7 @@ Ingarch.Prediction <- function(Data_Window,
     
     #Extracting fitting values, true value and last known value
     TimeSeriesValue_Window <- Data_Window[[WindowIndex]]$timeSeriesValue_window[c("week_date",Category)]
-    TimeseriesValue_Future <- Data_Window[[WindowIndex]]$timeSeriesValue_future[[Category]]
+    TimeseriesValue_Future <- Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[[Category]]
     TimeSeriesValue_LastKnown <- tail(TimeSeriesValue_Window[[Category]],n=1)
     
     Xreg <-NULL
@@ -229,16 +230,20 @@ Ingarch.Analysis <- function(Data_Raw,
   PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_RunVariable){
     print(paste("Calculating for ID:",Id_RunVariable))
     #Preparing data
-    Data_Prepared <- Data_Raw %>%
+    Data_Processed <- Data_Raw %>%
       filter(fridge_id == Id_RunVariable &
                main_category_id %in% as.integer(Category_Main) &
                sub_category_id %in% as.integer(Category_Sub)) %>%
       dplyr::select(week_date, main_category_id, any_of(SubCategory_Column) ,sold) %>%
-      arrange(week_date) %>%
-      Ingarch.DataPreparation(ZeroHandling = ZeroHandling,
+      arrange(week_date)
+    
+    Data_Prepared <- Ingarch.DataPreparation(Data_Raw = Data_Processed,ZeroHandling = ZeroHandling,
                               HistoryLength = HistoryLength,
                               TakeSubCategory = TakeSubCategory)
     
+    Data_PreparedNoTransform <- Ingarch.DataPreparation(Data_Raw = Data_Processed,ZeroHandling = "none",
+                                                        HistoryLength = HistoryLength,
+                                                        TakeSubCategory = TakeSubCategory)
     Category <- names(Data_Prepared)[-1]
     
     #Calculating the length of the timeseries
@@ -262,6 +267,7 @@ Ingarch.Analysis <- function(Data_Raw,
     
     #Creating fitting and prediction windows
     Data_Window <- Data.Window(Data_Prepared,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
+    Data_WindowNoTransform <- Data.Window( Data_PreparedNoTransform,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
     
     
     #Calculating Prediction results for each category 
@@ -283,6 +289,7 @@ Ingarch.Analysis <- function(Data_Raw,
       
       PredictionResult <- tryCatch(
         expr = { Ingarch.Prediction(Data_Window = Data_Window,
+                                    Data_WindowNoTransform = Data_WindowNoTransform,
                                     Category = Category_RunVariable,
                                     PredictionStep = PredictionStep,
                                     Frame = Frame,
@@ -312,6 +319,7 @@ Ingarch.Analysis <- function(Data_Raw,
         
         PredictionResult <- tryCatch(
           expr = { Ingarch.Prediction(Data_Window = Data_Window,
+                                      Data_WindowNoTransform = Data_WindowNoTransform,
                                       Category = Category_RunVariable,
                                       PredictionStep = PredictionStep,
                                       Frame = Frame,
