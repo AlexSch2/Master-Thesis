@@ -225,7 +225,7 @@ names(data_raw)[1] <- c("date")
 
 
 p<-ggplot(plot_data_ingarch,aes(x=date,y=valuePredict),col="blue")+
-  facet_wrap(vars(category),nrow=length(unique(plot_data_ingarch$category)),scales = "free")+
+  facet_wrap(vars(category),ncol=1,scales = "free")+
   geom_point(size=1)+
   geom_ribbon(aes(x=date,y=valuePredict,ymin=lowerBound,ymax=upperBound),
               data=plot_data_ingarch,inherit.aes = F,fill="grey90",linetype="dashed",col="blue")+
