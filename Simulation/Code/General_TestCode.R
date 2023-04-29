@@ -113,11 +113,11 @@ x
 
 
 #Choosing random fridge as test data
-test_data<-weekly_category_data%>%filter(fridge_id==8)
+test_data<-weekly_category_data%>%filter(fridge_id==10)
 View(test_data)
 
 test_data_prep <- weekly_category_data %>%
-  filter(fridge_id == 8) %>%
+  filter(fridge_id == 10) %>%
   dplyr::select(week_date, main_category_id, sold) %>%
   arrange(week_date) %>% Data.Preparation()
 
@@ -134,11 +134,11 @@ data_fit<-data_prep[1:fit_length,]
 
 data_fit<-dplyr::select(data_fit,y1,y2,y3,y4,x1,x2,x3,x4)
 
-data_fit <- data.frame(y4=c(1,rep(0,10)),x4=c(0,1,rep(0,9)))
+data_fit <- data.frame(y4=c(1,rep(0,10)),x4=c(0,0,rep(0,9)))
 
 model_zim<-zim(y1~x1+x2+x3+x4, data=data_fit,control = zim.control(type="ginv"))
 
-model_zeroinfl <- zeroinfl(y4 ~x4,data=data_fit,dist = "poisson")
+model_zeroinfl <- zeroinfl(y4 ~bshift(x4),data=data_prep,dist = "poisson")
 
 yhat <- predict(model_zeroinfl,newdata = data.frame(x4=0),type="zero")
 

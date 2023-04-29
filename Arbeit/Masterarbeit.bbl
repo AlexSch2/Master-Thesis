@@ -110,6 +110,56 @@
       \verb https://www.sciencedirect.com/science/article/pii/0022169487901326
       \endverb
     \endentry
+    \entry{Douc:2013}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1ae40d85e615f3473f4056c1a0e3985f}{%
+           family={Douc},
+           familyi={D\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a01679346023065fd3c518a7907daf12}{%
+           family={Doukhan},
+           familyi={D\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=7d4f0ae37840c386371ad1f0085a30af}{%
+           family={Moulines},
+           familyi={M\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{9532f1ff0a97c760763db273eea3a38f}
+      \strng{fullhash}{9532f1ff0a97c760763db273eea3a38f}
+      \strng{bibnamehash}{9532f1ff0a97c760763db273eea3a38f}
+      \strng{authorbibnamehash}{9532f1ff0a97c760763db273eea3a38f}
+      \strng{authornamehash}{9532f1ff0a97c760763db273eea3a38f}
+      \strng{authorfullhash}{9532f1ff0a97c760763db273eea3a38f}
+      \field{labelalpha}{DDM13}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper deals with a general class of observation-driven time series models with a special focus on time series of counts. We provide conditions under which there exist strict-sense stationary and ergodic versions of such processes. The consistency of the maximum likelihood estimators is then derived for well-specified and misspecified models.}
+      \field{issn}{0304-4149}
+      \field{journaltitle}{Stochastic Processes and their Applications}
+      \field{note}{A Special Issue on the Occasion of the 2013 International Year of Statistics}
+      \field{number}{7}
+      \field{title}{Ergodicity of observation-driven time series models and consistency of the maximum likelihood estimator}
+      \field{volume}{123}
+      \field{year}{2013}
+      \field{pages}{2620\bibrangedash 2647}
+      \range{pages}{28}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.spa.2013.04.010
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0304414913001051
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0304414913001051
+      \endverb
+      \keyw{Consistency,Ergodicity,Time series of counts,Maximum likelihood,Observation-driven models,Stationarity}
+    \endentry
     \entry{Doukhan:2012}{article}{}
       \name{author}{3}{}{%
         {{hash=b56d3f1bb6a728b76afa43443e8a0723}{%
@@ -376,6 +426,50 @@
       \verb https://doi.org/10.1198/jasa.2009.tm08270
       \endverb
     \endentry
+    \entry{Fokianos:2011}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
+           family={Fokianos},
+           familyi={F\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+        {{hash=bef86b20d26f1ca869b076275b55f9ae}{%
+           family={Tjøstheim},
+           familyi={T\bibinitperiod},
+           given={Dag},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{f5eab276b44b7d3722efa513881c1980}
+      \strng{fullhash}{f5eab276b44b7d3722efa513881c1980}
+      \strng{bibnamehash}{f5eab276b44b7d3722efa513881c1980}
+      \strng{authorbibnamehash}{f5eab276b44b7d3722efa513881c1980}
+      \strng{authornamehash}{f5eab276b44b7d3722efa513881c1980}
+      \strng{authorfullhash}{f5eab276b44b7d3722efa513881c1980}
+      \field{labelalpha}{FT11}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We consider a log-linear model for time series of counts. This type of model provides a framework where both negative and positive association can be taken into account. In addition time dependent covariates are accommodated in a straightforward way. We study its probabilistic properties and maximum likelihood estimation. It is shown that a perturbed version of the process is geometrically ergodic, and, under some conditions, it approaches the non-perturbed version. In addition, it is proved that the maximum likelihood estimator of the vector of unknown parameters is asymptotically normal with a covariance matrix that can be consistently estimated. The results are based on minimal assumptions and can be extended to the case of log-linear regression with continuous exogenous variables. The theory is applied to aggregated financial transaction time series. In particular, we discover positive association between the number of transactions and the volatility process of a certain stock.}
+      \field{issn}{0047-259X}
+      \field{journaltitle}{Journal of Multivariate Analysis}
+      \field{number}{3}
+      \field{title}{Log-linear Poisson autoregression}
+      \field{volume}{102}
+      \field{year}{2011}
+      \field{pages}{563\bibrangedash 578}
+      \range{pages}{16}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.jmva.2010.11.002
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0047259X10002320
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0047259X10002320
+      \endverb
+      \keyw{Autocorrelation,Covariates,Ergodicity,Generalized linear models,Perturbation,Prediction,Stationarity,Volatility}
+    \endentry
     \entry{Harvey:1989}{article}{}
       \name{author}{2}{}{%
         {{hash=8b5397bf9e5e04cda1789b21aeef1dba}{%
@@ -596,6 +690,57 @@
       \field{title}{Hidden Markov and Other Models for Discrete- valued Time Series}
       \field{year}{1997}
     \endentry
+    \entry{Woodard:2011}{article}{}
+      \name{author}{3}{}{%
+        {{hash=f14bde91cea7d327d1e4a9bd5aac0749}{%
+           family={Woodard},
+           familyi={W\bibinitperiod},
+           given={Dawn\bibnamedelima B.},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=86007d19a558a67f16ba755be671b978}{%
+           family={Matteson},
+           familyi={M\bibinitperiod},
+           given={David\bibnamedelima S.},
+           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=d60bd39f59ccc89fa650e103e0524e6b}{%
+           family={Henderson},
+           familyi={H\bibinitperiod},
+           given={Shane\bibnamedelima G.},
+           giveni={S\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Institute of Mathematical Statistics}%
+        {Bernoulli Society}%
+      }
+      \strng{namehash}{89b64ffc5d773e193859dd17c616f386}
+      \strng{fullhash}{89b64ffc5d773e193859dd17c616f386}
+      \strng{bibnamehash}{89b64ffc5d773e193859dd17c616f386}
+      \strng{authorbibnamehash}{89b64ffc5d773e193859dd17c616f386}
+      \strng{authornamehash}{89b64ffc5d773e193859dd17c616f386}
+      \strng{authorfullhash}{89b64ffc5d773e193859dd17c616f386}
+      \field{labelalpha}{WMH11}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Electronic Journal of Statistics}
+      \field{number}{none}
+      \field{title}{{Stationarity of generalized autoregressive moving average models}}
+      \field{volume}{5}
+      \field{year}{2011}
+      \field{pages}{800\bibrangedash 828}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.1214/11-EJS627
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1214/11-EJS627
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1214/11-EJS627
+      \endverb
+      \keyw{drift conditions,Ergodic,Feller,irreducibility,stationary,time series}
+    \endentry
     \entry{Qaqish:1988}{article}{}
       \name{author}{1}{}{%
         {{hash=022dfc2e1071d95c0df10b84f7f84ef1}{%
@@ -637,6 +782,45 @@
       \verb{url}
       \verb http://www.jstor.org/stable/2336303
       \endverb
+    \endentry
+    \entry{Zhu:2012}{article}{}
+      \name{author}{1}{}{%
+        {{hash=ec786b4d7c7cb65431cceb7cb1804dbc}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Fukang},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{ec786b4d7c7cb65431cceb7cb1804dbc}
+      \strng{fullhash}{ec786b4d7c7cb65431cceb7cb1804dbc}
+      \strng{bibnamehash}{ec786b4d7c7cb65431cceb7cb1804dbc}
+      \strng{authorbibnamehash}{ec786b4d7c7cb65431cceb7cb1804dbc}
+      \strng{authornamehash}{ec786b4d7c7cb65431cceb7cb1804dbc}
+      \strng{authorfullhash}{ec786b4d7c7cb65431cceb7cb1804dbc}
+      \field{labelalpha}{Zhu12}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Zero inflation means that the proportion of 0's of a model is greater than the proportion of 0's of the corresponding Poisson model, which is a common phenomenon in count data. To model the zero-inflated characteristic of time series of counts, we propose zero-inflated Poisson and negative binomial INGARCH models, which are useful and flexible generalizations of the Poisson and negative binomial INGARCH models, respectively. The stationarity conditions and the autocorrelation function are given. Based on the EM algorithm, the estimating procedure is simple and easy to be implemented. A simulation study shows that the estimation method is accurate and reliable as long as the sample size is reasonably large. A real data example leads to superior performance of the proposed models compared with other competitive models in the literature.}
+      \field{issn}{0378-3758}
+      \field{journaltitle}{Journal of Statistical Planning and Inference}
+      \field{number}{4}
+      \field{title}{Zero-inflated Poisson and negative binomial integer-valued GARCH models}
+      \field{volume}{142}
+      \field{year}{2012}
+      \field{pages}{826\bibrangedash 839}
+      \range{pages}{14}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.jspi.2011.10.002
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S037837581100379X
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S037837581100379X
+      \endverb
+      \keyw{EM algorithm,Integer-valued GARCH model,Negative binomial,Poisson,Time series of counts,Zero inflation}
     \endentry
   \enddatalist
 \endrefsection

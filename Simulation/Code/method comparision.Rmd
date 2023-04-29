@@ -643,7 +643,7 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 4
+FID <- 10
 
 plot_data_coda<-coda_result$result%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
@@ -656,6 +656,8 @@ plot_data_ingarch <- ingarch_result$result %>% dplyr::filter(id==FID)
 plot_data_ingarch$model<-"ingarch"
 
 plot_data <- bind_rows(plot_data_coda, plot_data_ingarch) %>% dplyr::select(!c(distribution, pivotGroup))
+
+plot_data_zim <- zim_result$result %>% dplyr::filter(id==FID)
 
 
 
@@ -809,6 +811,25 @@ if(save_plots){
 }
 
 ```
+
+Zim Model for Category 4
+```{r}
+p<-ggplot(plot_data_zim,aes(x=date,y=valuePredict),col="green")+
+  facet_wrap(vars(category),ncol=length(1),scales = "free")+
+  geom_point(size=1)+
+  geom_line(data=plot_data_zim,
+            aes(x=date,y=valuePredict),col="green")+
+  geom_line(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
+  geom_point(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
+  theme(text = element_text(size = 50))+
+  ggtitle(paste("Zim Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,sep=" "))
+
+if(save_plots){
+  ggsave(filename = here("Plots",paste("ts_ing_id_",FID,"_win_lgth",frame,"_maincat",MainCat,".png",sep="")),plot=p,height = 15,width = 20)
+}
+
+```
+
 
 Comparing the timeseries with prediction intervals
 

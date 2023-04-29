@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=87
-Cursor=2023
+TopLine=76
+Cursor=2478
 
 [Frame1]
 Flags=0
@@ -71,8 +71,8 @@ Class=LaTeXView
 Document=Methode_Ingarch.tex
 
 [Frame3_View0,0]
-TopLine=24
-Cursor=3690
+TopLine=0
+Cursor=4544
 
 [Frame4]
 Flags=0
@@ -107,8 +107,8 @@ Class=LaTeXView
 Document=Other_methods.tex
 
 [Frame5_View0,0]
-TopLine=0
-Cursor=32
+TopLine=10
+Cursor=3020
 
 [Frame6]
 Flags=0
@@ -197,12 +197,12 @@ Class=BibTeXView
 Document=Literatur.bib
 
 [Frame10_View0,0]
-TopLine=2
-Cursor=12909
+TopLine=249
+Cursor=18028
 
 [SessionInfo]
 FrameCount=11
-ActiveFrame=0
+ActiveFrame=5
 
 [Bookmarks]
 Results.tex=81 
