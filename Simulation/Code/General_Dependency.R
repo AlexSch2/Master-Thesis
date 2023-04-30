@@ -20,14 +20,12 @@
 #Loading Packages
 
 library(ZIM) #ZIM 
-library(dplyr) #nice data handeling 
 library(splines) #apparently splines are needed for ZIM?
 library(vars) #coda models
 library(robCompositions) #coda models
-library(tidyverse) #tidyverse
+library(tidyverse) #tidyverse (includes dplyr,ggplot2)
 library(tscount) #models for count data; see dissertation 
 library(parallel) #parallelisation
-library(ggplot2) #plots
 library(VGAM) #VGAMS
 library(here) #for paths of plots
 library(pscl) #alternative for zim models

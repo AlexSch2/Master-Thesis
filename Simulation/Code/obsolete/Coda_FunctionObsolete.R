@@ -431,3 +431,126 @@ coda.plots<-function(analysis_results,plot.type="dots",save=TRUE,path=NULL){
 #               = main_category_id, values_from = sold) %>%
 #   ungroup()%>%
 #   setnafill(type = "const", fill = 0)
+
+
+
+##Unused Coda Functions
+#Function for naming a coda plot
+Coda.PlotName <- function(Id,ZeroHandling,TSpace,Log){
+  if(TSpace){
+    TSpace_char<-"_TSpace"
+    
+    if(Log){
+      Log_char<-"_log"
+    } 
+    else{
+      Log_char<-""
+    }
+    
+  } 
+  else{
+    TSpace_char<-""
+    Log_char<-""
+  }
+  
+  name<-paste("fridge_","id",Id,"_ZeroHandling_",ZeroHandling,Log_char,TSpace_char,sep="")
+  return(name)
+}
+
+
+#Function to extract the lag from the models. Obsolete since we set the lag to 1 
+Coda.GetLag <- function (Coda_Result,Id) {
+  
+  Coda_ResultModel <- Coda_Result$model
+  PivotGroup <- unique(Coda_Result$result$pivotGroup)
+  Lag <- NULL
+  Id <- as.character(Id)
+  
+  
+  if (is.null(PivotGroup)) {
+    Window_Number <- length(Coda_ResultModel[[Id]])
+    Lag <-
+      append(Lag, unlist(UnlistListElement(Coda_ResultModel[[Id]], Element = "p")))
+    
+    Id <- rep(Id, each = (Window_Number))
+    return(data.frame(
+      lag = Lag,
+      id = Id,
+      window = c(1:Window_Number)
+    ))
+  }
+  else{
+    Window_Number <- length(Coda_ResultModel[[Id]][[1]])
+    for(PivotGroup in PivotGroup){
+      Lag <- append(Lag,unlist(UnlistListElement(Coda_ResultModel[[Id]][[PivotGroup]],Element= "p")))
+      
+    }
+    Category <- rep(PivotGroup,each=Window_Number)
+    Id <- rep(Id,each=(length(PivotGroup)*Window_Number))
+    return(data.frame(lag=Lag,
+                      id=Id,
+                      category=Category,
+                      window=c(1:Window_Number)))
+  }
+}
+
+
+#Function to extract the coefficients from a Coda model. 
+Coda.GetCoefficients <- function(Coda_Result,Id,Fnc="det",...) {
+  
+  Fnc <- match.fun(Fnc)
+  Coda_ResultModel <- Coda_Result$model
+  PivotGroup <- unique(Coda_Result$result$PivotGroup)
+  Value <- NULL
+  Lag <- NULL
+  Window_All <- NULL
+  Id <- as.character(Id)
+  
+  if (is.null(PivotGroup)) {
+    
+    Window_Number <- length(Coda_ResultModel[[Id]])
+    for(window in 1:Window_Number){
+      Lag[window] <- Coda_ResultModel[[Id]][[window]][["p"]]
+      
+      x <- sapply(Acoef(Coda_ResultModel[[Id]][[window]]),Fnc,...)
+      
+      Window_All <- append(Window_All,rep(window,length(x)))
+      
+      Value <- append(Value, x)
+    }
+    
+    return(data.frame(
+      determinant =  Value,
+      id = Id,
+      window = Window_All))
+  }
+  else{
+    category <- NULL
+    for(PivotGroup_RunVariable in PivotGroup){
+      Window_Number <- length(Coda_ResultModel[[Id]][[PivotGroup_RunVariable]])
+      for(window in 1:Window_Number){
+        Lag[window] <- Coda_ResultModel[[Id]][[PivotGroup_RunVariable]][[window]][["p"]]
+        
+        x<-sapply(Acoef(Coda_ResultModel[[Id]][[PivotGroup_RunVariable]][[window]]),Fnc,...)
+        
+        category <- append(category,rep(PivotGroup,length(x)))
+        
+        Window_All <- append(Window_All,rep(window,length(x)))
+        
+        Value <- append(Value, x)
+      }
+      
+    }
+    return(data.frame(value=Value,
+                      id=Id,
+                      category=category,
+                      window=Window_All))
+  }
+  
+}
+
+
+#Eucledian Distance Function
+Eucledian <- function(x, y, Standardise = 1) return(sum((x - y) / Standardise) ^ 2)
+
+
