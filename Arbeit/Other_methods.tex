@@ -43,9 +43,19 @@ The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scal
 \subsection{Vector Generalised Additive Models}
 \label{sec:Vgam}
 
-Because we work with multivariate count data, we also look at vector generalised additive models (VGAMs) which extend generalised additive models to higher dimensions. Let 
+Because we work with multivariate count data, we also look at vector generalised additive models (VGAMs) which extend generalised additive models (GAMs) to higher dimensions. GAMs allow us to reveal and model non-linear relationship in our data, as opposed to linear models or generalised linear models \cite{Yee:1996}. Let $y$ be a univariate response with a distribution in the exponential family and mean $\mu$. Further take a p-dimensional covariate vector and $\bm{x}=(x_1,\ldots,x_p)^T$. Then the generalised additive model (GAM) is given by
+
+\begin{equation}
+g(\mu) = \nu(\bm{x}) = \beta_0 + f_1(x_1) + \ldots f_p(x_p)
+\label{eq:Gam}
+\end{equation}
+
+with $f_j$ being arbitrary smooth functions \cite{Yee:1996}.
+To extend this model to the multivariate case, we replace the functions $f_j$ with vector functions. Let $\bm{f}_k(Y_{k_{t}}) = (f_{(1)k}(Y_{k_{t}}),\ldots,f_{(M)k}(Y_{k_{t}}))^T$ with $M \in \mathbbm{N}$ be an arbitrary smooth vector function. Then the vector generalised additive model is given by
 
 \begin{equation}
 \mathbb{E}[\bm{Y}_t] = \bm{\beta}_0 + \sum_{k=1}^K\bm{f}_k(Y_{k_{t-1}})
-\label{eq:}
+\label{eq:Vgam}
 \end{equation}
+
+where $\mathbb{E}[\bm{Y}_t] = (\mathbb{E}[Y_{1_t}],\ldots,\mathbb{E}[Y_{K_t}])^T$ \cite{Yee:1996}. Further theoretical background about VGAMs are given in \cite{Yee:1996,Yee:2015,Wood:2004}.

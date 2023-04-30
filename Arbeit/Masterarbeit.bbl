@@ -374,6 +374,43 @@
       \endverb
       \keyw{Aitchison geometry,Bootstrap,Classification,Compositional data,Linear discriminant analysis,Partial least squares,PLS-DA,Principal component analysis,Regression,Relative information,Validation}
     \endentry
+    \entry{CoDAR4:2018}{book}{}
+      \name{author}{3}{}{%
+        {{hash=440840cf1a958f86ce96afdf0ed33447}{%
+           family={Filzmoser},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=49b157272ea2bc1f4c5617e4a013ae2f}{%
+           family={Hron},
+           familyi={H\bibinitperiod},
+           given={Karel},
+           giveni={K\bibinitperiod}}}%
+        {{hash=faaed83ab21bd48aa70346a9a1a0fa99}{%
+           family={Templ},
+           familyi={T\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing. Springer Nature Switzerland AG, Cham, Switzerland}%
+      }
+      \strng{namehash}{6d1774f7e5435035568ae7e863554ad0}
+      \strng{fullhash}{6d1774f7e5435035568ae7e863554ad0}
+      \strng{bibnamehash}{6d1774f7e5435035568ae7e863554ad0}
+      \strng{authorbibnamehash}{6d1774f7e5435035568ae7e863554ad0}
+      \strng{authornamehash}{6d1774f7e5435035568ae7e863554ad0}
+      \strng{authorfullhash}{6d1774f7e5435035568ae7e863554ad0}
+      \field{labelalpha}{FHT18}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-319-96420-1}
+      \field{note}{Springer Series in Statistics}
+      \field{title}{Applied Compositional Data Analysis. With Worked Examples in {R}}
+      \field{year}{2018}
+    \endentry
     \entry{Fokianos:2009}{article}{}
       \name{author}{3}{}{%
         {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
@@ -626,6 +663,90 @@
       \field{title}{Modeling count time series following generalized linear models}
       \field{year}{2016}
     \endentry
+    \entry{Tscount:2017}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5f6ee9f4581227d4f04ae7c035b6dac8}{%
+           family={Liboschik},
+           familyi={L\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod}}}%
+        {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
+           family={Fokianos},
+           familyi={F\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+        {{hash=0c0e3882ef8a6c009bb6c6da67b98281}{%
+           family={Fried},
+           familyi={F\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{2b410d5c6d9a18c34a5a410a8f0fd07b}
+      \strng{fullhash}{2b410d5c6d9a18c34a5a410a8f0fd07b}
+      \strng{bibnamehash}{2b410d5c6d9a18c34a5a410a8f0fd07b}
+      \strng{authorbibnamehash}{2b410d5c6d9a18c34a5a410a8f0fd07b}
+      \strng{authornamehash}{2b410d5c6d9a18c34a5a410a8f0fd07b}
+      \strng{authorfullhash}{2b410d5c6d9a18c34a5a410a8f0fd07b}
+      \field{labelalpha}{LFF17}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{5}
+      \field{title}{{tscount}: An {R} Package for Analysis of Count Time Series Following Generalized Linear Models}
+      \field{volume}{82}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 51}
+      \range{pages}{51}
+      \verb{doi}
+      \verb 10.18637/jss.v082.i05
+      \endverb
+    \endentry
+    \entry{Tscount:2020}{manual}{}
+      \name{author}{4}{}{%
+        {{hash=5f6ee9f4581227d4f04ae7c035b6dac8}{%
+           family={Liboschik},
+           familyi={L\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod}}}%
+        {{hash=0c0e3882ef8a6c009bb6c6da67b98281}{%
+           family={Fried},
+           familyi={F\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
+           family={Fokianos},
+           familyi={F\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+        {{hash=dddbccb2c1aa9404d8c9d71319c47f20}{%
+           family={Probst},
+           familyi={P\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{ecc084c86b529f1fd700034af2b70605}
+      \strng{fullhash}{4a3fdd18e2d02c68a2371a5f130907c0}
+      \strng{bibnamehash}{ecc084c86b529f1fd700034af2b70605}
+      \strng{authorbibnamehash}{ecc084c86b529f1fd700034af2b70605}
+      \strng{authornamehash}{ecc084c86b529f1fd700034af2b70605}
+      \strng{authorfullhash}{4a3fdd18e2d02c68a2371a5f130907c0}
+      \field{labelalpha}{Lib+20}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package version 1.4.3}
+      \field{title}{tscount: Analysis of Count Time Series}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://CRAN.R-project.org/package=tscount
+      \endverb
+      \verb{url}
+      \verb https://CRAN.R-project.org/package=tscount
+      \endverb
+    \endentry
     \entry{Luetkepohl:2007}{book}{}
       \name{author}{1}{}{%
         {{hash=fabf6fc976497f6f73e23fb22dd67753}{%
@@ -690,6 +811,399 @@
       \field{title}{Hidden Markov and Other Models for Discrete- valued Time Series}
       \field{year}{1997}
     \endentry
+    \entry{here:2020}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=1435ca4f08e53208e1c34297357afa80}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Kirill},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{1435ca4f08e53208e1c34297357afa80}
+      \strng{fullhash}{1435ca4f08e53208e1c34297357afa80}
+      \strng{bibnamehash}{1435ca4f08e53208e1c34297357afa80}
+      \strng{authorbibnamehash}{1435ca4f08e53208e1c34297357afa80}
+      \strng{authornamehash}{1435ca4f08e53208e1c34297357afa80}
+      \strng{authorfullhash}{1435ca4f08e53208e1c34297357afa80}
+      \field{labelalpha}{Mül20}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package version 1.0.1}
+      \field{title}{here: A Simpler Way to Find Your Files}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://CRAN.R-project.org/package=here
+      \endverb
+      \verb{url}
+      \verb https://CRAN.R-project.org/package=here
+      \endverb
+    \endentry
+    \entry{CoDAR2:2008}{book}{}
+      \name{author}{1}{}{%
+        {{hash=15b832cca18e6fd4d84135d543b787ac}{%
+           family={Pfaff},
+           familyi={P\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{15b832cca18e6fd4d84135d543b787ac}
+      \strng{fullhash}{15b832cca18e6fd4d84135d543b787ac}
+      \strng{bibnamehash}{15b832cca18e6fd4d84135d543b787ac}
+      \strng{authorbibnamehash}{15b832cca18e6fd4d84135d543b787ac}
+      \strng{authornamehash}{15b832cca18e6fd4d84135d543b787ac}
+      \strng{authorfullhash}{15b832cca18e6fd4d84135d543b787ac}
+      \field{extraname}{1}
+      \field{labelalpha}{Pfa08}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Second}
+      \field{note}{ISBN 0-387-27960-1}
+      \field{title}{Analysis of Integrated and Cointegrated Time Series with R}
+      \field{year}{2008}
+      \verb{urlraw}
+      \verb https://www.pfaffikus.de
+      \endverb
+      \verb{url}
+      \verb https://www.pfaffikus.de
+      \endverb
+    \endentry
+    \entry{VAR:2008}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fa41ac8224f04c1506aec017e2ca6928}{%
+           family={Pfaff},
+           familyi={P\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa41ac8224f04c1506aec017e2ca6928}
+      \strng{fullhash}{fa41ac8224f04c1506aec017e2ca6928}
+      \strng{bibnamehash}{fa41ac8224f04c1506aec017e2ca6928}
+      \strng{authorbibnamehash}{fa41ac8224f04c1506aec017e2ca6928}
+      \strng{authornamehash}{fa41ac8224f04c1506aec017e2ca6928}
+      \strng{authorfullhash}{fa41ac8224f04c1506aec017e2ca6928}
+      \field{extraname}{2}
+      \field{labelalpha}{Pfa08}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{4}
+      \field{title}{VAR, SVAR and SVEC Models: Implementation Within {R} Package {vars}}
+      \field{volume}{27}
+      \field{year}{2008}
+      \verb{urlraw}
+      \verb https://www.jstatsoft.org/v27/i04/
+      \endverb
+      \verb{url}
+      \verb https://www.jstatsoft.org/v27/i04/
+      \endverb
+    \endentry
+    \entry{R:2022}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=dcdebb6b35bff7c0568bf8c50ef8626d}{%
+           family={{R Core Team}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Vienna, Austria}%
+      }
+      \list{organization}{1}{%
+        {R Foundation for Statistical Computing}%
+      }
+      \strng{namehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{fullhash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{bibnamehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{authorbibnamehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{authornamehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{authorfullhash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \field{labelalpha}{R C22}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{R: A Language and Environment for Statistical Computing}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://www.R-project.org/
+      \endverb
+      \verb{url}
+      \verb https://www.R-project.org/
+      \endverb
+    \endentry
+    \entry{Miceadds:2023}{manual}{}
+      \name{author}{2}{}{%
+        {{hash=528bc76f8c90e99a225806fbced9ca6e}{%
+           family={Robitzsch},
+           familyi={R\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=aaaf9baf0cd299fbaefdcbab1435bbd4}{%
+           family={Grund},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{b14c667616b8fbd2c3749fd18b7515b2}
+      \strng{fullhash}{b14c667616b8fbd2c3749fd18b7515b2}
+      \strng{bibnamehash}{b14c667616b8fbd2c3749fd18b7515b2}
+      \strng{authorbibnamehash}{b14c667616b8fbd2c3749fd18b7515b2}
+      \strng{authornamehash}{b14c667616b8fbd2c3749fd18b7515b2}
+      \strng{authorfullhash}{b14c667616b8fbd2c3749fd18b7515b2}
+      \field{labelalpha}{RG23}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package version 3.16-18}
+      \field{title}{miceadds: Some Additional Multiple Imputation Functions, Especially for 'mice'}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://CRAN.R-project.org/package=miceadds
+      \endverb
+      \verb{url}
+      \verb https://CRAN.R-project.org/package=miceadds
+      \endverb
+    \endentry
+    \entry{RobComp:2011}{book}{}
+      \name{author}{3}{}{%
+        {{hash=faaed83ab21bd48aa70346a9a1a0fa99}{%
+           family={Templ},
+           familyi={T\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+        {{hash=49b157272ea2bc1f4c5617e4a013ae2f}{%
+           family={Hron},
+           familyi={H\bibinitperiod},
+           given={Karel},
+           giveni={K\bibinitperiod}}}%
+        {{hash=440840cf1a958f86ce96afdf0ed33447}{%
+           family={Filzmoser},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {{J}ohn {W}iley}%
+        {{S}ons}%
+      }
+      \strng{namehash}{e2659fe6f50cbb909d8162dbe06d5132}
+      \strng{fullhash}{e2659fe6f50cbb909d8162dbe06d5132}
+      \strng{bibnamehash}{e2659fe6f50cbb909d8162dbe06d5132}
+      \strng{authorbibnamehash}{e2659fe6f50cbb909d8162dbe06d5132}
+      \strng{authornamehash}{e2659fe6f50cbb909d8162dbe06d5132}
+      \strng{authorfullhash}{e2659fe6f50cbb909d8162dbe06d5132}
+      \field{labelalpha}{THF11}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{{C}ompositional {D}ata {A}nalysis: {T}heory and {A}pplications}
+      \field{isbn}{978-0-470-71135-4}
+      \field{title}{rob{C}ompositions: an R-package for robust statistical analysis of compositional data}
+      \field{year}{2011}
+      \field{pages}{341\bibrangedash 355}
+      \range{pages}{15}
+    \endentry
+    \entry{Tidyverse:2019}{article}{}
+      \name{author}{24}{}{%
+        {{hash=1d0f6977ce2d043e298a59a1cd75b7ef}{%
+           family={Wickham},
+           familyi={W\bibinitperiod},
+           given={Hadley},
+           giveni={H\bibinitperiod}}}%
+        {{hash=0c11220b22f907dc3709ff23c6b023e5}{%
+           family={Averick},
+           familyi={A\bibinitperiod},
+           given={Mara},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0f88b724c9f070dbceda00a5027d25bb}{%
+           family={Bryan},
+           familyi={B\bibinitperiod},
+           given={Jennifer},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3ad4f9244dbfff3b38eeeec6d91fbd7d}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Winston},
+           giveni={W\bibinitperiod}}}%
+        {{hash=28ee445d433874efb86495f4c4e9d559}{%
+           family={McGowan},
+           familyi={M\bibinitperiod},
+           given={Lucy\bibnamedelima D'Agostino},
+           giveni={L\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=3bd2c624a8715b2aeffcecaa24f3d017}{%
+           family={François},
+           familyi={F\bibinitperiod},
+           given={Romain},
+           giveni={R\bibinitperiod}}}%
+        {{hash=de759ef99fad34b8426e26035eb4a20b}{%
+           family={Grolemund},
+           familyi={G\bibinitperiod},
+           given={Garrett},
+           giveni={G\bibinitperiod}}}%
+        {{hash=83154656fbd4fc02a9e468c493204cf9}{%
+           family={Hayes},
+           familyi={H\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4caae9be043b32573c94b11203a4a2fe}{%
+           family={Henry},
+           familyi={H\bibinitperiod},
+           given={Lionel},
+           giveni={L\bibinitperiod}}}%
+        {{hash=5d26572f4d1de0fce70db1a8cfb6b0d1}{%
+           family={Hester},
+           familyi={H\bibinitperiod},
+           given={Jim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3305789acf03200ed22f154007d4fab9}{%
+           family={Kuhn},
+           familyi={K\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod}}}%
+        {{hash=baa847ed0a47fe330db451600329cf32}{%
+           family={Pedersen},
+           familyi={P\bibinitperiod},
+           given={Thomas\bibnamedelima Lin},
+           giveni={T\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=ac004a72f317bb04dcf539660a0feee0}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Evan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=5769225f722449dff0c3f62aa09d2f6e}{%
+           family={Bache},
+           familyi={B\bibinitperiod},
+           given={Stephan\bibnamedelima Milton},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=1435ca4f08e53208e1c34297357afa80}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Kirill},
+           giveni={K\bibinitperiod}}}%
+        {{hash=0f4f7df4d18c1270721b575fc1288184}{%
+           family={Ooms},
+           familyi={O\bibinitperiod},
+           given={Jeroen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=42a6c387e6c733bd0db8180d2bbacd30}{%
+           family={Robinson},
+           familyi={R\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d318a128b5a51b4b776ac61c1f4f7e99}{%
+           family={Seidel},
+           familyi={S\bibinitperiod},
+           given={Dana\bibnamedelima Paige},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=ac149bcd683a561a218e8dc1c1529489}{%
+           family={Spinu},
+           familyi={S\bibinitperiod},
+           given={Vitalie},
+           giveni={V\bibinitperiod}}}%
+        {{hash=cc134fc26d52494111fa09f0a1546069}{%
+           family={Takahashi},
+           familyi={T\bibinitperiod},
+           given={Kohske},
+           giveni={K\bibinitperiod}}}%
+        {{hash=858f3a61393526cfc73cb860925a277a}{%
+           family={Vaughan},
+           familyi={V\bibinitperiod},
+           given={Davis},
+           giveni={D\bibinitperiod}}}%
+        {{hash=acc6b5a79d7cad33c02e41491584028f}{%
+           family={Wilke},
+           familyi={W\bibinitperiod},
+           given={Claus},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ff79890fd7a7f58816ee7360c25d812e}{%
+           family={Woo},
+           familyi={W\bibinitperiod},
+           given={Kara},
+           giveni={K\bibinitperiod}}}%
+        {{hash=f2f301536c9cd620e39deb5fad8712ff}{%
+           family={Yutani},
+           familyi={Y\bibinitperiod},
+           given={Hiroaki},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{fullhash}{60da0af5902bcdfab541641a492d8d42}
+      \strng{bibnamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{authorbibnamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{authornamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{authorfullhash}{60da0af5902bcdfab541641a492d8d42}
+      \field{labelalpha}{Wic+19}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Open Source Software}
+      \field{number}{43}
+      \field{title}{Welcome to the {tidyverse}}
+      \field{volume}{4}
+      \field{year}{2019}
+      \field{pages}{1686}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.21105/joss.01686
+      \endverb
+    \endentry
+    \entry{Wood:2004}{article}{}
+      \name{author}{1}{}{%
+        {{hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
+           family={Wood},
+           familyi={W\bibinitperiod},
+           given={Simon\bibnamedelima N.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {[American Statistical Association, Taylor & Francis, Ltd.]}%
+      }
+      \strng{namehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{fullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{bibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \field{labelalpha}{Woo04}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Representation of generalized additive models (GAM's) using penalized regression splines allows GAM's to be employed in a straightforward manner using penalized regression methods. Not only is inference facilitated by this approach, but it is also possible to integrate model selection in the form of smoothing parameter selection into model fitting in a computationally efficient manner using well founded criteria such as generalized cross-validation. The current fitting and smoothing parameter selection methods for such models are usually effective, but do not provide the level of numerical stability to which users of linear regression packages, for example, are accustomed. In particular the existing methods cannot deal adequately with numerical rank deficiency of the GAM fitting problem, and it is not straightforward to produce methods that can do so, given that the degree of rank deficiency can be smoothing parameter dependent. In addition, models with the potential flexibility of GAM's can also present practical fitting difficulties as a result of indeterminacy in the model likelihood: Data with many zeros fitted by a model with a log link are a good example. In this article it is proposed that GAM's with a ridge penalty provide a practical solution in such circumstances, and a multiple smoothing parameter selection method suitable for use in the presence of such a penalty is developed. The method is based on the pivoted QR decomposition and the singular value decomposition, so that with or without a ridge penalty it has good error propagation properties and is capable of detecting and coping elegantly with numerical rank deficiency. The method also allows mixtures of user specified and estimated smoothing parameters and the setting of lower bounds on smoothing parameters. In terms of computational efficiency, the method compares well with existing methods. A simulation study compares the method to existing methods, including treating GAM's as mixed models.}
+      \field{issn}{01621459}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{467}
+      \field{title}{Stable and Efficient Multiple Smoothing Parameter Estimation for Generalized Additive Models}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{volume}{99}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \field{pages}{673\bibrangedash 686}
+      \range{pages}{14}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/27590439
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/27590439
+      \endverb
+    \endentry
     \entry{Woodard:2011}{article}{}
       \name{author}{3}{}{%
         {{hash=f14bde91cea7d327d1e4a9bd5aac0749}{%
@@ -741,6 +1255,114 @@
       \endverb
       \keyw{drift conditions,Ergodic,Feller,irreducibility,stationary,time series}
     \endentry
+    \entry{Yee:1996}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a9a5a50bccf047f3d6a65308f04e0987}{%
+           family={Yee},
+           familyi={Y\bibinitperiod},
+           given={T.\bibnamedelimi W.},
+           giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=316fb3b9e6c322e18a7cbfa651f82df0}{%
+           family={Wild},
+           familyi={W\bibinitperiod},
+           given={C.\bibnamedelimi J.},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {[Royal Statistical Society, Wiley]}%
+      }
+      \strng{namehash}{9a31ef6231360afa2bf3898b1f7548e1}
+      \strng{fullhash}{9a31ef6231360afa2bf3898b1f7548e1}
+      \strng{bibnamehash}{9a31ef6231360afa2bf3898b1f7548e1}
+      \strng{authorbibnamehash}{9a31ef6231360afa2bf3898b1f7548e1}
+      \strng{authornamehash}{9a31ef6231360afa2bf3898b1f7548e1}
+      \strng{authorfullhash}{9a31ef6231360afa2bf3898b1f7548e1}
+      \field{labelalpha}{YW96}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Vector smoothing is used to extend the class of generalized additive models in a very natural way to include a class of multivariate regression models. The resulting models are called `vector generalized additive models'. The class of models for which the methodology gives generalized additive extensions includes the multiple logistic regression model for nominal responses, the continuation ratio model and the proportional and non-proportional odds models for ordinal responses, and the bivariate probit and bivariate logistic models for correlated binary responses. They may also be applied to generalized estimating equations.}
+      \field{issn}{00359246}
+      \field{journaltitle}{Journal of the Royal Statistical Society. Series B (Methodological)}
+      \field{number}{3}
+      \field{title}{Vector Generalized Additive Models}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{volume}{58}
+      \field{year}{1996}
+      \field{urldateera}{ce}
+      \field{pages}{481\bibrangedash 493}
+      \range{pages}{13}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/2345888
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/2345888
+      \endverb
+    \endentry
+    \entry{Yee:2015}{book}{}
+      \name{author}{1}{}{%
+        {{hash=60cfa95cd3d0fcdb0c870a7fa5855108}{%
+           family={Yee},
+           familyi={Y\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
+      \strng{fullhash}{60cfa95cd3d0fcdb0c870a7fa5855108}
+      \strng{bibnamehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
+      \strng{authorbibnamehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
+      \strng{authornamehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
+      \strng{authorfullhash}{60cfa95cd3d0fcdb0c870a7fa5855108}
+      \field{extraname}{1}
+      \field{labelalpha}{Yee15}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-4939-2817-0}
+      \field{month}{01}
+      \field{title}{Vector Generalized Linear and Additive Models: With an Implementation in R}
+      \field{year}{2015}
+      \field{pages}{1\bibrangedash 589}
+      \range{pages}{589}
+      \verb{doi}
+      \verb 10.1007/978-1-4939-2818-7
+      \endverb
+    \endentry
+    \entry{RVGAM:2010}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7467dc5e783b7611642bfcd1c127db99}{%
+           family={Yee},
+           familyi={Y\bibinitperiod},
+           given={Thomas\bibnamedelima W.},
+           giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{7467dc5e783b7611642bfcd1c127db99}
+      \strng{fullhash}{7467dc5e783b7611642bfcd1c127db99}
+      \strng{bibnamehash}{7467dc5e783b7611642bfcd1c127db99}
+      \strng{authorbibnamehash}{7467dc5e783b7611642bfcd1c127db99}
+      \strng{authornamehash}{7467dc5e783b7611642bfcd1c127db99}
+      \strng{authorfullhash}{7467dc5e783b7611642bfcd1c127db99}
+      \field{extraname}{2}
+      \field{labelalpha}{Yee10}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{10}
+      \field{title}{The {VGAM} Package for Categorical Data Analysis}
+      \field{volume}{32}
+      \field{year}{2010}
+      \field{pages}{1\bibrangedash 34}
+      \range{pages}{34}
+      \verb{doi}
+      \verb 10.18637/jss.v032.i10
+      \endverb
+    \endentry
     \entry{Qaqish:1988}{article}{}
       \name{author}{1}{}{%
         {{hash=022dfc2e1071d95c0df10b84f7f84ef1}{%
@@ -781,6 +1403,47 @@
       \endverb
       \verb{url}
       \verb http://www.jstor.org/stable/2336303
+      \endverb
+    \endentry
+    \entry{Pscl:2008}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9b2b213ce13e040cff6fc8714922a812}{%
+           family={Zeileis},
+           familyi={Z\bibinitperiod},
+           given={Achim},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7bb1aed2f80d791ded7713d375bc4a5f}{%
+           family={Kleiber},
+           familyi={K\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=40964af0b06eafe7b25f4e545a94503f}{%
+           family={Jackman},
+           familyi={J\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3b93fb71bf2598dc4a38701d6dfa6ff7}
+      \strng{fullhash}{3b93fb71bf2598dc4a38701d6dfa6ff7}
+      \strng{bibnamehash}{3b93fb71bf2598dc4a38701d6dfa6ff7}
+      \strng{authorbibnamehash}{3b93fb71bf2598dc4a38701d6dfa6ff7}
+      \strng{authornamehash}{3b93fb71bf2598dc4a38701d6dfa6ff7}
+      \strng{authorfullhash}{3b93fb71bf2598dc4a38701d6dfa6ff7}
+      \field{labelalpha}{ZKJ08}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{8}
+      \field{title}{Regression Models for Count Data in {R}}
+      \field{volume}{27}
+      \field{year}{2008}
+      \verb{urlraw}
+      \verb http://www.jstatsoft.org/v27/i08/
+      \endverb
+      \verb{url}
+      \verb http://www.jstatsoft.org/v27/i08/
       \endverb
     \endentry
     \entry{Zhu:2012}{article}{}

@@ -1,0 +1,15 @@
+@article{10.2307/2345888,
+ ISSN = {00359246},
+ URL = {http://www.jstor.org/stable/2345888},
+ abstract = {Vector smoothing is used to extend the class of generalized additive models in a very natural way to include a class of multivariate regression models. The resulting models are called `vector generalized additive models'. The class of models for which the methodology gives generalized additive extensions includes the multiple logistic regression model for nominal responses, the continuation ratio model and the proportional and non-proportional odds models for ordinal responses, and the bivariate probit and bivariate logistic models for correlated binary responses. They may also be applied to generalized estimating equations.},
+ author = {T. W. Yee and C. J. Wild},
+ journal = {Journal of the Royal Statistical Society. Series B (Methodological)},
+ number = {3},
+ pages = {481--493},
+ publisher = {[Royal Statistical Society, Wiley]},
+ title = {Vector Generalized Additive Models},
+ urldate = {2023-04-30},
+ volume = {58},
+ year = {1996}
+}
+

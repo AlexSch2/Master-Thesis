@@ -1,0 +1,15 @@
+@article{10.2307/27590439,
+ ISSN = {01621459},
+ URL = {http://www.jstor.org/stable/27590439},
+ abstract = {Representation of generalized additive models (GAM's) using penalized regression splines allows GAM's to be employed in a straightforward manner using penalized regression methods. Not only is inference facilitated by this approach, but it is also possible to integrate model selection in the form of smoothing parameter selection into model fitting in a computationally efficient manner using well founded criteria such as generalized cross-validation. The current fitting and smoothing parameter selection methods for such models are usually effective, but do not provide the level of numerical stability to which users of linear regression packages, for example, are accustomed. In particular the existing methods cannot deal adequately with numerical rank deficiency of the GAM fitting problem, and it is not straightforward to produce methods that can do so, given that the degree of rank deficiency can be smoothing parameter dependent. In addition, models with the potential flexibility of GAM's can also present practical fitting difficulties as a result of indeterminacy in the model likelihood: Data with many zeros fitted by a model with a log link are a good example. In this article it is proposed that GAM's with a ridge penalty provide a practical solution in such circumstances, and a multiple smoothing parameter selection method suitable for use in the presence of such a penalty is developed. The method is based on the pivoted QR decomposition and the singular value decomposition, so that with or without a ridge penalty it has good error propagation properties and is capable of detecting and coping elegantly with numerical rank deficiency. The method also allows mixtures of user specified and estimated smoothing parameters and the setting of lower bounds on smoothing parameters. In terms of computational efficiency, the method compares well with existing methods. A simulation study compares the method to existing methods, including treating GAM's as mixed models.},
+ author = {Simon N. Wood},
+ journal = {Journal of the American Statistical Association},
+ number = {467},
+ pages = {673--686},
+ publisher = {[American Statistical Association, Taylor & Francis, Ltd.]},
+ title = {Stable and Efficient Multiple Smoothing Parameter Estimation for Generalized Additive Models},
+ urldate = {2023-04-30},
+ volume = {99},
+ year = {2004}
+}
+

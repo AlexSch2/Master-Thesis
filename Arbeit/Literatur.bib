@@ -261,3 +261,195 @@ author = {R. Douc and P. Doukhan and E. Moulines},
 keywords = {Consistency, Ergodicity, Time series of counts, Maximum likelihood, Observation-driven models, Stationarity},
 abstract = {This paper deals with a general class of observation-driven time series models with a special focus on time series of counts. We provide conditions under which there exist strict-sense stationary and ergodic versions of such processes. The consistency of the maximum likelihood estimators is then derived for well-specified and misspecified models.}
 }
+
+% VGAM
+@article{Yee:1996,
+ ISSN = {00359246},
+ URL = {http://www.jstor.org/stable/2345888},
+ abstract = {Vector smoothing is used to extend the class of generalized additive models in a very natural way to include a class of multivariate regression models. The resulting models are called `vector generalized additive models'. The class of models for which the methodology gives generalized additive extensions includes the multiple logistic regression model for nominal responses, the continuation ratio model and the proportional and non-proportional odds models for ordinal responses, and the bivariate probit and bivariate logistic models for correlated binary responses. They may also be applied to generalized estimating equations.},
+ author = {T. W. Yee and C. J. Wild},
+ journal = {Journal of the Royal Statistical Society. Series B (Methodological)},
+ number = {3},
+ pages = {481--493},
+ publisher = {[Royal Statistical Society, Wiley]},
+ title = {Vector Generalized Additive Models},
+ urldate = {2023-04-30},
+ volume = {58},
+ year = {1996}
+}
+
+% VGAM 2
+@book{Yee:2015,
+author = {Yee, Thomas},
+year = {2015},
+month = {01},
+pages = {1-589},
+title = {Vector Generalized Linear and Additive Models: With an Implementation in R},
+isbn = {978-1-4939-2817-0},
+doi = {10.1007/978-1-4939-2818-7}
+}
+
+
+% VGAM 3
+
+@article{Wood:2004,
+ ISSN = {01621459},
+ URL = {http://www.jstor.org/stable/27590439},
+ abstract = {Representation of generalized additive models (GAM's) using penalized regression splines allows GAM's to be employed in a straightforward manner using penalized regression methods. Not only is inference facilitated by this approach, but it is also possible to integrate model selection in the form of smoothing parameter selection into model fitting in a computationally efficient manner using well founded criteria such as generalized cross-validation. The current fitting and smoothing parameter selection methods for such models are usually effective, but do not provide the level of numerical stability to which users of linear regression packages, for example, are accustomed. In particular the existing methods cannot deal adequately with numerical rank deficiency of the GAM fitting problem, and it is not straightforward to produce methods that can do so, given that the degree of rank deficiency can be smoothing parameter dependent. In addition, models with the potential flexibility of GAM's can also present practical fitting difficulties as a result of indeterminacy in the model likelihood: Data with many zeros fitted by a model with a log link are a good example. In this article it is proposed that GAM's with a ridge penalty provide a practical solution in such circumstances, and a multiple smoothing parameter selection method suitable for use in the presence of such a penalty is developed. The method is based on the pivoted QR decomposition and the singular value decomposition, so that with or without a ridge penalty it has good error propagation properties and is capable of detecting and coping elegantly with numerical rank deficiency. The method also allows mixtures of user specified and estimated smoothing parameters and the setting of lower bounds on smoothing parameters. In terms of computational efficiency, the method compares well with existing methods. A simulation study compares the method to existing methods, including treating GAM's as mixed models.},
+ author = {Simon N. Wood},
+ journal = {Journal of the American Statistical Association},
+ number = {467},
+ pages = {673--686},
+ publisher = {[American Statistical Association, Taylor & Francis, Ltd.]},
+ title = {Stable and Efficient Multiple Smoothing Parameter Estimation for Generalized Additive Models},
+ urldate = {2023-04-30},
+ volume = {99},
+ year = {2004}
+}
+
+
+%R
+
+  @Manual{R:2022,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2022},
+    url = {https://www.R-project.org/},
+  }
+
+%Tidyverse
+@Article{Tidyverse:2019,
+    title = {Welcome to the {tidyverse}},
+    author = {Hadley Wickham and Mara Averick and Jennifer Bryan and Winston Chang and Lucy D'Agostino McGowan and Romain François and Garrett Grolemund and Alex Hayes and Lionel Henry and Jim Hester and Max Kuhn and Thomas Lin Pedersen and Evan Miller and Stephan Milton Bache and Kirill Müller and Jeroen Ooms and David Robinson and Dana Paige Seidel and Vitalie Spinu and Kohske Takahashi and Davis Vaughan and Claus Wilke and Kara Woo and Hiroaki Yutani},
+    year = {2019},
+    journal = {Journal of Open Source Software},
+    volume = {4},
+    number = {43},
+    pages = {1686},
+    doi = {10.21105/joss.01686},
+  }
+	
+%here
+  @Manual{here:2020,
+    title = {here: A Simpler Way to Find Your Files},
+    author = {Kirill Müller},
+    year = {2020},
+    note = {R package version 1.0.1},
+    url = {https://CRAN.R-project.org/package=here},
+  }
+
+%CodA R1
+@Article{VAR:2008,
+  title = {VAR, SVAR and SVEC Models: Implementation Within {R} Package {vars}},
+  author = {Bernhard Pfaff},
+  journal = {Journal of Statistical Software},
+  year = {2008},
+  volume = {27},
+  number = {4},
+  url = {https://www.jstatsoft.org/v27/i04/},
+}
+
+%CoDA R2
+@Book{CoDAR2:2008,
+  title = {Analysis of Integrated and Cointegrated Time Series with R},
+  author = {B. Pfaff},
+  publisher = {Springer},
+  edition = {Second},
+  address = {New York},
+  year = {2008},
+  note = {ISBN 0-387-27960-1},
+  url = {https://www.pfaffikus.de},
+}
+
+%CoDA R3
+@Book{RobComp:2011,
+  title = {rob{C}ompositions: an R-package for robust statistical analysis of compositional data},
+  author = {Matthias Templ and Karel Hron and Peter Filzmoser},
+  publisher = {{J}ohn {W}iley and {S}ons},
+  isbn = {978-0-470-71135-4},
+  booktitle = {{C}ompositional {D}ata {A}nalysis: {T}heory and {A}pplications},
+  year = {2011},
+  pages = {341--355},
+}
+
+%CoDA R4
+@Book{CoDAR4:2018,
+  title = {Applied Compositional Data Analysis. With Worked Examples in {R}},
+  author = {Peter Filzmoser and Karel Hron and Matthias Templ},
+  publisher = {Springer International Publishing. Springer Nature Switzerland AG, Cham, Switzerland},
+  note = {Springer Series in Statistics},
+  isbn = {978-3-319-96420-1},
+  year = {2018},
+}
+
+%Ingarch R1
+@Article{Tscount:2017,
+  title = {{tscount}: An {R} Package for Analysis of Count Time Series Following Generalized Linear Models},
+  author = {Tobias Liboschik and Konstantinos Fokianos and Roland Fried},
+  journal = {Journal of Statistical Software},
+  year = {2017},
+  volume = {82},
+  number = {5},
+  pages = {1--51},
+  doi = {10.18637/jss.v082.i05},
+}
+
+%Ingarch R2
+@Article{Tscount:2016,
+  author = {Tobias Liboschik and Pascal Kerschke and Konstantinos Fokianos and Roland Fried},
+  title = {Modelling interventions in INGARCH processes},
+  journal = {International Journal of Computer Mathematics},
+  issn = {1548-7660},
+  year = {2016},
+  volume = {93},
+  number = {4},
+  pages = {640--657},
+  doi = {10.1080/00207160.2014.949250},
+  note = {preprint available at http://doi.org/10.17877/DE290R-4981},
+}
+
+%Ingarch R3
+@Manual{Tscount:2020,
+  title = {tscount: Analysis of Count Time Series},
+  author = {Tobias Liboschik and Roland Fried and Konstantinos Fokianos and Philipp Probst},
+  year = {2020},
+  note = {R package version 1.4.3},
+  url = {https://CRAN.R-project.org/package=tscount},
+}
+
+
+%ZIM R1
+@Article{Pscl:2008,
+  title = {Regression Models for Count Data in {R}},
+  author = {Achim Zeileis and Christian Kleiber and Simon Jackman},
+  journal = {Journal of Statistical Software},
+  year = {2008},
+  volume = {27},
+  number = {8},
+  url = {http://www.jstatsoft.org/v27/i08/},
+}
+
+%VGAM R1
+
+@Article{RVGAM:2010,
+  title = {The {VGAM} Package for Categorical Data Analysis},
+  author = {Thomas W. Yee},
+  journal = {Journal of Statistical Software},
+  year = {2010},
+  volume = {32},
+  number = {10},
+  pages = {1--34},
+  doi = {10.18637/jss.v032.i10},
+}
+
+%Miceadds
+@Manual{Miceadds:2023,
+    title = {miceadds: Some Additional Multiple Imputation Functions, Especially for
+'mice'},
+    author = {Alexander Robitzsch and Simon Grund},
+    year = {2023},
+    note = {R package version 3.16-18},
+    url = {https://CRAN.R-project.org/package=miceadds},
+  }

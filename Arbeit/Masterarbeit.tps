@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=76
-Cursor=2478
+TopLine=64
+Cursor=2747
 
 [Frame1]
 Flags=0
@@ -35,7 +35,7 @@ Class=LaTeXView
 Document=Deckblatt.tex
 
 [Frame1_View0,0]
-TopLine=1
+TopLine=0
 Cursor=989
 
 [Frame2]
@@ -71,8 +71,8 @@ Class=LaTeXView
 Document=Methode_Ingarch.tex
 
 [Frame3_View0,0]
-TopLine=0
-Cursor=4544
+TopLine=11
+Cursor=5251
 
 [Frame4]
 Flags=0
@@ -89,8 +89,8 @@ Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame4_View0,0]
-TopLine=170
-Cursor=9690
+TopLine=157
+Cursor=12880
 
 [Frame5]
 Flags=0
@@ -108,7 +108,7 @@ Document=Other_methods.tex
 
 [Frame5_View0,0]
 TopLine=10
-Cursor=3020
+Cursor=4100
 
 [Frame6]
 Flags=0
@@ -125,8 +125,8 @@ Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame6_View0,0]
-TopLine=0
-Cursor=1879
+TopLine=52
+Cursor=5106
 
 [Frame7]
 Flags=0
@@ -143,7 +143,7 @@ Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame7_View0,0]
-TopLine=68
+TopLine=55
 Cursor=5177
 
 [Frame8]
@@ -158,11 +158,11 @@ NormalPos.top=26
 NormalPos.right=2556
 NormalPos.bottom=875
 Class=LaTeXView
-Document=Results.tex
+Document=RCode.tex
 
 [Frame8_View0,0]
-TopLine=7
-Cursor=791
+TopLine=0
+Cursor=1632
 
 [Frame9]
 Flags=0
@@ -176,13 +176,31 @@ NormalPos.top=26
 NormalPos.right=2556
 NormalPos.bottom=875
 Class=LaTeXView
-Document=Conclusion.tex
+Document=Results.tex
 
 [Frame9_View0,0]
+TopLine=7
+Cursor=791
+
+[Frame10]
+Flags=0
+ShowCmd=1
+MinPos.x=-1
+MinPos.y=-1
+MaxPos.x=-1
+MaxPos.y=-1
+NormalPos.left=4
+NormalPos.top=26
+NormalPos.right=2556
+NormalPos.bottom=875
+Class=LaTeXView
+Document=Conclusion.tex
+
+[Frame10_View0,0]
 TopLine=0
 Cursor=0
 
-[Frame10]
+[Frame11]
 Flags=0
 ShowCmd=1
 MinPos.x=-1
@@ -196,13 +214,13 @@ NormalPos.bottom=875
 Class=BibTeXView
 Document=Literatur.bib
 
-[Frame10_View0,0]
-TopLine=249
-Cursor=18028
+[Frame11_View0,0]
+TopLine=439
+Cursor=26637
 
 [SessionInfo]
-FrameCount=11
-ActiveFrame=5
+FrameCount=12
+ActiveFrame=0
 
 [Bookmarks]
 Results.tex=81 
