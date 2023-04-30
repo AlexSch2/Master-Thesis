@@ -210,7 +210,6 @@ Ingarch.Analysis <- function(Data_Raw,
                              NCores = 2
                              ) {
   
-  
   stopifnot(ModelType %in% c("ingarch","ingarch_OneVsAll"))
   
   #Only return IDs with results
@@ -264,12 +263,10 @@ Ingarch.Analysis <- function(Data_Raw,
       }
     }
     
-    
     #Creating fitting and prediction windows
     Data_Window <- Data.Window(Data_Prepared,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
     Data_WindowNoTransform <- Data.Window( Data_PreparedNoTransform,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
-    
-    
+  
     #Calculating Prediction results for each category 
     if(Multicore == TRUE){
       
@@ -305,7 +302,7 @@ Ingarch.Analysis <- function(Data_Raw,
         print(paste("Error occured in prediction: ID",Id_RunVariable,", Category",Category_RunVariable,PredictionResult))
         return(NA)
       }
-
+      
       return(list(result=bind_rows(PredictionResult$result),
                   model=PredictionResult$model))
       
@@ -335,10 +332,8 @@ Ingarch.Analysis <- function(Data_Raw,
           print(paste("Error occured in prediction: ID",Id_RunVariable,", Category",Category_RunVariable,PredictionResult))
           return(NA)
         }
-        
         return(list(result = bind_rows(PredictionResult$result),
                     model = PredictionResult$model))
-        
       })
     }
     
@@ -375,9 +370,6 @@ Ingarch.Analysis <- function(Data_Raw,
   
   return(list(result = Result_Prediction,
               model = Result_Model))
-  
- 
-  
 }
 
 

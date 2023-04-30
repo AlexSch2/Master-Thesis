@@ -387,8 +387,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         if(Frame < 1){
           Frame_Help <- as.character(Frame)
           Frame = round(Frame*dim(Data_Transform)[1])
-          if(Frame < 4){
-            Frame = 4
+          if(Frame < 5){
+            Frame = 5
           }
         }
         
@@ -513,8 +513,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         if(Frame < 1){
           Frame_Help <- as.character(Frame)
           Frame = round(Frame*dim(Data_Transform)[1])
-          if(Frame < 4){
-            Frame = 4
+          if(Frame < 5){
+            Frame = 5
           }
         }
         
