@@ -1,6 +1,6 @@
 %% HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[a4paper,twoside,12pt]{scrbook}
+\documentclass[a4paper,twoside,12pt,appendixprefix=true]{scrbook}
 
 
 %% Sprache Anpassungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,6 +30,9 @@
 %\doublespacing        %% 2-zeilig
 
 %% Verzeichnisse
+
+%Appendix
+\usepackage[toc, title, titletoc]{appendix}
 
 %Biblatex
 \usepackage[citestyle=alphabetic,bibstyle=authortitle]{biblatex}
@@ -125,7 +128,9 @@
 %% ANHÄNGE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
-
+    \chapter{R-Functions}
+		\label{sec:R-Functions}
+		\input{RFunctions}
 \end{document}
 
 

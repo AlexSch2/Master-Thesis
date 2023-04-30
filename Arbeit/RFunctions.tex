@@ -1,0 +1,1158 @@
+\section{General Functions}
+\label{sec:General Functions}
+
+\begin{verbatim}
+Data.Window <- function(Timeseries,Frame,
+												Method = c("non-overlapping", "fixed", "extending"),
+												PredictionStep = 1) {
+  
+  Method <- match.arg(Method)
+  Timeseries_Length <- dim(Timeseries)[1]
+  
+  if (is.null(Timeseries_Length)) {
+    Timeseries <- as.matrix(Timeseries, ncol = 1)
+    Timeseries_Length <- dim(Timeseries)[1]
+  }
+  if (is.null(Timeseries_Length))
+    stop("Enter valid timeseries")
+  
+  stopifnot(Timeseries_Length >= Frame)
+  
+  if (Method == "non-overlapping") {
+    Window_Number <-
+      floor(Timeseries_Length / Frame) - 
+			ifelse(Timeseries_Length %% Frame < PredictionStep, 1, 0) - 
+      ifelse(Frame < PredictionStep, 1, 0) #div and prediction step
+    
+    StartIndex <-
+      max(1,Timeseries_Length - Window_Number * Frame - PredictionStep)
+    
+    Timeseries <- Timeseries[StartIndex:Timeseries_Length, ]
+    
+    Result <- lapply(c(0:(Window_Number - 1)), function(i) {
+      return(list(timeSeriesValue_window = 
+									Timeseries[(i * Frame + 1):((i + 1) * Frame), ],
+                  timeSeriesValue_future = 
+									Timeseries[((i + 1) * Frame + PredictionStep), ]))
+    })
+    
+    names(Result) <- c(1:Window_Number)
+  }
+  
+  else if (Method == "fixed") {
+    #Length of the series - length of the window + prediction step equals the 
+		#Number of windows
+    Window_Number <- Timeseries_Length - Frame - PredictionStep + 1
+    
+    Result <- lapply(c(1:Window_Number), function(i) {
+      return(list(timeSeriesValue_window = 
+									Timeseries[i:(Frame + i - 1), ],
+                  timeSeriesValue_future = 
+									Timeseries[(Frame + i - 1 + PredictionStep), ]))
+    })
+    names(Result) <- c(1:Window_Number)
+  }
+  
+  else if (Method == "extending") {
+    #Length of the series - length of the first window + prediction step 
+		#equals the number of windows
+    Window_Number <- Timeseries_Length - Frame - PredictionStep + 1
+    
+    Result <- lapply(c(1:Window_Number), function(i) {
+      return(list(timeSeriesValue_window = 
+									Timeseries[1:(Frame + i - 1), ],
+                  timeSeriesValue_future = 
+									Timeseries[(Frame + i - 1 + PredictionStep), ]))
+    })
+    names(Result) <- c(1:Window_Number)
+  }
+  
+  else {
+    stop("Enter valid Method")
+  }
+  
+  return(Result)
+}
+\end{verbatim}
+
+
+\begin{verbatim}
+Data.Preparation <- function(Data_Raw,
+                             OneVsAll = F,
+                             PivotGroup = "1",
+                             Category = c(1, 2, 3, 4),
+                             NA_to = 0,
+                             HistoryLength = 1,
+                             TakeSubCategory = FALSE){
+  
+  #Sub or Main Category
+  if(TakeSubCategory){
+    Category_Var <- "sub_category_id"
+    Data_Raw <- subset(Data_Raw,select = -main_category_id)
+  }else{
+    Category_Var <- "main_category_id"
+#    Data_Raw <- subset(Data_Raw,select = -sub_category_id)
+  }
+
+  
+  columns <- c("week_date", as.character(Category))
+  
+    Data_Raw <- Data_Raw %>%
+    dplyr::filter(get(Category_Var) %in% Category) %>%
+    group_by(across(all_of(Category_Var)), week_date) %>%
+    dplyr::mutate(sold = sum(sold)) %>% 
+    dplyr::select(all_of(c("week_date",Category_Var,"sold"))) %>%
+    dplyr::distinct() %>%
+    pivot_wider(names_from
+                = Category_Var, values_from = sold) %>%
+    ungroup() %>%
+    setnafill(type = "const", fill = NA_to) %>%
+    dplyr::select(any_of(columns)) %>%
+    dplyr::mutate(across(.cols = as.character(Category), 
+												 .fns = as.double))
+  
+  #Determining the length of the Timeseries
+  DataRaw_Length <- dim(Data_Raw)[1]
+  
+  if(between(HistoryLength,0,1)){
+    DataRaw_Start <- round(DataRaw_Length * (1-HistoryLength) + 1)
+  }else {
+    DataRaw_Start <- DataRaw_Length - HistoryLength
+  }
+  
+  Data_Raw <- Data_Raw[DataRaw_Start:DataRaw_Length,]
+  
+  if (OneVsAll) {
+    Data_Raw <- Data_Raw %>%
+      dplyr::mutate(other = dplyr::select(.,-all_of(PivotGroup), 
+																					-"week_date") %>% 
+			rowSums(na.rm =F)) %>%
+      dplyr::select("week_date", all_of(PivotGroup), "other")
+    
+  }
+  
+  return(Data_Raw)
+  
+}
+\end{verbatim}
+
+\section{INGARCH Functions}
+\label{sec:Ingarch Functions}
+
+\begin{verbatim}
+Ingarch.DataPreparation <- function(Data_Raw,
+                                     ZeroHandling = c("none","zero_to_one"),
+                                    HistoryLength = 1,
+                                    TakeSubCategory = F){
+  
+  ZeroHandling <- match.arg(ZeroHandling)
+  
+  if(TakeSubCategory){
+    Category <- sort(unique(Data_Raw$sub_category_id))
+  }
+  else{
+    Category <- sort(unique(Data_Raw$main_category_id))
+  }
+  
+  Data_Prepared <- Data.Preparation(Data_Raw = Data_Raw,
+                               OneVsAll = F,
+                               Category = Category,
+                               NA_to = 0,
+                               HistoryLength = HistoryLength,
+                               TakeSubCategory = TakeSubCategory)
+  
+  if (ZeroHandling == "none") {
+    return(Data_Prepared)
+  }
+  else if (ZeroHandling == "zero_to_one") {
+    Data_Prepared[Data_Prepared == 0] <- 1
+    return(Data_Prepared)
+  }
+  else{
+    stop("Enter valid zero handling method")
+    }
+}
+\end{verbatim}
+
+\begin{verbatim}
+Ingarch.Prediction <- function(Data_Window,
+                               Data_WindowNoTransform,
+                               Category,
+                               PredictionStep = 1,
+                               Frame = 10,
+                               Distribution = "poisson",
+                               Plot = F,
+                               WindowMethod = "extending",
+                               External = FALSE,
+                               PastOb = 1,
+                               PastMean = 1){
+  
+  NumberOfWindows <- length(Data_Window)
+  
+  
+  #Calculating the prediction for each window
+  Result <- lapply(c(1:NumberOfWindows),function(WindowIndex){
+    
+    
+    #Extracting fitting values, true value and last known value
+    TimeSeriesValue_Window <- 
+		Data_Window[[WindowIndex]]$timeSeriesValue_window[c("week_date",Category)]
+    TimeseriesValue_Future <- 
+		Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[[Category]]
+    TimeSeriesValue_LastKnown <- tail(TimeSeriesValue_Window[[Category]],n=1)
+    
+    Xreg <-NULL
+    Ext <- NULL
+    XregFuture <- NULL
+    
+    if(External){
+      Xreg <- Data_Window[[WindowIndex]]$timeSeriesValue_window %>%
+              dplyr::select(-c("week_date", all_of(Category))) %>%
+              as.matrix()
+      Ext <- rep(TRUE,ncol(Xreg))
+      XregFuture <- matrix(round(apply(tail(Xreg,n=5),2,mean)),nrow=1)
+      names(XregFuture) <- colnames(Xreg)
+    }
+    
+    #Fitting the model
+   
+    PastOb_Used <- c(1:PastOb)
+    if (PastMean == 0) {
+      PastMean_Used <- NULL
+    } else{
+      PastMean_Used <- c(1:PastMean)
+    }
+    
+    #Determining init.method. If none works, we skip this fridge 
+    SkipWindow <- FALSE
+    
+    for (method in c("marginal", "iid", "firstobs", "zero")) {
+      
+      Model <- tryCatch(
+        expr = {tsglm(TimeSeriesValue_Window[[Category]],
+                      model = list("past_obs" = PastOb_Used,
+                                   "past_mean" = PastMean_Used,
+                                   external = Ext),
+                      xreg = Xreg,
+                      distr = Distribution,
+                      link = "identity",
+                      init.method = method)},
+        error = function (e) e
+      )
+      
+    if(inherits(Model,"error")){
+      if(method == "zero") {
+        SkipWindow <- TRUE
+        print("No init.method works. Skipping Window.")
+        break
+      }
+      next
+    }else{
+      initMethod <- method
+      break 
+    }
+    }
+    
+    if(SkipWindow)return(list(prediction=NA,model=NA))
+    
+    #Predicting the future value depending on PredictionStep
+    PredictionResult <- predict(Model,n.ahead = PredictionStep,
+																type = "shortest",
+                                level = 0.90,newxreg = XregFuture)
+    
+    
+    #Rounding it since we only have integers
+    ValuePredict <- round(PredictionResult$pred)
+    
+    
+    #Extracting the lower and upper prediction interval 
+    PredictionInterval_Lower <- PredictionResult$interval[1,"lower"]
+    PredictionInterval_Upper <- PredictionResult$interval[1,"upper"]
+    
+    
+    #Calculating the prediction error
+    PredictionError <- as.numeric(ValuePredict - TimeseriesValue_Future)
+    
+  
+    #Calculating the normed prediction error
+    PredictionError_Normed <- PredictionError
+    
+    return(list(
+      prediction = data.frame(
+        predictionError = PredictionError,
+        valuePredict = ValuePredict,
+        predictionError_normed = PredictionError_Normed,
+        lowerBound = PredictionInterval_Lower,
+        upperBound = PredictionInterval_Upper,
+        valueTrue = TimeseriesValue_Future,
+        valueLastKnown = TimeSeriesValue_LastKnown,
+        category = Category,
+        date = Data_Window[[WindowIndex]]$timeSeriesValue_future[[1]],
+        distribution = Distribution,
+        window = WindowIndex,
+        window_length = dim(TimeSeriesValue_Window)[1],
+        window_baseLength = Frame,
+        pastOb = PastOb,
+        pastMean = PastMean,
+        external = External,
+        initMethod = initMethod
+      ),
+      model = Model
+    ))
+    
+  })
+  
+  #Transforming result in a nicer format
+  Result <- discard(Result, ~all(is.na(.x)))
+  Result_Prediction <- bind_rows(UnlistListElement(Result, "prediction"))
+  Result_Model <- UnlistListElement(Result, "model")
+  names(Result_Model) <- sapply(c(1:NumberOfWindows),
+																function(i){paste("window",i,sep = "")})
+  
+  
+  #Calculation the normed prediction error 
+  div <- sapply(c(1:dim(Result_Prediction)[1]),function(i){
+    
+    return(Normation(x = Result_Prediction$valueTrue[1:i],
+                     y = Result_Prediction$valueLastKnown[1:i]))}
+    )
+  if(0 %in% div ) div[div == 0] <- 0.5
+  Result_Prediction$predictionError_normed <- 
+																	Result_Prediction$predictionError_normed/div
+  
+  
+  #Plotting diagnostic plots or not
+  #if (Plot) {
+  #  plot(model, ask = F)
+  #}
+  
+  return(list(result = Result_Prediction,
+              model = Result_Model))
+  
+}
+\end{verbatim}
+
+\begin{verbatim}
+Ingarch.Analysis <- function(Data_Raw,
+                             Id,
+                             PredictionStep = 1,
+                             Distribution = "poisson",
+                             ModelType = "ingarch",
+                             Plot = F,
+                             Category_Main = c("1", "2", "3", "4"),
+                             TakeSubCategory = F,
+                             Category_Sub = NULL,
+                             Frame = 10,
+                             WindowMethod = "extending",
+                             ZeroHandling = "none",
+                             PastOb = 1,
+                             PastMean = 1,
+                             External = FALSE,
+                             HistoryLength = 1,
+                             Multicore = TRUE,
+                             NCores = 2
+                             ) {
+  
+  stopifnot(ModelType %in% c("ingarch","ingarch_OneVsAll"))
+  
+  #Only return IDs with results
+  Id_Result <- Id
+  
+  #Operating on Sub category Level
+  SubCategory_Column  <- NULL
+  if(TakeSubCategory){
+    SubCategory_Column <- "sub_category_id"
+    stopifnot(length(Category_Main)==1)
+  }
+  if(is.null(Category_Sub)){
+    Category_Sub <- unique(Data_Raw$sub_category_id)
+  }
+  
+  #Calculating Prediction results for all ids and each category
+  PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_RunVariable){
+    print(paste("Calculating for ID:",Id_RunVariable))
+    #Preparing data
+    Data_Processed <- Data_Raw %>%
+      filter(fridge_id == Id_RunVariable &
+               main_category_id %in% as.integer(Category_Main) &
+               sub_category_id %in% as.integer(Category_Sub)) %>%
+      dplyr::select(week_date, main_category_id, any_of(SubCategory_Column) ,sold) %>%
+      arrange(week_date)
+    
+    Data_Prepared <- 
+						Ingarch.DataPreparation(Data_Raw = Data_Processed,
+						                        ZeroHandling = ZeroHandling,
+																		HistoryLength = HistoryLength,
+																		TakeSubCategory = TakeSubCategory)
+    
+    Data_PreparedNoTransform <- 
+						Ingarch.DataPreparation(Data_Raw = Data_Processed,
+																		ZeroHandling = "none",
+																		HistoryLength = HistoryLength,
+																		TakeSubCategory = TakeSubCategory)
+    Category <- names(Data_Prepared)[-1]
+    
+    #Calculating the length of the timeseries
+    TimeSeries_Length <- length(unique(Data_Prepared$week_date))
+    
+    #If the Frame is given as a fraction, calculate the absolute length. 
+		#We set 5 as the minimum length needed.
+    Frame_Help <- "fixed"
+    if(dim(Data_Prepared)[1]<5){
+      print(paste("Insufficient data. Skipping ID: ",Id_RunVariable))
+      Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
+      return(NA)
+    }
+    if(Frame < 1){
+      Frame_Help <- as.character(Frame)
+      Frame = round(Frame*dim(Data_Prepared)[1])
+      if(Frame < 4){
+        Frame = 4
+      }
+    }
+    
+    #Creating fitting and prediction windows
+    Data_Window <- Data.Window(Data_Prepared,Frame = Frame,
+															 Method=WindowMethod,
+														   PredictionStep = PredictionStep)
+    Data_WindowNoTransform <- Data.Window(Data_PreparedNoTransform,
+																					Frame = Frame,
+																					Method=WindowMethod,
+																					PredictionStep = PredictionStep)
+  
+    #Calculating Prediction results for each category 
+    if(Multicore == TRUE){
+      
+      Cluster1 <- makeCluster(NCores)
+      print("Initiating Cluster")
+      
+      invisible(clusterCall(Cluster1, function() {
+        source("General_Dependency.R")
+        source("General_Function.R")
+      }))
+      
+      invisible(clusterExport(Cluster1,list("Data.Window",
+																						"Ingarch.DataPreparation",
+																						"Ingarch.Prediction",
+																						"Data_Window",
+"External","PastOb",
+																						"PastMean","Distribution",
+																						"Plot"),
+                              envir = environment()))
+      print("Starting Calculations")
+    PredictionResult_AllCategory <- 
+										parLapply(Cluster1, Category,function(Category_RunVariable){
+      
+      PredictionResult <- tryCatch(
+        expr = { Ingarch.Prediction(Data_Window = Data_Window,
+                                    Data_WindowNoTransform = Data_WindowNoTransform,
+                                    Category = Category_RunVariable,
+                                    PredictionStep = PredictionStep,
+                                    Frame = Frame,
+                                    Plot = F,
+                                    Distribution = Distribution,
+                                    WindowMethod = WindowMethod,
+                                    External = External,
+                                    PastOb = PastOb,
+                                    PastMean = PastMean)},
+        error = function (e) e
+      )
+      if(inherits(PredictionResult,"error")){
+        print(paste("Error occured in prediction: ID",Id_RunVariable,", 
+										              Category",Category_RunVariable,PredictionResult))
+        return(NA)
+      }
+      
+      return(list(result=bind_rows(PredictionResult$result),
+                  model=PredictionResult$model))
+      
+    })
+    print("Stopping Calculations")
+    print("Stopping Cluster")
+    stopCluster(Cluster1)
+    } 
+    else {
+      PredictionResult_AllCategory <- lapply(Category,function(Category_RunVariable){
+        
+        PredictionResult <- tryCatch(
+          expr = { Ingarch.Prediction(Data_Window = Data_Window,
+                                      Data_WindowNoTransform = Data_WindowNoTransform,
+                                      Category = Category_RunVariable,
+                                      PredictionStep = PredictionStep,
+                                      Frame = Frame,
+                                      Plot = F,
+                                      Distribution = Distribution,
+                                      WindowMethod = WindowMethod,
+                                      External = External,
+                                      PastOb = PastOb,
+                                      PastMean = PastMean)},
+          error = function (e) e
+        )
+        if(inherits(PredictionResult,"error")){
+          print(paste("Error occured in prediction: ID",Id_RunVariable,", 
+											Category",Category_RunVariable,PredictionResult))
+          return(NA)
+        }
+        return(list(result = bind_rows(PredictionResult$result),
+                    model = PredictionResult$model))
+      })
+    }
+    
+    #Transforming data in nicer format and removing NA values
+    NA_Index <- which(is.na(PredictionResult_AllCategory)==TRUE)
+    PredictionResult_AllCategory <- 
+							PredictionResult_AllCategory[!is.na(PredictionResult_AllCategory)]
+    Result_Prediction <- 
+							bind_rows(UnlistListElement(PredictionResult_AllCategory,"result"))
+    Result_Model <- UnlistListElement(PredictionResult_AllCategory,"model")
+    names(Result_Model) <- Category[-NA_Index]
+    Result_Prediction$id <- Id_RunVariable
+    Result_Prediction$windowMethod <- WindowMethod
+    Result_Prediction$zeroHandling <- ZeroHandling
+    Result_Prediction$frame <- Frame_Help
+    Result_Prediction$history <- as.character(HistoryLength)
+    Result_Prediction$timeseriesLength <- as.character(TimeSeries_Length)
+    
+    if(TakeSubCategory){
+      Result_Prediction$main_category <- Category_Main
+    }
+    
+    return(list(result = Result_Prediction,
+                model = Result_Model))
+  })
+
+  #Removing NA (aka Timeseries which are too short)
+  PredictionResult_AllIDAllCategory <- 
+						PredictionResult_AllIDAllCategory[!is.na(PredictionResult_AllIDAllCategory)]
+  
+  #Transforming data in nicer format
+  Result_Prediction <- 
+							bind_rows(UnlistListElement(PredictionResult_AllIDAllCategory,"result"))
+  Result_Prediction$id <- as.factor(Result_Prediction$id)
+  Result_Model <- UnlistListElement(PredictionResult_AllIDAllCategory,"model")
+  names(Result_Model) <- Id_Result
+  Result_Prediction$model <- ModelType
+  
+  return(list(result = Result_Prediction,
+              model = Result_Model))
+}
+\end{verbatim}
+
+\section{CoDA Functions}
+\label{sec:Coda Functions}
+
+\begin{verbatim}
+Coda.DataPreparation <- function(Data_Raw,
+           ZeroHandling = c("all", "zeros_only", "none"),
+           TSpace = FALSE,
+           Transform = TRUE,
+           Log = FALSE,
+           OneVsAll = FALSE,
+           PivotGroup = "1",
+           HistoryLength = 1) {
+
+    Plus <- function(x,Value=0.5){
+         x[is.na(x)] <- 0
+      x <- x + Value
+      return(x)
+    }
+    ZeroHandling <- match.arg(ZeroHandling)
+    
+    #If we compare one category to all the others we use all categories. 
+		#Otherwise we only use the first 2
+    if(OneVsAll) {
+      Category <- c(1,2,3,4)
+    }
+    else {
+      Category <- c(1,2)
+    }
+    Data_Prepared <- Data.Preparation(Data_Raw = Data_Raw,
+                             OneVsAll = OneVsAll,
+                             PivotGroup = PivotGroup,
+                             NA_to=0,
+                             Category = Category,
+                             HistoryLength = HistoryLength)
+
+    
+    if (ZeroHandling == "none") {
+      Data_Prepared$tsum <- rowSums(Data_Prepared[,-1])
+      return(Data_Prepared)
+    }
+    
+    if (ZeroHandling == "all") {
+      Data_Prepared <- Data_Prepared %>% 
+											 mutate(across(where(is.numeric),.fns = Plus))
+    }
+    else if (ZeroHandling == "zeros_only") {
+      Data_Prepared[Data_Prepared == 0] <- 0.5
+    }
+    else {
+      stop("Enter valid zero handling option")
+    }
+    
+    Data_Ilr <- 
+				cbind(Data_Prepared$week_date, pivotCoord(as.data.frame(Data_Prepared[,-1])))
+    
+    if (TSpace) {
+      if (Log) {
+        Data_Ilr$tsum <- log(rowSums(Data_Prepared[,-1]))
+      }
+      else {
+        Data_Ilr$tsum <- rowSums(Data_Prepared[,-1])
+      }
+    }
+    names(Data_Ilr)[1] <- "week_date"
+    
+    return(Data_Ilr)
+  }
+\end{verbatim}
+
+\begin{verbatim}
+Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, 
+														Data_NoTransform, PredictionStep,
+                            OneVsAll,TSpace, Log, PivotGroup, Frame = 10) {
+  
+  PredictionResult <- lapply(c(1:length(Data_TransformWindow)), 
+														 function(WindowIndex) {
+    
+    
+    # Selecting the fitting data and the data which should be predicted 
+    TimeSeriesValue_Window <- 
+							Data_TransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1]
+    Date <- Data_TransformWindow[[WindowIndex]]$timeSeriesValue_future[1, 1]
+    
+    #Depending on whether we have TSpace or not we fit a VAR model or an AR model
+    ####TSPACE
+    if (TSpace) {
+      Window_Length <- dim(TimeSeriesValue_Window)[1]
+      
+      Model <- VAR(TimeSeriesValue_Window, p=1 ,lag.max = NULL, ic= "AIC")
+      ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
+      Size = 2
+      
+      #Initialising result vectors
+      ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
+      LowerBound_Vector<- UpperBound_Vector <- vector(mode="numeric",length=Size)
+      
+      #Filling up result vectors
+      for (i in 1:Size) {
+        ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
+        LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
+        UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
+      }
+      
+      
+      TSum <- 
+				as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
+      
+      #Back transformations
+      ValuePredict <- ValuePredict_Vector[-Size] %>%
+        matrix(nrow = 1) %>%
+        D2invPC()
+      
+      LowerBound <- LowerBound_Vector[-Size] %>%
+        
+        matrix(nrow = 1) %>%
+        D2invPC()
+      
+      UpperBound <- UpperBound_Vector[-Size] %>%
+        matrix(nrow = 1) %>%
+        D2invPC()
+      
+      
+      # Back transformations when we use the log of the total sum
+      if (Log) {
+        ValuePredict <- ValuePredict * exp(ValuePredict_Vector[Size])
+        ValuePredict <-
+          (append(ValuePredict, exp(ValuePredict_Vector[Size])))
+        
+        LowerBound <- LowerBound * exp(ValuePredict_Vector[Size])
+        LowerBound <-
+          (append(LowerBound, exp(ValuePredict_Vector[Size])))
+        
+        UpperBound <- UpperBound * exp(ValuePredict_Vector[Size])
+        UpperBound <-
+          (append(UpperBound, exp(ValuePredict_Vector[Size])))
+        
+      }
+      # Normal back transformations
+      else{
+        ValuePredict <- ValuePredict * ValuePredict_Vector[Size]
+        ValuePredict <-
+          (append(ValuePredict, ValuePredict_Vector[Size]))
+        
+        LowerBound <- LowerBound * ValuePredict_Vector[Size]
+        LowerBound <-
+          (append(LowerBound, ValuePredict_Vector[Size]))
+        
+        UpperBound <- UpperBound * ValuePredict_Vector[Size]
+        UpperBound <-
+          (append(UpperBound, ValuePredict_Vector[Size]))
+      }
+      
+      ValuePredict_Naive <-
+        as.numeric(
+					 tail(
+						Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1],1))
+      
+      #Getting true value and last known values
+      Window_Length <-
+        dim(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window)[1]
+      ValueTrue <-
+        as.numeric(
+				   Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[, -1])
+      ValueLastKnown <-
+        as.numeric(
+				  tail(
+					 Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -1], n =
+                          1))
+      
+      
+      if (OneVsAll) {
+        Category <- factor(c(PivotGroup, "other", "tsum"))
+      }
+      else{
+        Category <- factor(c("1", "2", "tsum"))
+      }
+      
+    }
+    ###No TSPACE
+    else{
+      Window_Length <- length(TimeSeriesValue_Window)
+      
+      Model <- ar(TimeSeriesValue_Window, aic = F, order.max = 1)
+      ValuePredict <- 
+			    predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
+      Size = 1
+      
+      #Initialising result vectors
+      ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
+      LowerBound_Vector<- UpperBound_Vector <- vector(mode="numeric",length=Size)
+      
+      #Filling up result vectors
+      for (i in 1:Size) {
+        ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
+        LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
+        UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
+      }
+      
+      
+      TSum <- 
+			  as.numeric(
+				  tail(
+					 Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
+      
+      #Back transformations
+      
+      ValuePredict <- ValuePredict_Vector %>%
+        matrix(nrow = 1) %>%
+        D2invPC()
+      ValuePredict <- ValuePredict * TSum
+      
+      
+      LowerBound <- LowerBound_Vector %>%
+        matrix(nrow = 1) %>%
+        D2invPC()
+      LowerBound <- as.vector(LowerBound * TSum)
+      
+      
+      UpperBound <- UpperBound_Vector %>%
+        matrix(nrow = 1) %>%
+        D2invPC()
+      UpperBound <- as.vector(UpperBound * TSum)
+      
+      
+      ValueTrue <-
+        as.numeric(
+				  Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[, -c(1, 4)])
+      ValueLastKnown <-
+        as.numeric(
+				  tail(
+					 Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], n =
+                          1))
+      
+      if (OneVsAll) {
+        Category <- factor(c(PivotGroup, "other"))
+      }
+      else{
+        Category <- factor(c("1", "2"))
+      }
+      
+      ValuePredict_Naive <-
+        as.numeric(
+				  tail(
+					 Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], 1))
+    }
+    
+    ValuePredict <- round(as.numeric(ValuePredict))
+    PredictionError <- as.numeric(ValuePredict - ValueTrue)
+    PredictionError_Naive <- as.numeric(ValuePredict_Naive - ValueTrue)
+    
+    #Calculating the normed prediction error
+    PredictionError_Normed <- PredictionError
+    
+    
+    if(OneVsAll){
+      
+      return(
+        list(
+          prediction = data.frame(
+            predictionError = PredictionError,
+            predictionError_naive = PredictionError_Naive,
+            predictionError_normed = PredictionError_Normed,
+            valuePredict = ValuePredict,
+            lowerBound = LowerBound,
+            upperBound = UpperBound,
+            valueTrue = ValueTrue,
+            valueLastKnown = ValueLastKnown,
+            valuePredict_naive = ValuePredict_Naive,
+            category = Category,
+            date = Date,
+            pivotGroup = PivotGroup,
+            window = WindowIndex,
+            window_length = Window_Length,
+            window_baseLength = Frame
+          ),
+          model = Model
+        )
+      )
+    } 
+    else {
+      return(
+        list(
+          prediction = data.frame(
+            predictionError = PredictionError,
+            predictionError_naive = PredictionError_Naive,
+            predictionError_normed = PredictionError_Normed,
+            valuePredict = ValuePredict,
+            lowerBound = LowerBound,
+            upperBound = UpperBound,
+            valueTrue = ValueTrue,
+            valueLastKnown = ValueLastKnown,
+            valuePredict_naive = ValuePredict_Naive,
+            category = Category,
+            date = Date,
+            window = WindowIndex,
+            window_length = Window_Length,
+            window_baseLength = Frame
+        ),
+        model = Model
+        )
+      )
+    }
+    })
+  
+  
+  Result_Prediction <- bind_rows(UnlistListElement(PredictionResult,
+																									 "prediction"))
+  Result_Model <- UnlistListElement(PredictionResult,"model")
+  names(Result_Model) <- 
+	   sapply(c(1:length(Result_Model)),function(i){paste("window",i,sep="")})
+  
+  #Calculation the normed prediction error
+  for (catg in unique(Result_Prediction$category)) {
+    x <- Result_Prediction %>% filter(category==catg)
+    
+    div <- sapply(c(1:dim(x)[1]), function(i) {
+      return(Normation(
+        x = x$valueTrue[1:i],
+        y = x$valueLastKnown[1:i]
+      ))
+    })
+    if (0 %in% div)
+      div[div == 0] <- 0.5
+    Result_Prediction[Result_Prediction$category == catg, 
+											"predictionError_normed"] <-
+      Result_Prediction[Result_Prediction$category == catg, 
+												"predictionError_normed"] / div
+    
+    
+  }
+  
+  
+  return(list(result = Result_Prediction,
+              model= Result_Model))
+}
+\end{verbatim}
+
+\begin{verbatim}
+Coda.Analysis<-function(Data_Raw, Id, 
+Frame=10, 
+												ZeroHandling = "zeros_only", 
+												PredictionStep = 1, 
+												Log = T,
+                        TSpace = T, OneVsAll = F , 
+												PivotGroup = c("1"), 
+												HistoryLength = 1,
+                        ModelType = "coda", 
+												WindowMethod ="extending") {
+  
+  stopifnot(ModelType %in% c("coda","coda_OneVsAll"))
+  
+  #one vs all for all pivot groups
+  
+  #Only return IDs with results
+  Id_Result <- Id
+  
+  if(OneVsAll) {
+  
+  PredictionResult_AllIDAllPivotGroup <- 
+	  lapply(Id,function(Id_RunVariable){
+		
+    print(paste("Calculating for ID:",Id_RunVariable))
+    PredictionResult_AllPivotGroup <- 
+		  lapply(PivotGroup,function(PivotGroup_RunVariable){
+      
+        #Preparing raw data
+        Data_Prepared <- Data_Raw %>%
+          filter(fridge_id == Id_RunVariable &
+                   main_category_id %in% c(1, 2, 3, 4)) %>%
+          dplyr::select(week_date, main_category_id, sold) %>%
+          arrange(week_date)
+        
+        #Calculating the length of the timeseries
+        TimeSeries_Length <- 
+				  length(unique(Data_Prepared$week_date))
+        
+        
+        #Preparing transformed data
+        Data_Transform <- 
+				  Coda.DataPreparation(Data_Prepared,
+					ZeroHandling = ZeroHandling,
+					TSpace = TSpace, 
+					Log = Log,
+					OneVsAll = T,
+					PivotGroup = PivotGroup_RunVariable,
+					HistoryLength = HistoryLength) %>%
+          arrange(week_date)
+        
+
+        
+        #If the Frame is given as a fraction, calculate the absolute length.
+				#We set 5 as the minimum length needed. 
+        Frame_Help <- "fixed"
+        if(dim(Data_Transform)[1]<5){
+          return(NA)
+          }
+        if(Frame < 1){
+          Frame_Help <- as.character(Frame)
+          Frame = round(Frame*dim(Data_Transform)[1])
+          if(Frame < 4){
+            Frame = 4
+          }
+        }
+        
+        
+        #Splitting transformed data into windows
+        Data_TransformWindow <- Data.Window(Data_Transform,
+                                         Frame=Frame,
+                                         Method = WindowMethod,
+                                         PredictionStep = PredictionStep)
+        
+        
+        
+        #Preparing non transformed data 
+        Data_NoTransform <- Coda.DataPreparation(Data_Prepared,
+				ZeroHandling="none",
+				TSpace=TSpace, 
+				Log=F, 
+				OneVsAll = T,
+				PivotGroup = PivotGroup_RunVariable,
+				HistoryLength = HistoryLength) %>%
+          arrange(week_date)
+					
+        #Splitting non transformed data into windows
+        Data_NoTransformWindow <- Data.Window(Data_NoTransform,
+                                            Frame=Frame,
+                                            Method = WindowMethod,
+                                            PredictionStep = PredictionStep)
+        
+        
+        #Carrying out model fitting and prediction
+        PredictionResult <- 
+				  Coda.Prediction(Data_TransformWindow = Data_TransformWindow,
+					Data_NoTransformWindow = Data_NoTransformWindow,
+					Data_NoTransform = Data_NoTransform, 
+					PredictionStep = PredictionStep,
+					OneVsAll = T,
+					TSpace = TSpace,
+					Log =  Log,
+					PivotGroup = PivotGroup_RunVariable,
+					Frame = Frame)
+					
+        PredictionResult$result$id <- Id_RunVariable
+        PredictionResult$result$windowMethod <- WindowMethod
+        PredictionResult$result$model <- ModelType 
+        PredictionResult$result$zeroHandling <- ZeroHandling
+        PredictionResult$result$frame <- Frame_Help
+        PredictionResult$result$history <- as.character(HistoryLength)
+        PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
+      
+          
+        #Tidying up data
+        Result_Prediction <- PredictionResult$result
+        Result_Model <- PredictionResult$model
+        
+        return(list(result = Result_Prediction,
+                    model = Result_Model))
+        
+     })
+      
+      #Removing NA (aka Timeseries which are too short)
+      PredictionResult_AllPivotGroup <- 
+			  PredictionResult_AllPivotGroup[!is.na(PredictionResult_AllPivotGroup)]
+      
+      if(length(PredictionResult_AllPivotGroup)==0){
+        print(paste("Insufficient data. Skipping ID: ",Id_RunVariable))
+        Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
+        return(NA)
+      }
+    
+      #Tidying up data
+      Result_Prediction <- 
+			  bind_rows(UnlistListElement(PredictionResult_AllPivotGroup,"result"))
+      Result_Prediction$id <- as.factor(Result_Prediction$id)
+      Result_Model <- UnlistListElement(PredictionResult_AllPivotGroup,"model")
+      names(Result_Model) <- PivotGroup
+    
+      return(list(result = Result_Prediction,
+                  model = Result_Model))
+    
+      
+    })
+  
+    #Removing NA (aka Timeseries which are too short)
+  PredictionResult_AllIDAllPivotGroup <- 
+	  PredictionResult_AllIDAllPivotGroup[!is.na(
+		PredictionResult_AllIDAllPivotGroup)]
+  
+    if(length(PredictionResult_AllIDAllPivotGroup)==0)return(NA)
+  
+  
+    #Tidying up data
+    Result_Prediction <- 
+		  bind_rows(UnlistListElement(PredictionResult_AllIDAllPivotGroup,
+			  "result"))
+    Result_Model <- 
+		  UnlistListElement(PredictionResult_AllIDAllPivotGroup,"model")
+    names(Result_Model) <- Id_Result
+  
+    return(list(result = Result_Prediction,
+                model = Result_Model))
+    
+  }
+  #Not one vs all
+  else {
+    
+    PredictionResult_AllID <- lapply(Id,function(Id_RunVariable){
+      print(paste("Calculating for ID:",Id_RunVariable))
+        #Preparing raw data
+        Data_Prepared <- Data_Raw %>%
+          filter(fridge_id == Id_RunVariable &
+                   main_category_id %in% c(1, 2, 3, 4)) %>%
+          dplyr::select(week_date, main_category_id, sold) %>%
+          arrange(week_date)
+        
+        #Calculating the length of the timeseries
+        TimeSeries_Length <- length(unique(Data_Prepared$week_date))
+        
+        #Preparing transformed data
+        Data_Transform <- 
+				  Coda.DataPreparation(Data_Prepared, 
+					ZeroHandling = ZeroHandling,
+					TSpace = TSpace, 
+					Log = Log,
+					OneVsAll = F,
+					HistoryLength = HistoryLength) %>% arrange(week_date)
+        
+        
+        #If the Frame is given as a fraction, calculate the absolute length. 
+				#We set 5 as the minimum length needed.
+        Frame_Help <- "fixed"
+        if(dim(Data_Transform)[1]<5){
+          return(NA)
+        }
+        if(Frame < 1){
+          Frame_Help <- as.character(Frame)
+          Frame = round(Frame*dim(Data_Transform)[1])
+          if(Frame < 5){
+            Frame = 5
+          }
+        }
+        
+        
+        #Splitting transformed data into windows
+        Data_TransformWindow <- Data.Window(Data_Transform,
+                                         Frame= Frame ,
+                                         Method = WindowMethod,
+                                         PredictionStep = PredictionStep)
+        
+        
+        
+        #Preparing non transformed data 
+        Data_NoTransform <- 
+				  Coda.DataPreparation(Data_Prepared,
+					ZeroHandling="none",
+					TSpace=TSpace,
+					Log=F, 
+					OneVsAll = F,
+					HistoryLength = HistoryLength) %>% arrange(week_date)
+					
+        #Splitting non transformed data into windows
+        Data_NoTransformWindow <- Data.Window(Data_NoTransform,
+                                         Frame = Frame,
+                                         Method = WindowMethod,
+                                         PredictionStep = PredictionStep)
+        
+        
+        PredictionResult <- 
+				  Coda.Prediction(Data_TransformWindow = Data_TransformWindow,
+					  Data_NoTransformWindow = Data_NoTransformWindow,
+						Data_NoTransform = Data_NoTransform, 
+						PredictionStep = PredictionStep,
+						OneVsAll = F,
+						TSpace = TSpace,
+						Log =  Log, 
+						Frame = Frame)
+						
+        PredictionResult$result$id <- Id_RunVariable
+        PredictionResult$result$WindowMethod <- WindowMethod
+        PredictionResult$result$model <- ModelType 
+        PredictionResult$result$ZeroHandling <- ZeroHandling
+        PredictionResult$result$frame <- Frame_Help
+        PredictionResult$result$history <- as.character(HistoryLength)
+        PredictionResult$result$timeseriesLength <- 
+				  as.character(TimeSeries_Length)
+        
+        #Tidying up data
+        Result_Prediction <- PredictionResult$result
+        Result_Model <- PredictionResult$model
+        
+        return(list(result = Result_Prediction,
+                    model = Result_Model))
+        
+    })
+    
+    #Removing NA (aka Timeseries which are too short)
+    PredictionResult_AllID <- 
+		  PredictionResult_AllID[!is.na(PredictionResult_AllID)]
+    
+    if(length(PredictionResult_AllID)==0){
+      print(paste("Insufficient data. Skipping ID: ",Id_RunVariable))
+      Id_Result <<- Id_Result[Id_RunVariable!=Id_Result]
+      return(NA)
+    }
+    
+    #Tidying up data
+    Result_Prediction <- 
+		  bind_rows(UnlistListElement(PredictionResult_AllID,"result"))
+    Result_Model <- UnlistListElement(PredictionResult_AllID,"model")
+    names(Result_Model) <- Id_Result
+    
+    return(list(result = Result_Prediction,
+                model = Result_Model))
+    
+  }
+  
+}
+\end{verbatim}
