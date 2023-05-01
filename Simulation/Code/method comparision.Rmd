@@ -78,23 +78,23 @@ if(save_results){
 ingarch_result <-
   Ingarch.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 100402,
+    Id = ids_all,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("4"),
+    Category_Main = c("1", "2", "3", "4"),
     WindowMethod = window_method,
     ZeroHandling = "none",
     External = F,
-    Multicore = F,
+    Multicore = T,
     NCores = 10,
-    PastOb = 1,
-    PastMean = 1,
+    PastOb = 2,
+    PastMean = 2,
     HistoryLength = HistoryLength,
     TakeSubCategory = F
   )
   
   if(save_results){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"po2",".RData",sep="")))
 
   }
 
@@ -159,12 +159,14 @@ Coda05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/res
 #Coda07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth07_history_lght1.RData")
 
 
-Ingarch03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__frame_method_overlapping.RData")
-Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__win_lgth05_history_lght1.RData")
-#Ingarch07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__win_lgth07_history_lght1.RData")
+Ingarch03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_po2.RData")
+Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__nbinom.RData")
+Ingarch07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
 
 Coda_Combined <- rbind(Coda03$result,Coda05$result)
-Ingarch_Combined <- rbind(Ingarch03$result,Ingarch05$result)
+Ingarch_Combined <- rbind(Ingarch05$result,Ingarch07$result)
+
+Plot.ErrorMeasureSingle(ResultCombined=Ingarch_Combined,Variation=c("Distribution"="distribution"),Values=c("poisson","nbinom"),Split=F)
 
 Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("extending","fixed"),Split=F,Variation = "windowMethod")
 
