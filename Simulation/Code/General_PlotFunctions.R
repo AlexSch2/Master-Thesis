@@ -277,7 +277,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
     i <- 1
     for(Variation_RunVariable in Values){
       ResultData <- ResultCombined %>% filter(!!as.symbol(Variation) == Variation_RunVariable)
-      ResultModelError_Single <- Model.Error(ResultData,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+      ResultModelError_Single <- Model.Error(ResultData,Fnct = "Mse",Category = c(1,2,3,4)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
       ResultModelError_Single[paste(Variation)] <- Variation_RunVariable
       
       
