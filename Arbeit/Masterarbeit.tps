@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
 TopLine=93
-Cursor=2700
+Cursor=3595
 
 [Frame1]
 Flags=0
@@ -29,8 +29,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Deckblatt.tex
 
@@ -47,8 +47,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Einleitung.tex
 
@@ -65,14 +65,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=RCode.tex
+Document=Methode_Ingarch.tex
 
 [Frame3_View0,0]
-TopLine=0
-Cursor=1722
+TopLine=43
+Cursor=6228
 
 [Frame4]
 Flags=0
@@ -83,14 +83,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=Methode_Ingarch.tex
+Document=Methode_Coda.tex
 
 [Frame4_View0,0]
-TopLine=14
-Cursor=5251
+TopLine=170
+Cursor=12880
 
 [Frame5]
 Flags=0
@@ -101,14 +101,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=Methode_Coda.tex
+Document=Other_methods.tex
 
 [Frame5_View0,0]
-TopLine=198
-Cursor=12880
+TopLine=10
+Cursor=4100
 
 [Frame6]
 Flags=0
@@ -119,14 +119,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=Other_methods.tex
+Document=Model_Specification.tex
 
 [Frame6_View0,0]
-TopLine=11
-Cursor=4100
+TopLine=60
+Cursor=4023
 
 [Frame7]
 Flags=0
@@ -137,14 +137,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=Model_Specification.tex
+Document=Examples_Applications.tex
 
 [Frame7_View0,0]
-TopLine=72
-Cursor=5106
+TopLine=55
+Cursor=5177
 
 [Frame8]
 Flags=0
@@ -155,14 +155,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=Examples_Applications.tex
+Document=RCode.tex
 
 [Frame8_View0,0]
-TopLine=68
-Cursor=5177
+TopLine=0
+Cursor=1720
 
 [Frame9]
 Flags=0
@@ -173,14 +173,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=RFunctions.tex
+Document=Results.tex
 
 [Frame9_View0,0]
-TopLine=899
-Cursor=31397
+TopLine=232
+Cursor=11627
 
 [Frame10]
 Flags=0
@@ -191,14 +191,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=Results.tex
+Document=Conclusion.tex
 
 [Frame10_View0,0]
-TopLine=8
-Cursor=791
+TopLine=0
+Cursor=0
 
 [Frame11]
 Flags=0
@@ -209,14 +209,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
-Document=Conclusion.tex
+Document=RFunctions.tex
 
 [Frame11_View0,0]
 TopLine=0
-Cursor=0
+Cursor=38587
 
 [Frame12]
 Flags=0
@@ -227,18 +227,18 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1274
-NormalPos.bottom=866
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=BibTeXView
 Document=Literatur.bib
 
 [Frame12_View0,0]
-TopLine=508
+TopLine=439
 Cursor=26637
 
 [SessionInfo]
 FrameCount=13
-ActiveFrame=9
+ActiveFrame=0
 
 [Bookmarks]
 Results.tex=81 

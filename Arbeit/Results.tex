@@ -11,7 +11,7 @@ First, we start with specifications which can be chosen for both CoDA and INGARC
 \subsubsection{History}
 \label{sec:History}
 
-As mentioned various times throughout this thesis, the length of the history is one of the parameters which can be adjusted. Since we deal with time series with different lengths, we take the history as a fraction of the total length. In figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot and a histogram. 
+As mentioned various times throughout this thesis, the length of the history is one of the parameters which can be adjusted. Since we deal with time series with different lengths, we take the history as a fraction of the total length. In figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot and a histogram. The quantile plots shows the error for each fridge sorted by value. The dot size indicates the length of the respective time series. The vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile. 
 
 \begin{figure}[htb!]
 \centering
@@ -98,10 +98,10 @@ We also vary the shape of the window. As explained in \ref{sec: Model Specificat
 \end{figure}
 
 
-\subsection{INGARCH Specifications}
-\label{sec: Ingarch Specifications}
+\subsection{INGARCH Specifications Results}
+\label{sec: Ingarch Specifications Results}
 
-Next we will investigate the INGARCH specific options. 
+Next we will investigate the INGARCH specific options. We use a INGARCH(1,1) with a Poisson distribution, extending windows, no external factors, no zero handling, full history $T_f=1$ and initial window length $w_f=0.5$ as the standard model. We will always vary one setting and leave the others unchanged. 
 
 \subsubsection{Distribution}
 \label{sec:Distribution}
@@ -175,7 +175,7 @@ In figure \ref{fig:past obs Comp1} we compare the INGARCH(1,1) (red) model with 
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png}
 \caption{Histogram for a different number of past observations}
 \label{fig:past obs Hist}
 \end{subfigure}
@@ -188,4 +188,112 @@ In figure \ref{fig:past obs Comp1} we compare the INGARCH(1,1) (red) model with 
 \caption{Comparison of a different number of past observations}
 \label{fig:past obs Comp1}
 \end{figure}
+
+
+\subsection{CoDA Specifications Results}
+\label{sec: CoDA Specifications Results}
+
+Lastly we will compare different CoDA Specifications as mentioned in \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, an initial window length of $w_f=0.5$, the full history $T_f=1$, add 0.5 to all values, $\Tsp$-spaces with the logarithmic sum and the one-vs-all method. 
+
+\subsection{Zero Handling}
+\label{sec: Zero Handling}
+
+First we compare the different options of handling zeros as explained in \ref{sec: Coda Specifications}. The results are shown in figure \ref{fig:Coda zero handling Comp1}. It seems that adding 0.5 only to zeros results in marginally better performance.
+
+\begin{figure}[htb!]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png}
+\caption{Boxplot for a different methods of zero handling}
+\label{fig:Coda zero handling Box}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png}
+\caption{Histogram for a different methods of zero handling}
+\label{fig:Coda zero handling Hist}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.8\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png}
+\caption{Quantiles for a different methods of zero handling}
+\label{fig:Coda zero handling Quant}
+\end{subfigure}
+\caption{Comparison of different zero handling methods}
+\label{fig:Coda zero handling Comp1}
+\end{figure}
+
+
+\subsection{$\Tsp$-spaces}
+\label{sec: Tspaces results}
+
+Next we compare CoDA for $\Tsp-$Spaces. The results are shown in \ref{fig:Coda T-Spaces Comp1}. It seems that using no $\Tsp-$Spaces result in slightly better results. Especially for shorter time series using no $\Tsp-$Spaces returns better results. This can be seen in figure \ref{fig:Coda T-Spaces Quant}
+
+\begin{figure}[htb!]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Box_all__Variation_tSpace.png}
+\caption{Boxplot for $\Tsp-$Spaces}
+\label{fig:Coda T-Spaces Box}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png}
+\caption{Histogram for $\Tsp-$Spaces}
+\label{fig:Coda T-Spaces Hist}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.8\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Quant_all__Variation_tSpace.png}
+\caption{Quantiles for $\Tsp-$Spaces}
+\label{fig:Coda T-Spaces Quant}
+\end{subfigure}
+\caption{Comparison of CoDA with and without $\Tsp-$Spaces}
+\label{fig:Coda T-Spaces Comp1}
+\end{figure}
+
+
+\subsection{One-vs-All method}
+\label{sec: One-vs-All}
+
+Now we analyse the one-vs-all method. Figure \ref{fig:Coda One-vs-All Comp1} shows the results. Again, we get pretty similar results and there does not seem to be much of an effect. 
+
+\begin{figure}[htb!]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png}
+\caption{Boxplot for One-vs-All}
+\label{fig:Coda One-vs-All Box}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Histogram_all__Variation_oneVSAll.png}
+\caption{Histogram for One-vs-All}
+\label{fig:Coda One-vs-All Hist}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.8\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png}
+\caption{Quantiles for One-vs-All}
+\label{fig:Coda One-vs-All Quant}
+\end{subfigure}
+\caption{Comparison of CoDA with and without One-vs-All}
+\label{fig:Coda One-vs-All Comp1}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

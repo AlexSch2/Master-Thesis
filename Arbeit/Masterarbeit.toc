@@ -34,17 +34,21 @@
 \contentsline {section}{\numberline {3.4}Results}{24}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}General Specifications}{25}{subsection.3.4.1}%
 \contentsline {subsubsection}{\nonumberline History}{25}{subsubsection*.22}%
-\contentsline {subsubsection}{\nonumberline Frame}{26}{subsubsection*.25}%
-\contentsline {subsubsection}{\nonumberline Window Shape}{26}{subsubsection*.28}%
-\contentsline {subsection}{\numberline {3.4.2}INGARCH Specifications}{26}{subsection.3.4.2}%
+\contentsline {subsubsection}{\nonumberline Frame}{25}{subsubsection*.25}%
+\contentsline {subsubsection}{\nonumberline Window Shape}{25}{subsubsection*.28}%
+\contentsline {subsection}{\numberline {3.4.2}INGARCH Specifications Results}{25}{subsection.3.4.2}%
 \contentsline {subsubsection}{\nonumberline Distribution}{26}{subsubsection*.31}%
-\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{26}{subsubsection*.34}%
-\contentsline {chapter}{\numberline {4}Conclusion}{33}{chapter.4}%
+\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{27}{subsubsection*.34}%
+\contentsline {subsection}{\numberline {3.4.3}CoDA Specifications Results}{28}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Zero Handling}{29}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}$\mathcal {T}$-spaces}{29}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}One-vs-All method}{29}{subsection.3.4.6}%
+\contentsline {chapter}{\numberline {4}Conclusion}{35}{chapter.4}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{List of Figures}{38}{chapter*.37}%
-\contentsline {chapter}{List of Tables}{40}{chapter*.38}%
-\contentsline {chapter}{\numberline {A}R-Functions}{43}{appendix.A}%
-\contentsline {section}{\numberline {A.1}General Functions}{43}{section.A.1}%
-\contentsline {section}{\numberline {A.2}INGARCH Functions}{46}{section.A.2}%
-\contentsline {section}{\numberline {A.3}CoDA Functions}{55}{section.A.3}%
+\contentsline {chapter}{List of Figures}{40}{chapter*.40}%
+\contentsline {chapter}{List of Tables}{42}{chapter*.41}%
+\contentsline {chapter}{\numberline {A}R-Functions}{45}{appendix.A}%
+\contentsline {section}{\numberline {A.1}General Functions}{45}{section.A.1}%
+\contentsline {section}{\numberline {A.2}INGARCH Functions}{48}{section.A.2}%
+\contentsline {section}{\numberline {A.3}CoDA Functions}{57}{section.A.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
