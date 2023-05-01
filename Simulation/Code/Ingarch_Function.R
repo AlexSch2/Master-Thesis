@@ -339,10 +339,16 @@ Ingarch.Analysis <- function(Data_Raw,
     
     #Transforming data in nicer format and removing NA values
     NA_Index <- which(is.na(PredictionResult_AllCategory)==TRUE)
+    if(is_empty(NA_Index)){
+      ModelNames <- Category
+    }else{
+      ModelNames <- Category[-NA_Index]
+    }
+    
     PredictionResult_AllCategory <- PredictionResult_AllCategory[!is.na(PredictionResult_AllCategory)]
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllCategory,"result"))
     Result_Model <- UnlistListElement(PredictionResult_AllCategory,"model")
-    names(Result_Model) <- Category[-NA_Index]
+    names(Result_Model) <- ModelNames
     Result_Prediction$id <- Id_RunVariable
     Result_Prediction$windowMethod <- WindowMethod
     Result_Prediction$zeroHandling <- ZeroHandling
