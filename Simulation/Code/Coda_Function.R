@@ -552,9 +552,9 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                               Log =  Log, 
                                               Frame = Frame)
         PredictionResult$result$id <- Id_RunVariable
-        PredictionResult$result$WindowMethod <- WindowMethod
+        PredictionResult$result$windowMethod <- WindowMethod
         PredictionResult$result$model <- ModelType 
-        PredictionResult$result$ZeroHandling <- ZeroHandling
+        PredictionResult$result$zeroHandling <- ZeroHandling
         PredictionResult$result$frame <- Frame_Help
         PredictionResult$result$history <- as.character(HistoryLength)
         PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
