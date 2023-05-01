@@ -3,6 +3,11 @@
 
 In this section we present and describe the results for our methods with their variations. For this we use the previously introduced error measure, calculate it for all available fridges and summarise the results. We show the results as graphics for easier interpretation. The tables with the exact values are shown in the appendix. 
 
+\subsection{General Specifications}
+\label{sec:General Specifications}
+
+First, we start with specifications which can be chosen for both CoDA and INGARCH. 
+
 \subsubsection{History}
 \label{sec:History}
 
@@ -91,3 +96,96 @@ We also vary the shape of the window. As explained in \ref{sec: Model Specificat
 \caption{Comparison of different window shapes}
 \label{fig:window methods Comp1}
 \end{figure}
+
+
+\subsection{INGARCH Specifications}
+\label{sec: Ingarch Specifications}
+
+Next we will investigate the INGARCH specific options. 
+
+\subsubsection{Distribution}
+\label{sec:Distribution}
+
+As mentioned in \ref{sec: Ingarch Specifications} we can replace the Poisson distribution with a Negative Binomial Distribution in \ref{eq:Ingarch Distribution}. The results are shown in \ref{fig:distributions Comp1}. 
+
+\begin{figure}[htb!]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Box_all__Variation_distribution.png}
+\caption{Boxplot for different distributions}
+\label{fig:distributions Box}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png}
+\caption{Histogram for different distributions}
+\label{fig:distributions Hist}
+\end{subfigure}
+\hfill
+%\begin{subfigure}[b]{0.8\textwidth}
+%\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Quant_all__Variation_windowMethod.png}
+%\caption{Quantiles for different distributions}
+%\label{fig:window methods Quant}
+%\end{subfigure}
+\caption{Comparison of different distributions}
+\label{fig:distributions Comp1}
+\end{figure}
+
+As we can see, we get the exactly the same results for both distributions. Since the Poisson Distribution is a limiting case of the Negative Binomial Distribution when $\phi \longrightarrow \infty$ in \ref{eq:Ingarch negbinom Distribution}, \cite{Liboschik:2016}. 
+
+
+\subsubsection{Number of Past Means and Observations}
+\label{sec: Number of Past Means and Observations}
+
+The order in the INGARCH(p,q) model is another parameter which can be chosen. For simplicities sake we only compare our INGARCH(1,1) with an INGARCH(1,2) and INGARCH(2,1) model. However, further models could be tried out and compared. One could even optimise over the optimal order. 
+
+In figure \ref{fig:past means Comp1} we compare the INGARCH(1,1) model (red) with the INGARCH(1,2) model (blue). We can see that the performance is very similar . Hence we prefer the smaller model. 
+\begin{figure}[htb!]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Box_all__Variation_pastMean.png}
+\caption{Boxplot for a different number of past means}
+\label{fig:past means Box}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png}
+\caption{Histogram for a different number of past means}
+\label{fig:past means Hist}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.8\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png}
+\caption{Quantiles for a different number of past means}
+\label{fig:past means Quant}
+\end{subfigure}
+\caption{Comparison of a different number of past means}
+\label{fig:past means Comp1}
+\end{figure}
+
+
+In figure \ref{fig:past obs Comp1} we compare the INGARCH(1,1) (red) model with the INGARCH(2,1) (blue) model. Again the performance is very similar in general. 
+
+\begin{figure}[htb!]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Box_all__Variation_pastOb.png}
+\caption{Boxplot for a different number of past observations}
+\label{fig:past obs Box}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png}
+\caption{Histogram for a different number of past observations}
+\label{fig:past obs Hist}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.8\textwidth}
+\includegraphics[width=\textwidth]{ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png}
+\caption{Quantiles for a different number of past observations}
+\label{fig:past obs Quant}
+\end{subfigure}
+\caption{Comparison of a different number of past observations}
+\label{fig:past obs Comp1}
+\end{figure}
+

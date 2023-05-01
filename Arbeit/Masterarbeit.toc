@@ -32,15 +32,19 @@
 \contentsline {section}{\numberline {3.2}Examples of model application}{19}{section.3.2}%
 \contentsline {section}{\numberline {3.3}R-Code}{21}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Results}{24}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}General Specifications}{25}{subsection.3.4.1}%
 \contentsline {subsubsection}{\nonumberline History}{25}{subsubsection*.22}%
 \contentsline {subsubsection}{\nonumberline Frame}{26}{subsubsection*.25}%
 \contentsline {subsubsection}{\nonumberline Window Shape}{26}{subsubsection*.28}%
-\contentsline {chapter}{\numberline {4}Conclusion}{29}{chapter.4}%
+\contentsline {subsection}{\numberline {3.4.2}INGARCH Specifications}{26}{subsection.3.4.2}%
+\contentsline {subsubsection}{\nonumberline Distribution}{26}{subsubsection*.31}%
+\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{26}{subsubsection*.34}%
+\contentsline {chapter}{\numberline {4}Conclusion}{33}{chapter.4}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{List of Figures}{34}{chapter*.30}%
-\contentsline {chapter}{List of Tables}{36}{chapter*.31}%
-\contentsline {chapter}{\numberline {A}R-Functions}{39}{appendix.A}%
-\contentsline {section}{\numberline {A.1}General Functions}{39}{section.A.1}%
-\contentsline {section}{\numberline {A.2}INGARCH Functions}{42}{section.A.2}%
-\contentsline {section}{\numberline {A.3}CoDA Functions}{51}{section.A.3}%
+\contentsline {chapter}{List of Figures}{38}{chapter*.37}%
+\contentsline {chapter}{List of Tables}{40}{chapter*.38}%
+\contentsline {chapter}{\numberline {A}R-Functions}{43}{appendix.A}%
+\contentsline {section}{\numberline {A.1}General Functions}{43}{section.A.1}%
+\contentsline {section}{\numberline {A.2}INGARCH Functions}{46}{section.A.2}%
+\contentsline {section}{\numberline {A.3}CoDA Functions}{55}{section.A.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
