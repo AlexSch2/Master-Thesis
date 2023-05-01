@@ -436,6 +436,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$frame <- Frame_Help
         PredictionResult$result$history <- as.character(HistoryLength)
         PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
+        PredictionResult$result$oneVsAll <- OneVsAll
       
           
         #Tidying up data
@@ -558,6 +559,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         PredictionResult$result$frame <- Frame_Help
         PredictionResult$result$history <- as.character(HistoryLength)
         PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
+        PredictionResult$result$oneVsAll <- OneVsAll
         
         #Tidying up data
         Result_Prediction <- PredictionResult$result

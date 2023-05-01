@@ -71,7 +71,7 @@ coda_result <-
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"_no_ova",".RData",sep="")))
 }
 
 
@@ -154,19 +154,20 @@ if(!identical(ids,unique(ingarch_result$result$id)) ||
 
 
 ```{r}
-Coda03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all__frame_method_overlapping.RData")
-Coda05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth05_history_lght1.RData")
+Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all__no_ova.RData")
+Coda0 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_.RData")
 #Coda07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth07_history_lght1.RData")
-
+Coda1$result$oneVsAll<- FALSE
+Coda0$result$oneVsAll <- TRUE
 
 Ingarch03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_po2.RData")
 Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__nbinom.RData")
 Ingarch07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
 
-Coda_Combined <- rbind(Coda03$result,Coda05$result)
+Coda_Combined <- rbind(select(Coda0$result,-"pivotGroup"),Coda1$result)
 Ingarch_Combined <- rbind(Ingarch05$result,Ingarch07$result)
 
-Plot.ErrorMeasureSingle(ResultCombined=Ingarch_Combined,Variation=c("Distribution"="distribution"),Values=c("poisson","nbinom"),Split=F)
+Plot.ErrorMeasureSingle(ResultCombined=Coda_Combined,Variation=c("One-vs-All"="oneVsAll"),Values=c(TRUE,FALSE),Split=F,Category = c(1,2))
 
 Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("extending","fixed"),Split=F,Variation = "windowMethod")
 
@@ -298,7 +299,7 @@ plot(c(1:length(sort(CodaError_Sorted_All$error[CodaError_Sorted_All$error < x &
 Error measure calculations
 ```{r}
 
-coda_model_error <- Model.Error(coda_result$result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
+coda_model_error1 <- Model.Error(Coda1$result,Fnct = "Mse") %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
 ingarch_model_error <- Model.Error(ingarch_result$result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ingarch_result$result$category)))
 model_error <- rbind(coda_model_error,ingarch_model_error)
 zim_model_error <- Model.Error(zim_result$result,Fnct = "Mse",Category = unique(zim_result$result$category)) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(zim_result$result$category)))
@@ -645,9 +646,9 @@ if(save_plots){
 Preparing Data for plotting
 
 ```{r}
-FID <- 10
+FID <- 100321
 
-plot_data_coda<-coda_result$result%>%
+plot_data_coda<-Coda1$result%>%
   dplyr::filter(category %in% c(1,2,3,4), id==FID)%>%
   dplyr::select(!c(valuePredict_naive,predictionError_naive))
 
@@ -806,10 +807,10 @@ p0<-ggplot(plot_data_coda,aes(x=date,y=valuePredict),col="red")+
   geom_line(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
   geom_point(data=data_raw,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
   theme(text = element_text(size = text_size))+
-  ggtitle(paste("Coda Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,",base window length:",frame,sep=" "))
+  ggtitle(paste("Coda Timeseries",sep=" "),subtitle = paste("Fridge ID:",FID,",Tspace:",unique(plot_data_coda$tSpace),sep=" "))
 
 if(save_plots){
- ggsave(filename = here("Plots",paste("ts_coda_id_",FID,"_pi","win_lgth",frame,".png",sep="")),plot=p0,height = 15,width = 20) 
+ ggsave(filename = here("Plots",paste("ts_coda_id_",FID,"Tspace",unique(plot_data_coda$tSpace),".png",sep="")),plot=p0,height = 15,width = 20) 
 }
 
 ```
