@@ -121,6 +121,9 @@ test_data_prep <- weekly_category_data %>%
   dplyr::select(week_date, main_category_id, sold) %>%
   arrange(week_date) %>% Data.Preparation()
 
+names(test_data_prep) <- c("week_date","y1","y2","y3","y4")
+
+
 raw_length<-dim(test_data_prep)[1]
 
 data_prep<-cbind(test_data_prep[-1,-1],test_data_prep[-raw_length,-1])
@@ -138,9 +141,9 @@ data_fit <- data.frame(y4=c(1,rep(0,10)),x4=c(0,0,rep(0,9)))
 
 model_zim<-zim(y1~x1+x2+x3+x4, data=data_fit,control = zim.control(type="ginv"))
 
-model_zeroinfl <- zeroinfl(y4 ~bshift(x4),data=data_prep,dist = "poisson")
+model_zeroinfl <- zeroinfl(y4 ~bshift(y4),data=test_data_prep,dist = "poisson")
 
-yhat <- predict(model_zeroinfl,newdata = data.frame(x4=0),type="zero")
+yhat <- predict(model_zeroinfl,newdata = data.frame(week_date="2022-07-18",y4=0))
 
 test <- Zim.Analysis(Data_Raw = weekly_category_data,Id=10,Multicore = F,Category_Main = "4")
 

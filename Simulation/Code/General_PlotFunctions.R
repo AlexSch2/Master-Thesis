@@ -385,11 +385,13 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
 
 #This function plots the boxplot/quantile plot and histogram of the error measures either by group or in total
 Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "history",Values,Split=T,
-                                 Groups=list(Group1=c(1,2),Group2=c(3,4))){
+                                 Groups=list(Group1=c(1,2),Group2=c(3,4)),LabelNames){
   
   if(Split){
 
   }else{
+    
+    label.function <- function(String)return(LabelNames[String])
     
     #Calculating the Error measure
     i <- 1
@@ -419,7 +421,7 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
   
     #Boxplot
     BoxPlot <- ggplot(ModelErrorAll ,aes(x=model,y=error))+
-      facet_wrap(vars(!!as.symbol(Variation)),ncol=length(Values),scales = "fixed")+
+      facet_wrap(vars(!!as.symbol(Variation)),ncol=length(Values),scales = "fixed",labeller = as_labeller(label.function))+
       geom_boxplot()+
       scale_y_continuous(limits=c(0,5))+
       geom_hline(yintercept =1,linewidth=2)+
@@ -469,7 +471,7 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
       }
       
     QuantPlot <- ggplot(IngarchError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
-        facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free")+
+        facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free",labeller = as_labeller(label.function))+
         geom_point()+
         scale_y_continuous(limits=c(0,5))+
         geom_point(data = CodaError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
@@ -488,7 +490,7 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
         ModelErrorAll_MM <- full_join(ModelErrorAll_Mean,ModelErrorAll_Median,by=c("model",Variation)) %>% pivot_longer(cols=c("Mean","Median"),names_to="Type",values_to = "value")
         
         HistPlot <- ggplot(ModelErrorAll,aes(x=error,colour=model,fill=model))+
-          facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free")+
+          facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free",labeller = as_labeller(label.function))+
           geom_histogram(bins=100,position = "identity",alpha=0.3,linewidth=1)+
           scale_x_continuous(limits=c(0,8))+
           scale_y_continuous(limits=c(0,12))+

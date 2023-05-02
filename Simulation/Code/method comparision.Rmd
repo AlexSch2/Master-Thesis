@@ -41,10 +41,10 @@ if(all(ids == ids_all)){
   ids_save <- paste(ids,collapse = "-")
 }
 
-frame <- 0.5
+frame <- 0.7
 window_method <- "extending"
 save_results <- F
-HistoryLength <- 1
+HistoryLength <- 0.5
 
 #Ingarch specifications
 MainCat <- 2
@@ -71,7 +71,7 @@ coda_result <-
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"_no_ova",".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"frame07",".RData",sep="")))
 }
 
 
@@ -87,14 +87,14 @@ ingarch_result <-
     External = F,
     Multicore = T,
     NCores = 10,
-    PastOb = 2,
-    PastMean = 2,
+    PastOb = 1,
+    PastMean = 1,
     HistoryLength = HistoryLength,
     TakeSubCategory = F
   )
   
   if(save_results){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"po2",".RData",sep="")))
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"frame07",".RData",sep="")))
 
   }
 
@@ -154,22 +154,22 @@ if(!identical(ids,unique(ingarch_result$result$id)) ||
 
 
 ```{r}
-Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all__no_ova.RData")
+Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_frame03.RData")
 Coda0 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_.RData")
-#Coda07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_win_lgth07_history_lght1.RData")
-Coda1$result$oneVsAll<- FALSE
+Coda07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_frame07.RData")
+Coda1$result$oneVsAll<- TRUE
 Coda0$result$oneVsAll <- TRUE
 
-Ingarch03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_po2.RData")
-Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__nbinom.RData")
-Ingarch07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
+Ingarch03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_frame03.RData")
+Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
+Ingarch07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_frame07.RData")
 
-Coda_Combined <- rbind(select(Coda0$result,-"pivotGroup"),Coda1$result)
-Ingarch_Combined <- rbind(Ingarch05$result,Ingarch07$result)
+Coda_Combined <- rbind(Coda0$result,Coda1$result,Coda07$result)
+Ingarch_Combined <- rbind(Ingarch03$result,Ingarch07$result,Ingarch05$result)
 
 Plot.ErrorMeasureSingle(ResultCombined=Coda_Combined,Variation=c("One-vs-All"="oneVsAll"),Values=c(TRUE,FALSE),Split=F,Category = c(1,2))
 
-Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("extending","fixed"),Split=F,Variation = "windowMethod")
+Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("0.3","0.5","0.7"),Split=F,Variation = "frame",LabelNames = c("0.3"="w=0.3","0.5"="w=0.5","0.7"="w=0.7"))
 
 History <- unique(Coda_Combined $history)
 
@@ -205,7 +205,7 @@ for(History_RunVariable in History){
     levels(ModelErrorAll$model) <- list(CoDA = "coda", INGARCH = "ingarch")
     #Boxplot
     BoxPlot <- ggplot(ModelErrorAll ,aes(x=model,y=error))+
-      facet_wrap(vars(!!as.symbol(Variation)),ncol=length(Values),scales = "fixed")+
+      facet_wrap(vars(!!as.symbol(Variation)),ncol=length(Values),scales = "fixed",labeller =as_labeller(label.function))+
       geom_boxplot()+
       scale_y_continuous(limits=c(0,5))+
       geom_hline(yintercept =1,linewidth=2)+
