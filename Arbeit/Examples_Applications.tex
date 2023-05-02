@@ -44,9 +44,7 @@ Next in figure \ref{fig:TS Coda}, we add the predictions of the CoDA model. For 
 \label{fig:TS Coda}
 \end{figure}
 
-
-
-In figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. For this, we used the whole history $T_f$, half of the data for the initial window length $w_f=\frac{T_f}{2}$, extend the window at every time point, add nohting to the zero values and used the poisson distribution. We used no external factors and set $p=1, q=1$ in model \ref{eq:Ingarch model with external effect}. The general trend is again captured well and in the instance of \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
+In figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. For this, we used the whole history $T=T_F$, half of the data for the initial window length $w_f=\frac{T}{2}$, extend the window at every time point, add nothing to the zero values and used the poisson distribution. We used no external factors and set $p=1, q=1$ in model \ref{eq:Ingarch model with external effect}. The general trend is again captured well and in the instance of \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
 
 \begin{figure}[htb]
 \centering

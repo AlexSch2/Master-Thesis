@@ -1,11 +1,11 @@
 \section{Model Specifications}
 \label{sec: Model Specification}
 
-As our data has a specific structure, some transformations can be made to increase performance and stability. The most prominent characteristic of our data is its amount of 0 or null values. As both CoDA can't handle an excessive amount of 0 values, we have to accommodate for this. The concrete way to do this will be described in the following subsections. 
+As our data has a specific structure, some transformations can be made to increase performance and stability. The most prominent characteristic of our data is its amount of 0 or null values. As CoDA can't handle an excessive amount of 0 values, we have to accommodate for this. The concrete way to do this will be described in the following subsections. 
 
-Another varying factor is the history. We define as history the length of the time series for fridge $f$ and denote it with $T_f$. While at first it may seem obvious to use as much data as possible, it may actually not always result in a better model. Older values may contain outdated information which influences the estimation the of parameters. Therefore we compare the performance of the models with various history lengths. 
+Another varying factor is the history. We define the history $h$ as the proportion of the length of the time series used for our model. While at first it may seem obvious to use as much data as possible, it may actually not always result in a better model. Older values may contain outdated information which influences the estimation the of parameters. Therefore we compare the performance of the models with various history lengths. So instead of using $T_f$ points in time, we will only use $T=h\dot T_F$ with $0\leq h \leq 1$. 
 
-Closely related to the length of the history, is the shape of the window used. The window determines which values are used to estimate the parameters at each point in time. The shape includes both the initial length of it and the way it handles new values. As the different time series vary in length, we choose the possible window length as a fraction of the time series history. Let $w_f$ be the initial window length. For the way how new values are handled, we focus on two different approaches. The first one uses a fixed window length. This means when a new time point is available, it will be included in the estimation while simultaneously the oldest time point will be removed from the estimation. This has the advantage of only using the most recent and relevant information. The second approach, extends the window at each point in time. When a new value is available, it is included in the estimation of the parameter. With this approach we have more data available at each step and combined with the varying history length we don't have to rely on information that is too old.
+Closely related to the length of the history, is the shape of the window used. The window determines which values are used to estimate the parameters at each point in time. The shape includes both the initial length of it and the way it handles new values. As the different time series vary in length, we choose the possible window length as a fraction of the time series history. Let $w_f:=w \dot T$ with $0\leq w \leq 1$be the initial window length. It is therefore a fraction of the the total used length. For the way how new values are handled, we focus on two different approaches. The first one uses a fixed window length. This means when a new time point is available, it will be included in the estimation while simultaneously the oldest time point will be removed from the estimation. This has the advantage of only using the most recent and relevant information. The second approach, extends the window at each point in time. When a new value is available, it is included in the estimation of the parameter. With this approach we have more data available at each step and combined with the varying history length we don't have to rely on information that is too old.
 
 \subsection{CoDA Specifications}
 \label{sec: Coda Specifications}
@@ -19,19 +19,19 @@ As already hinted in the description of the methodology we consider the use of $
 \label{eq:Tspace u}
 \end{equation*}
 
-with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{k_t}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{k_t}\right)$.
+with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$.
 
 Another characteristic of our data are the low values for some categories of it. Even at the aggregated main category level there are instances with low values for some of the categories. This is the case especially for category 3 and 4. As such, we inspect a method which we will call in the following one-vs-all. The principle is the following. A category $k$ is chosen as the pivot category $k_{pivot}$. For all the chosen time points, at each point, the values of the other categories get summed up
 
 \begin{equation*}
-Y_{other_t} = \sum_{\substack{k=0 \\ k \neq k_{pivot}}}^K Y_{k_t}.
+Y_{other,t} = \sum_{\substack{k=0 \\ k \neq k_{pivot}}}^K Y_{kt}.
 \label{eq:one vs all}
 \end{equation*}
 
 Together with the pivot category, the sum of the other categories are then transformed as usual and the VAR model is calculated 
 
 \begin{equation*}
-\bm{u}_t = ilr([Y_{other_t}, Y_{k_{pivot_t}}]).
+\bm{u}_t = ilr([Y_{other,t}, Y_{k_{pivot},t}]).
 \label{eq:one vs all ilr}
 \end{equation*}
 
@@ -45,11 +45,11 @@ All categories are chosen as a pivot category at one point and the predicted val
 As an alternative to the Poisson distribution in \ref{eq:Ingarch Distribution}, a negative binomial distribution can be used as well. This would change \ref{eq:Ingarch Distribution} to 
 
 \begin{equation*}
-p_t(y;\bm{\theta})=\mathbb{P}(Y_{k_t}=y | \SigA_{t-1}) = \frac{\Gamma(\phi+y)}{\Gamma(y+1)\Gamma(\phi)}\left(\frac{\phi}{\phi+\lambda_t}\right)^\phi\left(\frac{\lambda_t}{\phi+\lambda_t}\right)^y, \hspace{0.2cm} y \in \mathbb{N}_0.
+p_t(y;\bm{\theta})=\mathbb{P}(Y_{kt}=y | \SigA_{t-1}) = \frac{\Gamma(\phi+y)}{\Gamma(y+1)\Gamma(\phi)}\left(\frac{\phi}{\phi+\lambda_t}\right)^\phi\left(\frac{\lambda_t}{\phi+\lambda_t}\right)^y, \hspace{0.2cm} y \in \mathbb{N}_0.
 \label{eq:Ingarch negbinom Distribution}
 \end{equation*}
 
-With the negative Binomial Distribution the conditional variance is larger than the conditional mean $\lambda_t = \mathbb{V}\left[Y_{k_t} | \SigA_{t-1}\right] > \mathbb{E}\left[Y_{k_t} | \SigA_{t-1}\right]$.
+With the negative Binomial Distribution the conditional variance is larger than the conditional mean $\lambda_t = \mathbb{V}\left[Y_{kt} | \SigA_{t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{t-1}\right]$.
 
 As seen in the model \ref{eq:Ingarch model with external effect} we can also choose to include external factors or not. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. The values $p$ and $q$ are also varying parameters which have to be chosen. 
 
@@ -66,7 +66,7 @@ E_f=\frac{\sum_{k=1}^{K}\sum_{t=1}^n(y_{ftk}-\hat{y}_{ftk})^2}{\sum_{k=1}^{K}\su
 \label{eq: Error Measure}
 \end{equation}
 
-With the use of the squared difference we penalise big deviations from the true value. By taking the naive random walk model as a benchmark, we achieve scale independence and are able to compare the performance of our model over different time series. This error measure is basically the ration of the mean MSEs for the chosen model and the naive random walk model
+With the use of the squared difference we penalise big deviations from the true value. By taking the naive random walk model as a benchmark, we achieve scale independence and are able to compare the performance of our model over different time series. This error measure is basically the ratio of the mean MSEs for the chosen model and the naive random walk model
 
 \begin{equation}
 E_f=\frac{\frac{1}{K}\sum_{k=1}^K MSE_{fk}}{\frac{1}{K}\sum_{k=1}^K MSE_{naive_{fk}}}.

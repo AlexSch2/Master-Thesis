@@ -96,7 +96,7 @@ d(\textbf{x},\textbf{z})_a = d(clr(\textbf{x}),clr(\textbf{z})) .
 \subsubsection{ilr Coordinates}
 \label{sec:ilr Coordinates}
 
-The isometric log-ratio (ilr) are closely related to the clr Coefficients. Assume the inverse clr transformation is isometric. Let $\left\{v_1,\ldots,v_n\right\}$ be an orthonormal base in in the D-dimensional hyperplane $V$. Then $\textbf{e}_i = clr^{-1}(v_i), i=1,\ldots,D-1$ is an orthonormal basis of the simplex $\mathbbm{S}$. For $\textbf{x} \in \mathbbm{S}$, the ilr transformation can then be defined as  
+The isometric log-ratio (ilr) are closely related to the clr Coefficients. Assume the inverse clr transformation is isometric. Let $\left\{v_1,\ldots,v_{D-1}\right\}$ be an orthonormal base in the hyperplane $V$. Then $\textbf{e}_i = clr^{-1}(v_i), i=1,\ldots,D-1$ is an orthonormal basis of the simplex $\mathbbm{S}$. For $\textbf{x} \in \mathbbm{S}$, the ilr transformation can then be defined as  
 
 \begin{equation*}
 \textbf{u} = ilr(\textbf{x}) = \left(\left\langle \textbf{x},\textbf{e}_1\right\rangle_a,\ldots,\left\langle \textbf{x},\textbf{e}_{D-1}\right\rangle_a\right)^T .
@@ -157,14 +157,14 @@ Since we have established the basic setting we can now introduce compositional t
 \label{eq:CTS characterisation}
 \end{equation*} 
 
-Let $\left\{\bm{Y}_t:t\in \mathbb{N}, \bm{Y}_t \in \mathbb{N}_0^K \right\}_f$ be our time series for fridge $f$ and assume that $\bm{Y}_t$ is a D-dimensional compositional vector measured at time $t, t=1,\ldots,n$. Further, let $\textbf{u}_t = ilr(\bm{Y}_t)$ be its ilr transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by \cite{Kynclova:2015}
+Let $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f$ be our time series for fridge $f$ and assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a K-dimensional compositional vector measured at time $t, t=1,\ldots,T$. Further, let $\textbf{u}_t = ilr(\bm{Y}_t)$ be its ilr transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by \cite{Kynclova:2015}
 
 \begin{equation}
 \textbf{u}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{u}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{u}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{u}_{t-p} + \bm{\epsilon}_{t}.
 \label{eq:VAR model}
 \end{equation}
 
-where $\textbf{c}_{\textbf{V}} \in \mathbb{R}^{D-1}$ is a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{(D-1) \times (D-1)}$ are parameter matrices and $\bm{\epsilon}_t$ is a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. The observation $\textbf{u}_t$ therefore depends on the p past observations $\textbf{u}_{t-1},\ldots,\textbf{u}_{t-p}$. It can be shown, that two VAR(p) models resulting from different ilr transformations are compositionally equivalent which means that the same predictions are obtained \cite{Kynclova:2015}. 
+where $\textbf{c}_{\textbf{V}} \in \mathbb{R}^{K-1}$ is a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{(K-1) \times (K-1)}$ are parameter matrices and $\bm{\epsilon}_t$ is a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. The observation $\textbf{u}_t$ therefore depends on the p past observations $\textbf{u}_{t-1},\ldots,\textbf{u}_{t-p}$. It can be shown, that two VAR(p) models resulting from different ilr transformations are compositionally equivalent which means that the same predictions are obtained \cite{Kynclova:2015}. 
 
 
 \subsubsection{Estimation of the VAR Model}
@@ -175,9 +175,9 @@ Assuming $n$ observations are used for the model, equation \ref{eq:VAR model} ca
 
 \begin{gather*}
 \textbf{U} = \textbf{ZB} + \textbf{E}, \\
-\textbf{U} = (\textbf{u}_1,\ldots,\textbf{u}_n)^T \in \mathbb{R}^{n \times (D-1)}, \\
-\textbf{Z} \in \mathbb{R}^{n \times \left[(D-1)p+1\right]} \text{ with } \textbf{Z}_t = \left(1,\textbf{u}_{t-1}^T,\ldots,\textbf{u}_{t-p}^T\right)^T, \\ %von \cite{Kynclova:2015}
-\textbf{B} = \left[\textbf{c},\textbf{A}^{(1)}, \ldots, \textbf{A}^{(p)}\right]^T \in \mathbb{R}^{(D-1)p +1 \times (D-1)}.
+\textbf{U} = (\textbf{u}_1,\ldots,\textbf{u}_n)^T \in \mathbb{R}^{n \times (K-1)}, \\
+\textbf{Z} \in \mathbb{R}^{n \times \left[(K-1)p+1\right]} \text{ with } \textbf{Z}_t = \left(1,\textbf{u}_{t-1}^T,\ldots,\textbf{u}_{t-p}^T\right)^T, \\ %von \cite{Kynclova:2015}
+\textbf{B} = \left[\textbf{c},\textbf{A}^{(1)}, \ldots, \textbf{A}^{(p)}\right]^T \in \mathbb{R}^{(K-1)p +1 \times (K-1)}.
 \label{eq:VAR model matrix}
 \end{gather*}
 

@@ -1,7 +1,7 @@
 \section{Results}
 \label{sec:Results}
 
-In this section we present and describe the results for our methods with their variations. For this we use the previously introduced error measure, calculate it for all available fridges and summarise the results. We show the results as graphics for easier interpretation. The tables with the exact values are shown in the appendix. 
+In this section we present and describe the results for our methods with their variations. For this we use the previously introduced error measure, calculate it for all available fridges and summarise the results. We show the results as graphics for easier interpretation. %The tables with the exact values are shown in the appendix. 
 
 \subsection{General Specifications}
 \label{sec:General Specifications}
@@ -11,59 +11,59 @@ First, we start with specifications which can be chosen for both CoDA and INGARC
 \subsubsection{History}
 \label{sec:History}
 
-As mentioned various times throughout this thesis, the length of the history is one of the parameters which can be adjusted. Since we deal with time series with different lengths, we take the history as a fraction of the total length. In figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot and a histogram. The quantile plots shows the error for each fridge sorted by value. The dot size indicates the length of the respective time series. The vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile. 
+As mentioned various times throughout this thesis, the the history is one of the parameters which can be adjusted. In figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot and a histogram. The quantile plots shows the error for each fridge sorted by value. The dot size indicates the length of the respective time series. The vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile. 
 
 \begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_history.png}
-\caption{Boxplot for different history lengths}
+\caption{Boxplot of different $h$}
 \label{fig:History Box}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Histogram_all__Variation_history.png}
-\caption{Histogram for different history lengths}
+\caption{Histogram of different $h$}
 \label{fig:History Hist}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.8\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Quant_all__Variation_history.png}
-\caption{Quantiles Plot for different history lengths}
+\caption{Quantiles Plot of different $h$}
 \label{fig:History Quant}
 \end{subfigure}
-\caption{Comparison of different history lengths}
+\caption{Comparison of different $h$}
 \label{fig:History Comp1}
 \end{figure}
 
-In figure \ref{fig:History Comp1} we can see that the results for CoDA vary for the different history lengths. While for a history of half of the length of the original time series, on around 75\% of the fridges the error measure is smaller than 1, this number drops to 50\% if we use the whole history. However, one can see in the quantile plot \ref{fig:History Quant} that we have 8 less values for the factor 0.5 than for 1. This means that either we have larger values than the limits of the y-axis or that the method was unable to compute any result at all. 
+In figure \ref{fig:History Comp1} we can see that the results for CoDA vary for the different histories. While for $h=0.5$ on around 75\% of the fridges the error measure is smaller than 1, this number drops to 50\% when $h=1$. However, one can see in the quantile plot \ref{fig:History Quant} that we have 8 less values for  $h=0.5$ than for $h=1$. This means that either we have larger values than the limits of the y-axis or that the method was unable to compute any result at all. 
 
-For INGARCH, the results are very similar. For a factor of 1 we get slightly higher values for the error measure as seen in \ref{fig:History Box}. But again in \ref{fig:History Quant} we see that we have less values for the shorter history. So again they are either too large to be shown, or there do not exist any values at all. 
+For INGARCH, the results are very similar. For $h=1$ we get slightly higher values for the error measure as seen in \ref{fig:History Box}. But again in \ref{fig:History Quant} we see that we have less values for the shorter history. So again they are either too large to be shown, or there do not exist any values at all. 
 
 \subsubsection{Frame}
 \label{sec:Frame}
 
-Next, we vary the initial frame length $w_f$. We choose to extend the frame with each new data point. In addition, we take the frame as a fraction of the history used. For example, the value $w_f=0.3$ means that 30\% of the data points are chosen for the first estimation. The results are portrayed in \ref{fig:Frame Comp1}. In general, there is not much difference between the different frames. INGARCH seems to perform better for all three values. In figure \ref{fig:Frame Quant} we can see that for CoDA some time series yielded very high errors or couldn't calculate at all. 
+Next, we vary the initial frame length $w_f$. We choose to extend the frame with each new data point. For this we vary the value $w$ in $w_f=w\cdot T$. The results are portrayed in \ref{fig:Frame Comp1}. In general, there is not much difference between the different frames. INGARCH seems to perform better for all three values. In figure \ref{fig:Frame Quant} we can see that for CoDA some time series yielded very high errors or couldn't calculate at all. 
 \begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_frame.png}
-\caption{Boxplot for different frames}
+\caption{Boxplot of different $w$}
 \label{fig:Frame Box}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Histogram_all__Variation_frame.png}
-\caption{Histogram for different frames}
+\caption{Histogram of different $w$}
 \label{fig:Frame Hist}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.8\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Quant_all__Variation_frame.png}
-\caption{Quantiles for different frames}
+\caption{Quantiles of different $w$}
 \label{fig:Frame Quant}
 \end{subfigure}
-\caption{Comparison of different frames}
+\caption{Comparison of different $w$}
 \label{fig:Frame Comp1}
 \end{figure}
 
@@ -101,7 +101,7 @@ We also vary the shape of the window. As explained in \ref{sec: Model Specificat
 \subsection{INGARCH Specifications Results}
 \label{sec: Ingarch Specifications Results}
 
-Next we will investigate the INGARCH specific options. We use a INGARCH(1,1) with a Poisson distribution, extending windows, no external factors, no zero handling, full history $T_f=1$ and initial window length $w_f=0.5$ as the standard model. We will always vary one setting and leave the others unchanged. 
+Next we will investigate the INGARCH specific options. We use a INGARCH(1,1) with a Poisson distribution, extending windows, no external factors, no zero handling, full history $T=T_f$ and initial window length $w_f=\frac{T}{2}$ as the standard model. We will always vary one setting and leave the others unchanged. 
 
 \subsubsection{Distribution}
 \label{sec:Distribution}
@@ -193,7 +193,7 @@ In figure \ref{fig:past obs Comp1} we compare the INGARCH(1,1) (red) model with 
 \subsection{CoDA Specifications Results}
 \label{sec: CoDA Specifications Results}
 
-Lastly we will compare different CoDA Specifications as mentioned in \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, an initial window length of $w_f=0.5$, the full history $T_f=1$, add 0.5 to all values, $\Tsp$-spaces with the logarithmic sum and the one-vs-all method. 
+Lastly we will compare different CoDA Specifications as mentioned in \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $T=T_f$, an initial window length of $w_f=\frac{T}{2}$, add 0.5 to all values, $\Tsp$-spaces with the logarithmic sum and the one-vs-all method. 
 
 \subsection{Zero Handling}
 \label{sec: Zero Handling}

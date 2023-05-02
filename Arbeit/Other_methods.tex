@@ -4,33 +4,33 @@
 \subsection{Naive Random Walk}
 \label{sec: Naive Random Walk}
 
-This method acts as kind of benchmark model and is what is currently used for forecasting. Let $\left\{Y_{k_t}:t\in \mathbb{N}, Y_{k_t} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then
+This method acts as kind of benchmark model and is what is currently used for forecasting. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{k_t} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then
 
 \begin{equation}
-\hat{Y}_{k_{t+1}}= Y_{k_t} ,\hspace{0.2cm} \forall t \in \mathbb{N}, k=1,\ldots,K
+\hat{Y}_{k,t+1}= Y_{kt} ,\hspace{0.2cm} k=1,\ldots,K
 \label{eq: Random Walk Model}
 \end{equation}
 
-where $\hat{Y}_{k_{t+1}}$ is the predicted value at time $t$. In other words, the last known value is the predicted value. 
+where $\hat{Y}_{k,t+1}$ is the predicted value at time $t$. In other words, the last known value is the predicted value. 
 
 
 \subsection{Zero-Inflated Models}
 \label{sec: Zim}
 
-Since we encounter a large number of zeros we also consider zero-inflated models. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function. This way we can explain the large amount of zero values which would not be expected in a normal Poisson distribution. The zero-inflated INGARCH(p,q) model is equivalent to \ref{eq:Ingarch model} and only the conditional distribution of $Y_{k_t}=y | \SigA_{t-1}$ changes. Instead of \ref{eq:Ingarch Distribution} it is now 
+Since we encounter a large number of zeros we also consider zero-inflated models. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function. This way we can explain the large amount of zero values which otherwise would not be expected in a normal Poisson distribution. The zero-inflated INGARCH(p,q) model is equivalent to \ref{eq:Ingarch model} and only the conditional distribution of $Y_{kt}| \SigA_{t-1}$ changes. Instead of \ref{eq:Ingarch Distribution} it is now 
 
 \begin{equation}
-\mathbb{P}(Y_{k_t}=y | \SigA_{t-1}) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda_t^y \exp(-\lambda_t)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
+\mathbb{P}(Y_{kt}=y | \SigA_{t-1}) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda_t^y \exp(-\lambda_t)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
 \label{eq:ZIP Distribution}
 \end{equation}
 
-where $0 < \omega < 1$ and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources. If $\omega =0$ then we get the normal INGARCH(p,q) model discussed above. More details about zero-inflated models and especially zero-inflated INGARCH(p,q) model can be found in \cite{Zhu:2012}.
+where $0 < \omega < 1$ and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources. If $\omega =0$ then we get the normal INGARCH(p,q) model discussed above. More details about zero-inflated models and especially the zero-inflated INGARCH(p,q) model can be found in \cite{Zhu:2012}.
 
 
 \subsection{Log-Linear Models}
 \label{sec: Log-Linear Models}
 
-As mentioned in \ref{sec:Ingarch Motivation} we also investigate log-linear models. These models are structurally very similar to the normal INGARCH(p,q) model only with a logarithmic link function. It has the form 
+As mentioned in \ref{sec:Ingarch Motivation} we also investigate log-linear models. These models are structurally very similar to the normal INGARCH(p,q) model only with a logarithmic link function. They have the form 
 
 \begin{equation}
 \nu_t= \log(\lambda_t) = \beta_0 + \sum_{i=1}^p\beta_i \log(Y_{k_{t-i}}+1) + \sum_{j=1}^q\alpha_j \nu_{t-j}.
@@ -51,11 +51,11 @@ g(\mu) = \nu(\bm{x}) = \beta_0 + f_1(x_1) + \ldots f_p(x_p)
 \end{equation}
 
 with $f_j$ being arbitrary smooth functions \cite{Yee:1996}.
-To extend this model to the multivariate case, we replace the functions $f_j$ with vector functions. Let $\bm{f}_k(Y_{k_{t}}) = (f_{(1)k}(Y_{k_{t}}),\ldots,f_{(M)k}(Y_{k_{t}}))^T$ with $M \in \mathbbm{N}$ be an arbitrary smooth vector function. Then the vector generalised additive model is given by
+To extend this model to the multivariate case, we replace the functions $f_j$ with vector functions. Let $\bm{f}_k(Y_{kt}) = (f_{(1)k}(Y_{kt}),\ldots,f_{(M)k}(Y_{kt}))^T$ with $M \in \mathbbm{N}$ be an arbitrary smooth vector function. Then the vector generalised additive model is given by
 
 \begin{equation}
-\mathbb{E}[\bm{Y}_t] = \bm{\beta}_0 + \sum_{k=1}^K\bm{f}_k(Y_{k_{t-1}})
+\mathbb{E}[\bm{Y}_t] = \bm{\beta}_0 + \sum_{k=1}^K\bm{f}_k(Y_{k,t-1})
 \label{eq:Vgam}
 \end{equation}
 
-where $\mathbb{E}[\bm{Y}_t] = (\mathbb{E}[Y_{1_t}],\ldots,\mathbb{E}[Y_{K_t}])^T$ \cite{Yee:1996}. Further theoretical background about VGAMs are given in \cite{Yee:1996,Yee:2015,Wood:2004}.
+where $\mathbb{E}[\bm{Y}_t] = (\mathbb{E}[Y_{1t}],\ldots,\mathbb{E}[Y_{Kt}])^T$ \cite{Yee:1996}. Further theoretical background about VGAMs are given in \cite{Yee:1996,Yee:2015,Wood:2004}.
