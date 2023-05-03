@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=51
-Cursor=2051
+TopLine=63
+Cursor=2220
 
 [Frame1]
 Flags=0
@@ -36,7 +36,7 @@ Document=Deckblatt.tex
 
 [Frame1_View0,0]
 TopLine=0
-Cursor=989
+Cursor=22
 
 [Frame2]
 Flags=0
@@ -54,7 +54,7 @@ Document=Eidesstattliche Erklaerung.tex
 
 [Frame2_View0,0]
 TopLine=0
-Cursor=0
+Cursor=100
 
 [Frame3]
 Flags=0
@@ -72,7 +72,7 @@ Document=Abstract.tex
 
 [Frame3_View0,0]
 TopLine=0
-Cursor=8
+Cursor=1118
 
 [Frame4]
 Flags=0
@@ -89,8 +89,8 @@ Class=LaTeXView
 Document=Einleitung.tex
 
 [Frame4_View0,0]
-TopLine=0
-Cursor=2710
+TopLine=38
+Cursor=20
 
 [Frame5]
 Flags=0
@@ -108,7 +108,7 @@ Document=Methode_Ingarch.tex
 
 [Frame5_View0,0]
 TopLine=0
-Cursor=8310
+Cursor=4470
 
 [Frame6]
 Flags=0
@@ -125,8 +125,8 @@ Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame6_View0,0]
-TopLine=169
-Cursor=12906
+TopLine=0
+Cursor=1430
 
 [Frame7]
 Flags=0
@@ -143,7 +143,7 @@ Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame7_View0,0]
-TopLine=53
+TopLine=62
 Cursor=7812
 
 [Frame8]
@@ -161,7 +161,7 @@ Class=LaTeXView
 Document=Other_methods.tex
 
 [Frame8_View0,0]
-TopLine=3
+TopLine=23
 Cursor=2389
 
 [Frame9]
@@ -251,7 +251,7 @@ Class=BibTeXView
 Document=Literatur.bib
 
 [Frame13_View0,0]
-TopLine=439
+TopLine=452
 Cursor=26637
 
 [Frame14]
@@ -269,7 +269,7 @@ Class=LaTeXView
 Document=Results.tex
 
 [Frame14_View0,0]
-TopLine=230
+TopLine=238
 Cursor=11232
 
 [SessionInfo]

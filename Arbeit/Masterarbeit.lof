@@ -3,20 +3,20 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Time series for two fridges\relax }}{18}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Time series with CoDA model\relax }}{19}{figure.caption.19}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Time series with INGARCH model\relax }}{19}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Time series with both models\relax }}{20}{figure.caption.21}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Time series with both models and their prediction intervals\relax }}{21}{figure.caption.22}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Comparison of different $h$\relax }}{24}{figure.caption.25}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Comparison of different $w$\relax }}{25}{figure.caption.28}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Comparison of different window shapes\relax }}{26}{figure.caption.31}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Comparison of different distributions\relax }}{27}{figure.caption.34}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Comparison of a different number of past means\relax }}{28}{figure.caption.37}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Comparison of a different number of past observations\relax }}{29}{figure.caption.38}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Comparison of different zero handling methods\relax }}{30}{figure.caption.39}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{31}{figure.caption.40}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{32}{figure.caption.41}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Time series for two fridges\relax }}{21}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Time series with CoDA model\relax }}{21}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Time series with INGARCH model\relax }}{22}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Time series with both models\relax }}{23}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Time series with both models and their prediction intervals\relax }}{24}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Comparison of different $h$\relax }}{27}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Comparison of different $w$\relax }}{28}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Comparison of different window shapes\relax }}{29}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Comparison of different distributions\relax }}{30}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Comparison of a different number of past means\relax }}{31}{figure.caption.37}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Comparison of a different number of past observations\relax }}{32}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Comparison of different zero handling methods\relax }}{33}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{34}{figure.caption.40}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{35}{figure.caption.41}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
