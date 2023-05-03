@@ -390,6 +390,7 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
   if(Split){
 
   }else{
+
     
     label.function <- function(String)return(LabelNames[String])
     
@@ -414,7 +415,6 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
       }
       i <- i+1
     }
-    
     ModelErrorAll <- rbind(CodaModelError_All,IngarchModelError_All)
     ModelErrorAll$model <- as.factor(ModelErrorAll$model)
     levels(ModelErrorAll$model) <- list(CoDA = "coda", INGARCH = "ingarch")
@@ -431,52 +431,53 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
       ylab("Errors")
     
       ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Box",ids_save,"_Variation_",Variation,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
-      
-      
+  
+       
     #Quantile Plot
     MyColour <- setNames(c("red", "blue"),
                          c("CoDA","INGARCH"))
-      
     i <- 1
     for(Variation_RunVariable in Values){
-        
+
         Ingarch_Combined_Single <- Ingarch_Combined %>% filter(!!as.symbol(Variation)==Variation_RunVariable)
         length <- Ingarch_Combined_Single%>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
-        
+
         TimeSeries_Length <- Ingarch_Combined_Single%>% group_by(id) %>% dplyr::summarise(n=unique(timeseriesLength))
-        
+
         names(TimeSeries_Length) <- c("id","Length")
         TimeSeries_Length$Length <- as.numeric(TimeSeries_Length$Length)
-        
+
         IngarchError_Sorted <- ModelErrorAll %>% filter(model=="INGARCH" & !!as.symbol(Variation)==Variation_RunVariable)%>%arrange(.,error)
-        IngarchQuantiles <- quantile(IngarchError_Sorted$error,na.rm = T)
         IngarchError_Sorted$index <- seq(1:dim(IngarchError_Sorted)[1])
         IngarchError_Sorted <- full_join(IngarchError_Sorted,TimeSeries_Length,bye ="id")
-        
-        Quantiles_Index <- data.frame(quant_ind=findInterval(IngarchQuantiles,IngarchError_Sorted$error))
-        
+
         CodaError_Sorted <- ModelErrorAll  %>% filter(model=="CoDA" & !!as.symbol(Variation)==Variation_RunVariable)%>%arrange(.,error)
-        CodaQuantiles <- quantile(CodaError_Sorted$error,na.rm = T)
         CodaError_Sorted$index <- seq(1:dim(CodaError_Sorted)[1])
         CodaError_Sorted <- full_join(CodaError_Sorted,TimeSeries_Length,bye ="id")
-        
+
+        Quantile <- quantile(c(1:max(dim(IngarchError_Sorted)[1],dim(CodaError_Sorted)[1])))
+        Quantiles_Index <- data.frame(quant_ind=Quantile)
+        Quantiles_Index[Variation] <- Variation_RunVariable
         if(i==1){
           CodaError_Sorted_All <- CodaError_Sorted
           IngarchError_Sorted_All <- IngarchError_Sorted
+          Quantiles_Index_All <- Quantiles_Index
         }else{
           CodaError_Sorted_All  <- rbind(CodaError_Sorted_All ,CodaError_Sorted)
           IngarchError_Sorted_All <- rbind(IngarchError_Sorted_All,IngarchError_Sorted)
+          Quantiles_Index_All <- rbind(Quantiles_Index_All,Quantiles_Index)
         }
         i <- i+1
       }
-      
+
     QuantPlot <- ggplot(IngarchError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
         facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free",labeller = as_labeller(label.function))+
         geom_point()+
         scale_y_continuous(limits=c(0,5))+
+        scale_x_continuous(limits=c(0,max(Quantiles_Index_All$quant_ind)))+
         geom_point(data = CodaError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
         geom_hline(yintercept=1,linewidth=2)+
-        geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
+        geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index_All)+
         theme(text = element_text(size = 50))+
         scale_color_manual("Model", values = c(MyColour))+
         ggtitle(paste("Error Measure sorted",sep=" "))
@@ -505,3 +506,4 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
 
   }
 }
+
