@@ -1,0 +1,24 @@
+\documentclass{scrbook}
+
+\begin{document}
+
+\tableofcontents
+
+\chapter{First Chapter}
+This chapter will be included in the table of contents.
+
+% Exclude the chapter entry from the table of contents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+\chapter*{Excluded Chapter}
+This chapter will not appear in the table of contents.
+
+\chapter{Second Chapter}
+This chapter will be included in the table of contents.
+\section{Section}
+
+% Reset the depth of the table of contents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{\arabic{tocdepth}}}
+
+\chapter{Third Chapter}
+
+\end{document}

@@ -4,7 +4,7 @@
 \subsection{Naive Random Walk}
 \label{sec: Naive Random Walk}
 
-This method acts as kind of benchmark model and is what is currently used for forecasting. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{k_t} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then
+This method acts as kind of a benchmark model and is what is currently used for forecasting. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then
 
 \begin{equation}
 \hat{Y}_{k,t+1}= Y_{kt} ,\hspace{0.2cm} k=1,\ldots,K
@@ -17,10 +17,10 @@ where $\hat{Y}_{k,t+1}$ is the predicted value at time $t$. In other words, the 
 \subsection{Zero-Inflated Models}
 \label{sec: Zim}
 
-Since we encounter a large number of zeros we also consider zero-inflated models. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function. This way we can explain the large amount of zero values which otherwise would not be expected in a normal Poisson distribution. The zero-inflated INGARCH(p,q) model is equivalent to \ref{eq:Ingarch model} and only the conditional distribution of $Y_{kt}| \SigA_{t-1}$ changes. Instead of \ref{eq:Ingarch Distribution} it is now 
+Since we encounter a large number of zeros we also consider zero-inflated models. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function. This way we can explain the large amount of zero values which otherwise would not be expected in a normal Poisson distribution. The zero-inflated INGARCH(p,q) model is equivalent to \ref{eq:Ingarch model} and only the conditional distribution of $Y_{kt}| \SigA_{k,t-1}$ changes. Instead of \ref{eq:Ingarch Distribution} it is now 
 
 \begin{equation}
-\mathbb{P}(Y_{kt}=y | \SigA_{t-1}) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda_t^y \exp(-\lambda_t)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
+\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda_{kt}^y \exp(-\lambda_{kt})}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
 \label{eq:ZIP Distribution}
 \end{equation}
 
@@ -33,11 +33,11 @@ where $0 < \omega < 1$ and $\delta_{y,0}$ is the Kronecker delta for which $\del
 As mentioned in \ref{sec:Ingarch Motivation} we also investigate log-linear models. These models are structurally very similar to the normal INGARCH(p,q) model only with a logarithmic link function. They have the form 
 
 \begin{equation}
-\nu_t= \log(\lambda_t) = \beta_0 + \sum_{i=1}^p\beta_i \log(Y_{k_{t-i}}+1) + \sum_{j=1}^q\alpha_j \nu_{t-j}.
+\nu_{kt}= \log(\lambda_{kt}) = \beta_0 + \sum_{i=1}^p\beta_i \log(Y_{k,t-i}+1) + \sum_{j=1}^q\alpha_j \nu_{k,t-j}.
 \label{eq:Log-Linear model}
 \end{equation}
 
-The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_t$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. In comparison to the INGARCH(p,q) model, the log-linear model also supports modeling of negative serial correlation \cite{Liboschik:2016}. It is further discussed in \cite{Fokianos:2011,Woodard:2011,Douc:2013}.
+The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. In comparison to the INGARCH(p,q) model, the log-linear model also supports modeling of negative serial correlation \cite{Liboschik:2016}. It is further discussed in \cite{Fokianos:2011,Woodard:2011,Douc:2013}.
 
 
 \subsection{Vector Generalised Additive Models}

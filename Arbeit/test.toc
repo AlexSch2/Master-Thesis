@@ -1,0 +1,7 @@
+\contentsline {chapter}{\numberline {1}First Chapter}{3}{}%
+\setcounter {tocdepth}{0}
+\contentsline {chapter}{\numberline {2}Second Chapter}{7}{}%
+\contentsline {section}{\numberline {2.1}Section}{7}{}%
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {3}Third Chapter}{9}{}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

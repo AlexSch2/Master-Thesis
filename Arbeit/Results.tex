@@ -11,7 +11,7 @@ First, we start with specifications which can be chosen for both CoDA and INGARC
 \subsubsection{History}
 \label{sec:History}
 
-As mentioned various times throughout this thesis, the the history is one of the parameters which can be adjusted. In figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot and a histogram. The quantile plots shows the error for each fridge sorted by value. The dot size indicates the length of the respective time series. The vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile. 
+As mentioned various times throughout this thesis, the the history is one of the parameters which can be adjusted. In figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot and a histogram. The quantile plots shows the error for each fridge sorted by their size. The dot size indicates the length of the respective time series. The vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile. 
 
 \begin{figure}[htb!]
 \centering
@@ -101,7 +101,7 @@ We also vary the shape of the window. As explained in \ref{sec: Model Specificat
 \subsection{INGARCH Specifications Results}
 \label{sec: Ingarch Specifications Results}
 
-Next we will investigate the INGARCH specific options. We use a INGARCH(1,1) with a Poisson distribution, extending windows, no external factors, no zero handling, full history $T=T_f$ and initial window length $w_f=\frac{T}{2}$ as the standard model. We will always vary one setting and leave the others unchanged. 
+Next we will investigate the INGARCH specific options. We use a INGARCH(1,1) with a Poisson distribution, extending windows, no external factors, no zero handling, full history $h=1$ and initial window length $w=0.5$ as the standard model. We will always vary one setting and leave the others unchanged. 
 
 \subsubsection{Distribution}
 \label{sec:Distribution}
@@ -193,7 +193,7 @@ In figure \ref{fig:past obs Comp1} we compare the INGARCH(1,1) (red) model with 
 \subsection{CoDA Specifications Results}
 \label{sec: CoDA Specifications Results}
 
-Lastly we will compare different CoDA Specifications as mentioned in \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $T=T_f$, an initial window length of $w_f=\frac{T}{2}$, add 0.5 to all values, $\Tsp$-spaces with the logarithmic sum and the one-vs-all method. 
+Lastly we will compare different CoDA Specifications as mentioned in \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $h=1$, an initial window length of $w=0.5$, add 0.5 to all values, $\Tsp$-spaces with the logarithmic sum and the one-vs-all method. 
 
 \subsection{Zero Handling}
 \label{sec: Zero Handling}

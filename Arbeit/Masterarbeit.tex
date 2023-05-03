@@ -57,6 +57,8 @@
 \newcommand{\Tsp}{\mathcal{T}} %geschwungenes T für den T-Space
 
 
+
+
 %%
 \makeindex
 
@@ -67,16 +69,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
+\pagenumbering{Alph}
 \pagestyle{empty} %%Keine Kopf-/Fusszeilen auf den ersten Seiten.
-
 \input{Deckblatt}
+\pagestyle{plain} %%Ab hier die Kopf-/Fusszeilen
 
+\pagenumbering{roman}
+\chapter*{Eidesstattliche Erklärung}
+\input{Eidesstattliche Erklaerung}
+\addchap{Abstract}
+\input{Abstract}
 %% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents %Inhaltsverzeichnis
 \cleardoublepage %Das erste Kapitel soll auf einer ungeraden Seite beginnen.
-
-\pagestyle{plain} %%Ab hier die Kopf-/Fusszeilen
-
+\pagenumbering{arabic} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% HAUPTTEIL MIT KAPITEL
