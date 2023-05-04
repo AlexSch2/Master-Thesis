@@ -262,8 +262,121 @@ Plot.TimeseriesCodaIngarchPI <- function(Data_Raw,CodaResult,IngarchResult,Id,Sa
   }
 }
 
+Plot.MethodComparision <- function(IngarchResult,CodaResult,ZimResult,Split=F){
+  
+  
+  CodaModelError <- Model.Error(CodaResult$result,Fnct = "Mse") %>% 
+                        Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(CodaResult$result$category)))
+  IngarchModelError <- Model.Error(IngarchResult$result,Fnct = "Mse",Category = unique(ingarch_result$result$category)) %>% 
+                        Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(IngarchResult$result$category)))
+  ZimModelError <- Model.Error(ZimResult$result,Fnct = "Mse",Category = unique(zim_result$result$category)) %>% 
+                        Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = as.numeric(unique(ZimResult$result$category)))
 
+  CodaModelError_Split <- Model.Error(CodaResult$result,Fnct = "Mse",Category =as.numeric(unique(ZimResult$result$category))) %>% 
+    Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(3,4))
+  
+  IngarchModelError_Split <- Model.Error(IngarchResult$result,Fnct = "Mse",Category =as.numeric(unique(IngarchResult$result$category))) %>% 
+    Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(3,4))
+  
+  ZimModelError_Split <- Model.Error(ZimResult$result,Fnct = "Mse",Category = unique(ZimResult$result$category)) %>% 
+    Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(3,4))
+  
+  ModelError_Split <- rbind(CodaModelError_Split,IngarchModelError_Split,ZimModelError_Split)
+  
+  ModelError <- rbind(CodaModelError,IngarchModelError,ZimModelError)
+  
+  #Boxplot
+  BoxPlot <- ggplot(ModelError,aes(x=model,y=error))+
+  geom_boxplot()+
+  scale_y_continuous(limits=c(0,5))+
+  geom_hline(yintercept =1,linewidth=2)+
+  theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
+  ggtitle(paste("Error measures",sep=" "),subtitle = "Standard Zim Model")
+  
+  ggsave(filename = here("Plots",paste("All_ErrorMeasure_combined_zoomed",ids_save,"zim_standard",".png",sep="")),plot=BoxPlot,height = 15,width = 20)
+   
 
+ #Quantile Plot
+  length <- ingarch_result$result %>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
+  
+  TimeSeries_Length <- data.frame(id = unique(IngarchResult$result$id),
+                                  length = length$n/
+                                    (as.numeric(unique(IngarchResult$result$frame))*as.numeric(unique(IngarchResult$result$history))))
+  
+  MyColour <- setNames(c("red", "blue","green"),
+                               c("coda","ingarch","zim"))
+  
+  i <- 1
+  for(group in c("3","4")){
+  
+  if(i==1){
+    IngarchErrorSorted_Split <- ModelError_Split %>% filter(model=="ingarch" & group == group)%>%arrange(.,error)
+    IngarchQuantiles_Split  <- quantile(IngarchErrorSorted_Split $error,na.rm = T)
+    
+    IngarchErrorSorted_Split$index <- NA
+    IngarchErrorSorted_Length <- sum(IngarchErrorSorted_Split$group == group)
+    IngarchErrorSorted_Split[IngarchErrorSorted_Split$group == group,]$index <- seq(1:IngarchErrorSorted_Length)
+    IngarchErrorSorted_Split <- inner_join(IngarchErrorSorted_Split,TimeSeries_Length,bye ="id")
+    
+    CodaErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="coda" & group == group)%>%arrange(.,error)
+    CodaQuantiles_Split  <- quantile(CodaErrorSorted_Split $error,na.rm = T)
+    
+    CodaErrorSorted_Split$index <- NA
+    CodaErrorSorted_Length <- sum(CodaErrorSorted_Split$group == group)
+    CodaErrorSorted_Split[CodaErrorSorted_Split$group == group,]$index <- seq(1:CodaErrorSorted_Length)
+    CodaErrorSorted_Split <- inner_join(CodaErrorSorted_Split,TimeSeries_Length,bye ="id")
+    
+    ZimErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="zim" & group == group)%>%arrange(.,error)
+    zimQuantiles_Split  <- quantile(ZimErrorSorted_Split $error,na.rm = T)
+    
+    ZimErrorSorted_Split$index <- NA
+    ZimErrorSorted_Length <- sum(ZimErrorSorted_Split$group == group)
+    ZimErrorSorted_Split[ZimErrorSorted_Split$group == group,]$index <- seq(1:ZimErrorSorted_Length)
+    ZimErrorSorted_Split <- inner_join(ZimErrorSorted_Split,TimeSeries_Length,bye ="id")
+    
+  }else{
+    IngarchErrorSorted_Length <- sum(IngarchErrorSorted_Split$group == group)
+    IngarchErrorSorted_Split[IngarchErrorSorted_Split$group == group,]$index <- seq(1:IngarchErrorSorted_Length)
+    
+    CodaErrorSorted_Length <- sum(CodaErrorSorted_Split$group == group)
+    CodaErrorSorted_Split[CodaErrorSorted_Split$group == group,]$index <- seq(1:CodaErrorSorted_Length)
+    
+    ZimErrorSorted_Length <- sum(ZimErrorSorted_Split$group == group)
+    ZimErrorSorted_Split[ZimErrorSorted_Split$group == group,]$index <- seq(1:ZimErrorSorted_Length)
+    
+    
+    ErrorSorted_Split <<- na.omit(rbind(CodaErrorSorted_Split,IngarchErrorSorted_Split,ZimErrorSorted_Split))
+    ErrorSorted_Split$group <<- as.factor(ErrorSorted_Split$group)
+  }
+    i <- i+1
+ }
+    
+    Quantile_Help <- ErrorSorted_Split %>% 
+      group_by(model,group) %>% 
+      dplyr::count() %>% 
+      dplyr::group_by(group)%>%
+      dplyr::summarise(n=max(n))
+
+    
+    Quantile <- c(quantile(c(1:Quantile_Help$n[1])),quantile(c(1:Quantile_Help$n[2])))
+    
+    
+    QuantilesIndex_Split <- data.frame(quant_ind=Quantile,group=rep(c(Quantile_Help$group[1],Quantile_Help$group[2]),each=5))
+
+  QuantPlot_Split <- ggplot(ErrorSorted_Split ,aes(x=index,y=error,colour=model,size=length))+
+    facet_wrap(vars(group),nrow=length(unique(IngarchErrorSorted_Split$group)),scales = "free")+
+    geom_point()+
+    scale_y_continuous(limits=c(0,5))+
+    geom_hline(yintercept=1,linewidth=2)+
+    # geom_point(data = CodaErrorSorted_Split,aes(x=index,y=error,colour=model),size=3)+
+    geom_vline(aes(xintercept=quant_ind),data=QuantilesIndex_Split)+
+    theme(text = element_text(size = 50))+
+    scale_colour_manual("Legend", values = c(MyColour),aesthetics = "colour")+
+    ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,sep=" "))
+
+  ggsave(filename = here("Plots",paste("Quantile_Plot_Split",ids_save,"_all_models",".png",sep="")),plot=QuantPlot_Split,height = 15,width = 20)
+
+}
 
 #This function plots the boxplot/quantile plot and histogram of the error measures either by group or in total
 Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,Split=T,

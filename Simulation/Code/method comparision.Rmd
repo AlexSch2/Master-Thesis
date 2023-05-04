@@ -95,7 +95,7 @@ zim_result <- Zim.Analysis(
     Id = ids_all,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("1","2","3","4"),
+    Category_Main = c("3","4"),
     WindowMethod = window_method,
     Multicore = F,
     HistoryLength = 1,
@@ -162,6 +162,10 @@ Ingarch_Combined <- rbind(Ingarch1$result,
                           Ingarch2$result
 #                          ,Ingarch3$result
                           )
+
+######CODA; INGARCH ; ZIM ######
+
+Plot.MethodComparision(IngarchResult = ingarch_result,CodaResult = coda_result,ZimResult = zim_result)
 
 #########BOTH METHODS############
 #History

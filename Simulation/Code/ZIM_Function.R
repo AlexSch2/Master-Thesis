@@ -237,9 +237,11 @@ Zim.Analysis <- function(Data_Raw,
       dplyr::select(week_date, main_category_id, any_of(SubCategory_Column) ,sold) %>%
       arrange(week_date)
     
+    CategoryName <- c(paste("y",Category_Main,sep=""),paste("x",Category_Main,sep=""))
+    
     Data_Prepared <- Zim.DataPreparation(Data_Raw = Data_Processed,
                                              HistoryLength = HistoryLength,
-                                             TakeSubCategory = TakeSubCategory) %>%dplyr::select(week_date,"y4","x4")
+                                             TakeSubCategory = TakeSubCategory) %>%dplyr::select(week_date,all_of(CategoryName))
     
     Category <- unique(gsub("\\D", "", names(Data_Prepared)[-1]))
     
