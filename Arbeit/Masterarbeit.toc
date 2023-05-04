@@ -44,12 +44,11 @@
 \contentsline {subsection}{\numberline {3.4.4}Zero Handling}{30}{subsection.3.4.4}%
 \contentsline {subsection}{\numberline {3.4.5}$\mathcal {T}$-spaces}{30}{subsection.3.4.5}%
 \contentsline {subsection}{\numberline {3.4.6}One-vs-All method}{31}{subsection.3.4.6}%
-\contentsline {chapter}{\numberline {4}Conclusion}{37}{chapter.4}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{List of Figures}{43}{chapter*.43}%
-\contentsline {chapter}{List of Tables}{44}{chapter*.44}%
-\contentsline {chapter}{\numberline {A}R-Functions}{47}{appendix.A}%
-\contentsline {section}{\numberline {A.1}General Functions}{47}{section.A.1}%
-\contentsline {section}{\numberline {A.2}INGARCH Functions}{51}{section.A.2}%
-\contentsline {section}{\numberline {A.3}CoDA Functions}{62}{section.A.3}%
+\contentsline {chapter}{List of Figures}{41}{chapter*.43}%
+\contentsline {chapter}{List of Tables}{42}{chapter*.44}%
+\contentsline {chapter}{\numberline {A}R-Functions}{45}{appendix.A}%
+\contentsline {section}{\numberline {A.1}General Functions}{45}{section.A.1}%
+\contentsline {section}{\numberline {A.2}INGARCH Functions}{49}{section.A.2}%
+\contentsline {section}{\numberline {A.3}CoDA Functions}{60}{section.A.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

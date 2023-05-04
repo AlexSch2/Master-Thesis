@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  4 MAY 2023 11:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  4 MAY 2023 16:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1206,38 +1206,38 @@ Underfull \vbox (badness 2856) has occurred while \output is active []
 
  [17]
 [18] [19]) (Examples_Applications.tex
-<Graphiken//Raw_Timeseries_ID4.png, id=357, 1445.4pt x 1084.05pt>
+<Graphiken//Raw_Timeseries_ID4.png, id=356, 1445.4pt x 1084.05pt>
 File: Graphiken//Raw_Timeseries_ID4.png Graphic file (type png)
 <use Graphiken//Raw_Timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//Raw_Timeseries_ID4.png  used on input line 
 11.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Raw_Timeseries_ID24.png, id=358, 1445.4pt x 1084.05pt>
+<Graphiken//Raw_Timeseries_ID24.png, id=357, 1445.4pt x 1084.05pt>
 File: Graphiken//Raw_Timeseries_ID24.png Graphic file (type png)
 <use Graphiken//Raw_Timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//Raw_Timeseries_ID24.png  used on input line
  17.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
  [20]
-<Graphiken//Coda_Timeseries_ID4.png, id=375, 1445.4pt x 1084.05pt>
+<Graphiken//Coda_Timeseries_ID4.png, id=374, 1445.4pt x 1084.05pt>
 File: Graphiken//Coda_Timeseries_ID4.png Graphic file (type png)
 <use Graphiken//Coda_Timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//Coda_Timeseries_ID4.png  used on input line
  33.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Coda_timeseries_ID24.png, id=376, 1445.4pt x 1084.05pt>
+<Graphiken//Coda_timeseries_ID24.png, id=375, 1445.4pt x 1084.05pt>
 File: Graphiken//Coda_timeseries_ID24.png Graphic file (type png)
 <use Graphiken//Coda_timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//Coda_timeseries_ID24.png  used on input lin
 e 39.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Ingarch_timeseries_ID4.png, id=380, 1445.4pt x 1084.05pt>
+<Graphiken//Ingarch_timeseries_ID4.png, id=379, 1445.4pt x 1084.05pt>
 File: Graphiken//Ingarch_timeseries_ID4.png Graphic file (type png)
 <use Graphiken//Ingarch_timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//Ingarch_timeseries_ID4.png  used on input l
 ine 52.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Ingarch_Timeseries_ID24.png, id=381, 1445.4pt x 1084.05pt>
+<Graphiken//Ingarch_Timeseries_ID24.png, id=380, 1445.4pt x 1084.05pt>
 File: Graphiken//Ingarch_Timeseries_ID24.png Graphic file (type png)
 <use Graphiken//Ingarch_Timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//Ingarch_Timeseries_ID24.png  used on input 
@@ -1246,25 +1246,25 @@ line 58.
  [21 <./Graphiken//Raw_Timeseries_ID4.png> <./Graphiken//Raw_Timeseries_ID24.pn
 g> <./Graphiken//Coda_Timeseries_ID4.png> <./Graphiken//Coda_timeseries_ID24.pn
 g>]
-<Graphiken//Both_timeseries_ID4.png, id=394, 1445.4pt x 1084.05pt>
+<Graphiken//Both_timeseries_ID4.png, id=393, 1445.4pt x 1084.05pt>
 File: Graphiken//Both_timeseries_ID4.png Graphic file (type png)
 <use Graphiken//Both_timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//Both_timeseries_ID4.png  used on input line
  72.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//Both_timeseries_ID24.png, id=395, 1445.4pt x 1084.05pt>
+<Graphiken//Both_timeseries_ID24.png, id=394, 1445.4pt x 1084.05pt>
 File: Graphiken//Both_timeseries_ID24.png Graphic file (type png)
 <use Graphiken//Both_timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//Both_timeseries_ID24.png  used on input lin
 e 78.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//BothPI_timeseries_ID4.png, id=398, 1445.4pt x 1084.05pt>
+<Graphiken//BothPI_timeseries_ID4.png, id=397, 1445.4pt x 1084.05pt>
 File: Graphiken//BothPI_timeseries_ID4.png Graphic file (type png)
 <use Graphiken//BothPI_timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//BothPI_timeseries_ID4.png  used on input li
 ne 91.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//BothPI_timeseries_ID24.png, id=399, 1445.4pt x 1084.05pt>
+<Graphiken//BothPI_timeseries_ID24.png, id=398, 1445.4pt x 1084.05pt>
 File: Graphiken//BothPI_timeseries_ID24.png Graphic file (type png)
 <use Graphiken//BothPI_timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//BothPI_timeseries_ID24.png  used on input l
@@ -1295,7 +1295,7 @@ Overfull \hbox (39.91257pt too wide) in paragraph at lines 12--13
  []
 
 ) (Results.tex [25]
-<Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png, id=454, 1445.4
+<Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png, id=453, 1445.4
 pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png Graphic fi
 le (type png)
@@ -1303,7 +1303,7 @@ le (type png)
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_his
 tory.png  used on input line 19.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png, id=455, 
+<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png, id=454, 
 1445.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png Grap
 hic file (type png)
@@ -1311,7 +1311,7 @@ hic file (type png)
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
 on_history.png  used on input line 25.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png, id=456, 1445
+<Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png, id=455, 1445
 .4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png Graphic 
 file (type png)
@@ -1319,7 +1319,7 @@ file (type png)
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_h
 istory.png  used on input line 31.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png, id=463, 1445.4pt
+<Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png, id=462, 1445.4pt
  x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png Graphic file
  (type png)
@@ -1327,7 +1327,7 @@ File: Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png Graphic file
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_fra
 me.png  used on input line 50.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png, id=464, 14
+<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png, id=463, 14
 45.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png Graphi
 c file (type png)
@@ -1335,7 +1335,7 @@ c file (type png)
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
 on_frame.png  used on input line 56.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png, id=465, 1445.4
+<Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png, id=464, 1445.4
 pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png Graphic fi
 le (type png)
@@ -1344,7 +1344,7 @@ Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_f
 rame.png  used on input line 62.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
  [26]
-<Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png, id=482, 1
+<Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png, id=481, 1
 445.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png Graph
 ic file (type png)
@@ -1353,7 +1353,7 @@ Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_win
 dowMethod.png  used on input line 80.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
 <Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png, id=
-483, 1445.4pt x 1084.05pt>
+482, 1445.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png
  Graphic file (type png)
 <use Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png>
@@ -1361,7 +1361,7 @@ File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png
 Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
 on_windowMethod.png  used on input line 86.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png, id=484,
+<Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png, id=483,
  1445.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png Gra
 phic file (type png)
@@ -1372,7 +1372,7 @@ indowMethod.png  used on input line 92.
  [27 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png> <./Grap
 hiken//ErrorMeasureCombined_Histogram_all__Variation_history.png> <./Graphiken/
 /ErrorMeasureCombined_Quant_all__Variation_history.png>]
-<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_distribution.png, id=497, 14
+<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_distribution.png, id=496, 14
 45.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_distribution.png Graphi
 c file (type png)
@@ -1381,7 +1381,7 @@ Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_dist
 ribution.png  used on input line 114.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
 <Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png, id=4
-98, 1445.4pt x 1084.05pt>
+97, 1445.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png 
 Graphic file (type png)
 <use Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png>
@@ -1391,7 +1391,7 @@ n_distribution.png  used on input line 120.
  [28 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png> <./Graphi
 ken//ErrorMeasureCombined_Histogram_all__Variation_frame.png> <./Graphiken//Err
 orMeasureCombined_Quant_all__Variation_frame.png>]
-<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastMean.png, id=512, 1445.4
+<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastMean.png, id=511, 1445.4
 pt x 1084.05pt>
 File: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastMean.png Graphic fi
 le (type png)
@@ -1399,7 +1399,7 @@ le (type png)
 Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_past
 Mean.png  used on input line 146.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png, id=513, 
+<Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png, id=512, 
 1445.4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png Grap
 hic file (type png)
@@ -1407,7 +1407,7 @@ hic file (type png)
 Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variatio
 n_pastMean.png  used on input line 152.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png, id=514, 1445
+<Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png, id=513, 1445
 .4pt x 1084.05pt>
 File: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png Graphic 
 file (type png)
@@ -1418,7 +1418,7 @@ stMean.png  used on input line 158.
  [29 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png> <.
 /Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png> <./
 Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png>]
-<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png, id=525, 1445.4pt
+<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png, id=524, 1445.4pt
  x 1084.05pt>
 File: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png Graphic file
  (type png)
@@ -1426,14 +1426,16 @@ File: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png Graphic file
 Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_past
 Ob.png  used on input line 172.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png, id=525, 14
+45.4pt x 1084.05pt>
+File: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png Graphi
+c file (type png)
+<use Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png>
+Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variatio
+n_pastOb.png  used on input line 178.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
 <Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png, id=526, 1445.4
 pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png Graphic fi
-le (type png)
-<use Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pa
-stOb.png  used on input line 178.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
 File: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png Graphic fi
 le (type png)
 <use Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png>
@@ -1527,20 +1529,16 @@ raphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png>])
 iken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png> <./Graphiken//
 ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png>] [32 <./Graphiken//Error
 MeasureINGARCH_Box_all__Variation_pastOb.png> <./Graphiken//ErrorMeasureINGARCH
-_Quant_all__Variation_pastOb.png>] [33 <./Graphiken//ErrorMeasureCoDA_Box_all__
-Variation_zeroHandling.png> <./Graphiken//ErrorMeasureCoDA_Histogram_all__Varia
-tion_zeroHandling.png> <./Graphiken//ErrorMeasureCoDA_Quant_all__Variation_zero
-Handling.png>] [34 <./Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.png
-> <./Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png> <./Graphi
-ken//ErrorMeasureCoDA_Quant_all__Variation_tSpace.png>] [35 <./Graphiken//Error
-MeasureCoDA_Box_all__Variation_oneVSAll.png> <./Graphiken//ErrorMeasureCoDA_His
-togram_all__Variation_oneVSAll.png> <./Graphiken//ErrorMeasureCoDA_Quant_all__V
-ariation_oneVSAll.png>] [36
-
-
-]
-chapter 4.
-(Conclusion.tex) [37] [38
+_Histogram_all__Variation_pastOb.png> <./Graphiken//ErrorMeasureINGARCH_Quant_a
+ll__Variation_pastOb.png>] [33 <./Graphiken//ErrorMeasureCoDA_Box_all__Variatio
+n_zeroHandling.png> <./Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_zer
+oHandling.png> <./Graphiken//ErrorMeasureCoDA_Quant_all__Variation_zeroHandling
+.png>] [34 <./Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.png> <./Gra
+phiken//ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png> <./Graphiken//Err
+orMeasureCoDA_Quant_all__Variation_tSpace.png>] [35 <./Graphiken//ErrorMeasureC
+oDA_Box_all__Variation_oneVSAll.png> <./Graphiken//ErrorMeasureCoDA_Histogram_a
+ll__Variation_oneVSAll.png> <./Graphiken//ErrorMeasureCoDA_Quant_all__Variation
+_oneVSAll.png>] [36
 
 
 ]
@@ -1550,21 +1548,21 @@ edirect . com / science / article / pii / S0167715212000259$[]\T1/lmr/m/n/12 .
 
  []
 
-[39] [40]
+[37] [38]
 Overfull \hbox (0.56573pt too wide) in paragraph at lines 125--125
 [][]\T1/lmr/m/n/12 Lütkepohl, H. \T1/lmr/m/it/12 New In-tro-duc-tion to Mul-tip
 le Time Series Ana-lysis\T1/lmr/m/n/12 . Springer Ber-lin Heidel-
  []
 
-[41] [42] (Masterarbeit.lof)
+[39] [40] (Masterarbeit.lof)
 \tf@lof=\write7
 \openout7 = `Masterarbeit.lof'.
 
- [43
+ [41
 
 
 
-] [44
+] [42
 
 
 
@@ -1572,12 +1570,12 @@ le Time Series Ana-lysis\T1/lmr/m/n/12 . Springer Ber-lin Heidel-
 \tf@lot=\write8
 \openout8 = `Masterarbeit.lot'.
 
- [45] [46
+ [43] [44
 
 
 ]
 chapter A.
-(RFunctions.tex [47]
+(RFunctions.tex [45]
 Overfull \hbox (27.34428pt too wide) in paragraph at lines 76--76
 []    \T1/lmtt/m/n/12 #Length of the series - length of the window + prediction
  step equals the[] 
@@ -1586,17 +1584,17 @@ Overfull \hbox (27.34428pt too wide) in paragraph at lines 76--76
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48]
-[49]
+ [46]
+[47]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [50]
+ [48]
 Overfull \hbox (21.16928pt too wide) in paragraph at lines 175--175
 []                                     \T1/lmtt/m/n/12 ZeroHandling = c("none",
 "zero_to_one"),[] 
  []
 
-[51]
+[49]
 Overfull \hbox (8.81927pt too wide) in paragraph at lines 333--333
 []\T1/lmtt/m/n/12 Data_Window[[WindowIndex]]$timeSeriesValue_window[c("week_dat
 e",Category)][] 
@@ -1611,13 +1609,13 @@ Overfull \hbox (27.34428pt too wide) in paragraph at lines 333--333
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [50]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [51]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [52]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [53]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [54]
 Overfull \hbox (2.64427pt too wide) in paragraph at lines 333--333
 []  \T1/lmtt/m/n/12 Result_Prediction <- bind_rows(UnlistListElement(Result, "p
 rediction"))[] 
@@ -1626,8 +1624,8 @@ rediction"))[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [55]
-[56]
+ [53]
+[54]
 Overfull \hbox (8.81927pt too wide) in paragraph at lines 544--544
 []  \T1/lmtt/m/n/12 PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_
 RunVariable){[] 
@@ -1642,10 +1640,10 @@ tegory_Column) ,sold) %>%[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [57]
+ [55]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [58]
+ [56]
 Overfull \hbox (70.5693pt too wide) in paragraph at lines 544--544
 []                                    \T1/lmtt/m/n/12 Data_WindowNoTransform = 
 Data_WindowNoTransform,[] 
@@ -1654,7 +1652,7 @@ Data_WindowNoTransform,[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [59]
+ [57]
 Overfull \hbox (76.74431pt too wide) in paragraph at lines 544--544
 []      \T1/lmtt/m/n/12 PredictionResult_AllCategory <- lapply(Category,functio
 n(Category_RunVariable){[] 
@@ -1675,7 +1673,7 @@ nVariable,",[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [60]
+ [58]
 Overfull \hbox (14.99428pt too wide) in paragraph at lines 544--544
 []    \T1/lmtt/m/n/12 Result_Model <- UnlistListElement(PredictionResult_AllCat
 egory,"model")[] 
@@ -1696,13 +1694,13 @@ IDAllCategory)][]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [61]
+ [59]
 Overfull \hbox (33.51929pt too wide) in paragraph at lines 544--544
 []  \T1/lmtt/m/n/12 Result_Model <- UnlistListElement(PredictionResult_AllIDAll
 Category,"model")[] 
  []
 
-[62]
+[60]
 Overfull \hbox (27.34428pt too wide) in paragraph at lines 613--613
 []\T1/lmtt/m/n/12 cbind(Data_Prepared$week_date, pivotCoord(as.data.frame(Data_
 Prepared[,-1])))[] 
@@ -1711,7 +1709,7 @@ Prepared[,-1])))[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [63]
+ [61]
 Overfull \hbox (2.64427pt too wide) in paragraph at lines 883--883
 []\T1/lmtt/m/n/12 Coda.Prediction <- function(Data_TransformWindow, Data_NoTran
 sformWindow,[] 
@@ -1753,7 +1751,7 @@ Overfull \hbox (52.0443pt too wide) in paragraph at lines 883--883
 umeric",length=Size)[] 
  []
 
-[64]
+[62]
 Overfull \hbox (21.16928pt too wide) in paragraph at lines 883--883
 []        \T1/lmtt/m/n/12 ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][
 PredictionStep][] 
@@ -1780,7 +1778,7 @@ iesValue_window$tsum, 1))[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [65]
+ [63]
 Overfull \hbox (21.16928pt too wide) in paragraph at lines 883--883
 []        \T1/lmtt/m/n/12 dim(Data_NoTransformWindow[[WindowIndex]]$timeSeriesV
 alue_window)[1][] 
@@ -1789,7 +1787,7 @@ alue_window)[1][]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [66]
+ [64]
 Overfull \hbox (52.0443pt too wide) in paragraph at lines 883--883
 []      \T1/lmtt/m/n/12 LowerBound_Vector<- UpperBound_Vector <- vector(mode="n
 umeric",length=Size)[] 
@@ -1816,7 +1814,7 @@ ctionStep+2][]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [67]
+ [65]
 Overfull \hbox (14.99428pt too wide) in paragraph at lines 883--883
 []  \T1/lmtt/m/n/12 Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_futur
 e[, -c(1, 4)])[] 
@@ -1831,7 +1829,7 @@ Overfull \hbox (33.51929pt too wide) in paragraph at lines 883--883
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [68]
+ [66]
 Overfull \hbox (33.51929pt too wide) in paragraph at lines 883--883
 [] \T1/lmtt/m/n/12 Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window
 [, -c(1, 4)], 1))[] 
@@ -1840,19 +1838,19 @@ Overfull \hbox (33.51929pt too wide) in paragraph at lines 883--883
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [69]
+ [67]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [70]
+ [68]
 Overfull \hbox (8.81927pt too wide) in paragraph at lines 883--883
 []   \T1/lmtt/m/n/12 sapply(c(1:length(Result_Model)),function(i){paste("window
 ",i,sep="")})[] 
  []
 
-[71]
+[69]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [72]
+ [70]
 Overfull \hbox (21.16928pt too wide) in paragraph at lines 1167--1167
 []        \T1/lmtt/m/n/12 #If the Frame is given as a fraction, calculate the a
 bsolute length.[] 
@@ -1867,7 +1865,7 @@ dictionStep)[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [73]
+ [71]
 Overfull \hbox (21.16928pt too wide) in paragraph at lines 1167--1167
 []                                            \T1/lmtt/m/n/12 PredictionStep = 
 PredictionStep)[] 
@@ -1882,7 +1880,7 @@ ter(TimeSeries_Length)[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [74]
+ [72]
 Overfull \hbox (39.69429pt too wide) in paragraph at lines 1167--1167
 []      \T1/lmtt/m/n/12 Result_Model <- UnlistListElement(PredictionResult_AllP
 ivotGroup,"model")[] 
@@ -1891,10 +1889,10 @@ ivotGroup,"model")[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [75]
+ [73]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [76]
+ [74]
 Overfull \hbox (21.16928pt too wide) in paragraph at lines 1167--1167
 []        \T1/lmtt/m/n/12 #If the Frame is given as a fraction, calculate the a
 bsolute length.[] 
@@ -1909,7 +1907,7 @@ dictionStep)[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [77]
+ [75]
 Overfull \hbox (2.64427pt too wide) in paragraph at lines 1167--1167
 []                                         \T1/lmtt/m/n/12 PredictionStep = Pre
 dictionStep)[] 
@@ -1918,53 +1916,64 @@ dictionStep)[]
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [78])
-[79] (Masterarbeit.aux)
+ [76])
+[77] (Masterarbeit.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `Masterarbeit.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
+
 Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 \openout1 = `Masterarbeit.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
  26539 strings out of 476300
- 506760 string characters out of 5784939
+ 507199 string characters out of 5784939
  1868382 words of memory out of 5000000
- 46309 multiletter control sequences out of 15000+600000
+ 46313 multiletter control sequences out of 15000+600000
  628032 words of font info for 119 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,15n,106p,10609b,2361s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc
-}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.
-enc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.e
-nc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-maths
-y.enc} <C:\Users\Alex\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dpi60
-0\bbm12.pk>{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
-lm-mathex.enc}<C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
-ic/lm/lmbx12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
-ublic/lm/lmbx8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
-/public/lm/lmcsc10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/t
-ype1/public/lm/lmex10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/font
-s/type1/public/lm/lmmi10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/public/lm/lmmi12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Alex/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/Alex/AppData/Local/Programs
-/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/Alex/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/Alex/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/Alex/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/Alex/AppData/Local/
-Programs/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Alex/AppData/L
-ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Alex/AppDat
-a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Alex/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.p
-fb>
-Output written on Masterarbeit.pdf (89 pages, 6486698 bytes).
+
+pdfTeX warning (dest): name{chapter.4} has been referenced but does not exist, 
+replaced by a fixed one
+
+{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{
+C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.en
+c}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc
+}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.
+enc} <C:\Users\Alex\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dpi600\
+bbm12.pk>{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm
+-mathex.enc}<C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
+/lm/lmbx12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
+lic/lm/lmbx8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
+ublic/lm/lmcsc10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/lm/lmex10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/public/lm/lmmi10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fon
+ts/type1/public/lm/lmmi12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/lm/lmmi6.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 
+2.9/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Alex/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/Alex/AppData/Local/Programs/M
+iKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/Alex/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/Alex/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/Alex/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/Alex/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Alex/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Alex/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Alex/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppD
+ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+>
+Output written on Masterarbeit.pdf (87 pages, 6610173 bytes).
 PDF statistics:
- 1130 PDF objects out of 1200 (max. 8388607)
- 226 named destinations out of 1000 (max. 500000)
- 514 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1120 PDF objects out of 1200 (max. 8388607)
+ 224 named destinations out of 1000 (max. 500000)
+ 511 words of extra memory for PDF output out of 10000 (max. 10000000)
 
