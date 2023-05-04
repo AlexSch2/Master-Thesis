@@ -58,13 +58,15 @@ Zim.Prediction <- function(Data_Window,
     #We implement a first version of alternative models. If we have only 0 or no 0 values we cannot use a ZIM model.
     #Hence, if we have only 0 we predict the next value with 0 as well. 
     #If we have no 0, we use a normal INGARCH(1,1) model. 
-    CheckForOnlyZeros <- (sum(TimeSeriesValue_Window[Category_Future]==0)>(Frame-1) || 
-                          sum(TimeSeriesValue_Window[Category_Past]==0)>(Frame-1)) 
-    UseIngarch <- sum(TimeSeriesValue_Window[Category_Past]==0)<Frame/5
-    
+#    UseOnlyZero <- (sum(TimeSeriesValue_Window[Category_Future]==0)>(Frame-1) || 
+#                          sum(TimeSeriesValue_Window[Category_Past]==0)>(Frame-1)) 
+#    UseIngarch <- sum(TimeSeriesValue_Window[Category_Past]==0)<Frame/5
+
+    UseOnlyZero <- F
+    UseIngarch <- F
     
     #Choosing one of the three models. 
-    if(CheckForOnlyZeros){
+    if(UseOnlyZero){
       print("Setting 0 for prediction")
       ValuePredict <- 0
       Model <- NA
