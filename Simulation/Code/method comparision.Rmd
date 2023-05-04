@@ -13,14 +13,6 @@ source("General_Function.R")
 source("General_PlotFunctions.R")
 ```
 
-
-Plot parameters 
-```{r eval = FALSE}
-text_size <- 50
-save_plots <- F
-```
-
-
 Preparation
 ```{r eval = FALSE}
 
@@ -44,7 +36,7 @@ if(all(ids == ids_all)){
 frame <- 0.5
 window_method <- "extending"
 save_results <- F
-HistoryLength <- 0.5
+HistoryLength <- 1
 
 #Ingarch specifications
 MainCat <- 2
@@ -61,8 +53,8 @@ coda_result <-
     Data_Raw  = weekly_category_data,
     Id = ids_all,
     Frame = frame,
-    OneVsAll = T,
-    PivotGroup =  c("1", "2", "3", "4"),
+    OneVsAll = F,
+    PivotGroup =  c("1", "2"),
     TSpace = T,
     Log = T,
     ZeroHandling = "all",
@@ -71,7 +63,7 @@ coda_result <-
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"history05",".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"no_ova",".RData",sep="")))
 }
 
 
@@ -93,8 +85,8 @@ ingarch_result <-
     TakeSubCategory = F
   )
   
-  if(save_results){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"frame07",".RData",sep="")))
+  if(T){
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"fixed",".RData",sep="")))
 
   }
 
@@ -154,21 +146,63 @@ if(!identical(ids,unique(ingarch_result$result$id)) ||
 
 
 ```{r}
-Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_history05.RData")
-Coda0 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_.RData")
-Coda07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_frame07.RData")
-Coda1$result$oneVsAll<- TRUE
-Coda0$result$oneVsAll <- TRUE
+Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_.RData")
+Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_no_ova.RData")
+#Coda3 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_frame07.RData")
 
-Ingarch03 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_history05.RData")
-Ingarch05 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
-Ingarch07 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_frame07.RData")
+Ingarch1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
+Ingarch2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__nbinom.RData")
+#Ingarch3 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_frame07.RData")
 
-Coda_Combined <- rbind(Coda0$result,Coda1$result)
-Ingarch_Combined <- rbind(Ingarch03$result,Ingarch05$result)
+Coda_Combined <- rbind(Coda1$result,
+                       Coda2$result
+#                       ,Coda3$result
+                       )
+Ingarch_Combined <- rbind(Ingarch1$result,
+                          Ingarch2$result
+#                          ,Ingarch3$result
+                          )
 
-Plot.ErrorMeasureSingle(ResultCombined=Coda_Combined,Variation=c("One-vs-All"="oneVsAll"),Values=c(TRUE,FALSE),Split=F,Category = c(1,2))
+#########BOTH METHODS############
+#History
+Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("0.5","1"),Split=F,Variation = "history",LabelNames = c("0.5"="h=0.5","1"="h=1")
 
-Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("0.5","1"),Split=F,Variation = "history",LabelNames = c("0.5"="h=0.5","1"="h=1"))
+#Frames
+Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("0.3","0.5","0.7"),Split=F,Variation = "frame",LabelNames = c("0.3"="w=0.3","0.5"="w=0.5","0.7"="w=0.7"))
 
+#Window Method
+Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("fixed","extending"),Split=F,Variation = "windowMethod",LabelNames = c("fixed"="Fixed","extending"="Extending"))
+
+
+########ONE METHOD##############
+#####INGARCH######
+#Distribution
+Ingarch2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__nbinom.RData")
+Result_Combined <- rbind(Ingarch1$result,Ingarch2$result)
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Distribution"="distribution"),LabelNames=c("Poisson","Negativ Binomial"),Split=F,Category = c(1,2,3,4),Values = c("poisson","nbinom"))
+
+#Past Mean
+Ingarch2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_pm2.RData")
+Result_Combined <- rbind(Ingarch1$result,Ingarch2$result)
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Past Means"="pastMean"),LabelNames=c("1","2"),Split=F,Category = c(1,2,3,4),Values = c("1","2"))
+
+#Past Observations
+Ingarch2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_po2.RData")
+Result_Combined <- rbind(Ingarch1$result,Ingarch2$result)
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Past Observations"="pastOb"),LabelNames=c("1","2"),Split=F,Category = c(1,2,3,4),Values = c("1","2"))
+#####CODA#####
+#Zero Handling
+Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_zeros_only.RData")
+Result_Combined <- rbind(Coda1$result,Coda2$result)
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Zero handling"="zeroHandling"),LabelNames=c("All","Zeros Only"),Split=F,Category = c(1,2,3,4),Values = c("all","zeros_only"))
+
+#TSpaces
+Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_no_Tspace.RData")
+Result_Combined <- rbind(Coda1$result,Coda2$result)
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("T-Space"="tSpace"),LabelNames=c("T-Space","No T-Space"),Split=F,Category = c(1,2,3,4),Values = c(TRUE,FALSE))
+
+#OneVsAll
+Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_no_ova.RData")
+Result_Combined <- rbind(select(Coda1$result,-pivotGroup),Coda2$result)
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("One-vs-All"="oneVsAll"),LabelNames=c("Used","Not Used"),Split=F,Category = c(1,2),Values = c(TRUE,FALSE))
 ```

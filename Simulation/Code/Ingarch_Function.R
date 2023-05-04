@@ -275,11 +275,12 @@ Ingarch.Analysis <- function(Data_Raw,
       
       invisible(clusterCall(Cluster1, function() {
         source("General_Dependency.R")
-        source("General_Function.R")
+       source("General_Function.R")
       }))
       
-      invisible(clusterExport(Cluster1,list("Data.Window","Ingarch.DataPreparation","Ingarch.Prediction","Data_Window",
-                                            "External","PastOb","PastMean","Distribution","Plot"),
+      invisible(clusterExport(Cluster1,list("Ingarch.DataPreparation","Ingarch.Prediction","Data_Window",
+                                            "Data_WindowNoTransform","External","PastOb","PastMean",
+                                            "Distribution","Plot","WindowMethod","PredictionStep"),
                               envir = environment()))
       print("Starting Calculations")
     PredictionResult_AllCategory <- parLapply(Cluster1, Category,function(Category_RunVariable){

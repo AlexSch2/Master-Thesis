@@ -267,7 +267,9 @@ Plot.TimeseriesCodaIngarchPI <- function(Data_Raw,CodaResult,IngarchResult,Id,Sa
 
 #This function plots the boxplot/quantile plot and histogram of the error measures either by group or in total
 Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,Split=T,
-                                      Groups=list(Group1=c(1,2),Group2=c(3,4)),Category=c(1,2,3,4)){
+                                      Groups=list(Group1=c(1,2),Group2=c(3,4)),Category=c(1,2,3,4),LabelNames){
+  
+  label.function <- function(String)return(LabelNames[String])
   
   if(Split){
     
@@ -290,6 +292,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       i <- i+1
     }
     
+    
     ModelErrorAll <- rbind(ResultModelError_All)
     ModelErrorAll$model <- as.factor(ModelErrorAll$model)
     if(unique(ModelErrorAll$model) =="coda"){
@@ -301,7 +304,6 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
     } else{
       stop("Unknown model type.")
     }
-
     
     #Boxplot
     BoxPlot <- ggplot(ModelErrorAll ,aes(x=!!as.symbol(Variation),y=error))+
@@ -309,7 +311,8 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       scale_y_continuous(limits=c(0,5))+
       geom_hline(yintercept =1,linewidth=2)+
       theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
-      ggtitle(paste("Error measure Boxplot",sep=" "))+
+      ggtitle(paste("Error Measure Boxplot",sep=" "))+
+      scale_x_discrete(labels=LabelNames)+
       xlab(str_to_title(names(Variation)))+
       ylab("Error")
     
@@ -317,6 +320,10 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
     
     
     #Quantile Plot
+    MyShapes <- c(16,17)
+    MyColour <- c("darkgreen","darkorange")
+    names(MyShapes) <- Values
+    names(MyColour) <- Values
     
     i <- 1
     for(Variation_RunVariable in Values){
@@ -344,35 +351,46 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       i <- i+1
     }
     
-    QuantPlot <- ggplot(ResultError_Sorted_All,aes(x=index,y=error,colour=!!as.symbol(Variation),size=Length))+
+    QuantPlot <- ggplot(ResultError_Sorted_All,aes(x=index,y=error,colour=!!as.symbol(Variation),size=Length,shape=!!as.symbol(Variation)))+
       geom_point()+
       scale_y_continuous(limits=c(0,5))+
       geom_hline(yintercept=1,linewidth=2)+
       geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index)+
       theme(text = element_text(size = 50))+
-      ggtitle(paste("Error Measure sorted",sep=" "))+
+      ggtitle(paste("Error Measure Quantiles",sep=" "))+
       labs(colour=str_to_title(names(Variation)))+
+      scale_shape_manual(names(Variation), values = c(MyShapes),labels=LabelNames)+
+      scale_colour_manual(names(Variation), values = c(MyColour),labels=LabelNames)+
+      guides(shape = guide_legend(override.aes = list(size = 5)))+
+      guides(color = guide_legend(override.aes = list(size = 5)))+
       xlab("Index")+
       ylab("Error")
     
     ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Quant",ids_save,"_Variation_",Variation,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
     
     #Histogram 
+    MyLinetype <- c("solid", "dashed")
+    names(MyLinetype) <- Values
+    
     ModelErrorAll_Median <- ModelErrorAll %>% dplyr::group_by(!!as.symbol(Variation)) %>% summarise(Median=median(error,na.rm=T))
     ModelErrorAll_Mean <- ModelErrorAll %>% dplyr::group_by(!!as.symbol(Variation)) %>% summarise(Mean=mean(error,na.rm=T))
     
     ModelErrorAll_MM <- full_join(ModelErrorAll_Mean,ModelErrorAll_Median,by=unname(Variation)) %>% pivot_longer(cols=c("Mean","Median"),names_to="Type",
                                                                                                             values_to = "value")
     
-    HistPlot <- ggplot(ModelErrorAll,aes(x=error,colour=!!as.symbol(Variation),fill=!!as.symbol(Variation)))+
+    HistPlot <- ggplot(ModelErrorAll,aes(x=error,colour=!!as.symbol(Variation),fill=!!as.symbol(Variation),linetype=!!as.symbol(Variation)))+
       geom_histogram(bins=100,position = "identity",alpha=0.3,linewidth=1)+
       scale_x_continuous(limits=c(0,8))+
       scale_y_continuous(limits=c(0,12))+
       geom_vline(xintercept = 1,linewidth=2)+
-      geom_vline(aes(xintercept=value,colour=!!as.symbol(Variation),linetype=Type),data = ModelErrorAll_MM ,linewidth=2)+
+#      geom_vline(aes(xintercept=value,colour=!!as.symbol(Variation),linetype=Type),data = ModelErrorAll_MM ,linewidth=2)+
       theme(text = element_text(size = 50))+
       ggtitle(paste("Error Measure Histogram",sep=" "))+
+      scale_linetype_manual(names(Variation), values = c(MyLinetype),labels=LabelNames)+
+      scale_colour_manual(names(Variation), values = c(MyColour),labels=LabelNames)+
+      scale_fill_manual(names(Variation), values = c(MyColour),labels=LabelNames)+
       labs(colour=str_to_title(names(Variation)),fill=str_to_title(names(Variation)))+
+      guides(linetype = guide_legend(override.aes = list(size = 5)))+
       ylab("Count")+
       xlab("Error")
     
@@ -387,12 +405,11 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
 Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "history",Values,Split=T,
                                  Groups=list(Group1=c(1,2),Group2=c(3,4)),LabelNames){
   
+  label.function <- function(String)return(LabelNames[String])
+  
   if(Split){
 
-  }else{
-
-    
-    label.function <- function(String)return(LabelNames[String])
+  }else {
     
     #Calculating the Error measure
     i <- 1
@@ -426,9 +443,9 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
       scale_y_continuous(limits=c(0,5))+
       geom_hline(yintercept =1,linewidth=2)+
       theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
-      ggtitle(paste("Error measure Boxplot",sep=" "))+
-      xlab("Models")+
-      ylab("Errors")
+      ggtitle(paste("Error Measure Boxplot",sep=" "))+
+      xlab("Model")+
+      ylab("Error")
     
       ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Box",ids_save,"_Variation_",Variation,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
   
@@ -436,6 +453,10 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
     #Quantile Plot
     MyColour <- setNames(c("red", "blue"),
                          c("CoDA","INGARCH"))
+    MyLinetype <- setNames(c("solid", "dashed"),
+                           c("CoDA","INGARCH"))
+    MyShape <- setNames(c(16,17),
+                        c("CoDA","INGARCH"))
     i <- 1
     for(Variation_RunVariable in Values){
 
@@ -468,19 +489,25 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
           Quantiles_Index_All <- rbind(Quantiles_Index_All,Quantiles_Index)
         }
         i <- i+1
-      }
+    }
+    Result_All <- rbind(CodaError_Sorted_All,IngarchError_Sorted_All)
 
-    QuantPlot <- ggplot(IngarchError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
+    QuantPlot <- ggplot(Result_All,aes(x=index,y=error,colour=model,size=Length,shape=model))+
         facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free",labeller = as_labeller(label.function))+
         geom_point()+
         scale_y_continuous(limits=c(0,5))+
         scale_x_continuous(limits=c(0,max(Quantiles_Index_All$quant_ind)))+
-        geom_point(data = CodaError_Sorted_All,aes(x=index,y=error,colour=model,size=Length))+
+#       geom_point(data = CodaError_Sorted_All,aes(x=index,y=error,colour=model,size=Length,shape=model))+
         geom_hline(yintercept=1,linewidth=2)+
         geom_vline(aes(xintercept=quant_ind),data=Quantiles_Index_All)+
         theme(text = element_text(size = 50))+
         scale_color_manual("Model", values = c(MyColour))+
-        ggtitle(paste("Error Measure sorted",sep=" "))
+        scale_shape_manual("Model", values = c(MyShape))+
+        ggtitle(paste("Error Measure Quantiles",sep=" "))+
+        guides(shape = guide_legend(override.aes = list(size = 5)))+
+        guides(color = guide_legend(override.aes = list(size = 5)))+
+        xlab("Index")+
+        ylab("Error")
       
         ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Quant",ids_save,"_Variation_",Variation,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
         
@@ -490,20 +517,22 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
         
         ModelErrorAll_MM <- full_join(ModelErrorAll_Mean,ModelErrorAll_Median,by=c("model",Variation)) %>% pivot_longer(cols=c("Mean","Median"),names_to="Type",values_to = "value")
         
-        HistPlot <- ggplot(ModelErrorAll,aes(x=error,colour=model,fill=model))+
+        HistPlot <- ggplot(ModelErrorAll,aes(x=error,colour=model,fill=model,linetype=model))+
           facet_wrap(vars(!!as.symbol(Variation)),nrow=length(Values),scales = "free",labeller = as_labeller(label.function))+
           geom_histogram(bins=100,position = "identity",alpha=0.3,linewidth=1)+
           scale_x_continuous(limits=c(0,8))+
           scale_y_continuous(limits=c(0,12))+
           geom_vline(xintercept = 1,linewidth=2)+
-          geom_vline(aes(xintercept=value,colour=model,linetype=Type),data = ModelErrorAll_MM ,linewidth=2)+
-          scale_color_manual("Legend", values = c(MyColour ))+
-          scale_fill_manual("Legend", values = c(MyColour ))+
+#          geom_vline(aes(xintercept=value,colour=model,linetype=Type),data = ModelErrorAll_MM ,linewidth=2)+
+          scale_color_manual("Model", values = c(MyColour))+
+          scale_fill_manual("Model", values = c(MyColour))+
+          scale_linetype_manual("Model", values = c(MyLinetype))+
           theme(text = element_text(size = 50))+
-          ggtitle(paste("Error Measure Histogram",sep=" "))
+          ggtitle(paste("Error Measure Histogram",sep=" "))+
+          guides(linetype = guide_legend(override.aes = list(size = 5)))+
+          xlab("Error")+
+          ylab("Count")
         
           ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Histogram",ids_save,"_Variation_",Variation,".png",sep="")),plot=HistPlot,height = 15,width = 20)
-
   }
 }
-
