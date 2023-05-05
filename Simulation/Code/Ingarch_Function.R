@@ -274,8 +274,15 @@ Ingarch.Analysis <- function(Data_Raw,
       print("Initiating Cluster")
       
       invisible(clusterCall(Cluster1, function() {
-        source("General_Dependency.R")
-       source("General_Function.R")
+        tryCatch(({
+          source("General_Dependency.R")
+          source("General_Function.R")
+        },
+        error = function(e) {
+          print(e)
+          stop(e)
+        }))
+
       }))
       
       invisible(clusterExport(Cluster1,list("Ingarch.DataPreparation","Ingarch.Prediction","Data_Window",

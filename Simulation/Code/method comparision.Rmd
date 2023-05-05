@@ -73,7 +73,7 @@ ingarch_result <-
     Id = ids_all,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("1", "2", "3", "4"),
+    Category_Main = c("3", "4"),
     WindowMethod = window_method,
     ZeroHandling = "none",
     External = F,
@@ -86,7 +86,7 @@ ingarch_result <-
   )
   
   if(T){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),"fixed",".RData",sep="")))
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
 
   }
 
@@ -95,7 +95,8 @@ zim_result <- Zim.Analysis(
     Id = ids_all,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("3","4"),
+    Category_Main = c("1","2", "3","4"),
+    Category_Calculated = c("3","4"),
     WindowMethod = window_method,
     Multicore = F,
     HistoryLength = 1,
@@ -103,7 +104,7 @@ zim_result <- Zim.Analysis(
   )
 
   if(save_results){
-  save(zim_result,file=here("Code/results",paste("zim_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
+  save(zim_result,file=here("Code/results",paste("zim_result_ids",paste(ids_save,collapse="-"),"cat34",".RData",sep="")))
 
   }
 ```
@@ -166,6 +167,18 @@ Ingarch_Combined <- rbind(Ingarch1$result,
 ######CODA; INGARCH ; ZIM ######
 
 Plot.MethodComparision(IngarchResult = ingarch_result,CodaResult = coda_result,ZimResult = zim_result)
+zim_zeros <- zim_result$result%>% group_by(category,id) %>% summarise(n=sum(valuePredict==0))
+ingarch_zeros <- ingarch_result$result %>% filter(category%in% c(3,4))%>% group_by(category,id) %>% summarise(n=sum(valuePredict==0))
+zim_zeros$model <- "zim"
+ingarch_zeros$model <- "ingarch"
+plot.data <- rbind(zim_zeros,ingarch_zeros)
+p <- ggplot(plot.data,aes(x=id,y=n,col=model))+
+  facet_wrap(vars(category),nrow=2,scales="free")+
+  geom_point(size=5)+
+  theme(text = element_text(size = 30,angle = 45, vjust = 0.5, hjust=1))+
+  scale_colour_manual("Legend", values = setNames(c("green","blue"),c("zim","ingarch")),aesthetics = "colour")+
+  ylab("Amount of zeros")
+
 
 #########BOTH METHODS############
 #History

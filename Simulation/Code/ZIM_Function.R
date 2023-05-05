@@ -204,6 +204,7 @@ Zim.Analysis <- function(Data_Raw,
                          Category_Main = c("1", "2", "3", "4"),
                          TakeSubCategory = F,
                          Category_Sub = NULL,
+                         Category_Calculated = c("3","4"),
                          Frame = 10,
                          WindowMethod = "extending",
                          HistoryLength = 1,
@@ -237,7 +238,7 @@ Zim.Analysis <- function(Data_Raw,
       dplyr::select(week_date, main_category_id, any_of(SubCategory_Column) ,sold) %>%
       arrange(week_date)
     
-    CategoryName <- c(paste("y",Category_Main,sep=""),paste("x",Category_Main,sep=""))
+    CategoryName <- c(paste("y",Category_Calculated,sep=""),paste("x",Category_Calculated,sep=""))
     
     Data_Prepared <- Zim.DataPreparation(Data_Raw = Data_Processed,
                                              HistoryLength = HistoryLength,
