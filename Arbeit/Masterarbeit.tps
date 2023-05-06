@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
 TopLine=103
-Cursor=3322
+Cursor=2959
 
 [Frame1]
 Flags=0
@@ -29,8 +29,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Deckblatt.tex
 
@@ -47,8 +47,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Abstract.tex
 
@@ -65,8 +65,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Danksagung.tex
 
@@ -83,8 +83,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Eidesstattliche Erklaerung.tex
 
@@ -101,13 +101,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Einleitung.tex
 
 [Frame5_View0,0]
-TopLine=38
+TopLine=50
 Cursor=6474
 
 [Frame6]
@@ -119,14 +119,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Methode_Ingarch.tex
 
 [Frame6_View0,0]
-TopLine=0
-Cursor=4470
+TopLine=41
+Cursor=3901
 
 [Frame7]
 Flags=0
@@ -137,13 +137,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame7_View0,0]
-TopLine=169
+TopLine=95
 Cursor=12906
 
 [Frame8]
@@ -155,13 +155,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame8_View0,0]
-TopLine=66
+TopLine=83
 Cursor=7812
 
 [Frame9]
@@ -173,14 +173,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Other_methods.tex
 
 [Frame9_View0,0]
-TopLine=23
-Cursor=2389
+TopLine=0
+Cursor=5022
 
 [Frame10]
 Flags=0
@@ -191,8 +191,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=RCode.tex
 
@@ -209,13 +209,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame11_View0,0]
-TopLine=15
+TopLine=18
 Cursor=985
 
 [Frame12]
@@ -227,13 +227,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Results.tex
 
 [Frame12_View0,0]
-TopLine=230
+TopLine=266
 Cursor=11236
 
 [Frame13]
@@ -245,8 +245,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=Conclusion.tex
 
@@ -263,8 +263,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=LaTeXView
 Document=RFunctions.tex
 
@@ -281,18 +281,18 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=2556
-NormalPos.bottom=875
+NormalPos.right=1260
+NormalPos.bottom=26
 Class=BibTeXView
 Document=Literatur.bib
 
 [Frame15_View0,0]
-TopLine=452
-Cursor=26637
+TopLine=248
+Cursor=13512
 
 [SessionInfo]
 FrameCount=16
-ActiveFrame=12
+ActiveFrame=0
 
 [Bookmarks]
 Results.tex=81 

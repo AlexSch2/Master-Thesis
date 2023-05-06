@@ -22,8 +22,8 @@
 \contentsline {section}{\numberline {2.3}Other Methods}{13}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Naive Random Walk}{13}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Zero-Inflated Models}{14}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Log-Linear Models}{14}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Vector Generalised Additive Models}{15}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.3}Log-Linear Models}{15}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Vector Generalised Additive Models}{16}{subsection.2.3.4}%
 \contentsline {chapter}{\numberline {3}Application}{17}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Model Specifications}{17}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}CoDA Specifications}{18}{subsection.3.1.1}%

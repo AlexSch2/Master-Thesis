@@ -1,0 +1,35 @@
+A random walk without drift is a time series where the value at each time step is a random deviation from the previous value, with no overall trend or drift. Mathematically, if we denote the time series as {X_t}, then a random walk without drift can be defined as:
+
+X_t = X_{t-1} + e_t
+
+where e_t is a random error term with mean zero and finite variance.
+
+To forecast the value of X_t for some future time step, t+h, one commonly used method is the naive forecast, which simply assumes that the future value will be equal to the current value:
+
+X_{t+h} = X_t
+
+To prove that the naive forecast is optimal for a random walk without drift, we need to show that it has the smallest mean squared error (MSE) among all possible forecasts.
+
+Let F_{t+h} denote a general forecast for X_{t+h} based on the available information up to time t. Then, the MSE of this forecast can be defined as:
+
+MSE(F_{t+h}) = E[(X_{t+h} - F_{t+h})^2]
+
+where E[.] denotes the expected value operator.
+
+Using the definition of a random walk without drift, we can write:
+
+X_{t+h} = X_t + e_{t+1} + e_{t+2} + ... + e_{t+h}
+
+Therefore, the MSE of any forecast can be decomposed into two parts:
+
+MSE(F_{t+h}) = E[(X_t + e_{t+1} + e_{t+2} + ... + e_{t+h} - F_{t+h})^2]
+= E[(X_t - F_{t+h})^2] + E[e_{t+1}^2] + E[e_{t+2}^2] + ... + E[e_{t+h}^2]
+= MSE(naive forecast) + h*Var(e_t)
+
+where Var(e_t) denotes the variance of the error term.
+
+The last equality follows from the fact that the naive forecast sets F_{t+h} = X_t for all h, so that the first term in the MSE reduces to the variance of the error term. The second term is proportional to h, since the error terms are assumed to be independent and identically distributed.
+
+Therefore, the MSE of any forecast is equal to the MSE of the naive forecast plus a positive term proportional to h. This means that for small values of h, the naive forecast has the smallest MSE among all possible forecasts, and is therefore optimal.
+
+In summary, the naive forecast is optimal for a random walk without drift, since it minimizes the mean squared error among all possible forecasts, due to the fact that the error terms are independent and identically distributed.

@@ -4,11 +4,18 @@
 \subsection{Naive Random Walk}
 \label{sec: Naive Random Walk}
 
-This method acts as kind of a benchmark model and is what is currently used for forecasting. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then
+The Naive Random Walk model is one of the simplest and most comprehensive forecasting models. It assumes that the 1-step difference between two values is i.i.d distributed with mean 0. Its simplicity and easy interpretability makes this method a popular benchmark model. In addition, it is what is currently employed. So using it enables us to directly see if our models outperform the current model. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then the Naive Random Walk model is given as
+
+\begin{equation}
+Y_{k,t+1}= Y_{kt} + \epsilon_{kt},\hspace{0.2cm} k=1,\ldots,K
+\label{eq: Random Walk Model}
+\end{equation}
+ 
+where $\epsilon_{kt} \sim WN(\sigma^2)$ is a white noise process with variance $\sigma^2 \in \mathbb{R}_+$. It can be shown easily, that the optimal 1-step ahead forecast with regards to the mean squared error (MSE) is given by
 
 \begin{equation}
 \hat{Y}_{k,t+1}= Y_{kt} ,\hspace{0.2cm} k=1,\ldots,K
-\label{eq: Random Walk Model}
+\label{eq: Random Walk Model Prediction}
 \end{equation}
 
 where $\hat{Y}_{k,t+1}$ is the predicted value at time $t$. In other words, the last known value is the predicted value. 
@@ -17,14 +24,31 @@ where $\hat{Y}_{k,t+1}$ is the predicted value at time $t$. In other words, the 
 \subsection{Zero-Inflated Models}
 \label{sec: Zim}
 
-Since we encounter a large number of zeros we also consider zero-inflated models. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function. This way we can explain the large amount of zero values which otherwise would not be expected in a normal Poisson distribution. The zero-inflated INGARCH(p,q) model is equivalent to \ref{eq:Ingarch model} and only the conditional distribution of $Y_{kt}| \SigA_{k,t-1}$ changes. Instead of \ref{eq:Ingarch Distribution} it is now 
+Since we encounter a large number of zeros we also consider zero-inflated models. Zero inflation means that the proportion of observed zeros is bigger than that of the underlying distribution. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function. This way we can explain the large amount of zero values which otherwise would not be expected in a normal Poisson or negative binomial distribution. The probability mass function of a $ZIP(\lambda,\omega)$ distribution for a random variable $Y$ is defined as \cite{Zhu:2012}
 
 \begin{equation}
-\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda_{kt}^y \exp(-\lambda_{kt})}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
+\mathbb{P}(Y=y) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda^y \exp(-\lambda)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
 \label{eq:ZIP Distribution}
 \end{equation}
 
-where $0 < \omega < 1$ and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources. If $\omega =0$ then we get the normal INGARCH(p,q) model discussed above. More details about zero-inflated models and especially the zero-inflated INGARCH(p,q) model can be found in \cite{Zhu:2012}.
+where $0 < \omega < 1$ and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources \cite{Zhu:2012}. 
+
+Now we can define the zero-inflated poisson INGARCH(p,q) as
+
+\begin{gather}
+\label{eq:ZIP model}
+Y_{kt} | \SigA_{k,t-1} \sim ZIP(\lambda_{kt},\omega_k); \forall t \in \mathbb{N}, \\
+\mathbb{E}\left[Y_{kt} | \SigA_{k,t-1} \right] = \lambda_{kt} = \beta_0 + \sum_{i=1}^p\beta_i Y_{k,t-i} + \sum_{j=1}^q\alpha_j \lambda_{k,t-j}.
+\end{gather}
+
+If $\omega =0$ then we get the normal INGARCH(p,q) model discussed above. It can be shown that the conditional mean and variance are given by
+
+\begin{equation*}
+\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_k)\lambda_{kt}, \hspace{1cm} \mathbb{V}[Y_{kt} | \SigA_{k,t-1}] =(1-\omega)\lambda_{kt}(1+\omega \lambda_{kt})
+\label{eq:Conditional Mean and Variance ZIP}
+\end{equation*}
+
+which implies $ \mathbb{V}[Y_{kt} | \SigA_{k,t-1}] > \mathbb{E}[Y_{kt} | \SigA_{k,t-1}]$ \cite{Zhu:2012}. This means that model \ref{eq:ZIP model} can handle overdispersion in our data. More details about zero-inflated models and especially the zero-inflated INGARCH(p,q) model can be found in \cite{Zhu:2012}.
 
 
 \subsection{Log-Linear Models}
@@ -32,12 +56,23 @@ where $0 < \omega < 1$ and $\delta_{y,0}$ is the Kronecker delta for which $\del
 
 As mentioned in \ref{sec:Ingarch Motivation} we also investigate log-linear models. These models are structurally very similar to the normal INGARCH(p,q) model only with a logarithmic link function. They have the form 
 
-\begin{equation}
+\begin{gather}
+Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \nu_{kt}= \log(\lambda_{kt}) = \beta_0 + \sum_{i=1}^p\beta_i \log(Y_{k,t-i}+1) + \sum_{j=1}^q\alpha_j \nu_{k,t-j}.
 \label{eq:Log-Linear model}
-\end{equation}
+\end{gather}
 
-The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. In comparison to the INGARCH(p,q) model, the log-linear model also supports modeling of negative serial correlation \cite{Liboschik:2016}. It is further discussed in \cite{Fokianos:2011,Woodard:2011,Douc:2013}.
+The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. We consider the Log-Linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of \ref{eq:Ingarch parameter space}, we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative \cite{Fokianos:2011}. However, in the Log-Linear case we can extend this to
+
+\begin{gather}
+Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
+\nu_{kt}= \log(\lambda_{kt}) = \beta_0 + \sum_{i=1}^p\beta_i \log(Y_{k,t-i}+1) + \sum_{j=1}^q\alpha_j \nu_{k,t-j} + \bm{\eta}^T\textbf{X}_{kt}.
+\label{eq:Log-Linear model}
+\end{gather}
+
+with $\bm{\eta} \in \mathbb{R}^r$. 
+
+Log-Linear Models are further discussed in \cite{Fokianos:2011,Woodard:2011,Douc:2013}.
 
 
 \subsection{Vector Generalised Additive Models}
