@@ -1,15 +1,15 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'Masterarbeit.blg'
-[166] biber-MSWIN64:340> INFO - === 
-[233] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
-[406] Biber.pm:979> INFO - Found 33 citekeys in bib section 0
-[422] Biber.pm:4419> INFO - Processing section 0
-[439] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
-[540] bibtex.pm:1713> INFO - LaTeX decoding ...
-[601] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
-[896] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[896] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
-[896] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-GB'
-[896] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
-[939] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
-[967] bbl.pm:763> INFO - Output to Masterarbeit.bbl
+[180] biber-MSWIN64:340> INFO - === 
+[245] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
+[399] Biber.pm:979> INFO - Found 37 citekeys in bib section 0
+[415] Biber.pm:4419> INFO - Processing section 0
+[429] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
+[539] bibtex.pm:1713> INFO - LaTeX decoding ...
+[608] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
+[910] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[910] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
+[910] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-GB'
+[910] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
+[958] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
+[984] bbl.pm:763> INFO - Output to Masterarbeit.bbl

@@ -32,6 +32,66 @@ keywords = {Aitchison geometry, Bootstrap, Classification, Compositional data, L
 abstract = {This article presents an introduction to the field and methods of compositional data analysis. The basic concepts and ideas are explained, and the approach is motivated from a geometrical perspective. Multivariate methods that are relevant in chemometrics are considered from the point of view of compositional data analysis, such as principal component analysis, multivariate outlier detection, as well as regression and classification, also for the high-dimensional case. The article includes several examples which illustrate the use of this methodology for practical data analysis.}
 }
 
+%Coda 3
+
+@book{Aitchison:1986,
+    author = {Aitchison, J},
+    title = {The Statistical Analysis of Compositional Data},
+    year = {1986},
+    isbn = {0412280604},
+    publisher = {Chapman \& Hall, Ltd.},
+    address = {GBR}
+}
+
+      
+
+
+
+
+
+%Coda Zero Handling 1
+@article{Lubbe:2021,
+title = {Comparison of zero replacement strategies for compositional data with large numbers of zeros},
+journal = {Chemometrics and Intelligent Laboratory Systems},
+volume = {210},
+pages = {104248},
+year = {2021},
+issn = {0169-7439},
+doi = {https://doi.org/10.1016/j.chemolab.2021.104248},
+url = {https://www.sciencedirect.com/science/article/pii/S0169743921000162},
+author = {Sugnet Lubbe and Peter Filzmoser and Matthias Templ},
+keywords = {Imputation, Compositional data analysis, ZeroSum regression, Microbiome data},
+abstract = {Modern applications in chemometrics and bioinformatics result in compositional data sets with a high proportion of zeros. An example are microbiome data, where zeros refer to measurements below the detection limit of one count. When building statistical models, it is important that zeros are replaced by sensible values. Different replacement techniques from compositional data analysis are considered and compared by a simulation study and examples. The comparison also includes a recently proposed method (Templ, 2020) [1] based on deep learning. Detailed insights into the appropriateness of the methods for a problem at hand are provided, and differences in the outcomes of statistical results are discussed.}
+}
+
+@Article{Josep:2003,
+        title={ Dealing with Zeros and Missing Values in Compositional Data Sets Using Nonparametric Imputation },
+        author={ Josep Antoni Martín-Fernández and C. Barceló-Vidal and Vera Pawlowsky-Glahn },
+        journal={ Mathematical Geosciences },
+        year={ 2003 },
+        publisher={ Kluwer Academic Publishers-Plenum Publishers },
+        volume={ 35 },
+        pages={ 253-278 },
+        number={ 3 },
+        
+        
+        doi={ 10.1023/A:1023866030544 },  
+      }
+			
+%zCompositional Methoden für Zero Handling in CoDA 3	
+@article{Palarea-Albaladejo:2015,
+title = {zCompositions — R package for multivariate imputation of left-censored data under a compositional approach},
+journal = {Chemometrics and Intelligent Laboratory Systems},
+volume = {143},
+pages = {85-96},
+year = {2015},
+issn = {0169-7439},
+doi = {https://doi.org/10.1016/j.chemolab.2015.02.019},
+url = {https://www.sciencedirect.com/science/article/pii/S0169743915000490},
+author = {Javier Palarea-Albaladejo and Josep Antoni Martín-Fernández},
+keywords = {Censored data, Nondetects, Zeros, Compositional data, Imputation, Log-ratio analysis},
+abstract = {zCompositions is an R package for the imputation of left-censored data under a compositional approach. It is pertinent when the analyst assumes that the relevant information is contained on the relative variation structure of the data. For instance, in cases where the experimental data are simultaneously measured in amounts related to a same total weight or volume. The approach is used in fields like geochemistry of waters or sedimentary rocks, environmental studies related to air pollution, physicochemical analysis of glass fragments in forensic science, and among many others. In these fields, rounded zeros and nondetects are usually regarded as left-censored data that hamper any subsequent data analysis. The implemented methods consider aspects of relevance for a compositional approach such as scale invariance, subcompositional coherence or preserving the multivariate relative structure of the data. Based on solid statistical frameworks, it comprises the ability to deal with single and varying censoring thresholds, consistent treatment of closed and non-closed data, exploratory tools, multiple imputation, MCMC, robust and non-parametric alternatives, and recent proposals for count data. Key methodological aspects, new contributions, computational implementation and the practical application of the approach are discussed.}
+}			
 %CLR coefficients are isometric
 @article{Egozcue:2003,
 author = {Egozcue, Juan Jose and Pawlowsky-Glahn, Vera and Figueras, Glòria and Vidal, Carles},
@@ -300,7 +360,7 @@ doi = {10.1007/978-1-4939-2818-7}
  journal = {Journal of the American Statistical Association},
  number = {467},
  pages = {673--686},
- publisher = {[American Statistical Association, Taylor & Francis, Ltd.]},
+ publisher = {[American Statistical Association, Taylor \& Francis, Ltd.]},
  title = {Stable and Efficient Multiple Smoothing Parameter Estimation for Generalized Additive Models},
  urldate = {2023-04-30},
  volume = {99},

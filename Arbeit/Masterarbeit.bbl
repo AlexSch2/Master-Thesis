@@ -19,6 +19,35 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{Aitchison:1986}{book}{}
+      \name{author}{1}{}{%
+        {{hash=5b6e7a86e4b5f391b09c6da9a0c458bc}{%
+           family={Aitchison},
+           familyi={A\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {GBR}%
+      }
+      \list{publisher}{1}{%
+        {Chapman \& Hall, Ltd.}%
+      }
+      \strng{namehash}{5b6e7a86e4b5f391b09c6da9a0c458bc}
+      \strng{fullhash}{5b6e7a86e4b5f391b09c6da9a0c458bc}
+      \strng{bibnamehash}{5b6e7a86e4b5f391b09c6da9a0c458bc}
+      \strng{authorbibnamehash}{5b6e7a86e4b5f391b09c6da9a0c458bc}
+      \strng{authornamehash}{5b6e7a86e4b5f391b09c6da9a0c458bc}
+      \strng{authorfullhash}{5b6e7a86e4b5f391b09c6da9a0c458bc}
+      \field{labelalpha}{Ait86}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0412280604}
+      \field{title}{The Statistical Analysis of Compositional Data}
+      \field{year}{1986}
+    \endentry
     \entry{Biswas:2009}{article}{}
       \name{author}{2}{}{%
         {{hash=a60b050ab12f80c13579e0988404e9e0}{%
@@ -747,6 +776,54 @@
       \verb https://CRAN.R-project.org/package=tscount
       \endverb
     \endentry
+    \entry{Lubbe:2021}{article}{}
+      \name{author}{3}{}{%
+        {{hash=3a618530db548247ed3bea8c0427a46a}{%
+           family={Lubbe},
+           familyi={L\bibinitperiod},
+           given={Sugnet},
+           giveni={S\bibinitperiod}}}%
+        {{hash=440840cf1a958f86ce96afdf0ed33447}{%
+           family={Filzmoser},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=faaed83ab21bd48aa70346a9a1a0fa99}{%
+           family={Templ},
+           familyi={T\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{7beff848e1377af57eb0fd2dd21f8a86}
+      \strng{fullhash}{7beff848e1377af57eb0fd2dd21f8a86}
+      \strng{bibnamehash}{7beff848e1377af57eb0fd2dd21f8a86}
+      \strng{authorbibnamehash}{7beff848e1377af57eb0fd2dd21f8a86}
+      \strng{authornamehash}{7beff848e1377af57eb0fd2dd21f8a86}
+      \strng{authorfullhash}{7beff848e1377af57eb0fd2dd21f8a86}
+      \field{labelalpha}{LFT21}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Modern applications in chemometrics and bioinformatics result in compositional data sets with a high proportion of zeros. An example are microbiome data, where zeros refer to measurements below the detection limit of one count. When building statistical models, it is important that zeros are replaced by sensible values. Different replacement techniques from compositional data analysis are considered and compared by a simulation study and examples. The comparison also includes a recently proposed method (Templ, 2020) [1] based on deep learning. Detailed insights into the appropriateness of the methods for a problem at hand are provided, and differences in the outcomes of statistical results are discussed.}
+      \field{issn}{0169-7439}
+      \field{journaltitle}{Chemometrics and Intelligent Laboratory Systems}
+      \field{title}{Comparison of zero replacement strategies for compositional data with large numbers of zeros}
+      \field{volume}{210}
+      \field{year}{2021}
+      \field{pages}{104248}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.chemolab.2021.104248
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0169743921000162
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0169743921000162
+      \endverb
+      \keyw{Imputation,Compositional data analysis,ZeroSum regression,Microbiome data}
+    \endentry
     \entry{Luetkepohl:2007}{book}{}
       \name{author}{1}{}{%
         {{hash=fabf6fc976497f6f73e23fb22dd67753}{%
@@ -811,6 +888,49 @@
       \field{title}{Hidden Markov and Other Models for Discrete- valued Time Series}
       \field{year}{1997}
     \endentry
+    \entry{Josep:2003}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5e75cadbba9516f9e33b5273150c27a2}{%
+           family={Martín-Fernández},
+           familyi={M\bibinithyphendelim F\bibinitperiod},
+           given={Josep\bibnamedelima Antoni},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=b469db0c2c0959f1ba98b9abf45a8b9a}{%
+           family={Barceló-Vidal},
+           familyi={B\bibinithyphendelim V\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=2eea4c7d7a1051871715333c665f5c27}{%
+           family={Pawlowsky-Glahn},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Vera},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Kluwer Academic Publishers-Plenum Publishers}%
+      }
+      \strng{namehash}{541b28cc5f6c7e4f1924c267bbec2864}
+      \strng{fullhash}{541b28cc5f6c7e4f1924c267bbec2864}
+      \strng{bibnamehash}{541b28cc5f6c7e4f1924c267bbec2864}
+      \strng{authorbibnamehash}{541b28cc5f6c7e4f1924c267bbec2864}
+      \strng{authornamehash}{541b28cc5f6c7e4f1924c267bbec2864}
+      \strng{authorfullhash}{541b28cc5f6c7e4f1924c267bbec2864}
+      \field{labelalpha}{MBP03}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Geosciences}
+      \field{number}{3}
+      \field{title}{Dealing with Zeros and Missing Values in Compositional Data Sets Using Nonparametric Imputation}
+      \field{volume}{35}
+      \field{year}{2003}
+      \field{pages}{253\bibrangedash 278}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1023/A:1023866030544
+      \endverb
+    \endentry
     \entry{here:2020}{manual}{}
       \name{author}{1}{}{%
         {{hash=1435ca4f08e53208e1c34297357afa80}{%
@@ -839,6 +959,49 @@
       \verb{url}
       \verb https://CRAN.R-project.org/package=here
       \endverb
+    \endentry
+    \entry{Palarea-Albaladejo:2015}{article}{}
+      \name{author}{2}{}{%
+        {{hash=df10b03faeeaa66acf7b211f8a114eea}{%
+           family={Palarea-Albaladejo},
+           familyi={P\bibinithyphendelim A\bibinitperiod},
+           given={Javier},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5e75cadbba9516f9e33b5273150c27a2}{%
+           family={Martín-Fernández},
+           familyi={M\bibinithyphendelim F\bibinitperiod},
+           given={Josep\bibnamedelima Antoni},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{7b493621537ac3c69d3c4b8eb1d07af4}
+      \strng{fullhash}{7b493621537ac3c69d3c4b8eb1d07af4}
+      \strng{bibnamehash}{7b493621537ac3c69d3c4b8eb1d07af4}
+      \strng{authorbibnamehash}{7b493621537ac3c69d3c4b8eb1d07af4}
+      \strng{authornamehash}{7b493621537ac3c69d3c4b8eb1d07af4}
+      \strng{authorfullhash}{7b493621537ac3c69d3c4b8eb1d07af4}
+      \field{labelalpha}{PM15}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{zCompositions is an R package for the imputation of left-censored data under a compositional approach. It is pertinent when the analyst assumes that the relevant information is contained on the relative variation structure of the data. For instance, in cases where the experimental data are simultaneously measured in amounts related to a same total weight or volume. The approach is used in fields like geochemistry of waters or sedimentary rocks, environmental studies related to air pollution, physicochemical analysis of glass fragments in forensic science, and among many others. In these fields, rounded zeros and nondetects are usually regarded as left-censored data that hamper any subsequent data analysis. The implemented methods consider aspects of relevance for a compositional approach such as scale invariance, subcompositional coherence or preserving the multivariate relative structure of the data. Based on solid statistical frameworks, it comprises the ability to deal with single and varying censoring thresholds, consistent treatment of closed and non-closed data, exploratory tools, multiple imputation, MCMC, robust and non-parametric alternatives, and recent proposals for count data. Key methodological aspects, new contributions, computational implementation and the practical application of the approach are discussed.}
+      \field{issn}{0169-7439}
+      \field{journaltitle}{Chemometrics and Intelligent Laboratory Systems}
+      \field{title}{zCompositions — R package for multivariate imputation of left-censored data under a compositional approach}
+      \field{volume}{143}
+      \field{year}{2015}
+      \field{pages}{85\bibrangedash 96}
+      \range{pages}{12}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.chemolab.2015.02.019
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0169743915000490
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0169743915000490
+      \endverb
+      \keyw{Censored data,Nondetects,Zeros,Compositional data,Imputation,Log-ratio analysis}
     \endentry
     \entry{CoDAR2:2008}{book}{}
       \name{author}{1}{}{%
@@ -1171,7 +1334,7 @@
            giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
-        {[American Statistical Association, Taylor & Francis, Ltd.]}%
+        {[American Statistical Association, Taylor \& Francis, Ltd.]}%
       }
       \strng{namehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{fullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}

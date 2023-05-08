@@ -13,10 +13,10 @@ One way to see our data is as a compositional time series. The exact definition 
 The basis of this section is given by \cite{Kynclova:2015}, \cite{Egozcue:2003} and \cite{Filzmoser:2020}.
 
 CoDA, which is short for "`Compositional Data Analysis"' works with compositional data. The key to compositional data is the fact that the absolute value of its parts is less important than the relative relation of the parts to each other. To define compositional data, we first need to define the $(D-1)$-dimensional simplex,
-	\begin{equation*}
+	\begin{equation}
 	\mathbbm{S}^D := \left\{(x_1,\ldots, x_D)^T: x_i > 0, i =1,\ldots,D; \sum_{i=1}^{D}x_i=\kappa  \right\}
 	\label{eq:Simplex Definition}
-	\end{equation*}
+	\end{equation}
 	
 where $\kappa$ is a positive constant \cite{Kynclova:2015}. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A D-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $a \in \mathbb{R}$ they are defined respectively as \cite{Kynclova:2015}
 
@@ -190,4 +190,61 @@ Under these assumptions it can be shown that the OLS estimator is consistent and
 \label{sec: Tspaces}
 
 Since in our context absolute values should be predicted eventually, we model this information in form of the sum of the original parts. Let $\textbf{x}$ be a D-dimensional compositional vector and define an extended vector space $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^D$.  An element of $\Tsp$ now has the form $\tilde{\bm{x}} = \left[t(\bm{x}),\ClOp\left({\bm{x}}\right)\right] = \left[t_x,\tilde{x}_1,\tilde{x}_2,\ldots,\tilde{x}_D \right]$ where $t(\bm{x})= \sum_{i=1}^D x_i$. This allows us to model the relative structure of the data as well as the total sum of the compositional parts. Often times the logarithm of the sum is taken. In the subsequent analysis, the compositional part $\bm{x}$ is then transformed using one of the possible transformations and then the statistical analysis is performed \cite{Kynclova:2015}. In our case, we have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=[t(\bm{Y}_t),\ClOp(\bm{Y}_t)]$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. 
+
+
+\subsection{Zero-Handling}
+\label{sec: Zero-Handling}
+
+As we can see in the definition of the simplex \ref{eq:Simplex Definition}, a compositional vector can only consist of positive parts. Since we have a considerate amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data. First, however, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them in order to perform compositional data analysis. In the following we summarise the methods presented in \cite{Lubbe:2021,Josep:2003}. 
+
+
+Let $\bm{x} \in \mathbbm{S}^D$ be a compositional vector and assume it has $m$ zeros. Further take $\bm{r} \in \mathbbm{S}^D$ as its zero free replacement. If we have rounded zeros, a simple method proposed in \cite{Josep:2003} is to replace zero values with $DL \cdot 0.65$ where DL is the detection limit and 0.65 was found to be optimal to minimise the distortion in the covariance structure \cite{Lubbe:2021}. This means $\bm{r}$ has the form
+
+\begin{equation}
+r_j = 
+\begin{cases}
+0.65\cdot DL, & \text{if} x_j=0, \\
+x_j, & \text{if} x_j>0, 
+\end{cases}
+\label{eq:DL065}
+\end{equation}
+
+Additionally \cite{Josep:2003} mentions two other methods. First, the Additive Replacement Strategy, which was first introduced by Aitchison in \cite{Aitchison:1986}, and is given by
+
+\begin{equation}
+r_j = 
+\begin{cases}
+\frac{\delta(m+1)(D-m)}{D^2}, & \text{if } x_j=0, \\
+x_j - \frac{\delta(m+1)m}{D^2}, & \text{if } x_j>0.
+\end{cases}
+\label{eq:additive replacement strategy}
+\end{equation}
+
+Second, the Simple Replacement Strategy, which formalises the procedure of replacing the zeros in $\bm{x}$ with a small positive value $\delta$, obtaining a strictly positive vector $\bm{w} \in \mathbbm{R}_+$ and applying the closure operation $\bm{r}=\ClOp(\bm{w})$
+
+\begin{equation}
+r_j = 
+\begin{cases}
+\frac{\kappa}{\kappa + \sum_{i| x_i=0}\delta_i } \delta_j, & \text{if } x_j=0, \\
+\frac{\kappa}{\kappa + \sum_{i| x_i=0}\delta_i } x_j, & \text{if } x_j>0.
+\end{cases}
+\label{eq:simple replacement strategy}
+\end{equation}
+
+The main result of \cite{Josep:2003} is the multiplicative replacement strategy. The proposed replacement is 
+
+\begin{equation}
+r_j = 
+\begin{cases}
+\delta_j, & \text{if} x_j=0, \\
+\left( 1- \frac{\sum_{i | x_i=0}\delta_i}{\kappa} \right)x_j, & \text{if } x_j>0, 
+\end{cases}
+\label{eq:multiplicative replacement strategy}
+\end{equation}
+
+where $\delta_j$ is the imputed value. The advantages of this method in comparison with the Additive and Simple Replacement Strategy are further explained in \cite{Josep:2003}.
+
+Another method proposed in \cite{Lubbe:2021} is to replace rounded zeros with values drawn from a continuous uniform distribution $U(0.1\cdot DL,DL)$. Setting the lower limit to $0.1\cdot DL$ makes sure that the values are not getting too close to zero and not using a constant prevents underestimation of the variability. They further present the R-package \textit{zCompositions} by \cite{Palarea-Albaladejo:2015}. This package includes some more advanced methods which are based on Markov Chain Monte Carlo (MCMC), the EM algorithm or multiple imputation to perform imputation. Some methods include Model-based multiplicative log-normal imputation, which fits a log-normal distribution for the data, a Data Augmentation (DA) algorithm, which is based on MCMC, and Multiplicative Kaplan–Meier smoothing spline replacement \cite{Palarea-Albaladejo:2015}.
+
+
 
