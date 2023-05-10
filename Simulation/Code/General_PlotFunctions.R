@@ -73,10 +73,10 @@ Plot.TimeseriesIngarch <- function(Data,IngarchResult,Id,Save=T,SubCategory=F,Ma
     PlotDataIngarch <- IngarchResult$result %>% filter(id==Id_RunVariable)
     
     #Creating the plot
-    MyColour <- setNames(c("blue"),
-                         c("ingarch"))
-    MyNames <- setNames(c("INGARCH"),
-                        c("ingarch"))
+    MyColour <- setNames(c("blue","orange"),
+                         c("ingarch","inar_classic"))
+    MyNames <- setNames(c("INGARCH","INAR Classic"),
+                        c("ingarch","inar_classic"))
     
     Plot <- ggplot(PlotDataIngarch,aes(x=date,y=valuePredict,col=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataIngarch$category)),scales = "free")+
@@ -98,12 +98,12 @@ Plot.TimeseriesIngarch <- function(Data,IngarchResult,Id,Save=T,SubCategory=F,Ma
   }
 }
 
-#This function plots the Time series for the ZIM Model 
-Plot.TimeseriesZim <- function(Data,ZimResult,Id,Save=T,SubCategory=F,MainCategory=1,TextSize=50){
+#This function plots the Time series for the given model
+Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4)){
   
   for(Id_RunVariable in Id) {
     
-    Data_Raw <- Data %>% filter(fridge_id == Id_RunVariable & main_category_id %in% c(3,4))
+    Data_Raw <- Data %>% filter(fridge_id == Id_RunVariable & main_category_id %in% MainCategory)
     
     #Should a Subcategory be plotted
     if(SubCategory){
@@ -119,27 +119,28 @@ Plot.TimeseriesZim <- function(Data,ZimResult,Id,Save=T,SubCategory=F,MainCatego
     #Preparing data for plotting
     PlotData <- Data_Raw %>%
       dplyr::select(fridge_id,week_date, main_category_id, sub_category_id, sold) %>%
-      Data.Preparation(Category = c(3,4),TakeSubCategory = SubCategory) %>% 
+      Data.Preparation(Category = MainCategory,TakeSubCategory = SubCategory) %>% 
       pivot_longer(cols= all_of(Category),names_to="category",values_to="valueTrue")
     
     names(PlotData)[1] <- c("date")
     
-    PlotDataZim <- ZimResult$result %>% filter(id==Id_RunVariable)
+    PlotData <- Result %>% filter(id==Id_RunVariable)
     
     #Creating the plot
-    MyColour <- setNames(c("green"),
-                         c("zim"))
-    MyNames <- setNames(c("ZIM"),
-                        c("zim"))
+    #Creating the plot
+    MyColour <- setNames(c("red", "blue","orange","green","pink"),
+                         c("coda","ingarch","inar_classic","zim","inar_bayes"))
+    MyNames <- setNames(c("CoDA","INGARCH","INAR classic","ZIM","INAR bayes"),
+                        c("coda","ingarch","inar_classic","zim","inar_bayes"))
     
-    Plot <- ggplot(PlotDataZim,aes(x=date,y=valuePredict,col=model))+
+    Plot <- ggplot(PlotData,aes(x=date,y=valuePredict,col=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataZim$category)),scales = "free")+
       geom_point()+
       geom_line()+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      theme(text = element_text(size =TextSize))+
-      ggtitle(paste("Timeseries with Zim Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
+      theme(text = element_text(size =50))+
+      ggtitle(paste("Timeseries with Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
       ylab("Units Sold")+
       xlab("Time")+
       scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
@@ -147,7 +148,7 @@ Plot.TimeseriesZim <- function(Data,ZimResult,Id,Save=T,SubCategory=F,MainCatego
     
     #Saving of the plot
     if(Save){
-      ggsave(filename = here("Plots",paste("Zim_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
+      ggsave(filename = here("Plots",paste("Predictions_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
     }
   }
 }
@@ -233,12 +234,12 @@ Plot.TimeseriesIngarchZim <- function(Data,IngarchResult,ZimResult,Id,Save=T,Sub
       dplyr::select(all_of(Names_Joined))
     
     #Creating the plot
-    MyColour <- setNames(c("blue","green"),
-                         c("ingarch","zim"))
-    MyNames <- setNames(c("INGARCH","ZIM"),
-                        c("ingarch","zim"))
-    MyShape <- setNames(c(1,4),
-                        c("zim","ingarch"))
+    MyColour <- setNames(c("blue","green","orange"),
+                         c("ingarch","zim","inar_classic"))
+    MyNames <- setNames(c("INGARCH","ZIM","INAR classic"),
+                        c("ingarch","zim","inar_classic"))
+    MyShape <- setNames(c(1,4,5),
+                        c("zim","ingarch","inar_classic"))
     
     PlotDataBoth <- rbind(PlotDataZim,PlotDataIngarch)
     
@@ -294,10 +295,10 @@ Plot.TimeseriesCodaIngarch <- function(Data,CodaResult,IngarchResult,Id,Save=T,T
     PlotDataBoth <- rbind(PlotDataCoda,PlotDataIngarch)
     
     #Creating the plot
-    MyColour <- setNames(c("red", "blue"),
-                        c("coda","ingarch"))
-    MyNames <- setNames(c("CoDA","INGARCH"),
-                        c("coda","ingarch"))
+    MyColour <- setNames(c("red", "blue","orange"),
+                        c("coda","ingarch","inar_classic"))
+    MyNames <- setNames(c("CoDA","INGARCH","INAR classic"),
+                        c("coda","ingarch","inar_classic"))
     
     Plot <- ggplot(PlotDataBoth,aes(x=date,y=valuePredict,col=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataCoda$category)),scales = "free")+

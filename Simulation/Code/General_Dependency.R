@@ -15,7 +15,9 @@
 #install.packages("VGAM")
 #install.packages("here")
 #install.packages("pscl")
-#install.packags("miceadds)
+#install.packages("miceadds)
+#install.packages("ZINARp")
+#install.packages("ZINAR1")
 
 #Loading Packages
 
@@ -30,3 +32,5 @@ library(VGAM) #VGAMS
 library(here) #for paths of plots
 library(pscl) #alternative for zim models
 library(miceadds) #for loading RData 
+library(ZINARp) #For fitting ZINAR(p) or INAR(p) models
+library(ZINAR1) #For fitting ZINAR(1) or INAR(1) models

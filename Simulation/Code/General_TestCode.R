@@ -123,6 +123,9 @@ test_data_prep <- weekly_category_data %>%
 
 names(test_data_prep) <- c("week_date","y1","y2","y3","y4")
 
+model_inar <- estimate_zinarp(test_data_prep$y1,p=1)
+model_inar2 <- EST_ZINAR(test_data_prep$y1,model="inar",innovation = "Po")
+
 
 raw_length<-dim(test_data_prep)[1]
 
@@ -131,20 +134,11 @@ data_prep<-cbind(test_data_prep[-1,-1],test_data_prep[-raw_length,-1])
 names(data_prep)<-c("y1","y2","y3","y4",
                     "x1","x2","x3","x4")
 
-fit_length<-round(dim(test_data_prep)[1]*1/2)
+model_zeroinfl <- zeroinfl(cbind(y3,y4)~x3+x4,data=data_prep,dist = "poisson")
 
-data_fit<-data_prep[1:fit_length,]
+yhat <- predict(model_zeroinfl,newdata = data.frame(week_date="2022-07-18",data.frame(x3=0,x4=0)))
 
-data_fit<-dplyr::select(data_fit,y1,y2,y3,y4,x1,x2,x3,x4)
 
-data_fit <- data.frame(y4=c(1,rep(0,10)),x4=c(0,0,rep(0,9)))
 
-model_zim<-zim(y1~x1+x2+x3+x4, data=data_fit,control = zim.control(type="ginv"))
-
-model_zeroinfl <- zeroinfl(y4 ~bshift(y4),data=test_data_prep,dist = "poisson")
-
-yhat <- predict(model_zeroinfl,newdata = data.frame(week_date="2022-07-18",y4=0))
-
-test <- Zim.Analysis(Data_Raw = weekly_category_data,Id=10,Multicore = F,Category_Main = "4")
-
-z <- lapply(1,function(x)return(NA))
+y <- c(1:15)
+ybshift <- bshift(y)

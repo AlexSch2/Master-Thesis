@@ -67,26 +67,27 @@ if(save_results){
 }
 
 
-ingarch_result <-
-  Ingarch.Analysis(
+zim_result <-
+  CountModel.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids_all,
+    Id = 4,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c("3", "4"),
+    Category_Main = c( "4"),
     WindowMethod = window_method,
     ZeroHandling = "none",
     External = F,
-    Multicore = T,
+    Multicore = F,
     NCores = 10,
-    PastOb = 1,
-    PastMean = 1,
+    PastOb = NA,
+    PastMean = NA,
     HistoryLength = HistoryLength,
-    TakeSubCategory = F
+    TakeSubCategory = F,
+    ModelType = "zim"
   )
   
   if(T){
-  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
+  save(inarbayes_result,file=here("Code/results",paste("inarbayes_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
 
   }
 
