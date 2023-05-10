@@ -536,6 +536,41 @@
       \endverb
       \keyw{Autocorrelation,Covariates,Ergodicity,Generalized linear models,Perturbation,Prediction,Stationarity,Volatility}
     \endentry
+    \entry{Freeland:2004}{article}{}
+      \name{author}{2}{}{%
+        {{hash=403ea067b42216accc63388571c92699}{%
+           family={Freeland},
+           familyi={F\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3ea1d27844a53abf188abd4d33bf8c54}{%
+           family={McCabe},
+           familyi={M\bibinitperiod},
+           given={Brendan},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{5e7ffbeb08f96b50e0fb3d506b08f92f}
+      \strng{fullhash}{5e7ffbeb08f96b50e0fb3d506b08f92f}
+      \strng{bibnamehash}{5e7ffbeb08f96b50e0fb3d506b08f92f}
+      \strng{authorbibnamehash}{5e7ffbeb08f96b50e0fb3d506b08f92f}
+      \strng{authornamehash}{5e7ffbeb08f96b50e0fb3d506b08f92f}
+      \strng{authorfullhash}{5e7ffbeb08f96b50e0fb3d506b08f92f}
+      \field{labelalpha}{FM04}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Forecasting}
+      \field{month}{02}
+      \field{title}{Forecasting discrete valued low count time series}
+      \field{volume}{20}
+      \field{year}{2004}
+      \field{pages}{427\bibrangedash 434}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/S0169-2070(03)00014-1
+      \endverb
+    \endentry
     \entry{Harvey:1989}{article}{}
       \name{author}{2}{}{%
         {{hash=8b5397bf9e5e04cda1789b21aeef1dba}{%
@@ -1140,6 +1175,51 @@
       \verb https://CRAN.R-project.org/package=miceadds
       \endverb
     \endentry
+    \entry{Silva:2005}{article}{}
+      \name{author}{4}{}{%
+        {{hash=78cd8673f03c17fd72896c74d666a079}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Isabel},
+           giveni={I\bibinitperiod}}}%
+        {{hash=e6376a6ae7d74c74a868da0a5b4004a1}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=029ceda78d975429c284d1416f193d08}{%
+           family={Pereira},
+           familyi={P\bibinitperiod},
+           given={Isabel},
+           giveni={I\bibinitperiod}}}%
+        {{hash=0b33dfdea7125337cecb9996df3719f0}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Nélia},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{c03ba8622bc191d535f793dadb5af592}
+      \strng{fullhash}{bbf1b01a9474792374b8f4c29fb6c43a}
+      \strng{bibnamehash}{c03ba8622bc191d535f793dadb5af592}
+      \strng{authorbibnamehash}{c03ba8622bc191d535f793dadb5af592}
+      \strng{authornamehash}{c03ba8622bc191d535f793dadb5af592}
+      \strng{authorfullhash}{bbf1b01a9474792374b8f4c29fb6c43a}
+      \field{labelalpha}{Sil+05}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Methodology And Computing In Applied Probability}
+      \field{month}{12}
+      \field{title}{Replicated INAR(1) processes}
+      \field{volume}{7}
+      \field{year}{2005}
+      \field{pages}{517\bibrangedash 542}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1007/s11009-005-5006-x
+      \endverb
+    \endentry
     \entry{RobComp:2011}{book}{}
       \name{author}{3}{}{%
         {{hash=faaed83ab21bd48aa70346a9a1a0fa99}{%
@@ -1649,6 +1729,7 @@
       \keyw{EM algorithm,Integer-valued GARCH model,Negative binomial,Poisson,Time series of counts,Zero inflation}
     \endentry
   \enddatalist
+  \missing{Bre:1993}
 \endrefsection
 \endinput
 

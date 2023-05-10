@@ -1,0 +1,19 @@
+TY  - JOUR
+AU  - Silva, Isabel
+AU  - Silva, M. Eduarda
+AU  - Pereira, Isabel
+AU  - Silva, Nélia
+PY  - 2005
+DA  - 2005/12/01
+TI  - Replicated INAR(1) Processes
+JO  - Methodology and Computing in Applied Probability
+SP  - 517
+EP  - 542
+VL  - 7
+IS  - 4
+AB  - Replicated time series are a particular type of repeated measures, which consist of time-sequences of measurements taken from several subjects (experimental units). We consider independent replications of count time series that are modelled by first-order integer-valued autoregressive processes, INAR(1). In this work, we propose several estimation methods using the classical and the Bayesian approaches and both in time and frequency domains. Furthermore, we study the asymptotic properties of the estimators. The methods are illustrated and their performance is compared in a simulation study. Finally, the methods are applied to a set of observations concerning sunspot data.
+SN  - 1573-7713
+UR  - https://doi.org/10.1007/s11009-005-5006-x
+DO  - 10.1007/s11009-005-5006-x
+ID  - Silva2005
+ER  - 

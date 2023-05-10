@@ -94,3 +94,70 @@ To extend this model to the multivariate case, we replace the functions $f_j$ wi
 \end{equation}
 
 where $\mathbb{E}[\bm{Y}_t] = (\mathbb{E}[Y_{1t}],\ldots,\mathbb{E}[Y_{Kt}])^T$ \cite{Yee:1996}. Further theoretical background about VGAMs are given in \cite{Yee:1996,Yee:2015,Wood:2004}.
+
+
+\subsection{INAR(p) Models}
+\label{sec: Inar Models}
+
+Integer valued autoregressive models of order p (INAR(p)) are another option to handle univariate count data. To define them, we first need to define the generalised thinning operator. Take an integer-valued, non-negative random variable $X$ and $\alpha \in [0,1]$. Further, take a sequence of i.i.d. integer-valued, non-negative random variables $\left\{Z_i \right\}_{i=1}^X$ with finite mean $\alpha$ and variance $\sigma^2<\infty $ which are independent of $X$. Then the generalised thinning operate $\circ$ is defined as
+
+\begin{equation}
+\alpha \circ X = \sum_{i=1}^X Z_i .
+\label{eq:Thinning operator}
+\end{equation}
+
+The sequence  $\left\{Z_i \right\}_{i=1}^X$ is called the counting series of $X$ \cite{Silva:2005}. 
+
+We can then define the INAR(p) model for a positive integer-valued time series $\left\{X_t \right\}$ as
+
+\begin{equation}
+X_t = \alpha_1 \circ X_{t-1} + \alpha_2 \circ X_{t-2} + \ldots + \alpha_p X_{t-p} +\epsilon_t 
+\label{eq:Inar(p) model}
+\end{equation}
+
+where
+
+\begin{enumerate}
+	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables with finite first, second and third moment. 
+	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and $\left\{Z_j \right\}$ for $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$ as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$
+	\item $\alpha_i \in [0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$
+	\item $\sum_{j=1}^p \alpha_j < 1$ \cite{Silva:2005}. 
+\end{enumerate}
+
+
+The last condition ensures the existence and stationary of the process. 
+
+Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then the INVAR(p) model is given by
+
+\begin{equation}
+Y_{kt} = \alpha_1 \circ Y_{k,t-1} + \alpha_2 \circ Y_{k,t-2} + \ldots + \alpha_p Y_{k,t-p} +\epsilon_{kt}.
+\label{eq:Inar(p) model ts}
+\end{equation}
+
+For simplicity, we will consider INAR(1) models, although the optimal choice of the lag is something that could be further investigated. 
+
+\subsubsection{Distributional assumptions}
+\label{sec: Inar Distributional assumptions}
+
+While we will mainly assume that the innovations $\left\{\epsilon_t\right\}$ follow a Poisson distribution, they can also follow other distributions. One interesting option is, that one can choose a zero-inflated distribution as mentioned in \ref{sec: Zim}. This could make the model adequate for our data. 
+
+
+\subsubsection{Forecasting}
+\label{sec: Inar Forecasting}
+
+The authors in \cite{Silva:2005} present two types of forecasting methods for INAR(1) models. The first approach is a classical method for performing predictions in a time series context and makes use of the conditional expectation. It was obtained by \cite{Bre:1993} and \cite{Freeland:2004}. Assuming that $\left\{\epsilon_t\right\} \sim_{i.i.d} Poisson(\lambda)$, the $h$-step ahead predictor, for $h\in \mathbbm{N}$, based on $n$ past observations $\bm{Y}_k=(Y_{k1},\ldots,Y_{kn})$ is given by
+
+\begin{equation}
+\hat{Y}_{k,n+h} | \bm{Y}_k = \mathbb{E}[Y_{k,n+h} | \bm{Y}_k] = \alpha^h \left[Y_{kn}- \frac{\lambda}{1-\alpha} \right] + \frac{\lambda}{1-\alpha}.
+\label{eq:Forecasting Classic}
+\end{equation}
+
+
+However, this forecast hardly ever produces integer values. Remedies, like minimising the absolute expected error, have been suggested by \cite{Freeland:2004} but the authors in \cite{Silva:2005} propose a bayesian approach. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha,\lambda)$ are random \cite{Silva:2005}. Since the complexity posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \cite{Silva:2005}. The estimator for the conditional expectation is then given by
+
+\begin{equation}
+\hat{Y}_{k,n+h} | \bm{Y}_k = Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_i^m\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_i^h}{1-\alpha_i}\lambda_i\right)
+\label{eq:Forecasting Bayesian}
+\end{equation}
+
+where $m$ is the sampling size and the pairs $(\alpha_i,\lambda_i)$ for $i=1,\ldots,m$ are the sampled parameters. 

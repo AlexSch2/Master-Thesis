@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=82
-Cursor=2959
+TopLine=81
+Cursor=3445
 
 [Frame1]
 Flags=0
@@ -71,7 +71,7 @@ Class=LaTeXView
 Document=Einleitung.tex
 
 [Frame3_View0,0]
-TopLine=38
+TopLine=36
 Cursor=6474
 
 [Frame4]
@@ -125,7 +125,7 @@ Class=LaTeXView
 Document=Results.tex
 
 [Frame6_View0,0]
-TopLine=247
+TopLine=253
 Cursor=11236
 
 [Frame7]
@@ -143,7 +143,7 @@ Class=LaTeXView
 Document=Methode_Ingarch.tex
 
 [Frame7_View0,0]
-TopLine=27
+TopLine=33
 Cursor=3901
 
 [Frame8]
@@ -161,8 +161,8 @@ Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame8_View0,0]
-TopLine=79
-Cursor=12906
+TopLine=231
+Cursor=17787
 
 [Frame9]
 Flags=0
@@ -179,8 +179,8 @@ Class=LaTeXView
 Document=Other_methods.tex
 
 [Frame9_View0,0]
-TopLine=62
-Cursor=5338
+TopLine=132
+Cursor=10253
 
 [Frame10]
 Flags=0
@@ -197,7 +197,7 @@ Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame10_View0,0]
-TopLine=15
+TopLine=16
 Cursor=985
 
 [Frame11]
@@ -233,8 +233,8 @@ Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame12_View0,0]
-TopLine=66
-Cursor=7812
+TopLine=6
+Cursor=3648
 
 [Frame13]
 Flags=0
@@ -269,8 +269,8 @@ Class=BibTeXView
 Document=Literatur.bib
 
 [Frame14_View0,0]
-TopLine=218
-Cursor=13512
+TopLine=570
+Cursor=32736
 
 [Frame15]
 Flags=0
@@ -292,7 +292,7 @@ Cursor=38587
 
 [SessionInfo]
 FrameCount=16
-ActiveFrame=9
+ActiveFrame=0
 
 [Bookmarks]
 Results.tex=81 
