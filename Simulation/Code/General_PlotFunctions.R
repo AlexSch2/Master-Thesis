@@ -43,63 +43,8 @@ Plot.Timeseries <- function(Data,Id,Save=T,SubCategory=F,MainCategory=1,TextSize
   }
 }
 
-
-#This plots the timeseries with the predictions made by the Ingarch model
-Plot.TimeseriesIngarch <- function(Data,IngarchResult,Id,Save=T,SubCategory=F,MainCategory=1,TextSize=50){
-  
-  for(Id_RunVariable in Id) {
-    
-    Data_Raw <- Data %>% filter(fridge_id == Id_RunVariable)
-    
-    #Should a Subcategory be plotted
-    if(SubCategory){
-      Data_Raw <- Data_Raw %>% filter(main_category_id ==as.character(MainCategory))
-      Category <- as.character(unique(Data_Raw$sub_category_id))
-      Subtitle_Text <- paste("and Main Category ", MainCategory)
-    }
-    else{
-      Category <- as.character(unique(Data_Raw$main_category_id))
-      Subtitle_Text <- ""
-    }
-    
-    #Preparing data for plotting
-    PlotData <- Data_Raw %>%
-      dplyr::select(fridge_id,week_date, main_category_id, sub_category_id, sold) %>%
-      Data.Preparation(Category = c(1,2,3,4),TakeSubCategory = SubCategory) %>% 
-      pivot_longer(cols= all_of(Category),names_to="category",values_to="valueTrue")
-    
-    names(PlotData)[1] <- c("date")
-    
-    PlotDataIngarch <- IngarchResult$result %>% filter(id==Id_RunVariable)
-    
-    #Creating the plot
-    MyColour <- setNames(c("blue","orange"),
-                         c("ingarch","inar_classic"))
-    MyNames <- setNames(c("INGARCH","INAR Classic"),
-                        c("ingarch","inar_classic"))
-    
-    Plot <- ggplot(PlotDataIngarch,aes(x=date,y=valuePredict,col=model))+
-      facet_wrap(vars(category),nrow=length(unique(PlotDataIngarch$category)),scales = "free")+
-      geom_point()+
-      geom_line()+
-      geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      theme(text = element_text(size =TextSize))+
-      ggtitle(paste("Timeseries with INGARCH Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Units Sold")+
-      xlab("Time")+
-      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
-    
-    
-    #Saving of the plot
-    if(Save){
-      ggsave(filename = here("Plots",paste("Ingarch_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
-    }
-  }
-}
-
 #This function plots the Time series for the given model
-Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4)){
+Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4),Title=""){
   
   for(Id_RunVariable in Id) {
     
@@ -124,23 +69,22 @@ Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCateg
     
     names(PlotData)[1] <- c("date")
     
-    PlotData <- Result %>% filter(id==Id_RunVariable)
+    PlotDataResult <- Result %>% filter(id==Id_RunVariable,category %in% MainCategory)
     
     #Creating the plot
-    #Creating the plot
-    MyColour <- setNames(c("red", "blue","orange","green","pink"),
+    MyColour <- setNames(c("red", "blue","orange","green","deeppink"),
                          c("coda","ingarch","inar_classic","zim","inar_bayes"))
     MyNames <- setNames(c("CoDA","INGARCH","INAR classic","ZIM","INAR bayes"),
                         c("coda","ingarch","inar_classic","zim","inar_bayes"))
     
-    Plot <- ggplot(PlotData,aes(x=date,y=valuePredict,col=model))+
-      facet_wrap(vars(category),nrow=length(unique(PlotDataZim$category)),scales = "free")+
+    Plot <- ggplot(PlotDataResult,aes(x=date,y=valuePredict,col=model))+
+      facet_wrap(vars(category),nrow=length(unique(PlotData$category)),scales = "free")+
       geom_point()+
       geom_line()+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       theme(text = element_text(size =50))+
-      ggtitle(paste("Timeseries with Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
+      ggtitle(paste("Timeseries with",Title, "Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
       ylab("Units Sold")+
       xlab("Time")+
       scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
@@ -148,178 +92,10 @@ Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCateg
     
     #Saving of the plot
     if(Save){
-      ggsave(filename = here("Plots",paste("Predictions_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
+      ggsave(filename = here("Plots",paste(Title,"Predictions_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
     }
   }
 }
-
-#This plots the timeseries with the predictions made by the Coda model
-Plot.TimeseriesCoda <- function(Data,CodaResult,Id,Save=T,TextSize=50){
-  
-  for(Id_RunVariable in Id) {
-    
-    Data_Raw <- Data %>% filter(fridge_id == Id_RunVariable)
-    
-    Category <- as.character(unique(Data_Raw$main_category_id))
-    Subtitle_Text <- ""
-    
-    #Preparing data for plotting
-    PlotData <- Data_Raw %>%
-      dplyr::select(fridge_id,week_date, main_category_id, sub_category_id, sold) %>%
-      Data.Preparation(Category = Category,TakeSubCategory = F) %>% 
-      pivot_longer(cols= all_of(Category),names_to="category",values_to="valueTrue")
-    
-    names(PlotData)[1] <- c("date")
-    
-    PlotDataCoda <- CodaResult$result %>% filter(id==Id_RunVariable & category %in% c(1,2,3,4))
-    
-    #Creating the plot
-    MyColour <- setNames(c("red" ),
-                         c("coda"))
-    MyNames <- setNames(c("CoDA"),
-                        c("coda"))
-    
-    Plot <- ggplot(PlotDataCoda,aes(x=date,y=valuePredict,col=model))+
-      facet_wrap(vars(category),nrow=length(unique(PlotDataCoda$category)),scales = "free")+
-      geom_point()+
-      geom_line()+
-      geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      theme(text = element_text(size =TextSize))+
-      ggtitle(paste("Timeseries with CoDA Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Units Sold")+
-      xlab("Time")+
-      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
-    
-    
-    #Saving of the plot
-    if(Save){
-      ggsave(filename = here("Plots",paste("Coda_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
-    }
-  }
-}
-
-#This function compares the ZIM Model with the INGARCH Model on chosen IDs
-Plot.TimeseriesIngarchZim <- function(Data,IngarchResult,ZimResult,Id,Save=T,SubCategory=F,MainCategory=1,TextSize=50){
-  
-  for(Id_RunVariable in Id) {
-    Data_Raw <- Data %>% filter(fridge_id == Id_RunVariable & main_category_id %in% c(1,2,3,4))
-    
-    #Should a Subcategory be plotted
-    if(SubCategory){
-      Data_Raw <- Data_Raw %>% filter(main_category_id ==as.character(MainCategory))
-      Category <- as.character(unique(Data_Raw$sub_category_id))
-      Subtitle_Text <- paste("and Main Category ", MainCategory)
-    }
-    else{
-      Category <- as.character(unique(Data_Raw$main_category_id))
-      Subtitle_Text <- ""
-    }
-    
-    #Preparing data for plotting
-    PlotData <- Data_Raw %>%
-      dplyr::select(fridge_id,week_date, main_category_id, sub_category_id, sold) %>%
-      Data.Preparation(Category = c(1,2,3,4),TakeSubCategory = SubCategory) %>% 
-      pivot_longer(cols= all_of(Category),names_to="category",values_to="valueTrue") %>%filter(category %in% c(3,4))
-    
-    names(PlotData)[1] <- c("date")
-    
-    PlotDataZim_Columns <- names(ZimResult$result)
-    PlotDataIngarch_Columns <- names(IngarchResult$result)
-    Names_Joined <- intersect(PlotDataIngarch_Columns,PlotDataZim_Columns)
-    
-    PlotDataZim <- ZimResult$result %>% filter(id==Id_RunVariable)%>% 
-      dplyr::select(all_of(Names_Joined))
-    PlotDataIngarch <- IngarchResult$result %>% filter(id==Id_RunVariable & category %in% c(3,4))%>% 
-      dplyr::select(all_of(Names_Joined))
-    
-    #Creating the plot
-    MyColour <- setNames(c("blue","green","orange"),
-                         c("ingarch","zim","inar_classic"))
-    MyNames <- setNames(c("INGARCH","ZIM","INAR classic"),
-                        c("ingarch","zim","inar_classic"))
-    MyShape <- setNames(c(1,4,5),
-                        c("zim","ingarch","inar_classic"))
-    
-    PlotDataBoth <- rbind(PlotDataZim,PlotDataIngarch)
-    
-    Plot <- ggplot(PlotDataBoth,aes(x=date,y=valuePredict,col=model,shape=model))+
-      facet_wrap(vars(category),nrow=2,scales = "free")+
-      geom_point(size=5)+
-      geom_line()+
-      geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      theme(text = element_text(size =TextSize))+
-      ggtitle(paste("Timeseries with Zim Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Units Sold")+
-      xlab("Time")+
-      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))+
-      scale_shape_manual("Model", values = c(MyShape))
-    
-    
-    #Saving of the plot
-    if(Save){
-      ggsave(filename = here("Plots",paste("ZimIngarch_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
-    }
-  }
-}
-
-#This function plots the timeseries with both models 
-Plot.TimeseriesCodaIngarch <- function(Data,CodaResult,IngarchResult,Id,Save=T,TextSize=50){
-  
-  for(Id_RunVariable in Id) {
-    
-    Data_Raw <- Data%>% filter(fridge_id == Id_RunVariable)
-    
-    Category <- as.character(unique(Data_Raw$main_category_id))
-    Subtitle_Text <- ""
-    
-    #Preparing data for plotting
-    PlotData <- Data_Raw %>%
-      dplyr::select(fridge_id,week_date, main_category_id, sub_category_id, sold) %>%
-      Data.Preparation(Category = Category,TakeSubCategory = F) %>% 
-      pivot_longer(cols= all_of(Category),names_to="category",values_to="valueTrue")
-    
-    names(PlotData)[1] <- c("date")
-    
-    PlotDataCoda_Columns <- names(CodaResult$result)
-    PlotDataIngarch_Columns <- names(IngarchResult$result)
-    Names_Joined <- intersect(PlotDataIngarch_Columns,PlotDataCoda_Columns)
-    
-    PlotDataCoda <- CodaResult$result %>% filter(id == Id_RunVariable &  category %in% c(1, 2, 3, 4)) %>%
-                                          dplyr::select(all_of(Names_Joined))
-    
-    PlotDataIngarch <- IngarchResult$result %>% filter(id==Id_RunVariable & category %in% c(1, 2, 3, 4))%>% 
-                                                dplyr::select(all_of(Names_Joined))
-    
-    PlotDataBoth <- rbind(PlotDataCoda,PlotDataIngarch)
-    
-    #Creating the plot
-    MyColour <- setNames(c("red", "blue","orange"),
-                        c("coda","ingarch","inar_classic"))
-    MyNames <- setNames(c("CoDA","INGARCH","INAR classic"),
-                        c("coda","ingarch","inar_classic"))
-    
-    Plot <- ggplot(PlotDataBoth,aes(x=date,y=valuePredict,col=model))+
-      facet_wrap(vars(category),nrow=length(unique(PlotDataCoda$category)),scales = "free")+
-      geom_point()+
-      geom_line()+
-      geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
-      theme(text = element_text(size =TextSize))+
-      ggtitle(paste("Timeseries with both models",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
-      ylab("Units Sold")+
-      xlab("Time")+
-      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
-    
-    
-    #Saving of the plot
-    if(Save){
-      ggsave(filename = here("Plots",paste("Both_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
-    }
-  }
-}
-
 
 #This function plots the timeseries with both models and their respective confidence bands
 Plot.TimeseriesCodaIngarchPI <- function(Data,CodaResult,IngarchResult,Id,Save=T,TextSize=50){
@@ -380,30 +156,41 @@ Plot.TimeseriesCodaIngarchPI <- function(Data,CodaResult,IngarchResult,Id,Save=T
   }
 }
 
-
 #This function plots comparision plots for Ingarch,Coda and Zim
-Plot.MethodComparision <- function(IngarchResult,CodaResult,ZimResult,Split=F){
+Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
   
+  Model <- unique(Result$model)
+  Model <- Model[!Model=="zim"]
   
-  CodaModelError <- Model.Error(CodaResult$result,Fnct = "Mse") %>% 
-                        Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = c(3,4))
-  IngarchModelError <- Model.Error(IngarchResult$result,Fnct = "Mse",Category = c(3,4)) %>% 
-                        Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = c(3,4))
-  ZimModelError <- Model.Error(ZimResult$result,Fnct = "Mse",Category = c(3,4)) %>% 
-                        Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = c(3,4))
+  if(ZIM){
+    stopifnot(Category %in% c(3,4))
+    Model <- c(Model,"zim")
+  }
+  
 
-  CodaModelError_Split <- Model.Error(CodaResult$result,Fnct = "Mse",Category =c(3,4)) %>% 
-    Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(3,4))
   
-  IngarchModelError_Split <- Model.Error(IngarchResult$result,Fnct = "Mse",Category =c(3,4)) %>% 
-    Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(3,4))
-  
-  ZimModelError_Split <- Model.Error(ZimResult$result,Fnct = "Mse",Category = c(3,4)) %>% 
-    Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = list(3,4))
-  
-  ModelError_Split <- rbind(CodaModelError_Split,IngarchModelError_Split,ZimModelError_Split)
-  
-  ModelError <- rbind(CodaModelError,IngarchModelError,ZimModelError)
+  i <- 1
+  for(Model_RunVariable in Model) {
+    
+    ModelResult <- Result[Result$model==Model_RunVariable,]
+    
+    ModelError_Run <- Model.Error(ModelResult ,Fnct = "Mse",Category = Category) %>% 
+      Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = Category)
+    
+    ModelErrorSplit_Run <- Model.Error(ModelResult,Fnct = "Mse",Category =Category) %>% 
+      Model.ErrorOverall(Fnct = "sum",SplitByGroup = T,Groups = as.list(Category))
+    
+    if(i==1){
+      ModelError <- ModelError_Run
+      ModelError_Split <- ModelErrorSplit_Run
+    }
+    else{
+      ModelError <- rbind(ModelError,ModelError_Run)
+      ModelError_Split <- rbind(ModelError_Split,ModelErrorSplit_Run)
+    }
+    i <- i+1
+  }
+
   
   #Boxplot
   BoxPlot <- ggplot(ModelError,aes(x=model,y=error))+
@@ -411,23 +198,25 @@ Plot.MethodComparision <- function(IngarchResult,CodaResult,ZimResult,Split=F){
   scale_y_continuous(limits=c(0,5))+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
-  ggtitle(paste("Error measures",sep=" "),subtitle = "Standard Zim Model")
+  ggtitle(paste("Error measures",sep=" "))
   
   ggsave(filename = here("Plots",paste("All_ErrorMeasure_combined_zoomed",ids_save,"zim_standard",".png",sep="")),plot=BoxPlot,height = 15,width = 20)
    
 
  #Quantile Plot
-  length <- ingarch_result$result %>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
+  length <- Result %>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
   
-  TimeSeries_Length <- data.frame(id = unique(IngarchResult$result$id),
+  TimeSeries_Length <- data.frame(id = unique(Result$id),
                                   length = length$n/
-                                    (as.numeric(unique(IngarchResult$result$frame))*as.numeric(unique(IngarchResult$result$history))))
+                                    (as.numeric(unique(Result$frame))*as.numeric(unique(Result$history))))
   
-  MyColour <- setNames(c("red", "blue","green"),
-                               c("coda","ingarch","zim"))
+  MyColour <- setNames(c("red", "blue","orange","green","deeppink"),
+                       c("coda","ingarch","inar_classic","zim","inar_bayes"))
+  MyNames <- setNames(c("CoDA","INGARCH","INAR classic","ZIM","INAR bayes"),
+                      c("coda","ingarch","inar_classic","zim","inar_bayes"))
   
   i <- 1
-  for(group in c("3","4")){
+  for(group in as.character(Category)){
   
   if(i==1){
     IngarchErrorSorted_Split <- ModelError_Split %>% filter(model=="ingarch" & group == group)%>%arrange(.,error)
@@ -438,6 +227,7 @@ Plot.MethodComparision <- function(IngarchResult,CodaResult,ZimResult,Split=F){
     IngarchErrorSorted_Split[IngarchErrorSorted_Split$group == group,]$index <- seq(1:IngarchErrorSorted_Length)
     IngarchErrorSorted_Split <- inner_join(IngarchErrorSorted_Split,TimeSeries_Length,bye ="id")
     
+    
     CodaErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="coda" & group == group)%>%arrange(.,error)
     CodaQuantiles_Split  <- quantile(CodaErrorSorted_Split $error,na.rm = T)
     
@@ -446,13 +236,34 @@ Plot.MethodComparision <- function(IngarchResult,CodaResult,ZimResult,Split=F){
     CodaErrorSorted_Split[CodaErrorSorted_Split$group == group,]$index <- seq(1:CodaErrorSorted_Length)
     CodaErrorSorted_Split <- inner_join(CodaErrorSorted_Split,TimeSeries_Length,bye ="id")
     
-    ZimErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="zim" & group == group)%>%arrange(.,error)
-    zimQuantiles_Split  <- quantile(ZimErrorSorted_Split $error,na.rm = T)
+    if(ZIM){
+      ZimErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="zim" & group == group)%>%arrange(.,error)
+      zimQuantiles_Split  <- quantile(ZimErrorSorted_Split $error,na.rm = T)
+
+      ZimErrorSorted_Split$index <- NA
+      ZimErrorSorted_Length <- sum(ZimErrorSorted_Split$group == group)
+      ZimErrorSorted_Split[ZimErrorSorted_Split$group == group,]$index <- seq(1:ZimErrorSorted_Length)
+      ZimErrorSorted_Split <- inner_join(ZimErrorSorted_Split,TimeSeries_Length,bye ="id")
+    }
+
     
-    ZimErrorSorted_Split$index <- NA
-    ZimErrorSorted_Length <- sum(ZimErrorSorted_Split$group == group)
-    ZimErrorSorted_Split[ZimErrorSorted_Split$group == group,]$index <- seq(1:ZimErrorSorted_Length)
-    ZimErrorSorted_Split <- inner_join(ZimErrorSorted_Split,TimeSeries_Length,bye ="id")
+    
+    InarClassicErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="inar_classic" & group == group)%>%arrange(.,error)
+    InarClassicQuantiles_Split  <- quantile(InarClassicErrorSorted_Split $error,na.rm = T)
+    
+    InarClassicErrorSorted_Split$index <- NA
+    InarClassicErrorSorted_Length <- sum(InarClassicErrorSorted_Split$group == group)
+    InarClassicErrorSorted_Split[InarClassicErrorSorted_Split$group == group,]$index <- seq(1:InarClassicErrorSorted_Length)
+    InarClassicErrorSorted_Split <- inner_join(InarClassicErrorSorted_Split,TimeSeries_Length,bye ="id")
+    
+    
+    InarBayesErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="inar_bayes" & group == group)%>%arrange(.,error)
+    InarBayesQuantiles_Split  <- quantile(InarBayesErrorSorted_Split $error,na.rm = T)
+    
+    InarBayesErrorSorted_Split$index <- NA
+    InarBayesErrorSorted_Length <- sum(InarBayesErrorSorted_Split$group == group)
+    InarBayesErrorSorted_Split[InarBayesErrorSorted_Split$group == group,]$index <- seq(1:InarBayesErrorSorted_Length)
+    InarBayesErrorSorted_Split <- inner_join(InarBayesErrorSorted_Split,TimeSeries_Length,bye ="id")
     
   }else{
     IngarchErrorSorted_Length <- sum(IngarchErrorSorted_Split$group == group)
@@ -461,11 +272,25 @@ Plot.MethodComparision <- function(IngarchResult,CodaResult,ZimResult,Split=F){
     CodaErrorSorted_Length <- sum(CodaErrorSorted_Split$group == group)
     CodaErrorSorted_Split[CodaErrorSorted_Split$group == group,]$index <- seq(1:CodaErrorSorted_Length)
     
-    ZimErrorSorted_Length <- sum(ZimErrorSorted_Split$group == group)
-    ZimErrorSorted_Split[ZimErrorSorted_Split$group == group,]$index <- seq(1:ZimErrorSorted_Length)
+    InarClassicErrorSorted_Length <- sum(InarClassicErrorSorted_Split$group == group)
+    InarClassicErrorSorted_Split[InarClassicErrorSorted_Split$group == group,]$index <- seq(1:InarClassicErrorSorted_Length)
+    
+    InarBayesErrorSorted_Length <- sum(InarBayesErrorSorted_Split$group == group)
+    InarBayesErrorSorted_Split[InarBayesErrorSorted_Split$group == group,]$index <- seq(1:InarBayesErrorSorted_Length)
+    
+    ErrorSorted_Split <- na.omit(rbind(CodaErrorSorted_Split,
+                                       IngarchErrorSorted_Split,
+                                       InarClassicErrorSorted_Split,
+                                       InarBayesErrorSorted_Split))
     
     
-    ErrorSorted_Split <- na.omit(rbind(CodaErrorSorted_Split,IngarchErrorSorted_Split,ZimErrorSorted_Split))
+    if(ZIM){
+      ZimErrorSorted_Length <- sum(ZimErrorSorted_Split$group == group)
+      ZimErrorSorted_Split[ZimErrorSorted_Split$group == group,]$index <- seq(1:ZimErrorSorted_Length)
+      
+      ErrorSorted_Split <- na.omit(rbind(ZimErrorSorted_Split,ErrorSorted_Split))
+    }
+    
     ErrorSorted_Split$group <- as.factor(ErrorSorted_Split$group)
   }
     i <- i+1
@@ -488,7 +313,6 @@ Plot.MethodComparision <- function(IngarchResult,CodaResult,ZimResult,Split=F){
     geom_point()+
     scale_y_continuous(limits=c(0,5))+
     geom_hline(yintercept=1,linewidth=2)+
-    # geom_point(data = CodaErrorSorted_Split,aes(x=index,y=error,colour=model),size=3)+
     geom_vline(aes(xintercept=quant_ind),data=QuantilesIndex_Split)+
     theme(text = element_text(size = 50))+
     scale_colour_manual("Legend", values = c(MyColour),aesthetics = "colour")+
@@ -631,7 +455,6 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
     
   }
 }
-
 
 
 #This function plots the boxplot/quantile plot and histogram of the error measures either by group or in total

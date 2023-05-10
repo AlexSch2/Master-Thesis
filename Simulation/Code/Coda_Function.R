@@ -581,8 +581,9 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
     
     #Tidying up data
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllID,"result"))
+    Result_Prediction$id <- as.factor(Result_Prediction$id)
     Result_Model <- UnlistListElement(PredictionResult_AllID,"model")
-    names(Result_Model) <- Id_Result
+    names(Result_Model) <- unique(as.character(Result_Prediction$id))
     
     return(list(result = Result_Prediction,
                 model = Result_Model))

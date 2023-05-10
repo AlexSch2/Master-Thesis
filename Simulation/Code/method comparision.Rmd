@@ -70,14 +70,15 @@ if(save_results){
 zim_result <-
   CountModel.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 4,
+    Id = ids_all,
     Frame = frame,
     Distribution = "poisson",
-    Category_Main = c( "4"),
+    Category_Main = c("1","2","3","4"),
+    Category_Calculated = c("3","4"),
     WindowMethod = window_method,
     ZeroHandling = "none",
     External = F,
-    Multicore = F,
+    Multicore = T,
     NCores = 10,
     PastOb = NA,
     PastMean = NA,
@@ -87,7 +88,7 @@ zim_result <-
   )
   
   if(T){
-  save(inarbayes_result,file=here("Code/results",paste("inarbayes_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
+  save(zim_result,file=here("Code/results",paste("zim_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
 
   }
 
@@ -182,6 +183,22 @@ p <- ggplot(plot.data,aes(x=id,y=n,col=model))+
 
 
 #########BOTH METHODS############
+#General 
+
+Count_Result <- rbind(ingarch_result$result,
+                 inarbayes_result$result,
+                 inarclassic_result$result,
+                 zim_result$result)
+
+Common_Names <- intersect(names(ingarch_result$result),names(coda_result$result))
+CodaResult_Short <- coda_result$result %>% select(all_of(Common_Names))
+CountModelResult_Short <- Count_Result %>% select(all_of(Common_Names))
+
+AllResult <- rbind(CodaResult_Short,CountModelResult_Short)
+AllResult$window_baseLength[AllResult$window_baseLength==4]<-5
+
+Plot.MethodComparision(AllResult,Category = c(1,2,3,4),ZIM=F)
+
 #History
 Plot.ErrorMeasureCombined(CodaCombined = Coda_Combined,IngarchCombined = Ingarch_Combined,Values=c("0.5","1"),Split=F,Variation = "history",LabelNames = c("0.5"="h=0.5","1"="h=1")
 

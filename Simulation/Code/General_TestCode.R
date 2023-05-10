@@ -142,3 +142,7 @@ yhat <- predict(model_zeroinfl,newdata = data.frame(week_date="2022-07-18",data.
 
 y <- c(1:15)
 ybshift <- bshift(y)
+
+
+test<-results %>% group_by(model)%>%Model.Error(Fnct = "Mse",Category = c(3,4)) %>% 
+  Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = c(3,4))
