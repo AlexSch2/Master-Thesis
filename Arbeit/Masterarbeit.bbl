@@ -91,6 +91,30 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0167715209001977
       \endverb
     \endentry
+    \entry{Bre:1993}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c768b383bdf912cbceb14725d453a8df}{%
+           family={Brännäs},
+           familyi={B\bibinitperiod},
+           given={Kurt},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{c768b383bdf912cbceb14725d453a8df}
+      \strng{fullhash}{c768b383bdf912cbceb14725d453a8df}
+      \strng{bibnamehash}{c768b383bdf912cbceb14725d453a8df}
+      \strng{authorbibnamehash}{c768b383bdf912cbceb14725d453a8df}
+      \strng{authornamehash}{c768b383bdf912cbceb14725d453a8df}
+      \strng{authorfullhash}{c768b383bdf912cbceb14725d453a8df}
+      \field{labelalpha}{Brä93}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Umeå Economic Studies}
+      \field{month}{01}
+      \field{title}{Estimation and Testing in Integer-valued AR(1) Models}
+      \field{year}{1993}
+    \endentry
     \entry{Chang:1987}{article}{}
       \name{author}{3}{}{%
         {{hash=a1b93542a7cd5aa25495e22de02ff703}{%
@@ -1428,6 +1452,46 @@
       \verb 10.1007/s11009-005-5006-x
       \endverb
     \endentry
+    \entry{Silva:2009}{article}{}
+      \name{author}{3}{}{%
+        {{hash=0b33dfdea7125337cecb9996df3719f0}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Nélia},
+           giveni={N\bibinitperiod}}}%
+        {{hash=029ceda78d975429c284d1416f193d08}{%
+           family={Pereira},
+           familyi={P\bibinitperiod},
+           given={Isabel},
+           giveni={I\bibinitperiod}}}%
+        {{hash=e6376a6ae7d74c74a868da0a5b4004a1}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f563b018e2a3b13b04ef9f0acc3cc37c}
+      \strng{fullhash}{f563b018e2a3b13b04ef9f0acc3cc37c}
+      \strng{bibnamehash}{f563b018e2a3b13b04ef9f0acc3cc37c}
+      \strng{authorbibnamehash}{f563b018e2a3b13b04ef9f0acc3cc37c}
+      \strng{authornamehash}{f563b018e2a3b13b04ef9f0acc3cc37c}
+      \strng{authorfullhash}{f563b018e2a3b13b04ef9f0acc3cc37c}
+      \field{labelalpha}{SPS09}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{REVSTAT – Statistical Journal Volume}
+      \field{month}{05}
+      \field{title}{Forecasting in INAR (1) model}
+      \field{volume}{7}
+      \field{year}{2009}
+      \field{pages}{119\bibrangedash 134}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.57805/revstat.v7i1.77
+      \endverb
+    \endentry
     \entry{RobComp:2011}{book}{}
       \name{author}{3}{}{%
         {{hash=faaed83ab21bd48aa70346a9a1a0fa99}{%
@@ -1937,7 +2001,6 @@
       \keyw{EM algorithm,Integer-valued GARCH model,Negative binomial,Poisson,Time series of counts,Zero inflation}
     \endentry
   \enddatalist
-  \missing{Bre:1993}
 \endrefsection
 \endinput
 

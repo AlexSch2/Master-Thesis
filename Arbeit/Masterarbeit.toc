@@ -37,21 +37,21 @@
 \contentsline {subsubsection}{\nonumberline Extension of the Error Measure}{26}{subsubsection*.22}%
 \contentsline {section}{\numberline {3.2}Examples of model application}{26}{section.3.2}%
 \contentsline {section}{\numberline {3.3}R-Code}{28}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Results}{31}{section.3.4}%
+\contentsline {section}{\numberline {3.4}Results}{32}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}General Specifications}{32}{subsection.3.4.1}%
 \contentsline {subsubsection}{\nonumberline History}{32}{subsubsection*.29}%
 \contentsline {subsubsection}{\nonumberline Frame}{32}{subsubsection*.32}%
-\contentsline {subsubsection}{\nonumberline Window Shape}{32}{subsubsection*.35}%
-\contentsline {subsection}{\numberline {3.4.2}INGARCH Specifications Results}{33}{subsection.3.4.2}%
-\contentsline {subsubsection}{\nonumberline Distribution}{34}{subsubsection*.38}%
-\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{35}{subsubsection*.41}%
+\contentsline {subsubsection}{\nonumberline Window Shape}{33}{subsubsection*.35}%
+\contentsline {subsection}{\numberline {3.4.2}INGARCH Specifications Results}{34}{subsection.3.4.2}%
+\contentsline {subsubsection}{\nonumberline Distribution}{35}{subsubsection*.38}%
+\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{36}{subsubsection*.41}%
 \contentsline {subsection}{\numberline {3.4.3}CoDA Specifications Results}{36}{subsection.3.4.3}%
 \contentsline {subsection}{\numberline {3.4.4}Zero Handling}{36}{subsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.4.5}$\mathcal {T}$-spaces}{36}{subsection.3.4.5}%
-\contentsline {subsection}{\numberline {3.4.6}One-vs-All method}{37}{subsection.3.4.6}%
-\vspace *{\baselineskip }
-\contentsline {chapter}{List of Figures}{48}{chapter*.47}%
-\contentsline {chapter}{List of Tables}{50}{chapter*.48}%
+\contentsline {subsection}{\numberline {3.4.5}$\mathcal {T}$-spaces}{37}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}One-vs-All method}{38}{subsection.3.4.6}%
+\contentsline {chapter}{\nonumberline Bibliography}{43}{chapter*.47}%
+\contentsline {chapter}{\nonumberline List of Figures}{49}{chapter*.48}%
+\contentsline {chapter}{\nonumberline List of Tables}{51}{chapter*.49}%
 \contentsline {chapter}{\numberline {A}R-Functions}{53}{appendix.A}%
 \contentsline {section}{\numberline {A.1}General Functions}{53}{section.A.1}%
 \contentsline {section}{\numberline {A.2}INGARCH Functions}{57}{section.A.2}%
