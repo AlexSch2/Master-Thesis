@@ -1,0 +1,17 @@
+TY  - JOUR
+AU  - Cui, Yan
+AU  - Zhu, Fukang
+PY  - 2018
+DA  - 2018/06/01
+TI  - A new bivariate integer-valued GARCH model allowing for negative cross-correlation
+JO  - TEST
+SP  - 428
+EP  - 452
+VL  - 27
+IS  - 2
+AB  - Univariate integer-valued time series models, including integer-valued autoregressive (INAR) models and integer-valued generalized autoregressive conditional heteroscedastic (INGARCH) models, have been well studied in the literature, but there is little progress in multivariate models. Although some multivariate INAR models were proposed, they do not provide enough flexibility in modeling count data, such as volatility of numbers of stock transactions. Then, a bivariate Poisson INGARCH model was suggested by Liu (Some models for time series of counts, Dissertations, Columbia University, 2012), but it can only deal with positive cross-correlation between two components. To remedy this defect, we propose a new bivariate Poisson INGARCH model, which is more flexible and allows for positive or negative cross-correlation. Stationarity and ergodicity of the new process are established. The maximum likelihood method is used to estimate the unknown parameters, and consistency and asymptotic normality for estimators are given. A simulation study is given to evaluate the estimators for parameters of interest. Real and artificial data examples are illustrated to demonstrate good performances of the proposed model relative to the existing model.
+SN  - 1863-8260
+UR  - https://doi.org/10.1007/s11749-017-0552-4
+DO  - 10.1007/s11749-017-0552-4
+ID  - Cui2018
+ER  - 

@@ -139,6 +139,49 @@
       \verb https://www.sciencedirect.com/science/article/pii/0022169487901326
       \endverb
     \endentry
+    \entry{Cui:2018}{article}{}
+      \name{author}{2}{}{%
+        {{hash=77900a39c97aedaef8bb51bdf6edc633}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Yan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ec786b4d7c7cb65431cceb7cb1804dbc}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Fukang},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{206ce9a1fe6d02017566cf015d4f7f38}
+      \strng{fullhash}{206ce9a1fe6d02017566cf015d4f7f38}
+      \strng{bibnamehash}{206ce9a1fe6d02017566cf015d4f7f38}
+      \strng{authorbibnamehash}{206ce9a1fe6d02017566cf015d4f7f38}
+      \strng{authornamehash}{206ce9a1fe6d02017566cf015d4f7f38}
+      \strng{authorfullhash}{206ce9a1fe6d02017566cf015d4f7f38}
+      \field{labelalpha}{CZ18}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{TEST: An Official Journal of the Spanish Society of Statistics and Operations Research}
+      \field{month}{6}
+      \field{number}{2}
+      \field{title}{{A new bivariate integer-valued GARCH model allowing for negative cross-correlation}}
+      \field{volume}{27}
+      \field{year}{2018}
+      \field{pages}{428\bibrangedash 452}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.1007/s11749-017-0552-4
+      \endverb
+      \verb{urlraw}
+      \verb https://ideas.repec.org/a/spr/testjl/v27y2018i2d10.1007_s11749-017-0552-4.html
+      \endverb
+      \verb{url}
+      \verb https://ideas.repec.org/a/spr/testjl/v27y2018i2d10.1007_s11749-017-0552-4.html
+      \endverb
+      \keyw{Bivariate; GARCH model; MLE; Negative cross-correlation; Poisson; Time series of counts}
+    \endentry
     \entry{Douc:2013}{article}{}
       \name{author}{3}{}{%
         {{hash=1ae40d85e615f3473f4056c1a0e3985f}{%
@@ -440,6 +483,40 @@
       \field{title}{Applied Compositional Data Analysis. With Worked Examples in {R}}
       \field{year}{2018}
     \endentry
+    \entry{Fokianos:2021}{article}{}
+      \name{author}{1}{}{%
+        {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
+           family={Fokianos},
+           familyi={F\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{ba1df24a226e6d8ab513979801d7b5d7}
+      \strng{fullhash}{ba1df24a226e6d8ab513979801d7b5d7}
+      \strng{bibnamehash}{ba1df24a226e6d8ab513979801d7b5d7}
+      \strng{authorbibnamehash}{ba1df24a226e6d8ab513979801d7b5d7}
+      \strng{authornamehash}{ba1df24a226e6d8ab513979801d7b5d7}
+      \strng{authorfullhash}{ba1df24a226e6d8ab513979801d7b5d7}
+      \field{labelalpha}{Fok21}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2452-3062}
+      \field{journaltitle}{Econometrics and Statistics}
+      \field{title}{Multivariate Count Time Series Modelling}
+      \field{year}{2021}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.ecosta.2021.11.006
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2452306221001374
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2452306221001374
+      \endverb
+      \keyw{auto-correlation,covariates,copula,estimation,multivariate count distribution,prediction}
+    \endentry
     \entry{Fokianos:2009}{article}{}
       \name{author}{3}{}{%
         {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
@@ -535,6 +612,62 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0047259X10002320
       \endverb
       \keyw{Autocorrelation,Covariates,Ergodicity,Generalized linear models,Perturbation,Prediction,Stationarity,Volatility}
+    \endentry
+    \entry{Fokianos:2020}{article}{}
+      \name{author}{4}{}{%
+        {{hash=ba1df24a226e6d8ab513979801d7b5d7}{%
+           family={Fokianos},
+           familyi={F\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+        {{hash=92742deeae477034b3de8204711d95d8}{%
+           family={St{ø}ve},
+           familyi={S\bibinitperiod},
+           given={B{å}rd},
+           giveni={B\bibinitperiod}}}%
+        {{hash=bef86b20d26f1ca869b076275b55f9ae}{%
+           family={Tj{ø}stheim},
+           familyi={T\bibinitperiod},
+           given={Dag},
+           giveni={D\bibinitperiod}}}%
+        {{hash=b56d3f1bb6a728b76afa43443e8a0723}{%
+           family={Doukhan},
+           familyi={D\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Bernoulli Society for Mathematical Statistics}%
+        {Probability}%
+      }
+      \strng{namehash}{8c9a7f0316ac98612f922ec62b226d1d}
+      \strng{fullhash}{4785531efebc835d98df17d7f240d98c}
+      \strng{bibnamehash}{8c9a7f0316ac98612f922ec62b226d1d}
+      \strng{authorbibnamehash}{8c9a7f0316ac98612f922ec62b226d1d}
+      \strng{authornamehash}{8c9a7f0316ac98612f922ec62b226d1d}
+      \strng{authorfullhash}{4785531efebc835d98df17d7f240d98c}
+      \field{labelalpha}{Fok+20}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bernoulli}
+      \field{number}{1}
+      \field{title}{{Multivariate count autoregression}}
+      \field{volume}{26}
+      \field{year}{2020}
+      \field{pages}{471\bibrangedash 499}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.3150/19-BEJ1132
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.3150/19-BEJ1132
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.3150/19-BEJ1132
+      \endverb
+      \keyw{Autocorrelation,copula,ergodicity,generalized linear models,perturbation,prediction,stationarity,Volatility}
     \endentry
     \entry{Freeland:2004}{article}{}
       \name{author}{2}{}{%
@@ -705,6 +838,53 @@
       \endverb
       \keyw{VAR model,compositional data,isometric log-ratio transformation,Granger causality}
     \endentry
+    \entry{Lee:2023}{article}{}
+      \name{author}{3}{}{%
+        {{hash=f05cc1164295f56cb0c7c3c30d1ea993}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Sangyeol},
+           giveni={S\bibinitperiod}}}%
+        {{hash=702fb164dec8a8b8c138981c12e3ae7c}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Dongwon},
+           giveni={D\bibinitperiod}}}%
+        {{hash=bfafc5467b515abe88b8a7900aeb241b}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Byungsoo},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{1c36c49f9575613f99b56c45d59d3ea2}
+      \strng{fullhash}{1c36c49f9575613f99b56c45d59d3ea2}
+      \strng{bibnamehash}{1c36c49f9575613f99b56c45d59d3ea2}
+      \strng{authorbibnamehash}{1c36c49f9575613f99b56c45d59d3ea2}
+      \strng{authornamehash}{1c36c49f9575613f99b56c45d59d3ea2}
+      \strng{authorfullhash}{1c36c49f9575613f99b56c45d59d3ea2}
+      \field{labelalpha}{LKK23}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0167-9473}
+      \field{journaltitle}{Computational Statistics \& Data Analysis}
+      \field{title}{Modeling and inference for multivariate time series of counts based on the INGARCH scheme}
+      \field{volume}{177}
+      \field{year}{2023}
+      \field{pages}{107579}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.csda.2022.107579
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167947322001591
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0167947322001591
+      \endverb
+      \keyw{Multivariate time series of counts,MINGARCH model,QMLE,MDPDE,Change point test}
+    \endentry
     \entry{Liboschik:2016}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=5f6ee9f4581227d4f04ae7c035b6dac8}{%
@@ -809,6 +989,34 @@
       \endverb
       \verb{url}
       \verb https://CRAN.R-project.org/package=tscount
+      \endverb
+    \endentry
+    \entry{Liu:2012}{book}{}
+      \name{author}{1}{}{%
+        {{hash=5a5537b780b95c5191b1690b9233e265}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Heng},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Columbia University}%
+      }
+      \strng{namehash}{5a5537b780b95c5191b1690b9233e265}
+      \strng{fullhash}{5a5537b780b95c5191b1690b9233e265}
+      \strng{bibnamehash}{5a5537b780b95c5191b1690b9233e265}
+      \strng{authorbibnamehash}{5a5537b780b95c5191b1690b9233e265}
+      \strng{authornamehash}{5a5537b780b95c5191b1690b9233e265}
+      \strng{authorfullhash}{5a5537b780b95c5191b1690b9233e265}
+      \field{labelalpha}{Liu12}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Some models for time series of counts}
+      \field{year}{2012}
+      \verb{doi}
+      \verb 10.7916/D8Z325SW
       \endverb
     \endentry
     \entry{Lubbe:2021}{article}{}

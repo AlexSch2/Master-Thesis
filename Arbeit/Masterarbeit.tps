@@ -17,7 +17,7 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=81
+TopLine=103
 Cursor=3445
 
 [Frame1]
@@ -71,8 +71,8 @@ Class=LaTeXView
 Document=Einleitung.tex
 
 [Frame3_View0,0]
-TopLine=36
-Cursor=6474
+TopLine=14
+Cursor=2311
 
 [Frame4]
 Flags=0
@@ -125,7 +125,7 @@ Class=LaTeXView
 Document=Results.tex
 
 [Frame6_View0,0]
-TopLine=253
+TopLine=261
 Cursor=11236
 
 [Frame7]
@@ -143,8 +143,8 @@ Class=LaTeXView
 Document=Methode_Ingarch.tex
 
 [Frame7_View0,0]
-TopLine=33
-Cursor=3901
+TopLine=84
+Cursor=10160
 
 [Frame8]
 Flags=0
@@ -161,7 +161,7 @@ Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame8_View0,0]
-TopLine=231
+TopLine=233
 Cursor=17787
 
 [Frame9]
@@ -179,7 +179,7 @@ Class=LaTeXView
 Document=Other_methods.tex
 
 [Frame9_View0,0]
-TopLine=132
+TopLine=134
 Cursor=10253
 
 [Frame10]
@@ -269,8 +269,8 @@ Class=BibTeXView
 Document=Literatur.bib
 
 [Frame14_View0,0]
-TopLine=570
-Cursor=32736
+TopLine=624
+Cursor=34372
 
 [Frame15]
 Flags=0

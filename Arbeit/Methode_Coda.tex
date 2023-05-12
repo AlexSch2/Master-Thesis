@@ -14,7 +14,7 @@ The basis of this section is given by \cite{Kynclova:2015}, \cite{Egozcue:2003} 
 
 CoDA, which is short for "`Compositional Data Analysis"' works with compositional data. The key to compositional data is the fact that the absolute value of its parts is less important than the relative relation of the parts to each other. To define compositional data, we first need to define the $(D-1)$-dimensional simplex,
 	\begin{equation}
-	\mathbbm{S}^D := \left\{(x_1,\ldots, x_D)^T: x_i > 0, i =1,\ldots,D; \sum_{i=1}^{D}x_i=\kappa  \right\}
+	\mathbbm{S}^D := \left\{(x_1,\ldots, x_D)^T: x_i > 0, i =1,\ldots,D; \sum_{i=1}^{D}x_i=\kappa  \right\},
 	\label{eq:Simplex Definition}
 	\end{equation}
 	
@@ -36,7 +36,7 @@ Here $\ClOp$ is the closure operation that maps each compositional vector from t
 Using $z^{-1} := \ClOp(z_1^{-1},z_2^{-1},\ldots,z_D^{-1})$, the inverse perturbation can be defined as 
 
 \begin{equation*}
-\textbf{x} \ominus \textbf{z} := \textbf{x} \oplus \textbf{z}^{-1}
+\textbf{x} \ominus \textbf{z} := \textbf{x} \oplus \textbf{z}^{-1},
 \label{eq: Inverse Perturbation}
 \end{equation*}
 
@@ -51,7 +51,7 @@ Now we further define an inner product in order to have an inner product space o
 In addition, a norm and distance measure can be defined
 
 \begin{equation*}
-\norm{\textbf{x}}_a^2 := \left\langle  \textbf{x},\textbf{x} \right\rangle_a, \hspace{0.5cm} d_a(\textbf{x},\textbf{z}) := \norm{\textbf{x} \ominus \textbf{z}}_a .
+\norm{\textbf{x}}_a^2 := \left\langle  \textbf{x},\textbf{x} \right\rangle_a, \hspace{0.5cm} d_a(\textbf{x},\textbf{z}) := \norm{\textbf{x} \ominus \textbf{z}}_a.
 \label{eq:Simplex Norm and Distance}
 \end{equation*}
 
@@ -81,7 +81,7 @@ and map the composition $\textbf{x}$ to the real space $\mathbb{R}^D$. They are 
 Let $g(\textbf{x})$ be the geometric mean of $\textbf{x}$. The centered log-ratio coefficients are then defined as 
 
 \begin{equation*}
-\textbf{w} = (w_1,\ldots, w_D)^T = clr(\textbf{x}) := \left(\log\left(\frac{x_1}{g(\textbf{x})}\right),\ldots, \log\left(\frac{x_D}{g(\textbf{x})}\right)\right)^T .
+\textbf{w} = (w_1,\ldots, w_D)^T = clr(\textbf{x}) := \left(\log\left(\frac{x_1}{g(\textbf{x})}\right),\ldots, \log\left(\frac{x_D}{g(\textbf{x})}\right)\right)^T.
 \label{eq:clr Coefficients}
 \end{equation*}
 
@@ -89,7 +89,7 @@ This transformation maps $\textbf{x}$ into the hyperplane $V = \left\{\textbf{w}
 
 \begin{gather*}
 \left\langle  \textbf{x},\textbf{z} \right\rangle_a = \left\langle  clr(\textbf{x}),clr(\textbf{z}) \right\rangle_a, \\
-d(\textbf{x},\textbf{z})_a = d(clr(\textbf{x}),clr(\textbf{z})) .
+d(\textbf{x},\textbf{z})_a = d(clr(\textbf{x}),clr(\textbf{z})).
 \label{eq:clr Coefficients isometric}
 \end{gather*}
 
@@ -99,14 +99,14 @@ d(\textbf{x},\textbf{z})_a = d(clr(\textbf{x}),clr(\textbf{z})) .
 The isometric log-ratio (ilr) are closely related to the clr Coefficients. Assume the inverse $clr$ transformation is isometric. Let $\left\{v_1,\ldots,v_{D-1}\right\}$ be an orthonormal base in the hyperplane $V$. Then $\textbf{e}_i = clr^{-1}(v_i), i=1,\ldots,D-1$ is an orthonormal basis of the simplex $\mathbbm{S}^D$. For $\textbf{x} \in \mathbbm{S}^D$, the $ilr$ transformation can then be defined as  
 
 \begin{equation*}
-\textbf{u} = ilr(\textbf{x}) = \left(\left\langle \textbf{x},\textbf{e}_1\right\rangle_a,\ldots,\left\langle \textbf{x},\textbf{e}_{D-1}\right\rangle_a\right)^T .
+\textbf{u} = ilr(\textbf{x}) = \left(\left\langle \textbf{x},\textbf{e}_1\right\rangle_a,\ldots,\left\langle \textbf{x},\textbf{e}_{D-1}\right\rangle_a\right)^T.
 \label{eq:ilr Coordinates}
 \end{equation*}
 
 In addition to being isometric, the $ilr$ transformation is also isomorph. Let $\textbf{x}, \textbf{z}$ be two compositions and $a, b  \in \mathbbm{R}$. Then,
 
 \begin{equation*}
-ilr(a \odot \textbf{x} \oplus b \odot \textbf{z}) = a \cdot ilr(\textbf{x}) + b \cdot ilr(\textbf{z})
+ilr(a \odot \textbf{x} \oplus b \odot \textbf{z}) = a \cdot ilr(\textbf{x}) + b \cdot ilr(\textbf{z}),
 \label{eq:ilr coordinates isomorph}
 \end{equation*}
 
@@ -115,7 +115,7 @@ as well as,
 \begin{gather*}
 \left\langle  \textbf{x},\textbf{z} \right\rangle_a = \left\langle  ilr(\textbf{x}), ilr(\textbf{z}) \right\rangle_a, \\
 d(\textbf{x},\textbf{z})_a = d(ilr(\textbf{x}),ilr(\textbf{z})),\\
-\norm{x}_a = \norm{ilr(x)} = \norm{u} .
+\norm{x}_a = \norm{ilr(x)} = \norm{u}.
 \label{eq:ilr coordinates isometric }
 \end{gather*}
 
@@ -131,7 +131,7 @@ The matrix $\textbf{V}$ is the contrast matrix with the orthonormal basis $(\tex
 
 \begin{gather*}
 ilr(\textbf{x}) = (u_1,\ldots,u_{D-1})^T, \\
-u_j = \sqrt{\frac{D-j}{D-j+1}}\log\left(\frac{x_j}{\sqrt[D-j]{\prod_{l=j+1}^D x_l}}\right), \hspace{0.2cm} j=1,\ldots, D-1 .
+u_j = \sqrt{\frac{D-j}{D-j+1}}\log\left(\frac{x_j}{\sqrt[D-j]{\prod_{l=j+1}^D x_l}}\right), \hspace{0.2cm} j=1,\ldots, D-1.
 \label{eq:pivot coordinates}
 \end{gather*}
 

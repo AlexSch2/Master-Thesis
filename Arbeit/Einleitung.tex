@@ -11,14 +11,14 @@ A company is operating numerous vending machines with food, ranging from appetiz
 In this section we describe the structure of our data which is essential in choosing the right model. We have several multivariate time series with integer values, with each series representing a vending machine. The dimensions represent the various categories of the food. Each item is of one of the four main categories 1,2,3,4 and one of the various subcategories. We mainly analyse the time series on the aggregated level of the main categories, however the models can also be applied to the subcategories. In this case we have a model for each main category instead of each vending machine. The values for each category represent the number of items sold. For a fridge $f$ denote this time series with 
 
 \begin{equation}
-\left\{\bm{Y}_t:t=1,\ldots,T_f; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f
+\left\{\bm{Y}_t:t=1,\ldots,T_f; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f,
 \label{eq:time series definition}
 \end{equation}
 
-where $K$ stands for the number of categories, $T_f$ denotes the total length of the time series and $\mathbb{N}_0^K := \underbrace{\mathbb{N}_0 \times \mathbb{N}_0}_{K-times}$. Since we will sometimes not use all of our data but only a fraction of it, we will denote with $T$ the length of the time series used. So \ref{eq:time series definition} describes the whole time series available, while \ref{eq:time series definition fraction} describes the time series used. It holds $T\leq T_f$. In the following we will use \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
+where $K$ stands for the number of categories, $T_f$ denotes the total length of the time series and $\mathbb{N}_0^K := \underbrace{\mathbb{N}_0 \times \ldots \times \mathbb{N}_0}_{K-times}$. This means $\bm{Y}_t = (Y_{1t},\ldots,Y_{Kt})^T$ with $Y_{kt} \in \mathbb{N}_0, t=1,\ldots,T_f$ and $k=1,\ldots,K$. Since we will sometimes not use all of our data but only a fraction of it, we will denote with $T$ the length of the time series used. So \ref{eq:time series definition} describes the whole time series available, while \ref{eq:time series definition fraction} describes the time series used. It holds $T\leq T_f$. In the following we will use \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
 
 \begin{equation}
-\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f
+\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f,
 \label{eq:time series definition fraction}
 \end{equation}
 
