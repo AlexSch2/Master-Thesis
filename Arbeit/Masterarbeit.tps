@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=82
-Cursor=3445
+TopLine=30
+Cursor=2925
 
 [Frame1]
 Flags=0
@@ -107,7 +107,7 @@ Class=LaTeXView
 Document=Einleitung.tex
 
 [Frame5_View0,0]
-TopLine=39
+TopLine=26
 Cursor=2928
 
 [Frame6]
@@ -122,11 +122,11 @@ NormalPos.top=26
 NormalPos.right=2556
 NormalPos.bottom=875
 Class=LaTeXView
-Document=Methode_Ingarch.tex
+Document=Methode_CountTS.tex
 
 [Frame6_View0,0]
-TopLine=69
-Cursor=8465
+TopLine=0
+Cursor=40
 
 [Frame7]
 Flags=0
@@ -140,11 +140,11 @@ NormalPos.top=26
 NormalPos.right=2556
 NormalPos.bottom=875
 Class=LaTeXView
-Document=Methode_Coda.tex
+Document=Other_CountTS.tex
 
 [Frame7_View0,0]
-TopLine=233
-Cursor=8859
+TopLine=0
+Cursor=0
 
 [Frame8]
 Flags=0
@@ -158,11 +158,11 @@ NormalPos.top=26
 NormalPos.right=2556
 NormalPos.bottom=875
 Class=LaTeXView
-Document=Other_methods.tex
+Document=Methode_Coda.tex
 
 [Frame8_View0,0]
-TopLine=134
-Cursor=10839
+TopLine=318
+Cursor=19700
 
 [Frame9]
 Flags=0
@@ -179,7 +179,7 @@ Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame9_View0,0]
-TopLine=66
+TopLine=53
 Cursor=985
 
 [Frame10]
@@ -198,7 +198,7 @@ Document=RCode.tex
 
 [Frame10_View0,0]
 TopLine=0
-Cursor=688
+Cursor=1437
 
 [Frame11]
 Flags=0
@@ -215,8 +215,8 @@ Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame11_View0,0]
-TopLine=66
-Cursor=2962
+TopLine=53
+Cursor=4710
 
 [Frame12]
 Flags=0
@@ -233,8 +233,8 @@ Class=LaTeXView
 Document=Results.tex
 
 [Frame12_View0,0]
-TopLine=0
-Cursor=3
+TopLine=238
+Cursor=11236
 
 [Frame13]
 Flags=0
@@ -269,8 +269,8 @@ Class=BibTeXView
 Document=Literatur.bib
 
 [Frame14_View0,0]
-TopLine=15
-Cursor=1367
+TopLine=24
+Cursor=3261
 
 [Frame15]
 Flags=0
@@ -292,7 +292,7 @@ Cursor=38587
 
 [SessionInfo]
 FrameCount=16
-ActiveFrame=6
+ActiveFrame=8
 
 [Bookmarks]
 Results.tex=81 

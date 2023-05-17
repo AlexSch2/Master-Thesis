@@ -1270,6 +1270,42 @@
       \endverb
       \keyw{Censored data,Nondetects,Zeros,Compositional data,Imputation,Log-ratio analysis}
     \endentry
+    \entry{Pawlowsky:2013}{article}{}
+      \name{author}{3}{}{%
+        {{hash=2eea4c7d7a1051871715333c665f5c27}{%
+           family={Pawlowsky-Glahn},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Vera},
+           giveni={V\bibinitperiod}}}%
+        {{hash=c1b64e1cc2fbaf10ecf21361df5a2ae8}{%
+           family={Egozcue},
+           familyi={E\bibinitperiod},
+           given={Juan\bibnamedelima Jose},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=dd9acf670b20b73153a72952b029a72b}{%
+           family={Lovell},
+           familyi={L\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{2fe000fb0588046eed41d20ce4bf6be3}
+      \strng{fullhash}{2fe000fb0588046eed41d20ce4bf6be3}
+      \strng{bibnamehash}{2fe000fb0588046eed41d20ce4bf6be3}
+      \strng{authorbibnamehash}{2fe000fb0588046eed41d20ce4bf6be3}
+      \strng{authornamehash}{2fe000fb0588046eed41d20ce4bf6be3}
+      \strng{authorfullhash}{2fe000fb0588046eed41d20ce4bf6be3}
+      \field{labelalpha}{PEL13}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 5th International Workshop on Compositional Data Analysis}
+      \field{month}{06}
+      \field{title}{The product space T (tools for compositional data with a total)}
+      \field{year}{2013}
+      \field{pages}{143\bibrangedash 152}
+      \range{pages}{10}
+    \endentry
     \entry{CoDAR2:2008}{book}{}
       \name{author}{1}{}{%
         {{hash=15b832cca18e6fd4d84135d543b787ac}{%
@@ -1769,6 +1805,46 @@
       \verb https://doi.org/10.1214/11-EJS627
       \endverb
       \keyw{drift conditions,Ergodic,Feller,irreducibility,stationary,time series}
+    \endentry
+    \entry{Yang:2013}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9845261412338f09f9fda112e8d5206d}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Ming},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c1e53f19f11af935f7661a81f43c3d37}{%
+           family={Zamba},
+           familyi={Z\bibinitperiod},
+           given={Gideon},
+           giveni={G\bibinitperiod}}}%
+        {{hash=85355652f1b5e7ddd0ed4bfa61c55a42}{%
+           family={Cavanaugh},
+           familyi={C\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
+      \strng{fullhash}{0a430d56c991496b3d9a3b7a0bba0dbb}
+      \strng{bibnamehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
+      \strng{authorbibnamehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
+      \strng{authornamehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
+      \strng{authorfullhash}{0a430d56c991496b3d9a3b7a0bba0dbb}
+      \field{labelalpha}{YZC13}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Statistical Methodology}
+      \field{month}{09}
+      \field{title}{Markov regression models for count time series with excess zeros: A partial likelihood approach}
+      \field{volume}{14}
+      \field{year}{2013}
+      \field{pages}{26\bibrangedash 38}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.stamet.2013.02.001
+      \endverb
     \endentry
     \entry{Yee:1996}{article}{}
       \name{author}{2}{}{%

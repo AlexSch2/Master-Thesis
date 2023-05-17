@@ -14,26 +14,26 @@ As mentioned above the CoDA model must not include any zero values. Since in the
 
 As already hinted in the description of the methodology we consider the use of $\Tsp$-Spaces. For this, at each time point, we calculate the total amount and include it as an additional variable in the model. In addition we can choose to take the logarithm of the sum. This means $\bm{u}_t$ in model \ref{eq:VAR model} changes to 
 
-\begin{equation*}
+\begin{equation}
 \bm{u}_t = [ilr(\bm{Y}_t),t(\bm{Y}_t)],
 \label{eq:Tspace u}
-\end{equation*}
+\end{equation}
 
 with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$.
 
 Another characteristic of our data are the low values for some categories of it. Even at the aggregated main category level there are instances with low values for some of the categories. This is the case especially for category 3 and 4. As such, we inspect a method which we will call in the following one-vs-all. The principle is the following. A category $k$ is chosen as the pivot category $k_{pivot}$. For all the chosen time points, at each point, the values of the other categories get summed up
 
-\begin{equation*}
+\begin{equation}
 Y_{other,t} = \sum_{\substack{k=1 \\ k \neq k_{pivot}}}^K Y_{kt}.
 \label{eq:one vs all}
-\end{equation*}
+\end{equation}
 
 Together with the pivot category, the sum of the other categories are then transformed as usual and the VAR model is calculated 
 
-\begin{equation*}
+\begin{equation}
 \bm{u}_t = ilr([Y_{other,t}, Y_{k_{pivot},t}]).
 \label{eq:one vs all ilr}
-\end{equation*}
+\end{equation}
 
 
 All categories are chosen as a pivot category at one point and the predicted values of the pivot groups are then used as the final result. 
@@ -44,10 +44,10 @@ All categories are chosen as a pivot category at one point and the predicted val
 
 As an alternative to the Poisson distribution in \ref{eq:Ingarch Distribution}, a negative binomial distribution can be used as well. This would change \ref{eq:Ingarch Distribution} to 
 
-\begin{equation*}
+\begin{equation}
 p_{kt}(y;\bm{\theta})=\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \frac{\Gamma(\phi+y)}{\Gamma(y+1)\Gamma(\phi)}\left(\frac{\phi}{\phi+\lambda_{kt}}\right)^\phi\left(\frac{\lambda_{kt}}{\phi+\lambda_{kt}}\right)^y, \hspace{0.2cm} y \in \mathbb{N}_0.
 \label{eq:Ingarch negbinom Distribution}
-\end{equation*}
+\end{equation}
 
 With the negative Binomial Distribution the conditional variance is larger than the conditional mean $\lambda_{kt} = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right]$.
 

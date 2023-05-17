@@ -146,3 +146,17 @@ ybshift <- bshift(y)
 
 test<-results %>% group_by(model)%>%Model.Error(Fnct = "Mse",Category = c(3,4)) %>% 
   Model.ErrorOverall(Fnct = "sum",SplitByGroup = F,Category = c(3,4))
+
+
+
+Model <- inarbayes_result$model[["8"]][["1"]]$window19
+Alpha <- Model$alpha
+Lambda <- Model$lambda
+m <- length(Alpha)
+TimeSeriesValue_LastKnown <- inarbayes_result$result %>% filter(id==8 & category == 1 & window ==19) %>%select(valueLastKnown)
+
+ValuePredict <- TimeSeriesValue_LastKnown*(1/m *sum(Alpha^PredictionStep)) + (1/m*sum((1-Alpha^PredictionStep)/(1-Alpha)*Lambda))
+
+
+
+

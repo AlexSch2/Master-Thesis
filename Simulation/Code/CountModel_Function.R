@@ -153,13 +153,18 @@ CountModel.Prediction <- function(Data_Window,
     
     else if(ModelType =="inar_bayes"){
       
-      Model <- estimate_zinarp(TimeSeriesValue_Window[[Category]],p=1,innovation = Distribution)
+      Model <- estimate_zinarp(TimeSeriesValue_Window[[Category]],p=1,innovation = Distribution,iter = 500)
       
-      Alpha <- Model$alpha
-      Lambda <- Model$lambda
-      m <- length(Alpha)
+      # Alpha <- Model$alpha
+      # Lambda <- Model$lambda
+      # m <- length(Alpha)
+      # 
+      # ValuePredict <- TimeSeriesValue_LastKnown*(1/m *sum(Alpha^PredictionStep)) + (1/m*sum((1-Alpha^PredictionStep)/(1-Alpha)*Lambda))
       
-      ValuePredict <- TimeSeriesValue_LastKnown*(1/m *sum(Alpha^PredictionStep)) + (1/m*sum((1-Alpha^PredictionStep)/(1-Alpha)*Lambda))
+      Alpha <- mean(Model$alpha)
+      Lambda <- mean(Model$lambda)
+      
+      ValuePredict <- Alpha^PredictionStep * (TimeSeriesValue_LastKnown-(Lambda)/(1-Alpha))+Lambda/(1-Alpha)
       
       PredictionInterval_Lower <- NA
       PredictionInterval_Upper <- NA

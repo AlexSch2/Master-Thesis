@@ -200,7 +200,7 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
   theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
   ggtitle(paste("Error measures",sep=" "))
   
-  ggsave(filename = here("Plots",paste("All_ErrorMeasure_combined_zoomed",ids_save,"zim_standard",".png",sep="")),plot=BoxPlot,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("All_ErrorMeasure_combined_zoomed",".png",sep="")),plot=BoxPlot,height = 15,width = 20)
    
 
  #Quantile Plot
@@ -257,13 +257,13 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
     InarClassicErrorSorted_Split <- inner_join(InarClassicErrorSorted_Split,TimeSeries_Length,bye ="id")
     
     
-    InarBayesErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="inar_bayes" & group == group)%>%arrange(.,error)
-    InarBayesQuantiles_Split  <- quantile(InarBayesErrorSorted_Split $error,na.rm = T)
-    
-    InarBayesErrorSorted_Split$index <- NA
-    InarBayesErrorSorted_Length <- sum(InarBayesErrorSorted_Split$group == group)
-    InarBayesErrorSorted_Split[InarBayesErrorSorted_Split$group == group,]$index <- seq(1:InarBayesErrorSorted_Length)
-    InarBayesErrorSorted_Split <- inner_join(InarBayesErrorSorted_Split,TimeSeries_Length,bye ="id")
+    # InarBayesErrorSorted_Split  <-  ModelError_Split   %>% filter(model=="inar_bayes" & group == group)%>%arrange(.,error)
+    # InarBayesQuantiles_Split  <- quantile(InarBayesErrorSorted_Split $error,na.rm = T)
+    # 
+    # InarBayesErrorSorted_Split$index <- NA
+    # InarBayesErrorSorted_Length <- sum(InarBayesErrorSorted_Split$group == group)
+    # InarBayesErrorSorted_Split[InarBayesErrorSorted_Split$group == group,]$index <- seq(1:InarBayesErrorSorted_Length)
+    # InarBayesErrorSorted_Split <- inner_join(InarBayesErrorSorted_Split,TimeSeries_Length,bye ="id")
     
   }else{
     IngarchErrorSorted_Length <- sum(IngarchErrorSorted_Split$group == group)
@@ -275,13 +275,14 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
     InarClassicErrorSorted_Length <- sum(InarClassicErrorSorted_Split$group == group)
     InarClassicErrorSorted_Split[InarClassicErrorSorted_Split$group == group,]$index <- seq(1:InarClassicErrorSorted_Length)
     
-    InarBayesErrorSorted_Length <- sum(InarBayesErrorSorted_Split$group == group)
-    InarBayesErrorSorted_Split[InarBayesErrorSorted_Split$group == group,]$index <- seq(1:InarBayesErrorSorted_Length)
+    # InarBayesErrorSorted_Length <- sum(InarBayesErrorSorted_Split$group == group)
+    # InarBayesErrorSorted_Split[InarBayesErrorSorted_Split$group == group,]$index <- seq(1:InarBayesErrorSorted_Length)
     
     ErrorSorted_Split <- na.omit(rbind(CodaErrorSorted_Split,
                                        IngarchErrorSorted_Split,
-                                       InarClassicErrorSorted_Split,
-                                       InarBayesErrorSorted_Split))
+                                       InarClassicErrorSorted_Split))
+                                       # ,
+                                       # InarBayesErrorSorted_Split))
     
     
     if(ZIM){
@@ -318,7 +319,7 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
     scale_colour_manual("Legend", values = c(MyColour),aesthetics = "colour")+
     ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,sep=" "))
 
-  ggsave(filename = here("Plots",paste("Quantile_Plot_Split",ids_save,"_all_models",".png",sep="")),plot=QuantPlot_Split,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Quantile_Plot_Split_all_models",".png",sep="")),plot=QuantPlot_Split,height = 15,width = 20)
 
 }
 

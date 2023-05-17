@@ -1,6 +1,3 @@
-\section{CoDA}
-\label{sec:Coda}
-
 \subsection{Motivation}
 \label{sec: Coda Motivation}
 
@@ -8,7 +5,7 @@ One way to see our data is as a compositional time series. The exact definition 
 
 %Beschreiben warum CoDA und wie unsere Daten als compositional Data gesehen werden kann. 
 
-\subsection{Preliminaries}
+\section{Preliminaries}
 \label{sec: Coda Preliminaries}
 The basis of this section is given by \cite{Kynclova:2015}, \cite{Egozcue:2003} and \cite{Filzmoser:2020}.
 
@@ -20,142 +17,142 @@ CoDA, which is short for "`Compositional Data Analysis"' works with compositiona
 	
 where $\kappa$ is a positive constant \cite{Kynclova:2015}. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A D-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $a \in \mathbb{R}$ they are defined respectively as \cite{Kynclova:2015}
 
-\begin{equation*}
-\textbf{x}\oplus \textbf{z} := \ClOp(x_1z_1,x_2z_2,\ldots,x_Dz_D)^T, \hspace{0.5cm} a \odot \textbf{x} := \ClOp(x_1^a,x_2^a,\ldots,x_D^a)^T.
+\begin{equation}
+\textbf{x}\oplus_a \textbf{z} := \ClOp(x_1z_1,x_2z_2,\ldots,x_Dz_D)^T, \hspace{0.5cm} a \odot_a \textbf{x} := \ClOp(x_1^a,x_2^a,\ldots,x_D^a)^T.
 \label{eq:Simplex Operationen}
-\end{equation*}
+\end{equation}
 
 Here $\ClOp$ is the closure operation that maps each compositional vector from the real value space $\mathbbm{R}_+^D$ into its representation in $\mathbbm{S}^D$
 
-\begin{equation*}
+\begin{equation}
 \ClOp \left(\bm{x}\right) := \left(\frac{\kappa x_1}{\sum_{i=1}^D x_i},\ldots, \frac{\kappa x_D}{\sum_{i=1}^D x_i}\right)^T.
 \label{eq:Closure Operation}
-\end{equation*}
+\end{equation}
 
 
 Using $z^{-1} := \ClOp(z_1^{-1},z_2^{-1},\ldots,z_D^{-1})$, the inverse perturbation can be defined as 
 
-\begin{equation*}
-\textbf{x} \ominus \textbf{z} := \textbf{x} \oplus \textbf{z}^{-1},
+\begin{equation}
+\textbf{x} \ominus_a \textbf{z} := \textbf{x} \oplus_a \textbf{z}^{-1},
 \label{eq: Inverse Perturbation}
-\end{equation*}
+\end{equation}
 
 Now we further define an inner product in order to have an inner product space over the simplex $\mathbbm{S}^D$. For two compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ define the Aitchison inner product as 
 
-\begin{equation*}
+\begin{equation}
 \left\langle \textbf{x},\textbf{z} \right\rangle_a := \frac{1}{2D}\sum_{i=1}^{D}\sum_{j=1}^{D}\log(\frac{x_i}{x_j})\log(\frac{z_i}{z_j}).
 \label{eq:Aitchon inner product}
-\end{equation*}
+\end{equation}
 
 %With this, the Euclidean vector space structure is induced on the simplex. 
 In addition, a norm and distance measure can be defined
 
-\begin{equation*}
-\norm{\textbf{x}}_a^2 := \left\langle  \textbf{x},\textbf{x} \right\rangle_a, \hspace{0.5cm} d_a(\textbf{x},\textbf{z}) := \norm{\textbf{x} \ominus \textbf{z}}_a.
+\begin{equation}
+\norm{\textbf{x}}_a^2 := \left\langle  \textbf{x},\textbf{x} \right\rangle_a, \hspace{0.5cm} d_a(\textbf{x},\textbf{z}) := \norm{\textbf{x} \ominus_a \textbf{z}}_a.
 \label{eq:Simplex Norm and Distance}
-\end{equation*}
+\end{equation}
 
 This induced geometry is called the Aitchison geometry and it allows us to express a composition $\textbf{x} \in \mathbbm{S}^D$ as a perturbation-linear combination of a basis of $\mathbbm{S}^D$.
 
 However, in order to use standard statistical tools, it is desirable to move from this geometry to the Euclidean real space \cite{Filzmoser:2020}. There are various ways to map the data from the simplex $\mathbbm{S}^D$ to the real space $\mathbb{R}^D$. A review of the most common transformations is provided in the following section.
 
-\subsection{Common Transformations}
+\section{Common Transformations}
 \label{sec: Common Transformations}
 
 Let $\textbf{x}, \textbf{z} \in \mathbbm{S}^D$ be D-part compositions.
 \subsubsection{alr Coordinates}
 \label{sec:alr Coordinates}
 
-The additive log-ratio (alr) Coordinates are defined as
+The additive log-ratio (alr) Coordinates are defined as \cite{Kynclova:2015}
 
-\begin{equation*}
+\begin{equation}
 \textbf{z}^{(k)} = alr_k(\textbf{x}) := \left(\log\left(\frac{x_1}{x_k}\right), \ldots, \log\left(\frac{x_{k-1}}{x_k}\right),\log\left(\frac{x_{k+1}}{x_k}\right),\ldots,\log\left(\frac{x_D}{x_k}\right)\right).
 \label{eq:alr Coordinates}
-\end{equation*}
+\end{equation}
 
 and map the composition $\textbf{x}$ to the real space $\mathbb{R}^D$. They are mainly mentioned for historic purposes since they are an intuitive way of transformation. However, limitations are posed by their dependence on the choice of the denominator $x_k$ and the fact that they are not orthogonal to each other \cite{Filzmoser:2020}. 
 
 \subsubsection{clr Coefficients}
 \label{sec:clr Coefficients}
 
-Let $g(\textbf{x})$ be the geometric mean of $\textbf{x}$. The centered log-ratio coefficients are then defined as 
+Let $g(\textbf{x})$ be the geometric mean of $\textbf{x}$. The centered log-ratio coefficients are then defined as \cite{Kynclova:2015}
 
-\begin{equation*}
+\begin{equation}
 \textbf{w} = (w_1,\ldots, w_D)^T = clr(\textbf{x}) := \left(\log\left(\frac{x_1}{g(\textbf{x})}\right),\ldots, \log\left(\frac{x_D}{g(\textbf{x})}\right)\right)^T.
 \label{eq:clr Coefficients}
-\end{equation*}
+\end{equation}
 
 This transformation maps $\textbf{x}$ into the hyperplane $V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$. Hence the transformed data is constrained, which is emphasised by the term 'coefficient' instead of 'coordinates' \cite{Filzmoser:2020}. It can be shown that the $clr$ transformation is an isometry\cite{Egozcue:2003}. Therefore it holds 
 
-\begin{gather*}
+\begin{gather}
 \left\langle  \textbf{x},\textbf{z} \right\rangle_a = \left\langle  clr(\textbf{x}),clr(\textbf{z}) \right\rangle_a, \\
 d(\textbf{x},\textbf{z})_a = d(clr(\textbf{x}),clr(\textbf{z})).
 \label{eq:clr Coefficients isometric}
-\end{gather*}
+\end{gather}
 
 \subsubsection{ilr Coordinates}
 \label{sec:ilr Coordinates}
 
-The isometric log-ratio (ilr) are closely related to the clr Coefficients. Assume the inverse $clr$ transformation is isometric. Let $\left\{v_1,\ldots,v_{D-1}\right\}$ be an orthonormal base in the hyperplane $V$. Then $\textbf{e}_i = clr^{-1}(v_i), i=1,\ldots,D-1$ is an orthonormal basis of the simplex $\mathbbm{S}^D$. For $\textbf{x} \in \mathbbm{S}^D$, the $ilr$ transformation can then be defined as  
+The isometric log-ratio (ilr) are closely related to the clr Coefficients. Assume the inverse $clr$ transformation is isometric. Let $\left\{v_1,\ldots,v_{D-1}\right\}$ be an orthonormal base in the hyperplane $V$. Then $\textbf{e}_i = clr^{-1}(v_i), i=1,\ldots,D-1$ is an orthonormal basis of the simplex $\mathbbm{S}^D$. For $\textbf{x} \in \mathbbm{S}^D$, the $ilr$ transformation can then be defined as \cite{Kynclova:2015}
 
-\begin{equation*}
+\begin{equation}
 \textbf{u} = ilr(\textbf{x}) = \left(\left\langle \textbf{x},\textbf{e}_1\right\rangle_a,\ldots,\left\langle \textbf{x},\textbf{e}_{D-1}\right\rangle_a\right)^T.
 \label{eq:ilr Coordinates}
-\end{equation*}
+\end{equation}
 
 In addition to being isometric, the $ilr$ transformation is also isomorph. Let $\textbf{x}, \textbf{z}$ be two compositions and $a, b  \in \mathbbm{R}$. Then,
 
-\begin{equation*}
-ilr(a \odot \textbf{x} \oplus b \odot \textbf{z}) = a \cdot ilr(\textbf{x}) + b \cdot ilr(\textbf{z}),
+\begin{equation}
+ilr(a \odot \textbf{x} \oplus_a b \odot_a \textbf{z}) = a \cdot ilr(\textbf{x}) + b \cdot ilr(\textbf{z}),
 \label{eq:ilr coordinates isomorph}
-\end{equation*}
+\end{equation}
 
 as well as,
 
-\begin{gather*}
+\begin{gather}
 \left\langle  \textbf{x},\textbf{z} \right\rangle_a = \left\langle  ilr(\textbf{x}), ilr(\textbf{z}) \right\rangle_a, \\
 d(\textbf{x},\textbf{z})_a = d(ilr(\textbf{x}),ilr(\textbf{z})),\\
 \norm{x}_a = \norm{ilr(x)} = \norm{u}.
 \label{eq:ilr coordinates isometric }
-\end{gather*}
+\end{gather}
 
 
 From the definition of the ilr coordinates it can be seen that they can be expressed as a linear combination of the basis induced by the clr coefficients as seen above. Let $\textbf{V}$ be a $D \times (D-1)$ matrix with columns $\textbf{v}_i = clr(\textbf{e}_i)$. For a composition $\textbf{x}$ the vector of ilr coordinates associated with $\textbf{V}$ is given by,
 
-\begin{equation*}
+\begin{equation}
 \textbf{u}_{\textbf{V}} = ilr_{\textbf{V}}(\textbf{x}) = \textbf{V}^T clr(\textbf{x}) = \textbf{V}^T \log(\textbf{x}). 
 \label{eq:ilr coordinates with V}
-\end{equation*}
+\end{equation}
 
 The matrix $\textbf{V}$ is the contrast matrix with the orthonormal basis $(\textbf{e}_i)_{i=1}^{D-1}$ \cite{Egozcue:2003}. A special choice of orthogonal coordinates leads to the coordinates 
 
-\begin{gather*}
+\begin{gather}
 ilr(\textbf{x}) = (u_1,\ldots,u_{D-1})^T, \\
 u_j = \sqrt{\frac{D-j}{D-j+1}}\log\left(\frac{x_j}{\sqrt[D-j]{\prod_{l=j+1}^D x_l}}\right), \hspace{0.2cm} j=1,\ldots, D-1.
 \label{eq:pivot coordinates}
-\end{gather*}
+\end{gather}
 
 With this choice, the problem of interpretation, which arises from the relative nature of the compositional data and the dimension of the simplex, can be solved. The part $x_1$ is only contained in $z_1$ and therefore contains all relative information of $x_1$ \cite{Filzmoser:2020}. 
 
 To transform the data back in the simplex, the inverse transformation is given by, 
 
-\begin{gather*}
+\begin{gather}
 x_1 = \exp\left(\sqrt{\frac{D-1}{D}}u_1\right), \\
 x_i = \exp\left( \sum_{j=1}^{i-1}\frac{1}{\sqrt{(D-j+1)(D-j)}}u_j + \sqrt{\frac{D-i}{D-i+1}u_i} \right), \hspace{0.2cm} i=2,\ldots, D-1, \\
 x_D = \exp\left(- \sum_{j=1}^{D-1} \frac{1}{\sqrt{(D-j+1)(D-j)}}u_j \right).
 \label{eq: Inverse Transformation}
-\end{gather*}
+\end{gather}
 
 
-\subsection{The VAR Model}
+\section{The VAR Model}
 \label{sec:The VAR Model}
 
 Since we have established the basic setting we can now introduce compositional time series (CTS). A CTS $\left\{\bm{x}_t:t=1,\ldots,n \right\}$ can be defined as a series where $\bm{x}_t = \left(x_{1t},\ldots,x_{Dt}\right)^T \in \mathbbm{S}^D$. They are thus characterised by their positive components which sum up to a constant $\kappa_t$ for each point in time $t=1,\ldots,n$ 
 
-\begin{equation*}
+\begin{equation}
 \sum_{i=1}^D x_{it} = \kappa_t, \hspace{0.2cm} x_i > 0, i=1,\ldots D \hspace{0.1cm}; t=1,\ldots, n. 
 \label{eq:CTS characterisation}
-\end{equation*} 
+\end{equation} 
 
 Let $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f$ be our time series for fridge $f$ and assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a K-dimensional compositional vector measured at time $t, t=1,\ldots,T$. Further, let $\textbf{u}_t = ilr(\bm{Y}_t)$ be its $ilr$ transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by \cite{Kynclova:2015}
 
@@ -186,13 +183,94 @@ The parameter $\textbf{B}$ can then be estimated separately for each column of $
 Under these assumptions it can be shown that the OLS estimator is consistent and asymptotic normal \cite{Kynclova:2015} \cite{Luetkepohl:2007}. 
 
 
-\subsection{$\Tsp$-Spaces}
+\section{$\Tsp$-Spaces}
 \label{sec: Tspaces}
 
-Since in our context absolute values should be predicted eventually, we model this information in form of the sum of the original parts. Let $\textbf{x}$ be a D-dimensional compositional vector and define an extended vector space $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^D$.  An element of $\Tsp$ now has the form $\tilde{\bm{x}} = \left[t(\bm{x}),\ClOp\left({\bm{x}}\right)\right] = \left[t_x,\tilde{x}_1,\tilde{x}_2,\ldots,\tilde{x}_D \right]$ where $t(\bm{x})= \sum_{i=1}^D x_i$. This allows us to model the relative structure of the data as well as the total sum of the compositional parts. Often times the logarithm of the sum is taken. In the subsequent analysis, the compositional part $\bm{x}$ is then transformed using one of the possible transformations and then the statistical analysis is performed \cite{Kynclova:2015}. In our case, we have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=[t(\bm{Y}_t),\ClOp(\bm{Y}_t)]$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. 
+As we have seen lies the focus in compositional data analysis in the relative information encoded in the observations. However, as is often the case in practice, the absolute information is of interest as well. To retain this information, usually two practices are used. First, for a vector $\bm{x} \in \mathbb{R}^D_+$ the component wise logarithm $\log(\bm{x})$ is considered. Second, the total sum, or some other function, of $\bm{x}$ is added as an additional variable \cite{Pawlowsky:2013}. Here, we will dive deeper into the second method mentioned. An overview over the first method can be found in \cite{Pawlowsky:2013}. 
 
+Let $\bm{x} \in \mathbb{R}^D_+$ be a positive vector and $\ClOp(\bm{x})$ the projection onto $\mathbbm{S}^D$. Further, take a function $t:\mathbb{R}^D_+ \longrightarrow \mathbb{R}_+$ (i.e. the sum, product,...). Then define the product space  $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^D$ as the space of all possible elements $[t(\bm{x}),\ClOp(\bm{x})]$ \cite{Pawlowsky:2013}. To define a D-dimensional Euclidean vector space structure on $\Tsp$ we define an Abelian inner group operation, an external multiplication, and an inner product \cite{Pawlowsky:2013}. However, first we need to induce the Euclidean structure on $\mathbb{R}_+^D$ with the same operations. For $\bm{x},\bm{y} \in \mathbbm{R}_+^D$ and $\alpha \in \mathbbm{R}$ define the Abelian inner group operation, the external multiplication, and an inner product respectively as \cite{Pawlowsky:2013}
 
-\subsection{Zero-Handling}
+\begin{gather}
+\bm{x} \oplus_+ \bm{y}:= [x_1\cdot y_1,\ldots,x_D \cdot y_D)], \\
+\alpha \odot_+ \bm{x} := [x_1^{\alpha},x_D^{\alpha}], \\
+\left\langle \bm{x},\bm{y} \right\rangle_+ := \left\langle \log(\bm{x}),\log(\bm{y}) \right\rangle.
+\label{eq:Operations on Rdplus}
+\end{gather}
+
+Here, $\left\langle ,\right\rangle$ denotes the usual Euclidean inner product on $\mathbbm{R}^D$. 
+
+Now we can define for $\tilde{\bm{x}},\tilde{\bm{y}} \in \Tsp$ and $\alpha \in \mathbbm{R}$ the Abelian inner group operation as 
+
+\begin{equation}
+\tilde{\bm{x}} \oplus_T \tilde{\bm{y}} = [t(\bm{x}) \oplus_+ t(\bm{y}), \bm{x} \oplus_a \bm{y}] := [t(\bm{x}) \cdot t(\bm{y}), \ClOp(\tilde{x}_1\tilde{y}_1,\ldots,\tilde{x}_D\tilde{y}_D)],
+\label{eq:Abelian inner group operation}
+\end{equation}
+
+and the external multiplication as 
+
+\begin{equation}
+\alpha \odot_T \tilde{\bm{x}} = [\alpha \odot_+ t(\bm{x}), \alpha \odot_a \bm{x}] := [t(\bm{x})^{\alpha},\ClOp(\tilde{x}_1^{\alpha},\tilde{x}_D^{\alpha}],
+\label{eq:external multiplication}
+\end{equation}
+
+where $\oplus_a$ and $\odot_a$ are the perturbation and power transformation defined in \ref{eq:Simplex Operationen} and $\oplus_+$ and $\odot_+$ the respective operations defined for $\mathbbm{R}_+$ \ref{eq:Operations on Rdplus}.
+
+The inner product is defined as 
+
+\begin{equation}
+\left\langle \tilde{\bm{x}},\tilde{\bm{y}} \right\rangle_T := \left\langle t(\bm{x}),t(\bm{y}) \right\rangle_+ + \left\langle \ClOp(\bm{x}),\ClOp(\bm{y}) \right\rangle_a,
+\label{eq:inner product Tspace}
+\end{equation}
+
+where $\left\langle ,\right\rangle_+$ is the inner product in $\mathbbm{R}_+$, and $\left\langle ,\right\rangle_a$ is the Aitchison inner product defined in \ref{eq:Aitchon inner product} \cite{Pawlowsky:2013}.
+
+Further we can define a distance on $\Tsp$ with 
+
+\begin{gather}
+d_T^2(\tilde{\bm{x}},\tilde{\bm{y}}) = d_+^2(t(\bm{x}),t(\bm{y})) + d_a^2(\ClOp(\bm{x}),\ClOp(\bm{y})),
+\label{eq:distance Tspace}
+\end{gather}
+
+with $d_+^2(\bm{x},\bm{y}) = d(\log(\bm{x}),\log(\bm{y}))$ and $d$ is the Euclidean distance. 
+
+To ensure that the operations performed on $\ClOp(\bm{x})$ are compatible with the ones performed on $\Tsp$ we need to impose some conditions on the function $h:\mathbbm{R}_+^D \rightarrow \Tsp$, $h(\bm{x}):=[t(\bm{x}),\ClOp(\bm{x})]$. First, the function $h$ needs to be a one-to-one function since otherwise information could be lost by applying $h$ or $h^{-1}$. A result of this is the fact, that the function $t$ must be related to the sum of the components. To see this, write $\bm{x} \in \mathbbm{R}_+^D$ as $\bm{x} = \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x})$. Hence $ \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x}) = h^{-1}([t(\bm{x}),\ClOp(\bm{x})])$ \cite{Pawlowsky:2013}.
+The second condition is the preservation of the vector space properties in $\mathbbm{R}_+^D$ and $\Tsp$
+
+\begin{gather}
+h(\bm{x} \oplus_+ \bm{y}) = h(\bm{x}) \oplus_T h(\bm{y}), \\
+h(\alpha \odot_T \bm{x}) = \alpha \odot_T h(\bm{x}). 
+\label{eq:Vector Space Properties}
+\end{gather}
+
+This means for the function $t$ that 
+
+\begin{gather}
+t(\bm{x} \oplus_+ \bm{y}) = t(\bm{x}) \cdot t(\bm{y}), \\
+t(\alpha \odot_T \bm{x}) = [t(\bm{x})]^{\alpha}. 
+\label{eq:Vector Space Properties for t}
+\end{gather}
+
+In \cite{Pawlowsky:2013} the authors show that for $h_s=([t_s(\bm{x}),\ClOp(\bm{x})])$ with $t_s(\bm{x}) = \sum_{i=1}^D x_i$ is a one-to-one function, but not compatible with $\oplus_+,\odot_+$ and $\oplus_T,\odot_T$. However, as $h_s$ is a one-to-one function between $\mathbbm{R}_+^D$ and $\Tsp$, there exists a Euclidean structure in $\mathbbm{R}_+^D$ that is isometric to the one in $\Tsp$ \cite{Pawlowsky:2013}. The vector space operations can be defined as
+
+\begin{gather}
+\bm{x} \oplus_{+s} \bm{y} = h_s^{-1}(\tilde{\bm{x}}) \oplus_T  h_s^{-1}(\tilde{\bm{y}}), \\
+\alpha \odot_{+s} \bm{x} = \alpha \odot_T h_s{^-1}(\tilde{\bm{x}}), \\
+d_{+s}^2(\bm{x},\bm{y}) = d_T^2(h_s(\bm{x},\bm{y})),
+\label{eq:Vector Space Operations sum}
+\end{gather}
+
+where $\oplus_{+s}$ and $\odot_{+s}$ are the new operations in $\mathbbm{R}_+^D$ and $d^2$ is the squared distance in $\Tsp$. 
+
+In our case, we have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=[t(\bm{Y}_t),\ClOp(\bm{Y}_t)]$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr(\bm{Y}_t))^T$ take the $irl$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices and $\bm{\epsilon}_t$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$
+
+\begin{equation}
+\textbf{w}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{w}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{w}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{w}_{t-p} + \bm{\epsilon}_{t}.
+\label{eq:VAR model Tspace}
+\end{equation}
+
+In our application we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t)=\log(\sum_{k=1}^K Y_{kt})$ since we are interested in the total sum at time $t$. The logarithmic sum is a popular choice in the time series context \cite{Kynclova:2015}. 
+
+\section{Zero-Handling}
 \label{sec: Zero-Handling}
 
 As we can see in the definition of the simplex \ref{eq:Simplex Definition}, a compositional vector can only consist of positive parts. Since we have a considerate amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data. First, however, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them in order to perform compositional data analysis. In the following we summarise the methods presented in \cite{Lubbe:2021,Josep:2003}. 
