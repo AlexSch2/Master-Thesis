@@ -1016,6 +1016,49 @@
       \endverb
       \keyw{Forecast; volatility; transactions data}
     \endentry
+    \entry{Hong:2017}{article}{}
+      \name{author}{2}{}{%
+        {{hash=425b576c5175e8fedcae03a2b296e560}{%
+           family={Hong},
+           familyi={H\bibinitperiod},
+           given={Yongmiao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ede6503ef4890407f7dd7c662657672a}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Yoon-Jin},
+           giveni={Y\bibinithyphendelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5ea8492b4f9463129825c162edb3bb63}
+      \strng{fullhash}{5ea8492b4f9463129825c162edb3bb63}
+      \strng{bibnamehash}{5ea8492b4f9463129825c162edb3bb63}
+      \strng{authorbibnamehash}{5ea8492b4f9463129825c162edb3bb63}
+      \strng{authornamehash}{5ea8492b4f9463129825c162edb3bb63}
+      \strng{authorfullhash}{5ea8492b4f9463129825c162edb3bb63}
+      \field{labelalpha}{HL17}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2096-2320}
+      \field{journaltitle}{Journal of Management Science and Engineering}
+      \field{number}{1}
+      \field{title}{A General Approach to Testing Volatility Models in Time Series}
+      \field{volume}{2}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 33}
+      \range{pages}{33}
+      \verb{doi}
+      \verb https://doi.org/10.3724/SP.J.1383.201001
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2096232019300162
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2096232019300162
+      \endverb
+      \keyw{GARCH models,Nonlinear volatility dynamics,Specification testing}
+    \endentry
     \entry{Kynclova:2015}{article}{}
       \name{author}{3}{}{%
         {{hash=0545d5e6a07a5843e8443d7665f0dbc4}{%

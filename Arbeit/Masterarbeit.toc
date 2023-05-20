@@ -15,7 +15,7 @@
 \contentsline {section}{\numberline {2.3}Naive Random Walk}{11}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Zero-Inflated Models}{11}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Log-Linear Models}{13}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Vector Generalised Additive Models}{13}{section.2.6}%
+\contentsline {section}{\numberline {2.6}Vector Generalised Additive Models}{14}{section.2.6}%
 \contentsline {section}{\numberline {2.7}INAR(p) Models}{14}{section.2.7}%
 \contentsline {subsection}{\numberline {2.7.1}Distributional assumptions}{15}{subsection.2.7.1}%
 \contentsline {subsection}{\numberline {2.7.2}Forecasting}{15}{subsection.2.7.2}%

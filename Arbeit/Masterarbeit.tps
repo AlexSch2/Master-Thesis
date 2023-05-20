@@ -17,7 +17,7 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=75
+TopLine=66
 Cursor=2925
 
 [Frame1]
@@ -125,8 +125,8 @@ Class=LaTeXView
 Document=Methode_CountTS.tex
 
 [Frame6_View0,0]
-TopLine=0
-Cursor=40
+TopLine=32
+Cursor=6393
 
 [Frame7]
 Flags=0
@@ -143,8 +143,8 @@ Class=LaTeXView
 Document=Other_CountTS.tex
 
 [Frame7_View0,0]
-TopLine=0
-Cursor=0
+TopLine=21
+Cursor=3184
 
 [Frame8]
 Flags=0
@@ -233,7 +233,7 @@ Class=LaTeXView
 Document=Results.tex
 
 [Frame12_View0,0]
-TopLine=254
+TopLine=262
 Cursor=11236
 
 [Frame13]
@@ -269,8 +269,8 @@ Class=BibTeXView
 Document=Literatur.bib
 
 [Frame14_View0,0]
-TopLine=738
-Cursor=39977
+TopLine=717
+Cursor=24851
 
 [Frame15]
 Flags=0

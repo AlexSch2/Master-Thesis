@@ -168,3 +168,9 @@ z <- unclass(as.vector(test_data_prep[,2]))
 model <- tsglm(ts=z[[1]],model=list(past_obs=1,past_mean=1),link="identity")
 pred<-predict(model,n.ahead=1,type="shortest")
 pred$pred
+
+
+y <- z[[1]] - mean(z[[1]])
+x.g <- garchFit(~garch(1,1),y,include.mean = F)
+summary(x.g)
+predict(x.g)
