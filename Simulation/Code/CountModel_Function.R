@@ -122,7 +122,6 @@ CountModel.Prediction <- function(Data_Window,
       PredictionResult <- predict(Model,n.ahead = PredictionStep,type = "shortest",
                                   level = 0.90,newxreg = XregFuture)
       
-      #Rounding it since we only have integers
       ValuePredict <- PredictionResult$pred
       
       #Extracting the lower and upper prediction interval 
@@ -190,7 +189,6 @@ CountModel.Prediction <- function(Data_Window,
       
       names(TimeSeriesValue_LastKnown) <- paste("x",as.character(Category),sep="")
       ValuePredict <- predict(Model,newdata = data.frame(as.list(TimeSeriesValue_LastKnown)))
-      #Rounding it since we only have integers
       
       PredictionInterval_Lower <- NA
       PredictionInterval_Upper <- NA
@@ -201,7 +199,7 @@ CountModel.Prediction <- function(Data_Window,
       stop("Choose valid Model")
     }
 
-    
+    #Rounding Result
     ValuePredict <- round (ValuePredict)
     
     #Calculating the prediction error

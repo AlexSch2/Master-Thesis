@@ -160,3 +160,11 @@ ValuePredict <- TimeSeriesValue_LastKnown*(1/m *sum(Alpha^PredictionStep)) + (1/
 
 
 
+x <- ccomp(test_data_prep[,-1],SZ=TRUE)
+is.SZ(x)
+
+z <- unclass(as.vector(test_data_prep[,2]))
+
+model <- tsglm(ts=z[[1]],model=list(past_obs=1,past_mean=1),link="identity")
+pred<-predict(model,n.ahead=1,type="shortest")
+pred$pred
