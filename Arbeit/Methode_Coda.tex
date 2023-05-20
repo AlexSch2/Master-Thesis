@@ -261,7 +261,7 @@ d_{+s}^2(\bm{x},\bm{y}) = d_T^2(h_s(\bm{x},\bm{y})),
 
 where $\oplus_{+s}$ and $\odot_{+s}$ are the new operations in $\mathbbm{R}_+^D$ and $d^2$ is the squared distance in $\Tsp$. 
 
-In our case, we have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=[t(\bm{Y}_t),\ClOp(\bm{Y}_t)]$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr(\bm{Y}_t))^T$ take the $irl$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices and $\bm{\epsilon}_t$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$
+With the Euclidean structure established, we can model the relative structure and total sum in one model.  We have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=[t(\bm{Y}_t),\ClOp(\bm{Y}_t)]$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr(\bm{Y}_t))^T$ take the $irl$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices and $\bm{\epsilon}_t$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$
 
 \begin{equation}
 \textbf{w}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{w}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{w}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{w}_{t-p} + \bm{\epsilon}_{t}.
@@ -275,8 +275,10 @@ In our application we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t)
 
 As we can see in the definition of the simplex \ref{eq:Simplex Definition}, a compositional vector can only consist of positive parts. Since we have a considerate amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data. First, however, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them in order to perform compositional data analysis. In the following we summarise the methods presented in \cite{Lubbe:2021,Josep:2003}. 
 
+\subsection{Rounded Zeros}
+\label{sec:Rounded Zeros}
 
-Let $\bm{x} \in \mathbbm{S}^D$ be a compositional vector and assume it has $m$ zeros. Further take $\bm{r} \in \mathbbm{S}^D$ as its zero free replacement. If we have rounded zeros, a simple method proposed in \cite{Josep:2003} is to replace zero values with $DL \cdot 0.65$ where DL is the detection limit and 0.65 was found to be optimal to minimise the distortion in the covariance structure \cite{Lubbe:2021}. This means $\bm{r}$ has the form
+Let $\bm{x} \in \mathbbm{S}^D$ be a compositional vector and assume it has $m$ zeros. Further take $\bm{r} \in \mathbbm{S}^D$ as its zero free replacement. Let $\bm{S}$ be the selection matrix of the non-zero components and define a sub compositions as $\bm{x}_s=\ClOp(\bm{Sx})$ . If we have rounded zeros, a simple method proposed in \cite{Josep:2003} is to replace zero values with $DL \cdot 0.65$ where DL is the detection limit and 0.65 was found to be optimal to minimise the distortion in the covariance structure \cite{Lubbe:2021}. This means $\bm{r}$ has the form
 
 \begin{equation}
 r_j = 
@@ -298,6 +300,15 @@ x_j - \frac{\delta(m+1)m}{D^2}, & \text{if } x_j>0.
 \label{eq:additive replacement strategy}
 \end{equation}
 
+As we can see in \ref{eq:additive replacement strategy}, both zero and non-zero values are modified. In addition, this rule can be extended by using a different $\delta_j$ for each component $x_j$. However, the additive replacement strategy is additive for non-zero values and hence not coherent with the basic operations of $\mathbbm{S}^D$ \cite{Josep:2003}. Other properties include:
+
+\begin{enumerate}
+	\item The replacement value $r_j$ depends on both, the amount of zeros $m$ and the dimension $D$.
+	\item For two vectors $\bm{x},\bm{y} \in \mathbbm{S}^D$ with common zeros, i.e. $x_j= 0 \leftrightarrow y_j=0, j=1,\ldots,D$, their sub compositions $\bm{x}_s$ and $\bm{y}_s$  on their non-zero parts and their replacements $\bm{r}^x,\bm{r}^y$, the Aitchison distance is not preserved $d_a(\bm{r}^x,\bm{r}^y) \neq d_a(\bm{x}_s,\bm{y}_s)$. 
+	\item Ratios are not preserved. If $\bm{x}$ has more than one zero, then $\frac{r_j}{r_k} \neq \frac{x_j}{x_k}$ for $x_j,x_k > 0$.
+	\item The value $\frac{r_j}{r_k}$ depends on $\delta$. Therefore, the covariance structure of the sub compositions of the non-zero parts is not preserved \cite{Josep:2003}.
+\end{enumerate}
+
 Second, the Simple Replacement Strategy, which formalises the procedure of replacing the zeros in $\bm{x}$ with a small positive value $\delta$, obtaining a strictly positive vector $\bm{w} \in \mathbbm{R}_+$ and applying the closure operation $\bm{r}=\ClOp(\bm{w})$
 
 \begin{equation}
@@ -308,6 +319,8 @@ r_j =
 \end{cases}
 \label{eq:simple replacement strategy}
 \end{equation}
+
+This method depends again on $\delta_j$ and the number of zeros $m$. 
 
 The main result of \cite{Josep:2003} is the multiplicative replacement strategy. The proposed replacement is 
 
@@ -320,9 +333,77 @@ r_j =
 \label{eq:multiplicative replacement strategy}
 \end{equation}
 
-where $\delta_j$ is the imputed value. The advantages of this method in comparison with the Additive and Simple Replacement Strategy are further explained in \cite{Josep:2003}.
+where $\delta_j$ is the imputed value. It has the following properties
 
-Another method proposed in \cite{Lubbe:2021} is to replace rounded zeros with values drawn from a continuous uniform distribution $U(0.1\cdot DL,DL)$. Setting the lower limit to $0.1\cdot DL$ makes sure that the values are not getting too close to zero and not using a constant prevents underestimation of the variability. They further present the R-package \textit{zCompositions} by \cite{Palarea-Albaladejo:2015}. This package includes some more advanced methods which are based on Markov Chain Monte Carlo (MCMC), the EM algorithm or multiple imputation to perform imputation. Some methods include Model-based multiplicative log-normal imputation, which fits a log-normal distribution for the data, a Data Augmentation (DA) algorithm, which is based on MCMC, and Multiplicative Kaplan–Meier smoothing spline replacement \cite{Palarea-Albaladejo:2015}.
+\begin{enumerate}
+	\item It is a more intuitive approach. If $\delta$ is close to the actual censored value, then $\bm{r}$ recovers the true composition. Further it does not depend on the number of zeros $m$ or the dimension $D$. 
+	\item It is compatible with the Simplex vector space structure. For $\bm{x} \in \mathbbm{S}^D$, its non-zero version $\bm{r}$ and their sub compositions $\bm{x}_s,\bm{r}_s$, it holds 
+	\begin{itemize}
+		\item Subcomposition Invariance: $\bm{x}_s = \bm{r}_s$,
+		\item Perturbation Invariance: $\forall \bm{y} \in \mathbbm{S}^D: (\bm{y} \oplus \bm{r})_s = (\bm{y} \oplus \bm{x})_s$,
+		\item Power transformation Invariance: $\forall \alpha \in \mathbbm{R}: (\alpha \odot \bm{r})_s = (\alpha \odot \bm{x})_s$. 
+	\end{itemize}
+	\item Ratios are preserved which implies that the covariance structure for non-zero components is preserved. For  $x_j,x_k >0$ it holds $\frac{r_j}{r_k} = \frac{x_j}{x_k}$. 
+	\item Let again $\bm{x},\bm{y} \in \mathbbm{S}^D$ be two vectors with common zeros and their replacements $\bm{r}^x,\bm{r}^y$ which were obtained with the same imputation $\delta_j$. Then it holds $\frac{r^x_j}{r^y_j}=\frac{x_j}{y_j}$ for $x_j,y_j>0$ and $d_a(\bm{r}^x,\bm{r}^y$ does not depend on the imputed values \cite{Josep:2003}. 
+\end{enumerate}
+
+Another method proposed in \cite{Lubbe:2021} is to replace rounded zeros with values drawn from a continuous uniform distribution $U(0.1\cdot DL,DL)$. Setting the lower limit to $0.1\cdot DL$ makes sure that the values are not getting too close to zero and not using a constant prevents underestimation of the variability. They further present the R-package \textit{zCompositions} by \cite{Palarea-Albaladejo:2015}. 
+
+The authors in \cite{Palarea-Albaladejo:2015} focus on the case of rounded zeros which can be seen as left censored data. Their package includes some more advanced methods which are based on Markov Chain Monte Carlo (MCMC), the EM algorithm or multiple imputation to perform imputation. They assume the data is left-censored, or Type 1 censored and follows a multivariate normal distribution in $\mathbbm{R}^D$. 
+
+\subsubsection{EM-based algorithm}
+\label{sec:EM Algorithm}
+
+The Expectation-Maximisation (EM) algorithm \cite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses information in the covariance structure to conditionally estimate the censored values. Given a vector $\bm{x}$ with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components the EM-algorithm consists of two steps
+
+\begin{enumerate}
+	\item E-Step: Given a parameter estimate $\hat{\theta}_t$, compute $\mathbbm{E}[\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\theta}_t]$.
+	\item M-Step: Compute a new estimate $\hat{\theta}_{t+1}$ based on $[\hat{\bm{x}}_{non},\bm{x}_{obs}]$.
+\end{enumerate}
+
+Here, $DL$ is the mapped censoring threshold \cite{Palarea-Albaladejo:2015}.
+
+As seen an initial estimation is required to kick start the iteration. This can be done by either using a subset of the data which was fully observed or by using other imputation methods \cite{Palarea-Albaladejo:2015}. 
 
 
+\subsubsection{MCMC data augmentation}
+\label{sec:MCMC data augmentation}
+
+The Markov Chain Monte Carlo(MCMC) algorithm can be seen as the Bayesian counter part to the EM algorithm. With the use of priors, external information can be incorporated. Generally, non-informative priors are used. With the same notation as above, the algorithm consists of two steps again
+
+\begin{enumerate}
+	\item Imputation-Step: Given $\hat{\theta}_t$ , simulate from $P(\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\theta}_t)$.
+	\item Posterior-Step: Generate $\hat{\theta}_{t+1}$ by simulating from $P(\theta|\hat{\bm{x}}_{non},\bm{x}_{obs})$. 
+\end{enumerate}
+
+This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement \cite{Palarea-Albaladejo:2015}.
+
+
+\subsubsection{Bayesian-multiplicative replacement}
+\label{sec:Bayesian-multiplicative replacement}
+
+A common assumption for multivariate count data is that a vector $\bm{x}$ is a realisation from a multinomial distribution with parameters $[n,\pi_1,\ldots,\pi_D]$ where $\pi_j$ is the probability of belonging to category j. For the prior distribution of $\bm{\pi}=[\pi_1,\ldots,\pi_D]$, an imprecise Dirichlet model with parameter s and $\bm{t}=[t_1,\ldots,t_D]$ with $\sum_k t_k=1$ and expectation $\mathbbm{E}[\pi_j]=t_j$ is considered. The posterior expectation is then given by $\mathbbm{E}[\pi_j|x_j=0]=t_j \frac{s}{n+s}$ \cite{Palarea-Albaladejo:2015}.
+
+
+The presented methods as well as additional methods are explained in more detail in \cite{Palarea-Albaladejo:2015}.
+
+\subsection{Essential Zeros}
+\label{sec: Essential Zeros}
+
+The case of essential zeros is not as straightforward. In \cite{Aitchison:2003} the authors question the experimental design in case of many essential zeros. Especially if the zeros arise as a result of an overly fine division of the data or that the category has no significance. A possible solution in that case would be the amalgamation of categories with low counts. Further they introduce a two stage model. The first stage models the appearance of essential zeros, while in the second stage the non zero components are generated. The maximum likelihood estimates of the parameters are suggested to be done via a MCMC algorithm. After this is done, hypothesis testing and statistical analysis can be performed. 
+
+A vector space approach for the simplex is presented in \cite{Boogaart:2006} and extended in the R-package \textit{compositions} \cite{Compositions:2023}. The idea is based on the $clr$ coefficients \ref{eq:clr Coefficients} and the spanned subspace. Let M contain the indices of the missing parts. Then according to \cite{Egozcue:2005} a subcomposition can be seen as a projection of the clr transformed composition into the null space of the vectors $\left\{\bm{w}_i: i \in M\right\}$. Hence, one only observes a projection of the true composition. Let $P_M$ be the orthogonal projection onto the null space of $\left\{\bm{w}_i: i \in M\right\}$ and $\bm{x}$ a composition with zeros. Then the idea is to represent the information of $\bm{x}$ by the projected values $P_M(clr(\bm{x}))$ and $P_M$ itself \cite{Boogaart:2006}. If $M^C$ denotes the complement of M, so the indices of the non-zero parts, and $\bm{x}_s$ is the sub composition of $\bm{x}$ of $M^C$ then for this sub composition it holds 
+
+\begin{equation}
+P_M(clr(\bm{x}))_i =
+\begin{cases}
+clr(\bm{x}_s)_i, & \text{if} i \notin M \\
+0, & \text{if} i \in M.
+\end{cases}
+\label{eq:clr Projection}
+\end{equation}
+
+The subsequent $ilr$ transformation is then based on this modified approach with $ ilr_{\textbf{V}}(\textbf{x}) = \textbf{V}^T P_M(clr(\textbf{x}))$.
+
+In \cite{Leininger:2013} they  they provide a review of other possible methods for handling essential zeros. They also introduce a model themselves, which allows zeros by modifying the $alr$ transformation with the help of latent variables. Assuming a category with no zero values for all observations and taking it as the baseline component, they allow for transformation into a lower dimensional space and where they can perform their regression \cite{Leininger:2013}.
 

@@ -1,0 +1,15 @@
+@article{10.2307/1912773,
+ ISSN = {00129682, 14680262},
+ URL = {http://www.jstor.org/stable/1912773},
+ abstract = {Traditional econometric models assume a constant one-period forecast variance. To generalize this implausible assumption, a new class of stochastic processes called autoregressive conditional heteroscedastic (ARCH) processes are introduced in this paper. These are mean zero, serially uncorrelated processes with nonconstant variances conditional on the past, but constant unconditional variances. For such processes, the recent past gives information about the one-period forecast variance. A regression model is then introduced with disturbances following an ARCH process. Maximum likelihood estimators are described and a simple scoring iteration formulated. Ordinary least squares maintains its optimality properties in this set-up, but maximum likelihood is more efficient. The relative efficiency is calculated and can be infinite. To test whether the disturbances follow an ARCH process, the Lagrange multiplier procedure is employed. The test is based simply on the autocorrelation of the squared OLS residuals. This model is used to estimate the means and variances of inflation in the U.K. The ARCH effect is found to be significant and the estimated variances increase substantially during the chaotic seventies.},
+ author = {Robert F. Engle},
+ journal = {Econometrica},
+ number = {4},
+ pages = {987--1007},
+ publisher = {[Wiley, Econometric Society]},
+ title = {Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of United Kingdom Inflation},
+ urldate = {2023-05-20},
+ volume = {50},
+ year = {1982}
+}
+

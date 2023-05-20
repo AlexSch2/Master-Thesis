@@ -17,7 +17,7 @@ Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame0_View0,0]
-TopLine=30
+TopLine=75
 Cursor=2925
 
 [Frame1]
@@ -161,8 +161,8 @@ Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame8_View0,0]
-TopLine=318
-Cursor=19700
+TopLine=412
+Cursor=30967
 
 [Frame9]
 Flags=0
@@ -233,7 +233,7 @@ Class=LaTeXView
 Document=Results.tex
 
 [Frame12_View0,0]
-TopLine=238
+TopLine=254
 Cursor=11236
 
 [Frame13]
@@ -269,8 +269,8 @@ Class=BibTeXView
 Document=Literatur.bib
 
 [Frame14_View0,0]
-TopLine=24
-Cursor=3261
+TopLine=738
+Cursor=39977
 
 [Frame15]
 Flags=0
@@ -292,7 +292,7 @@ Cursor=38587
 
 [SessionInfo]
 FrameCount=16
-ActiveFrame=8
+ActiveFrame=0
 
 [Bookmarks]
 Results.tex=81 

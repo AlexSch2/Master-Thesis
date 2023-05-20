@@ -1,0 +1,15 @@
+@article{10.2307/26452944,
+ ISSN = {10857117},
+ URL = {http://www.jstor.org/stable/26452944},
+ abstract = {Compositional data analysis considers vectors of nonnegative-valued variables subject to a unit-sum constraint. Our interest lies in spatial compositional data, in particular, land use/land cover (LULC) data in the northeastern United States. Here, the observations are vectors providing the proportions of LULC types observed in each 3 km × 3 km grid cell, yielding order 104 cells. On the same grid cells, we have an additional compositional dataset supplying forest fragmentation proportions. Potentially useful and available covariates include elevation range, road length, population, median household income, and housing levels. We propose a spatial regression model that is also able to capture flexible dependence among the components of the observation vectors at each location as well as spatial dependence across the locations of the simplex-restricted measurements. A key issue is the high incidence of observed zero proportions for the LULC dataset, requiring incorporation of local point masses at 0. We build a hierarchical model prescribing a power scaling first stage and using latent variables at the second stage with spatial structure for these variables supplied through a multivariate CAR specification. Analyses for the LULC and forest fragmentation data illustrate the interpretation of the regression coefficients and the benefit of incorporating spatial smoothing.},
+ author = {Thomas J. Leininger and Alan E. Gelfand and Jenica M. Allen and John A. Silander},
+ journal = {Journal of Agricultural, Biological, and Environmental Statistics},
+ number = {3},
+ pages = {314--334},
+ publisher = {[International Biometric Society, Springer]},
+ title = {Spatial Regression Modeling for Compositional Data With Many Zeros},
+ urldate = {2023-05-19},
+ volume = {18},
+ year = {2013}
+}
+
