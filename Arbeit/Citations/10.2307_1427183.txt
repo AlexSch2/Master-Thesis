@@ -1,0 +1,15 @@
+@article{10.2307/1427183,
+ ISSN = {00018678},
+ URL = {http://www.jstor.org/stable/1427183},
+ abstract = {Some simple models are described which may be used for the modelling or generation of sequences of dependent discrete random variates with negative binomial and geometric univariate marginal distributions. The models are developed as analogues of well-known continuous variate models for gamma and negative exponential variates. The analogy arises naturally from a consideration of self-decomposability for discrete random variables. An alternative derivation is also given wherein both the continuous and the discrete variate processes arise simultaneously as measures on a process of overlapping intervals. The former is the process of interval lengths and the latter is a process of counts on these intervals.},
+ author = {Ed McKenzie},
+ journal = {Advances in Applied Probability},
+ number = {3},
+ pages = {679--705},
+ publisher = {Applied Probability Trust},
+ title = {Autoregressive Moving-Average Processes with Negative-Binomial and Geometric Marginal Distributions},
+ urldate = {2023-05-22},
+ volume = {18},
+ year = {1986}
+}
+

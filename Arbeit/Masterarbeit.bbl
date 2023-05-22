@@ -76,6 +76,52 @@
       \field{title}{Possible solution of some essential zero problems in compositional data analysis}
       \field{year}{2003}
     \endentry
+    \entry{Alzaid:1990}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6d5621cf7ef8547aa3705893425adce8}{%
+           family={Alzaid},
+           familyi={A\bibinitperiod},
+           given={A.\bibnamedelimi A.},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=4240d3c06dfae7cf97f74008c48c5605}{%
+           family={Al-Osh},
+           familyi={A\bibinithyphendelim O\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Applied Probability Trust}%
+      }
+      \strng{namehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{fullhash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{bibnamehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{authorbibnamehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{authornamehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{authorfullhash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \field{labelalpha}{AA90}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00219002}
+      \field{journaltitle}{Journal of Applied Probability}
+      \field{number}{2}
+      \field{title}{An Integer-Valued pth-Order Autoregressive Structure (INAR(p)) Process}
+      \field{urlday}{22}
+      \field{urlmonth}{5}
+      \field{urlyear}{2023}
+      \field{volume}{27}
+      \field{year}{1990}
+      \field{urldateera}{ce}
+      \field{pages}{314\bibrangedash 324}
+      \range{pages}{11}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/3214650
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/3214650
+      \endverb
+    \endentry
     \entry{Engle:1982}{article}{}
       \list{publisher}{1}{%
         {[Wiley, Econometric Society]}%
@@ -102,6 +148,46 @@
       \verb{url}
       \verb http://www.jstor.org/stable/1912773
       \endverb
+    \endentry
+    \entry{Berndt:1974}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c7641f973611032be95874f22b101f04}{%
+           family={Berndt},
+           familyi={B\bibinitperiod},
+           given={Ernst},
+           giveni={E\bibinitperiod}}}%
+        {{hash=2d29f937ed8d76cce73678916750c9d9}{%
+           family={Hall},
+           familyi={H\bibinitperiod},
+           given={Bronwyn},
+           giveni={B\bibinitperiod}}}%
+        {{hash=2d84451a02990d08f815dd8a78a7b497}{%
+           family={Hall},
+           familyi={H\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=6b05590b027efa53665c79a23d66dacf}{%
+           family={Hausman},
+           familyi={H\bibinitperiod},
+           given={Jerry},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{6cb691eaf6a7720238dc0d9e083db71a}
+      \strng{fullhash}{25611d39103e231b49a7399c446a5400}
+      \strng{bibnamehash}{6cb691eaf6a7720238dc0d9e083db71a}
+      \strng{authorbibnamehash}{6cb691eaf6a7720238dc0d9e083db71a}
+      \strng{authornamehash}{6cb691eaf6a7720238dc0d9e083db71a}
+      \strng{authorfullhash}{25611d39103e231b49a7399c446a5400}
+      \field{labelalpha}{Ber+74}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annals of Economic and Social Measurement}
+      \field{month}{01}
+      \field{title}{Estimation and Inference in Non-Linear Structural Models}
+      \field{volume}{4}
+      \field{year}{1974}
     \endentry
     \entry{Biswas:2009}{article}{}
       \name{author}{2}{}{%
@@ -1059,6 +1145,52 @@
       \endverb
       \keyw{GARCH models,Nonlinear volatility dynamics,Specification testing}
     \endentry
+    \entry{Guan:1991}{article}{}
+      \name{author}{2}{}{%
+        {{hash=eabccc344552bda166495767bd2ef717}{%
+           family={Jin-Guan},
+           familyi={J\bibinithyphendelim G\bibinitperiod},
+           given={Du},
+           giveni={D\bibinitperiod}}}%
+        {{hash=218fa32d4e65e6f95699163d9632ea2b}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Li},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{971f5533d883f775b734b27ee14d2d85}
+      \strng{fullhash}{971f5533d883f775b734b27ee14d2d85}
+      \strng{bibnamehash}{971f5533d883f775b734b27ee14d2d85}
+      \strng{authorbibnamehash}{971f5533d883f775b734b27ee14d2d85}
+      \strng{authornamehash}{971f5533d883f775b734b27ee14d2d85}
+      \strng{authorfullhash}{971f5533d883f775b734b27ee14d2d85}
+      \field{labelalpha}{JY91}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract. The integer-valued autoregressive (INAR) model with lag p dependence is discussed. The existence and ergodic property of the INAR model are proved. It is shown that the correlation structure of the INAR model is similar to that of the continuous-valued autoregressive (AR) process, and the stationary conditions of INAR and AR processes are also the same.}
+      \field{journaltitle}{Journal of Time Series Analysis}
+      \field{number}{2}
+      \field{title}{THE INTEGER-VALUED AUTOREGRESSIVE (INAR(p)) MODEL}
+      \field{volume}{12}
+      \field{year}{1991}
+      \field{pages}{129\bibrangedash 142}
+      \range{pages}{14}
+      \verb{doi}
+      \verb https://doi.org/10.1111/j.1467-9892.1991.tb00073.x
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-9892.1991.tb00073.x
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.1991.tb00073.x
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.1991.tb00073.x
+      \endverb
+      \keyw{Discrete time series,INAR model,conditional least-squares estimation}
+    \endentry
     \entry{Kynclova:2015}{article}{}
       \name{author}{3}{}{%
         {{hash=0545d5e6a07a5843e8443d7665f0dbc4}{%
@@ -1744,6 +1876,29 @@
       \verb https://CRAN.R-project.org/package=miceadds
       \endverb
     \endentry
+    \entry{Scherrer:2021}{unpublished}{}
+      \name{author}{1}{}{%
+        {{hash=4e629037cfa1a329cc12d5f5e84fce01}{%
+           family={Scherrer},
+           familyi={S\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{4e629037cfa1a329cc12d5f5e84fce01}
+      \strng{fullhash}{4e629037cfa1a329cc12d5f5e84fce01}
+      \strng{bibnamehash}{4e629037cfa1a329cc12d5f5e84fce01}
+      \strng{authorbibnamehash}{4e629037cfa1a329cc12d5f5e84fce01}
+      \strng{authornamehash}{4e629037cfa1a329cc12d5f5e84fce01}
+      \strng{authorfullhash}{4e629037cfa1a329cc12d5f5e84fce01}
+      \field{labelalpha}{Sch21}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{3}
+      \field{title}{Stationäre Prozesse und Zeitreihenanalyse}
+      \field{year}{2021}
+    \endentry
     \entry{Silva:2005}{article}{}
       \name{author}{4}{}{%
         {{hash=78cd8673f03c17fd72896c74d666a079}{%
@@ -1787,6 +1942,41 @@
       \range{pages}{26}
       \verb{doi}
       \verb 10.1007/s11009-005-5006-x
+      \endverb
+    \endentry
+    \entry{Oliveira:2005}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e6376a6ae7d74c74a868da0a5b4004a1}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a474ae30e840f84d9dbb231a304904fb}{%
+           family={Oliveira},
+           familyi={O\bibinitperiod},
+           given={Vera},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{694f9ccde18f5bcd349fac333f2699e9}
+      \strng{fullhash}{694f9ccde18f5bcd349fac333f2699e9}
+      \strng{bibnamehash}{694f9ccde18f5bcd349fac333f2699e9}
+      \strng{authorbibnamehash}{694f9ccde18f5bcd349fac333f2699e9}
+      \strng{authornamehash}{694f9ccde18f5bcd349fac333f2699e9}
+      \strng{authorfullhash}{694f9ccde18f5bcd349fac333f2699e9}
+      \field{labelalpha}{SO05}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Time Series Analysis}
+      \field{month}{01}
+      \field{title}{Difference Equations for the Higher Order Moments and Cumulants of the INAR(p) Model}
+      \field{volume}{26}
+      \field{year}{2005}
+      \field{pages}{17\bibrangedash 36}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1111/j.1467-9892.2005.00388.x
       \endverb
     \endentry
     \entry{Silva:2009}{article}{}
@@ -2412,6 +2602,73 @@
       \verb https://www.sciencedirect.com/science/article/pii/S037837581100379X
       \endverb
       \keyw{EM algorithm,Integer-valued GARCH model,Negative binomial,Poisson,Time series of counts,Zero inflation}
+    \endentry
+    \entry{Zivot:2009}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=18c76c6967bbfc2643e8d0c125beac31}{%
+           family={Zivot},
+           familyi={Z\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=48ccd2a7477afd13776060380f483d57}{%
+           family={Mikosch},
+           familyi={M\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=01dbe3e75a7dcb6ba65969e910135818}{%
+           family={Krei{ß}},
+           familyi={K\bibinitperiod},
+           given={Jens-Peter},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=8a2bb053c938a3254c68ec9fb886a907}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Richard\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=8a4670fbb0cfadae9bd2d5516104f66a}{%
+           family={Andersen},
+           familyi={A\bibinitperiod},
+           given={Torben\bibnamedelima Gustav},
+           giveni={T\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{18c76c6967bbfc2643e8d0c125beac31}
+      \strng{fullhash}{18c76c6967bbfc2643e8d0c125beac31}
+      \strng{bibnamehash}{18c76c6967bbfc2643e8d0c125beac31}
+      \strng{authorbibnamehash}{18c76c6967bbfc2643e8d0c125beac31}
+      \strng{authornamehash}{18c76c6967bbfc2643e8d0c125beac31}
+      \strng{authorfullhash}{18c76c6967bbfc2643e8d0c125beac31}
+      \strng{editorbibnamehash}{a898ba7f29049bc4b5adc2d6113f0545}
+      \strng{editornamehash}{a898ba7f29049bc4b5adc2d6113f0545}
+      \strng{editorfullhash}{61a8af58533442f4feb0ae9bbb2f2de6}
+      \field{labelalpha}{Ziv09}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This chapter gives a tour through the empirical analysis of univariate GARCH models for financial time series with stops along the way to discuss various practical issues associated with model specification, estimation, diagnostic evaluation and forecasting.}
+      \field{booktitle}{Handbook of Financial Time Series}
+      \field{isbn}{978-3-540-71297-8}
+      \field{title}{Practical Issues in the Analysis of Univariate GARCH Models}
+      \field{year}{2009}
+      \field{pages}{113\bibrangedash 155}
+      \range{pages}{43}
+      \verb{doi}
+      \verb 10.1007/978-3-540-71297-8_5
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-540-71297-8_5
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-540-71297-8_5
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

@@ -1,0 +1,15 @@
+@article{10.2307/3214650,
+ ISSN = {00219002},
+ URL = {http://www.jstor.org/stable/3214650},
+ abstract = {An extension of the INAR(l) process which is useful for modelling discrete-time dependent counting processes is considered. The model investigated here has a form similar to that of the Gaussian AR(p) process, and is called the integer-valued pth-order autoregressive structure (INAR(p)) process. Despite the similarity in form, the two processes differ in many aspects such as the behaviour of the correlation, Markovian property and regression. Among other aspects of the INAR(p) process investigated here are the limiting as well as the joint distributions of the process. Also, some detailed discussion is given for the case in which the marginal distribution of the process is Poisson.},
+ author = {A. A. Alzaid and M. Al-Osh},
+ journal = {Journal of Applied Probability},
+ number = {2},
+ pages = {314--324},
+ publisher = {Applied Probability Trust},
+ title = {An Integer-Valued pth-Order Autoregressive Structure (INAR(p)) Process},
+ urldate = {2023-05-22},
+ volume = {27},
+ year = {1990}
+}
+
