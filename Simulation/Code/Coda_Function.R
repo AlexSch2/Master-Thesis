@@ -11,7 +11,6 @@
 Coda.DataPreparation <- function(Data_Raw,
            ZeroHandling = c("all", "zeros_only", "none"),
            TSpace = FALSE,
-           Transform = TRUE,
            Log = FALSE,
            OneVsAll = FALSE,
            PivotGroup = "1",
@@ -90,15 +89,15 @@ Coda.DataPreparation <- function(Data_Raw,
 # p...lag.max*2 (since we have p summands each with dimension 2)
 # m... 2
 # See Multivariate Linear Regression pdf
-Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_NoTransform, PredictionStep,
+Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransform, PredictionStep,
                             OneVsAll,TSpace, Log, PivotGroup, Frame = 10) {
   
-  PredictionResult <- lapply(c(1:length(Data_TransformWindow)), function(WindowIndex) {
+  PredictionResult <- lapply(c(1:length(Data_Window)), function(WindowIndex) {
     
     
     # Selecting the fitting data and the data which should be predicted 
-    TimeSeriesValue_Window <- Data_TransformWindow[[WindowIndex]]$timeSeriesValue_window[,-1]
-    Date <- Data_TransformWindow[[WindowIndex]]$timeSeriesValue_future[1, 1]
+    TimeSeriesValue_Window <- Data_Window[[WindowIndex]]$timeSeriesValue_window[,-1]
+    Date <- Data_Window[[WindowIndex]]$timeSeriesValue_future[1, 1]
     
     #Depending on whether we have TSpace or not we fit a VAR model or an AR model
     ####TSPACE
@@ -121,15 +120,12 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
       }
       
       
-      TSum <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
-      
       #Back transformations
       ValuePredict <- ValuePredict_Vector[-Size] %>%
         matrix(nrow = 1) %>%
         D2invPC()
       
       LowerBound <- LowerBound_Vector[-Size] %>%
-        
         matrix(nrow = 1) %>%
         D2invPC()
       
@@ -168,17 +164,16 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
           (append(UpperBound, ValuePredict_Vector[Size]))
       }
       
-      ValuePredict_Naive <-
-        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -1], 1))
-      
       #Getting true value and last known values
       Window_Length <-
-        dim(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window)[1]
+        dim(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window)[1]
       ValueTrue <-
-        as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[, -1])
+        as.numeric(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[, -1])
       ValueLastKnown <-
-        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -1], n =
+        as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -1], n =
                           1))
+      
+      ValuePredict_Naive <- ValueLastKnown
       
       
       if (OneVsAll) {
@@ -209,7 +204,7 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
       }
       
       
-      TSum <- as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
+      TSum <- as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window$tsum, 1))
       
       #Back transformations
       
@@ -232,9 +227,9 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
       
       
       ValueTrue <-
-        as.numeric(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_future[, -c(1, 4)])
+        as.numeric(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[, -c(1, 4)])
       ValueLastKnown <-
-        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], n =
+        as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], n =
                           1))
       
       if (OneVsAll) {
@@ -245,7 +240,7 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
       }
       
       ValuePredict_Naive <-
-        as.numeric(tail(Data_NoTransformWindow[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], 1))
+        as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], 1))
     }
     
     ValuePredict <- round(as.numeric(ValuePredict))
@@ -342,7 +337,7 @@ Coda.Prediction <- function(Data_TransformWindow, Data_NoTransformWindow, Data_N
 ## Standard CI is 95%
 
 Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", PredictionStep = 1, Log = T,
-                        TSpace = T, OneVsAll = F , PivotGroup = c("1"), HistoryLength = 1,
+                        TSpace = TOneVsAll = F , PivotGroup = c("1"), HistoryLength = 1,
                         ModelType = "coda", WindowMethod ="extending") {
   
   stopifnot(ModelType %in% c("coda","coda_OneVsAll"))
@@ -396,7 +391,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #Splitting transformed data into windows
-        Data_TransformWindow <- Data.Window(Data_Transform,
+        Data_Window <- Data.Window(Data_Transform,
                                          Frame=Frame,
                                          Method = WindowMethod,
                                          PredictionStep = PredictionStep)
@@ -413,15 +408,15 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                  HistoryLength = HistoryLength) %>%
           arrange(week_date)
         #Splitting non transformed data into windows
-        Data_NoTransformWindow <- Data.Window(Data_NoTransform,
+        Data_WindowNoTransform <- Data.Window(Data_NoTransform,
                                             Frame=Frame,
                                             Method = WindowMethod,
                                             PredictionStep = PredictionStep)
         
         
         #Carrying out model fitting and prediction
-        PredictionResult <- Coda.Prediction(Data_TransformWindow = Data_TransformWindow, 
-                                              Data_NoTransformWindow = Data_NoTransformWindow, 
+        PredictionResult <- Coda.Prediction(Data_Window = Data_Window, 
+                                              Data_WindowNoTransform = Data_WindowNoTransform, 
                                               Data_NoTransform = Data_NoTransform, 
                                               PredictionStep = PredictionStep,
                                               OneVsAll = T,
@@ -523,7 +518,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #Splitting transformed data into windows
-        Data_TransformWindow <- Data.Window(Data_Transform,
+        Data_Window <- Data.Window(Data_Transform,
                                          Frame= Frame ,
                                          Method = WindowMethod,
                                          PredictionStep = PredictionStep)
@@ -538,14 +533,14 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                                         OneVsAll = F,
                                                  HistoryLength = HistoryLength) %>% arrange(week_date)
         #Splitting non transformed data into windows
-        Data_NoTransformWindow <- Data.Window(Data_NoTransform,
+        Data_WindowNoTransform <- Data.Window(Data_NoTransform,
                                          Frame = Frame,
                                          Method = WindowMethod,
                                          PredictionStep = PredictionStep)
         
         
-        PredictionResult <- Coda.Prediction(Data_TransformWindow = Data_TransformWindow, 
-                                              Data_NoTransformWindow = Data_NoTransformWindow, 
+        PredictionResult <- Coda.Prediction(Data_Window = Data_Window, 
+                                              Data_WindowNoTransform = Data_WindowNoTransform, 
                                               Data_NoTransform = Data_NoTransform, 
                                               PredictionStep = PredictionStep,
                                               OneVsAll = F,

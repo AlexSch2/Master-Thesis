@@ -154,12 +154,6 @@ CountModel.Prediction <- function(Data_Window,
       
       Model <- estimate_zinarp(TimeSeriesValue_Window[[Category]],p=1,innovation = Distribution,iter = 500)
       
-      # Alpha <- Model$alpha
-      # Lambda <- Model$lambda
-      # m <- length(Alpha)
-      # 
-      # ValuePredict <- TimeSeriesValue_LastKnown*(1/m *sum(Alpha^PredictionStep)) + (1/m*sum((1-Alpha^PredictionStep)/(1-Alpha)*Lambda))
-      
       Alpha <- mean(Model$alpha)
       Lambda <- mean(Model$lambda)
       
@@ -353,20 +347,6 @@ CountModel.Analysis <- function(Data_Raw,
       
       Cluster1 <- makeCluster(NCores)
       print("Initiating Cluster")
-      
-      # invisible(clusterCall(Cluster1, function() {
-      #   tryCatch(
-      #     expr = {
-      #     source("General_Dependency.R")
-      #     source("General_Function.R")
-      #   },
-      #   error = function(e) {
-      #     print(e)
-      #     stop(e)
-      #   })
-      # 
-      # }))
-
       invisible(clusterCall(Cluster1, function() {
           source("General_Dependency.R")
           source("General_Function.R")
@@ -378,6 +358,7 @@ CountModel.Analysis <- function(Data_Raw,
                                             "Distribution","Plot","WindowMethod","PredictionStep","ModelType"),
                               envir = environment()))
       print("Starting Calculations")
+      
     PredictionResult_AllCategory <- parLapply(Cluster1, Category,function(Category_RunVariable){
       print("Calculating")
       PredictionResult <- tryCatch(
@@ -399,19 +380,6 @@ CountModel.Analysis <- function(Data_Raw,
         print(paste("Error occured in prediction: ID",Id_RunVariable,", Category",Category_RunVariable,PredictionResult))
         return(NA)
       }
-      
-      # PredictionResult<-  CountModel.Prediction(Data_Window = Data_Window,
-      #                                                Data_WindowNoTransform = Data_WindowNoTransform,
-      #                                                Category = Category_RunVariable,
-      #                                                PredictionStep = PredictionStep,
-      #                                                Frame = Frame,
-      #                                                Plot = F,
-      #                                                Distribution = Distribution,
-      #                                                WindowMethod = WindowMethod,
-      #                                                External = External,
-      #                                                PastOb = PastOb,
-      #                                                PastMean = PastMean,
-      #                                                ModelType = ModelType)
       
       return(list(result=bind_rows(PredictionResult$result),
                   model=PredictionResult$model))

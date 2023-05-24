@@ -93,10 +93,10 @@ Data.Preparation <- function(Data_Raw,
     dplyr::select(all_of(c("week_date",Category_Var,"sold"))) %>%
     dplyr::distinct() %>%
     pivot_wider(names_from
-                = Category_Var, values_from = sold) %>%
+                = all_of(Category_Var), values_from = sold) %>%
     ungroup() %>%
     setnafill(type = "const", fill = NA_to) %>%
-    dplyr::select(any_of(columns)) %>%
+    dplyr::select(all_of(columns)) %>%
     dplyr::mutate(across(.cols = as.character(Category), .fns = as.double))
   
   #Determining the length of the Timeseries
