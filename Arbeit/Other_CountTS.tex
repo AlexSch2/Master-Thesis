@@ -29,14 +29,14 @@ Other distributions than the normal distributions can be taken as well.
 
 Estimation of the parameters can be done with maximum likelihood and an iterative algorithm. The model is rewritten and the log-likelihood function then used. After derivation after its variance and mean parameters the Berndt, Hall Hall and Hausman algorithm \cite{Berndt:1974}is used to obtain the maximum likelihood estimates. Further details and assumptions can be found in \cite{Bollerslev:1986}. 
 
-For the one step ahead prediction, the parameters are estimated and the model is evaluated. 
+If one is interested in forecasting $Y_{kt}$, then the minimum mean squared h-step error forecast is simply $\mathbbm{E}[Y_{k,t+h}]$. This forecast is independent of the model parameters. If the conditional variance for $h=1$ should be forecasted, the parameters are estimated and the known values are plugged in. Forecasts for $h>1$ are computed recursively with plugging in the forecasts for $h-1,h-2,\ldots$ in the model \cite{Zivot:2009}. 
+
 
 \subsection{Testing for GARCH Models}
 \label{sec: Testing for GARCH models}
 
 To decide whether to use a GARCH model one can test for volatility or the validity of GARCH models in general. In \cite{Bollerslev:1986} the author suggests a Lagrange multiplier test. Other popular tests include the Box–Pierce–Lung‐type portmanteau tests and residual‐based diagnostics \cite{Hong:2017}. The authors in \cite{Hong:2017} present further methods. 
 
-If one is interested in forecasting $Y_{kt}$, then the minimum mean squared h-step error forecast is simply $\mathbbm{E}[Y_{k,t+h}]$. This forecast is independent of the model parameters. If the conditional variance for $h=1$ should be forecasted, the parameters are estimated and the known values are plugged in. Forecasts for $h>1$ are computed recursively with plugging in the forecasts for $h-1,h-2,\ldots$ in the model \cite{Zivot:2009}. 
 
 \subsection{Applications}
 \label{sec: Garch Applications}
@@ -111,7 +111,14 @@ where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldot
 \label{eq:ZIP Autoregressive model timeseries}
 \end{gather}
 
-Hence we have $\bm{B}^T_{t-1} = (1,Y_{k,t-1})^T$ and $\bm{Z}_{t-1} = 1$. Parameter estimation can be done with the EM algorithm. Further details can be found in \cite{Yang:2013}.
+Hence we have $\bm{B}^T_{t-1} = (1,Y_{k,t-1})^T$ and $\bm{Z}_{t-1} = 1$. 
+
+\subsection{Parameter Estimation and Forecasting}
+\label{sec: ZIM Parameter Estimation and Forecasting}
+
+Parameter estimation can be done with the EM algorithm. Further details can be found in \cite{Yang:2013}.
+
+The one step ahead predictor is again given by the conditional expectation $\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_k)\lambda_{kt} $ with the estimated coefficients plugged in. 
 
 \section{Log-Linear Models}
 \label{sec: Log-Linear Models}
@@ -133,6 +140,18 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \end{gather}
 
 with $\bm{\eta} \in \mathbb{R}^r$. 
+
+\subsection{Parameter Estimation and Forecasting}
+\label{sec: Log-Linear Parameter Estimation and Forecasting}
+
+The parameter estimation for the log-linear model is done similarly to the INGARCH model in \ref{sec: Estimation of the Ingarch Model}. Only the parameter space $\Theta$ is different
+
+\begin{equation}
+\Theta = \left\{ \bm{\theta} \in \mathbb{R}^{p+q+r+1}: \abs{\beta_1},\ldots,\abs{\beta_p},\abs{\alpha_1},\ldots,\abs{\alpha_q} < 1, \abs{\sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j } < 1 \right\}.
+\label{eq:Parameter Space log-linear}
+\end{equation}
+
+Just like parameter estimation, forecasting is also performed in the same way as the INGARCH model. The optimal one-step ahead prediction with regards to the mean squared error is given by the conditional expectation. The h-step ahead predictions for $h>1$ are calculated iteratively again \cite{Liboschik:2016}. 
 
 Log-Linear Models are further discussed in \cite{Fokianos:2011,Woodard:2011,Douc:2013}.
 

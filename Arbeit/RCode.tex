@@ -5,10 +5,171 @@ We conducted our analysis in the statistical software R \cite{R:2022}. For our d
 
 For building our CoDA model we use the packages \textit{vars} \cite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} \cite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the ilr transformation described in \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in \ref{sec:The VAR Model}, and \texttt{D2invPC} which performs the necessary back transformation to get predictions in the desired space. The INGARCH(p,q) analysis is mainly done with the package \textit{tscount} \cite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm} which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated model were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} \cite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} \cite{RVGAM:2010}. To fit the INAR model we use two packages. First \textit{ZINAp} to calculate our predictions with the bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \cite{Silva:2009}. The implementation of the classical approach was done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
 
-Since we focus our efforts on the INGARCH(p,q) and CoDA model, we will only describe the functions used by them. In general, all functions can be grouped into three categories: general, INGARCH specific and CoDA specific. General functions are used for both, the INGARCH(p,q) and the CoDA model. INGARCH and CoDA specific functions are only used for their respective methods. The code for them can be found in \ref{sec:R-Functions}. 
+Since we focus our efforts on the INGARCH(p,q) and CoDA model, we will only describe the functions used by them. In general, all functions can be grouped into three categories: general, INGARCH specific and CoDA specific. General functions are used for both, the INGARCH(p,q) and the CoDA model. INGARCH and CoDA specific functions are only used for their respective methods.
+\subsection{Handbook}
+\label{sec:Handbook}
 
-Notable general functions are \texttt{Data.Window} and \texttt{Data.Preparation}. The former function splits the time series in the specified windows and the value to be predicted. The models are then fitted on these windows and the prediction result is compared with the actual value. The latter one brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transform the data into the right format needed for the one-vs-all method. Other important functions are \texttt{Model.Error} and \texttt{Model.ErrorOverall} which implement the error measure introduced in \ref{sec: Error Measure} and summarise it. 
+In this handbook we will describe the use and results of the most important functions used for our analysis.  The code for them can be found in \ref{sec:R-Functions}. 
 
-There are three INGARCH specific functions. The first function is \texttt{Ingarch.DataPreparation} which transforms the data into the right format needed to fit the INGARCH(p,q) model. At its core it uses the \texttt{Data.Preparation} function but adds the additional option to replace zero values with 1. The second function is \texttt{Ingarch.Prediction} which is the function where the model is fit and the predicted value is calculated. It used the \texttt{tsglm} function to fit the model for each window and predicts the next value. The third function is \texttt{Ingarch.Analysis} which acts as a wrapper function to streamline and facilitate the analysis. The previously mentioned model specifications can be chosen here as well as various other options. 
+\subsubsection{General Functions}
+\label{sec: General Functions}
+%Notable general functions are \texttt{Data.Window} and \texttt{Data.Preparation}. The former function splits the time series in the specified windows and the value to be predicted. The models are then fitted on these windows and the prediction result is compared with the actual value. The latter one brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transform the data into the right format needed for the one-vs-all method. Other important functions are \texttt{Model.Error} and \texttt{Model.ErrorOverall} which implement the error measure introduced in \ref{sec: Error Measure} and summarise it. 
 
-The CoDA specific functions have the same structure as the INGARCH ones. Again there are \texttt{Coda.DataPreparation},\texttt{Coda.Prediction} and \texttt{Coda.Analysis} and they act like their respective INGARCH counterparts. \texttt{Coda.DataPreparation} transforms the data into the correct format, \texttt{Coda.Prediction} fits the model, predicts the future value and compares it with the true value and \texttt{Coda.Analysis} is again the wrapper function where the mentioned specifications can be chosen. 
+The function \texttt{Data.Window} splits the time series in the specified windows and the value to be predicted. The models are then fitted on these windows and the prediction result is compared with the actual value. Its input values are:
+
+\begin{itemize}
+	\item Timeseries: The time series to be split up in windows.
+	\item Frame: The window length to split the time series into.
+	\item Method: How the time series should be split up. For example if the windows should be extended at each step or be kept at a fixed length.
+	\item PredictionStep: The future prediction step.
+\end{itemize}
+
+It returns a list where each element consists of two variables. First the values of the specified window which are used to fit the model and second the value to be predicted. 
+
+The function \texttt{Data.Preparation} brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transform the data into the right format needed for the one-vs-all method. It has the input values:
+
+\begin{itemize}
+	\item Data\_Raw: The Data to be transformed in the right format.
+  \item OneVsAll: If TRUE, then the one-vs-all method is used.
+  \item PivotGroup: If one-vs-all is used, this specifies the pivot category.
+  \item Category: The categories to consider for the transformation.
+  \item NA\_to: The value with which NA values should be replaced with.
+  \item HistoryLength: The length of the history. Can be an absolute number or a ratio $h$. 
+  \item TakeSubCategory: If TRUE, then we transform the data for the subcategories instead of the main categories. 
+\end{itemize}
+
+The result is a tibble with the dates as its rows, the categories as columns and the sold amount as its values.
+
+\texttt{Model.Error} calculates the specified error measure for each time series and category. Since we want to compare the performance of a method with the one of the naive model in \ref{sec: Naive Random Walk} we calculate the errors for this model as well. The input values are:
+
+\begin{itemize}
+	\item Model\_Result: The result calculated by either \texttt{Coda.Analysis} or \texttt{CountModel.Analysis}.
+	\item Fnct: The error function to be used. Currently the MSE and RMSE are implemented. 
+	\item Category: The categories for which the errors should be caluculated.
+\end{itemize}
+
+The result is a tibble with the columns: \textit{id,category,error,error\_naive,model}. 
+
+Closely connected to \texttt{Model.Error} is the function \texttt{Model.ErrorOverall}. This function calculates the error measure defined in \ref{sec: Error Measure}. One can decide if the error measure should be calculated over all categories or if they should be split up in subsets as in \ref{sec:Error Measure Extension}. The function has the input values:
+
+\begin{itemize}
+	\item Error\_Result: The result of the function \texttt{Model.Error}.
+	\item Fnct: Function to summarise the errors. This opens up to use different methods like the mean or median. 
+	\item SplitByGroup: If TRUE, then the errors are split by groups defined in the \textit{Groups} argument. 
+	\item Groups: The grouped categories over which the error should be calculated. 
+	\item Category: The categories for which the error should be calculated for.
+\end{itemize}
+
+The result is a tibble with the columns \textit{id,error,model,group}. 
+
+\subsection{Count Model Functions}
+\label{sec:Count Model Functions}
+
+
+There are three count model specific functions. The first function is \texttt{CountModel.DataPreparation} which transforms the data into the right format needed to fit the INGARCH(p,q) model. At its core it uses the \texttt{Data.Preparation} function but adds the additional option to replace zero values with 1. Its input values are:
+
+\begin{itemize}
+	\item Data\_Raw: The data to be transformed.
+	\item ZeroHandling: How should zero values be treated? Currently there is no treatment or them being replaced with 1. 
+	\item HistoryLength: The length of the history. Can be an absolute number or a ratio $h$. 
+	\item TakeSubCategory = If TRUE, then we transform the data for the subcategories instead of the main categories. 
+\end{itemize}
+
+The result is a tibble with the dates as its rows, the categories as columns and the sold amount as its values.
+
+The second function is \texttt{Ingarch.Prediction} which is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. It takes the values:
+
+\begin{itemize}
+	\item Data\_Window: The data divided into the different windows by the \texttt{Data.Window} function.
+	\item Data\_WindowNoTransform: The data without zero handling divided into the different windows by the \texttt{Data.Window} function.
+  \item Category: The category to predict. 
+  \item PredictionStep: The future prediction step.
+  \item Frame: The window length.
+  \item Distribution: The distribution chosen for the model. Care has to be taken, since every model can choose from a different list of distribution and its name has to be specified correctly (i.e. "`Po"' for INAR but "`poisson"' for ZIM). 
+  \item Plot: For the INGARCH model, diagnostic plots can be generated. Currently not implemented.
+  \item WindowMethod: Method for splitting up the time series. For example if the windows are be extended at each step or kept at a fixed length.
+  \item External: For INGARCH. Should external factors as in \ref{eq:Ingarch model with external effect} be used?
+  \item PastOb: For INGARCH. How many past observations should be used. Equals $p$ in equation \ref{eq:Ingarch model}.
+  \item PastMean: For INGARCH. How many past means should be used. Equals $q$ in equation \ref{eq:Ingarch model}.
+  \item ModelType: Model to be fit. 
+\end{itemize}
+
+It returns a tibble with the prediction results and some additional model specifications. 
+
+The third function is \texttt{Ingarch.Analysis} and acts as a wrapper function to streamline and facilitate the analysis. The previously mentioned model specifications can be chosen here as well as various other options. This is the sole function which has to be used by the user. The other functions are mainly for internal use. Its input values are:
+
+\begin{itemize}
+	\item Data\_Raw: The raw data as extracted from the data base.
+  \item Id: The ids of the fridges to be analysed.
+  \item PredictionStep: The future prediction step.
+  \item Distribution: The distribution chosen for the model. Care has to be taken, since every model can choose from a different list of distribution and its name has to be specified correctly (i.e. "`Po"' for INAR but "`poisson"' for ZIM).
+  \item ModelType: Model to be fit. 
+  \item Plot: For the INGARCH model, diagnostic plots can be generated. Currently not implemented.
+  \item Category\_Main: The main categories to choose. 
+  \item TakeSubCategory: If TRUE, then we transform the data for the subcategories instead of the main categories. 
+  \item Category\_Sub: The sub categories to choose.
+  \item Category\_Calculated: The categories which should be calculated. 
+  \item Frame: The window length.
+  \item WindowMethod: Method for splitting up the time series. For example if the windows are be extended at each step or kept at a fixed length.
+  \item ZeroHandling: Method for zero handling. Currently there is no treatment or them being replaced with 1. 
+  \item PastOb: For INGARCH. How many past observations should be used. Equals $p$ in equation \ref{eq:Ingarch model}.
+  \item PastMean: For INGARCH. How many past means should be used. Equals $q$ in equation \ref{eq:Ingarch model}.
+  \item External: For INGARCH. Should external factors as in \ref{eq:Ingarch model with external effect} be used?
+  \item HistoryLength: The length of the history. Can be an absolute number or a ratio $h$.
+  \item Multicore: If TRUE, then calculations are done on multiple cores to improve performance. Internally the parallelisation takes place across the different categories to be calculated. 
+  \item NCores: The number of cores to be used for parallelisation. 
+\end{itemize}
+
+This function returns a list with two variables. The first is a tibble with the prediction results, model details and additional information for all the chosen ids, categories ect. The second variable is a list with each fitted model. 
+
+\subsection{CoDA Model Functions}
+\label{sec:Coda Model Functions}
+
+The CoDA specific functions have the same structure as the INGARCH ones. We have again \texttt{Coda.DataPreparation} which takes the values
+
+\begin{itemize}
+  \item Data\_Raw: The data to be transformed.
+  \item ZeroHandling: Method for zero handling.  Currently there is no treatment or them being replaced with 1. 
+  \item TSpace: If TRUE, then $\Tsp$-Spaces are used.
+  \item Log: If TRUE, then the logarithm of the total sum is used in the $\Tsp$-Space.
+  \item OneVsAll: If TRUE, then the one-vs-all method is used.
+  \item PivotGroup: If one-vs-all is used, this specifies the pivot category.
+  \item HistoryLength: The length of the history. Can be an absolute number or a ratio $h$.
+\end{itemize}
+
+The result is a data-frame with the dates as its rows and the $ilr$ transformed sold amount as its values.
+
+The next function is \texttt{Coda.Prediction}, which acts like its respective count model counterpart. The input values are 
+
+\begin{itemize}
+	\item Data\_Window: The data divided into the different windows by the \texttt{Data.Window} function.
+	\item Data\_WindowNoTransform: The data without zero handling and no transformation divided into the different windows by the \texttt{Data.Window} function.
+	\item Data\_NoTransform: The data without zero handling and no transformation.
+	\item PredictionStep: The future prediction step.
+	\item OneVsAll: If TRUE, then the one-vs-all method is used.
+	\item TSpace: If TRUE, then $\Tsp$-Spaces are used.
+	\item Log: If TRUE, then the logarithm of the total sum is used in the $\Tsp$-Space.
+	\item PivotGroup: If one-vs-all is used, this specifies the pivot category.
+	\item Frame: The window length.
+\end{itemize}
+
+It returns a tibble with the prediction results and some additional model specifications. 
+
+Last, we have again the wrapper function \texttt{Coda.Analysis}. This is again the only function which needs to be used by the user to fit models for the specified time series. Its input values are:
+
+\begin{itemize}
+	\item Data\_Raw: The raw data as extracted from the data base.
+	\item Id: The ids of the fridges to be analysed.
+	\item Frame: The window length.
+	\item ZeroHandling: Method for zero handling. 
+	\item PredictionStep: The future prediction step. 
+	\item Log: If TRUE, then the logarithm of the total sum is used in the $\Tsp$-Space.
+	\item TSpace: If TRUE, then $\Tsp$-Spaces are used. 
+	\item OneVsAll: If TRUE, then the one-vs-all method is used. 
+	\item PivotGroup: If one-vs-all is used, this specifies the pivot category.
+	\item HistoryLength: The length of the history. Can be an absolute number or a ratio $h$. 
+	\item ModelType: Model to be fit. Currently only "`coda"' and "`coda\_OneVsAll"' can be chosen.
+	\item WindowMethod: Method for splitting up the time series. For example if the windows are be extended at each step or kept at a fixed length.
+\end{itemize}
+
+This function returns a list with two variables. The first is a tibble with the prediction results, model details and additional information for all the chosen ids, categories ect. The second variable is a list with each fitted model. 
