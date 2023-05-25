@@ -9,7 +9,7 @@
 #If one vs all is chosen, pivot groups have to be supplied as a character
 
 Coda.DataPreparation <- function(Data,
-           ZeroHandling = c("all", "zeros_only", "none"),
+           ZeroHandling = c("all", "simple", "none"),
            TSpace = FALSE,
            Log = FALSE,
            OneVsAll = FALSE,
@@ -42,7 +42,7 @@ Coda.DataPreparation <- function(Data,
     if (ZeroHandling == "all") {
       Data_Prepared <- Data_Prepared %>% mutate(across(where(is.numeric),.fns = Plus))
     }
-    else if (ZeroHandling == "zeros_only") {
+    else if (ZeroHandling == "simple") {
       Data_Prepared[Data_Prepared == 0] <- 0.5
     }
     else {
@@ -399,14 +399,14 @@ Coda.Analysis<-function(Data_Raw,
         dplyr::select(week_date, main_category_id, sub_category_id ,sold) %>%
         arrange(week_date)
       
-      Category <- unique(Data_Processed$sub_category_id)
+      Category <- sort(unique(Data_Processed$sub_category_id))
       
     } else {
       Data_Processed <- Data_Processed %>%
         dplyr::select(week_date, main_category_id,sold) %>%
         arrange(week_date)
       
-      Category <- unique(Data_Processed$main_category_id)
+      Category <- sort(unique(Data_Processed$main_category_id))
     }
     
     #Checking input
