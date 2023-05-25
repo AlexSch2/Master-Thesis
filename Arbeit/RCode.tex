@@ -3,9 +3,9 @@
 
 We conducted our analysis in the statistical software R \cite{R:2022}. For our data cleansing, data handling and plotting we use the \textit{tidyverse} package \cite{Tidyverse:2019}. Further we use the packages \textit{here} \cite{here:2020}, \textit{miceadds} \cite{Miceadds:2023} and \textit{parallel}, which is part of core R, to facilitate our analysis.  
 
-For building our CoDA model we use the packages \textit{vars} \cite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} \cite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the ilr transformation described in \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in \ref{sec:The VAR Model}, and \texttt{D2invPC} which performs the necessary back transformation to get predictions in the desired space. The INGARCH(p,q) analysis is mainly done with the package \textit{tscount} \cite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm} which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated model were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} \cite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} \cite{RVGAM:2010}. To fit the INAR model we use two packages. First \textit{ZINAp} to calculate our predictions with the bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \cite{Silva:2009}. The implementation of the classical approach was done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
+For building our CoDA model we use the packages \textit{vars} \cite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} \cite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the ilr transformation described in \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in \ref{sec:The VAR Model}, and \texttt{D2invPC} which performs the necessary back transformation to get predictions in the desired space. The INGARCH(p,q) analysis is mainly done with the package \textit{tscount} \cite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm} which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated model were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} \cite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} \cite{RVGAM:2010}. To fit the INAR model we use two packages. First \textit{ZINAp} to calculate our predictions with the bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \cite{Silva:2009}. Second, the classical approach was done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
 
-Since we focus our efforts on the INGARCH(p,q) and CoDA model, we will only describe the functions used by them. In general, all functions can be grouped into three categories: general, INGARCH specific and CoDA specific. General functions are used for both, the INGARCH(p,q) and the CoDA model. INGARCH and CoDA specific functions are only used for their respective methods.
+In general, all functions can be grouped into three categories: general, count data model specific and CoDA specific. General functions are used for both, the count data models and the CoDA model. Count data model and CoDA specific functions are only used for their respective methods.
 \subsection{Handbook}
 \label{sec:Handbook}
 
@@ -24,7 +24,7 @@ The function \texttt{Data.Window} splits the time series in the specified window
 	\item PredictionStep: The future prediction step.
 \end{itemize}
 
-It returns a list where each element consists of two variables. First the values of the specified window which are used to fit the model and second the value to be predicted. 
+It returns a list where each element consists of two variables. First, the values of the specified window which are used to fit the model and second the value to be predicted. 
 
 The function \texttt{Data.Preparation} brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transform the data into the right format needed for the one-vs-all method. It has the input values:
 
@@ -66,18 +66,18 @@ The result is a tibble with the columns \textit{id,error,model,group}.
 \label{sec:Count Model Functions}
 
 
-There are three count model specific functions. The first function is \texttt{CountModel.DataPreparation} which transforms the data into the right format needed to fit the INGARCH(p,q) model. At its core it uses the \texttt{Data.Preparation} function but adds the additional option to replace zero values with 1. Its input values are:
+There are three count model specific functions. The first function is \texttt{CountModel.DataPreparation} which transforms the data into the right format needed to fit the count data models. At its core it uses the \texttt{Data.Preparation} function but adds the additional option to replace zero values with 1. Its input values are:
 
 \begin{itemize}
-	\item Data\_Raw: The data to be transformed.
-	\item ZeroHandling: How should zero values be treated? Currently there is no treatment or them being replaced with 1. 
+	\item Data: The data to be transformed.
+	\item ZeroHandling: Method for zero handling. Currently there is no treatment or them being replaced with 1. 
 	\item HistoryLength: The length of the history. Can be an absolute number or a ratio $h$. 
 	\item TakeSubCategory = If TRUE, then we transform the data for the subcategories instead of the main categories. 
 \end{itemize}
 
 The result is a tibble with the dates as its rows, the categories as columns and the sold amount as its values.
 
-The second function is \texttt{Ingarch.Prediction} which is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. It takes the values:
+The second function is \texttt{CountModel.Prediction} which is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. It takes the values:
 
 \begin{itemize}
 	\item Data\_Window: The data divided into the different windows by the \texttt{Data.Window} function.
@@ -96,7 +96,7 @@ The second function is \texttt{Ingarch.Prediction} which is the function where t
 
 It returns a tibble with the prediction results and some additional model specifications. 
 
-The third function is \texttt{Ingarch.Analysis} and acts as a wrapper function to streamline and facilitate the analysis. The previously mentioned model specifications can be chosen here as well as various other options. This is the sole function which has to be used by the user. The other functions are mainly for internal use. Its input values are:
+The third function is \texttt{CountModel.Analysis} and acts as a wrapper function to streamline and facilitate the analysis. The previously mentioned model specifications can be chosen here as well as various other options. This is the sole function which has to be used by the user. The other functions are mainly for internal use. Its input values are:
 
 \begin{itemize}
 	\item Data\_Raw: The raw data as extracted from the data base.
@@ -108,7 +108,6 @@ The third function is \texttt{Ingarch.Analysis} and acts as a wrapper function t
   \item Category\_Main: The main categories to choose. 
   \item TakeSubCategory: If TRUE, then we transform the data for the subcategories instead of the main categories. 
   \item Category\_Sub: The sub categories to choose.
-  \item Category\_Calculated: The categories which should be calculated. 
   \item Frame: The window length.
   \item WindowMethod: Method for splitting up the time series. For example if the windows are be extended at each step or kept at a fixed length.
   \item ZeroHandling: Method for zero handling. Currently there is no treatment or them being replaced with 1. 
@@ -128,7 +127,7 @@ This function returns a list with two variables. The first is a tibble with the 
 The CoDA specific functions have the same structure as the INGARCH ones. We have again \texttt{Coda.DataPreparation} which takes the values
 
 \begin{itemize}
-  \item Data\_Raw: The data to be transformed.
+  \item Data: The data to be transformed.
   \item ZeroHandling: Method for zero handling.  Currently there is no treatment or them being replaced with 1. 
   \item TSpace: If TRUE, then $\Tsp$-Spaces are used.
   \item Log: If TRUE, then the logarithm of the total sum is used in the $\Tsp$-Space.

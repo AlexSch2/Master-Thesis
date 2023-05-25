@@ -1241,6 +1241,47 @@
       \endverb
       \keyw{VAR model,compositional data,isometric log-ratio transformation,Granger causality}
     \endentry
+    \entry{Lambert:1992}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7f1ab910fa11a90cc9a2eaca523dd397}{%
+           family={Lambert},
+           familyi={L\bibinitperiod},
+           given={Diane},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {[Taylor & Francis, Ltd., American Statistical Association, American Society for Quality]}%
+      }
+      \strng{namehash}{7f1ab910fa11a90cc9a2eaca523dd397}
+      \strng{fullhash}{7f1ab910fa11a90cc9a2eaca523dd397}
+      \strng{bibnamehash}{7f1ab910fa11a90cc9a2eaca523dd397}
+      \strng{authorbibnamehash}{7f1ab910fa11a90cc9a2eaca523dd397}
+      \strng{authornamehash}{7f1ab910fa11a90cc9a2eaca523dd397}
+      \strng{authorfullhash}{7f1ab910fa11a90cc9a2eaca523dd397}
+      \field{labelalpha}{Lam92}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00401706}
+      \field{journaltitle}{Technometrics}
+      \field{number}{1}
+      \field{title}{Zero-Inflated Poisson Regression, with an Application to Defects in Manufacturing}
+      \field{urlday}{25}
+      \field{urlmonth}{5}
+      \field{urlyear}{2023}
+      \field{volume}{34}
+      \field{year}{1992}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 14}
+      \range{pages}{14}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/1269547
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/1269547
+      \endverb
+    \endentry
     \entry{Lee:2023}{article}{}
       \name{author}{3}{}{%
         {{hash=f05cc1164295f56cb0c7c3c30d1ea993}{%
@@ -2335,46 +2376,6 @@
       \verb https://doi.org/10.1214/11-EJS627
       \endverb
       \keyw{drift conditions,Ergodic,Feller,irreducibility,stationary,time series}
-    \endentry
-    \entry{Yang:2013}{article}{}
-      \name{author}{3}{}{%
-        {{hash=9845261412338f09f9fda112e8d5206d}{%
-           family={Yang},
-           familyi={Y\bibinitperiod},
-           given={Ming},
-           giveni={M\bibinitperiod}}}%
-        {{hash=c1e53f19f11af935f7661a81f43c3d37}{%
-           family={Zamba},
-           familyi={Z\bibinitperiod},
-           given={Gideon},
-           giveni={G\bibinitperiod}}}%
-        {{hash=85355652f1b5e7ddd0ed4bfa61c55a42}{%
-           family={Cavanaugh},
-           familyi={C\bibinitperiod},
-           given={Joseph},
-           giveni={J\bibinitperiod}}}%
-      }
-      \strng{namehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
-      \strng{fullhash}{0a430d56c991496b3d9a3b7a0bba0dbb}
-      \strng{bibnamehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
-      \strng{authorbibnamehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
-      \strng{authornamehash}{0a430d56c991496b3d9a3b7a0bba0dbb}
-      \strng{authorfullhash}{0a430d56c991496b3d9a3b7a0bba0dbb}
-      \field{labelalpha}{YZC13}
-      \field{sortinit}{Y}
-      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Statistical Methodology}
-      \field{month}{09}
-      \field{title}{Markov regression models for count time series with excess zeros: A partial likelihood approach}
-      \field{volume}{14}
-      \field{year}{2013}
-      \field{pages}{26\bibrangedash 38}
-      \range{pages}{13}
-      \verb{doi}
-      \verb 10.1016/j.stamet.2013.02.001
-      \endverb
     \endentry
     \entry{Yee:1996}{article}{}
       \name{author}{2}{}{%

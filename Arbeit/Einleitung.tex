@@ -3,7 +3,7 @@
 
 Multivariate count data is a reoccurring theme in real world applications. While there exist various methods among the classical statistical models to handle such data, there exist less methods to handle it in a time series context. Even more so, when there is an excessive amount of zeros or missing values present. In this thesis we compare various models for such data and compare their predictive power. We test our models on real world data which was kindly provided to us. In the following we will shortly describe the general framework and objective. 
 
-A company is operating numerous vending machines with food, ranging from appetizers and main course to snacks and beverages. Each week the vending machines, or in the following also called fridges, are being restocked and the number of items sold in the past week is being recorded. In addition, non-sold items are being disposed off which result in monetary losses. The objective is to find a model with to predict the amount they need to order in a bid to minimise the loss.
+A company is operating numerous vending machines with food, ranging from appetizers and main course to snacks and beverages. Each week the vending machines, or in the following also called fridges, are being restocked and the number of items sold in the past week is being recorded. In addition, non-sold items are being disposed off which result in monetary losses. The objective is to find a model to predict the amount they need to order in a bid to minimise the loss.
 
 \section{Data Description}
 \label{sec: Data Description}
@@ -15,18 +15,17 @@ In this section we describe the structure of our data which is essential in choo
 \label{eq:time series definition}
 \end{equation}
 
-where $K$ stands for the number of categories, $T_f$ denotes the total length of the time series and $\mathbb{N}_0^K := \underbrace{\mathbb{N}_0 \times \ldots \times \mathbb{N}_0}_{K-times}$. This means $\bm{Y}_t = (Y_{1t},\ldots,Y_{Kt})^T$ with $Y_{kt} \in \mathbb{N}_0, t=1,\ldots,T_f$ and $k=1,\ldots,K$. Since we will sometimes not use all of our data but only a fraction of it, we will denote with $T$ the length of the time series used. So \ref{eq:time series definition} describes the whole time series available, while \ref{eq:time series definition fraction} describes the time series used. It holds $T\leq T_f$. In the following we will use \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
+where $K$ stands for the number of categories, $T_f$ denotes the total length of the time series and $\mathbb{N}_0^K := \underbrace{\mathbb{N}_0 \times \ldots \times \mathbb{N}_0}_{K-times}$. This means $\bm{Y}_t = (Y_{1t},\ldots,Y_{Kt})^T$ with $Y_{kt} \in \mathbb{N}_0, t=1,\ldots,T_f$ and $k=1,\ldots,K$. Since we will sometimes not use all of our data but only a fraction of it, we will denote with $T$ the length of the time series used
 
 \begin{equation}
-\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f,
+\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f.
 \label{eq:time series definition fraction}
 \end{equation}
 
+So \ref{eq:time series definition} describes the whole time series available, while \ref{eq:time series definition fraction} describes the time series used. It holds $T\leq T_f$. In the following we will use \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
+
 The data is measured weekly and hence our points in time are equidistant. A special feature of our data is the amount of 0 and NA values. How they are handled is explained in later sections. Another characteristic of our data is the difference in length for various time series. While for some time series we have 70+ data points, for others we have less than 10. An example view of our data would be: 
 
-% Please add the following required packages to your document preamble:
-% 
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \begin{table}[h!]
 \centering
 \begin{tabular}{ccccc}
@@ -68,4 +67,4 @@ As mentioned before, we mainly aggregate our data on main category level. This m
 \section{Outlook}
 \label{sec: Outlook}
 
-%The remainder of the thesis is split in the following way. In chapters \ref{sec:CountTS} and \ref{sec:Coda} we describe our methodologies used and the reasoning why we are using them. We provide a short literature review about count data time series in \ref{sec:Ingarch Motivation}. In these sections we also lay the mathematical groundwork for both of those methods. In section \ref{sec: Other methods} we shortly describe other methods considered. In chapter \ref{sec:Application} we explain the specification and tuning options for our models and also introduce an error measure to evaluate their performance. We show the results on some exemplary time series and then show the results of each tuning parameter.% In the conclusion \ref{sec: Conclusion} we summarise our findings and provide a further outlook on the topic. 
+The remainder of the thesis is split in the following way. In chapters \ref{sec:CountTS} and \ref{sec:Coda} we describe our methodologies used and the reasoning why we are using them. We provide a short literature review about count data time series in \ref{sec:CountTS}. In these sections we also lay the mathematical groundwork for the considered methods. In chapter \ref{sec:Application} we explain the specification and tuning options for our models and also introduce an error measure to evaluate their performance. We show the results on some exemplary time series and then show the results of each tuning parameter. In \ref{sec:R-Code} we explain the R-functions used and provide a guidebook.% In the conclusion \ref{sec: Conclusion} we summarise our findings and provide a further outlook on the topic. 

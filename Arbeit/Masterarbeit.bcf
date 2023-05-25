@@ -2362,49 +2362,49 @@
     <bcf:citekey order="1" intorder="1">Liboschik:2016</bcf:citekey>
     <bcf:citekey order="2" intorder="1">Heinen:2003</bcf:citekey>
     <bcf:citekey order="3" intorder="1">Zucchini:1997</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">Liboschik:2016</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">Heinen:2003</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">Zucchini:1997</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">Biswas:2009</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">Chang:1987</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">Heinen:2003</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">Harvey:1989</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">Qaqish:1988</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">Heinen:2003</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">Liboschik:2016</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">Heinen:2003</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">Liboschik:2016</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">Ferland:2006</bcf:citekey>
-    <bcf:citekey order="16" intorder="2">Fokianos:2009</bcf:citekey>
-    <bcf:citekey order="16" intorder="3">Doukhan:2012</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">Liboschik:2016</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">Liu:2012</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">Cui:2018</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">Zucchini:1997</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">Biswas:2009</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">Chang:1987</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">Heinen:2003</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">Harvey:1989</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">Qaqish:1988</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">Heinen:2003</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">Lambert:1992</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">Liboschik:2016</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">Heinen:2003</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">Liboschik:2016</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">Ferland:2006</bcf:citekey>
+    <bcf:citekey order="15" intorder="2">Fokianos:2009</bcf:citekey>
+    <bcf:citekey order="15" intorder="3">Doukhan:2012</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">Liboschik:2016</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">Liu:2012</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">Cui:2018</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">Fokianos:2020</bcf:citekey>
+    <bcf:citekey order="19" intorder="2">Fokianos:2021</bcf:citekey>
     <bcf:citekey order="20" intorder="1">Fokianos:2020</bcf:citekey>
-    <bcf:citekey order="20" intorder="2">Fokianos:2021</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">Fokianos:2020</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">Lee:2023</bcf:citekey>
     <bcf:citekey order="22" intorder="1">Lee:2023</bcf:citekey>
     <bcf:citekey order="23" intorder="1">Lee:2023</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">Lee:2023</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">Engle:1982</bcf:citekey>
     <bcf:citekey order="25" intorder="1">Engle:1982</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">Engle:1982</bcf:citekey>
-    <bcf:citekey order="27" intorder="1">Bollerslev:1986</bcf:citekey>
-    <bcf:citekey order="28" intorder="1">Berndt:1974</bcf:citekey>
-    <bcf:citekey order="29" intorder="1">Bollerslev:1986</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">Zivot:2009</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">Bollerslev:1986</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">Bollerslev:1986</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">Berndt:1974</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">Bollerslev:1986</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">Zivot:2009</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">Bollerslev:1986</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">Hong:2017</bcf:citekey>
     <bcf:citekey order="32" intorder="1">Hong:2017</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">Hong:2017</bcf:citekey>
-    <bcf:citekey order="34" intorder="1">Bollerslev:1986</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">Bollerslev:1986</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">Zhu:2012</bcf:citekey>
     <bcf:citekey order="35" intorder="1">Zhu:2012</bcf:citekey>
     <bcf:citekey order="36" intorder="1">Zhu:2012</bcf:citekey>
     <bcf:citekey order="37" intorder="1">Zhu:2012</bcf:citekey>
-    <bcf:citekey order="38" intorder="1">Zhu:2012</bcf:citekey>
-    <bcf:citekey order="39" intorder="1">Yang:2013</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">Yang:2013</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">Liboschik:2016</bcf:citekey>
-    <bcf:citekey order="41" intorder="2">Fokianos:2011</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">Fokianos:2011</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">Lambert:1992</bcf:citekey>
+    <bcf:citekey order="39" intorder="1">Lambert:1992</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">Liboschik:2016</bcf:citekey>
+    <bcf:citekey order="40" intorder="2">Fokianos:2011</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">Fokianos:2011</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">Liboschik:2016</bcf:citekey>
     <bcf:citekey order="43" intorder="1">Liboschik:2016</bcf:citekey>
     <bcf:citekey order="44" intorder="1">Fokianos:2011</bcf:citekey>
     <bcf:citekey order="44" intorder="2">Woodard:2011</bcf:citekey>
@@ -2415,24 +2415,24 @@
     <bcf:citekey order="48" intorder="1">Yee:1996</bcf:citekey>
     <bcf:citekey order="48" intorder="2">Yee:2015</bcf:citekey>
     <bcf:citekey order="48" intorder="3">Wood:2004</bcf:citekey>
-    <bcf:citekey order="49" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="50" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="51" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="52" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="53" intorder="1">Bre:1993</bcf:citekey>
-    <bcf:citekey order="54" intorder="1">Freeland:2004</bcf:citekey>
-    <bcf:citekey order="55" intorder="1">Freeland:2004</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">Scherrer:2021</bcf:citekey>
+    <bcf:citekey order="50" intorder="1">Scherrer:2021</bcf:citekey>
+    <bcf:citekey order="51" intorder="1">Scherrer:2021</bcf:citekey>
+    <bcf:citekey order="52" intorder="1">Scherrer:2021</bcf:citekey>
+    <bcf:citekey order="53" intorder="1">Scherrer:2021</bcf:citekey>
+    <bcf:citekey order="54" intorder="1">Silva:2005</bcf:citekey>
+    <bcf:citekey order="55" intorder="1">Silva:2005</bcf:citekey>
     <bcf:citekey order="56" intorder="1">Silva:2005</bcf:citekey>
     <bcf:citekey order="57" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="58" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="59" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="60" intorder="1">Silva:2005</bcf:citekey>
+    <bcf:citekey order="58" intorder="1">Bre:1993</bcf:citekey>
+    <bcf:citekey order="59" intorder="1">Freeland:2004</bcf:citekey>
+    <bcf:citekey order="60" intorder="1">Freeland:2004</bcf:citekey>
     <bcf:citekey order="61" intorder="1">Silva:2005</bcf:citekey>
-    <bcf:citekey order="62" intorder="1">Scherrer:2021</bcf:citekey>
-    <bcf:citekey order="63" intorder="1">Scherrer:2021</bcf:citekey>
-    <bcf:citekey order="64" intorder="1">Scherrer:2021</bcf:citekey>
-    <bcf:citekey order="65" intorder="1">Scherrer:2021</bcf:citekey>
-    <bcf:citekey order="66" intorder="1">Scherrer:2021</bcf:citekey>
+    <bcf:citekey order="62" intorder="1">Silva:2005</bcf:citekey>
+    <bcf:citekey order="63" intorder="1">Silva:2005</bcf:citekey>
+    <bcf:citekey order="64" intorder="1">Silva:2005</bcf:citekey>
+    <bcf:citekey order="65" intorder="1">Silva:2005</bcf:citekey>
+    <bcf:citekey order="66" intorder="1">Silva:2005</bcf:citekey>
     <bcf:citekey order="67" intorder="1">Guan:1991</bcf:citekey>
     <bcf:citekey order="68" intorder="1">Oliveira:2005</bcf:citekey>
     <bcf:citekey order="69" intorder="1">Alzaid:1990</bcf:citekey>

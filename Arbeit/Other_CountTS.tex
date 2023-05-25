@@ -12,7 +12,7 @@ h_{kt} = a_0 + a_1 Y_{k,t-1}^2.
 \label{eq:ARCH model}
 \end{gather}
 
-The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-1},\bm{a})$ where $\bm{a}$ is the parameter vector. 
+The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$ where $\bm{a}$ is the parameter vector and $p \in \mathbbm{N}$ is the order of the ARCH process. 
 
 The GARCH model generalises this approach by adding the past variances as another source of information. The GARCH(p,q) model for non-negative parameter vectors $\bm{a}=(a_1,\ldots,a_p)^T$ and $\bm{b}=(b_1,\ldots,b_q)^T$ with $p,q \in \mathbbm{N}$ is given by \cite{Bollerslev:1986}
 
@@ -27,7 +27,7 @@ Other distributions than the normal distributions can be taken as well.
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: GARCH Parameter Estimation and Forecasting}
 
-Estimation of the parameters can be done with maximum likelihood and an iterative algorithm. The model is rewritten and the log-likelihood function then used. After derivation after its variance and mean parameters the Berndt, Hall Hall and Hausman algorithm \cite{Berndt:1974}is used to obtain the maximum likelihood estimates. Further details and assumptions can be found in \cite{Bollerslev:1986}. 
+Estimation of the parameters can be done with maximum likelihood and an iterative algorithm. The model is rewritten and the log-likelihood function then used. After differentiation with respect to its variance and mean parameters the Berndt, Hall Hall and Hausman algorithm \cite{Berndt:1974}is used to obtain the maximum likelihood estimates. Further details and assumptions can be found in \cite{Bollerslev:1986}. 
 
 If one is interested in forecasting $Y_{kt}$, then the minimum mean squared h-step error forecast is simply $\mathbbm{E}[Y_{k,t+h}]$. This forecast is independent of the model parameters. If the conditional variance for $h=1$ should be forecasted, the parameters are estimated and the known values are plugged in. Forecasts for $h>1$ are computed recursively with plugging in the forecasts for $h-1,h-2,\ldots$ in the model \cite{Zivot:2009}. 
 
@@ -41,9 +41,9 @@ To decide whether to use a GARCH model one can test for volatility or the validi
 \subsection{Applications}
 \label{sec: Garch Applications}
 
-The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling  macroeconomic key figures such as inflation rates. GARCH models then generalised this approach and allowed to model a more flexible lag structure \cite{Bollerslev:1986}. Since then they have found wide applications in finance mathematical problems. Especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments. 
+The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling  macroeconomic key figures such as inflation rates. GARCH models then generalised this approach and allowed to model a more flexible lag structure \cite{Bollerslev:1986}. Since then they have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments. 
 
-Since the ARCH and GARCH models are used to model and forecast volatility or the conditional variance, but not values, we will not use it in our application. In addition, the INGARCH model also accounts for the discrete nature of our data as well as its possible over dispersion. 
+Since the ARCH and GARCH models are used to model and forecast volatility or the conditional variance, but not values, we will not use it in our application. In addition, the INGARCH model also accounts for the discrete nature of our data as well as its possible over dispersion which makes it the preferred choice. 
 
 
 \section{Naive Random Walk}
@@ -95,7 +95,7 @@ If $\omega =0$ then we get the normal INGARCH(p,q) model discussed above. It can
 
 which implies $ \mathbb{V}[Y_{kt} | \SigA_{k,t-1}] > \mathbb{E}[Y_{kt} | \SigA_{k,t-1}]$ \cite{Zhu:2012}. This means that model \ref{eq:ZIP model} can handle overdispersion in our data. More details about zero-inflated models and especially the zero-inflated INGARCH(p,q) model can be found in \cite{Zhu:2012}.
 
-However, due to a lack of available R-packages for zero-inflated Poisson INGARCH models, we use a zero-inflated Poisson autoregressive model. We again assume that our data is conditionally $ZIP(\lambda_{kt},\omega_{kt})$ distributed. For the parameters $\lambda_{kt}$ and $\omega_{kt}$, the ZIP autoregressive model is given by \cite{Yang:2013}
+However, due to a lack of available R-packages for zero-inflated Poisson INGARCH models, we use a zero-inflated Poisson autoregressive model. We again assume that our data is conditionally $ZIP(\lambda_{kt},\omega_{kt})$ distributed. For the parameters $\lambda_{kt}$ and $\omega_{kt}$, the ZIP autoregressive model is given by \cite{Lambert:1992}
 
 \begin{gather}
 \log(\lambda_{kt}) = \bm{B}^T_{k,t-1} \bm{\beta},\\
@@ -103,7 +103,9 @@ However, due to a lack of available R-packages for zero-inflated Poisson INGARCH
 \label{eq:ZIP Autoregressive model}
 \end{gather}
 
-where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_m)^T$ are the parameters to be estimated. The vectors $\bm{B}_{k,t-1}$ and $\bm{Z}_{k,t-1}$ are the explanatory covariates. In our case we regress on the past values of our time series. In that case model \ref{eq:ZIP Autoregressive model} becomes
+where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_m)^T$ are the parameters to be estimated and the vectors $\bm{B}_{k,t-1}$ and $\bm{Z}_{k,t-1}$ are the explanatory covariates. In model \ref{eq:ZIP Autoregressive model} a logit link function has been used. It can be replaced with other link functions like the probit or log link. 
+
+In our case we regress on the past values of our time series. In that case model \ref{eq:ZIP Autoregressive model} becomes
 
 \begin{gather}
 \log(\lambda_{kt}) = (1,Y_{k,t-1})^T \bm{\beta},\\
@@ -116,7 +118,7 @@ Hence we have $\bm{B}^T_{t-1} = (1,Y_{k,t-1})^T$ and $\bm{Z}_{t-1} = 1$.
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: ZIM Parameter Estimation and Forecasting}
 
-Parameter estimation can be done with the EM algorithm. Further details can be found in \cite{Yang:2013}.
+Parameter estimation can be done with the EM algorithm. Further details can be found in \cite{Lambert:1992}.
 
 The one step ahead predictor is again given by the conditional expectation $\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_k)\lambda_{kt} $ with the estimated coefficients plugged in. 
 
@@ -139,7 +141,7 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \label{eq:Log-Linear model external factors}
 \end{gather}
 
-with $\bm{\eta} \in \mathbb{R}^r$. 
+with $\bm{\eta} \in \mathbb{R}^r$. Additionally, because of \ref{eq:Parameter Space log-linear}, it also allows for negative autocorrelation \cite{Liboschik:2016}. 
 
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: Log-Linear Parameter Estimation and Forecasting}
@@ -176,97 +178,10 @@ To extend this model to the multivariate case, we replace the functions $f_j$ wi
 
 where $\mathbb{E}[\bm{Y}_t] = (\mathbb{E}[Y_{1t}],\ldots,\mathbb{E}[Y_{Kt}])^T$ \cite{Yee:1996}. Further theoretical background about VGAMs are given in \cite{Yee:1996,Yee:2015,Wood:2004}.
 
-
-\section{INAR(p) Models}
-\label{sec: Inar Models}
-
-Integer valued autoregressive models of order p (INAR(p)) are another option to handle univariate count data. To define them, we first need to define the generalised thinning operator. Take an integer-valued, non-negative random variable $X$ and $\alpha \in [0,1]$. Further, take a sequence of i.i.d. integer-valued, non-negative random variables $\left\{Z_i \right\}_{i=1}^X$ with finite mean $\alpha$ and variance $\sigma^2<\infty $ which are independent of $X$. Then the generalised thinning operate $\circ$ is defined as
-
-\begin{equation}
-\alpha \circ X = \sum_{i=1}^X Z_i .
-\label{eq:Thinning operator}
-\end{equation}
-
-The sequence  $\left\{Z_i \right\}_{i=1}^X$ is called the counting series of $X$ \cite{Silva:2005}. 
-
-We can then define the INAR(p) model for a positive integer-valued time series $\left\{X_t \right\}$ as
-
-\begin{equation}
-X_t = \alpha_1 \circ X_{t-1} + \alpha_2 \circ X_{t-2} + \ldots + \alpha_p X_{t-p} +\epsilon_t ,
-\label{eq:Inar(p) model}
-\end{equation}
-
-where
-
-\begin{enumerate}
-	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables with finite first, second and third moment. 
-	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and $\left\{Z_j \right\}$ for $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$ as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$
-	\item $\alpha_i \in [0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$
-	\item $\sum_{j=1}^p \alpha_j < 1$ \cite{Silva:2005}. 
-\end{enumerate}
-
-
-The last condition ensures the existence and stationary of the process. 
-
-Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then the INVAR(p) model is given by
-
-\begin{equation}
-Y_{kt} = \alpha_1 \circ Y_{k,t-1} + \alpha_2 \circ Y_{k,t-2} + \ldots + \alpha_p Y_{k,t-p} +\epsilon_{kt}.
-\label{eq:Inar(p) model ts}
-\end{equation}
-
-For simplicity, we will consider INAR(1) models, although the optimal choice of the lag is something that could be further investigated. 
-
-\subsection{Distributional assumptions}
-\label{sec: Inar Distributional assumptions}
-
-While we will mainly assume that the innovations $\left\{\epsilon_t\right\}$ follow a Poisson distribution, they can also follow other distributions. One interesting option is, that one can choose a zero-inflated distribution as mentioned in \ref{sec: Zim}. This could make the model adequate for our data. 
-
-
-\subsection{Parameter Estimation and Forecasting}
-\label{sec: Inar Parameter Estimation and Forecasting}
-
-Parameter estimation can be done in several ways. Possible methods are: moment based estimators (MM), regression based or conditional least squares (CLS) and maximum likelhood (ML) based estimators. Especially for the Poisson model, those methods have been studied in detail in literature \cite{Silva:2005}. 
-
-The authors in \cite{Silva:2005} present two types of forecasting methods for INAR(1) models. The first approach is a classical method for performing predictions in a time series context and makes use of the conditional expectation. It was obtained by \cite{Bre:1993} and \cite{Freeland:2004}. Assuming that $\left\{\epsilon_t\right\} \sim_{i.i.d} P(\lambda)$, the $h$-step ahead predictor, for $h\in \mathbbm{N}$, based on $n$ past observations $\bm{Y}_k=(Y_{k1},\ldots,Y_{kn})$ is given by
-
-\begin{equation}
-\hat{Y}_{k,n+h} = \mathbb{E}[Y_{k,n+h} | \bm{Y}_k] = \alpha^h \left[Y_{kn}- \frac{\lambda}{1-\alpha} \right] + \frac{\lambda}{1-\alpha}.
-\label{eq:Forecasting Classic}
-\end{equation}
-
-
-However, this forecast hardly ever produces integer values. Remedies, like minimising the absolute expected error, have been suggested by \cite{Freeland:2004} but the authors in \cite{Silva:2005} propose a bayesian approach. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha,\lambda)$ are random \cite{Silva:2005}. Since the complexity posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \cite{Silva:2005}. The estimator for the conditional expectation is then given by
-
-\begin{equation}
-\hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_i^m\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_i^h}{1-\alpha_i}\lambda_i\right),
-\label{eq:Forecasting Bayesian}
-\end{equation}
-
-where $m$ is the sampling size and the pairs $(\alpha_i,\lambda_i)$ for $i=1,\ldots,m$ are the sampled parameters. 
-
-\subsection{Testing for INAR(1) Models}
-\label{sec:Testing for INAR(1) Models}
-
-To test the adequacy of the INAR(1) model, there are again various options. 
-
-Parametric re-sampling is the first of the presented methods. The idea is to generate data with the help of the fitted model, construct the empirical distribution of the functional of interest and check if the original sample is a reasonable point within that empirical distribution \cite{Silva:2005}. 
-
-Residual based methods based on the Pearson residuals defined by 
-
-\begin{equation}
-r_{kt} = \frac{Y_{kt}-\mathbbm{E}[Y_{kt}|Y_{k,t-1}]}{\mathbbm{V}[Y_{kt}|Y_{k,t-1}]^{1/2}},
-\label{eq:Pearson residuals}
-\end{equation}
-
-where estimated quantities are plugged in. If the model is specified correctly, the residuals should have mean zero, variance one and no significant serial correlation \cite{Silva:2005}. 
-
-Another option is based on predictive distributions where an adjusted probability integral transform (PIT) is used. Further details can be found in \cite{Silva:2005}. 
-
 \section{AR Models}
 \label{sec: Ar Models}
 
-Autoregressive models of order p (AR(p))  are one of the most simple time series models which makes them very popular. For $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\epsilon_{kt} \sim WN(\sigma^2)$, in this context also called innovations, they are defined as 
+Autoregressive models of order p (AR(p))  are one of the most simple time series models which makes them very popular. For $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\epsilon_{kt} \sim WN(\sigma^2)$, called innovations as well, they are defined as 
 
 \begin{equation}
 Y_{kt} = a_1Y_{k,t-1} + \ldots + a_pY_{k,t-p} + \epsilon_{kt},
@@ -308,7 +223,7 @@ for $m>p$ \cite{Scherrer:2021}. For $h>1$, one simply continues recursively usin
 
 To test whether or not a time series follows an AR(p) process the estimates of the white noise process $\hat{\epsilon}_t$ can be used. These estimates should follow a white noise process and hence should show no signs of serial correlation. Popular tests are the Portmanteau and the Breusch-Godfrey Test \cite{Scherrer:2021}. 
 
-The Portmanteau Test tests the null hypothesis $H_0: \mathbbm{E}[\bm{\epsilon}_t,\bm{\epsilon}_{t-m}^T]$, i.e. if the estimated innovations are uncorrelated. Under the assumption that $(\bm{Y}_t)$ is an AR(p) process and an AR(p) model has been fit, then the used test statistic converges against a chi-squared distribution \cite{Scherrer:2021}. 
+The Portmanteau Test tests the null hypothesis $H_0: \mathbbm{E}[\bm{\epsilon}_t,\bm{\epsilon}_{t-m}^T]=0$, i.e. if the estimated innovations are uncorrelated. Under the assumption that $(\bm{Y}_t)_{t=1}^T$ is an AR(p) process and an AR(p) model has been fit, then the used test statistic converges against a chi-squared distribution \cite{Scherrer:2021}. 
 
 The Breusch-Godfrey Test tests if the coefficients $(b_1,\ldots,b_h)$ in the model 
 
@@ -319,11 +234,96 @@ The Breusch-Godfrey Test tests if the coefficients $(b_1,\ldots,b_h)$ in the mod
 
 are zero, i.e. if process $(\bm{\epsilon}_t)$ follows an AR(h) structure or not. Under the null hypothesis the test statistic follows a chi-squared distribution again \cite{Scherrer:2021}. 
 
+\section{INAR(p) Models}
+\label{sec: Inar Models}
 
-\subsection{Difference to INAR(p) Models}
-\label{sec: Difference to Inar models}
+Integer valued autoregressive models of order p (INAR(p)) are another option to handle univariate count data. To define them, we first need to define the generalised thinning operator. Take an integer-valued, non-negative random variable $X$ and $\alpha \in [0,1]$. Further, take a sequence of i.i.d. integer-valued, non-negative random variables $(Z_i)_{i=1}^X$ with finite mean $\alpha$ and variance $\sigma^2<\infty $ which are independent of $X$. Then the generalised thinning operate $\circ$ is defined as
+
+\begin{equation}
+\alpha \circ X = \sum_{i=1}^X Z_i .
+\label{eq:Thinning operator}
+\end{equation}
+
+The sequence  $\left\{Z_i \right\}_{i=1}^X$ is called the counting series of $X$ \cite{Silva:2005}. 
+
+We can then define the INAR(p) model for a positive integer-valued time series $\left\{X_t \right\}$ as
+
+\begin{equation}
+X_t = \alpha_1 \circ X_{t-1} + \alpha_2 \circ X_{t-2} + \ldots + \alpha_p X_{t-p} +\epsilon_t ,
+\label{eq:Inar(p) model}
+\end{equation}
+
+where
+
+\begin{enumerate}
+	\item $(\epsilon_t)$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second and third moment. 
+	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and $(Z_j)$ for $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $(\epsilon_t)$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$ as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$
+	\item $\alpha_i \in [0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$
+	\item $\sum_{j=1}^p \alpha_j < 1$ \cite{Silva:2005}. 
+\end{enumerate}
+
+
+The last condition ensures the existence and stationary of the process. 
+
+Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then the INVAR(p) model is given by
+
+\begin{equation}
+Y_{kt} = \alpha_1 \circ Y_{k,t-1} + \alpha_2 \circ Y_{k,t-2} + \ldots + \alpha_p Y_{k,t-p} +\epsilon_{kt}.
+\label{eq:Inar(p) model ts}
+\end{equation}
+
+For simplicity, we will consider INAR(1) models, although the optimal choice of the lag is something that could be further investigated. 
+
+\subsection{Distributional assumptions}
+\label{sec: Inar Distributional assumptions}
+
+While we will mainly assume that the innovations $(\epsilon_t)$ follow a Poisson distribution, they can also follow other distributions. One interesting option is, that one can choose a zero-inflated distribution as mentioned in \ref{sec: Zim}. This could make the model adequate for our data. 
+
+
+\subsection{Parameter Estimation and Forecasting}
+\label{sec: Inar Parameter Estimation and Forecasting}
+
+Parameter estimation can be done in several ways. Possible methods are: moment based estimators (MM), regression based or conditional least squares (CLS) and maximum likelhood (ML) based estimators. Especially for the Poisson model, those methods have been studied in detail in literature \cite{Silva:2005}. 
+
+The authors in \cite{Silva:2005} present two types of forecasting methods for INAR(1) models. The first approach is a classical method for performing predictions in a time series context and makes use of the conditional expectation. It was obtained by \cite{Bre:1993} and \cite{Freeland:2004}. Assuming that $(\epsilon_t) \sim_{i.i.d} P(\lambda)$, the $h$-step ahead predictor, for $h\in \mathbbm{N}$, based on $n$ past observations $\bm{Y}_k=(Y_{k1},\ldots,Y_{kn})$ is given by
+
+\begin{equation}
+\hat{Y}_{k,n+h} = \mathbb{E}[Y_{k,n+h} | \bm{Y}_k] = \alpha^h \left[Y_{kn}- \frac{\lambda}{1-\alpha} \right] + \frac{\lambda}{1-\alpha}.
+\label{eq:Forecasting Classic}
+\end{equation}
+
+
+However, this forecast hardly ever produces integer values. Remedies, like minimising the absolute expected error, have been suggested by \cite{Freeland:2004} but the authors in \cite{Silva:2005} propose a bayesian approach. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha,\lambda)$ are random \cite{Silva:2005}. Since the complexity posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \cite{Silva:2005}. The estimator for the conditional expectation is then given by
+
+\begin{equation}
+\hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_i^m\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_i^h}{1-\alpha_i}\lambda_i\right),
+\label{eq:Forecasting Bayesian}
+\end{equation}
+
+where $m$ is the sampling size and the pairs $(\alpha_i,\lambda_i)$ for $i=1,\ldots,m$ are the sampled parameters. 
+
+\subsection{Testing for INAR(1) Models}
+\label{sec:Testing for INAR(1) Models}
+
+To test the adequacy of the INAR(1) model, there are again various options. 
+
+Parametric re-sampling is the first of the presented methods. The idea is to generate data with the help of the fitted model, construct the empirical distribution of the functional of interest and check if the original sample is a reasonable point within that empirical distribution \cite{Silva:2005}. 
+
+Residual based methods are based on the Pearson residuals defined by 
+
+\begin{equation}
+r_{kt} = \frac{Y_{kt}-\mathbbm{E}[Y_{kt}|Y_{k,t-1}]}{\mathbbm{V}[Y_{kt}|Y_{k,t-1}]^{1/2}},
+\label{eq:Pearson residuals}
+\end{equation}
+
+where estimated quantities are plugged in. If the model is specified correctly, the residuals should have mean zero, variance one and no significant serial correlation \cite{Silva:2005}. 
+
+Another option is based on predictive distributions where an adjusted probability integral transform (PIT) is used. Further details can be found in \cite{Silva:2005}. 
+
+\subsection{Difference to AR(p) Models}
+\label{sec: Difference to AR models}
 
 %Using other defintion of INAR(p) model. 
 %While structurally the AR(P) and then INAR(P) model look similar they have different properties. The only exception is for $p=1$. The authors in \cite{McKenzie:1986} and \cite{Alzaid:1988} noted that the aside from their structural similarity, those two processes also show the same autocorrelation and regression behaviour \cite{Alzaid:1990}. However, for $p>1$ the similarities end at the structure. For an INAR(p) process, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ have a mutual dependence structure for $i=1,2,\ldots,p$ which induces a moving-average structure. In the AR(p) process they are only connected by the presence of $Y_{t,k}$. Because of this additional dependence, it can be shown that the autocorrelation behaves more like a standard ARMA(p,p-1) process \cite{Alzaid:1990}. 
 
-Depending on the definition of the INAR(p) Model the degree of similarity varies. If one follows the definition of \cite{Guan:1991}, which is the one in \ref{eq:Inar(p) model}, then the autocorrelation function follows that of an AR(p) process \cite{Oliveira:2005}. However, the authors in \cite{Alzaid:1990} propose a different definition. In their work, given $Y_{tk}=y_{tk}$, the conditional distribution of $(\alpha_1 \circ Y_{tk}, \ldots, \alpha_p \circ Y_{tk})$ is multinomial with parameters $( \alpha_1,\ldots,\alpha_p,y_{tk})$ and is independent of the history of the process. Under those assumptions, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ for $i=1,2,\ldots,p$  have a stronger mutual dependence structure than the corresponding AR(p) process and induces a moving-average structure \cite{Alzaid:1990}.
+Depending on the definition of the INAR(p) Model the degree of similarity varies. If one follows the definition of \cite{Guan:1991}, which is the one in \ref{eq:Inar(p) model}, then the autocorrelation function follows that of an AR(p) process \cite{Oliveira:2005}. However, the authors in \cite{Alzaid:1990} propose a different definition. In their work, given $Y_{tk}=y_{tk}$, the conditional distribution of $(\alpha_1 \circ Y_{tk}, \ldots, \alpha_p \circ Y_{tk})$ is multinomial with parameters $( \alpha_1,\ldots,\alpha_p,y_{tk})$ and is independent of the history of the process. Under those assumptions, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ for $i=1,2,\ldots,p$  have a stronger mutual dependence structure than the corresponding AR(p) process and induce a moving-average structure \cite{Alzaid:1990}.
