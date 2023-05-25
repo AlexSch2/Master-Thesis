@@ -51,14 +51,16 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = ids_all,
+    Id = 4,
     Frame = frame,
-    OneVsAll = F,
-    PivotGroup =  c("1", "2"),
+    OneVsAll = T,
+    PivotGroup =  NULL,
+    Category_Main = c("1","2","3","4"),
     TSpace = T,
     Log = T,
     ZeroHandling = "all",
     WindowMethod = window_method,
+    TakeSubCategory= F,
     HistoryLength = HistoryLength
   )
 
@@ -67,24 +69,23 @@ if(save_results){
 }
 
 
-inarzim_result <-
+ingarch_result <-
   CountModel.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids_all,
+    Id = 4,
     Frame = frame,
-    Distribution = "ZIP",
-    Category_Main = c("1","2","3","4"),
-    Category_Calculated = c("3","4"),
+    Distribution = "poisson",
+    Category_Main = c("1"),
     WindowMethod = window_method,
     ZeroHandling = "none",
     External = F,
-    Multicore = T,
+    Multicore = F,
     NCores = 10,
-    PastOb = NA,
-    PastMean = NA,
+    PastOb = 1,
+    PastMean = 1,
     HistoryLength = HistoryLength,
-    TakeSubCategory = F,
-    ModelType = "inar_bayes"
+    TakeSubCategory = T,
+    ModelType = "ingarch"
   )
   
   if(T){

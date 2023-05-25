@@ -5,12 +5,12 @@ Data.Window <- function(Timeseries,Frame,Method = c("non-overlapping", "fixed", 
                     PredictionStep = 1) {
   
   Method <- match.arg(Method)
-  Timeseries_Length <- dim(Timeseries)[1]
+  Timeseries_Length <- dim(as.data.frame(Timeseries))[1]
   
-  if (is.null(Timeseries_Length)) {
-    Timeseries <- as.matrix(Timeseries, ncol = 1)
-    Timeseries_Length <- dim(Timeseries)[1]
-  }
+  # if (is.null(Timeseries_Length)) {
+  #   Timeseries <- as.matrix(Timeseries, ncol = 1)
+  #   Timeseries_Length <- dim(Timeseries)[1]
+  # }
   if (is.null(Timeseries_Length))
     stop("Enter valid timeseries")
   
@@ -112,8 +112,8 @@ Data.Preparation <- function(Data_Raw,
   
   if (OneVsAll) {
     Data_Raw <- Data_Raw %>%
-      dplyr::mutate(other = dplyr::select(.,-all_of(PivotGroup), -"week_date") %>% rowSums(na.rm =
-                                                                                             F)) %>%
+      dplyr::mutate(other = dplyr::select(.,-all_of(PivotGroup), -"week_date") %>%
+                      rowSums(na.rm = F)) %>%
       dplyr::select("week_date", all_of(PivotGroup), "other")
     
   }

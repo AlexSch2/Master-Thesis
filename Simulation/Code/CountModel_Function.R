@@ -1,20 +1,14 @@
 
 #Data preparation for count models
-CountModel.DataPreparation <- function(Data_Raw,
-                                     ZeroHandling = c("none","zero_to_one"),
-                                    HistoryLength = 1,
-                                    TakeSubCategory = F){
+CountModel.DataPreparation <- function(Data,
+                                       ZeroHandling = c("none", "zero_to_one"),
+                                       HistoryLength = 1,
+                                       TakeSubCategory = F,
+                                       Category){
   
   ZeroHandling <- match.arg(ZeroHandling)
-  
-  if(TakeSubCategory){
-    Category <- sort(unique(Data_Raw$sub_category_id))
-  }
-  else{
-    Category <- sort(unique(Data_Raw$main_category_id))
-  }
-  
-  Data_Prepared <- Data.Preparation(Data_Raw = Data_Raw,
+
+  Data_Prepared <- Data.Preparation(Data_Raw = Data,
                                OneVsAll = F,
                                Category = Category,
                                NA_to = 0,
@@ -57,7 +51,7 @@ CountModel.Prediction <- function(Data_Window,
     
     
     #Extracting fitting values, true value and last known value
-    TimeSeriesValue_Window <- Data_Window[[WindowIndex]]$timeSeriesValue_window[c("week_date",Category)]
+    TimeSeriesValue_Window <- as.data.frame(Data_Window[[WindowIndex]]$timeSeriesValue_window[c("week_date",Category)])
     TimeseriesValue_Future <- Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[[Category]]
     TimeSeriesValue_LastKnown <- tail(TimeSeriesValue_Window[[Category]],n=1)
     
@@ -266,11 +260,9 @@ CountModel.Analysis <- function(Data_Raw,
                              PredictionStep = 1,
                              Distribution = "poisson",
                              ModelType = "ingarch",
-                             Plot = F,
                              Category_Main = c("1", "2", "3", "4"),
                              TakeSubCategory = F,
                              Category_Sub = NULL,
-                             Category_Calculated = c("1", "2", "3", "4"),
                              Frame = 10,
                              WindowMethod = "extending",
                              ZeroHandling = "none",
@@ -282,41 +274,72 @@ CountModel.Analysis <- function(Data_Raw,
                              NCores = 2
                              ) {
   
+  #Checking Input
   stopifnot(ModelType %in% c("ingarch","inar_classic","inar_bayes","zim"))
+  stopifnot("External,Multicore and TakeSubCategory must be boolean."=
+              all(sum(sapply(c(External,Multicore,TakeSubCategory),is.logical))))
+  stopifnot("ZeroHandling,WindowMethod,Distribution and Category_Main must be character vectors."=
+              all(sum(sapply(c(ZeroHandling,Distribution,WindowMethod,Category_Main),is.character))))
+  stopifnot("Id,PredictionStep,HistoryLength,NCores and Frame must be numeric."= 
+              all(sum(sapply(c(Id,PredictionStep,HistoryLength,Frame,NCores),is.numeric))))
+  
   
   #Only return IDs with results
   Id_Result <- Id
   
-  #Operating on Sub category Level
-  SubCategory_Column  <- NULL
-  if(TakeSubCategory){
-    SubCategory_Column <- "sub_category_id"
-    stopifnot(length(Category_Main)==1)
-  }
-  if(is.null(Category_Sub)){
-    Category_Sub <- unique(Data_Raw$sub_category_id)
-  }
-  
   #Calculating Prediction results for all ids and each category
   PredictionResult_AllIDAllCategory <- lapply(Id,function(Id_RunVariable){
     print(paste("Calculating for ID:",Id_RunVariable))
-    #Preparing data
+    
+    #Preparing raw data
     Data_Processed <- Data_Raw %>%
       filter(fridge_id == Id_RunVariable &
-               main_category_id %in% as.integer(Category_Main) &
-               sub_category_id %in% as.integer(Category_Sub)) %>%
-      dplyr::select(week_date, main_category_id, any_of(SubCategory_Column) ,sold) %>%
-      arrange(week_date)
+               main_category_id %in% as.integer(Category_Main))
     
-    Data_Prepared <- CountModel.DataPreparation(Data_Raw = Data_Processed,ZeroHandling = ZeroHandling,
-                              HistoryLength = HistoryLength,
-                              TakeSubCategory = TakeSubCategory)%>%
-      dplyr::select(week_date,all_of(Category_Calculated))
+    #Safe Catching if Category Main was wrongly specified
+    if(dim(Data_Processed)[1]==0){
+      stop("There was an error filtering Data_Raw with respect to Id and Category_Main. Check those inputs and 
+            make sure they exist in the provided data.")
+    }
     
-    Data_PreparedNoTransform <- CountModel.DataPreparation(Data_Raw = Data_Processed,ZeroHandling = "none",
-                                                        HistoryLength = HistoryLength,
-                                                        TakeSubCategory = TakeSubCategory)%>%
-      dplyr::select(week_date,all_of(Category_Calculated))
+    #If no Subcategory is specified, we take all
+    if(!is.null(Category_Sub)){
+      #Taking Subcategories      
+      stopifnot("Subcategory must be part of main category."=Category_Sub %in% unique(Data_Processed$sub_category_id))
+      Data_Processed <- Data_Processed %>% 
+        filter(sub_category_id %in% as.integer(Category_Sub))
+    }
+    
+    #Operating on Sub category Level
+    if(TakeSubCategory){
+      stopifnot("Only one main category can be chosen"=length(Category_Main)==1)
+      Data_Processed <- Data_Processed %>%
+        dplyr::select(week_date, main_category_id, sub_category_id ,sold) %>%
+        arrange(week_date)
+      
+      Category <- sort(unique(Data_Processed$sub_category_id))
+      
+    } else {
+      Data_Processed <- Data_Processed %>%
+        dplyr::select(week_date, main_category_id,sold) %>%
+        arrange(week_date)
+      
+      Category <- sort(unique(Data_Processed$main_category_id))
+    }
+    
+    Data_Prepared <- CountModel.DataPreparation(Data = Data_Processed,
+                                                ZeroHandling = ZeroHandling,
+                                                HistoryLength = HistoryLength,
+                                                TakeSubCategory = TakeSubCategory,
+                                                Category = Category)
+    
+    
+    Data_PreparedNoTransform <- CountModel.DataPreparation(Data = Data_Processed,
+                                                           ZeroHandling = "none",
+                                                           HistoryLength = HistoryLength,
+                                                           TakeSubCategory = TakeSubCategory,
+                                                           Category = Category)
+    
     
     Category <- names(Data_Prepared)[-1]
     
@@ -339,8 +362,15 @@ CountModel.Analysis <- function(Data_Raw,
     }
     
     #Creating fitting and prediction windows
-    Data_Window <- Data.Window(Data_Prepared,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
-    Data_WindowNoTransform <- Data.Window( Data_PreparedNoTransform,Frame = Frame,Method=WindowMethod,PredictionStep = PredictionStep)
+    Data_Window <- Data.Window(Data_Prepared,
+                               Frame = Frame,
+                               Method=WindowMethod,
+                               PredictionStep = PredictionStep)
+    
+    Data_WindowNoTransform <- Data.Window( Data_PreparedNoTransform,
+                                           Frame = Frame,
+                                           Method=WindowMethod,
+                                           PredictionStep = PredictionStep)
   
     #Calculating Prediction results for each category 
     if(Multicore == TRUE){

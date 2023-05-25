@@ -8,13 +8,15 @@
 #Currently aggregating on the main categories
 #If one vs all is chosen, pivot groups have to be supplied as a character
 
-Coda.DataPreparation <- function(Data_Raw,
+Coda.DataPreparation <- function(Data,
            ZeroHandling = c("all", "zeros_only", "none"),
            TSpace = FALSE,
            Log = FALSE,
            OneVsAll = FALSE,
            PivotGroup = "1",
-           HistoryLength = 1) {
+           HistoryLength = 1,
+           TakeSubCategory = F,
+           Category) {
 
     Plus <- function(x,Value=0.5){
          x[is.na(x)] <- 0
@@ -22,21 +24,14 @@ Coda.DataPreparation <- function(Data_Raw,
       return(x)
     }
     ZeroHandling <- match.arg(ZeroHandling)
-    
-    #If we compare one category to all the others we use all categories. Otherwise we only use the first 2
-    if(OneVsAll) {
-      Category <- c(1,2,3,4)
-    }
-    else {
-      Category <- c(1,2)
-    }
 
-    Data_Prepared <- Data.Preparation(Data_Raw = Data_Raw,
+    Data_Prepared <- Data.Preparation(Data_Raw = Data,
                              OneVsAll = OneVsAll,
                              PivotGroup = PivotGroup,
                              NA_to=0,
                              Category = Category,
-                             HistoryLength = HistoryLength)
+                             HistoryLength = HistoryLength,
+                             TakeSubCategory = TakeSubCategory)
 
     
     if (ZeroHandling == "none") {
@@ -90,23 +85,24 @@ Coda.DataPreparation <- function(Data_Raw,
 # m... 2
 # See Multivariate Linear Regression pdf
 Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransform, PredictionStep,
-                            OneVsAll,TSpace, Log, PivotGroup, Frame = 10) {
+                            OneVsAll,TSpace, Log, PivotGroup, Frame = 10, Category) {
   
   PredictionResult <- lapply(c(1:length(Data_Window)), function(WindowIndex) {
     
     
     # Selecting the fitting data and the data which should be predicted 
-    TimeSeriesValue_Window <- Data_Window[[WindowIndex]]$timeSeriesValue_window[,-1]
+    TimeSeriesValue_Window <- as.data.frame(Data_Window[[WindowIndex]]$timeSeriesValue_window[,-1])
     Date <- Data_Window[[WindowIndex]]$timeSeriesValue_future[1, 1]
     
-    #Depending on whether we have TSpace or not we fit a VAR model or an AR model
+    Size <- dim(TimeSeriesValue_Window)[2]
+    
+    #If we have multivariate data, we fit a VAR model. Otherwise we fit an AR model
     ####TSPACE
-    if (TSpace) {
+    if (Size > 1) {
       Window_Length <- dim(TimeSeriesValue_Window)[1]
       
       Model <- VAR(TimeSeriesValue_Window, p=1 ,lag.max = NULL, ic= "AIC")
       ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
-      Size = 2
       
       #Initialising result vectors
       ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
@@ -180,17 +176,16 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
         Category <- factor(c(PivotGroup, "other", "tsum"))
       }
       else{
-        Category <- factor(c("1", "2", "tsum"))
+        Category <- factor(c(as.character(Category), "tsum"))
       }
       
     }
-    ###No TSPACE
+    ### We have a univariate time series.
     else{
       Window_Length <- length(TimeSeriesValue_Window)
       
       Model <- ar(TimeSeriesValue_Window, aic = F, order.max = 1)
-      ValuePredict <- predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
-      Size = 1
+      ValuePredict <- predict(Model, as.matrix(TimeSeriesValue_Window), n.ahead = PredictionStep)
       
       #Initialising result vectors
       ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
@@ -199,8 +194,8 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       #Filling up result vectors
       for (i in 1:Size) {
         ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
-        LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
-        UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
+       # LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
+       # UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
       }
       
       
@@ -213,17 +208,19 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
         D2invPC()
       ValuePredict <- ValuePredict * TSum
       
+      LowerBound <- NA
+      UpperBound <- NA
       
-      LowerBound <- LowerBound_Vector %>%
-        matrix(nrow = 1) %>%
-        D2invPC()
-      LowerBound <- as.vector(LowerBound * TSum)
-      
-      
-      UpperBound <- UpperBound_Vector %>%
-        matrix(nrow = 1) %>%
-        D2invPC()
-      UpperBound <- as.vector(UpperBound * TSum)
+      # LowerBound <- LowerBound_Vector %>%
+      #   matrix(nrow = 1) %>%
+      #   D2invPC()
+      # LowerBound <- as.vector(LowerBound * TSum)
+      # 
+      # 
+      # UpperBound <- UpperBound_Vector %>%
+      #   matrix(nrow = 1) %>%
+      #   D2invPC()
+      # UpperBound <- as.vector(UpperBound * TSum)
       
       
       ValueTrue <-
@@ -236,7 +233,7 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
         Category <- factor(c(PivotGroup, "other"))
       }
       else{
-        Category <- factor(c("1", "2"))
+        Category <- factor(c(as.character(Category)))
       }
       
       ValuePredict_Naive <-
@@ -336,54 +333,119 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
 ## Wrapper function for the coda analysis. Still WIP
 ## Standard CI is 95%
 
-Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", PredictionStep = 1, Log = T,
-                        TSpace = TOneVsAll = F , PivotGroup = c("1"), HistoryLength = 1,
-                        ModelType = "coda", WindowMethod ="extending") {
+Coda.Analysis<-function(Data_Raw, 
+                        Id, 
+                        Frame=10, 
+                        ZeroHandling = "zeros_only", 
+                        PredictionStep = 1, 
+                        Log = T,
+                        TSpace = T,
+                        OneVsAll = T , 
+                        PivotGroup = NULL, 
+                        HistoryLength = 1,
+                        ModelType = "coda", 
+                        WindowMethod ="extending",
+                        Category_Main = c("1", "2", "3", "4"),
+                        TakeSubCategory = F,
+                        Category_Sub = NULL) {
   
-  stopifnot(ModelType %in% c("coda","coda_OneVsAll"))
+  #Checking Input
+  stopifnot("Model Type not correct."=ModelType %in% c("coda","coda_OneVsAll"))
+  stopifnot("Log,TSpace,OneVsAll and TakeSubCategory must be boolean."=
+              all(sapply(c(Log,TSpace,OneVsAll,TakeSubCategory),is.logical)))
+  stopifnot("ZeroHandling,WindowMethod and Category_Main must be character vectors."=
+              all(sapply(c(ZeroHandling,WindowMethod,Category_Main),is.character)))
+  stopifnot("Id,PredictionStep,HistoryLength and Frame must be numeric."= 
+              all(sapply(c(Id,PredictionStep,HistoryLength,Frame),is.numeric)))
   
-  #one vs all for all pivot groups
+  stopifnot("Frame and HistoryLength must both be greater than 0."=Frame>0 & HistoryLength >0)
+  
   
   #Only return IDs with results
   Id_Result <- Id
   
+  #one vs all for all pivot groups
   if(OneVsAll) {
   
   PredictionResult_AllIDAllPivotGroup <- lapply(Id,function(Id_RunVariable){
     print(paste("Calculating for ID:",Id_RunVariable))
+    
+    
+    #Preparing raw data
+    Data_Processed <- Data_Raw %>%
+      filter(fridge_id == Id_RunVariable &
+               main_category_id %in% as.integer(Category_Main))
+    
+    #Safe Catching if Category Main was wrongly specified
+    if(dim(Data_Processed)[1]==0){
+      stop("There was an error filtering Data_Raw with respect to Id and Category_Main. Check those inputs and 
+            make sure they exist in the provided data.")
+    }
+               
+    #If no Subcategory is specified, we take all
+    if(!is.null(Category_Sub)){
+      #Taking Subcategories      
+      stopifnot("Subcategory must be part of main category."=
+                  Category_Sub %in% unique(Data_Processed$sub_category_id))
+      Data_Processed <- Data_Processed %>% 
+        filter(sub_category_id %in% as.integer(Category_Sub))
+    }
+  
+    
+    #Operating on Sub category Level
+    if(TakeSubCategory){
+      stopifnot("Only one main category can be chosen"=length(Category_Main)==1)
+      Data_Processed <- Data_Processed %>%
+        dplyr::select(week_date, main_category_id, sub_category_id ,sold) %>%
+        arrange(week_date)
+      
+      Category <- unique(Data_Processed$sub_category_id)
+      
+    } else {
+      Data_Processed <- Data_Processed %>%
+        dplyr::select(week_date, main_category_id,sold) %>%
+        arrange(week_date)
+      
+      Category <- unique(Data_Processed$main_category_id)
+    }
+    
+    #Checking input
+    if(is.null(PivotGroup)){
+      PivotGroup <- as.character(Category)
+    } else {
+      stopifnot("PivotGroup must be character."=is.character(PivotGroup))
+    }
+    stopifnot("PivotGroup must be analysed categories."=PivotGroup %in% Category)
+    
+    
     PredictionResult_AllPivotGroup <- lapply(PivotGroup,function(PivotGroup_RunVariable){
       
-        #Preparing raw data
-        Data_Prepared <- Data_Raw %>%
-          filter(fridge_id == Id_RunVariable &
-                   main_category_id %in% c(1, 2, 3, 4)) %>%
-          dplyr::select(week_date, main_category_id, sold) %>%
-          arrange(week_date)
-        
         #Calculating the length of the timeseries
-        TimeSeries_Length <- length(unique(Data_Prepared$week_date))
+        TimeSeries_Length <- length(unique(Data_Processed$week_date))
         
         
         #Preparing transformed data
-        Data_Transform <- Coda.DataPreparation(Data_Prepared, 
+        Data_Prepared <- Coda.DataPreparation(Data_Processed, 
                                                ZeroHandling = ZeroHandling,
                                                TSpace = TSpace, 
                                                Log = Log,
                                                OneVsAll = T,
                                                PivotGroup = PivotGroup_RunVariable,
-                                               HistoryLength = HistoryLength) %>%
+                                               HistoryLength = HistoryLength,
+                                               TakeSubCategory = TakeSubCategory,
+                                               Category = Category) %>%
           arrange(week_date)
         
 
         
         #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed. 
         Frame_Help <- "fixed"
-        if(dim(Data_Transform)[1]<5){
+        if(dim(Data_Prepared)[1]<5){
           return(NA)
           }
         if(Frame < 1){
           Frame_Help <- as.character(Frame)
-          Frame = round(Frame*dim(Data_Transform)[1])
+          Frame = round(Frame*dim(Data_Prepared)[1])
           if(Frame < 5){
             Frame = 5
           }
@@ -391,7 +453,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #Splitting transformed data into windows
-        Data_Window <- Data.Window(Data_Transform,
+        Data_Window <- Data.Window(Data_Prepared,
                                          Frame=Frame,
                                          Method = WindowMethod,
                                          PredictionStep = PredictionStep)
@@ -399,14 +461,17 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #Preparing non transformed data 
-        Data_NoTransform <- Coda.DataPreparation(Data_Prepared,
-                                                        ZeroHandling="none",
-                                                        TSpace=TSpace, 
-                                                        Log=F, 
-                                                        OneVsAll = T,
-                                                        PivotGroup = PivotGroup_RunVariable,
-                                                 HistoryLength = HistoryLength) %>%
+        Data_NoTransform <- Coda.DataPreparation(Data_Processed,
+                                                 ZeroHandling="none",
+                                                 TSpace=TSpace,
+                                                 Log=F,
+                                                 OneVsAll = T,
+                                                 PivotGroup = PivotGroup_RunVariable,
+                                                 HistoryLength = HistoryLength,
+                                                 TakeSubCategory = TakeSubCategory,
+                                                 Category = Category) %>%
           arrange(week_date)
+        
         #Splitting non transformed data into windows
         Data_WindowNoTransform <- Data.Window(Data_NoTransform,
                                             Frame=Frame,
@@ -415,15 +480,17 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #Carrying out model fitting and prediction
-        PredictionResult <- Coda.Prediction(Data_Window = Data_Window, 
-                                              Data_WindowNoTransform = Data_WindowNoTransform, 
-                                              Data_NoTransform = Data_NoTransform, 
-                                              PredictionStep = PredictionStep,
-                                              OneVsAll = T,
-                                              TSpace = TSpace,
-                                              Log =  Log,
-                                              PivotGroup = PivotGroup_RunVariable,
-                                              Frame = Frame)
+        PredictionResult <- Coda.Prediction(Data_Window = Data_Window,
+                                            Data_WindowNoTransform = Data_WindowNoTransform,
+                                            Data_NoTransform = Data_NoTransform,
+                                            PredictionStep = PredictionStep,
+                                            OneVsAll = T,
+                                            TSpace = TSpace,
+                                            Log =  Log,
+                                            PivotGroup = PivotGroup_RunVariable,
+                                            Frame = Frame, 
+                                            Category = Category)
+        
         PredictionResult$result$id <- Id_RunVariable
         PredictionResult$result$windowMethod <- WindowMethod
         PredictionResult$result$model <- ModelType 
@@ -484,33 +551,66 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
     
     PredictionResult_AllID <- lapply(Id,function(Id_RunVariable){
       print(paste("Calculating for ID:",Id_RunVariable))
-        #Preparing raw data
-        Data_Prepared <- Data_Raw %>%
-          filter(fridge_id == Id_RunVariable &
-                   main_category_id %in% c(1, 2, 3, 4)) %>%
-          dplyr::select(week_date, main_category_id, sold) %>%
+      
+      #Preparing raw data
+      Data_Processed <- Data_Raw %>%
+        filter(fridge_id == Id_RunVariable &
+                 main_category_id %in% as.integer(Category_Main))
+      
+      #Safe Catching if Category Main was wrongly specified
+      if(dim(Data_Processed)[1]==0){
+        stop("There was an error filtering Data_Raw with respect to Id and Category_Main. Check those inputs and 
+            make sure they exist in the provided data.")
+      }
+      
+      #If no Subcategory is specified, we take all
+      if(!is.null(Category_Sub)){
+        #Taking Subcategories      
+        stopifnot("Subcategory must be part of main category."=
+                    Category_Sub %in% unique(Data_Processed$sub_category_id))
+        Data_Processed <- Data_Processed %>% 
+          filter(sub_category_id %in% as.integer(Category_Sub))
+      }
+      
+      #Operating on Sub category Level
+      if(TakeSubCategory){
+        stopifnot("Only one main category can be chosen"=length(Category_Main)==1)
+        Data_Processed <- Data_Processed %>%
+          dplyr::select(week_date, main_category_id, sub_category_id ,sold) %>%
           arrange(week_date)
         
+        Category <- unique(Data_Processed$sub_category_id)
+        
+      } else {
+        Data_Processed <- Data_Processed %>%
+          dplyr::select(week_date, main_category_id,sold) %>%
+          arrange(week_date)
+        
+        Category <- unique(Data_Processed$main_category_id)
+      }
+        
         #Calculating the length of the timeseries
-        TimeSeries_Length <- length(unique(Data_Prepared$week_date))
+        TimeSeries_Length <- length(unique(Data_Processed$week_date))
         
         #Preparing transformed data
-        Data_Transform <- Coda.DataPreparation(Data_Prepared, 
-                                               ZeroHandling = ZeroHandling,
-                                               TSpace = TSpace, 
-                                               Log = Log,
-                                               OneVsAll = F,
-                                               HistoryLength = HistoryLength) %>% arrange(week_date)
+        Data_Prepared <- Coda.DataPreparation(Data_Processed, 
+                                              ZeroHandling = ZeroHandling,
+                                              TSpace = TSpace, 
+                                              Log = Log,
+                                              OneVsAll = F,
+                                              HistoryLength = HistoryLength,
+                                              TakeSubCategory = TakeSubCategory,
+                                              Category = Category) %>% arrange(week_date)
         
         
         #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed.
         Frame_Help <- "fixed"
-        if(dim(Data_Transform)[1]<5){
+        if(dim(Data_Prepared)[1]<5){
           return(NA)
         }
         if(Frame < 1){
           Frame_Help <- as.character(Frame)
-          Frame = round(Frame*dim(Data_Transform)[1])
+          Frame = round(Frame*dim(Data_Prepared)[1])
           if(Frame < 5){
             Frame = 5
           }
@@ -518,7 +618,7 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #Splitting transformed data into windows
-        Data_Window <- Data.Window(Data_Transform,
+        Data_Window <- Data.Window(Data_Prepared,
                                          Frame= Frame ,
                                          Method = WindowMethod,
                                          PredictionStep = PredictionStep)
@@ -526,12 +626,14 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
         
         
         #Preparing non transformed data 
-        Data_NoTransform <- Coda.DataPreparation(Data_Prepared,
-                                                        ZeroHandling="none",
-                                                        TSpace=TSpace,
-                                                        Log=F, 
-                                                        OneVsAll = F,
-                                                 HistoryLength = HistoryLength) %>% arrange(week_date)
+        Data_NoTransform <- Coda.DataPreparation(Data_Processed,
+                                                 ZeroHandling="none",
+                                                 TSpace=TSpace,
+                                                 Log=F, 
+                                                 OneVsAll = F,
+                                                 HistoryLength = HistoryLength,
+                                                 TakeSubCategory = TakeSubCategory,
+                                                 Category = Category) %>% arrange(week_date)
         #Splitting non transformed data into windows
         Data_WindowNoTransform <- Data.Window(Data_NoTransform,
                                          Frame = Frame,
@@ -546,7 +648,8 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
                                               OneVsAll = F,
                                               TSpace = TSpace,
                                               Log =  Log, 
-                                              Frame = Frame)
+                                              Frame = Frame,
+                                              Category = Category)
         PredictionResult$result$id <- Id_RunVariable
         PredictionResult$result$windowMethod <- WindowMethod
         PredictionResult$result$model <- ModelType 
@@ -577,6 +680,11 @@ Coda.Analysis<-function(Data_Raw, Id, Frame=10, ZeroHandling = "zeros_only", Pre
     #Tidying up data
     Result_Prediction <- bind_rows(UnlistListElement(PredictionResult_AllID,"result"))
     Result_Prediction$id <- as.factor(Result_Prediction$id)
+    
+    if(TakeSubCategory){
+      Result_Prediction$main_category <- Category_Main
+    }
+    
     Result_Model <- UnlistListElement(PredictionResult_AllID,"model")
     names(Result_Model) <- unique(as.character(Result_Prediction$id))
     
