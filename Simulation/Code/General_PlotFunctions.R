@@ -190,30 +190,36 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
     }
     i <- i+1
   }
+  
+  #Plot Details
+  MyColour <- setNames(c("red", "blue","orange","green","deeppink"),
+                       c("coda","ingarch","inar_classic","zim","inar_bayes"))
+  MyNames <- setNames(c("CoDA","INGARCH","INAR classic","ZIM","INAR bayes"),
+                      c("coda","ingarch","inar_classic","zim","inar_bayes"))
+  MyShapes <- setNames(c(4,15,16,17,18),
+                       c("coda","ingarch","inar_classic","zim","inar_bayes"))
 
   
   #Boxplot
   BoxPlot <- ggplot(ModelError,aes(x=model,y=error))+
   geom_boxplot()+
   scale_y_continuous(limits=c(0,5))+
+  scale_x_discrete(labels=MyNames)+
   geom_hline(yintercept =1,linewidth=2)+
   theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
-  ggtitle(paste("Error measures",sep=" "))
+  ggtitle(paste("Error measures",sep=" "))+
+  xlab("Model")+
+  ylab("Error")
   
-  ggsave(filename = here("Plots",paste("All_ErrorMeasure_combined_zoomed",".png",sep="")),plot=BoxPlot,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("All_ErrorMeasure_combined_zoomed_ZIM",ZIM,".png",sep="")),plot=BoxPlot,height = 15,width = 20)
    
 
  #Quantile Plot
   length <- Result %>% group_by(id) %>% dplyr::summarise(n=unique(window_baseLength))
   
   TimeSeries_Length <- data.frame(id = unique(Result$id),
-                                  length = length$n/
+                                  Length = length$n/
                                     (as.numeric(unique(Result$frame))*as.numeric(unique(Result$history))))
-  
-  MyColour <- setNames(c("red", "blue","orange","green","deeppink"),
-                       c("coda","ingarch","inar_classic","zim","inar_bayes"))
-  MyNames <- setNames(c("CoDA","INGARCH","INAR classic","ZIM","INAR bayes"),
-                      c("coda","ingarch","inar_classic","zim","inar_bayes"))
   
   i <- 1
   for(group in as.character(Category)){
@@ -304,22 +310,41 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
       dplyr::summarise(n=max(n))
 
     
-    Quantile <- c(quantile(c(1:Quantile_Help$n[1])),quantile(c(1:Quantile_Help$n[2])))
-    
-    
-    QuantilesIndex_Split <- data.frame(quant_ind=Quantile,group=rep(c(Quantile_Help$group[1],Quantile_Help$group[2]),each=5))
 
-  QuantPlot_Split <- ggplot(ErrorSorted_Split ,aes(x=index,y=error,colour=model,size=length))+
+    
+    if(ZIM){
+      
+      Quantile <- c(quantile(c(1:Quantile_Help$n[1])),quantile(c(1:Quantile_Help$n[2])))
+      QuantilesIndex_Split <- data.frame(quant_ind=Quantile,group=rep(c(Quantile_Help$group[1],
+                                                                        Quantile_Help$group[2]),each=5))
+    }
+    else{
+      Quantile <- c(quantile(c(1:Quantile_Help$n[1])),quantile(c(1:Quantile_Help$n[2])),
+                    quantile(c(1:Quantile_Help$n[3])),quantile(c(1:Quantile_Help$n[4])))
+      
+      QuantilesIndex_Split <- data.frame(quant_ind=Quantile,group=rep(c(Quantile_Help$group[1],
+                                                                        Quantile_Help$group[2],
+                                                                        Quantile_Help$group[3],
+                                                                        Quantile_Help$group[4]),each=5))
+    }
+
+
+  QuantPlot_Split <- ggplot(ErrorSorted_Split ,aes(x=index,y=error,colour=model,size=Length,shape=model))+
     facet_wrap(vars(group),nrow=length(unique(IngarchErrorSorted_Split$group)),scales = "free")+
     geom_point()+
     scale_y_continuous(limits=c(0,5))+
     geom_hline(yintercept=1,linewidth=2)+
     geom_vline(aes(xintercept=quant_ind),data=QuantilesIndex_Split)+
     theme(text = element_text(size = 50))+
-    scale_colour_manual("Legend", values = c(MyColour),aesthetics = "colour")+
-    ggtitle(paste("Error measures sorted",sep=" "),subtitle = paste("Window length:",frame,"History:",HistoryLength,sep=" "))
+    scale_colour_manual("Models", values = c(MyColour),aesthetics = "colour",labels=MyNames)+
+    scale_shape_manual("Models",values=c(MyShapes),labels=MyNames)+
+    guides(shape = guide_legend(override.aes = list(size = 5)))+
+    guides(color = guide_legend(override.aes = list(size = 5)))+
+    ggtitle(paste("Error measures sorted",sep=" "))+
+    xlab("Index")+
+    ylab("Error")
 
-  ggsave(filename = here("Plots",paste("Quantile_Plot_Split_all_models",".png",sep="")),plot=QuantPlot_Split,height = 15,width = 20)
+  ggsave(filename = here("Plots",paste("Quantile_Plot_Split_all_models_ZIM",ZIM,".png",sep="")),plot=QuantPlot_Split,height = 15,width = 20)
 
 }
 
@@ -370,7 +395,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       geom_hline(yintercept =1,linewidth=2)+
       theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
       ggtitle(paste("Error Measure Boxplot",sep=" "))+
-      scale_x_discrete(labels=LabelNames)+
+#      scale_x_discrete(labels=LabelNames)+
       xlab(str_to_title(names(Variation)))+
       ylab("Error")
     
@@ -399,15 +424,22 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       ResultError_Sorted$index <- seq(1:dim(ResultError_Sorted)[1])
       ResultError_Sorted <- full_join(ResultError_Sorted,TimeSeries_Length,bye ="id")
       
-      Quantiles_Index <- data.frame(quant_ind=findInterval(ResultQuantiles,ResultError_Sorted$error))
-      
       if(i==1){
         ResultError_Sorted_All <- ResultError_Sorted
+        Quantiles_Index <- data.frame(quant_ind=findInterval(ResultQuantiles,na.omit(ResultError_Sorted$error)),
+                                      value = Variation_RunVariable)
       }else{
         ResultError_Sorted_All  <- rbind(ResultError_Sorted_All ,ResultError_Sorted)
+        Quantiles_Index <- rbind(Quantiles_Index,
+                                 data.frame(quant_ind=findInterval(ResultQuantiles,na.omit(ResultError_Sorted$error)),
+                                            value = Variation_RunVariable))
       }
       i <- i+1
     }
+    
+    QuantilesMax_Help <- Quantiles_Index %>% group_by(value)%>%max()
+    QuantilesMax_Value <- Quantiles_Index[Quantiles_Index$quant_ind== QuantilesMax_Help,"value"]
+    Quantiles_Index <- Quantiles_Index[Quantiles_Index$value==QuantilesMax_Value,]
     
     QuantPlot <- ggplot(ResultError_Sorted_All,aes(x=index,y=error,colour=!!as.symbol(Variation),size=Length,shape=!!as.symbol(Variation)))+
       geom_point()+

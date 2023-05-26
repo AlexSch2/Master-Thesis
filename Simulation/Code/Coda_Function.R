@@ -579,14 +579,14 @@ Coda.Analysis<-function(Data_Raw,
           dplyr::select(week_date, main_category_id, sub_category_id ,sold) %>%
           arrange(week_date)
         
-        Category <- unique(Data_Processed$sub_category_id)
+        Category <- sort(unique(Data_Processed$sub_category_id))
         
       } else {
         Data_Processed <- Data_Processed %>%
           dplyr::select(week_date, main_category_id,sold) %>%
           arrange(week_date)
         
-        Category <- unique(Data_Processed$main_category_id)
+        Category <- sort(unique(Data_Processed$main_category_id))
       }
         
         #Calculating the length of the timeseries
