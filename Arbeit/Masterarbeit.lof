@@ -9,15 +9,17 @@
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Time series with INGARCH model\relax }}{40}{figure.caption.27}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Time series with both models\relax }}{41}{figure.caption.28}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Time series with both models and their prediction intervals\relax }}{42}{figure.caption.29}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Comparison of different $h$\relax }}{51}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison of different $w$\relax }}{52}{figure.caption.37}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison of different window shapes\relax }}{53}{figure.caption.40}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Comparison of different distributions\relax }}{54}{figure.caption.43}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Comparison of a different number of past means\relax }}{55}{figure.caption.46}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Comparison of a different number of past observations\relax }}{56}{figure.caption.47}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison of different zero handling methods\relax }}{57}{figure.caption.48}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{58}{figure.caption.49}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{59}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Comparison of the different models\relax }}{53}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison of the different models \relax }}{55}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison of different $h$\relax }}{56}{figure.caption.54}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Comparison of different $w$\relax }}{57}{figure.caption.57}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Comparison of different window shapes\relax }}{58}{figure.caption.60}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Comparison of different distributions\relax }}{59}{figure.caption.63}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison of a different number of past means\relax }}{60}{figure.caption.66}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison of a different number of past observations\relax }}{61}{figure.caption.67}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of different zero handling methods\relax }}{62}{figure.caption.68}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{63}{figure.caption.69}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{64}{figure.caption.70}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

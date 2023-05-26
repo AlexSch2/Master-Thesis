@@ -1,6 +1,9 @@
 \section{R-Code}
 \label{sec:R-Code}
 
+\subsection{R-Packages}
+\label{sec:R-Packages}
+
 We conducted our analysis in the statistical software R \cite{R:2022}. For our data cleansing, data handling and plotting we use the \textit{tidyverse} package \cite{Tidyverse:2019}. Further we use the packages \textit{here} \cite{here:2020}, \textit{miceadds} \cite{Miceadds:2023} and \textit{parallel}, which is part of core R, to facilitate our analysis.  
 
 For building our CoDA model we use the packages \textit{vars} \cite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} \cite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the ilr transformation described in \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in \ref{sec:The VAR Model}, and \texttt{D2invPC} which performs the necessary back transformation to get predictions in the desired space. The INGARCH(p,q) analysis is mainly done with the package \textit{tscount} \cite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm} which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated model were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} \cite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} \cite{RVGAM:2010}. To fit the INAR model we use two packages. First \textit{ZINAp} to calculate our predictions with the bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \cite{Silva:2009}. Second, the classical approach was done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
@@ -11,11 +14,13 @@ In general, all functions can be grouped into three categories: general, count d
 
 In this handbook we will describe the use and results of the most important functions used for our analysis.  The code for them can be found in \ref{sec:R-Functions}. 
 
-\subsubsection{General Functions}
-\label{sec: General Functions}
+\subsubsection{Data.Window}
+\label{sec: Data.Window}
 %Notable general functions are \texttt{Data.Window} and \texttt{Data.Preparation}. The former function splits the time series in the specified windows and the value to be predicted. The models are then fitted on these windows and the prediction result is compared with the actual value. The latter one brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transform the data into the right format needed for the one-vs-all method. Other important functions are \texttt{Model.Error} and \texttt{Model.ErrorOverall} which implement the error measure introduced in \ref{sec: Error Measure} and summarise it. 
 
-The function \texttt{Data.Window} splits the time series in the specified windows and the value to be predicted. The models are then fitted on these windows and the prediction result is compared with the actual value. Its input values are:
+The function \texttt{Data.Window} splits the time series in the specified windows and the value to be predicted. The models are then fitted on these windows and the prediction result can compared with the actual value.
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Timeseries: The time series to be split up in windows.
@@ -24,9 +29,21 @@ The function \texttt{Data.Window} splits the time series in the specified window
 	\item PredictionStep: The future prediction step.
 \end{itemize}
 
-It returns a list where each element consists of two variables. First, the values of the specified window which are used to fit the model and second the value to be predicted. 
+\textbf{Values}:
 
-The function \texttt{Data.Preparation} brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transform the data into the right format needed for the one-vs-all method. It has the input values:
+A list of all windows is returned. A window is a list with the following elements: 
+
+\begin{itemize}
+	\item timeSeriesValue\_window: The values of the window
+	\item timeSeriesValue\_future: The value which should be predicted by this window. 
+\end{itemize}
+
+\subsubsection{Data.Preparation}
+\label{sec:Data.Preparation}
+
+The function \texttt{Data.Preparation} brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transform the data into the right format needed for the one-vs-all method.
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Data\_Raw: The Data to be transformed in the right format.
@@ -38,9 +55,30 @@ The function \texttt{Data.Preparation} brings the data in the right format, repl
   \item TakeSubCategory: If TRUE, then we transform the data for the subcategories instead of the main categories. 
 \end{itemize}
 
-The result is a tibble with the dates as its rows, the categories as columns and the sold amount as its values.
+\textbf{Values}:
 
-\texttt{Model.Error} calculates the specified error measure for each time series and category. Since we want to compare the performance of a method with the one of the naive model in \ref{sec: Naive Random Walk} we calculate the errors for this model as well. The input values are:
+A tibble with two or more columns is returned, depending on the number of categories: 
+
+\begin{itemize}
+	\item week\_date: The values of the window
+	\item \textit{Name of Category 1}: The number of sold items belonging to \textit{Name of Category 1}.
+\end{itemize}
+
+If the argument OneVsAll is TRUE, then a tibble with three columns is returned.
+
+
+\begin{itemize}
+	\item week\_date: The values of the window
+	\item PivotGroup: The amount of sold items belonging to the pivot group.
+	\item other: The amount of all other sold items belonging to the other categories. 
+\end{itemize}
+
+\subsubsection{Model.Error}
+\label{sec:Model.Error}
+
+The function \texttt{Model.Error} calculates the specified error measure for each time series and category. Since we want to compare the performance of a method with the one of the naive model in \ref{sec: Naive Random Walk} we calculate the errors for this model as well. 
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Model\_Result: The result calculated by either \texttt{Coda.Analysis} or \texttt{CountModel.Analysis}.
@@ -48,9 +86,24 @@ The result is a tibble with the dates as its rows, the categories as columns and
 	\item Category: The categories for which the errors should be caluculated.
 \end{itemize}
 
-The result is a tibble with the columns: \textit{id,category,error,error\_naive,model}. 
+\textbf{Values}:
 
-Closely connected to \texttt{Model.Error} is the function \texttt{Model.ErrorOverall}. This function calculates the error measure defined in \ref{sec: Error Measure}. One can decide if the error measure should be calculated over all categories or if they should be split up in subsets as in \ref{sec:Error Measure Extension}. The function has the input values:
+A tibble with the columns is returned: 
+
+\begin{itemize}
+	\item id: The id of the fridge.
+	\item category: The category for which the error was calculated. 
+	\item error: The error calculated according to the error function in the Fnct argument. 
+	\item error\_naive: The value of the error function for the naive random walk model.
+	\item model: Which model was used. 
+\end{itemize}
+
+\subsubsection{Model.ErrorOverall}
+\label{sec:Model.ErrorOverall}
+
+The function \texttt{Model.ErrorOverall} is closely related to \texttt{Model.Error}. This function calculates the error measure defined in \ref{sec: Error Measure}. One can decide if the error measure should be calculated over all categories or if they should be split up in subsets as in \ref{sec:Error Measure Extension}.
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Error\_Result: The result of the function \texttt{Model.Error}.
@@ -60,13 +113,23 @@ Closely connected to \texttt{Model.Error} is the function \texttt{Model.ErrorOve
 	\item Category: The categories for which the error should be calculated for.
 \end{itemize}
 
-The result is a tibble with the columns \textit{id,error,model,group}. 
+\textbf{Values}:
 
-\subsection{Count Model Functions}
-\label{sec:Count Model Functions}
+The result is a tibble with the columns:
+\begin{itemize}
+	\item id: The id of the fridge. 
+	\item error: The error calculated according to the error function in the Fnct argument. 
+	\item model: Which model was used. 
+	\item group: The subsets of categories as defined in \ref{sec:Error Measure Extension}.
+\end{itemize}
 
 
-There are three count model specific functions. The first function is \texttt{CountModel.DataPreparation} which transforms the data into the right format needed to fit the count data models. At its core it uses the \texttt{Data.Preparation} function but adds the additional option to replace zero values with 1. Its input values are:
+\subsubsection{CountModel.DataPreparation}
+\label{sec:CountModel.DataPreparation}
+
+The function \texttt{CountModel.DataPreparation} transforms the data into the right format needed to fit the count data models. At its core it uses the \texttt{Data.Preparation} function but adds the additional option to replace zero values with 1. 
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Data: The data to be transformed.
@@ -75,9 +138,21 @@ There are three count model specific functions. The first function is \texttt{Co
 	\item TakeSubCategory = If TRUE, then we transform the data for the subcategories instead of the main categories. 
 \end{itemize}
 
-The result is a tibble with the dates as its rows, the categories as columns and the sold amount as its values.
+\textbf{Values}:
 
-The second function is \texttt{CountModel.Prediction} which is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. It takes the values:
+A tibble with two or more columns is returned, depending on the number of categories: 
+
+\begin{itemize}
+	\item week\_date: The values of the window
+	\item \textit{Name of Category 1}: The number of sold items belonging to \textit{Name of Category 1}.
+\end{itemize}
+
+\subsubsection{CountModel.Prediction}
+\label{sec:CountModel.Prediction}
+
+The function \texttt{CountModel.Prediction} is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions mentioned in \ref{sec:R-Packages} to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. 
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Data\_Window: The data divided into the different windows by the \texttt{Data.Window} function.
@@ -94,9 +169,23 @@ The second function is \texttt{CountModel.Prediction} which is the function wher
   \item ModelType: Model to be fit. 
 \end{itemize}
 
-It returns a tibble with the prediction results and some additional model specifications. 
+\textbf{Values}:
 
-The third function is \texttt{CountModel.Analysis} and acts as a wrapper function to streamline and facilitate the analysis. The previously mentioned model specifications can be chosen here as well as various other options. This is the sole function which has to be used by the user. The other functions are mainly for internal use. Its input values are:
+It returns a list with two elements:
+
+\begin{itemize}
+	\item prediction: A data.frame with the predicted values and some additional information.
+	\item model: A list of all the models fitted for each window. 
+\end{itemize}
+
+
+\subsubsection{CountModel.Analysis}
+\label{sec:CountModel.Analysis}
+
+
+The function \texttt{CountModel.Analysis} acts as a wrapper function to streamline and facilitate the analysis. The previously mentioned model specifications can be chosen here as well as various other options. This is the sole function which has to be used by the user. The other functions are mainly for internal use.
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Data\_Raw: The raw data as extracted from the data base.
@@ -119,13 +208,21 @@ The third function is \texttt{CountModel.Analysis} and acts as a wrapper functio
   \item NCores: The number of cores to be used for parallelisation. 
 \end{itemize}
 
-This function returns a list with two variables. The first is a tibble with the prediction results, model details and additional information for all the chosen ids, categories ect. The second variable is a list with each fitted model. 
+\textbf{Values}:
 
-\subsection{CoDA Model Functions}
-\label{sec:Coda Model Functions}
+This function returns a list with two values:
 
-The CoDA specific functions have the same structure as the INGARCH ones. We have again \texttt{Coda.DataPreparation} which takes the values
+\begin{itemize}
+	\item result: The analysis result in the form of a data.frame . 
+	\item model: A nested list with all models, fitted for each id, category and window.
+\end{itemize}
 
+\subsubsection{Coda.DataPreparation}
+\label{sec:Coda.DataPreparation}
+
+The function \texttt{Coda.DataPreparation} is analogue to CountModel.Preparation
+
+\textbf{Arguments}:
 \begin{itemize}
   \item Data: The data to be transformed.
   \item ZeroHandling: Method for zero handling.  Currently there is no treatment or them being replaced with 1. 
@@ -136,9 +233,29 @@ The CoDA specific functions have the same structure as the INGARCH ones. We have
   \item HistoryLength: The length of the history. Can be an absolute number or a ratio $h$.
 \end{itemize}
 
-The result is a data-frame with the dates as its rows and the $ilr$ transformed sold amount as its values.
+\textbf{Values}:
 
-The next function is \texttt{Coda.Prediction}, which acts like its respective count model counterpart. The input values are 
+The result is a tibble with the columns. The columns are the ilr transformed data and hence the number of columns depends on the dimension of the data:
+
+\begin{itemize}
+	\item week\_date: The values of the window
+	\item \textit{Name of ilr transformed category 1}: The ilr transformed values.
+\end{itemize}
+
+If $\Tsp$-Spaces are used then an additional column with the sum or log-sum is added:
+
+\begin{itemize}
+	\item week\_date: The values of the window
+	\item \textit{Name of ilr transformed category 1}: The ilr transformed values.
+	\item tsum: Either the total sum or log-sum. 
+\end{itemize}
+
+\subsubsection{Coda.Prediction}
+\label{sec:Coda.Prediction}
+
+The function \texttt{Coda.Prediction} acts like its respective count model counterpart.
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Data\_Window: The data divided into the different windows by the \texttt{Data.Window} function.
@@ -152,9 +269,21 @@ The next function is \texttt{Coda.Prediction}, which acts like its respective co
 	\item Frame: The window length.
 \end{itemize}
 
-It returns a tibble with the prediction results and some additional model specifications. 
+\textbf{Values}:
 
-Last, we have again the wrapper function \texttt{Coda.Analysis}. This is again the only function which needs to be used by the user to fit models for the specified time series. Its input values are:
+It returns a list with two elements:
+
+\begin{itemize}
+	\item prediction: A data.frame with the predicted values and some additional information.
+	\item model: A list of all the models fitted for each window. 
+\end{itemize}
+
+\subsubsection{Coda.Analysis}
+\label{sec:Coda.Analysis}
+
+Again \texttt{Coda.Analysis} is the wrapper function. This is again the only function which needs to be used by the user to fit models for the specified time series.
+
+\textbf{Arguments}:
 
 \begin{itemize}
 	\item Data\_Raw: The raw data as extracted from the data base.
@@ -171,4 +300,13 @@ Last, we have again the wrapper function \texttt{Coda.Analysis}. This is again t
 	\item WindowMethod: Method for splitting up the time series. For example if the windows are be extended at each step or kept at a fixed length.
 \end{itemize}
 
-This function returns a list with two variables. The first is a tibble with the prediction results, model details and additional information for all the chosen ids, categories ect. The second variable is a list with each fitted model. 
+\textbf{Values}:
+
+This function returns a list with two values:
+
+\begin{itemize}
+	\item result: The analysis result in the form of a data.frame . 
+	\item model: A nested list with all models, fitted for each id, category and window.
+\end{itemize}
+
+

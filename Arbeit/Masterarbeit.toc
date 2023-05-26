@@ -51,24 +51,33 @@
 \contentsline {subsubsection}{\nonumberline Extension of the Error Measure}{38}{subsubsection*.24}%
 \contentsline {section}{\numberline {4.2}Examples of model application}{38}{section.4.2}%
 \contentsline {section}{\numberline {4.3}R-Code}{40}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Handbook}{43}{subsection.4.3.1}%
-\contentsline {subsubsection}{\nonumberline General Functions}{43}{subsubsection*.31}%
-\contentsline {subsection}{\numberline {4.3.2}Count Model Functions}{45}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}CoDA Model Functions}{48}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Results}{50}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}General Specifications}{50}{subsection.4.4.1}%
-\contentsline {subsubsection}{\nonumberline History}{50}{subsubsection*.33}%
-\contentsline {subsubsection}{\nonumberline Frame}{50}{subsubsection*.36}%
-\contentsline {subsubsection}{\nonumberline Window Shape}{51}{subsubsection*.39}%
-\contentsline {subsection}{\numberline {4.4.2}INGARCH Specifications Results}{52}{subsection.4.4.2}%
-\contentsline {subsubsection}{\nonumberline Distribution}{53}{subsubsection*.42}%
-\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{54}{subsubsection*.45}%
-\contentsline {subsection}{\numberline {4.4.3}CoDA Specifications Results}{54}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Zero Handling}{54}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}$\mathcal {T}$-spaces}{55}{subsection.4.4.5}%
-\contentsline {subsection}{\numberline {4.4.6}One-vs-All method}{56}{subsection.4.4.6}%
-\contentsline {chapter}{\nonumberline Bibliography}{61}{chapter*.51}%
-\contentsline {chapter}{\nonumberline List of Figures}{69}{chapter*.52}%
-\contentsline {chapter}{\nonumberline List of Tables}{71}{chapter*.53}%
-\contentsline {chapter}{\numberline {A}R-Functions}{73}{appendix.A}%
+\contentsline {subsection}{\numberline {4.3.1}R-Packages}{40}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Handbook}{43}{subsection.4.3.2}%
+\contentsline {subsubsection}{\nonumberline Data.Window}{43}{subsubsection*.31}%
+\contentsline {subsubsection}{\nonumberline Data.Preparation}{44}{subsubsection*.33}%
+\contentsline {subsubsection}{\nonumberline Model.Error}{45}{subsubsection*.35}%
+\contentsline {subsubsection}{\nonumberline Model.ErrorOverall}{45}{subsubsection*.37}%
+\contentsline {subsubsection}{\nonumberline CountModel.DataPreparation}{46}{subsubsection*.39}%
+\contentsline {subsubsection}{\nonumberline CountModel.Prediction}{47}{subsubsection*.41}%
+\contentsline {subsubsection}{\nonumberline CountModel.Analysis}{48}{subsubsection*.43}%
+\contentsline {subsubsection}{\nonumberline Coda.DataPreparation}{49}{subsubsection*.45}%
+\contentsline {subsubsection}{\nonumberline Coda.Prediction}{50}{subsubsection*.47}%
+\contentsline {subsubsection}{\nonumberline Coda.Analysis}{51}{subsubsection*.49}%
+\contentsline {section}{\numberline {4.4}Results}{52}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Model Comparison}{52}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}General Specifications}{54}{subsection.4.4.2}%
+\contentsline {subsubsection}{\nonumberline History}{54}{subsubsection*.53}%
+\contentsline {subsubsection}{\nonumberline Frame}{54}{subsubsection*.56}%
+\contentsline {subsubsection}{\nonumberline Window Shape}{57}{subsubsection*.59}%
+\contentsline {subsection}{\numberline {4.4.3}INGARCH Specifications Results}{58}{subsection.4.4.3}%
+\contentsline {subsubsection}{\nonumberline Distribution}{59}{subsubsection*.62}%
+\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{59}{subsubsection*.65}%
+\contentsline {subsection}{\numberline {4.4.4}CoDA Specifications Results}{60}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Zero Handling}{61}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.6}$\mathcal {T}$-spaces}{62}{subsection.4.4.6}%
+\contentsline {subsection}{\numberline {4.4.7}One-vs-All method}{63}{subsection.4.4.7}%
+\contentsline {chapter}{\nonumberline Bibliography}{65}{chapter*.71}%
+\contentsline {chapter}{\nonumberline List of Figures}{73}{chapter*.72}%
+\contentsline {chapter}{\nonumberline List of Tables}{75}{chapter*.73}%
+\contentsline {chapter}{\numberline {A}R-Functions}{77}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

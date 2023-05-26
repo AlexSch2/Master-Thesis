@@ -10,18 +10,9 @@ Closely related to the length of the history, is the shape of the window used. T
 \subsection{CoDA Specifications}
 \label{sec: Coda Specifications}
 
-As mentioned above the CoDA model must not include any zero values. Since in the CoDA context we see our data as relative data, a value of zero is not defined. Therefore we need to replace them. In order to keep things simple, we consider two options. The first one adds $0.5$ to all time series values. The second one only replaces zero values with $0.5$.
+As mentioned above the CoDA model must not include any zero values. Since in the CoDA context we see our data as relative data, a value of zero is not defined. Therefore we need to replace them. In order to keep things simple, we consider two options. The first one adds $0.5$to all time series values. The second one only replaces zero values with $0.5$ which is the simple replacement strategy in \ref{eq:simple replacement strategy}. Due to the fact that we have essential zeros and want to use the specific $ilr$ coordinates, we opt for these options. 
 
-As already hinted in the description of the methodology we consider the use of $\Tsp$-Spaces. For this, at each time point, we calculate the total amount and include it as an additional variable in the model. In addition we can choose to take the logarithm of the sum. This means $\bm{u}_t$ in model \ref{eq:VAR model} changes to 
-
-\begin{equation}
-\bm{u}_t = [ilr(\bm{Y}_t),t(\bm{Y}_t)],
-\label{eq:Tspace u}
-\end{equation}
-
-with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$.
-
-Another characteristic of our data are the low values for some categories of it. Even at the aggregated main category level there are instances with low values for some of the categories. This is the case especially for category 3 and 4. As such, we inspect a method which we will call in the following one-vs-all. The principle is the following. A category $k$ is chosen as the pivot category $k_{pivot}$. For all the chosen time points, at each point, the values of the other categories get summed up
+Another way to handle the zero values and the low values for some categories is a method we will call in the following one-vs-all. The principle is the following. A category $k$ is chosen as the pivot category $k_{pivot}$. For all the chosen time points, at each point, the values of the other categories get summed up
 
 \begin{equation}
 Y_{other,t} = \sum_{\substack{k=1 \\ k \neq k_{pivot}}}^K Y_{kt}.
@@ -36,8 +27,16 @@ Together with the pivot category, the sum of the other categories are then trans
 \end{equation}
 
 
-All categories are chosen as a pivot category at one point and the predicted values of the pivot groups are then used as the final result. 
+All categories are chosen as a pivot category at one point and the predicted values of the pivot groups are then used as the final result. This method is basically an implementation of the suggestions made in \cite{Aitchison:2003}. We amalgamate all but one category and therefore change the experimental design. 
 
+As already hinted in the description of the methodology we consider the use of $\Tsp$-Spaces. For this, at each time point, we calculate the total amount and include it as an additional variable in the model. In addition we can choose to take the logarithm of the sum. This means $\bm{u}_t$ in model \ref{eq:VAR model} changes to 
+
+\begin{equation}
+\bm{u}_t = [ilr(\bm{Y}_t),t(\bm{Y}_t)],
+\label{eq:Tspace u}
+\end{equation}
+
+with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$.
 
 \subsection{INGARCH Specifications}
 \label{sec: Ingarch Specifications}
@@ -52,6 +51,9 @@ p_{kt}(y;\bm{\theta})=\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \frac{\Gamma(\phi+y
 With the negative Binomial Distribution the conditional variance is larger than the conditional mean $\lambda_{kt} = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right]$.
 
 As seen in the model \ref{eq:Ingarch model with external effect} we can also choose to include external factors or not. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. The values $p$ and $q$ are also varying parameters which have to be chosen. 
+
+The optimal one step ahead prediction is given by the conditional expectation \ref{sec: Estimation of the Ingarch Model}. However, since we only expect integer values and $\lambda_{k,t+1} \in \mathbbm{R}_+$, we will round the values of $\lambda_{k,t+1}$ to the next integer and use this value. 
+
 
 
 \subsection{Error Measure}
