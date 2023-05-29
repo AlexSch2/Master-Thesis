@@ -5,12 +5,12 @@ As our data has a specific structure, some transformations can be made to increa
 
 Another varying factor is the history. We define the history $h$ as the proportion of the length of the time series used for our model. While at first it may seem obvious to use as much data as possible, it may actually not always result in a better model. Older values may contain outdated information which influences the estimation the of parameters. Therefore we compare the performance of the models with various history lengths. So instead of using $T_f$ points in time, we will only use $T=h\cdot T_F$ with $0 < h \leq 1$. 
 
-Closely related to the length of the history, is the shape of the window used. The window determines which values are used to estimate the parameters at each point in time. The shape includes both the initial length of it and the way it handles new values. As the different time series vary in length, we choose the possible window length as a fraction of the time series history. Let $w_f:=w \cdot T$ with $0 < w \leq 1$ be the initial window length. It is therefore a fraction of the the total used length. For the way how new values are handled, we focus on two different approaches. The first one uses a fixed window length. This means when a new time point is available, it will be included in the estimation while simultaneously the oldest time point will be removed from the estimation. This has the advantage of only using the most recent and relevant information. The second approach, extends the window at each point in time. When a new value is available, it is included in the estimation of the parameter. With this approach we have more data available at each step and combined with the varying history length we don't have to rely on information that is too old.
+Closely related to the length of the history, is the shape of the window used. The window determines which values are used to estimate the parameters at each point in time. The shape includes both the initial length of the window and the way new values are handled. As the different time series vary in length, we choose the possible window length as a fraction of the time series history. Hence, we define the initial window length as $w_f:=w \cdot T$ with $0 < w \leq 1$. For the way how new values are handled, we focus on two different approaches. The first one uses a fixed window length. This means when a new time point is available, it will be included in the estimation while simultaneously the oldest time point will be removed from the estimation. This has the advantage of only using the most recent and relevant information. The second approach extends the window at each point in time. When a new value is available, it is included in the estimation of the parameter. With this approach we have more data available at each step and combined with the varying history length we don't have to rely on information that is too old.
 
 \subsection{CoDA Specifications}
 \label{sec: Coda Specifications}
 
-As mentioned above the CoDA model must not include any zero values. Since in the CoDA context we see our data as relative data, a value of zero is not defined. Therefore we need to replace them. In order to keep things simple, we consider two options. The first one adds $0.5$to all time series values. The second one only replaces zero values with $0.5$ which is the simple replacement strategy in \ref{eq:simple replacement strategy}. Due to the fact that we have essential zeros and want to use the specific $ilr$ coordinates, we opt for these options. 
+As mentioned above the CoDA model must not include any zero values, since in this context, a value of zero is not defined. In order to keep things simple, we consider two options. The first one adds $0.5$ to all time series values. The second one only replaces zero values with $0.5$ which is the simple replacement strategy in \ref{eq:simple replacement strategy}. Due to the fact that we have essential zeros and want to use the specific $ilr$ coordinates, we opt for these options. 
 
 Another way to handle the zero values and the low values for some categories is a method we will call in the following one-vs-all. The principle is the following. A category $k$ is chosen as the pivot category $k_{pivot}$. For all the chosen time points, at each point, the values of the other categories get summed up
 
@@ -36,7 +36,7 @@ As already hinted in the description of the methodology we consider the use of $
 \label{eq:Tspace u}
 \end{equation}
 
-with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$.
+with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$ and we get model \ref{eq:VAR model Tspace}.
 
 \subsection{INGARCH Specifications}
 \label{sec: Ingarch Specifications}
@@ -50,7 +50,9 @@ p_{kt}(y;\bm{\theta})=\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \frac{\Gamma(\phi+y
 
 With the negative Binomial Distribution the conditional variance is larger than the conditional mean $\lambda_{kt} = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right]$.
 
-As seen in the model \ref{eq:Ingarch model with external effect} we can also choose to include external factors or not. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. The values $p$ and $q$ are also varying parameters which have to be chosen. 
+As seen in the model \ref{eq:Ingarch model with external effect} we can also choose to include external factors. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. 
+
+The values $p$ and $q$ are also varying parameters which have to be chosen. One could use the AIC or some other criteria to get the optimal lag order. However, this is not in the scope of this thesis and hence we will leave it as a future extension.
 
 The optimal one step ahead prediction is given by the conditional expectation \ref{sec: Estimation of the Ingarch Model}. However, since we only expect integer values and $\lambda_{k,t+1} \in \mathbbm{R}_+$, we will round the values of $\lambda_{k,t+1}$ to the next integer and use this value. 
 

@@ -1,7 +1,7 @@
 \section{Motivation}
 \label{sec: Coda Motivation}
 
-Another way to see our data is as a compositional time series. The exact definition of compositional will follow later but in general compositional data, which is by nature multivariate, describes relations between the parts instead of absolute values. We transform the data in such a way, that the values of each category can be seen as the relative share of the total amount at the current time. We then predict the relative share of the category for the next point in time. Since we are ultimately interested in the absolute value, we include the total sum of all categories as an additional variable and predict it as well. We then use predicted shares and the predicted total value to calculate the absolute values of each part. This is modelled as the so-called $\Tsp$-Space which will be introduced later. Since VAR models are easy to estimate and interpret and have some beneficial properties with our choice of transformation, we opt to focus on them. One such property is the fact that the VAR model does not depend on the concrete choice of the ilr-transformation \cite{Kynclova:2015}. 
+Another way to see our data is as a compositional time series. Compositional data, which is by nature multivariate, describes relations between the parts instead of absolute values. We transform the data in such a way, that the values of each category can be seen as the relative share of the total amount at the current time and then predict the relative share of the category for the next point in time. Since we are ultimately interested in the absolute value, we also investigate the inclusion of the total sum of all categories as an additional variable and predict it as well. We use the predicted shares and the predicted total value to calculate the absolute values of each part. This is modelled as the so-called $\Tsp$-Space, which will be explained in further detail in \ref{sec: Tspaces}. For the actual modelling, we choose VAR models. Their easiness to estimate and interpret, as well as other beneficial properties with our choice of transformation, make them desirable. One such property is the fact that the VAR model does not depend on the concrete choice of the ilr-transformation \cite{Kynclova:2015}. 
 
 %Beschreiben warum CoDA und wie unsere Daten als compositional Data gesehen werden kann. 
 
@@ -273,7 +273,7 @@ In our application we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t)
 \section{Zero-Handling}
 \label{sec: Zero-Handling}
 
-As we can see in the definition of the simplex \ref{eq:Simplex Definition}, a compositional vector can only consist of positive parts. Since we have a considerate amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data. First, however, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them in order to perform compositional data analysis. In the following we summarise the methods presented in \cite{Lubbe:2021,Josep:2003}. 
+As we can see in the definition of the simplex \ref{eq:Simplex Definition}, a compositional vector can only consist of positive parts and since we have a considerate amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data but first, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them in order to perform compositional data analysis. In the following we summarise the methods presented in \cite{Lubbe:2021,Josep:2003}. 
 
 \subsection{Rounded Zeros}
 \label{sec:Rounded Zeros}
@@ -322,7 +322,7 @@ r_j =
 
 This method depends again on $\delta_j$ and the number of zeros $m$. 
 
-The main result of \cite{Josep:2003} is the multiplicative replacement strategy. The proposed replacement is 
+Third, which is the main result of \cite{Josep:2003}, is the multiplicative replacement strategy. The proposed replacement is 
 
 \begin{equation}
 r_j = 

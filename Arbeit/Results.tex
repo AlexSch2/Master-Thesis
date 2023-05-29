@@ -10,8 +10,8 @@ Here, we compare the INGARCH(1,1) model, with the CoDA and INAR(1) model. For al
 
 In \ref{fig:models Comp1} we see a boxplot and quantile plot. In the boxplot the error measure is calculated for all groups and all fridges for each model. The result is then shown in a boxplot. In the quantile plot, the error measure for each fridge, each model and each category is calculated and sorted according to their size. The dot size indicates the length of the respective time series and the vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile.
 
-In the boxplot \ref{fig:distributions models} we can see that their performance is pretty similar. They all seem to outperform the the naive random walk model which is especially true for the count data models. 
-In the quantile plot \ref{fig:distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonable well and similar, differences emerge for category 3 and 4. INGARCH seems to be the clear favourite in category 4, while CoDA and INAR have similar performances. However, for all models there are again time series with errors that are too high to be shown, or that couldn't get calculated at all. 
+In the boxplot \ref{fig:box distributions models} we can see that their performance is pretty similar. They all seem to outperform the the naive random walk model which is especially true for the count data models. 
+In the quantile plot \ref{fig: quantile distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonable well and similar, differences emerge for category 3 and 4. INGARCH seems to be the clear favourite in category 4, while CoDA and INAR have similar performances. However, for all models there are again time series with errors that are too high to be shown, or that couldn't get calculated at all. 
 \begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
@@ -118,7 +118,7 @@ Next, we vary the initial frame length $w_f$. We choose to extend the frame with
 \end{figure}
 
 
-In the boxplot \ref{fig: Frame Box} it looks like INGARCH performs worst for $w=0.5$. However, in the quantile plot \ref{fig:Frame Quant} we can see that for $w=0.3,0.7$ the last errors are not included any more in the plot. This could either be a result of them being to high, or that the model couldn't be fit on those fridges. 
+In the boxplot \ref{fig:Frame Box} it looks like INGARCH performs worst for $w=0.5$. However, in the quantile plot \ref{fig:Frame Quant} we can see that for $w=0.3,0.7$ the last errors are not included any more in the plot. This could either be a result of them being to high, or that the model couldn't be fit on those fridges. 
 
 For CoDA there seems not to be much difference. The best results are obtained with $w=0.3$, but the differences are only marginal. 
 

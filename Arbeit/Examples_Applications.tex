@@ -1,7 +1,7 @@
 \section{Examples of model application}
 \label{sec:Examples of model applicatio}
 
-To improve understanding of our data and the models we show some application of the models on some exemplary fridges. We choose fridges 4 and 24. Hence $f \in \left\{4,24\right\}$. Furthermore we start with analysing the aggregated 4 main categories which means $K=4$. 
+To improve understanding of our data and the models we show some application of the models on some exemplary fridges. We choose fridges 4 and 24 so $f \in \left\{4,24\right\}$. Furthermore we start with analysing the aggregated 4 main categories which means $K=4$. 
 
 We first begin with plotting the values of time series. The x-axis shows the time and the y-axis the number of units sold. Since we have four main categorie for each fridge, we have four subplots. 
 
@@ -44,7 +44,7 @@ Next in figure \ref{fig:TS Coda}, we add the predictions of the CoDA model. For 
 \label{fig:TS Coda}
 \end{figure}
 
-In figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. For this, we used the whole history $h=1$, half of the data for the initial window length $w=0.5$, extend the window at every time point, add nothing to the zero values and used the poisson distribution. We used no external factors and set $p=1, q=1$ in model \ref{eq:Ingarch model with external effect}. The general trend is again captured well and in the instance of \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
+In figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. For this, we used the whole history $h=1$, half of the data for the initial window length $w=0.5$, extend the window at every time point, add nothing to the zero values and use the poisson distribution. We use no external factors and set $p=1, q=1$ in model \ref{eq:Ingarch model with external effect}. The general trend is again captured well and in the instance of \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
 
 \begin{figure}[htb]
 \centering
@@ -84,7 +84,7 @@ To directly compare both models, we plot the predictions in one figure \ref{fig:
 \end{figure}
 
 
-In order to get some further insight in the accuracy of our predictions, we added 95 \% prediction intervals \ref{fig:TS BothPI}. Here we can see some differences between the intervals. While for categories with bigger values the bands are quite similar in width, for categories with lower values, CoDA has much wider bands. This is especially visible in \ref{fig:BothPI Fridge 4} for category 3 and 4. However, most data points are covered by both bands.
+In order to get some further insight in the accuracy of our predictions, we add 95 \% prediction intervals \ref{fig:TS BothPI}. Here we can see some differences between the intervals. While for categories with bigger values the bands are quite similar in width, for categories with lower values, CoDA has much wider bands. This is especially visible in \ref{fig:BothPI Fridge 4} for category 3 and 4. However, most data points are covered by both bands.
 \begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
