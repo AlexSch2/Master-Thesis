@@ -9,7 +9,7 @@
 #If one vs all is chosen, pivot groups have to be supplied as a character
 
 Coda.DataPreparation <- function(Data,
-           ZeroHandling = c("all", "simple", "none"),
+           ZeroHandling = c("all", "simple", "none"," multiplicativ"),
            TSpace = FALSE,
            Log = FALSE,
            OneVsAll = FALSE,
@@ -18,11 +18,23 @@ Coda.DataPreparation <- function(Data,
            TakeSubCategory = F,
            Category) {
 
-    Plus <- function(x,Value=0.5){
+    Plus <- function(x,value=0.5){
          x[is.na(x)] <- 0
-      x <- x + Value
+      x <- x + value
       return(x)
     }
+    
+    multi <- function(s1,s2,...) {
+      delta <- 0.5
+      x <- cbind(s1,s2,...)
+      x <- as.numeric(x)
+      Kappa <- sum(x)
+      DeltaSum <- sum(x==0)*delta
+      x[x!=0] <- (1-DeltaSum/Kappa)*x[x!=0]
+      x[x==0] <- delta
+      return(x)
+    }
+    
     ZeroHandling <- match.arg(ZeroHandling)
 
     Data_Prepared <- Data.Preparation(Data_Raw = Data,
@@ -44,6 +56,11 @@ Coda.DataPreparation <- function(Data,
     }
     else if (ZeroHandling == "simple") {
       Data_Prepared[Data_Prepared == 0] <- 0.5
+    }
+    
+    else if (ZeroHandling == "multiplicativ"){
+      stop("To be implemented")
+      Data_Prepared <- pmap_dbl(as.list(Data_Prepared[,purrr::map_lgl(Data_Prepared,is.numeric)]),sum)
     }
     else {
       stop("Enter valid zero handling option")

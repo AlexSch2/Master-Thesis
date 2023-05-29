@@ -395,7 +395,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       geom_hline(yintercept =1,linewidth=2)+
       theme(text = element_text(size = 50),axis.text.x = element_text(size=30))+
       ggtitle(paste("Error Measure Boxplot",sep=" "))+
-#      scale_x_discrete(labels=LabelNames)+
+      scale_x_discrete(labels=LabelNames)+
       xlab(str_to_title(names(Variation)))+
       ylab("Error")
     
