@@ -43,7 +43,7 @@ Plot.Timeseries <- function(Data,Id,Save=T,SubCategory=F,MainCategory=1,TextSize
   }
 }
 
-#This function plots the Time series for the given model
+#This function plots the Time series for the given models
 Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4),Title=""){
   
   for(Id_RunVariable in Id) {
@@ -76,10 +76,12 @@ Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCateg
                          c("coda","ingarch","inar_classic","zim","inar_bayes"))
     MyNames <- setNames(c("CoDA","INGARCH","INAR classic","ZIM","INAR bayes"),
                         c("coda","ingarch","inar_classic","zim","inar_bayes"))
+    MyShape <- setNames(c(18,17,15,8,13),
+                        c("coda","ingarch","inar_classic","zim","inar_bayes"))
     
-    Plot <- ggplot(PlotDataResult,aes(x=date,y=valuePredict,col=model))+
+    Plot <- ggplot(PlotDataResult,aes(x=date,y=valuePredict,col=model,shape=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotData$category)),scales = "free")+
-      geom_point()+
+      geom_point(size=2.5)+
       geom_line()+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
@@ -87,16 +89,21 @@ Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCateg
       ggtitle(paste("Timeseries with",Title, "Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
       ylab("Units Sold")+
       xlab("Time")+
-      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))
+      scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))+
+      scale_shape_manual("Model", values = c(MyShape),labels=c(MyNames))+
+      guides(shape = guide_legend(override.aes = list(size = 5)))+
+      guides(color = guide_legend(override.aes = list(size = 5)))+
+      guides(fill="none")
     
     
     #Saving of the plot
     if(Save){
-      ggsave(filename = here("Plots",paste(Title,"Predictions_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
+      ggsave(filename = here("Plots",paste(Title,"_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
     }
   }
 }
 
+#This function plots the Time series for the given model
 Plot.TimeseriesSingle <- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4),Title="",Variation= "history",Values,LabelNames){
   
   for(Id_RunVariable in Id) {
@@ -149,10 +156,11 @@ Plot.TimeseriesSingle <- function(Data,Result,Id,Save=T,SubCategory=F,MainCatego
     
     #Saving of the plot
     if(Save){
-      ggsave(filename = here("Plots",paste(Title,"Predictions_Timeseries_Variation",Variation,Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
+      ggsave(filename = here("Plots",paste(Title,"_Timeseries_Variation",Variation,Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
     }
   }
 }
+
 #This function plots the timeseries with both models and their respective confidence bands
 Plot.TimeseriesCodaIngarchPI <- function(Data,CodaResult,IngarchResult,Id,Save=T,TextSize=50){
   
@@ -189,14 +197,14 @@ Plot.TimeseriesCodaIngarchPI <- function(Data,CodaResult,IngarchResult,Id,Save=T
     MyNames <- setNames(c("CoDA","INGARCH"),
                         c("coda","ingarch"))
     MyShape <- setNames(c(18,17),
-                        c("CoDA","INGARCH"))
+                        c("coda","ingarch"))
     MyLine <- setNames(c("longdash","dotted"),
                        c("coda","ingarch"))
     
     Plot <- ggplot(PlotDataBoth,aes(x=date,y=valuePredict,col=model,shape=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataCoda$category)),scales = "free")+
       geom_point(size=2.5)+
-      geom_line(data=PlotDataBoth,aes(x=date,y=valuePredict,col=model))+
+      geom_line(data=PlotDataBoth,aes(x=date,y=valuePredict,col=model),inherit.aes = F)+
       geom_ribbon(aes(x=date,y=valuePredict,col=model,ymin=lowerBound,ymax=upperBound,fill=model,linetype=model),
                   data=PlotDataBoth,alpha=0.15,inherit.aes = F)+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+

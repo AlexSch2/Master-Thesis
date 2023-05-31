@@ -8,7 +8,6 @@ output: pdf_document
 source("General_Dependency.R")
 source("Coda_Function.R") 
 source("CountModel_Function.R")
-source("ZIM_Function.R")
 source("General_Function.R")
 source("General_PlotFunctions.R")
 ```
@@ -52,11 +51,11 @@ coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
     Id = ids_all,
-    Frame = 0.7,
+    Frame = 0.5,
     OneVsAll = T,
     PivotGroup =  NULL,
     Category_Main = c("1","2","3","4"),
-    TSpace = F,
+    TSpace = T,
     Log = T,
     ZeroHandling = "simple",
     WindowMethod = "extending",
@@ -65,7 +64,7 @@ coda_result <-
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"frame07",".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"tspace",".RData",sep="")))
 }
 
 
@@ -133,58 +132,23 @@ if(!identical(ids,unique(ingarch_result$result$id)) ||
 
 
 ```{r}
-Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_.RData")
-Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_best.RData")
-#Coda3 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_frame07.RData")
-
-Ingarch1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
-Ingarch2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all__nbinom.RData")
-#Ingarch3 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_frame07.RData")
-
-Coda_Combined <- rbind(Coda1$result,
-                       Coda2$result
-#                       ,Coda3$result
-                       )
-Ingarch_Combined <- rbind(Ingarch1$result,
-                          Ingarch2$result
-#                          ,Ingarch3$result
-                          )
-
-######CODA; INGARCH ; ZIM ######
-
-Plot.MethodComparision(IngarchResult = ingarch_result,CodaResult = coda_result,ZimResult = zim_result)
-zim_zeros <- zim_result$result%>% group_by(category,id) %>% summarise(n=sum(valuePredict==0))
-ingarch_zeros <- ingarch_result$result %>% filter(category%in% c(3,4))%>% group_by(category,id) %>% summarise(n=sum(valuePredict==0))
-zim_zeros$model <- "zim"
-ingarch_zeros$model <- "ingarch"
-plot.data <- rbind(zim_zeros,ingarch_zeros)
-p <- ggplot(plot.data,aes(x=id,y=n,col=model))+
-  facet_wrap(vars(category),nrow=2,scales="free")+
-  geom_point(size=5)+
-  theme(text = element_text(size = 30,angle = 45, vjust = 0.5, hjust=1))+
-  scale_colour_manual("Legend", values = setNames(c("green","blue"),c("zim","ingarch")),aesthetics = "colour")+
-  ylab("Amount of zeros")
-
-
 #########BOTH METHODS############
 #General 
 Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_best.RData")
 Ingarch1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/ingarch_result_ids_all_.RData")
 Inarclassic <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/inarclassic_result_ids_all_.RData")
 Zim <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/zim_result_ids_all_.RData")
-Count_Result <- rbind(Ingarch1$result,
-                 Inarclassic $result,
-                 Zim$result)
+Count_Result <- rbind(Ingarch1$result)
 
-Common_Names <- intersect(names(ingarch_result$result),names(coda_result$result))
+Common_Names <- intersect(names(Ingarch1$result),names(coda_result$result))
 CodaResult_Short <- Coda1 $result %>% select(all_of(Common_Names))
 CountModelResult_Short <- Count_Result %>% select(all_of(Common_Names))
 
 AllResult <- rbind(CodaResult_Short,CountModelResult_Short)
 #AllResult$window_baseLength[AllResult$window_baseLength==4]<-5
 
-Plot.TimeseriesMultiple(weekly_category_data,AllResult,Id=c(4,6,8,20))
-
+Plot.TimeseriesMultiple(weekly_category_data,Ingarch1$result,Id=c(4,24),Title = "Ingarch")
+Plot.TimeseriesCodaIngarchPI(weekly_category_data,coda_result,Ingarch1,Id=24)
 Plot.MethodComparision(AllResult,Category = c(1,2,3,4),ZIM=F,Split = F)
 
 #History
@@ -253,15 +217,19 @@ Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Past Observa
 
 
 #####CODA#####
+Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_best.RData")
 #Zero Handling
-Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_zeros_only.RData")
+Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_all_values.RData")
 Result_Combined <- rbind(Coda1$result,Coda2$result)
 Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Zero handling"="zeroHandling"),LabelNames=c("All","Simple Replacement"),Split=F,Category = c(1,2,3,4),Values = c("all","simple"))
 
 #TSpaces
-Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_no_Tspace.RData")
+Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_tspace.RData")
 Result_Combined <- rbind(Coda1$result,Coda2$result)
+
 Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("T-Space"="tSpace"),LabelNames=c("TRUE"="T-Space","FALSE"="No T-Space"),Split=F,Category = c(1,2,3,4),Values = c(TRUE,FALSE))
+
+Plot.TimeseriesSingle(weekly_category_data,Result_Combined,Id=c(100321,20),Save=T,SubCategory=F,Variation=c("T-Space"="tSpace"),LabelNames=c("TRUE"="T-Space","FALSE"="No T-Space"),Values = c(TRUE,FALSE),Title = "Coda")
 
 #OneVsAll
 Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_no_ova.RData")

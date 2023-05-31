@@ -18,6 +18,7 @@
 #install.packages("miceadds)
 #install.packages("ZINARp")
 #install.packages("ZINAR1")
+#install.packages("forecast")
 
 #Loading Packages
 
@@ -34,3 +35,4 @@ library(pscl) #alternative for zim models
 library(miceadds) #for loading RData 
 library(ZINARp) #For fitting ZINAR(p) or INAR(p) models
 library(ZINAR1) #For fitting ZINAR(1) or INAR(1) models
+library(forecast) #For forecasting tools for AR models
