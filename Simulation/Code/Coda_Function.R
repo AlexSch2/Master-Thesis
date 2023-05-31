@@ -24,9 +24,9 @@ Coda.DataPreparation <- function(Data,
       return(x)
     }
     
-    multi <- function(s1,s2,...) {
+    multi <- function(x,y,z) {
       delta <- 0.5
-      x <- cbind(s1,s2,...)
+      x <- cbind(x,y,z)
       x <- as.numeric(x)
       Kappa <- sum(x)
       DeltaSum <- sum(x==0)*delta
@@ -60,7 +60,7 @@ Coda.DataPreparation <- function(Data,
     
     else if (ZeroHandling == "multiplicativ"){
       stop("To be implemented")
-      Data_Prepared <- pmap_dbl(as.list(Data_Prepared[,purrr::map_lgl(Data_Prepared,is.numeric)]),sum)
+      Data_Prepared <- pmap_dbl(as.list(Data_Prepared[,purrr::map_lgl(Data_Prepared,is.numeric)]),multi)
     }
     else {
       stop("Enter valid zero handling option")
@@ -119,7 +119,7 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       Window_Length <- dim(TimeSeriesValue_Window)[1]
       
       Model <- VAR(TimeSeriesValue_Window, p=1 ,lag.max = NULL, ic= "AIC")
-      ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep)
+      ValuePredict <-  predict(Model, TimeSeriesValue_Window, n.ahead = PredictionStep,ci=0.95)
       
       #Initialising result vectors
       ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
@@ -155,11 +155,11 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
         
         LowerBound <- LowerBound * exp(ValuePredict_Vector[Size])
         LowerBound <-
-          (append(LowerBound, exp(ValuePredict_Vector[Size])))
+          (append(LowerBound, exp(LowerBound_Vector[Size])))
         
         UpperBound <- UpperBound * exp(ValuePredict_Vector[Size])
         UpperBound <-
-          (append(UpperBound, exp(ValuePredict_Vector[Size])))
+          (append(UpperBound, exp(UpperBound_Vector[Size])))
         
       }
       # Normal back transformations
@@ -170,11 +170,11 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
         
         LowerBound <- LowerBound * ValuePredict_Vector[Size]
         LowerBound <-
-          (append(LowerBound, ValuePredict_Vector[Size]))
+          (append(LowerBound, LowerBound_Vector[Size]))
         
         UpperBound <- UpperBound * ValuePredict_Vector[Size]
         UpperBound <-
-          (append(UpperBound, ValuePredict_Vector[Size]))
+          (append(UpperBound, UpperBound_Vector[Size]))
       }
       
       #Getting true value and last known values
@@ -191,6 +191,12 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       
       if (OneVsAll) {
         Category <- factor(c(PivotGroup, "other", "tsum"))
+        
+        #We have to switch the Lower/Upper Bound results for the "other" category. When the lower bound of the Pivot Group gets estimated, then
+        # we assume that "Other" has a higher value/ratio and this value is hence the upper bound for the "Other" category. Vice versa for the upper bound.
+        Help <- LowerBound[2]
+        LowerBound[2] <- UpperBound[2]
+        UpperBound[2] <- Help
       }
       else{
         Category <- factor(c(as.character(Category), "tsum"))
@@ -202,7 +208,8 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       Window_Length <- length(TimeSeriesValue_Window)
       
       Model <- ar(TimeSeriesValue_Window, aic = F, order.max = 1)
-      ValuePredict <- predict(Model, as.matrix(TimeSeriesValue_Window), n.ahead = PredictionStep)
+      Model$x <- TimeSeriesValue_Window
+      ValuePredict <- forecast(Model, h = PredictionStep,level=0.95)
       
       #Initialising result vectors
       ValuePredict_Vector <-matrix(data = NA,nrow = 1,ncol = Size)
@@ -210,9 +217,9 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       
       #Filling up result vectors
       for (i in 1:Size) {
-        ValuePredict_Vector[1, i] <-  ValuePredict[[1]][[i]][PredictionStep]
-       # LowerBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+1]
-       # UpperBound_Vector[i] <-  ValuePredict[[1]][[i]][PredictionStep+2]
+        ValuePredict_Vector[1, i] <-  ValuePredict[["mean"]][PredictionStep]
+        LowerBound_Vector[i] <-  ValuePredict[["lower"]][PredictionStep]
+        UpperBound_Vector[i] <-  ValuePredict[["upper"]][PredictionStep]
       }
       
       
@@ -228,16 +235,16 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       LowerBound <- NA
       UpperBound <- NA
       
-      # LowerBound <- LowerBound_Vector %>%
-      #   matrix(nrow = 1) %>%
-      #   D2invPC()
-      # LowerBound <- as.vector(LowerBound * TSum)
-      # 
-      # 
-      # UpperBound <- UpperBound_Vector %>%
-      #   matrix(nrow = 1) %>%
-      #   D2invPC()
-      # UpperBound <- as.vector(UpperBound * TSum)
+      LowerBound <- LowerBound_Vector %>%
+        matrix(nrow = 1) %>%
+        D2invPC()
+      LowerBound <- as.vector(LowerBound * TSum)
+
+
+      UpperBound <- UpperBound_Vector %>%
+        matrix(nrow = 1) %>%
+        D2invPC()
+      UpperBound <- as.vector(UpperBound * TSum)
       
       
       ValueTrue <-
@@ -248,6 +255,11 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       
       if (OneVsAll) {
         Category <- factor(c(PivotGroup, "other"))
+        #We have to switch the Lower/Upper Bound results for the "other" category. When the lower bound of the Pivot Group gets estimated, then
+        # we assume that "Other" has a higher value/ratio and this value is hence the upper bound for the "Other" category. Vice versa for the upper bound.
+        Help <- LowerBound[2]
+        LowerBound[2] <- UpperBound[2]
+        UpperBound[2] <- Help
       }
       else{
         Category <- factor(c(as.character(Category)))
@@ -263,7 +275,6 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
     
     #Calculating the normed prediction error
     PredictionError_Normed <- PredictionError
-    
     
     if(OneVsAll){
       
