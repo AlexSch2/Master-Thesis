@@ -16,6 +16,7 @@ Coda.DataPreparation <- function(Data,
            PivotGroup = "1",
            HistoryLength = 1,
            TakeSubCategory = F,
+           DL = 0.1,
            Category) {
 
     Plus <- function(x,value=0.5){
@@ -55,7 +56,7 @@ Coda.DataPreparation <- function(Data,
       Data_Prepared <- Data_Prepared %>% mutate(across(where(is.numeric),.fns = Plus))
     }
     else if (ZeroHandling == "simple") {
-      Data_Prepared[Data_Prepared == 0] <- 0.5
+      Data_Prepared[Data_Prepared == 0] <- DL
     }
     
     else if (ZeroHandling == "multiplicativ"){
@@ -375,7 +376,8 @@ Coda.Analysis<-function(Data_Raw,
                         WindowMethod ="extending",
                         Category_Main = c("1", "2", "3", "4"),
                         TakeSubCategory = F,
-                        Category_Sub = NULL) {
+                        Category_Sub = NULL,
+                        DL = 0.1) {
   
   #Checking Input
   stopifnot("Model Type not correct."=ModelType %in% c("coda","coda_OneVsAll"))
