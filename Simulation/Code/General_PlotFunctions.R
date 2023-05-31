@@ -104,7 +104,11 @@ Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCateg
 }
 
 #This function plots the Time series for the given model
-Plot.TimeseriesSingle <- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4),Title="",Variation= "history",Values,LabelNames){
+Plot.TimeseriesSingle <- function(Data,Result,Id,Save=T,SubCategory=F,
+                                  MainCategory=c(1,2,3,4),Title="",
+                                  Variation= "history",Values,LabelNames,
+                                  MyShapes = c(18,17),
+                                  MyColour = c("darkgreen","darkorange")){
   
   for(Id_RunVariable in Id) {
     
@@ -129,11 +133,10 @@ Plot.TimeseriesSingle <- function(Data,Result,Id,Save=T,SubCategory=F,MainCatego
     
     names(PlotData)[1] <- c("date")
     
-    PlotDataResult <- Result %>% filter(id==Id_RunVariable,category %in% MainCategory)
+    PlotDataResult <- Result %>% filter(id==Id_RunVariable,category %in% MainCategory) %>%as.data.frame()
+    PlotDataResult[,Variation] <- as.factor(PlotDataResult[,Variation])
     
     #Creating the plot
-    MyShapes <- c(18,17)
-    MyColour <- c("darkgreen","darkorange")
     names(MyShapes) <- Values
     names(MyColour) <- Values
     
@@ -422,8 +425,13 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
 }
 
 #This function plots the boxplot/quantile plot and histogram of the error measures either by group or in total
-Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,Split=T,
-                                      Groups=list(Group1=c(1,2),Group2=c(3,4)),Category=c(1,2,3,4),LabelNames,File_Post=""){
+Plot.ErrorMeasureSingle <- function(ResultCombined, Variation = "history", Values, Split = T,
+                                    Groups = list(Group1 = c(1, 2), Group2 =c(3, 4)), 
+                                    Category = c(1, 2, 3, 4), 
+                                    LabelNames, 
+                                    File_Post = "", 
+                                    MyShapes =c(18, 17, 15),
+                                    MyColour = c("darkgreen", "darkorange", "darkblue")){
   
   label.function <- function(String)return(LabelNames[String])
   
@@ -479,8 +487,6 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
     
     
     #Quantile Plot
-    MyShapes <- c(18,17,15)
-    MyColour <- c("darkgreen","darkorange","darkblue")
     names(MyShapes) <- Values
     names(MyColour) <- Values
     
@@ -516,8 +522,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
     ResultError_Sorted_All <- as.data.frame(ResultError_Sorted_All)
     ResultError_Sorted_All[,Variation] <- as.factor(ResultError_Sorted_All[,Variation])
     
-    QuantilesMax_Help <- Quantiles_Index %>% group_by(value)%>%max()
-    QuantilesMax_Value <- Quantiles_Index[Quantiles_Index$quant_ind== QuantilesMax_Help,"value"]
+    QuantilesMax_Value <- dplyr::slice_max(Quantiles_Index,order_by = quant_ind)[1,1]
     Quantiles_Index <- Quantiles_Index[Quantiles_Index$value==QuantilesMax_Value,]
     
     QuantPlot <- ggplot(ResultError_Sorted_All,aes(x=index,y=error,colour=!!as.symbol(Variation),size=Length,shape=!!as.symbol(Variation)))+
