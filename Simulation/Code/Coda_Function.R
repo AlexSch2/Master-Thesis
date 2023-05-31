@@ -455,15 +455,16 @@ Coda.Analysis<-function(Data_Raw,
         
         
         #Preparing transformed data
-        Data_Prepared <- Coda.DataPreparation(Data_Processed, 
-                                               ZeroHandling = ZeroHandling,
-                                               TSpace = TSpace, 
-                                               Log = Log,
-                                               OneVsAll = T,
-                                               PivotGroup = PivotGroup_RunVariable,
-                                               HistoryLength = HistoryLength,
-                                               TakeSubCategory = TakeSubCategory,
-                                               Category = Category) %>%
+        Data_Prepared <- Coda.DataPreparation(Data_Processed,
+                                              ZeroHandling = ZeroHandling,
+                                              TSpace = TSpace,
+                                              Log = Log,
+                                              OneVsAll = T,
+                                              PivotGroup = PivotGroup_RunVariable,
+                                              HistoryLength = HistoryLength,
+                                              TakeSubCategory = TakeSubCategory,
+                                              Category = Category,
+                                              DL = DL) %>%
           arrange(week_date)
         
 
@@ -499,7 +500,8 @@ Coda.Analysis<-function(Data_Raw,
                                                  PivotGroup = PivotGroup_RunVariable,
                                                  HistoryLength = HistoryLength,
                                                  TakeSubCategory = TakeSubCategory,
-                                                 Category = Category) %>%
+                                                 Category = Category,
+                                                 DL = DL) %>%
           arrange(week_date)
         
         #Splitting non transformed data into windows
@@ -529,6 +531,7 @@ Coda.Analysis<-function(Data_Raw,
         PredictionResult$result$history <- as.character(HistoryLength)
         PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
         PredictionResult$result$oneVsAll <- OneVsAll
+        PredictionResult$result$dL <- DL
       
           
         #Tidying up data
@@ -630,7 +633,8 @@ Coda.Analysis<-function(Data_Raw,
                                               OneVsAll = F,
                                               HistoryLength = HistoryLength,
                                               TakeSubCategory = TakeSubCategory,
-                                              Category = Category) %>% arrange(week_date)
+                                              Category = Category,
+                                              DL = DL) %>% arrange(week_date)
         
         
         #If the Frame is given as a fraction, calculate the absolute length. We set 5 as the minimum length needed.
@@ -663,7 +667,8 @@ Coda.Analysis<-function(Data_Raw,
                                                  OneVsAll = F,
                                                  HistoryLength = HistoryLength,
                                                  TakeSubCategory = TakeSubCategory,
-                                                 Category = Category) %>% arrange(week_date)
+                                                 Category = Category,
+                                                 DL = DL) %>% arrange(week_date)
         #Splitting non transformed data into windows
         Data_WindowNoTransform <- Data.Window(Data_NoTransform,
                                          Frame = Frame,
@@ -688,6 +693,7 @@ Coda.Analysis<-function(Data_Raw,
         PredictionResult$result$history <- as.character(HistoryLength)
         PredictionResult$result$timeseriesLength <- as.character(TimeSeries_Length)
         PredictionResult$result$oneVsAll <- OneVsAll
+        PredictionResult$result$dL <- DL
         
         #Tidying up data
         Result_Prediction <- PredictionResult$result
