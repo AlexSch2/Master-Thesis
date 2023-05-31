@@ -97,6 +97,62 @@ Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCateg
   }
 }
 
+Plot.TimeseriesSingle <- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4),Title="",Variation= "history",Values,LabelNames){
+  
+  for(Id_RunVariable in Id) {
+    
+    Data_Raw <- Data %>% filter(fridge_id == Id_RunVariable & main_category_id %in% MainCategory)
+    
+    #Should a Subcategory be plotted
+    if(SubCategory){
+      Data_Raw <- Data_Raw %>% filter(main_category_id ==as.character(MainCategory))
+      Category <- as.character(unique(Data_Raw$sub_category_id))
+      Subtitle_Text <- paste("and Main Category ", MainCategory)
+    }
+    else{
+      Category <- as.character(unique(Data_Raw$main_category_id))
+      Subtitle_Text <- ""
+    }
+    
+    #Preparing data for plotting
+    PlotData <- Data_Raw %>%
+      dplyr::select(fridge_id,week_date, main_category_id, sub_category_id, sold) %>%
+      Data.Preparation(Category = MainCategory,TakeSubCategory = SubCategory) %>% 
+      pivot_longer(cols= all_of(Category),names_to="category",values_to="valueTrue")
+    
+    names(PlotData)[1] <- c("date")
+    
+    PlotDataResult <- Result %>% filter(id==Id_RunVariable,category %in% MainCategory)
+    
+    #Creating the plot
+    MyShapes <- c(18,17)
+    MyColour <- c("darkgreen","darkorange")
+    names(MyShapes) <- Values
+    names(MyColour) <- Values
+    
+    
+    Plot <- ggplot(PlotDataResult,aes(x=date,y=valuePredict,color=!!as.symbol(Variation),shape=!!as.symbol(Variation)))+
+      facet_wrap(vars(category),nrow=length(unique(PlotData$category)),scales = "free")+
+      geom_point(size=2.5)+
+      geom_line()+
+      geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
+      geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
+      theme(text = element_text(size =50))+
+      ggtitle(paste("Timeseries with",Title, "Predictions",sep=" "),subtitle = paste("Fridge ID",Id_RunVariable,Subtitle_Text,sep=" "))+
+      ylab("Units Sold")+
+      xlab("Time")+
+      scale_colour_manual(names(Variation), values = c(MyColour),labels=LabelNames)+
+      scale_shape_manual(names(Variation), values = c(MyShapes),labels=LabelNames)+
+      guides(shape = guide_legend(override.aes = list(size = 5)))+
+      guides(color = guide_legend(override.aes = list(size = 5)))
+    
+    
+    #Saving of the plot
+    if(Save){
+      ggsave(filename = here("Plots",paste(Title,"Predictions_Timeseries_Variation",Variation,Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
+    }
+  }
+}
 #This function plots the timeseries with both models and their respective confidence bands
 Plot.TimeseriesCodaIngarchPI <- function(Data,CodaResult,IngarchResult,Id,Save=T,TextSize=50){
   
@@ -132,13 +188,17 @@ Plot.TimeseriesCodaIngarchPI <- function(Data,CodaResult,IngarchResult,Id,Save=T
                          c("coda","ingarch"))
     MyNames <- setNames(c("CoDA","INGARCH"),
                         c("coda","ingarch"))
+    MyShape <- setNames(c(18,17),
+                        c("CoDA","INGARCH"))
+    MyLine <- setNames(c("longdash","dotted"),
+                       c("coda","ingarch"))
     
-    Plot <- ggplot(PlotDataBoth,aes(x=date,y=valuePredict,col=model))+
+    Plot <- ggplot(PlotDataBoth,aes(x=date,y=valuePredict,col=model,shape=model))+
       facet_wrap(vars(category),nrow=length(unique(PlotDataCoda$category)),scales = "free")+
-      geom_point()+
+      geom_point(size=2.5)+
       geom_line(data=PlotDataBoth,aes(x=date,y=valuePredict,col=model))+
-      geom_ribbon(aes(x=date,y=valuePredict,col=model,ymin=lowerBound,ymax=upperBound,fill=model),
-                  data=PlotDataBoth,alpha=0.15,inherit.aes = F,linetype="dashed")+
+      geom_ribbon(aes(x=date,y=valuePredict,col=model,ymin=lowerBound,ymax=upperBound,fill=model,linetype=model),
+                  data=PlotDataBoth,alpha=0.15,inherit.aes = F)+
       geom_line(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       geom_point(data=PlotData,aes(x=date,y=valueTrue),col="black",inherit.aes = F)+
       theme(text = element_text(size =TextSize))+
@@ -146,6 +206,11 @@ Plot.TimeseriesCodaIngarchPI <- function(Data,CodaResult,IngarchResult,Id,Save=T
       ylab("Units Sold")+
       xlab("Time")+
       scale_color_manual("Model", values = c(MyColour),labels=c(MyNames))+
+      scale_shape_manual("Model", values = c(MyShape),labels=c(MyNames))+
+      scale_linetype_manual("Model", values = c(MyLine),labels=c(MyNames))+
+      guides(shape = guide_legend(override.aes = list(size = 5)))+
+      guides(color = guide_legend(override.aes = list(size = 5)))+
+      guides(linetype = guide_legend(override.aes = list(size = 5)))+
       guides(fill="none")
     
     
