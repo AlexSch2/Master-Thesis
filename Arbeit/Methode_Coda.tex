@@ -268,7 +268,7 @@ With the Euclidean structure established, we can model the relative structure an
 \label{eq:VAR model Tspace}
 \end{equation}
 
-In our application we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t)=\log(\sum_{k=1}^K Y_{kt})$ since we are interested in the total sum at time $t$. The logarithmic sum is a popular choice in the time series context \cite{Kynclova:2015}. The estimation of model \ref{eq:VAR model Tspace} is carried out analogous to \ref{sec: Estimation of the Var Model}. 
+In our application we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t)=\log(\sum_{k=1}^K Y_{kt})$ since we are interested in the total sum at time $t$. The logarithmic sum is a popular choice in the time series context as it prevents the sum of being too big\cite{Kynclova:2015}. The estimation of model \ref{eq:VAR model Tspace} is carried out analogous to \ref{sec: Estimation of the Var Model}. 
 
 \section{Zero-Handling}
 \label{sec: Zero-Handling}
@@ -354,7 +354,7 @@ The authors in \cite{Palarea-Albaladejo:2015} focus on the case of rounded zeros
 \subsubsection{EM-based algorithm}
 \label{sec:EM Algorithm}
 
-The Expectation-Maximisation (EM) algorithm \cite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses information in the covariance structure to conditionally estimate the censored values. Given a vector $\bm{x}$ with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components the EM-algorithm consists of two steps
+The Expectation-Maximisation (EM) algorithm \cite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses the information in the covariance structure to conditionally estimate the censored values \cite{Palarea-Albaladejo:2015}. Given a vector $\bm{x}$ with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components the EM-algorithm consists of two steps
 
 \begin{enumerate}
 	\item E-Step: Given a parameter estimate $\hat{\theta}_t$, compute $\mathbbm{E}[\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\theta}_t]$.
@@ -392,13 +392,13 @@ The presented methods as well as additional methods are explained in more detail
 
 The case of essential zeros is not as straightforward because zero is the true value of the observation. In \cite{Aitchison:2003} the authors question the experimental design in case of many essential zeros. They point out to overly fine division of the data or the insignificance of the category as possible design faults. A solution in that case would be the amalgamation of categories with low counts. Further they also introduce a two stage model. The first stage models the appearance of essential zeros, while in the second stage the non zero components are generated. The maximum likelihood estimates of the parameters are suggested to be done via a MCMC algorithm. After this is done, hypothesis testing and statistical analysis can be performed. 
 
-A vector space approach for the simplex is presented in \cite{Boogaart:2006} and extended in the R-package \textit{compositions} \cite{Compositions:2023}. The idea is based on the $clr$ coefficients \ref{eq:clr Coefficients} and the spanned subspace. Let M contain the indices of the missing parts. Then according to \cite{Egozcue:2005} a subcomposition can be seen as a projection of the clr transformed composition into the null space of the vectors $\left\{\bm{w}_i: i \in M\right\}$. Hence, one only observes a projection of the true composition. Let $P_M$ be the orthogonal projection onto the null space of $\left\{\bm{w}_i: i \in M\right\}$ and $\bm{x}$ a composition with zeros. Then the idea is to represent the information of $\bm{x}$ by the projected values $P_M(clr(\bm{x}))$ and $P_M$ itself \cite{Boogaart:2006}. If $M^C$ denotes the complement of M, so the indices of the non-zero parts, and $\bm{x}_s$ is the sub composition of $\bm{x}$ of $M^C$ then for this sub composition it holds 
+A vector space approach for the simplex is presented in \cite{Boogaart:2006} and extended in the R-package \textit{compositions} \cite{Compositions:2023}. The idea is based on the $clr$ coefficients \ref{eq:clr Coefficients} and the spanned subspace. Let M contain the indices of the missing parts. Then according to \cite{Egozcue:2005} a subcomposition can be seen as a projection of the clr transformed composition into the null space of the vectors $\left\{\bm{w}_i: i \in M\right\}$, with $\bm{w}_i \in V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$. Hence, one only observes a projection of the true composition. Let $P_M$ be the orthogonal projection onto the null space of $\left\{\bm{w}_i: i \in M\right\}$ and $\bm{x}$ a composition with zeros. Then the idea is to represent the information of $\bm{x}$ by the projected values $P_M(clr(\bm{x}))$ and $P_M$ itself \cite{Boogaart:2006}. If $M^C$ denotes the complement of M, so the indices of the non-zero parts, and $\bm{x}_s$ is the sub composition of $\bm{x}$ of $M^C$ then for this sub composition it holds 
 
 \begin{equation}
 P_M(clr(\bm{x}))_i =
 \begin{cases}
-clr(\bm{x}_s)_i, & \text{if} i \notin M \\
-0, & \text{if} i \in M.
+clr(\bm{x}_s)_i, & \text{if } i \notin M \\
+0, & \text{if } i \in M.
 \end{cases}
 \label{eq:clr Projection}
 \end{equation}

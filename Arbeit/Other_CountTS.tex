@@ -29,23 +29,23 @@ Other distributions than the normal distributions can be taken as well.
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: GARCH Parameter Estimation and Forecasting}
 
-Estimation of the parameters can be done with maximum likelihood and an iterative algorithm. The model is rewritten and the log-likelihood function then used and after differentiation with respect to its variance and mean parameters, the Berndt, Hall Hall and Hausman algorithm \cite{Berndt:1974}is used to obtain the maximum likelihood estimates. Further details and assumptions can be found in \cite{Bollerslev:1986}. 
+Estimation of the parameters can be done with maximum likelihood and an iterative algorithm. First, the model is rewritten and the logarithm of the likelihood function is taken. Second, after differentiation with respect to its variance and mean parameters, the Berndt, Hall Hall and Hausman algorithm \cite{Berndt:1974}is used to obtain the maximum likelihood estimates. Further details and assumptions can be found in \cite{Bollerslev:1986}. 
 
-If one is interested in forecasting $Y_{kt}$, then the minimum mean squared one-step error forecast is $\mathbbm{E}[Y_{k,t+h}|\SigA_{k,t}]=0$ where $\SigA_{k,t}$ is the information available at time $t$. One should note, that the forecast is independent of the model parameters. If the conditional variance for should be forecasted, the parameters are estimated and the known values are plugged in. For $h>1$, $h$-step are computed recursively with plugging in the forecasts for $h-1,h-2,\ldots$ in the model \cite{Zivot:2009}. 
+If one is interested in forecasting $Y_{kt}$, then the minimum mean squared one-step error forecast is $\mathbbm{E}[Y_{k,t+h}|\SigA_{k,t}]=0$ where $\SigA_{k,t}$ is the information available at time $t$. One should note, that the forecast is independent of the model parameters. If the conditional variance for should be forecasted, the parameters are estimated and the known values are plugged in. For $h>1$, $h$-step predictions are computed recursively with plugging in the forecasts for $h-1,h-2,\ldots$ in the model \cite{Zivot:2009}. 
 
 
 \subsection{Testing for GARCH Models}
 \label{sec: Testing for GARCH models}
 
-To decide whether to use a GARCH model, one can test for volatility or the validity of GARCH models in general. In \cite{Bollerslev:1986} the author suggests a Lagrange multiplier test and other popular tests include the Box–Pierce–Lung‐type portmanteau tests and residual‐based diagnostics \cite{Hong:2017}. The authors in \cite{Hong:2017} present further methods. 
+To decide whether to use a GARCH model, one can test for volatility or the validity of GARCH models in general. In the original paper \cite{Bollerslev:1986}, the author suggests a Lagrange multiplier test. Other popular tests include the Box–Pierce–Lung‐type portmanteau tests and residual‐based diagnostics \cite{Hong:2017}. The authors in \cite{Hong:2017} present further methods. 
 
 
 \subsection{Applications}
 \label{sec: Garch Applications}
 
-The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures such as inflation rates and GARCH models then generalised this approach to model a more flexible lag structure \cite{Bollerslev:1986}. Since then, they have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments. 
+The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures such as inflation rates but since then have been used in a variety of fields. GARCH models generalised the ARCH model approach to allow the modelling of a more flexible lag structure \cite{Bollerslev:1986}. They have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments. 
 
-Since the ARCH and GARCH models are used to model and forecast volatility or the conditional variance, but not values, we will not use it in our application. In addition, the INGARCH model also accounts for the discrete nature of our data as well as its possible over dispersion which makes it the preferred choice. 
+Since the ARCH and GARCH models are used to model and forecast volatility or the conditional variance, but not values, we will not use it in our application. In addition, the INGARCH model also accounts for the discrete nature of our data, which makes it the preferred choice. 
 
 
 \section{Naive Random Walk}
@@ -71,7 +71,7 @@ where $\hat{Y}_{k,t+1}$ is the predicted value at time $t$. In other words, the 
 \section{Zero-Inflated Models}
 \label{sec: Zim}
 
-Since we encounter a large number of zeros we also consider zero-inflated models. Zero inflation means that the proportion of observed zeros is bigger than that of the underlying distribution and hence would not be expected. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function, which enables one to explain the large amount of zero values. The probability mass function of a $ZIP(\lambda,\omega)$ distribution for a random variable $Y$ is defined as \cite{Zhu:2012}
+Since we encounter a large number of zeros, we also consider zero-inflated models. Zero inflation means that the proportion of observed zeros is bigger than that of the underlying distribution and hence would not be expected. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function, which enables one to explain the large amount of zero values. The probability mass function of a $ZIP(\lambda,\omega)$ distribution for a random variable $Y$ is defined as \cite{Zhu:2012}
 
 \begin{equation}
 \mathbb{P}(Y=y) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda^y \exp(-\lambda)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
@@ -135,7 +135,7 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \label{eq:Log-Linear model}
 \end{gather}
 
-The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. We consider the Log-Linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of \ref{eq:Ingarch parameter space}, we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative \cite{Fokianos:2011}. However, in the Log-Linear case we can extend this to
+The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. We consider the Log-Linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of \ref{eq:Ingarch parameter space}, we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative \cite{Fokianos:2011}. However, in the log-linear case we can extend this to
 
 \begin{gather}
 Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
@@ -223,9 +223,9 @@ for $m>p$ \cite{Scherrer:2021}. For $h>1$, one simply continues recursively usin
 \subsection{Testing for AR Models}
 \label{sec: Testing for ar models}
 
-To test whether or not a time series follows an AR(p) process the estimates of the white noise process $\hat{\epsilon}_t$ can be used. These estimates should follow a white noise process and hence should show no signs of serial correlation. Popular tests are the Portmanteau and the Breusch-Godfrey Test \cite{Scherrer:2021}. 
+To test whether or not a time series follows an AR(p) process, the estimates of the white noise process $\hat{\epsilon}_t$ can be used. These estimates should follow a white noise process and hence should show no signs of serial correlation. Popular tests are the Portmanteau and the Breusch-Godfrey Test \cite{Scherrer:2021}. 
 
-The Portmanteau Test tests the null hypothesis $H_0: \mathbbm{E}[\bm{\epsilon}_t,\bm{\epsilon}_{t-m}^T]=0$, i.e. if the estimated innovations are uncorrelated. Under the assumption that $(\bm{Y}_t)_{t=1}^T$ is an AR(p) process and an AR(p) model has been fit, then the used test statistic converges against a chi-squared distribution \cite{Scherrer:2021}. 
+The Portmanteau Test tests the null hypothesis $H_0: \mathbbm{E}[\bm{\epsilon}_t,\bm{\epsilon}_{t-m}^T]=0$, i.e. if the estimated innovations are uncorrelated. Under the assumption that $(\bm{Y}_t)_{t=1}^T$ is an AR(p) process and an AR(p) model has been fit, the used test statistic converges against a chi-squared distribution \cite{Scherrer:2021}. 
 
 The Breusch-Godfrey Test tests if the coefficients $(b_1,\ldots,b_h)$ in the model 
 
@@ -309,7 +309,7 @@ where $m$ is the sampling size and the pairs $(\alpha_i,\lambda_i)$ for $i=1,\ld
 
 To test the adequacy of the INAR(1) model, there are again various options. 
 
-Parametric re-sampling is the first of the presented methods. The idea is to generate data with the help of the fitted model, construct the empirical distribution of the functional of interest and check if the original sample is a reasonable point within that empirical distribution \cite{Silva:2005}. 
+Parametric re-sampling is a popular method. The idea is to generate data with the help of the fitted model, construct the empirical distribution of the functional of interest and check if the original sample is a reasonable point within that empirical distribution \cite{Silva:2005}. 
 
 Residual based methods are based on the Pearson residuals defined by 
 

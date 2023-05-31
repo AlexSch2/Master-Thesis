@@ -18,8 +18,15 @@
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison of a different number of past means\relax }}{60}{figure.caption.66}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison of a different number of past observations\relax }}{61}{figure.caption.67}%
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of different zero handling methods\relax }}{62}{figure.caption.68}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{63}{figure.caption.69}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{64}{figure.caption.70}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Error Measure for all categories\relax }}{63}{figure.caption.69}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Error Measure for Category 4\relax }}{63}{figure.caption.70}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Time series for fridge 100402\relax }}{64}{figure.caption.71}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Time series for fridge 100403\relax }}{65}{figure.caption.72}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Time series for fridge 100191\relax }}{65}{figure.caption.73}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{66}{figure.caption.74}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Time series of fridge 100321\relax }}{67}{figure.caption.75}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Time series of fridge 20\relax }}{68}{figure.caption.76}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{69}{figure.caption.77}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -74,10 +74,10 @@
 \contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{59}{subsubsection*.65}%
 \contentsline {subsection}{\numberline {4.4.4}CoDA Specifications Results}{60}{subsection.4.4.4}%
 \contentsline {subsection}{\numberline {4.4.5}Zero Handling}{61}{subsection.4.4.5}%
-\contentsline {subsection}{\numberline {4.4.6}$\mathcal {T}$-spaces}{62}{subsection.4.4.6}%
-\contentsline {subsection}{\numberline {4.4.7}One-vs-All method}{63}{subsection.4.4.7}%
-\contentsline {chapter}{\nonumberline Bibliography}{65}{chapter*.71}%
-\contentsline {chapter}{\nonumberline List of Figures}{73}{chapter*.72}%
-\contentsline {chapter}{\nonumberline List of Tables}{75}{chapter*.73}%
-\contentsline {chapter}{\numberline {A}R-Functions}{77}{appendix.A}%
+\contentsline {subsection}{\numberline {4.4.6}$\mathcal {T}$-spaces}{64}{subsection.4.4.6}%
+\contentsline {subsection}{\numberline {4.4.7}One-vs-All method}{67}{subsection.4.4.7}%
+\contentsline {chapter}{\nonumberline Bibliography}{71}{chapter*.78}%
+\contentsline {chapter}{\nonumberline List of Figures}{79}{chapter*.79}%
+\contentsline {chapter}{\nonumberline List of Tables}{81}{chapter*.80}%
+\contentsline {chapter}{\numberline {A}R-Functions}{83}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
