@@ -181,17 +181,24 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       #Getting true value and last known values
       Window_Length <-
         dim(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window)[1]
-      ValueTrue <-
-        as.numeric(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[, -1])
-      ValueLastKnown <-
-        as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -1], n =
-                          1))
-      
-      ValuePredict_Naive <- ValueLastKnown
-      
       
       if (OneVsAll) {
-        Category <- factor(c(PivotGroup, "other", "tsum"))
+        if(TSpace){
+          Category <- factor(c(PivotGroup, "other", "tsum"))
+          ValueTrue <-
+            as.numeric(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[, -1])
+          ValueLastKnown <-
+            as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -1], n =
+                              1))
+        }
+        else {
+          Category <- factor(c(PivotGroup, "other"))
+          ValueTrue <-
+            as.numeric(select(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future,-c("week_date","tsum")))
+          ValueLastKnown <-
+            as.numeric(tail(select(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window,-c("week_date","tsum")), n =
+                              1))
+        }
         
         #We have to switch the Lower/Upper Bound results for the "other" category. When the lower bound of the Pivot Group gets estimated, then
         # we assume that "Other" has a higher value/ratio and this value is hence the upper bound for the "Other" category. Vice versa for the upper bound.
@@ -200,7 +207,23 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
         UpperBound[2] <- Help
       }
       else{
-        Category <- factor(c(as.character(Category), "tsum"))
+        if(TSpace){
+          Category <- factor(c(Category, "tsum"))
+          ValueTrue <-
+            as.numeric(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[, -1])
+          ValueLastKnown <-
+            as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -1], n =
+                              1))
+        }
+        else {
+          Category <- factor(c(Category))
+          ValueTrue <-
+            as.numeric(select(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future,-c("week_date","tsum")))
+          ValueLastKnown <-
+            as.numeric(tail(select(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window,-c("week_date","tsum")), n =
+                              1))
+        }
+        
       }
       
     }
@@ -249,12 +272,13 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
       
       
       ValueTrue <-
-        as.numeric(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future[, -c(1, 4)])
+        as.numeric(select(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_future,-c("week_date","tsum")))
       ValueLastKnown <-
-        as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], n =
+        as.numeric(tail(select(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window,-c("week_date","tsum")), n =
                           1))
       
       if (OneVsAll) {
+      
         Category <- factor(c(PivotGroup, "other"))
         #We have to switch the Lower/Upper Bound results for the "other" category. When the lower bound of the Pivot Group gets estimated, then
         # we assume that "Other" has a higher value/ratio and this value is hence the upper bound for the "Other" category. Vice versa for the upper bound.
@@ -266,10 +290,10 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
         Category <- factor(c(as.character(Category)))
       }
       
-      ValuePredict_Naive <-
-        as.numeric(tail(Data_WindowNoTransform[[WindowIndex]]$timeSeriesValue_window[, -c(1, 4)], 1))
+      ValuePredict_Naive <- ValueLastKnown
     }
     
+    ValuePredict_Naive <- ValueLastKnown
     ValuePredict <- round(as.numeric(ValuePredict))
     PredictionError <- as.numeric(ValuePredict - ValueTrue)
     PredictionError_Naive <- as.numeric(ValuePredict_Naive - ValueTrue)
