@@ -51,7 +51,7 @@ coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
     Id = ids_all,
-    Frame = 0.5,
+    Frame = 0.7,
     OneVsAll = T,
     PivotGroup =  NULL,
     Category_Main = c("1","2","3","4"),
@@ -61,11 +61,11 @@ coda_result <-
     WindowMethod = "extending",
     TakeSubCategory= F,
     HistoryLength = 1,
-    DL = 0.5
+    DL = 0.1
   )
 
 if(save_results){
-  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"dl05",".RData",sep="")))
+  save(coda_result,file=here("Code/results",paste("coda_result_ids",paste(ids_save,collapse="-"),"frame07",".RData",sep="")))
 }
 
 
@@ -140,7 +140,8 @@ Ingarch1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/r
 Inarclassic <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/inarclassic_result_ids_all_.RData")
 Zim <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/zim_result_ids_all_.RData")
 Count_Result <- rbind(Ingarch1$result,
-                      Inarclassic$result)
+                      Inarclassic$result,
+                      Zim$result)
 
 Codaspecial <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_dl01.RData")
 
@@ -153,7 +154,7 @@ AllResult <- rbind(CodaResult_Short,CountModelResult_Short)
 
 Plot.TimeseriesMultiple(weekly_category_data,AllResult,Id=c(100402,100403,100191),File_Prefix= "CodaIngarchInar")
 Plot.TimeseriesCodaIngarchPI(weekly_category_data,coda_result,Ingarch1,Id=24)
-Plot.MethodComparision(AllResult,Category = c(1,2,3,4),ZIM=F,Split = F)
+Plot.MethodComparision(AllResult,Category = c(3,4),ZIM=T,Split = F)
 
 #History
 Coda1 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_best.RData")
@@ -232,21 +233,23 @@ Result_Combined <- rbind(Coda1$result,Coda2$result,Coda3$result)
 
 Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Delta"="dL"),LabelNames=c("0.1"="Delta=0.1","0.5"="Delta=0.5","0.01"="Delta=0.01"),Split=F,Category = c(4),Values = c(0.01,0.1,0.5),File_Post= "cat4")
 
+Plot.TimeseriesSingle(weekly_category_data,Result_Combined,Id=c(100402,100403,100191),Variation=c("Delta"="dL"),LabelNames=c("0.1"="Delta=0.1","0.5"="Delta=0.5","0.01"="Delta=0.01"),Values = c(0.01,0.1,0.5),Title = "Coda",MyShapes = c(18,17,15),MyColour = c("darkgreen","darkorange","darkblue"))
+
 #Zero Handling
 Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_all_values.RData")
 Result_Combined <- rbind(Coda1$result,Coda2$result)
-Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Zero handling"="zeroHandling"),LabelNames=c("All","Simple Replacement"),Split=F,Category = c(1,2,3,4),Values = c("all","simple"))
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("Zero handling"="zeroHandling"),LabelNames=c("All","Simple Replacement"),Split=F,Category = c(1,2,3,4),Values = c("all","simple"),MyShapes = c(18,17),MyColour = c("darkgreen","darkorange"))
 
 #TSpaces
 Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_tspace.RData")
 Result_Combined <- rbind(Coda1$result,Coda2$result)
 
-Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("T-Space"="tSpace"),LabelNames=c("TRUE"="T-Space","FALSE"="No T-Space"),Split=F,Category = c(1,2,3,4),Values = c(TRUE,FALSE))
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("T-Space"="tSpace"),LabelNames=c("TRUE"="T-Space","FALSE"="No T-Space"),Split=F,Category = c(1,2,3,4),Values = c(TRUE,FALSE),MyShapes = c(18,17),MyColour = c("darkgreen","darkorange"))
 
 Plot.TimeseriesSingle(weekly_category_data,Result_Combined,Id=15,Save=T,SubCategory=F,Variation=c("T-Space"="tSpace"),LabelNames=c("TRUE"="T-Space","FALSE"="No T-Space"),Values = c(TRUE,FALSE),Title = "Coda")
 
 #OneVsAll
 Coda2 <- Object.Load("F:/Uni/Masterarbeit/Master-Thesis_git/Simulation/Code/results/coda_result_ids_all_no_ova.RData")
 Result_Combined <- rbind(select(Coda1$result,-pivotGroup),Coda2$result)
-Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("One-vs-All"="oneVsAll"),LabelNames=c("TRUE"="Used","FALSE"="Not Used"),Split=F,Category = c(1,2,3,4),Values = c(TRUE,FALSE))
+Plot.ErrorMeasureSingle(ResultCombined=Result_Combined,Variation=c("One-vs-All"="oneVsAll"),LabelNames=c("TRUE"="Used","FALSE"="Not Used"),Split=F,Category = c(1,2,3,4),Values = c(TRUE,FALSE),MyShapes = c(18,17),MyColour = c("darkgreen","darkorange"))
 ```
