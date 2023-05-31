@@ -44,7 +44,7 @@ Plot.Timeseries <- function(Data,Id,Save=T,SubCategory=F,MainCategory=1,TextSize
 }
 
 #This function plots the Time series for the given models
-Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4),Title=""){
+Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCategory=c(1,2,3,4),Title="",File_Prefix=""){
   
   for(Id_RunVariable in Id) {
     
@@ -98,7 +98,7 @@ Plot.TimeseriesMultiple<- function(Data,Result,Id,Save=T,SubCategory=F,MainCateg
     
     #Saving of the plot
     if(Save){
-      ggsave(filename = here("Plots",paste(Title,"_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
+      ggsave(filename = here("Plots",paste(File_Prefix,"_Timeseries_ID",Id_RunVariable,".png",sep="")),plot=Plot,height = 15,width = 20)
     }
   }
 }
@@ -423,7 +423,7 @@ Plot.MethodComparision <- function(Result, Category = c(1,2,3,4),Split=F,ZIM=T){
 
 #This function plots the boxplot/quantile plot and histogram of the error measures either by group or in total
 Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,Split=T,
-                                      Groups=list(Group1=c(1,2),Group2=c(3,4)),Category=c(1,2,3,4),LabelNames){
+                                      Groups=list(Group1=c(1,2),Group2=c(3,4)),Category=c(1,2,3,4),LabelNames,File_Post=""){
   
   label.function <- function(String)return(LabelNames[String])
   
@@ -436,7 +436,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
     for(Variation_RunVariable in Values){
       ResultData <- ResultCombined %>% filter(!!as.symbol(Variation) == Variation_RunVariable)
       ResultModelError_Single <- Model.Error(ResultData,Fnct = "Mse",Category = Category) %>% Model.ErrorOverall(Fnct = "sum",SplitByGroup = F)
-      ResultModelError_Single[paste(Variation)] <- Variation_RunVariable
+      ResultModelError_Single[Variation] <- Variation_RunVariable
       
       
       if(i==1){
@@ -447,10 +447,13 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       }
       i <- i+1
     }
+    ResultModelError_All <- as.data.frame(ResultModelError_All)
     
     
     ModelErrorAll <- rbind(ResultModelError_All)
     ModelErrorAll$model <- as.factor(ModelErrorAll$model)
+    ModelErrorAll[,Variation] <- as.factor(ResultModelError_All[,Variation])
+    
     if(unique(ModelErrorAll$model) =="coda"){
       levels(ModelErrorAll$model) <- list(CoDA="coda")
     }else if(unique(ModelErrorAll$model) =="ingarch"){
@@ -472,12 +475,12 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       xlab(str_to_title(names(Variation)))+
       ylab("Error")
     
-    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Box",ids_save,"_Variation_",Variation,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
+    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Box",ids_save,"_Variation_",Variation,File_Post,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
     
     
     #Quantile Plot
-    MyShapes <- c(16,17)
-    MyColour <- c("darkgreen","darkorange")
+    MyShapes <- c(18,17,15)
+    MyColour <- c("darkgreen","darkorange","darkblue")
     names(MyShapes) <- Values
     names(MyColour) <- Values
     
@@ -510,6 +513,9 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       i <- i+1
     }
     
+    ResultError_Sorted_All <- as.data.frame(ResultError_Sorted_All)
+    ResultError_Sorted_All[,Variation] <- as.factor(ResultError_Sorted_All[,Variation])
+    
     QuantilesMax_Help <- Quantiles_Index %>% group_by(value)%>%max()
     QuantilesMax_Value <- Quantiles_Index[Quantiles_Index$quant_ind== QuantilesMax_Help,"value"]
     Quantiles_Index <- Quantiles_Index[Quantiles_Index$value==QuantilesMax_Value,]
@@ -529,10 +535,10 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       xlab("Index")+
       ylab("Error")
     
-    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Quant",ids_save,"_Variation_",Variation,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
+    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Quant",ids_save,"_Variation_",Variation,File_Post,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
     
     #Histogram 
-    MyLinetype <- c("solid", "dashed")
+    MyLinetype <- c("solid", "dashed","dotted")
     names(MyLinetype) <- Values
     
     ModelErrorAll_Median <- ModelErrorAll %>% dplyr::group_by(!!as.symbol(Variation)) %>% summarise(Median=median(error,na.rm=T))
@@ -546,7 +552,6 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       scale_x_continuous(limits=c(0,8))+
       scale_y_continuous(limits=c(0,12))+
       geom_vline(xintercept = 1,linewidth=2)+
-#      geom_vline(aes(xintercept=value,colour=!!as.symbol(Variation),linetype=Type),data = ModelErrorAll_MM ,linewidth=2)+
       theme(text = element_text(size = 50))+
       ggtitle(paste("Error Measure Histogram",sep=" "))+
       scale_linetype_manual(names(Variation), values = c(MyLinetype),labels=LabelNames)+
@@ -557,7 +562,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined,Variation= "history",Values,S
       ylab("Count")+
       xlab("Error")
     
-    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Histogram",ids_save,"_Variation_",Variation,".png",sep="")),plot=HistPlot,height = 15,width = 20)
+    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Histogram",ids_save,"_Variation_",Variation,File_Post,".png",sep="")),plot=HistPlot,height = 15,width = 20)
     
   }
 }
