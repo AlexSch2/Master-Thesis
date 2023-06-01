@@ -5,7 +5,6 @@
 
 #Prepares the data for the VAR model (pivoting to wide format, handling the zeros and transforming to ilr coordinates)
 #For now written with dplyr, may be optimised later
-#Currently aggregating on the main categories
 #If one vs all is chosen, pivot groups have to be supplied as a character
 
 Coda.DataPreparation <- function(Data,

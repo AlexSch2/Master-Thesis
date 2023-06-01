@@ -72,24 +72,24 @@ if(save_results){
 ingarch_result <-
   CountModel.Analysis(
     Data_Raw= weekly_category_data,
-    Id = 4,
-    Frame = frame,
+    Id = ids_all,
+    Frame = 0.5,
     Distribution = "poisson",
-    Category_Main = c("1"),
-    WindowMethod = window_method,
+    Category_Main = c("1","2","3","4"),
+    WindowMethod = "extending",
     ZeroHandling = "none",
     External = F,
-    Multicore = F,
+    Multicore = T,
     NCores = 10,
     PastOb = 1,
     PastMean = 1,
-    HistoryLength = HistoryLength,
-    TakeSubCategory = T,
+    HistoryLength = 1,
+    TakeSubCategory = F,
     ModelType = "ingarch"
   )
   
   if(T){
-  save(zim_result,file=here("Code/results",paste("zim_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
+  save(ingarch_result,file=here("Code/results",paste("ingarch_result_ids",paste(ids_save,collapse="-"),".RData",sep="")))
 
   }
 
@@ -152,7 +152,8 @@ CountModelResult_Short <- Count_Result %>% select(all_of(Common_Names))
 AllResult <- rbind(CodaResult_Short,CountModelResult_Short)
 #AllResult$window_baseLength[AllResult$window_baseLength==4]<-5
 
-Plot.TimeseriesMultiple(weekly_category_data,AllResult,Id=c(100402,100403,100191),File_Prefix= "CodaIngarchInar")
+Plot.TimeseriesMultiple(weekly_category_data,AllResult,Id=c(4,24),File_Prefix= "Predictions")
+Plot.TimeseriesCodaIngarchPI(weekly_category_data,CodaResult = Coda1,IngarchResult = Ingarch1,Id = c(4,24))
 Plot.TimeseriesCodaIngarchPI(weekly_category_data,coda_result,Ingarch1,Id=24)
 Plot.MethodComparision(AllResult,Category = c(3,4),ZIM=T,Split = F)
 

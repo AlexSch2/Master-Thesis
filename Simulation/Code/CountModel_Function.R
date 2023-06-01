@@ -114,7 +114,7 @@ CountModel.Prediction <- function(Data_Window,
       
       #Predicting the future value depending on PredictionStep
       PredictionResult <- predict(Model,n.ahead = PredictionStep,type = "shortest",
-                                  level = 0.90,newxreg = XregFuture)
+                                  level = 0.95,newxreg = XregFuture)
       
       ValuePredict <- PredictionResult$pred
       
@@ -385,7 +385,7 @@ CountModel.Analysis <- function(Data_Raw,
       
       invisible(clusterExport(Cluster1,list("CountModel.DataPreparation","CountModel.Prediction","Data_Window",
                                             "Data_WindowNoTransform","External","PastOb","PastMean",
-                                            "Distribution","Plot","WindowMethod","PredictionStep","ModelType"),
+                                            "Distribution","WindowMethod","PredictionStep","ModelType"),
                               envir = environment()))
       print("Starting Calculations")
       
