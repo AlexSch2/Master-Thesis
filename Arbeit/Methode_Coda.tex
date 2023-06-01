@@ -9,13 +9,13 @@ Another way to see our data is as a compositional time series. Compositional dat
 \label{sec: Coda Preliminaries}
 The basis of this section is given by \cite{Kynclova:2015}, \cite{Egozcue:2003} and \cite{Filzmoser:2020}.
 
-CoDA, which is short for "`Compositional Data Analysis"' works with compositional data. The key to compositional data is the fact that the absolute value of its parts is less important than the relative relation of the parts to each other. To define compositional data, we first need to define the $(D-1)$-dimensional simplex,
+CoDA, which is short for "`Compositional Data Analysis"', works with compositional data. The key to compositional data is the fact that the absolute value of its parts is less important than the relative relation of the parts to each other. To define compositional data, we first need to define the $(D-1)$-dimensional simplex,
 	\begin{equation}
 	\mathbbm{S}^D := \left\{(x_1,\ldots, x_D)^T: x_i > 0, i =1,\ldots,D; \sum_{i=1}^{D}x_i=\kappa  \right\},
 	\label{eq:Simplex Definition}
 	\end{equation}
 	
-where $\kappa$ is a positive constant \cite{Kynclova:2015}. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A D-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $a \in \mathbb{R}$ they are defined respectively as \cite{Kynclova:2015}
+where $\kappa$ is a positive constant \cite{Kynclova:2015}. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A D-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next, we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $a \in \mathbb{R}$ they are defined respectively as \cite{Kynclova:2015}
 
 \begin{equation}
 \textbf{x}\oplus_a \textbf{z} := \ClOp(x_1z_1,x_2z_2,\ldots,x_Dz_D)^T, \hspace{0.5cm} a \odot_a \textbf{x} := \ClOp(x_1^a,x_2^a,\ldots,x_D^a)^T.
@@ -82,7 +82,7 @@ Let $g(\textbf{x})$ be the geometric mean of $\textbf{x}$. The centered log-rati
 \label{eq:clr Coefficients}
 \end{equation}
 
-This transformation maps $\textbf{x}$ into the hyperplane $V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$. Hence the transformed data is constrained, which is emphasised by the term 'coefficient' instead of 'coordinates' \cite{Filzmoser:2020}. It can be shown that the $clr$ transformation is an isometry\cite{Egozcue:2003}. Therefore it holds 
+This transformation maps $\textbf{x}$ into the hyperplane $V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$. Hence, the transformed data is constrained, which is emphasised by the term 'coefficient' instead of 'coordinates' \cite{Filzmoser:2020}. It can be shown that the $clr$ transformation is an isometry\cite{Egozcue:2003}. Therefore it holds 
 
 \begin{gather}
 \left\langle  \textbf{x},\textbf{z} \right\rangle_a = \left\langle  clr(\textbf{x}),clr(\textbf{z}) \right\rangle_a, \\
@@ -117,7 +117,7 @@ d(\textbf{x},\textbf{z})_a = d(ilr(\textbf{x}),ilr(\textbf{z})),\\
 \end{gather}
 
 
-From the definition of the ilr coordinates it can be seen that they can be expressed as a linear combination of the basis induced by the clr coefficients as seen above. Let $\textbf{V}$ be a $D \times (D-1)$ matrix with columns $\textbf{v}_i = clr(\textbf{e}_i)$. For a composition $\textbf{x}$ the vector of ilr coordinates associated with $\textbf{V}$ is given by,
+From the definition of the ilr coordinates it can be seen, that they can be expressed as a linear combination of the basis induced by the clr coefficients as seen above. Let $\textbf{V}$ be a $D \times (D-1)$ matrix with columns $\textbf{v}_i = clr(\textbf{e}_i)$. For a composition $\textbf{x}$, the vector of ilr coordinates associated with $\textbf{V}$ is given by,
 
 \begin{equation}
 \textbf{u}_{\textbf{V}} = ilr_{\textbf{V}}(\textbf{x}) = \textbf{V}^T clr(\textbf{x}) = \textbf{V}^T \log(\textbf{x}). 
@@ -147,7 +147,7 @@ x_D = \exp\left(- \sum_{j=1}^{D-1} \frac{1}{\sqrt{(D-j+1)(D-j)}}u_j \right).
 \section{The VAR Model}
 \label{sec:The VAR Model}
 
-Since we have established the basic setting we can now introduce compositional time series (CTS). A CTS $\left\{\bm{x}_t:t=1,\ldots,n \right\}$ can be defined as a series where $\bm{x}_t = \left(x_{1t},\ldots,x_{Dt}\right)^T \in \mathbbm{S}^D$. They are thus characterised by their positive components which sum up to a constant $\kappa_t$ for each point in time $t=1,\ldots,n$ 
+Since we have established the basic setting, we can now introduce compositional time series (CTS). A CTS $\left\{\bm{x}_t:t=1,\ldots,n \right\}$ can be defined as a series where $\bm{x}_t = \left(x_{1t},\ldots,x_{Dt}\right)^T \in \mathbbm{S}^D$. They are thus characterised by their positive components which sum up to a constant $\kappa_t$ for each point in time $t=1,\ldots,n$ 
 
 \begin{equation}
 \sum_{i=1}^D x_{it} = \kappa_t, \hspace{0.2cm} x_i > 0, i=1,\ldots D \hspace{0.1cm}; t=1,\ldots, n. 
@@ -382,7 +382,7 @@ This generates a Markov Chain with the posterior distribution of the transformed
 \subsubsection{Bayesian-multiplicative replacement}
 \label{sec:Bayesian-multiplicative replacement}
 
-A common assumption for multivariate count data is that a vector $\bm{x}$ is a realisation from a multinomial distribution with parameters $[n,\pi_1,\ldots,\pi_D]$ where $\pi_j$ is the probability of belonging to category j. For the prior distribution of $\bm{\pi}=[\pi_1,\ldots,\pi_D]$, an imprecise Dirichlet model with parameter s and $\bm{t}=[t_1,\ldots,t_D]$ with $\sum_k t_k=1$ and expectation $\mathbbm{E}[\pi_j]=t_j$ is considered. The posterior expectation is then given by $\mathbbm{E}[\pi_j|x_j=0]=t_j \frac{s}{n+s}$ \cite{Palarea-Albaladejo:2015}.
+A common assumption for multivariate count data is, that a vector $\bm{x}$ is a realisation from a multinomial distribution with parameters $[n,\pi_1,\ldots,\pi_D]$ where $\pi_j$ is the probability of belonging to category j. For the prior distribution of $\bm{\pi}=[\pi_1,\ldots,\pi_D]$, an imprecise Dirichlet model with parameter s and $\bm{t}=[t_1,\ldots,t_D]$ with $\sum_k t_k=1$ and expectation $\mathbbm{E}[\pi_j]=t_j$ is considered. The posterior expectation is then given by $\mathbbm{E}[\pi_j|x_j=0]=t_j \frac{s}{n+s}$ \cite{Palarea-Albaladejo:2015}.
 
 
 The presented methods as well as additional methods are explained in more detail in \cite{Palarea-Albaladejo:2015}.
@@ -390,9 +390,9 @@ The presented methods as well as additional methods are explained in more detail
 \subsection{Essential Zeros}
 \label{sec: Essential Zeros}
 
-The case of essential zeros is not as straightforward because zero is the true value of the observation. In \cite{Aitchison:2003} the authors question the experimental design in case of many essential zeros. They point out to overly fine division of the data or the insignificance of the category as possible design faults. A solution in that case would be the amalgamation of categories with low counts. Further they also introduce a two stage model. The first stage models the appearance of essential zeros, while in the second stage the non zero components are generated. The maximum likelihood estimates of the parameters are suggested to be done via a MCMC algorithm. After this is done, hypothesis testing and statistical analysis can be performed. 
+The case of essential zeros is not as straightforward because zero is the true value of the observation. In \cite{Aitchison:2003} the authors question the experimental design in case of many essential zeros. They point out to overly fine division of the data or the insignificance of the category as possible design faults. A solution in that case would be the amalgamation of categories with low counts. Further, they also introduce a two stage model. The first stage models the appearance of essential zeros, while in the second stage the non zero components are generated. The maximum likelihood estimates of the parameters are suggested to be done via a MCMC algorithm. After this is done, hypothesis testing and statistical analysis can be performed. 
 
-A vector space approach for the simplex is presented in \cite{Boogaart:2006} and extended in the R-package \textit{compositions} \cite{Compositions:2023}. The idea is based on the $clr$ coefficients \ref{eq:clr Coefficients} and the spanned subspace. Let M contain the indices of the missing parts. Then according to \cite{Egozcue:2005} a subcomposition can be seen as a projection of the clr transformed composition into the null space of the vectors $\left\{\bm{w}_i: i \in M\right\}$, with $\bm{w}_i \in V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$. Hence, one only observes a projection of the true composition. Let $P_M$ be the orthogonal projection onto the null space of $\left\{\bm{w}_i: i \in M\right\}$ and $\bm{x}$ a composition with zeros. Then the idea is to represent the information of $\bm{x}$ by the projected values $P_M(clr(\bm{x}))$ and $P_M$ itself \cite{Boogaart:2006}. If $M^C$ denotes the complement of M, so the indices of the non-zero parts, and $\bm{x}_s$ is the sub composition of $\bm{x}$ of $M^C$ then for this sub composition it holds 
+A vector space approach for the simplex is presented in \cite{Boogaart:2006} and extended in the R-package \textit{compositions} \cite{Compositions:2023}. The idea is based on the $clr$ coefficients \ref{eq:clr Coefficients} and the spanned subspace. Let M contain the indices of the missing parts. Then according to \cite{Egozcue:2005}, a subcomposition can be seen as a projection of the clr transformed composition into the null space of the vectors $\left\{\bm{w}_i: i \in M\right\}$, with $\bm{w}_i \in V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$. Hence, one only observes a projection of the true composition. Let $P_M$ be the orthogonal projection onto the null space of $\left\{\bm{w}_i: i \in M\right\}$ and $\bm{x}$ a composition with zeros. Then the idea is to represent the information of $\bm{x}$ by the projected values $P_M(clr(\bm{x}))$ and $P_M$ itself \cite{Boogaart:2006}. If $M^C$ denotes the complement of M, so the indices of the non-zero parts, and $\bm{x}_s$ is the sub composition of $\bm{x}$ of $M^C$ then for this sub composition it holds 
 
 \begin{equation}
 P_M(clr(\bm{x}))_i =

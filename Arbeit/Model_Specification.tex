@@ -10,7 +10,7 @@ Closely related to the length of the history, is the shape of the window used. T
 \subsection{CoDA Specifications}
 \label{sec: Coda Specifications}
 
-As mentioned above the CoDA model must not include any zero values, since in this context, a value of zero is not defined. In order to keep things simple, we consider two options. The first one adds $0.5$ to all time series values. The second one only replaces zero values with a chosen value, which is the simple replacement strategy in \ref{eq:simple replacement strategy}. Due to the fact that we have essential zeros and want to use the specific $ilr$ coordinates, we opt for these options. 
+As mentioned above the CoDA model must not include any zero values, since in this context, a value of zero is not defined. In order to keep things simple, we consider two options. The first one adds $0.5$ to all time series values. The second one only replaces zero values with a chosen value $\delta$, which is the simple replacement strategy in \ref{eq:simple replacement strategy}. Due to the fact that we have essential zeros and want to use the specific $ilr$ coordinates, we opt for these options. 
 
 Another way to handle the zero values and the low values for some categories is a method we will call in the following one-vs-all. The principle is the following. A category $k$ is chosen as the pivot category $k_{pivot}$. For all the chosen time points, at each point, the values of the other categories get summed up
 
@@ -29,10 +29,10 @@ Together with the pivot category, the sum of the other categories are then trans
 
 All categories are chosen as a pivot category at one point and the predicted values of the pivot groups are then used as the final result. This method is basically an implementation of the suggestions made in \cite{Aitchison:2003}. We amalgamate all but one category and therefore change the experimental design. 
 
-As already hinted in the description of the methodology we consider the use of $\Tsp$-Spaces. For this, at each time point, we calculate the total amount and include it as an additional variable in the model. In addition we can choose to take the logarithm of the sum. This means $\bm{u}_t$ in model \ref{eq:VAR model} changes to 
+As already hinted in the description of the methodology, we consider the use of $\Tsp$-Spaces. For this, at each time point, we calculate the total amount and include it as an additional variable in the model. In addition we can choose to take the logarithm of the sum. This means we have 
 
 \begin{equation}
-\bm{u}_t = [ilr(\bm{Y}_t),t(\bm{Y}_t)],
+\bm{w}_t = [ilr(\bm{Y}_t),t(\bm{Y}_t)],
 \label{eq:Tspace u}
 \end{equation}
 
@@ -48,9 +48,9 @@ p_{kt}(y;\bm{\theta})=\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \frac{\Gamma(\phi+y
 \label{eq:Ingarch negbinom Distribution}
 \end{equation}
 
-With the negative Binomial Distribution the conditional variance is larger than the conditional mean $\lambda_{kt} = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right]$.
+With the negative Binomial Distribution, the conditional variance is larger than the conditional mean $\lambda_{kt} = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right]$.
 
-As seen in the model \ref{eq:Ingarch model with external effect} we can also choose to include external factors. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. 
+As seen in the model \ref{eq:Ingarch model with external effect}, we can also choose to include external factors. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. 
 
 The values $p$ and $q$ are also varying parameters which have to be chosen. One could use the AIC or some other criteria to get the optimal lag order. However, this is not in the scope of this thesis and hence we will leave it as a future extension.
 
@@ -61,23 +61,23 @@ The optimal one step ahead prediction is given by the conditional expectation \r
 \subsection{Error Measure}
 \label{sec: Error Measure}
 
-In order to compare the results of the methods with each other we will introduce a new error measure. The goal of this measure is to get a performance indicator for each fridge, which can be used for comparison and summarisation. Since the scales of the fridges vary, the measure should be scale independent but because our data contains many zeros, we cannot use a percentage error measure. In addition, we want to penalise big absolute difference between the predicted values and actual values. These requirements lead us to the following measure.
+In order to compare the results of the methods with each other, we will introduce a new error measure. The goal of this measure is to get a performance indicator for each fridge, which can be used for comparison and summarisation. Since the scales of the fridges vary, the measure should be scale independent but because our data contains many zeros, we cannot use a percentage error measure. In addition, we want to penalise big absolute difference between the predicted values and actual values. These requirements lead us to the following measure.
 
-For a fridge $f$, let $t = 1,\ldots,T$ denote the point in time and $k=1,\ldots,K$ the category. Then $y_{ftk}$ is the $t$-th true value of the time series for category $k$, $\hat{y}_{ftk}$ the predicted value and $y_{naive_{ftk}}$ the naive predicted value . Then we define our measure as
+For a fridge $f$, let $t = 1,\ldots,T$ denote the point in time and $k=1,\ldots,K$ the category. Then $y_{ftk}$ is the $t$-th true value of the time series for category $k$, $\hat{y}_{ftk}$ the predicted value and $y_{naive_{ftk}}$ the value predicted by the naive random walk model \ref{sec: Naive Random Walk}. Then we define our measure as
 
 \begin{equation}
 E_f=\frac{\sum_{k=1}^{K}\sum_{t=1}^T(y_{ftk}-\hat{y}_{ftk})^2}{\sum_{k=1}^{K}\sum_{t=1}^T(y_{ftk}-y_{naive_{ftk}})^2}.
 \label{eq: Error Measure}
 \end{equation}
 
-With the use of the squared difference we penalise big deviations from the true value. By taking the naive random walk model as a benchmark, we achieve scale independence and are able to compare the performance of our model over different time series. This error measure is basically the ratio of the mean MSEs for the chosen model and the naive random walk model
+With the use of the squared difference, we penalise big deviations from the true value. By taking the naive random walk model as a benchmark, we achieve scale independence and are able to compare the performance of our model over different time series. This error measure is basically the ratio of the mean MSEs for the chosen model and the naive random walk model
 
 \begin{equation}
 E_f=\frac{\frac{1}{K}\sum_{k=1}^K MSE_{fk}}{\frac{1}{K}\sum_{k=1}^K MSE_{naive_{fk}}}.
 \label{eq: Error Measure MSE}
 \end{equation}
 
-If the ratio is below 1, the mean of the MSEs of our methods is lower than that of the naive method and vice versa. This provides a performance indicator for our models. 
+If the ratio is below 1, the mean of the MSEs of our method is lower than that of the naive method and vice versa. This provides a performance indicator for our models. 
 
 \subsubsection{Extension of the Error Measure}
 \label{sec:Error Measure Extension}

@@ -218,7 +218,7 @@ we get that the optimal one-step ahead prediction is simply
 \label{eq:AR 1step Forecasting}
 \end{equation}
 
-for $m>p$ \cite{Scherrer:2021}. For $h>1$, one simply continues recursively using $\hat{\bm{Y}}_{t+1}$, $\hat{\bm{Y}}_{t+2},\ldots$ .
+for $m>p$ \cite{Scherrer:2021}. For $h>1$, one simply continues recursively, using $\hat{\bm{Y}}_{t+1}$, $\hat{\bm{Y}}_{t+2},\ldots$ .
 
 \subsection{Testing for AR Models}
 \label{sec: Testing for ar models}
@@ -258,9 +258,9 @@ X_t = \alpha_1 \circ X_{t-1} + \alpha_2 \circ X_{t-2} + \ldots + \alpha_p X_{t-p
 where
 
 \begin{enumerate}
-	\item $(\epsilon_t)$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second and third moment. 
-	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and $(Z_j)$ for $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $(\epsilon_t)$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$ as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$
-	\item $\alpha_i \in [0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$
+	\item $(\epsilon_t)$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second and third moment, 
+	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and $(Z_j)$ for $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $(\epsilon_t)$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$ as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
+	\item $\alpha_i \in [0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$,
 	\item $\sum_{j=1}^p \alpha_j < 1$ \cite{Silva:2005}. 
 \end{enumerate}
 
@@ -328,4 +328,4 @@ Another option is based on predictive distributions where an adjusted probabilit
 %Using other defintion of INAR(p) model. 
 %While structurally the AR(P) and then INAR(P) model look similar they have different properties. The only exception is for $p=1$. The authors in \cite{McKenzie:1986} and \cite{Alzaid:1988} noted that the aside from their structural similarity, those two processes also show the same autocorrelation and regression behaviour \cite{Alzaid:1990}. However, for $p>1$ the similarities end at the structure. For an INAR(p) process, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ have a mutual dependence structure for $i=1,2,\ldots,p$ which induces a moving-average structure. In the AR(p) process they are only connected by the presence of $Y_{t,k}$. Because of this additional dependence, it can be shown that the autocorrelation behaves more like a standard ARMA(p,p-1) process \cite{Alzaid:1990}. 
 
-Depending on the definition of the INAR(p) Model the degree of similarity varies. If one follows the definition of \cite{Guan:1991}, which is the one in \ref{eq:Inar(p) model}, then the autocorrelation function follows that of an AR(p) process \cite{Oliveira:2005}. However, the authors in \cite{Alzaid:1990} propose a different definition. In their work, given $Y_{tk}=y_{tk}$, the conditional distribution of $(\alpha_1 \circ Y_{tk}, \ldots, \alpha_p \circ Y_{tk})$ is multinomial with parameters $( \alpha_1,\ldots,\alpha_p,y_{tk})$ and is independent of the history of the process. Under those assumptions, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ for $i=1,2,\ldots,p$  have a stronger mutual dependence structure than the corresponding AR(p) process and induce a moving-average structure \cite{Alzaid:1990}.
+Depending on the definition of the INAR(p) model, the degree of similarity varies. If one follows the definition of \cite{Guan:1991}, which is the one in \ref{eq:Inar(p) model}, then the autocorrelation function follows that of an AR(p) process \cite{Oliveira:2005}. However, the authors in \cite{Alzaid:1990} propose a different definition. In their work, given $Y_{tk}=y_{tk}$, the conditional distribution of $(\alpha_1 \circ Y_{tk}, \ldots, \alpha_p \circ Y_{tk})$ is multinomial with parameters $( \alpha_1,\ldots,\alpha_p,y_{tk})$ and is independent of the history of the process. Under those assumptions, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ for $i=1,2,\ldots,p$  have a stronger mutual dependence structure than the corresponding AR(p) process and induce a moving-average structure \cite{Alzaid:1990}.

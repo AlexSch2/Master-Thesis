@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  1 JUN 2023 01:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  1 JUN 2023 12:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1258,51 +1258,46 @@ File: Graphiken//Coda_timeseries_ID24.png Graphic file (type png)
 Package pdftex.def Info: Graphiken//Coda_timeseries_ID24.png  used on input lin
 e 39.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-
-Underfull \vbox (badness 1320) has occurred while \output is active []
-
- [39 <./Graphiken//Raw_Timeseries_ID4.png> <./Graphiken//Raw_Timeseries_ID24.pn
-g> <./Graphiken//Coda_Timeseries_ID4.png> <./Graphiken//Coda_timeseries_ID24.pn
-g>]
-<Graphiken//Ingarch_timeseries_ID4.png, id=747, 1445.4pt x 1084.05pt>
+<Graphiken//Ingarch_timeseries_ID4.png, id=737, 1445.4pt x 1084.05pt>
 File: Graphiken//Ingarch_timeseries_ID4.png Graphic file (type png)
 <use Graphiken//Ingarch_timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//Ingarch_timeseries_ID4.png  used on input l
 ine 52.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Ingarch_Timeseries_ID24.png, id=748, 1445.4pt x 1084.05pt>
+<Graphiken//Ingarch_Timeseries_ID24.png, id=738, 1445.4pt x 1084.05pt>
 File: Graphiken//Ingarch_Timeseries_ID24.png Graphic file (type png)
 <use Graphiken//Ingarch_Timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//Ingarch_Timeseries_ID24.png  used on input 
 line 58.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Predictions_timeseries_ID4.png, id=750, 1445.4pt x 1084.05pt>
+<Graphiken//Predictions_timeseries_ID4.png, id=740, 1445.4pt x 1084.05pt>
 File: Graphiken//Predictions_timeseries_ID4.png Graphic file (type png)
 <use Graphiken//Predictions_timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//Predictions_timeseries_ID4.png  used on inp
 ut line 72.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//Predictions_timeseries_ID24.png, id=751, 1445.4pt x 1084.05pt>
+<Graphiken//Predictions_timeseries_ID24.png, id=741, 1445.4pt x 1084.05pt>
 File: Graphiken//Predictions_timeseries_ID24.png Graphic file (type png)
 <use Graphiken//Predictions_timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//Predictions_timeseries_ID24.png  used on in
 put line 78.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//BothPI_timeseries_ID4.png, id=754, 1445.4pt x 1084.05pt>
+<Graphiken//BothPI_timeseries_ID4.png, id=744, 1445.4pt x 1084.05pt>
 File: Graphiken//BothPI_timeseries_ID4.png Graphic file (type png)
 <use Graphiken//BothPI_timeseries_ID4.png>
 Package pdftex.def Info: Graphiken//BothPI_timeseries_ID4.png  used on input li
 ne 91.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//BothPI_timeseries_ID24.png, id=755, 1445.4pt x 1084.05pt>
+<Graphiken//BothPI_timeseries_ID24.png, id=745, 1445.4pt x 1084.05pt>
 File: Graphiken//BothPI_timeseries_ID24.png Graphic file (type png)
 <use Graphiken//BothPI_timeseries_ID24.png>
 Package pdftex.def Info: Graphiken//BothPI_timeseries_ID24.png  used on input l
 ine 97.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-)
-(RCode.tex [40 <./Graphiken//Ingarch_timeseries_ID4.png> <./Graphiken//Ingarch_
-Timeseries_ID24.png>]
+) (RCode.tex [39 <./Graphiken//Raw_Timeseries_ID4.png> <./Graphiken//Raw_Timese
+ries_ID24.png>] [40 <./Graphiken//Coda_Timeseries_ID4.png> <./Graphiken//Coda_t
+imeseries_ID24.png> <./Graphiken//Ingarch_timeseries_ID4.png> <./Graphiken//Ing
+arch_Timeseries_ID24.png>]
 
 LaTeX Warning: Text page 41 contains only floats.
 
@@ -1650,19 +1645,16 @@ g)
 Package pdftex.def Info: Graphiken/Coda_Timeseries_VariationtSpace100321.png  u
 sed on input line 389.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken/Coda_Timeseries_VariationtSpace20.png, id=1059, 1445.4pt x 1084.05pt
+ [66 <./Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.png> <./Graphiken
+//ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png> <./Graphiken//ErrorMeas
+ureCoDA_Quant_all__Variation_tSpace.png>]
+<Graphiken/Coda_Timeseries_VariationtSpace20.png, id=1068, 1445.4pt x 1084.05pt
 >
 File: Graphiken/Coda_Timeseries_VariationtSpace20.png Graphic file (type png)
 <use Graphiken/Coda_Timeseries_VariationtSpace20.png>
 Package pdftex.def Info: Graphiken/Coda_Timeseries_VariationtSpace20.png  used 
 on input line 398.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-
-Underfull \vbox (badness 4556) has occurred while \output is active []
-
- [66 <./Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.png> <./Graphiken
-//ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png> <./Graphiken//ErrorMeas
-ureCoDA_Quant_all__Variation_tSpace.png>]
 <Graphiken//ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png, id=1071, 1445.4pt
  x 1084.05pt>
 File: Graphiken//ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png Graphic file 
@@ -1759,7 +1751,7 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 Here is how much of TeX's memory you used:
  27206 strings out of 476300
  524663 string characters out of 5784939
- 1868382 words of memory out of 5000000
+ 1869382 words of memory out of 5000000
  46778 multiletter control sequences out of 15000+600000
  636175 words of font info for 129 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1794,7 +1786,7 @@ Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/A
 ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Ale
 x/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb>
-Output written on Masterarbeit.pdf (93 pages, 8594418 bytes).
+Output written on Masterarbeit.pdf (93 pages, 8589927 bytes).
 PDF statistics:
  1674 PDF objects out of 1728 (max. 8388607)
  409 named destinations out of 1000 (max. 500000)
