@@ -227,13 +227,14 @@ where $\left\langle ,\right\rangle_+$ is the inner product in $\mathbbm{R}_+$, a
 Further we can define a distance on $\Tsp$ with 
 
 \begin{gather}
-d_T^2(\tilde{\bm{x}},\tilde{\bm{y}}) = d_+^2(t(\bm{x}),t(\bm{y})) + d_a^2(\ClOp(\bm{x}),\ClOp(\bm{y})),
+d_T^2(\tilde{\bm{x}},\tilde{\bm{y}}) := d_+^2(t(\bm{x}),t(\bm{y})) + d_a^2(\ClOp(\bm{x}),\ClOp(\bm{y})),
 \label{eq:distance Tspace}
 \end{gather}
 
 with $d_+^2(\bm{x},\bm{y}) = d(\log(\bm{x}),\log(\bm{y}))$ and $d$ is the Euclidean distance. 
 
-To ensure that the operations performed on $\ClOp(\bm{x})$ are compatible with the ones performed on $\Tsp$ we need to impose some conditions on the function $h:\mathbbm{R}_+^D \rightarrow \Tsp$, $h(\bm{x}):=(t(\bm{x}),\ClOp(\bm{x}))^T$. First, the function $h$ needs to be a one-to-one function since otherwise information could be lost by applying $h$ or $h^{-1}$. As a result, the function $t$ must be related to the sum of the components. To see this, write $\bm{x} \in \mathbbm{R}_+^D$ as $\bm{x} = \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x})$. Hence $ \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x}) = h^{-1}((t(\bm{x}),\ClOp(\bm{x}))^T)$ \cite{Pawlowsky:2013}.
+To ensure that the operations performed on $\ClOp(\bm{x})$ are compatible with the ones performed on $\Tsp$ we need to impose some conditions on the function $h:\mathbbm{R}_+^D \rightarrow \Tsp$, $h(\bm{x}):=(t(\bm{x}),\ClOp(\bm{x}))^T$. First, the function $h$ needs to be a one-to-one function since otherwise information could be lost by applying $h$ or $h^{-1}$. Since we can write $\bm{x} \in \mathbbm{R}_+^D$ as $\bm{x} = \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x})$, the function $t$ must be related to the sum of the components. This allows the reconstruction of $\bm{x}$ from the composition and total. To see this, write $ \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x}) = h^{-1}((t(\bm{x}),\ClOp(\bm{x}))^T)$ \cite{Pawlowsky:2013}. 
+
 The second condition is the preservation of the vector space properties in $\mathbbm{R}_+^D$ and $\Tsp$
 
 \begin{gather}
@@ -250,18 +251,18 @@ t(\alpha \odot_T \bm{x}) = (t(\bm{x}))^{\alpha}.
 \label{eq:Vector Space Properties for t}
 \end{gather}
 
-In \cite{Pawlowsky:2013} the authors show that for $h_s=((t_s(\bm{x}),\ClOp(\bm{x}))^T)$ with $t_s(\bm{x}) = \sum_{i=1}^D x_i$ is a one-to-one function, but not compatible with $\oplus_+,\odot_+$ and $\oplus_T,\odot_T$. However, as $h_s$ is a one-to-one function between $\mathbbm{R}_+^D$ and $\Tsp$, there exists a Euclidean structure in $\mathbbm{R}_+^D$ that is isometric to the one in $\Tsp$ \cite{Pawlowsky:2013}. The vector space operations can be defined as
+In \cite{Pawlowsky:2013} the authors show that $h_s=((t_s(\bm{x}),\ClOp(\bm{x}))^T)$ with $t_s(\bm{x}) = \sum_{i=1}^D x_i$ is a one-to-one function, but not compatible with $\oplus_+,\odot_+$ and $\oplus_T,\odot_T$. However, as $h_s$ is a one-to-one function between $\mathbbm{R}_+^D$ and $\Tsp$, there exists a Euclidean structure in $\mathbbm{R}_+^D$ that is isometric to the one in $\Tsp$ \cite{Pawlowsky:2013}. The vector space operations can be defined as
 
 \begin{gather}
-\bm{x} \oplus_{+s} \bm{y} = h_s^{-1}(\tilde{\bm{x}}) \oplus_T  h_s^{-1}(\tilde{\bm{y}}), \\
-\alpha \odot_{+s} \bm{x} = \alpha \odot_T h_s{^-1}(\tilde{\bm{x}}), \\
-d_{+s}^2(\bm{x},\bm{y}) = d_T^2(h_s(\bm{x},\bm{y})),
+\bm{x} \oplus_{+s} \bm{y} := h_s^{-1}(\tilde{\bm{x}}) \oplus_T  h_s^{-1}(\tilde{\bm{y}}), \\
+\alpha \odot_{+s} \bm{x} := \alpha \odot_T h_s{^-1}(\tilde{\bm{x}}), \\
+d_{+s}^2(\bm{x},\bm{y}) := d_T^2(h_s(\bm{x},\bm{y})),
 \label{eq:Vector Space Operations sum}
 \end{gather}
 
-where $\oplus_{+s}$ and $\odot_{+s}$ are the new operations in $\mathbbm{R}_+^D$ and $d^2$ is the squared distance in $\Tsp$. 
+where $\oplus_{+s}$ and $\odot_{+s}$ are the new operations in $\mathbbm{R}_+^D$ that are compatible with the operations in $\Tsp$ and $d^2$ is the squared distance in $\Tsp$. 
 
-With the Euclidean structure established, we can model the relative structure and total sum in one model.  We have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=(t(\bm{Y}_t),\ClOp(\bm{Y}_t))^T$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr(\bm{Y}_t))^T$ take the $irl$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices and $\bm{\epsilon}_t$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$
+With the structure established, we can model the relative structure and total sum in one model.  We have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=(t(\bm{Y}_t),\ClOp(\bm{Y}_t))^T$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr(\bm{Y}_t))^T$ take the $irl$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices and $\bm{\epsilon}_t$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$
 
 \begin{equation}
 \textbf{w}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{w}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{w}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{w}_{t-p} + \bm{\epsilon}_{t}.
@@ -349,19 +350,26 @@ where $\delta_j$ is the imputed value. It has the following properties
 
 Another method proposed in \cite{Lubbe:2021} is to replace rounded zeros with values drawn from a continuous uniform distribution $U(0.1\cdot DL,DL)$. Setting the lower limit to $0.1\cdot DL$ makes sure that the values are not getting too close to zero and not using a constant prevents underestimation of the variability. They further present the R-package \textit{zCompositions} by \cite{Palarea-Albaladejo:2015}. 
 
-The authors in \cite{Palarea-Albaladejo:2015} focus on the case of rounded zeros which can be seen as left censored data. Their package includes some more advanced methods which are based on Markov Chain Monte Carlo (MCMC), the EM algorithm or multiple imputation to perform imputation. They assume the data is left-censored, or Type 1 censored, and follows a multivariate normal distribution in $\mathbbm{R}^D$. 
+The authors in \cite{Palarea-Albaladejo:2015} focus on the case of rounded zeros which can be seen as left censored data. Their package includes some more advanced methods which are based on Markov Chain Monte Carlo (MCMC), the EM algorithm or multiple imputation to perform imputation. They assume the data is left-censored, or Type 1 censored, and follows a multivariate normal distribution in $\mathbbm{R}^D$. We review some of their methods presented and refer for more details to \cite{Palarea-Albaladejo:2015}.
 
 \subsubsection{EM-based algorithm}
 \label{sec:EM Algorithm}
 
-The Expectation-Maximisation (EM) algorithm \cite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses the information in the covariance structure to conditionally estimate the censored values \cite{Palarea-Albaladejo:2015}. Given a vector $\bm{x}$ with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components the EM-algorithm consists of two steps
+The Expectation-Maximisation (EM) algorithm \cite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses the information in the covariance structure to conditionally estimate the censored values \cite{Palarea-Albaladejo:2015}. Given a censoring pattern with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components of a composition $\bm{x}$, the EM-algorithm consists of two steps. At the t-th iteration
 
 \begin{enumerate}
-	\item E-Step: Given a parameter estimate $\hat{\theta}_t$, compute $\mathbbm{E}[\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\theta}_t]$.
-	\item M-Step: Compute a new estimate $\hat{\theta}_{t+1}$ based on $[\hat{\bm{x}}_{non},\bm{x}_{obs}]$.
+	\item E-Step: Given a parameter estimate $\hat{\theta}^{(t)}$, compute $\mathbbm{E}[\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\theta}^{(t)}]$.
+	\item M-Step: Compute a new estimate $\hat{\theta}^{(t+1)}$ based on $[\hat{\bm{x}}_{non},\bm{x}_{obs}]$.
 \end{enumerate}
 
-Here, $DL$ is the mapped censoring threshold \cite{Palarea-Albaladejo:2015}.
+Here, $DL$ is the mapped censoring threshold \cite{Palarea-Albaladejo:2015}. Assuming a multivariate normal distribution, the conditional expected value of $\bm{x}_{non}$ at step $t$ is given by
+
+\begin{equation}
+\hat{\bm{x}}_{non}^{(t)} = \bm{x}_{obs}\hat{\beta}^{(t)} - \hat{\sigma}^{(t)}\hat{\lambda}^{(t)},
+\label{eq:E-step}
+\end{equation}
+
+where $\hat{\lambda}^{(t)}=\frac{\phi((DL-\bm{y}_{obs}\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}{\Phi((DL-\bm{y}_{obs}\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}$ is the inverse mills ratio. The function $\phi$ denotes the standard normal density and $\Phi$ is its distribution. The parameter $\hat{\beta}$ is the ML estimate of the regression parameters and $\hat{\sigma}^2$ is the ML estimate of the variance \cite{Palarea-Albaladejo:2015}.
 
 As seen, an initial estimation is required to kick start the iteration. This can be done by either using a subset of the data which was fully observed or by using other imputation methods \cite{Palarea-Albaladejo:2015}. 
 
@@ -376,16 +384,22 @@ The Markov Chain Monte Carlo(MCMC) algorithm can be seen as the Bayesian counter
 	\item Posterior-Step: Generate $\hat{\theta}_{t+1}$ by simulating from $P(\theta|\hat{\bm{x}}_{non},\bm{x}_{obs})$. 
 \end{enumerate}
 
-This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement \cite{Palarea-Albaladejo:2015}.
+In the imputation step, the value $\hat{\bm{x}}_{non}$ is drawn from the conditional, right-truncated normal distribution with estimated mean $\bm{x}_{obs}\hat{\beta}$, variance $\hat{\sigma}^2$ and truncation point given by $DL$. The posterior step simulates the parameters $\theta = (\mu,\Sigma)$ from the data posterior distribution. This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement \cite{Palarea-Albaladejo:2015}.
 
 
 \subsubsection{Bayesian-multiplicative replacement}
 \label{sec:Bayesian-multiplicative replacement}
 
-A common assumption for multivariate count data is, that a vector $\bm{x}$ is a realisation from a multinomial distribution with parameters $[n,\pi_1,\ldots,\pi_D]$ where $\pi_j$ is the probability of belonging to category j. For the prior distribution of $\bm{\pi}=[\pi_1,\ldots,\pi_D]$, an imprecise Dirichlet model with parameter s and $\bm{t}=[t_1,\ldots,t_D]$ with $\sum_k t_k=1$ and expectation $\mathbbm{E}[\pi_j]=t_j$ is considered. The posterior expectation is then given by $\mathbbm{E}[\pi_j|x_j=0]=t_j \frac{s}{n+s}$ \cite{Palarea-Albaladejo:2015}.
+A method for count data is the Bayesian-multiplicative replacement. For multivariate count data one often assumes, that a vector $\bm{x}$ is a realisation from a multinomial distribution with parameters $[n,\pi_1,\ldots,\pi_D]$ where $\pi_j$ is the probability of belonging to category j. For the prior distribution of $\bm{\pi}=[\pi_1,\ldots,\pi_D]$, an imprecise Dirichlet model with parameter s and $\bm{t}=[t_1,\ldots,t_D]$ with $\sum_k t_k=1$ and expectation $\mathbbm{E}[\pi_j]=t_j$ is considered. The posterior expectation is then given by \cite{Palarea-Albaladejo:2015} 
 
 
-The presented methods as well as additional methods are explained in more detail in \cite{Palarea-Albaladejo:2015}.
+\begin{equation}
+\mathbbm{E}[\pi_j|x_j=0]=t_j \frac{s}{n+s}.
+\label{eq:BMR}
+\end{equation}
+
+Depending on the settings for $s$ and $\bm{t}$ and based on \ref{eq:BMR}, the imputation can be performed by geometric Bayesian multiplicative (BM), square root BM or Bayes–Laplace  \cite{Palarea-Albaladejo:2015}. The details of those methods can be found in \cite{Fernandez:2015}. 
+
 
 \subsection{Essential Zeros}
 \label{sec: Essential Zeros}

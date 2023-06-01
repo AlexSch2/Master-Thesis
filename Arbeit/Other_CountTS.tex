@@ -78,7 +78,7 @@ Since we encounter a large number of zeros, we also consider zero-inflated model
 \label{eq:ZIP Distribution}
 \end{equation}
 
-where $0 < \omega < 1$ and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources \cite{Zhu:2012}. 
+where $0 < \omega < 1$ is the zero-inflation parameter, $\lambda$ is the Poisson parameter and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources \cite{Zhu:2012}. The first part of \ref{eq:ZIP Distribution} $\delta_{y,0}$ is the degenerated point mass distribution.
 
 Now we can define the Zero-Inflated Poisson (ZIP) INGARCH(p,q) as
 
@@ -295,7 +295,7 @@ The authors in \cite{Silva:2005} present two types of forecasting methods for IN
 \end{equation}
 
 
-However, this forecast hardly ever produces integer values. Remedies, like minimising the absolute expected error, have been suggested by \cite{Freeland:2004} but the authors in \cite{Silva:2005} propose a bayesian approach. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha,\lambda)$ are random \cite{Silva:2005}. Since the complexity posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \cite{Silva:2005}. The estimator for the conditional expectation is then given by
+However, this forecast hardly ever produces integer values. One option is to take the value which minimises the absolute expected error $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$ instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$ \cite{Silva:2005,Freeland:2004}. Another option is a bayesian approach presented in \cite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha,\lambda)$ are random \cite{Silva:2005}. Since the complexity posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \cite{Silva:2005}. The estimator for the conditional expectation is then given by
 
 \begin{equation}
 \hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_i^m\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_i^h}{1-\alpha_i}\lambda_i\right),

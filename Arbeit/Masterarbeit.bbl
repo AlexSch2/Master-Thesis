@@ -1673,6 +1673,65 @@
       \verb 10.1023/A:1023866030544
       \endverb
     \endentry
+    \entry{Fernandez:2015}{article}{}
+      \name{author}{5}{}{%
+        {{hash=1fcbe107b4c915a5c1e2655b139da813}{%
+           family={Martín-Fernández},
+           familyi={M\bibinithyphendelim F\bibinitperiod},
+           given={Josep-Antoni},
+           giveni={J\bibinithyphendelim A\bibinitperiod}}}%
+        {{hash=49b157272ea2bc1f4c5617e4a013ae2f}{%
+           family={Hron},
+           familyi={H\bibinitperiod},
+           given={Karel},
+           giveni={K\bibinitperiod}}}%
+        {{hash=faaed83ab21bd48aa70346a9a1a0fa99}{%
+           family={Templ},
+           familyi={T\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+        {{hash=440840cf1a958f86ce96afdf0ed33447}{%
+           family={Filzmoser},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=df10b03faeeaa66acf7b211f8a114eea}{%
+           family={Palarea-Albaladejo},
+           familyi={P\bibinithyphendelim A\bibinitperiod},
+           given={Javier},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4a145d05ff84296e79209d234382fa0a}
+      \strng{fullhash}{8a97cbd1ef972e5229fcaeea3d075e55}
+      \strng{bibnamehash}{4a145d05ff84296e79209d234382fa0a}
+      \strng{authorbibnamehash}{4a145d05ff84296e79209d234382fa0a}
+      \strng{authornamehash}{4a145d05ff84296e79209d234382fa0a}
+      \strng{authorfullhash}{8a97cbd1ef972e5229fcaeea3d075e55}
+      \field{labelalpha}{Mar+15}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Statistical Modelling}
+      \field{number}{2}
+      \field{title}{Bayesian-multiplicative treatment of count zeros in compositional data sets}
+      \field{volume}{15}
+      \field{year}{2015}
+      \field{pages}{134\bibrangedash 158}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.1177/1471082X14535524
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1177/1471082X14535524
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1177/1471082X14535524
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1177/1471082X14535524
+      \endverb
+    \endentry
     \entry{here:2020}{manual}{}
       \name{author}{1}{}{%
         {{hash=1435ca4f08e53208e1c34297357afa80}{%
