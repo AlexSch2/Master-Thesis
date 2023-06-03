@@ -3,12 +3,12 @@
 
 Multivariate count data is a reoccurring theme in real world applications. While there exist various methods among the classical statistical models to handle such data, there are less methods available to handle it in a time series context. Even more so, when there is an excessive amount of zeros or missing values present. In this thesis we compare various models for such data and compare their predictive power. We test our models on real world data, which was kindly provided to us, and analyse their performance. In the following we will shortly describe the general framework and objective. 
 
-A company is operating numerous vending machines with food, ranging from appetizers and main course to snacks and beverages. Each week the vending machines, or in the following also called fridges, are being restocked and the number of items sold in the past week is being recorded. In addition, non-sold items are being disposed off which result in monetary losses. The objective is to find a model to predict the amount the company needs to order for the upcoming week in a bid to minimise the loss.
+A company is operating numerous vending machines with food, ranging from appetizers and main course to snacks and beverages. Each week the vending machines, or in the following also called fridges, are being restocked and the number of items sold in the past week is being recorded. In addition, non-sold items are being disposed off which results in monetary losses. The objective is to find a model to predict the amount the company needs to order for the upcoming week, in a bid to minimise the loss.
 
 \section{Data Description}
 \label{sec: Data Description}
 
-In this section we describe the structure of our data, which is essential in choosing the right model. We have several multivariate time series with integer values, with each series representing a vending machine. The dimensions represent the various categories of the food where each item is of one of the four main categories 1,2,3,4 and one of the various subcategories. We mainly analyse the time series on the aggregated level of the main categories, however the models can also be applied to the subcategories. In this case we have a model for each main category instead of each vending machine. The values for each category represent the number of items sold. For a fridge $f$ denote this time series with 
+In this section we describe the structure of our data, which is essential in choosing the right model. We have several multivariate time series with integer values, with each series representing a vending machine. The dimensions represent the various categories of the food where each item is of one of the four main categories 1,2,3,4 and one of the various subcategories. We mainly analyse the time series on the aggregated level of the main categories; however, the models can also be applied to the subcategories. In this case we have a model for each main category instead of each vending machine. The values for each category represent the number of items sold. For a fridge $f$ denote this time series with 
 
 \begin{equation}
 \left\{\bm{Y}_t:t=1,\ldots,T_f; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f,
@@ -22,7 +22,7 @@ where $K$ stands for the number of categories, $T_f$ denotes the total length of
 \label{eq:time series definition fraction}
 \end{equation}
 
-So \ref{eq:time series definition} describes the whole time series available, while \ref{eq:time series definition fraction} describes the time series used. It holds $T\leq T_f$. In the following we will use \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
+So \ref{eq:time series definition} describes the whole time series available, while \ref{eq:time series definition fraction} describes the time series used and it holds $T\leq T_f$. In the following we will use \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
 
 The data is measured on a weekly basis and hence our points in time are equidistant. One noteworthy feature of our data is the amount of 0 and NA values, which will be dived into in later sections. An additional characteristic of our data is the difference in length for various time series. While for some time series we have 70+ data points, for others we have less than 10. An example view of our data would be: 
 

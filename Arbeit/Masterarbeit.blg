@@ -1,18 +1,18 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'Masterarbeit.blg'
-[126] biber-MSWIN64:340> INFO - === 
-[182] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
-[336] Biber.pm:979> INFO - Found 64 citekeys in bib section 0
-[352] Biber.pm:4419> INFO - Processing section 0
-[363] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
-[449] bibtex.pm:1713> INFO - LaTeX decoding ...
-[537] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
-[926] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
-[926] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[926] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-GB'
-[926] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
-[990] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
-[1027] bbl.pm:763> INFO - Output to Masterarbeit.bbl
-[1027] Biber.pm:131> WARN - legacy month field 'June' in entry 'Cui:2018' is not an integer - this will probably not sort properly.
-[1027] Biber.pm:131> WARN - legacy month field 'March' in entry 'Scherrer:2021' is not an integer - this will probably not sort properly.
-[1027] Biber.pm:133> INFO - WARNINGS: 2
+[140] biber-MSWIN64:340> INFO - === 
+[198] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
+[365] Biber.pm:979> INFO - Found 64 citekeys in bib section 0
+[380] Biber.pm:4419> INFO - Processing section 0
+[393] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
+[482] bibtex.pm:1713> INFO - LaTeX decoding ...
+[584] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
+[993] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
+[994] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[994] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-GB'
+[994] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
+[1062] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
+[1100] bbl.pm:763> INFO - Output to Masterarbeit.bbl
+[1100] Biber.pm:131> WARN - legacy month field 'June' in entry 'Cui:2018' is not an integer - this will probably not sort properly.
+[1100] Biber.pm:131> WARN - legacy month field 'March' in entry 'Scherrer:2021' is not an integer - this will probably not sort properly.
+[1100] Biber.pm:133> INFO - WARNINGS: 2
