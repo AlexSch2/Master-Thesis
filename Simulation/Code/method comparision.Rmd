@@ -50,8 +50,8 @@ Performing the Analysis
 coda_result <-
   Coda.Analysis(
     Data_Raw  = weekly_category_data,
-    Id = ids_all,
-    Frame = 0.7,
+    Id = 4,
+    Frame = 0.5,
     OneVsAll = T,
     PivotGroup =  NULL,
     Category_Main = c("1","2","3","4"),
@@ -72,7 +72,7 @@ if(save_results){
 ingarch_result <-
   CountModel.Analysis(
     Data_Raw= weekly_category_data,
-    Id = ids_all,
+    Id = 4,
     Frame = 0.5,
     Distribution = "poisson",
     Category_Main = c("1","2","3","4"),
@@ -80,7 +80,7 @@ ingarch_result <-
     ZeroHandling = "none",
     External = F,
     Multicore = T,
-    NCores = 10,
+    NCores = 4,
     PastOb = 1,
     PastMean = 1,
     HistoryLength = 1,

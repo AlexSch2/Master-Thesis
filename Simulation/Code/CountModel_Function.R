@@ -259,13 +259,13 @@ CountModel.Analysis <- function(Data_Raw,
                              Id,
                              PredictionStep = 1,
                              Distribution = "poisson",
-                             ModelType = "ingarch",
+                             ModelType = c("ingarch","inar_classic","inar_bayes","zim"),
                              Category_Main = c("1", "2", "3", "4"),
                              TakeSubCategory = F,
                              Category_Sub = NULL,
                              Frame = 10,
-                             WindowMethod = "extending",
-                             ZeroHandling = "none",
+                             WindowMethod = c("extending","fixed"),
+                             ZeroHandling = c("none", "zero_to_one"),
                              PastOb = 1,
                              PastMean = 1,
                              External = FALSE,
@@ -282,6 +282,16 @@ CountModel.Analysis <- function(Data_Raw,
               all(sum(sapply(c(ZeroHandling,Distribution,WindowMethod,Category_Main),is.character))))
   stopifnot("Id,PredictionStep,HistoryLength,NCores and Frame must be numeric."= 
               all(sum(sapply(c(Id,PredictionStep,HistoryLength,Frame,NCores),is.numeric))))
+  
+  switch(ModelType,
+         "ingarch" = stopifnot("Distribution is not valid for chosen model. 
+                               Check help page for tsglm() for valid choices." = Distribution %in% c("poisson","nbinom")),
+         "inar_classic" = stopifnot("Distribution is not valid for chosen model. 
+                                    Check help page for EST_ZINAR() for valid choices." = Distribution %in% c("Po","NB","GI")),
+         "inar_bayes" = stopifnot("Distribution is not valid for chosen model. 
+                                  Check help page for estimate_zinarp() for valid choices." = Distribution %in% c("Poisson","ZIP")),
+         "zim" = stopifnot("Distribution is not valid for chosen model. 
+                           Check help page for zeroinfl() for valid choices." = Distribution %in% c("poisson","negbin","geometric")))
   
   
   #Only return IDs with results

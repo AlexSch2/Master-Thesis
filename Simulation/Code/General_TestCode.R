@@ -174,3 +174,13 @@ y <- z[[1]] - mean(z[[1]])
 x.g <- garchFit(~garch(1,1),y,include.mean = F)
 summary(x.g)
 predict(x.g)
+
+
+data(Pigs)
+Pigs.GBM <- cmultRepl(Pigs,output = "p-counts")
+
+a <- "B"
+x <- 3
+switch(a,
+       "A"= stopifnot(x>10),
+       "B"= stopifnot(x<5))

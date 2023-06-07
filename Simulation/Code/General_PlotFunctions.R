@@ -483,7 +483,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined, Variation = "history", Value
       xlab(str_to_title(names(Variation)))+
       ylab("Error")
     
-    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Box",ids_save,"_Variation_",Variation,File_Post,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
+    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Box_Variation_",Variation,File_Post,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
     
     
     #Quantile Plot
@@ -540,7 +540,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined, Variation = "history", Value
       xlab("Index")+
       ylab("Error")
     
-    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Quant",ids_save,"_Variation_",Variation,File_Post,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
+    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Quant_Variation_",Variation,File_Post,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
     
     #Histogram 
     MyLinetype <- c("solid", "dashed","dotted")
@@ -567,7 +567,7 @@ Plot.ErrorMeasureSingle <- function(ResultCombined, Variation = "history", Value
       ylab("Count")+
       xlab("Error")
     
-    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Histogram",ids_save,"_Variation_",Variation,File_Post,".png",sep="")),plot=HistPlot,height = 15,width = 20)
+    ggsave(filename = here("Plots",paste("ErrorMeasure",unique(ModelErrorAll$model),"_Histogram_Variation_",Variation,File_Post,".png",sep="")),plot=HistPlot,height = 15,width = 20)
     
   }
 }
@@ -619,7 +619,7 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
       xlab("Model")+
       ylab("Error")
     
-      ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Box",ids_save,"_Variation_",Variation,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
+      ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Box_Variation_",Variation,".png",sep="")),plot=BoxPlot ,height = 15,width = 20)
   
        
     #Quantile Plot
@@ -681,7 +681,7 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
         xlab("Index")+
         ylab("Error")
       
-        ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Quant",ids_save,"_Variation_",Variation,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
+        ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Quant_Variation_",Variation,".png",sep="")),plot=QuantPlot,height = 15,width = 20)
         
     #Histogram 
         ModelErrorAll_Median <- ModelErrorAll %>% dplyr::group_by(!!as.symbol(Variation),model) %>% summarise(Median=median(error,na.rm=T))
@@ -705,6 +705,6 @@ Plot.ErrorMeasureCombined <- function(CodaCombined,IngarchCombined,Variation= "h
           xlab("Error")+
           ylab("Count")
         
-          ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Histogram",ids_save,"_Variation_",Variation,".png",sep="")),plot=HistPlot,height = 15,width = 20)
+          ggsave(filename = here("Plots",paste("ErrorMeasureCombined_Histogram_Variation_",Variation,".png",sep="")),plot=HistPlot,height = 15,width = 20)
   }
 }
