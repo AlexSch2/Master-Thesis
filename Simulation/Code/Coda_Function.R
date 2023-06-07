@@ -296,9 +296,13 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
     ValuePredict <- round(as.numeric(ValuePredict))
     PredictionError <- as.numeric(ValuePredict - ValueTrue)
     PredictionError_Naive <- as.numeric(ValuePredict_Naive - ValueTrue)
+    LowerBound <- round(LowerBound)
+    UpperBound <- round(UpperBound)
     
     #Calculating the normed prediction error
     PredictionError_Normed <- PredictionError
+    
+    
     
     if(OneVsAll){
       
@@ -388,7 +392,7 @@ Coda.Prediction <- function(Data_Window, Data_WindowNoTransform, Data_NoTransfor
 Coda.Analysis<-function(Data_Raw, 
                         Id, 
                         Frame=10, 
-                        ZeroHandling = "zeros_only", 
+                        ZeroHandling = c("all", "simple", "none"), 
                         PredictionStep = 1, 
                         Log = T,
                         TSpace = T,
@@ -396,7 +400,7 @@ Coda.Analysis<-function(Data_Raw,
                         PivotGroup = NULL, 
                         HistoryLength = 1,
                         ModelType = "coda", 
-                        WindowMethod ="extending",
+                        WindowMethod = c("extending","fixed"),
                         Category_Main = c("1", "2", "3", "4"),
                         TakeSubCategory = F,
                         Category_Sub = NULL,
