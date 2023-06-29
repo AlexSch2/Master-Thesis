@@ -1,0 +1,18 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'Master Thesis Software '
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Alexander
+    family-names: Schwaiger
+    affiliation: Technical University of Vienna
+repository-code: 'https://github.com/AlexSch2/Master-Thesis'
+abstract: >-
+  This is the software used for my master thesis titled
+  Statistical models for multivariate (compositional) count
+  time series written at the Technical University of Vienna

@@ -6,9 +6,9 @@ In this section we present and describe the results for our methods with their v
 \subsection{Model Comparison}
 \label{sec: Model Comparison}
 
-Here we compare the INGARCH(1,1) model with the CoDA and INAR(1) model. For all three models we use the same parameter values, namely a window factor of $w=0.5$, the whole history $h=1$ and extending windows. For CoDA, the settings are no $\Tsp$-Space, one-vs-all method and the simple replacement strategy with $\delta=0.1$. For INGARCH(p,q) we use $p=q=1$, assume it is Poisson distributed, use no external factors and have no zero handling. For INAR(1) we use the classical forecasting method described in \ref{sec: Inar Parameter Estimation and Forecasting}. When we speak of standard settings or values in the following, we mean these settings. 
+Here we compare the INGARCH(1,1) model with the CoDA and INAR(1) model. For all three models we use the same parameter values, namely a window factor of $w=0.5$, the whole history $h=1$ and extending windows. For CoDA, the settings are no $\Tsp$-Space, one-vs-all method and the simple replacement strategy with $\delta=0.1$. For INGARCH(p,q) we use $p=q=1$, assume it is Poisson distributed, use no external factors and have no zero handling. For INAR(1) we use the classical forecasting method described in section \ref{sec: Inar Parameter Estimation and Forecasting}. When we speak of standard settings or values in the following, we mean these settings. 
 
-In \ref{fig:models Comp1} we see a boxplot and quantile plot. In the boxplot the error measure is calculated for all groups and all fridges for each model. The result is then shown in a boxplot. In the quantile plot, the error measure for each fridge, each model and each category is calculated and sorted according to their size. The dot size indicates the length of the respective time series and the vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile.
+In figure \ref{fig:models Comp1} we see a boxplot and quantile plot. In the boxplot the error measure is calculated for all groups and all fridges for each model. The result is then shown in a boxplot. In the quantile plot, the error measure for each fridge, each model and each category is calculated and sorted according to their size. The dot size indicates the length of the respective time series and the vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile.
 
 In the boxplot \ref{fig:box distributions models} we can see that their performance is pretty similar. They all seem to outperform the the naive random walk model, which is especially true for the count data models. 
 In the quantile plot \ref{fig: quantile distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonable well and similar, differences emerge for category 3 and 4. CoDA seems to be the clear favourite in category 4, followed by INGARCH and then INAR. However, for all models there are again time series with errors that are either too high to be shown, or that couldn't get calculated at all. 
@@ -32,7 +32,7 @@ In the quantile plot \ref{fig: quantile distributions models} we see the error m
 
 In figure \ref{fig:models Comp2} we also include the ZIM model. One drawback about the ZIM model is, that it needs to have zero values in the fitted window. Because of the lack of them in category 1 and 2, we couldn't manage to fit it. Hence the models in \ref{fig:models Comp2} were only fitted on categories 3 and 4. 
 
-In \ref{fig:box distributions models Zim} we again see the boxplot for the summarised error. The ZIM is close to INGARCH, but all three models still lag behind CoDA. In \ref{fig: quantile distributions models Zim} we see again the error measure for each category. While the models perform similar for category 3, the CoDA still outperforms all models for category 4. Here it is worth mentioning, that category 4 is the main category with the most amount of zeros in our data. 
+In \ref{fig:box distributions models Zim} we again see the boxplot for the summarised error. The ZIM is close to INGARCH, but all three models still lag behind CoDA. In \ref{fig: quantile distributions models Zim} we see again the error measure for each category. While the models perform similar for category 3, the CoDA still outperforms all models for category 4. Here it is worth mentioning, that category 4 is the main category with the most amount of zeros in our data. It should be mentioned here, that all models don't predict integer values, but rather real values which then get rounded to the nearest integer value. Especially CoDA cannot predict zero values but only small positive values which get rounded to zero.
 
 \begin{figure}[htb!]
 \centering
@@ -186,7 +186,7 @@ Next we will investigate the INGARCH specific options. As before, we use the sta
 \subsubsection{Distribution}
 \label{sec:Distribution}
 
-As mentioned in \ref{sec: Ingarch Specifications} we can replace the Poisson distribution with a Negative Binomial Distribution in \ref{eq:Ingarch Distribution}. The results are shown in \ref{fig:distributions Comp1}. 
+As mentioned in section \ref{sec: Ingarch Specifications} we can replace the Poisson distribution with a Negative Binomial Distribution in \ref{eq:Ingarch Distribution}. The results are shown in figure \ref{fig:distributions Comp1}. 
 
 \begin{figure}[htb!]
 \centering
@@ -211,7 +211,7 @@ As mentioned in \ref{sec: Ingarch Specifications} we can replace the Poisson dis
 \label{fig:distributions Comp1}
 \end{figure}
 
-As we can see, we get the exactly the same results for both distributions. However, as mentioned in \ref{sec: Estimation of the Ingarch Model}, we round the predicted conditional mean to the next integer. Hence, we could get slightly different results for the different distributions. Nevertheless, the difference is still negligible. %Since the Poisson Distribution is a limiting case of the Negative Binomial Distribution when $\phi \longrightarrow \infty$ in \ref{eq:Ingarch negbinom Distribution}, \cite{Liboschik:2016}. 
+As we can see, we get the exactly the same results for both distributions. However, as mentioned in section \ref{sec: Estimation of the Ingarch Model}, we round the predicted conditional mean to the next integer. Hence, we could get slightly different results for the different distributions. Nevertheless, the difference is still negligible. %Since the Poisson Distribution is a limiting case of the Negative Binomial Distribution when $\phi \longrightarrow \infty$ in \ref{eq:Ingarch negbinom Distribution}, \cite{Liboschik:2016}. 
 
 
 \subsubsection{Number of Past Means and Observations}
@@ -274,12 +274,12 @@ As we saw, there is not much difference between the INGARCH(1,1), INGARCH(2,1) a
 \subsection{CoDA Specifications Results}
 \label{sec: CoDA Specifications Results}
 
-Last, we will compare different CoDA Specifications as mentioned in \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $h=1$, an initial window length of $w=0.5$, use the simple replacement strategy with $\delta=0.1$, no $\Tsp$-spaces and the one-vs-all method. 
+Last, we will compare different CoDA Specifications as mentioned in section \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $h=1$, an initial window length of $w=0.5$, use the simple replacement strategy with $\delta=0.1$, no $\Tsp$-spaces and the one-vs-all method. 
 
 \subsection{Zero Handling}
 \label{sec: Zero Handling}
 
-First we compare the different options of handling zeros as explained in \ref{sec: Coda Specifications}. The results are shown in figure \ref{fig:Coda zero handling Comp1}. It seems that the simple replacement strategy with $\delta_j = 0.1$, $\forall j$ results in marginally better performance.
+First we compare the different options of handling zeros as explained in section \ref{sec: Coda Specifications}. The results are shown in figure \ref{fig:Coda zero handling Comp1}. It seems that the simple replacement strategy with $\delta_j = 0.1$, $\forall j$ results in marginally better performance.
 
 \begin{figure}[htb!]
 \centering
@@ -324,7 +324,7 @@ For the simple replacement strategy, one can also vary the parameter $\delta$. I
 
 
 
-To further investigate the differences, we look in detail at the time series with the highest error measures for $\delta=0.5$. The fridge with the highest error is 100402 \ref{fig:Coda_Timeseries_ID100402}. We can see that for $\delta=0.5$ in category 4, the predictions stay at 1, even after a repeated amount of zero values. With the smaller $\delta$-values on the other hand, CoDA starts to predict zero values after one or two time points. While the absolute difference is only one, the error measure is so high because the naive random walk model predicts all values correctly as zero and therefore the nominator in equation \ref{eq: Error Measure Subsets} is theoretically zero. In practice, we implemented a fail-safe and set the nominator to 1e-6 to avoid division by 0. 
+To further investigate the differences, we look in detail at the time series with the highest error measures for $\delta=0.5$. The fridge with the highest error is 100402, shown in figure \ref{fig:Coda_Timeseries_ID100402}. We can see that for $\delta=0.5$ in category 4, the predictions stay at 1, even after a repeated amount of zero values. With the smaller $\delta$-values on the other hand, CoDA starts to predict zero values after one or two time points. While the absolute difference is only one, the error measure is so high because the naive random walk model predicts all values correctly as zero and therefore the nominator in equation \ref{eq: Error Measure Subsets} is theoretically zero. In practice, we implemented a fail-safe and set the nominator to 1e-6 to avoid division by 0. 
 
 
 \begin{figure}[htbp]
@@ -334,7 +334,7 @@ To further investigate the differences, we look in detail at the time series wit
 	\label{fig:Coda_Timeseries_ID100402}
 \end{figure}
 
-The second highest error for CoDA is for fridge 100403 \ref{fig:Coda_Timeseries_ID100403}. Again, we only have zero values for category 4 and for $\delta=0.5$ CoDA never predicts zero. The same reasoning as above can be used to explain the high error value. 
+The second highest error for CoDA is for fridge 100403, shown in \ref{fig:Coda_Timeseries_ID100403}. Again, we only have zero values for category 4 and for $\delta=0.5$ CoDA never predicts zero. The same reasoning as above can be used to explain the high error value. 
 
 \begin{figure}[htbp]
 	\centering
@@ -343,7 +343,7 @@ The second highest error for CoDA is for fridge 100403 \ref{fig:Coda_Timeseries_
 	\label{fig:Coda_Timeseries_ID100403}
 \end{figure}
 
-The same thing happens for time series 100191 \ref{fig:Coda_Timeseries_ID100191}. We have an excessive amount of zero values and if $\delta$ is too high, CoDA fails to predict the correct value. 
+The same thing happens for time series 100191 in figure \ref{fig:Coda_Timeseries_ID100191}. We have an excessive amount of zero values and if $\delta$ is too high, CoDA fails to predict the correct value. 
 
 \begin{figure}[htbp]
 	\centering
@@ -382,7 +382,7 @@ Next we compare CoDA for $\Tsp-$Spaces. The results are shown in \ref{fig:Coda T
 \label{fig:Coda T-Spaces Comp1}
 \end{figure}
 
-To further investigate the reason of this difference in performance, we picked out the two time series with the highest error. The fridge with the highest error had Id 100321. Its time series can be seen in \ref{fig:Coda_Timeseries_VariationtSpace100321}. As we can seen, CoDA with $\Tsp$-Spaces performs worse for category 1 and 2. However, the time series is also short by nature with only 14 recorded points in time.  
+To further investigate the reason of this difference in performance, we picked out the two time series with the highest error. The fridge with the highest error had Id 100321. Its time series can be seen in figure \ref{fig:Coda_Timeseries_VariationtSpace100321}. As we can seen, CoDA with $\Tsp$-Spaces performs worse for category 1 and 2. However, the time series is also short by nature with only 14 recorded points in time.  
 
 \begin{figure}[htbp]
 	\centering
@@ -391,7 +391,7 @@ To further investigate the reason of this difference in performance, we picked o
 	\label{fig:Coda_Timeseries_VariationtSpace100321}
 \end{figure}
 
-The second highest error measure has fridge 20 \ref{fig:Coda_Timeseries_VariationtSpace20}. Again, the problem lies in category 1 and 2. Especially for category 1, CoDA with $\Tsp$-Space seems to continuously underestimate the true values. For category 3 and 4, both settings have very similar results.
+The second highest error measure has fridge 20, shown in \ref{fig:Coda_Timeseries_VariationtSpace20}. Again, the problem lies in category 1 and 2. Especially for category 1, CoDA with $\Tsp$-Space seems to continuously underestimate the true values. For category 3 and 4, both settings have very similar results.
 
 \begin{figure}[htbp]
 	\centering

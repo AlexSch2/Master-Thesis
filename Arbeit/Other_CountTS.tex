@@ -6,23 +6,27 @@
 
 INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle \cite{Engle:1982} in an economic context, model the variance conditional on past values. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$ and $\SigA_{k,t}$ be the information available at time $t$. Then the ARCH(1) model is given by \cite{Engle:1982}
 
-\begin{gather}
+\begin{equation}
+\begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim N(0,h_{kt}),\\
 h_{kt} = a_0 + a_1 Y_{k,t-1}^2,
 \label{eq:ARCH model}
-\end{gather}
+\end{gathered}
+\end{equation}
 
 with $a_0\geq0$, $a_1>0$. 
 
 The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$, where $\bm{a}\geq0$ is the parameter vector with $a_p>0$, and $p \in \mathbbm{N}$ is the order of the ARCH process. 
 
-The GARCH model generalises this approach by adding the past variances as another source of information. The GARCH(p,q) model for non-negative parameters $a_0>0$, $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ and $\bm{b}=(b_1,\ldots,b_q)^T\geq0$ with $p,q \in \mathbbm{N}$,$p\geq0, q>0$ is given by \cite{Bollerslev:1986}
+The GARCH model generalises this approach by adding the past variances as another source of information. The GARCH(p,q) model for non-negative parameters $a_0>0$, $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ and $\bm{b}=(b_1,\ldots,b_q)^T\geq0$ with $p,q \in \mathbbm{N}$, $p\geq0, q>0$ is given by \cite{Bollerslev:1986}
 
-\begin{gather}
+\begin{equation}
+\begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim N(0,h_{kt}); \forall t \in \mathbbm{N}, \\
 \mathbbm{V}[Y_{kt}|\SigA_{k,t-1}]=h_{kt} = a_0 + \sum_{i=1}^p a_i Y_{k,t-i}^2 + \sum_{j=1}^q b_j h_{k,t-j};\forall t \in \mathbbm{N}.
 \label{eq:GARCH model}
-\end{gather}
+\end{gathered}
+\end{equation}
 
 Other distributions than the normal distributions can be taken as well. 
 
@@ -78,15 +82,17 @@ Since we encounter a large number of zeros, we also consider zero-inflated model
 \label{eq:ZIP Distribution}
 \end{equation}
 
-where $0 < \omega < 1$ is the zero-inflation parameter, $\lambda$ is the Poisson parameter and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources \cite{Zhu:2012}. The first part of \ref{eq:ZIP Distribution} $\delta_{y,0}$ is the degenerated point mass distribution.
+where $0 < \omega < 1$ is the zero-inflation parameter, $\lambda$ is the Poisson parameter and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources \cite{Zhu:2012}. The first part of equation \ref{eq:ZIP Distribution} $\delta_{y,0}$ is the degenerated point mass distribution.
 
 Now we can define the Zero-Inflated Poisson (ZIP) INGARCH(p,q) as
 
-\begin{gather}
+\begin{equation}
+\begin{gathered}
 \label{eq:ZIP model}
 Y_{kt} | \SigA_{k,t-1} \sim ZIP(\lambda_{kt},\omega_k); \forall t \in \mathbb{N}, \\
 \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1} \right] = \lambda_{kt} = \beta_0 + \sum_{i=1}^p\beta_i Y_{k,t-i} + \sum_{j=1}^q\alpha_j \lambda_{k,t-j}.
-\end{gather}
+\end{gathered}
+\end{equation}
 
 If $\omega =0$ then we get the normal INGARCH(p,q) model discussed above. It can be shown that the conditional mean and variance are given by
 
@@ -99,21 +105,25 @@ which implies $ \mathbb{V}[Y_{kt} | \SigA_{k,t-1}] > \mathbb{E}[Y_{kt} | \SigA_{
 
 However, due to a lack of available R-packages for zero-inflated Poisson INGARCH models, we use a zero-inflated Poisson autoregressive model. We again assume that our data is conditionally $ZIP(\lambda_{kt},\omega_{kt})$ distributed. For the parameters $\lambda_{kt}$ and $\omega_{kt}$, the ZIP autoregressive model is given by \cite{Lambert:1992}
 
-\begin{gather}
+\begin{equation}
+\begin{gathered}
 \log(\lambda_{kt}) = \bm{B}^T_{k,t-1} \bm{\beta},\\
 \log\left(\frac{\omega_{t}}{1-\omega_{kt}}\right)=\bm{Z}_{k,t-1}^T\bm{\gamma},
 \label{eq:ZIP Autoregressive model}
-\end{gather}
+\end{gathered}
+\end{equation}
 
 where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_m)^T$ are the parameters to be estimated and the vectors $\bm{B}_{k,t-1}$ and $\bm{Z}_{k,t-1}$ are the explanatory covariates. In model \ref{eq:ZIP Autoregressive model} a logit link function has been used although, it can be replaced with other link functions like the probit or log link. 
 
 In our case we regress on the past values of our time series. In that case model \ref{eq:ZIP Autoregressive model} becomes
 
-\begin{gather}
+\begin{equation}
+\begin{gathered}
 \log(\lambda_{kt}) = (1,Y_{k,t-1})^T \bm{\beta},\\
 \log\left(\frac{\omega_{kt}}{1-\omega_{kt}}\right)= 1 \cdot \gamma.
 \label{eq:ZIP Autoregressive model timeseries}
-\end{gather}
+\end{gathered}
+\end{equation}
 
 Hence we have $\bm{B}^T_{t-1} = (1,Y_{k,t-1})^T$ and $\bm{Z}_{t-1} = 1$. 
 
@@ -127,23 +137,27 @@ The one step ahead predictor is again given by the conditional expectation $\mat
 \section{Log-Linear Models}
 \label{sec: Log-Linear Models}
 
-As mentioned in \ref{sec:Ingarch Motivation} we also investigate log-linear models. These models are structurally very similar to the normal INGARCH(p,q) model, only with a logarithmic link function. They have the form 
+As mentioned in section \ref{sec:Ingarch Motivation} we also investigate log-linear models. These models are structurally very similar to the normal INGARCH(p,q) model, only with a logarithmic link function. They have the form 
 
-\begin{gather}
+\begin{equation}
+\begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \nu_{kt}= \log(\lambda_{kt}) = \beta_0 + \sum_{i=1}^p\beta_i \log(Y_{k,t-i}+1) + \sum_{j=1}^q\alpha_j \nu_{k,t-j}.
 \label{eq:Log-Linear model}
-\end{gather}
+\end{gathered}
+\end{equation}
 
-The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. We consider the Log-Linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of \ref{eq:Ingarch parameter space}, we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative \cite{Fokianos:2011}. However, in the log-linear case we can extend this to
+The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm \cite{Liboschik:2016,Fokianos:2011}. We consider the Log-Linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of the definition of the parameter space \ref{eq:Ingarch parameter space}, we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative \cite{Fokianos:2011}. However, in the log-linear case we can extend this to
 
-\begin{gather}
+\begin{equation}
+\begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \nu_{kt}= \log(\lambda_{kt}) = \beta_0 + \sum_{i=1}^p\beta_i \log(Y_{k,t-i}+1) + \sum_{j=1}^q\alpha_j \nu_{k,t-j} + \bm{\eta}^T\textbf{X}_{kt}.
 \label{eq:Log-Linear model external factors}
-\end{gather}
+\end{gathered}
+\end{equation}
 
-with $\bm{\eta} \in \mathbb{R}^r$. Additionally, because of \ref{eq:Parameter Space log-linear}, it also allows for negative autocorrelation \cite{Liboschik:2016}. 
+with $\bm{\eta} \in \mathbb{R}^r$. Additionally, because of the updated definition of the parameter space \ref{eq:Parameter Space log-linear}, it also allows for negative autocorrelation \cite{Liboschik:2016}. 
 
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: Log-Linear Parameter Estimation and Forecasting}
@@ -160,30 +174,30 @@ Just like parameter estimation, forecasting is also performed in the same way as
 Log-Linear Models are further discussed in \cite{Fokianos:2011,Woodard:2011,Douc:2013}.
 
 
-\section{Vector Generalised Additive Models}
-\label{sec:Vgam}
-
-Because we work with multivariate count data, we also look at vector generalised additive models (VGAMs) which extend generalised additive models (GAMs) to higher dimensions. GAMs allow us to reveal and model non-linear relationship in our data, as opposed to linear models or generalised linear models \cite{Yee:1996}. Let $y$ be a univariate response with a distribution in the exponential family and mean $\mu$. Further take a p-dimensional covariate vector and $\bm{x}=(x_1,\ldots,x_p)^T$. Then the generalised additive model (GAM) is given by
-
-\begin{equation}
-g(\mu) = \nu(\bm{x}) = \beta_0 + f_1(x_1) + \ldots f_p(x_p),
-\label{eq:Gam}
-\end{equation}
-
-with $f_j$ being arbitrary smooth functions \cite{Yee:1996}.
-To extend this model to the multivariate case, we replace the functions $f_j$ with vector functions. Let $\bm{f}_k(Y_{kt}) = (f_{(1)k}(Y_{kt}),\ldots,f_{(M)k}(Y_{kt}))^T$ with $M \in \mathbbm{N}$ be an arbitrary smooth vector function. Then the vector generalised additive model is given by
-
-\begin{equation}
-\mathbb{E}[\bm{Y}_t] = \bm{\beta}_0 + \sum_{k=1}^K\bm{f}_k(Y_{k,t-1}),
-\label{eq:Vgam}
-\end{equation}
-
-where $\mathbb{E}[\bm{Y}_t] = (\mathbb{E}[Y_{1t}],\ldots,\mathbb{E}[Y_{Kt}])^T$ \cite{Yee:1996}. Further theoretical background about VGAMs are given in \cite{Yee:1996,Yee:2015,Wood:2004}.
+%\section{Vector Generalised Additive Models}
+%\label{sec:Vgam}
+%
+%Because we work with multivariate count data, we also look at vector generalised additive models (VGAMs) which extend generalised additive models (GAMs) to higher dimensions. GAMs allow us to reveal and model non-linear relationship in our data, as opposed to linear models or generalised linear models \cite{Yee:1996}. Let $y$ be a univariate response with a distribution in the exponential family and mean $\mu$. Further take a p-dimensional covariate vector and $\bm{x}=(x_1,\ldots,x_p)^T$. Then the generalised additive model (GAM) is given by
+%
+%\begin{equation}
+%g(\mu) = \nu(\bm{x}) = \beta_0 + f_1(x_1) + \ldots f_p(x_p),
+%\label{eq:Gam}
+%\end{equation}
+%
+%with $f_j$ being arbitrary smooth functions \cite{Yee:1996}.
+%To extend this model to the multivariate case, we replace the functions $f_j$ with vector functions. Let $\bm{f}_k(Y_{kt}) = (f_{(1)k}(Y_{kt}),\ldots,f_{(M)k}(Y_{kt}))^T$ with $M \in \mathbbm{N}$ be an arbitrary smooth vector function. Then the vector generalised additive model is given by
+%
+%\begin{equation}
+%\mathbb{E}[\bm{Y}_t] = \bm{\beta}_0 + \sum_{k=1}^K\bm{f}_k(Y_{k,t-1}),
+%\label{eq:Vgam}
+%\end{equation}
+%
+%where $\mathbb{E}[\bm{Y}_t] = (\mathbb{E}[Y_{1t}],\ldots,\mathbb{E}[Y_{Kt}])^T$ \cite{Yee:1996}. Further theoretical background about VGAMs are given in \cite{Yee:1996,Yee:2015,Wood:2004}.
 
 \section{AR Models}
 \label{sec: Ar Models}
 
-Autoregressive models of order p (AR(p))  are one of the most simple time series models, which makes them very popular. For $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\epsilon_{kt} \sim WN(\sigma^2)$, called innovations as well, they are defined as 
+Autoregressive models of order p (AR(p))  are one of the most simple time series models, which makes them very popular. For $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\epsilon_{kt} \sim WN(\sigma^2)$, called innovations, they are defined as 
 
 \begin{equation}
 Y_{kt} = a_1Y_{k,t-1} + \ldots + a_pY_{k,t-p} + \epsilon_{kt},
@@ -204,7 +218,7 @@ where $\bm{a}_j \in \mathbbm{R}^{k \times k}$ and $\bm{\epsilon}_t \sim WN(\Sigm
 
 The simplicity of AR models makes parameter estimation and forecasting easy. There are various ways to estimate the parameters in model \ref{eq: Var Model} such as the Yule-Walker equations, the ordinary least squares (OLS) estimator and if the innovations $(\bm{\epsilon}_t)$ are multivariate normal distributed, then the maximum likelihood estimator can be used as well. Further properties and comparison of their estimators can be found in \cite{Scherrer:2021}. 
 
-Like parameter estimation, forecasting is also simple in the AR model. Using the mean squared error as a measure,only considering affine forecasts and using $m \in \mathbbm{N}$ past values , hence 
+Like parameter estimation, forecasting is also simple in the AR model. Using the mean squared error as a measure, only considering affine forecasts and using $m \in \mathbbm{N}$ past values, hence 
 
 \begin{equation}
 \hat{\bm{Y}}_{t+h} = \bm{c}_0 + \bm{c}_1\bm{Y}_{t} + \ldots + \bm{c}_m\bm{Y}_{t-m+1},
@@ -259,7 +273,7 @@ where
 
 \begin{enumerate}
 	\item $(\epsilon_t)$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second and third moment, 
-	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and $(Z_j)$ for $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $(\epsilon_t)$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$ as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
+	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and $(Z_j)$ for $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $(\epsilon_t)$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
 	\item $\alpha_i \in [0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$,
 	\item $\sum_{j=1}^p \alpha_j < 1$ \cite{Silva:2005}. 
 \end{enumerate}
@@ -276,10 +290,10 @@ Y_{kt} = \alpha_1 \circ Y_{k,t-1} + \alpha_2 \circ Y_{k,t-2} + \ldots + \alpha_p
 
 For simplicity, we will consider INAR(1) models, although the optimal choice of the lag is something that could be further investigated. 
 
-\subsection{Distributional assumptions}
+\subsection{Distributional Assumptions}
 \label{sec: Inar Distributional assumptions}
 
-While we will mainly assume that the innovations $(\epsilon_t)$ follow a Poisson distribution, they can also follow other distributions. One interesting option is, that one can choose a zero-inflated distribution as mentioned in \ref{sec: Zim}. This could make the model adequate for our data. 
+While we will mainly assume that the innovations $(\epsilon_t)$ follow a Poisson distribution, they can also follow other distributions. One interesting option is, that one can choose a zero-inflated distribution. This could make the model adequate for our data. 
 
 
 \subsection{Parameter Estimation and Forecasting}
@@ -295,7 +309,7 @@ The authors in \cite{Silva:2005} present two types of forecasting methods for IN
 \end{equation}
 
 
-However, this forecast hardly ever produces integer values. One option is to take the value which minimises the absolute expected error $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$ instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$ \cite{Silva:2005,Freeland:2004}. Another option is a bayesian approach presented in \cite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha,\lambda)$ are random \cite{Silva:2005}. Since the complexity posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \cite{Silva:2005}. The estimator for the conditional expectation is then given by
+However, this forecast hardly ever produces integer values. One option to counter this problem, is to take the value which minimises the absolute expected error $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$ instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$ \cite{Silva:2005,Freeland:2004}. Another option is a bayesian approach presented in \cite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha,\lambda)$ are random \cite{Silva:2005}. Since the complexity posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \cite{Silva:2005}. The estimator for the conditional expectation is then given by
 
 \begin{equation}
 \hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_i^m\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_i^h}{1-\alpha_i}\lambda_i\right),
@@ -328,4 +342,4 @@ Another option is based on predictive distributions where an adjusted probabilit
 %Using other defintion of INAR(p) model. 
 %While structurally the AR(P) and then INAR(P) model look similar they have different properties. The only exception is for $p=1$. The authors in \cite{McKenzie:1986} and \cite{Alzaid:1988} noted that the aside from their structural similarity, those two processes also show the same autocorrelation and regression behaviour \cite{Alzaid:1990}. However, for $p>1$ the similarities end at the structure. For an INAR(p) process, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ have a mutual dependence structure for $i=1,2,\ldots,p$ which induces a moving-average structure. In the AR(p) process they are only connected by the presence of $Y_{t,k}$. Because of this additional dependence, it can be shown that the autocorrelation behaves more like a standard ARMA(p,p-1) process \cite{Alzaid:1990}. 
 
-Depending on the definition of the INAR(p) model, the degree of similarity varies. If one follows the definition of \cite{Guan:1991}, which is the one in \ref{eq:Inar(p) model}, then the autocorrelation function follows that of an AR(p) process \cite{Oliveira:2005}. However, the authors in \cite{Alzaid:1990} propose a different definition. In their work, given $Y_{tk}=y_{tk}$, the conditional distribution of $(\alpha_1 \circ Y_{tk}, \ldots, \alpha_p \circ Y_{tk})$ is multinomial with parameters $( \alpha_1,\ldots,\alpha_p,y_{tk})$ and is independent of the history of the process. Under those assumptions, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ for $i=1,2,\ldots,p$  have a stronger mutual dependence structure than the corresponding AR(p) process and induce a moving-average structure \cite{Alzaid:1990}.
+Depending on the definition of the INAR(p) model, the degree of similarity varies. If one follows the definition of \cite{Guan:1991}, which is the one given in equation \ref{eq:Inar(p) model}, then the autocorrelation function follows that of an AR(p) process \cite{Oliveira:2005}. However, the authors in \cite{Alzaid:1990} propose a different definition. In their work, given $Y_{tk}=y_{tk}$, the conditional distribution of $(\alpha_1 \circ Y_{tk}, \ldots, \alpha_p \circ Y_{tk})$ is multinomial with parameters $( \alpha_1,\ldots,\alpha_p,y_{tk})$ and is independent of the history of the process. Under those assumptions, the components $\alpha_i \circ Y_{t,k}$ of $Y_{t,k}$ for $i=1,2,\ldots,p$  have a stronger mutual dependence structure than the corresponding AR(p) process and induce a moving-average structure \cite{Alzaid:1990}. Because of this additional dependence, it can be shown that the autocorrelation behaves more like a standard ARMA(p,p-1) process \cite{Alzaid:1990}. 

@@ -6,7 +6,7 @@
 
 We conducted our analysis in the statistical software R \cite{R:2022}. For our data cleansing, data handling and plotting we use the \textit{tidyverse} package \cite{Tidyverse:2019}. Further we use the packages \textit{here} \cite{here:2020}, \textit{miceadds} \cite{Miceadds:2023} and \textit{parallel}, which is part of core R, to facilitate our analysis.  
 
-For building our CoDA model we use the packages \textit{vars} \cite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} \cite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the ilr transformation described in \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in \ref{sec:The VAR Model}, and \texttt{pivotCoordInv} which performs the necessary back transformation to get predictions in the desired space. The INGARCH analysis is mainly done with the package \textit{tscount} \cite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm} which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated model were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} \cite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} \cite{RVGAM:2010}. To fit the INAR model we use two packages. First \textit{ZINAp} to calculate our predictions with the bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \cite{Silva:2009}. Second, the classical approach was done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
+For building our CoDA model we use the packages \textit{vars} \cite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} \cite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the ilr transformation described in section \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in section \ref{sec:The VAR Model}, and \texttt{pivotCoordInv} which performs the necessary back transformation to get predictions in the desired space. The INGARCH analysis is mainly done with the package \textit{tscount} \cite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm} which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated model were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} \cite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} \cite{RVGAM:2010}. To fit the INAR model we use two packages. First \textit{ZINAp} to calculate our predictions with the bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \cite{Silva:2009}. Second, the classical approach was done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
 
 In general, all functions can be grouped into three categories: general, count data model specific and CoDA specific. General functions are used for both, the count data models and the CoDA model. Count data model and CoDA specific functions are only used for their respective methods.
 \subsection{Handbook}
@@ -76,7 +76,7 @@ When the argument OneVsAll is TRUE, then a tibble with three columns is returned
 \subsubsection{Model.Error}
 \label{sec:Model.Error}
 
-The function \texttt{Model.Error} calculates the specified error measure for each time series and category. Since we want to compare the performance of a method with the one of the naive model in \ref{sec: Naive Random Walk} we calculate the errors for this model as well. 
+The function \texttt{Model.Error} calculates the specified error measure for each time series and category. Since we want to compare the performance of a method with the one of the naive model in section \ref{sec: Naive Random Walk} we calculate the errors for this model as well. 
 
 \textbf{Arguments}:
 
@@ -95,13 +95,13 @@ A tibble with the columns is returned:
 	\item category: The category for which the error was calculated. 
 	\item error: The error calculated according to the error function in the Fnct argument. 
 	\item error\_naive: The value of the error function for the naive random walk model.
-	\item model: Which model was used. 
+	\item model: The used model.  
 \end{itemize}
 
 \subsubsection{Model.ErrorOverall}
 \label{sec:Model.ErrorOverall}
 
-The function \texttt{Model.ErrorOverall} is closely related to \texttt{Model.Error}. This function calculates the error measure defined in \ref{sec: Error Measure}. One can decide if the error measure should be calculated over all categories or if they should be split up in subsets as in \ref{sec:Error Measure Extension}.
+The function \texttt{Model.ErrorOverall} is closely related to \texttt{Model.Error}. This function calculates the error measure defined in section \ref{sec: Error Measure}. One can decide if the error measure should be calculated over all categories or if they should be split up in subsets as in subsection \ref{sec:Error Measure Extension}.
 
 \textbf{Arguments}:
 
@@ -119,8 +119,8 @@ The result is a tibble with the columns:
 \begin{itemize}
 	\item id: The id of the fridge. 
 	\item error: The error calculated according to the error function in the Fnct argument. 
-	\item model: Which model was used. 
-	\item group: The subsets of categories as defined in \ref{sec:Error Measure Extension}.
+	\item model: The used model. 
+	\item group: The subsets of categories as defined in subsection \ref{sec:Error Measure Extension}.
 \end{itemize}
 
 
@@ -150,7 +150,7 @@ A tibble with two or more columns is returned, depending on the number of catego
 \subsubsection{CountModel.Prediction}
 \label{sec:CountModel.Prediction}
 
-The function \texttt{CountModel.Prediction} is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions mentioned in \ref{sec:R-Packages} to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. 
+The function \texttt{CountModel.Prediction} is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions mentioned in section \ref{sec:R-Packages} to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. 
 
 \textbf{Arguments}:
 
@@ -163,7 +163,7 @@ The function \texttt{CountModel.Prediction} is the function where the model is f
   \item Distribution: The distribution chosen for the model. Care has to be taken, since every model can choose from a different list of distribution and its name has to be specified correctly (i.e. "`Po"' for INAR but "`poisson"' for ZIM). 
   \item Plot: For the INGARCH model, diagnostic plots can be generated. Currently not implemented.
   \item WindowMethod: Method for splitting up the time series. For example if the windows are extended at each step or kept at a fixed length.
-  \item External: For INGARCH. When TRUE, external factors as in \ref{eq:Ingarch model with external effect} are used.
+  \item External: For INGARCH. When TRUE, external factors as in equation \ref{eq:Ingarch model with external effect} are used.
   \item PastOb: For INGARCH. How many past observations should be used. Equals $p$ in equation \ref{eq:Ingarch model}.
   \item PastMean: For INGARCH. How many past means should be used. Equals $q$ in equation \ref{eq:Ingarch model}.
   \item ModelType: Model to be fit. 
@@ -202,7 +202,7 @@ The function \texttt{CountModel.Analysis} acts as a wrapper function to streamli
   \item ZeroHandling: Method for zero handling. Currently there is no treatment or them being replaced with 1. 
   \item PastOb: For INGARCH. How many past observations should be used. Equals $p$ in equation \ref{eq:Ingarch model}.
   \item PastMean: For INGARCH. How many past means should be used. Equals $q$ in equation \ref{eq:Ingarch model}.
-  \item External: For INGARCH. When TRUE, external factors as in \ref{eq:Ingarch model with external effect} are used.
+  \item External: For INGARCH. When TRUE, external factors as in equation \ref{eq:Ingarch model with external effect} are used.
   \item HistoryLength: The length of the history. Can be an absolute number or a ratio $0<h\leq 1$.
   \item Multicore: When TRUE, then calculations are done on multiple cores to improve performance. Internally the parallelisation takes place across the different categories to be calculated. 
   \item NCores: The number of cores to be used for parallelisation. 
@@ -239,14 +239,14 @@ The function \texttt{Coda.DataPreparation} is analogue to CountModel.Preparation
 The result is a tibble. The columns are the ilr transformed data and hence the number of columns depends on the dimension of the data:
 
 \begin{itemize}
-	\item week\_date: The values of the window
+	\item week\_date: The values of the window.
 	\item \textit{Name of ilr transformed category 1}: The ilr transformed values.
 \end{itemize}
 
 If $\Tsp$-Spaces are used then an additional column with the sum or log-sum is added:
 
 \begin{itemize}
-	\item week\_date: The values of the window
+	\item week\_date: The values of the window.
 	\item \textit{Name of ilr transformed category 1}: The ilr transformed values.
 	\item tsum: Either the total sum or log-sum. 
 \end{itemize}

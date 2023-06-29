@@ -22,7 +22,7 @@ where $K$ stands for the number of categories, $T_f$ denotes the total length of
 \label{eq:time series definition fraction}
 \end{equation}
 
-So \ref{eq:time series definition} describes the whole time series available, while \ref{eq:time series definition fraction} describes the time series used and it holds $T\leq T_f$. In the following we will use \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
+So equation \ref{eq:time series definition} describes the whole time series available, while equation \ref{eq:time series definition fraction} describes the time series used and it holds $T\leq T_f$. In the following we will use equation \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
 
 The data is measured on a weekly basis and hence our points in time are equidistant. One noteworthy feature of our data is the amount of 0 and NA values, which will be dived into in later sections. An additional characteristic of our data is the difference in length for various time series. While for some time series we have 70+ data points, for others we have less than 10. An example view of our data would be: 
 
@@ -45,7 +45,7 @@ The data is measured on a weekly basis and hence our points in time are equidist
 \label{tab:ExampleData}
 \end{table}
 
-As mentioned before, we mainly aggregate our data on main category level. This means that we do not differentiate between the subcategories and are only interested in the number of items sold for each main category. Our data in \ref{tab:ExampleData} would then change to \ref{tab:ExampleData aggregated}:
+As mentioned before, we mainly aggregate our data on main category level. This means that we do not differentiate between the subcategories and are only interested in the number of items sold for each main category. Our data in table \ref{tab:ExampleData} would then change to \ref{tab:ExampleData aggregated}:
 
 \begin{table}[h!]
 \centering
@@ -67,4 +67,4 @@ As mentioned before, we mainly aggregate our data on main category level. This m
 \section{Outlook}
 \label{sec: Outlook}
 
-The remainder of the thesis is split in the following way. In chapters \ref{sec:CountTS} and \ref{sec:Coda} we describe our methodologies used and the reasoning why we are using them. We provide a short literature review about count data time series in \ref{sec:CountTS}. In these chapters we also lay the mathematical groundwork for the considered methods. In chapter \ref{sec:Application} we explain the specification and tuning options for our models and also introduce an error measure to evaluate their performance. We show the results on some exemplary time series and then show the results of each tuning parameter. In \ref{sec:R-Code} we explain the R-functions used and provide a guidebook.% In the conclusion \ref{sec: Conclusion} we summarise our findings and provide a further outlook on the topic. 
+The remainder of the thesis is split in the following way. In chapters \ref{sec:CountTS} and \ref{sec:Coda} we describe our methodologies used and the reasoning why we are using them. We provide a short literature review about count data time series in section \ref{sec:CountTS}. In these chapters we also lay the mathematical groundwork for the considered methods. In chapter \ref{sec:Application} we explain the specification and tuning options for our models and also introduce an error measure to evaluate their performance. We show the results on some exemplary time series and then show the results of each tuning parameter. In section \ref{sec:R-Code} we explain the R-functions used and provide a guidebook.% In the conclusion \ref{sec: Conclusion} we summarise our findings and provide a further outlook on the topic. 
