@@ -2344,47 +2344,6 @@
       \verb 10.21105/joss.01686
       \endverb
     \endentry
-    \entry{Wood:2004}{article}{}
-      \name{author}{1}{}{%
-        {{hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
-           family={Wood},
-           familyi={W\bibinitperiod},
-           given={Simon\bibnamedelima N.},
-           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {[American Statistical Association, Taylor \& Francis, Ltd.]}%
-      }
-      \strng{namehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{fullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{bibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{labelalpha}{Woo04}
-      \field{sortinit}{W}
-      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{01621459}
-      \field{journaltitle}{Journal of the American Statistical Association}
-      \field{number}{467}
-      \field{title}{Stable and Efficient Multiple Smoothing Parameter Estimation for Generalized Additive Models}
-      \field{urlday}{30}
-      \field{urlmonth}{4}
-      \field{urlyear}{2023}
-      \field{volume}{99}
-      \field{year}{2004}
-      \field{urldateera}{ce}
-      \field{pages}{673\bibrangedash 686}
-      \range{pages}{14}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/27590439
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/27590439
-      \endverb
-    \endentry
     \entry{Woodard:2011}{article}{}
       \name{author}{3}{}{%
         {{hash=f14bde91cea7d327d1e4a9bd5aac0749}{%
@@ -2436,82 +2395,6 @@
       \endverb
       \keyw{drift conditions,Ergodic,Feller,irreducibility,stationary,time series}
     \endentry
-    \entry{Yee:1996}{article}{}
-      \name{author}{2}{}{%
-        {{hash=a9a5a50bccf047f3d6a65308f04e0987}{%
-           family={Yee},
-           familyi={Y\bibinitperiod},
-           given={T.\bibnamedelimi W.},
-           giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-        {{hash=316fb3b9e6c322e18a7cbfa651f82df0}{%
-           family={Wild},
-           familyi={W\bibinitperiod},
-           given={C.\bibnamedelimi J.},
-           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {[Royal Statistical Society, Wiley]}%
-      }
-      \strng{namehash}{9a31ef6231360afa2bf3898b1f7548e1}
-      \strng{fullhash}{9a31ef6231360afa2bf3898b1f7548e1}
-      \strng{bibnamehash}{9a31ef6231360afa2bf3898b1f7548e1}
-      \strng{authorbibnamehash}{9a31ef6231360afa2bf3898b1f7548e1}
-      \strng{authornamehash}{9a31ef6231360afa2bf3898b1f7548e1}
-      \strng{authorfullhash}{9a31ef6231360afa2bf3898b1f7548e1}
-      \field{labelalpha}{YW96}
-      \field{sortinit}{Y}
-      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{00359246}
-      \field{journaltitle}{Journal of the Royal Statistical Society. Series B (Methodological)}
-      \field{number}{3}
-      \field{title}{Vector Generalized Additive Models}
-      \field{urlday}{30}
-      \field{urlmonth}{4}
-      \field{urlyear}{2023}
-      \field{volume}{58}
-      \field{year}{1996}
-      \field{urldateera}{ce}
-      \field{pages}{481\bibrangedash 493}
-      \range{pages}{13}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/2345888
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/2345888
-      \endverb
-    \endentry
-    \entry{Yee:2015}{book}{}
-      \name{author}{1}{}{%
-        {{hash=60cfa95cd3d0fcdb0c870a7fa5855108}{%
-           family={Yee},
-           familyi={Y\bibinitperiod},
-           given={Thomas},
-           giveni={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
-      \strng{fullhash}{60cfa95cd3d0fcdb0c870a7fa5855108}
-      \strng{bibnamehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
-      \strng{authorbibnamehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
-      \strng{authornamehash}{60cfa95cd3d0fcdb0c870a7fa5855108}
-      \strng{authorfullhash}{60cfa95cd3d0fcdb0c870a7fa5855108}
-      \field{extraname}{1}
-      \field{labelalpha}{Yee15}
-      \field{sortinit}{Y}
-      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{isbn}{978-1-4939-2817-0}
-      \field{month}{01}
-      \field{title}{Vector Generalized Linear and Additive Models: With an Implementation in R}
-      \field{year}{2015}
-      \field{pages}{1\bibrangedash 589}
-      \range{pages}{589}
-      \verb{doi}
-      \verb 10.1007/978-1-4939-2818-7
-      \endverb
-    \endentry
     \entry{RVGAM:2010}{article}{}
       \name{author}{1}{}{%
         {{hash=7467dc5e783b7611642bfcd1c127db99}{%
@@ -2526,7 +2409,6 @@
       \strng{authorbibnamehash}{7467dc5e783b7611642bfcd1c127db99}
       \strng{authornamehash}{7467dc5e783b7611642bfcd1c127db99}
       \strng{authorfullhash}{7467dc5e783b7611642bfcd1c127db99}
-      \field{extraname}{2}
       \field{labelalpha}{Yee10}
       \field{sortinit}{Y}
       \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}

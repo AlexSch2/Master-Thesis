@@ -372,7 +372,7 @@ Here, $DL$ is the mapped censoring threshold \cite{Palarea-Albaladejo:2015}. Ass
 \label{eq:E-step}
 \end{equation}
 
-where $\hat{\lambda}^{(t)}=\frac{\phi((DL-\bm{y}_{obs}\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}{\Phi((DL-\bm{y}_{obs}\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}$ is the inverse Mills ratio. The function $\phi$ denotes the standard normal density and $\Phi$ is its distribution. The parameter $\hat{\beta}$ is the ML estimate of the regression parameters and $\hat{\sigma}^2$ is the ML estimate of the variance \cite{Palarea-Albaladejo:2015}.
+where $\hat{\lambda}^{(t)}=\frac{\phi((DL-\bm{y}_{obs}\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}{\Phi((DL-\bm{y}_{obs}\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}$ is the inverse Mills ratio and $\hat{\theta}^{(t)}=(\hat{\beta}^{(t)},\hat{\sigma}^{(t)})$. The function $\phi$ denotes the standard normal density and $\Phi$ is its distribution. The parameter $\hat{\beta}$ is the ML estimate of the regression parameters and $\hat{\sigma}^2$ is the ML estimate of the variance \cite{Palarea-Albaladejo:2015}.
 
 As seen, an initial estimation is required to kick start the iteration. This can be done by either using a subset of the data which was fully observed or by using other imputation methods \cite{Palarea-Albaladejo:2015}. 
 
@@ -387,7 +387,7 @@ The Markov Chain Monte Carlo(MCMC) algorithm can be seen as the Bayesian counter
 	\item Posterior-Step: Generate $\hat{\theta}_{t+1}$ by simulating from $P(\theta|\hat{\bm{x}}_{non},\bm{x}_{obs})$. 
 \end{enumerate}
 
-In the imputation step, the value $\hat{\bm{x}}_{non}$ is drawn from the conditional, right-truncated normal distribution with estimated mean $\bm{x}_{obs}\hat{\beta}$, variance $\hat{\sigma}^2$ and truncation point given by $DL$. The posterior step simulates the parameters $\theta = (\mu,\Sigma)$, where $\Sigma$ denotes the covariance matrix from the data posterior distribution. This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement \cite{Palarea-Albaladejo:2015}.
+In the imputation step, the value $\hat{\bm{x}}_{non}$ is drawn from the conditional, right-truncated normal distribution with estimated mean $\bm{x}_{obs}\hat{\beta}$, variance $\hat{\sigma}^2$ and truncation point given by $DL$. The posterior step simulates the parameter $\theta$. This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement \cite{Palarea-Albaladejo:2015}. %The posterior step simulates the parameters $\theta = (\mu,\Sigma)$, where $\Sigma$ denotes the covariance matrix from the data posterior distribution.
 
 
 \subsubsection{Bayesian-multiplicative replacement}
