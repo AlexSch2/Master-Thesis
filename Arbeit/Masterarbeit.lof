@@ -4,28 +4,28 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Time series for two fridges\relax }}{39}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Time series with CoDA model\relax }}{40}{figure.caption.26}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Time series with INGARCH model\relax }}{40}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Time series with both models\relax }}{41}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Time series with both models and their prediction intervals\relax }}{42}{figure.caption.29}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Comparison of the different models\relax }}{54}{figure.caption.50}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison of the different models \relax }}{55}{figure.caption.51}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison of different $h$\relax }}{56}{figure.caption.54}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Comparison of different $w$\relax }}{57}{figure.caption.57}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Comparison of different window shapes\relax }}{58}{figure.caption.60}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Comparison of different distributions\relax }}{59}{figure.caption.63}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison of a different number of past means\relax }}{60}{figure.caption.66}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison of a different number of past observations\relax }}{61}{figure.caption.67}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of different zero handling methods\relax }}{62}{figure.caption.68}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Error Measure for all categories\relax }}{63}{figure.caption.69}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Error Measure for Category 4\relax }}{64}{figure.caption.70}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Time series for fridge 100402\relax }}{64}{figure.caption.71}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Time series for fridge 100403\relax }}{65}{figure.caption.72}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Time series for fridge 100191\relax }}{65}{figure.caption.73}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{66}{figure.caption.74}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Time series of fridge 100321\relax }}{67}{figure.caption.75}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Time series of fridge 20\relax }}{68}{figure.caption.76}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{69}{figure.caption.77}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Time series for two fridges\relax }}{39}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Time series with CoDA model\relax }}{40}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Time series with INGARCH model\relax }}{40}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Time series with both models\relax }}{41}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Time series with both models and their prediction intervals\relax }}{42}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Comparison of the different models\relax }}{54}{figure.caption.48}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison of the different models \relax }}{55}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison of different $h$\relax }}{57}{figure.caption.52}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Comparison of different $w$\relax }}{58}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Comparison of different window shapes\relax }}{59}{figure.caption.58}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Comparison of different distributions\relax }}{60}{figure.caption.61}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison of a different number of past means\relax }}{61}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison of a different number of past observations\relax }}{62}{figure.caption.65}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of different zero handling methods\relax }}{63}{figure.caption.66}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Error Measure for all categories\relax }}{64}{figure.caption.67}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Error Measure for Category 4\relax }}{64}{figure.caption.68}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Time series for fridge 100402\relax }}{65}{figure.caption.69}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Time series for fridge 100403\relax }}{65}{figure.caption.70}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Time series for fridge 100191\relax }}{66}{figure.caption.71}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Comparison of CoDA with and without $\mathcal {T}-$Spaces\relax }}{67}{figure.caption.72}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Time series of fridge 100321\relax }}{68}{figure.caption.73}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Time series of fridge 20\relax }}{68}{figure.caption.74}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Comparison of CoDA with and without One-vs-All\relax }}{69}{figure.caption.75}%
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

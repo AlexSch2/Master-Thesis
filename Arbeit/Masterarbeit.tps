@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Results.tex
 
 [Frame0_View0,0]
-TopLine=448
-Cursor=23594
+TopLine=339
+Cursor=19742
 
 [Frame1]
 Flags=0
@@ -29,13 +29,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Masterarbeit.tex
 
 [Frame1_View0,0]
-TopLine=76
+TopLine=9
 Cursor=2695
 
 [Frame2]
@@ -47,14 +47,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Model_Specification.tex
 
 [Frame2_View0,0]
-TopLine=15
-Cursor=2175
+TopLine=53
+Cursor=5278
 
 [Frame3]
 Flags=0
@@ -65,14 +65,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=RCode.tex
 
 [Frame3_View0,0]
-TopLine=4
-Cursor=803
+TopLine=15
+Cursor=2248
 
 [Frame4]
 Flags=0
@@ -83,8 +83,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Abstract.tex
 
@@ -101,13 +101,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Einleitung.tex
 
 [Frame5_View0,0]
-TopLine=43
+TopLine=17
 Cursor=6501
 
 [Frame6]
@@ -119,14 +119,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Methode_CountTS.tex
 
 [Frame6_View0,0]
-TopLine=188
-Cursor=17271
+TopLine=148
+Cursor=16205
 
 [Frame7]
 Flags=0
@@ -137,14 +137,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Other_CountTS.tex
 
 [Frame7_View0,0]
-TopLine=357
-Cursor=25277
+TopLine=229
+Cursor=14990
 
 [Frame8]
 Flags=0
@@ -155,14 +155,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Methode_Coda.tex
 
 [Frame8_View0,0]
-TopLine=431
-Cursor=29862
+TopLine=168
+Cursor=11764
 
 [Frame9]
 Flags=0
@@ -173,13 +173,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=RFunctions.tex
 
 [Frame9_View0,0]
-TopLine=1110
+TopLine=1098
 Cursor=38587
 
 [Frame10]
@@ -191,14 +191,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=BibTeXView
 Document=Literatur.bib
 
 [Frame10_View0,0]
-TopLine=885
-Cursor=30647
+TopLine=862
+Cursor=30643
 
 [Frame11]
 Flags=0
@@ -209,8 +209,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Conclusion.tex
 
@@ -227,13 +227,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Examples_Applications.tex
 
 [Frame12_View0,0]
-TopLine=25
+TopLine=24
 Cursor=3321
 
 [Frame13]
@@ -245,14 +245,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Deckblatt.tex
 
 [Frame13_View0,0]
 TopLine=0
-Cursor=841
+Cursor=280
 
 [Frame14]
 Flags=0
@@ -263,8 +263,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=883
+NormalPos.right=2556
+NormalPos.bottom=875
 Class=LaTeXView
 Document=Danksagung.tex
 
@@ -274,7 +274,7 @@ Cursor=394
 
 [SessionInfo]
 FrameCount=15
-ActiveFrame=0
+ActiveFrame=1
 
 [Bookmarks]
 Results.tex=81 

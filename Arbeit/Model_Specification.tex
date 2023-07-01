@@ -7,6 +7,8 @@ Another varying factor is the history. We define the history $h$ as the proporti
 
 Closely related to the length of the history, is the shape of the window used. The window determines which values are used to estimate the parameters at each point in time. The shape includes both the initial length of the window and the way new values are handled. As the different time series vary in length, we choose the possible window length as a fraction of the time series history. Hence, we define the initial window length as $w_f:=w \cdot T$ with $0 < w \leq 1$. For the way how new values are handled, we focus on two different approaches. The first one uses a fixed window length. This means when a new time point is available, it will be included in the estimation while simultaneously the oldest time point will be removed from the estimation. This has the advantage of only using the most recent and relevant information. The second approach extends the window at each point in time. When a new value is available, it is included in the estimation of the parameter. With this approach we have more data available at each step and combined with the varying history length we don't have to rely on information that is too old.
 
+The optimal one step ahead prediction for the different models is given in their respective theoretical sections. However, since none of the models return integer valued results, we round the predicted values to the nearest integer. 
+
 \subsection{CoDA Specifications}
 \label{sec: Coda Specifications}
 
@@ -38,27 +40,29 @@ As already hinted in the description of the methodology, we consider the use of 
 
 with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$ and we get model \ref{eq:VAR model Tspace}.
 
+%The optimal one step ahead prediction is described in section \ref{sec: AR Estimation and Forecasting}. However, since we only have integer valued data, we round the predicted values to the nearest integer. 
+
 \subsection{INGARCH Specifications}
 \label{sec: Ingarch Specifications}
 
-As an alternative to the Poisson distribution in \ref{eq:Ingarch Distribution}, a negative binomial distribution can be used as well. This would change \ref{eq:Ingarch Distribution} to 
+As an alternative to the Poisson distribution in \ref{eq:Ingarch Distribution}, a Negative Binomial distribution can be used as well. This would change \ref{eq:Ingarch Distribution} to 
 
 \begin{equation}
 p_{kt}(y;\bm{\theta})=\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \frac{\Gamma(\phi+y)}{\Gamma(y+1)\Gamma(\phi)}\left(\frac{\phi}{\phi+\lambda_{kt}}\right)^\phi\left(\frac{\lambda_{kt}}{\phi+\lambda_{kt}}\right)^y, \hspace{0.2cm} y \in \mathbb{N}_0.
 \label{eq:Ingarch negbinom Distribution}
 \end{equation}
 
-With the negative Binomial Distribution, the conditional variance is larger than the conditional mean $\lambda_{kt} = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right]$.
+With the Negative Binomial Distribution, the conditional variance is larger than the conditional mean $\lambda_{kt} = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right] > \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right]$.
 
 As seen in the model \ref{eq:Ingarch model with external effect}, we can also choose to include external factors. However, as our data is of the structure where we don't have information about $\bm{X}_t$ at time $t$, we cannot make use of it. 
 
 The values $p$ and $q$ are also varying parameters which have to be chosen. One could use the AIC or some other criteria to get the optimal lag order. However, this is not in the scope of this thesis and hence will be left as a future extension.
 
-The optimal one step ahead prediction is given by the conditional expectation \ref{sec: Estimation of the Ingarch Model}. However, since we only expect integer values and $\lambda_{k,t+1} \in \mathbbm{R}_+$, we will round the values of $\lambda_{k,t+1}$ to the next integer and use this value. 
+%The optimal one step ahead prediction is given by the conditional expectation \ref{sec: Estimation of the Ingarch Model}. However, since we only expect integer values and $\lambda_{k,t+1} \in \mathbbm{R}_+$, we will round the values of $\lambda_{k,t+1}$ to the next integer and use this value. 
 
 
 
-\subsection{Error Measure}
+\section{Error Measure}
 \label{sec: Error Measure}
 
 In order to compare the results of the methods with each other, we will introduce a new error measure. The goal of this measure is to get a performance indicator for each fridge, which can be used for comparison and summarisation. Since the scales of the fridges vary, the measure should be scale independent but because our data contains many zeros, we cannot use a percentage error measure. In addition, we want to penalise big absolute difference between the predicted values and actual values. These requirements lead us to the following measure.

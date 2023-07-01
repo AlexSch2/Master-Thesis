@@ -167,24 +167,24 @@ Let $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f$ be ou
 where $\textbf{c}_{\textbf{V}} \in \mathbb{R}^{K-1}$ is a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{(K-1) \times (K-1)}$ are parameter matrices and $\bm{\epsilon}_t$ is a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. The observation $\textbf{u}_t$ therefore depends on the p past observations $\textbf{u}_{t-1},\ldots,\textbf{u}_{t-p}$. It can be shown, that two VAR(p) models resulting from different $ilr$ transformations are compositionally equivalent, which means that the same predictions are obtained \cite{Kynclova:2015}. 
 
 
-\subsubsection{Estimation of the VAR Model}
-\label{sec: Estimation of the Var Model}
+%\subsubsection{Estimation and Forecasting of the VAR Model}
+%\label{sec: Estimation of the Var Model}
 
-
-Assuming $T$ observations are used for the model, equation \ref{eq:VAR model} can be written in matrix form as
-
-\begin{gather*}
-\textbf{U} = \textbf{ZB} + \textbf{E}, \\
-\textbf{U} = (\textbf{u}_1,\ldots,\textbf{u}_T)^T \in \mathbb{R}^{T \times (K-1)}, \\
-\textbf{Z} \in \mathbb{R}^{T \times \left[(K-1)p+1\right]} \text{ with } \textbf{Z}_t = \left(1,\textbf{u}_{t-1}^T,\ldots,\textbf{u}_{t-p}^T\right)^T, \\ %von \cite{Kynclova:2015}
-\textbf{B} = \left[\textbf{c},\textbf{A}^{(1)}, \ldots, \textbf{A}^{(p)}\right]^T \in \mathbb{R}^{(K-1)p +1 \times (K-1)}.
-\label{eq:VAR model matrix}
-\end{gather*}
-
-
-The parameter $\textbf{B}$ can then be estimated separately for each column of $\textbf{U}$ by the ordinary least squares (OLS) method. In addition, if there are no restrictions posed on the parameter, the estimator is equal to the generalised least squares (GLS). If the VAR(p) process is normally distributed and the rows of the error matrix $\textbf{E}$ represent a white noise process, thus $\bm{E} \sim WN(\Sigma)$ where $\Sigma$ is the covariance matrix, then the estimator is also equal to the maximum likelihood (ML) estimator. 
-Under these assumptions it can be shown that the OLS estimator is consistent and asymptotic normal \cite{Kynclova:2015} \cite{Luetkepohl:2007}. 
-
+Estimation and Forecasting of model \ref{eq:VAR model} can be done with the methods described in section \ref{sec: AR Estimation and Forecasting}.
+%Assuming $T$ observations are used for the model, equation \ref{eq:VAR model} can be written in matrix form as
+%
+%\begin{gather*}
+%\textbf{U} = \textbf{ZB} + \textbf{E}, \\
+%\textbf{U} = (\textbf{u}_1,\ldots,\textbf{u}_T)^T \in \mathbb{R}^{T \times (K-1)}, \\
+%\textbf{Z} \in \mathbb{R}^{T \times \left[(K-1)p+1\right]} \text{ with } \textbf{Z}_t = \left(1,\textbf{u}_{t-1}^T,\ldots,\textbf{u}_{t-p}^T\right)^T, \\ %von \cite{Kynclova:2015}
+%\textbf{B} = \left[\textbf{c},\textbf{A}^{(1)}, \ldots, \textbf{A}^{(p)}\right]^T \in \mathbb{R}^{(K-1)p +1 \times (K-1)}.
+%\label{eq:VAR model matrix}
+%\end{gather*}
+%
+%
+%The parameter $\textbf{B}$ can then be estimated separately for each column of $\textbf{U}$ by the ordinary least squares (OLS) method. In addition, if there are no restrictions posed on the parameter, the estimator is equal to the generalised least squares (GLS). If the VAR(p) process is normally distributed and the rows of the error matrix $\textbf{E}$ represent a white noise process, thus $\bm{E} \sim WN(\Sigma)$ where $\Sigma$ is the covariance matrix, then the estimator is also equal to the maximum likelihood (ML) estimator. 
+%Under these assumptions it can be shown that the OLS estimator is consistent and asymptotic normal \cite{Kynclova:2015} \cite{Luetkepohl:2007}. 
+%
 
 \section{$\Tsp$-Spaces}
 \label{sec: Tspaces}
