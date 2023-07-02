@@ -17,7 +17,7 @@
 \contentsline {section}{\numberline {2.5}Zero-Inflated Models}{13}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Parameter Estimation and Forecasting}{15}{subsection.2.5.1}%
 \contentsline {section}{\numberline {2.6}Log-Linear Models}{15}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Parameter Estimation and Forecasting}{15}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.1}Parameter Estimation and Forecasting}{16}{subsection.2.6.1}%
 \contentsline {section}{\numberline {2.7}AR Models}{16}{section.2.7}%
 \contentsline {subsection}{\numberline {2.7.1}Parameter Estimation and Forecasting}{16}{subsection.2.7.1}%
 \contentsline {subsection}{\numberline {2.7.2}Testing for AR Models}{17}{subsection.2.7.2}%
