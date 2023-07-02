@@ -30,16 +30,16 @@
 \contentsline {section}{\numberline {3.1}Motivation}{21}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Preliminaries}{21}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Common Transformations}{22}{section.3.3}%
-\contentsline {subsubsection}{\nonumberline alr Coordinates}{22}{subsubsection*.10}%
+\contentsline {subsubsection}{\nonumberline alr Coordinates}{23}{subsubsection*.10}%
 \contentsline {subsubsection}{\nonumberline clr Coefficients}{23}{subsubsection*.12}%
 \contentsline {subsubsection}{\nonumberline ilr Coordinates}{23}{subsubsection*.14}%
 \contentsline {section}{\numberline {3.4}The VAR Model}{25}{section.3.4}%
-\contentsline {section}{\numberline {3.5}$\mathcal {T}$-Spaces}{25}{section.3.5}%
+\contentsline {section}{\numberline {3.5}$\mathcal {T}$-Spaces}{26}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Zero-Handling}{28}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Rounded Zeros}{28}{subsection.3.6.1}%
-\contentsline {subsubsection}{\nonumberline EM-based algorithm}{30}{subsubsection*.16}%
+\contentsline {subsection}{\numberline {3.6.1}Rounded Zeros}{29}{subsection.3.6.1}%
+\contentsline {subsubsection}{\nonumberline EM-based algorithm}{31}{subsubsection*.16}%
 \contentsline {subsubsection}{\nonumberline MCMC data augmentation}{31}{subsubsection*.18}%
-\contentsline {subsubsection}{\nonumberline Bayesian-multiplicative replacement}{31}{subsubsection*.20}%
+\contentsline {subsubsection}{\nonumberline Bayesian-multiplicative replacement}{32}{subsubsection*.20}%
 \contentsline {subsection}{\numberline {3.6.2}Essential Zeros}{32}{subsection.3.6.2}%
 \contentsline {chapter}{\numberline {4}Application}{35}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Model Specifications}{35}{section.4.1}%

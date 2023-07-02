@@ -4,7 +4,7 @@
 \section{GARCH Models}
 \label{sec: Garch Models}
 
-INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle \cite{Engle:1982} in an economic context, model the variance conditional on past values. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$ and $\SigA_{k,t}$ be the information available at time $t$. Then the ARCH(1) model is given by \cite{Engle:1982}
+INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle \cite{Engle:1982} in an economic context, model the variance conditional on past values. Since we no longer assume our data to be integer valued, our time series has the form $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$. Denote again with $\SigA_{k,t}$ the information available at time $t$. Then the ARCH(1) model is given by \cite{Engle:1982}
 
 \begin{equation}
 \begin{gathered}
@@ -106,13 +106,13 @@ However, due to a lack of available R-packages for zero-inflated Poisson INGARCH
 
 \begin{equation}
 \begin{gathered}
-\log(\lambda_{kt}) = \sum_{i=1}^p\beta_i b_{k_{ti}},\\ %\bm{B}^T_{k,t-1} \bm{\beta},\\
-\log\left(\frac{\omega_{t}}{1-\omega_{kt}}\right)=\sum_{i=1}^m\gamma_i z_{k_{tj}},%\bm{Z}_{k,t-1}^T\bm{\gamma},
+\log(\lambda_{kt}) = \sum_{i=1}^p\beta_i b^k_{ti},\\ %\bm{B}^T_{k,t-1} \bm{\beta},\\
+\log\left(\frac{\omega_{t}}{1-\omega_{kt}}\right)=\sum_{i=1}^m\gamma_i z^k_{tj},%\bm{Z}_{k,t-1}^T\bm{\gamma},
 \label{eq:ZIP Autoregressive model}
 \end{gathered}
 \end{equation}
 
-where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_m)^T$ are the parameters to be estimated and the vectors $\bm{B}_{k_t}=(b_{k_{tj}})$ and $\bm{Z}_{k_t}=(z_{k_{tj}})$ are the explanatory covariates. In model \ref{eq:ZIP Autoregressive model} a logit link function has been used although, it can be replaced with other link functions like the probit or log link. 
+where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_m)^T$ are the parameters to be estimated and the vectors $\bm{B}^k_t=(b^k_{tj})$ and $\bm{Z}^k_{t}=(z^k_{tj})$ are the explanatory covariates. In model \ref{eq:ZIP Autoregressive model} a logit link function has been used although, it can be replaced with other link functions like the probit or log link. 
 
 In our case we regress on the past values of our time series. In that case model \ref{eq:ZIP Autoregressive model} becomes
 
@@ -203,14 +203,14 @@ Y_{kt} = a_1Y_{k,t-1} + \ldots + a_pY_{k,t-p} + \epsilon_{kt},
 \label{eq: Ar model}
 \end{equation}
 
-where $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ is again our univariate time series. The multivariate version is defined as 
+where $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$ is again our univariate time series. As with the ARCH and GARCH models, we no longer assume that the data is constrained to integer values. The multivariate version is defined as 
 
 \begin{equation}
-\bm{Y}_{t} = \bm{a_1}Y_{t-1} + \ldots + \bm{a_p}Y_{t-p} + \bm{\epsilon}_{t},
+\bm{Y}_{t} = \bm{a_1 Y_{t-1}}+ \ldots + \bm{a_p Y_{t-p}} + \bm{\epsilon}_{t},
 \label{eq: Var Model}
 \end{equation}
 
-where $\bm{a}_j \in \mathbbm{R}^{k \times k}$ and $\bm{\epsilon}_t \sim WN(\Sigma)$.% with $\Sigma \in \mathbbm{R}^{k \times k}$. 
+where $\bm{a}_j \in \mathbbm{R}^{k \times k}$, $\bm{\epsilon}_t \sim WN(\Sigma)$ and $\bm{Y}_t = (Y_{1t},\ldots,Y_{Kt})^T$.% with $\Sigma \in \mathbbm{R}^{k \times k}$. 
 
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: AR Estimation and Forecasting}
