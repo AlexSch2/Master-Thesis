@@ -23,7 +23,7 @@
 \contentsline {subsection}{\numberline {2.7.2}Testing for AR Models}{17}{subsection.2.7.2}%
 \contentsline {section}{\numberline {2.8}INAR(p) Models}{17}{section.2.8}%
 \contentsline {subsection}{\numberline {2.8.1}Distributional Assumptions}{18}{subsection.2.8.1}%
-\contentsline {subsection}{\numberline {2.8.2}Parameter Estimation and Forecasting}{18}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.2}Parameter Estimation and Forecasting}{19}{subsection.2.8.2}%
 \contentsline {subsection}{\numberline {2.8.3}Testing for INAR(1) Models}{19}{subsection.2.8.3}%
 \contentsline {subsection}{\numberline {2.8.4}Difference to AR(p) Models}{20}{subsection.2.8.4}%
 \contentsline {chapter}{\numberline {3}Compositional Data Models}{21}{chapter.3}%

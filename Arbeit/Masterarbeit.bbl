@@ -2390,6 +2390,28 @@
       \endverb
       \keyw{drift conditions,Ergodic,Feller,irreducibility,stationary,time series}
     \endentry
+    \entry{Yang:2012}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=9845261412338f09f9fda112e8d5206d}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Ming},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{9845261412338f09f9fda112e8d5206d}
+      \strng{fullhash}{9845261412338f09f9fda112e8d5206d}
+      \strng{bibnamehash}{9845261412338f09f9fda112e8d5206d}
+      \strng{authorbibnamehash}{9845261412338f09f9fda112e8d5206d}
+      \strng{authornamehash}{9845261412338f09f9fda112e8d5206d}
+      \strng{authorfullhash}{9845261412338f09f9fda112e8d5206d}
+      \field{labelalpha}{Yan12}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Statistical models for count time series with excess zeros}
+      \field{year}{2012}
+    \endentry
     \entry{RVGAM:2010}{article}{}
       \name{author}{1}{}{%
         {{hash=7467dc5e783b7611642bfcd1c127db99}{%
