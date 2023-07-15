@@ -1,31 +1,31 @@
 \section{Motivation}
 \label{sec:Ingarch Motivation}
 
-In this section, we introduce the different count time series models. We begin with a short literature review about possible count data models and then provide a motivation on why we decided to focus on our models. The review is mainly based on \cite{Liboschik:2016} and \cite{Heinen:2003} and a more detailed review can be found in \cite{Zucchini:1997}. Later, we define the models themselves and list some of their properties. 
+In this section, we introduce the different count time series models. We begin with a short literature review about possible count data models and then provide a motivation on why we decided to focus on our models. The review is mainly based on \textcite{Liboschik:2016} and \textcite{Heinen:2003} and a more detailed review can be found in \textcite{Zucchini:1997}. Later, we define the models themselves and list some of their properties. 
 
 Since our data can be seen as a discrete time series with count data, we want a model which is able to take these properties into account. Hence, common features of count data, like autocorrelation and overdispersion, should not be neglected and instead be modelled properly.
  
-One common way to deal with count data are Markov chains. In Markov chains, the dependent variable can take on all possible values in the so called state space and the probability of changing states is then modelled as a transition probability. A limitation is the fact that these models become cumbersome if the state space gets too big and the model loses tractability. As an extension to the basic Markov chains models, Hidden Markov chains are proposed by \cite{Zucchini:1997}. In this case, one assumes that the observations follow a discrete distribution, i.e. the Poisson distribution. However, instead of assuming that the parameter of this distribution is fixed, it is assumed that it follows a Markov chain with finite state space. This makes it possible to account for serial correlation, as well as overdispersion \cite{Zucchini:1997}.  But, since there is no generally accepted way to determine the order of the Markov chain, it can cause problems if the data structure does not provide intuitive ways to do it. Another issue is that the number of parameters which need to be estimated gets big quickly, especially if the order of the model is big \cite{Heinen:2003}. 
+One common way to deal with count data are Markov chains. In Markov chains, the dependent variable can take on all possible values in the so called state space and the probability of changing states is then modelled as a transition probability. A limitation is the fact that these models become cumbersome if the state space gets too big and the model loses tractability. As an extension to the basic Markov chains models, Hidden Markov chains are proposed by \textcite{Zucchini:1997}. In this case, one assumes that the observations follow a discrete distribution, i.e. the Poisson distribution. However, instead of assuming that the parameter of this distribution is fixed, it is assumed that it follows a Markov chain with finite state space. This makes it possible to account for serial correlation, as well as overdispersion \textcite{Zucchini:1997}.  But, since there is no generally accepted way to determine the order of the Markov chain, it can cause problems if the data structure does not provide intuitive ways to do it. Another issue is that the number of parameters which needs to be estimated gets big quickly, especially if the order of the model is big \textcite{Heinen:2003}. 
 
-Other common models for time series data are the ARMA models and their discrete version, the Discrete Autoregressive Moving Average (DARMA) models. They can be defined as a mixture of discrete probability distributions and a suitable chosen marginal probability function \cite{Biswas:2009}. While there have been various applications, for example in \cite{Chang:1987}, there seem to be difficulties in their estimation \cite{Heinen:2003}. 
+Other common models for time series data are the ARMA models and their discrete version, the Discrete Autoregressive Moving Average (DARMA) models. They can be defined as a mixture of discrete probability distributions and a suitable chosen marginal probability function \textcite{Biswas:2009}. While there have been various applications, for example in \textcite{Chang:1987}, there seem to be difficulties in their estimation \textcite{Heinen:2003}. 
 
-State space models with conjugated priors are proposed by \cite{Harvey:1989}. Here, one assumes that the observations are drawn from a Poisson distribution whose mean itself follows a Gamma distribution. The parameters of the Gamma distribution, which are seen as latent variables, are chosen in such a way that its mean is constant but its variance is increasing. While there are ways proposed by \cite{Qaqish:1988} to handle overdispersion, their models have the weakness of needing further assumptions to handle zeros while also having more complicated model specifications \cite{Heinen:2003}.
+State space models with conjugated priors are proposed by \textcite{Harvey:1989}. Here, one assumes that the observations are drawn from a Poisson distribution whose mean itself follows a Gamma distribution. The parameters of the Gamma distribution, which are seen as latent variables, are chosen in such a way that its mean is constant but its variance is increasing. While there are ways proposed by \textcite{Qaqish:1988} to handle overdispersion, their models have the weakness of needing further assumptions to handle zeros while also having more complicated model specifications \textcite{Heinen:2003}.
 
-We decide to focus on the class of Generalised Linear Models (GLM) and in particular on the INGARCH(p,q) and log-linear model. For those models, the observations are modelled conditionally on the past and follow a discrete distribution. The conditional mean is then connected with a link function to the past observations and conditional means. A covariate vector can be included in the model to factor in additional, external information. While being easy to use and estimate, they still provide a good amount of flexibility and additionally, a wide array of tools is available for various tests and forecasts. We also introduce an extension of the INGARCH model to multivariate data. However, since to our knowledge there is currently no R-package available to fit these models, we stay with the univariate version. The INGARCH(p,q) and log-linear model will be discussed in detail in sections \ref{sec:Ingarch} and \ref{sec: Log-Linear Models} respectively.
+We decide to focus on the class of Generalised Linear Models (GLM) and in particular on the INGARCH(p,q) and log-linear model. For those models, the observations are modelled conditionally on the past and follow a discrete distribution. The conditional mean is then connected with a link function to the past observations and conditional means. A covariate vector can be included in the model to factor in additional, external information. While being easy to use and estimate, they still provide a good amount of flexibility and additionally, a wide array of tools is available for various tests and forecasts. We also introduce an extension of the INGARCH model to multivariate data. However, since to our knowledge there is currently no R-package available to fit these models, we stay with the univariate version. The INGARCH(p,q) and log-linear model will be discussed in detail in Sections \ref{sec:Ingarch} and \ref{sec: Log-Linear Models} respectively.
 
-Since our data features many zero values, we also investigate zero-inflated models (ZIM) with the focus on a zero-inflated version of the INGARCH(p,q) model. The structure of this model follows an INGARCH(p,q) model, but with a zero-inflated Poisson distribution as the conditional distribution. However, due to a lack of appropriate R-packages, we use a slightly different version of the ZIM, introduced by \cite{Lambert:1992}. This model is basically a generalised linear regression model with a logit link where the data is assumed to follow a zero-inflated Poisson distribution. More details can be found in section \ref{sec: Zim}
+Since our data features many zero values, we also investigate zero-inflated models (ZIM) with the focus on a zero-inflated version of the INGARCH(p,q) model. The structure of this model follows an INGARCH(p,q) model, but with a zero-inflated Poisson distribution as the conditional distribution. However, due to a lack of appropriate R-packages, we use a slightly different version of the ZIM, introduced by \textcite{Lambert:1992}. This model is basically a generalised linear regression model with a logit link where the data is assumed to follow a zero-inflated Poisson distribution. More details can be found in Section \ref{sec: Zim}.
 
-Another popular approach for count time series are the integer-valued autoregressive (INAR) models presented in section \ref{sec: Inar Distributional assumptions}. These models are based on a thinning operator and a parameter $\alpha$. The dependent variable $y_t$ is modelled as the sum of an error term and the sum of $y_{t-1}$ draws from an integer-valued distribution with mean $\alpha$ and finite variance. They are attractive since they have a linear-like structure and a similar correlation structure to AR or ARMA models and hence can be seen as a discrete counterpart \cite{Heinen:2003}. 
+Another popular approach for count time series are the integer valued autoregressive (INAR) models presented in Section \ref{sec: Inar Distributional assumptions}. These models are based on a thinning operator and a parameter $\alpha$. The dependent variable $y_t$ is modelled as the sum of an error term and the sum of $y_{t-1}$ draws from an integer valued distribution with mean $\alpha$ and finite variance. They are attractive since they have a linear-like structure and a similar correlation structure to AR or ARMA models and hence can be seen as a discrete counterpart \textcite{Heinen:2003}. 
 
-The simple naive random walk, defined in section \ref{sec: Naive Random Walk}, is the simplest and most basic approach not only for count data, but time series in general. This is the model that is currently used for forecasting and is therefore ideal as a benchmark. We will use it to compare the performance of the models with the help of a new error measure in section \ref{sec: Error Measure}. 
+The simple naive random walk, defined in Section \ref{sec: Naive Random Walk}, is the simplest and most basic approach not only for count data, but time series in general. This is the model that is currently used for forecasting and is therefore ideal as a benchmark. We will use it to compare the performance of the models with the help of a new error measure in Section \ref{sec: Error Measure}. 
 
-Since the INGARCH and the INAR model are based on their real valued counterparts, the GARCH and AR model, we will also provide a short review for them for better comparison and clearness on why we choose the integer valued versions. However, we will not consider neither the GARCH nor the AR model in our analysis. 
+Since the INGARCH and the INAR model are based on their real valued counterparts, the GARCH and AR model, we will also provide a short review for them for better comparison and clearness on why we choose the integer valued versions. However, we will consider neither the GARCH nor the AR model in our analysis. 
 
 \section{INGARCH Model}
 \label{sec:Ingarch}
 
-We construct the INGARCH(p,q) model as in \cite{Liboschik:2016}. 
-Take again our time series $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f$ for fridge $f$ and denote the univariate time series for category $k$ with $\left\{Y_{kt}:t=1,\ldots,T; Y_{kt} \in \mathbb{N}_0\right\}_f$  for $k=1,\ldots,K$. This means $\bm{Y}_t = (Y_{1t},\ldots,Y_{Kt})^T$. Denote a r-dimensional time varying covariate vector with $\textbf{X}_{kt}=(X_{t1}^k,\ldots,X_{tr}^k)^T$. Let the conditional mean be $\lambda_{kt} = \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1} \right]$ where $\SigA_{k,t-1}$ is the $\sigma$-field generated by $Y_{kt}$ and $\lambda_l$ for $l<t$ $, \SigA _{k,t-1}= \sigma(Y_{k1},\ldots,Y_{kl},\lambda_1, \ldots, \lambda_l)$. Therefore, the conditional mean of the time series is dependent on its combined history of the past conditional means and its past values. With this, we can define the integer valued generalized autoregressive conditional heteroskedasticity model of order (p,q) (INGARCH(p,q) model) for category $k=1,\ldots,K$ as,
+We construct the INGARCH(p,q) model as in \textcite{Liboschik:2016}. 
+Take again our time series $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f$ for fridge $f$ and denote the univariate time series for category $k$ with $\left\{Y_{kt}:t=1,\ldots,T; Y_{kt} \in \mathbb{N}_0\right\}_f$  for $k=1,\ldots,K$. This means $\bm{Y}_t = (Y_{1t},\ldots,Y_{Kt})^T$. Denote an r-dimensional time varying covariate vector with $\textbf{X}_{kt}=(X_{t1}^k,\ldots,X_{tr}^k)^T$. Let the conditional mean be $\lambda_{kt} = \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1} \right]$ where $\SigA_{k,t-1}$ is the $\sigma$-field generated by $Y_{kt}$ and $\lambda_l$ for $l<t$ $, \SigA _{k,t-1}= \sigma(Y_{k1},\ldots,Y_{kl},\lambda_1, \ldots, \lambda_l)$. Therefore, the conditional mean of the time series is dependent on its combined history of the past conditional means and its past values. With this, we can define the integer valued generalized autoregressive conditional heteroskedasticity model of order (p,q) (INGARCH(p,q) model) for category $k=1,\ldots,K$ as,
 
 \begin{equation}
 \begin{gathered}
@@ -34,8 +34,7 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1} \right] = \lambda_{kt} = \beta_0 + \sum_{i=1}^p\beta_i Y_{k,t-i} + \sum_{j=1}^q\alpha_j \lambda_{k,t-j},
 \end{gathered}
 \end{equation}
-
-
+%
 where $p,q \in \mathbb{N}$ and $P(\lambda_{kt})$ is a Poisson distribution with mean $\lambda_{kt}$. The integer $p$ defines the number of past values to regress on, whereas $q$ does the same for the past conditional means. In order to account for external effects as well, we add the covariate vector $\textbf{X}_{kt}$
 
 \begin{equation}
@@ -45,7 +44,7 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1} \right] = \lambda_{kt} = \beta_0 + \sum_{i=1}^p\beta_i Y_{k,t-i} + \sum_{j=1}^q\alpha_j \lambda_{k,t-j} + \bm{\eta}^T\textbf{X}_{kt},
 \end{gathered}
 \end{equation}
-
+%
 where $\bm{\eta}$ is the parameter for the covariates such that $\bm{\eta}^T\textbf{X}_{kt} \geq 0$.
 From the distributional assumption $Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt})$ it follows
 
@@ -53,30 +52,30 @@ From the distributional assumption $Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt})$
 p_{kt}(y;\bm{\theta})=\mathbb{P}(Y_{kt}=y | \SigA_{k,t-1}) = \frac{\lambda_{kt}^y \exp(-\lambda_{kt})}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
 \label{eq:Ingarch Distribution}
 \end{equation}
-
-Furthermore it can be shown that conditionally on the past history $\SigA_{k,t-1}$, the model is equidispersed, i.e. it holds $\lambda_{kt} = \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right] = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right]$. However, unconditionally the model exhibits overdispersion. In that case it holds $\mathbb{E}\left[Y_{kt}\right] \leq \mathbb{V}\left[Y_{kt}\right] $ \cite{Heinen:2003}. 
+%
+Furthermore, it can be shown that conditionally on the past history $\SigA_{k,t-1}$, the model is equidispersed, i.e. it holds $\lambda_{kt} = \mathbb{E}\left[Y_{kt} | \SigA_{k,t-1}\right] = \mathbb{V}\left[Y_{kt} | \SigA_{k,t-1}\right]$. However, unconditionally the model exhibits overdispersion. In that case it holds $\mathbb{E}\left[Y_{kt}\right] \leq \mathbb{V}\left[Y_{kt}\right] $ \textcite{Heinen:2003}. 
 
 \subsubsection{Parameter Estimation and Forecasting}
 \label{sec: Estimation of the Ingarch Model}
 
-We summarise the estimation of the INGARCH(p,q) Model as described in \cite{Liboschik:2016}. The model is estimated for each category $k=1,\ldots,K$ separately. 
+We summarise the estimation of the INGARCH(p,q) Model as described in \textcite{Liboschik:2016}. The model is estimated for each category $k=1,\ldots,K$ separately. 
 
-The parameter space for the INGARCH(p,q) model with external effects \ref{eq:Ingarch model with external effect} is given by 
+The parameter space for the INGARCH(p,q) model with external effects, Model (\ref{eq:Ingarch model with external effect}), is given by 
 
 \begin{equation}
 \Theta = \left\{ \bm{\theta} \in \mathbb{R}^{p+q+r+1}: \beta_0 > 0; \beta_1,\ldots,\beta_p,\alpha_1,\ldots,\alpha_q,\eta_1,\ldots,\eta_r \geq 0; \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1 \right\}.
 \label{eq:Ingarch parameter space}
 \end{equation}
-
-To ensure positivity of the conditional mean $\lambda_{kt}$, the intercept $\beta_0$ must be positive while all other parameters must be non negative. The upper bound of the sum ensures that the model has a stationary and ergodic solution with moments of any order \cite{Ferland:2006,Fokianos:2009,Doukhan:2012}. A quasi maximum likelihood approach is used to estimate the parameters $\bm{\theta}$. 
-For observations $\textbf{y}_k = \left(y_{k1},\ldots,y_{kT}\right)^T$ for category $k=1,\ldots,K$, the conditional quasi log-likelihood function, up to a constant, is given by,
+%
+To ensure positivity of the conditional mean $\lambda_{kt}$, the intercept $\beta_0$ must be positive while all other parameters must be non negative. The upper bound of the sum ensures that the model has a stationary and ergodic solution with moments of any order \textcite{Ferland:2006,Fokianos:2009,Doukhan:2012}. A quasi maximum likelihood approach is used to estimate the parameters $\bm{\theta}$. 
+For observations $\textbf{y}_k = \left(y_{k1},\ldots,y_{kT}\right)^T$ for category $k=1,\ldots,K$, the conditional quasi log-likelihood function, up to a constant, is given by
 
 \begin{equation}
 \loglik_k(\bm{\theta}) = \sum_{t=1}^T\log p_{kt}(y_{kt};\bm{\theta}) = \sum_{t=1}^T \left(y_{kt}\log(\lambda_{kt}(\bm{\theta})) - \lambda_{kt}(\bm{\theta})\right).
 \label{eq: Quasi log likelihood}
 \end{equation}
-
-where $p_{kt}(y_{kt};\bm{\theta})$ is the probability density function defined in \ref{eq:Ingarch Distribution}. The conditional mean is seen as a function $\lambda_{kt}: \Theta \rightarrow \mathbb{R}^{+}$. The conditional score function is given by,
+%
+where $p_{kt}(y_{kt};\bm{\theta})$ is the probability density function defined in Equation (\ref{eq:Ingarch Distribution}). The conditional mean is seen as a function $\lambda_{kt}: \Theta \rightarrow \mathbb{R}^{+}$. The conditional score function is given by
 
 \begin{equation}
 S_{kT}(\bm{\theta}) = \frac{\partial \loglik_k(\bm{\theta})}{\partial \bm{\theta}} = \sum_{t=1}^T\left(\frac{y_{kt}}{\lambda_{kt}(\bm{\theta})}-1\right)\frac{\partial\lambda_{kt}(\bm{\theta})}{\partial \bm{\theta}}.
@@ -84,7 +83,7 @@ S_{kT}(\bm{\theta}) = \frac{\partial \loglik_k(\bm{\theta})}{\partial \bm{\theta
 \end{equation}
 
 The vector $\frac{\partial\lambda_{kt}(\bm{\theta})}{\partial \bm{\theta}}$ can be computed recursively. 
-The conditional information matrix is given by, 
+The conditional information matrix is given by
 
 \begin{equation}
 \begin{aligned}
@@ -93,23 +92,25 @@ G_{kT}(\theta;\sigma^2) &= \sum_{t=1}^T Cov\left(\frac{\partial \loglik_k(\bm{\t
 \label{eq:conditional information matrix}
 \end{aligned}
 \end{equation}
-
-In the case of the Poisson distribution, we have $\sigma^2=0$. If the Negative Binomial distribution is used, see section \ref{sec: Ingarch Specifications}, then we have $\sigma^2=\frac{1}{\phi}$. 
+%
+In the case of the Poisson distribution, we have $\sigma^2=0$. If the Negative Binomial distribution is used, see Section \ref{sec: Ingarch Specifications}, then we have $\sigma^2=\frac{1}{\phi}$ where $\phi$ is the dispersion parameter of the Negative Binomial distribution. 
 Finally, assuming that the quasi maximum likelihood estimator (QMLE) $\hat{\bm{\theta}}_T$ of $\bm{\theta}$ exists, it is the solution to 
 
 \begin{equation}
 \hat{\bm{\theta}}= \hat{\bm{\theta}}_T = \text{arg max}_{\bm{\theta} \in \Theta} (\loglik_k(\bm{\theta})). 
 \label{eq:ingarch qmle}
 \end{equation}
+%
+The optimal one-step ahead forecast with regard to the mean squared error is the conditional expectation $\lambda_{k,t+1}=\mathbb{E}\left[Y_{k,t+1} | \SigA_{kt} \right]$. The h-step ahead prediction for $h>1$ is calculated iteratively with the one step ahead predictions of $Y_{k,t+1},Y_{k,t+2},\ldots$ \textcite{Liboschik:2016}. 
 
-The optimal one-step ahead forecast with regards to the mean squared error is the conditional expectation $\lambda_{k,t+1}=\mathbb{E}\left[Y_{k,t+1} | \SigA_{kt} \right]$. The h-step ahead prediction for $h>1$ is calculated iteratively with the one step ahead predictions of $Y_{k,t+1},Y_{k,t+2},\ldots$ \cite{Liboschik:2016}. 
-
-\subsection{Multivariate INGARCH model}
+\subsection{Multivariate INGARCH Model}
 \label{sec: Multivariate Ingarch}
 
-Since we have multivariate data, we also investigate multivariate versions of the INGARCH model. There have been various approaches in literature to expend the univariate INGARCH model to more dimensions. For example, bivariate models have been proposed by \cite{Liu:2012} and  extended by \cite{Cui:2018}. 
+Since we have multivariate data, we also investigate multivariate versions of the INGARCH model. There have been various approaches in literature to expend the univariate INGARCH model to more dimensions. For example, bivariate models have been proposed by \textcite{Liu:2012} and  extended by \textcite{Cui:2018}. 
 
-The authors in \cite{Fokianos:2020,Fokianos:2021} introduce and review the multivariate INGARCH model on the basis of a data generating process. Let $\bm{\lambda}_t=\mathbbm{E}[\bm{Y}_t|\SigA_t]$ where $\bm{\lambda}_t = (\lambda_{1t},\ldots,\lambda_{Kt})^T$ and $\SigA_t$ is the $\sigma$-field generated by $\left\{\bm{Y}_0,\ldots,\bm{Y}_t,\bm{\lambda}_0\right\}$. Then for each $k=1,\ldots,K$ we assume
+The authors in \textcite{Fokianos:2020,Fokianos:2021} introduce and review the multivariate INGARCH model on the basis of a data generating process. Since the extension from the univariate Poisson assumption to the multivariate case is quite complex, the authors focus on constructing a joint distribution, such that the components are marginally Poisson distributed, but not the joint distribution itself. 
+
+Let $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$, $\bm{\lambda}_t=\mathbbm{E}[\bm{Y}_t|\SigA_t]$ where $\bm{\lambda}_t = (\lambda_{1t},\ldots,\lambda_{Kt})^T$ and $\SigA_t$ is the $\sigma$-field generated by $\left\{\bm{Y}_0,\ldots,\bm{Y}_t,\bm{\lambda}_0\right\}$. Then for each $k=1,\ldots,K$ we assume
 
 \begin{equation}
 \begin{gathered}
@@ -118,20 +119,18 @@ Y_{kt} | \SigA_{t-1} \sim P(\lambda_{kt}), \\
 \label{eq:Mingarch 1}
 \end{gathered}
 \end{equation}
-
-where $\bm{d}$ is a $K$-dimensional vector and $\bm{A},\bm{B}$ are $K\times K$ matrices. The elements of $\bm{d},\bm{A},\bm{B}$ are assumed to be positive such that $\bm{\lambda}_t > 0$. 
-
-Based on this, a joint distribution is constructed using a copula structure and the following process. Take a starting value $\bm{\lambda_0}=(\lambda_{1,0},\ldots,\lambda_{K,0})^T$ and then \cite{Fokianos:2020}
+%
+where $\bm{d}$ is a $K$-dimensional vector and $\bm{A},\bm{B}$ are $K\times K$ matrices. The elements of $\bm{d},\bm{A},\bm{B}$ are assumed to be positive such that $\bm{\lambda}_t > 0$. So, Equation (\ref{eq:Mingarch 1}) implies, that $\left\{\bm{Y}_t\right\}$ is marginally a Poisson process. However, the joint distribution is not necessarily assumed to be a multivariate Poisson distribution \textcite{Fokianos:2020}. Instead the joint distribution is constructed using a copula structure. This allows for arbitrary dependence between the components. The joint distribution is constructed with the help of the following process. Take a starting value $\bm{\lambda_0}=(\lambda_{1,0},\ldots,\lambda_{K,0})^T$ and then \textcite{Fokianos:2020}
 
 \begin{enumerate}
 	\item Let $\bm{U}_l=(U_{1,l},\ldots,U_{K,l})$ for $l=1,\ldots,m$ be a sample from a $K$-dimensional copula $C(u_1,\ldots,u_K)$. Then by definition of a copula, $U_{il}$ follows marginally the uniform distribution on $(0,1)$ for $i=1,\ldots,K$ and $l=1,\ldots,m$. 
 	\item Define the transformation $X_{il} = -\log (\frac{U_{il}}{\lambda_{i,0}})$. Then the marginal distribution of $X_{il}$ is exponential with parameter $\lambda_{i,0}$. 
 	\item For $m$ large enough, define $Y_{i,0} = \max_{1\leq j \leq m}(\sum_{l=1}^j X_{il})\leq 1$. Then $\bm{Y}_0=(Y_{1,0},\ldots,Y_{K,0})^T$ is marginally a set of starting values of a Poisson process with parameter $\bm{\lambda}_0$. 
-	\item Use model \ref{eq:Mingarch 1} to obtain $\bm{\lambda_1}$.
+	\item Use Model (\ref{eq:Mingarch 1}) to obtain $\bm{\lambda_1}$.
 	\item Go back to step 1 to obtain $\bm{Y}_1$ and so on. 
 \end{enumerate}
 
-This construction of the joint distribution imposes the dependence among the components of the process $\left\{\bm{Y}_t\right\}$. This approach can be extended to other marginal count processes if they can be generated by continuous arrival times \cite{Fokianos:2020}. 
+This construction of the joint distribution imposes the dependence among the components of the process $\left\{\bm{Y}_t\right\}$. This approach can be extended to other marginal count processes if they can be generated by continuous arrival times \textcite{Fokianos:2020}. 
 
 We can then define the multivariate INGARCH model as
 
@@ -142,17 +141,17 @@ We can then define the multivariate INGARCH model as
 \label{eq:Mingarch 1 new}
 \end{gathered}
 \end{equation}
+%
+where $\left\{\bm{N}_t\right\}$ is a sequence of independent K-variate copula-Poisson processes that counts the number of events in $[0,\lambda_{1t}]\times,\ldots,\times[0,\lambda_{Kt}]$ \textcite{Fokianos:2020}. 
 
-where $\left\{\bm{N}_t\right\}$ is a sequence of independent K-variate copula-Poisson processes that counts the number of events in $[0,\lambda_{1t}]\times,\ldots,\times[0,\lambda_{Kt}]$ \cite{Fokianos:2020}. 
-
-Another approach is taken by \cite{Lee:2023}. Instead of constructing a joint distribution for the multivariate vector $\bm{Y}_t$, they fit a one-parameter exponential family conditional distribution to each component $Y_{kt}$
+Another approach is taken by \textcite{Lee:2023}. Instead of constructing a joint distribution for the multivariate vector $\bm{Y}_t$, they fit a one-parameter exponential family conditional distribution to each component $Y_{kt}$
 
 \begin{equation}
 p_{k}(y|\nu) = \exp(\nu y - A_k(\nu))h_k(y), \hspace{0.5cm} y \in \mathbbm{N}_0,
 \label{eq:Exponential Family}
 \end{equation}
 
-where $A_k$ and $h_k$ are known functions and $\nu$ is the natural parameter. Both $A_k$ and $B_k(\nu) = \frac{d A_k(\nu)}{d \nu}$ are strictly increasing \cite{Lee:2023}. The multivariate INGARCH model is then given for each $k=1,\ldots,K$ by
+where $A_k$ and $h_k$ are known functions and $\nu$ is the natural parameter. Both $A_k$ and $B_k(\nu) = \frac{d A_k(\nu)}{d \nu}$ are strictly increasing \textcite{Lee:2023}. The multivariate INGARCH model is then given for each $k=1,\ldots,K$ by
 
 \begin{equation}
 \begin{gathered}
@@ -161,22 +160,22 @@ Y_{kt} | \SigA_{t-1} \sim p_k(y|\nu_{kt}), \\
 \label{eq:Mingarch 2}
 \end{gathered}
 \end{equation}
-
-where $\SigA_{t-1}$ is the $\sigma$-field generated by $\left\{\bm{Y}_{t-1},\bm{Y}_{t-2},\ldots,B_k(\nu_{kt})\right\}$ with $B_k(\nu_{kt})=\lambda_{kt}$, and $f_{\theta}$ is a non-negative function on $[0,\infty)^K \times \mathbb{N}_0^K$, depending on the parameter $\theta \in \Theta \subset \mathbb{R}^d$ with $d \in \mathbb{N}$ \cite{Lee:2023}. So for each component $Y_{kt}$, a univariate INGARCH model is fit but, the components are connected by the conditional mean process. A popular choice of $f_{\theta}$ results in a linear relationship. Take a $K$-dimensional vector $\bm{W}$ with positive entries and $K\times K$ matrices $\bm{A},\bm{B}$ with non-negative entries satisfying either \cite{Lee:2023}
+%
+where $\SigA_{t-1}$ is the $\sigma$-field generated by $\left\{\bm{Y}_{t-1},\bm{Y}_{t-2},\ldots,B_k(\nu_{kt})\right\}$ with $B_k(\nu_{kt})=\lambda_{kt}$, and $f_{\theta}$ is a non-negative function on $[0,\infty)^K \times \mathbb{N}_0^K$, depending on the parameter $\theta \in \Theta \subset \mathbb{R}^d$ with $d \in \mathbb{N}$ \textcite{Lee:2023}. So for each component $Y_{kt}$, a univariate INGARCH model is fit but, the components are connected by the conditional mean process. A popular choice of $f_{\theta}$ results in a linear relationship. Take a $K$-dimensional vector $\bm{W}$ with positive entries and $K\times K$ matrices $\bm{A},\bm{B}$ with non-negative entries satisfying either \textcite{Lee:2023}
 
 \begin{equation}
 sup_{\theta \in \Theta} \left(\sum_{j=1}^K(a_{ij}+b_{ij})\right) < 1, \hspace{0.5cm} i=1,\ldots,K , 
 \label{eq:Mingarch 2 function condition 1}
 \end{equation}
-
-for a compact set $\Theta \subseteq R^{K+ 2K^2}$ and the vectorization of the K-dimensional vector $\bm{W}$ and the $K\times K$ matrices $\bm{A},\bm{B}$ $\theta=vec(\bm{W},\bm{A},\bm{B})$, or 
+%
+for a compact set $\Theta \subseteq R^{K+ 2K^2}$ and the vectorization of the K-dimensional vector $\bm{W}$ and the $K\times K$ matrices $\bm{A},\bm{B}$, $\theta=vec(\bm{W},\bm{A},\bm{B})$, or 
 
 \begin{equation}
 sup_{\theta \in \Theta}\left(\max_{1\leq j \leq K}(\sum_{i=1}^K a_{ij}) + \max_{1\leq j \leq K} \left(\sum_{i=1}^K b_{ij}\right)\right) < 1. 
 \label{eq:Mingarch 2 function condition 2}
 \end{equation}
-
-Then model \ref{eq:Mingarch 2} becomes 
+%
+Then Model (\ref{eq:Mingarch 2}) becomes 
 
 \begin{equation}
 \begin{gathered}

@@ -1,28 +1,28 @@
 \section{Motivation}
 \label{sec:Motivation}
 
-Multivariate count data is a reoccurring theme in real world applications. While there exist various methods among the classical statistical models to handle such data, there are less methods available to handle it in a time series context. Even more so, when there is an excessive amount of zeros or missing values present. In this thesis we compare various models for such data and compare their predictive power. We test our models on real world data, which was kindly provided to us, and analyse their performance. In the following we will shortly describe the general framework and objective. 
+Multivariate count data is a reoccurring theme in real world applications. While there are various methods among the classical statistical models to handle such data, there are fewer methods available to handle it in a time series context. Even more so, when there is an excessive amount of zeros or missing values present. In this thesis, we compare various models for such data and compare their predictive power. We test our models on real world data, which was kindly provided to us, and analyse their performance. In the following, we will shortly describe the general framework and objective. 
 
-A company is operating numerous vending machines with food, ranging from appetizers and main course to snacks and beverages. Each week the vending machines, or in the following also called fridges, are being restocked and the number of items sold in the past week is being recorded. In addition, non-sold items are being disposed off which results in monetary losses. The objective is to find a model to predict the amount the company needs to order for the upcoming week, in a bid to minimise the loss.
+This thesis is part of a bigger project carried out at the Technical University of Vienna in cooperation with the company Schrankerl GmbH. Schrankerl GmbH operates office food vending machines filled with food ranging from appetizers and main course to snacks and beverages. Each week the vending machines, or in the following also called fridges, are being restocked and the number of items sold in the past week is being recorded. In addition, non-sold items are being disposed off which results in monetary losses. The objective is to find a model to predict the amount the company needs to order for the upcoming week, in a bid to minimise the loss.
 
 \section{Data Description}
 \label{sec: Data Description}
 
-In this section we describe the structure of our data, which is essential in choosing the right model. We have several multivariate time series with integer values, with each series representing a vending machine. The dimensions represent the various categories of the food where each item is of one of the four main categories 1,2,3,4 and one of the various subcategories. We mainly analyse the time series on the aggregated level of the main categories; however, the models can also be applied to the subcategories. In this case we have a model for each main category instead of each vending machine. The values for each category represent the number of items sold. For a fridge $f$ denote this time series with 
-
+In this section, we describe the structure of our data, which is essential in choosing the right model. We have several multivariate time series with integer values, with each series representing a vending machine. The dimensions represent the various categories of the food where each item is of one of the four main categories 1,2,3,4 and one of the various subcategories. We mainly analyse the time series on the aggregated level of the main categories; however, the models can also be applied to the subcategories. In this case we have a model for each main category instead of each vending machine. The values for each category represent the number of items sold. For a fridge $f$ denote this time series with 
+%
 \begin{equation}
 \left\{\bm{Y}_t:t=1,\ldots,T_f; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f,
 \label{eq:time series definition}
 \end{equation}
-
+%
 where $K$ stands for the number of categories, $T_f$ denotes the total length of the time series and $\mathbb{N}_0^K = \underbrace{\mathbb{N}_0 \times \ldots \times \mathbb{N}_0}_{K-times}$. This means $\bm{Y}_t = (Y_{1t},\ldots,Y_{Kt})^T$ with $Y_{kt} \in \mathbb{N}_0, t=1,\ldots,T_f$ and $k=1,\ldots,K$. Since we will sometimes not use all of our data but only a fraction of it, we will denote with $T$ the length of the time series used
 
 \begin{equation}
 \left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{N}_0^K \right\}_f.
 \label{eq:time series definition fraction}
 \end{equation}
-
-So equation \ref{eq:time series definition} describes the whole time series available, while equation \ref{eq:time series definition fraction} describes the time series used and it holds $T\leq T_f$. In the following we will use equation \ref{eq:time series definition fraction} to indicated that we may only use a fraction of the whole time series. We will dive more into it in section \ref{sec: Model Specification}.
+%
+So Equation (\ref{eq:time series definition}) describes the whole time series available, while Equation (\ref{eq:time series definition fraction}) describes the time series used and it holds $T\leq T_f$. In the following we will use Equation (\ref{eq:time series definition fraction}) to indicated that we may only use a fraction of the whole time series. We will dive more into it in Section \ref{sec: Model Specification}.
 
 The data is measured on a weekly basis and hence our points in time are equidistant. One noteworthy feature of our data is the amount of 0 and NA values, which will be dived into in later sections. An additional characteristic of our data is the difference in length for various time series. While for some time series we have 70+ data points, for others we have less than 10. An example view of our data would be: 
 
@@ -41,11 +41,11 @@ The data is measured on a weekly basis and hence our points in time are equidist
 222                & 2022-06-20         & 2                      & 6                     & 30            \\
 222                & 2022-06-20         & 2                      & 10                    & 15            \\ \hline
 \end{tabular}
-\caption{Example Data}
+\caption{Example data}
 \label{tab:ExampleData}
 \end{table}
 
-As mentioned before, we mainly aggregate our data on main category level. This means that we do not differentiate between the subcategories and are only interested in the number of items sold for each main category. Our data in table \ref{tab:ExampleData} would then change to \ref{tab:ExampleData aggregated}:
+As mentioned before, we mainly aggregate our data on main category level. This means that we do not differentiate between the subcategories and are only interested in the number of items sold for each main category. Our data in Table \ref{tab:ExampleData} would then change to Table \ref{tab:ExampleData aggregated}:
 
 \begin{table}[h!]
 \centering
@@ -60,11 +60,11 @@ As mentioned before, we mainly aggregate our data on main category level. This m
 222                & 2022-06-13         & 1                      & 0             \\
 222                & 2022-06-20         & 2                      & 45            \\ \hline
 \end{tabular}
-\caption{Example Data aggregated on Main Category level}
+\caption{Example data aggregated on main category level}
 \label{tab:ExampleData aggregated}
 \end{table}
 
 \section{Outlook}
 \label{sec: Outlook}
 
-The remainder of the thesis is split in the following way. In chapters \ref{sec:CountTS} and \ref{sec:Coda} we describe our methodologies used and the reasoning why we are using them. We provide a short literature review about count data time series in section \ref{sec:CountTS}. In these chapters we also lay the mathematical groundwork for the considered methods. In chapter \ref{sec:Application} we explain the specification and tuning options for our models and also introduce an error measure to evaluate their performance. We show the results on some exemplary time series and then show the results of each tuning parameter. In section \ref{sec:R-Code} we explain the R-functions used and provide a guidebook.% In the conclusion \ref{sec: Conclusion} we summarise our findings and provide a further outlook on the topic. 
+The remainder of the thesis is split in the following way. In Chapters \ref{sec:CountTS} and \ref{sec:Coda}, we describe our methodologies used and the reasoning why we are using them. We provide a short literature review about count data time series in Section \ref{sec:CountTS}. In these chapters, we also lay the mathematical groundwork for the considered methods. In Chapter \ref{sec:Application}, we explain the specification and tuning options for our models and also introduce an error measure to evaluate their performance. We show the results on some exemplary time series and then show the results of each tuning parameter. In Section \ref{sec:R-Code}, we explain the R-functions used and provide a guidebook.% In the conclusion \ref{sec: Conclusion} we summarise our findings and provide a further outlook on the topic. 

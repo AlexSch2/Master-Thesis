@@ -1,5 +1,11 @@
 \babel@toc {british}{}\relax 
+\babel@toc {german}{}\relax 
+\babel@toc {british}{}\relax 
 \contentsline {chapter}{\nonumberline Abstract}{i}{chapter*.1}%
+\babel@toc {german}{}\relax 
+\babel@toc {british}{}\relax 
+\babel@toc {german}{}\relax 
+\babel@toc {british}{}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Data Description}{1}{section.1.2}%
@@ -7,74 +13,74 @@
 \contentsline {chapter}{\numberline {2}Count Time Series Models}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Motivation}{5}{section.2.1}%
 \contentsline {section}{\numberline {2.2}INGARCH Model}{7}{section.2.2}%
-\contentsline {subsubsection}{\nonumberline Parameter Estimation and Forecasting}{8}{subsubsection*.8}%
-\contentsline {subsection}{\numberline {2.2.1}Multivariate INGARCH model}{9}{subsection.2.2.1}%
+\contentsline {subsubsection}{\nonumberline Parameter Estimation and Forecasting}{8}{subsubsection*.9}%
+\contentsline {subsection}{\numberline {2.2.1}Multivariate INGARCH Model}{9}{subsection.2.2.1}%
 \contentsline {section}{\numberline {2.3}GARCH Models}{11}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Parameter Estimation and Forecasting}{12}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Testing for GARCH Models}{12}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Applications}{12}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.2}Testing for GARCH Models}{13}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Applications}{13}{subsection.2.3.3}%
 \contentsline {section}{\numberline {2.4}Naive Random Walk}{13}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Zero-Inflated Models}{13}{section.2.5}%
+\contentsline {section}{\numberline {2.5}Zero-Inflated Models}{14}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Parameter Estimation and Forecasting}{15}{subsection.2.5.1}%
 \contentsline {section}{\numberline {2.6}Log-Linear Models}{15}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}Parameter Estimation and Forecasting}{16}{subsection.2.6.1}%
-\contentsline {section}{\numberline {2.7}AR Models}{16}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Parameter Estimation and Forecasting}{16}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}Testing for AR Models}{17}{subsection.2.7.2}%
-\contentsline {section}{\numberline {2.8}INAR(p) Models}{17}{section.2.8}%
-\contentsline {subsection}{\numberline {2.8.1}Distributional Assumptions}{18}{subsection.2.8.1}%
+\contentsline {section}{\numberline {2.7}AR Models}{17}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Parameter Estimation and Forecasting}{17}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Testing for AR Models}{18}{subsection.2.7.2}%
+\contentsline {section}{\numberline {2.8}INAR(p) Models}{18}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Distributional Assumptions}{19}{subsection.2.8.1}%
 \contentsline {subsection}{\numberline {2.8.2}Parameter Estimation and Forecasting}{19}{subsection.2.8.2}%
-\contentsline {subsection}{\numberline {2.8.3}Testing for INAR(1) Models}{19}{subsection.2.8.3}%
-\contentsline {subsection}{\numberline {2.8.4}Difference to AR(p) Models}{20}{subsection.2.8.4}%
-\contentsline {chapter}{\numberline {3}Compositional Data Models}{21}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Motivation}{21}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Preliminaries}{21}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Common Transformations}{22}{section.3.3}%
-\contentsline {subsubsection}{\nonumberline alr Coordinates}{23}{subsubsection*.10}%
-\contentsline {subsubsection}{\nonumberline clr Coefficients}{23}{subsubsection*.12}%
-\contentsline {subsubsection}{\nonumberline ilr Coordinates}{23}{subsubsection*.14}%
-\contentsline {section}{\numberline {3.4}The VAR Model}{25}{section.3.4}%
-\contentsline {section}{\numberline {3.5}$\mathcal {T}$-Spaces}{26}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Zero-Handling}{28}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Rounded Zeros}{29}{subsection.3.6.1}%
-\contentsline {subsubsection}{\nonumberline EM-based algorithm}{31}{subsubsection*.16}%
-\contentsline {subsubsection}{\nonumberline MCMC data augmentation}{31}{subsubsection*.18}%
-\contentsline {subsubsection}{\nonumberline Bayesian-multiplicative replacement}{32}{subsubsection*.20}%
-\contentsline {subsection}{\numberline {3.6.2}Essential Zeros}{32}{subsection.3.6.2}%
-\contentsline {chapter}{\numberline {4}Application}{35}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Model Specifications}{35}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}CoDA Specifications}{36}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}INGARCH Specifications}{37}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Error Measure}{37}{section.4.2}%
-\contentsline {subsubsection}{\nonumberline Extension of the Error Measure}{38}{subsubsection*.22}%
-\contentsline {section}{\numberline {4.3}Examples of Model Application}{38}{section.4.3}%
-\contentsline {section}{\numberline {4.4}R-Code}{43}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}R-Packages}{43}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Handbook}{43}{subsection.4.4.2}%
-\contentsline {subsubsection}{\nonumberline Data.Window}{43}{subsubsection*.29}%
-\contentsline {subsubsection}{\nonumberline Data.Preparation}{44}{subsubsection*.31}%
-\contentsline {subsubsection}{\nonumberline Model.Error}{45}{subsubsection*.33}%
-\contentsline {subsubsection}{\nonumberline Model.ErrorOverall}{46}{subsubsection*.35}%
-\contentsline {subsubsection}{\nonumberline CountModel.DataPreparation}{46}{subsubsection*.37}%
-\contentsline {subsubsection}{\nonumberline CountModel.Prediction}{47}{subsubsection*.39}%
-\contentsline {subsubsection}{\nonumberline CountModel.Analysis}{48}{subsubsection*.41}%
-\contentsline {subsubsection}{\nonumberline Coda.DataPreparation}{50}{subsubsection*.43}%
-\contentsline {subsubsection}{\nonumberline Coda.Prediction}{51}{subsubsection*.45}%
-\contentsline {subsubsection}{\nonumberline Coda.Analysis}{51}{subsubsection*.47}%
-\contentsline {section}{\numberline {4.5}Results}{52}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Model Comparison}{53}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}General Specifications}{56}{subsection.4.5.2}%
-\contentsline {subsubsection}{\nonumberline History}{56}{subsubsection*.51}%
-\contentsline {subsubsection}{\nonumberline Frame}{56}{subsubsection*.54}%
-\contentsline {subsubsection}{\nonumberline Window Shape}{56}{subsubsection*.57}%
-\contentsline {subsection}{\numberline {4.5.3}INGARCH Specifications Results}{57}{subsection.4.5.3}%
-\contentsline {subsubsection}{\nonumberline Distribution}{58}{subsubsection*.60}%
-\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{59}{subsubsection*.63}%
-\contentsline {subsection}{\numberline {4.5.4}CoDA Specifications Results}{60}{subsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.5.5}Zero Handling}{60}{subsection.4.5.5}%
-\contentsline {subsection}{\numberline {4.5.6}$\mathcal {T}$-spaces}{66}{subsection.4.5.6}%
-\contentsline {subsection}{\numberline {4.5.7}One-vs-All method}{66}{subsection.4.5.7}%
-\contentsline {chapter}{\nonumberline Bibliography}{71}{chapter*.76}%
-\contentsline {chapter}{\nonumberline List of Figures}{79}{chapter*.77}%
-\contentsline {chapter}{\nonumberline List of Tables}{81}{chapter*.78}%
+\contentsline {subsection}{\numberline {2.8.3}Testing for INAR(1) Models}{20}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}Difference to AR(p) Models}{21}{subsection.2.8.4}%
+\contentsline {chapter}{\numberline {3}Compositional Data Models}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Motivation}{23}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Preliminaries}{23}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Common Transformations}{24}{section.3.3}%
+\contentsline {subsubsection}{\nonumberline alr Coordinates}{25}{subsubsection*.11}%
+\contentsline {subsubsection}{\nonumberline clr Coefficients}{25}{subsubsection*.13}%
+\contentsline {subsubsection}{\nonumberline ilr Coordinates}{25}{subsubsection*.15}%
+\contentsline {section}{\numberline {3.4}The VAR Model}{27}{section.3.4}%
+\contentsline {section}{\numberline {3.5}$\mathcal {T}$-Spaces}{28}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Zero-Handling}{30}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Rounded Zeros}{31}{subsection.3.6.1}%
+\contentsline {subsubsection}{\nonumberline EM-based algorithm}{33}{subsubsection*.17}%
+\contentsline {subsubsection}{\nonumberline MCMC data augmentation}{34}{subsubsection*.19}%
+\contentsline {subsubsection}{\nonumberline Bayesian-multiplicative replacement}{34}{subsubsection*.21}%
+\contentsline {subsection}{\numberline {3.6.2}Essential Zeros}{35}{subsection.3.6.2}%
+\contentsline {chapter}{\numberline {4}Application}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Model Specifications}{37}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}CoDA Specifications}{38}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}INGARCH Specifications}{39}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Error Measure}{39}{section.4.2}%
+\contentsline {subsubsection}{\nonumberline Extension of the Error Measure}{40}{subsubsection*.23}%
+\contentsline {section}{\numberline {4.3}Examples of Model Application}{40}{section.4.3}%
+\contentsline {section}{\numberline {4.4}R-Code}{45}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}R-Packages}{45}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Handbook}{45}{subsection.4.4.2}%
+\contentsline {subsubsection}{\nonumberline Data.Window}{46}{subsubsection*.30}%
+\contentsline {subsubsection}{\nonumberline Data.Preparation}{46}{subsubsection*.32}%
+\contentsline {subsubsection}{\nonumberline Model.Error}{47}{subsubsection*.34}%
+\contentsline {subsubsection}{\nonumberline Model.ErrorOverall}{48}{subsubsection*.36}%
+\contentsline {subsubsection}{\nonumberline CountModel.DataPreparation}{48}{subsubsection*.38}%
+\contentsline {subsubsection}{\nonumberline CountModel.Prediction}{49}{subsubsection*.40}%
+\contentsline {subsubsection}{\nonumberline CountModel.Analysis}{50}{subsubsection*.42}%
+\contentsline {subsubsection}{\nonumberline Coda.DataPreparation}{52}{subsubsection*.44}%
+\contentsline {subsubsection}{\nonumberline Coda.Prediction}{53}{subsubsection*.46}%
+\contentsline {subsubsection}{\nonumberline Coda.Analysis}{53}{subsubsection*.48}%
+\contentsline {section}{\numberline {4.5}Results}{54}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Model Comparison}{55}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}General Specifications}{58}{subsection.4.5.2}%
+\contentsline {subsubsection}{\nonumberline History}{58}{subsubsection*.52}%
+\contentsline {subsubsection}{\nonumberline Frame}{58}{subsubsection*.55}%
+\contentsline {subsubsection}{\nonumberline Window Shape}{58}{subsubsection*.58}%
+\contentsline {subsection}{\numberline {4.5.3}INGARCH Specifications Results}{59}{subsection.4.5.3}%
+\contentsline {subsubsection}{\nonumberline Distribution}{60}{subsubsection*.61}%
+\contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{61}{subsubsection*.64}%
+\contentsline {subsection}{\numberline {4.5.4}CoDA Specifications Results}{62}{subsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.5.5}Zero Handling}{62}{subsection.4.5.5}%
+\contentsline {subsection}{\numberline {4.5.6}$\mathcal {T}$-spaces}{68}{subsection.4.5.6}%
+\contentsline {subsection}{\numberline {4.5.7}One-vs-All Method}{68}{subsection.4.5.7}%
+\contentsline {chapter}{\nonumberline Bibliography}{73}{chapter*.77}%
+\contentsline {chapter}{\nonumberline List of Figures}{81}{chapter*.78}%
+\contentsline {chapter}{\nonumberline List of Tables}{83}{chapter*.79}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

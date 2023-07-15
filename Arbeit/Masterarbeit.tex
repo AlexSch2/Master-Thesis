@@ -4,7 +4,7 @@
 
 
 %% Sprache Anpassungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[british]{babel}
+\usepackage[german,british]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
@@ -35,7 +35,7 @@
 \usepackage[toc, title, titletoc]{appendix}
 
 %Biblatex
-\usepackage[citestyle=alphabetic,bibstyle=authortitle]{biblatex}
+\usepackage[citestyle=authoryear,bibstyle=authoryear]{biblatex}
 \usepackage{csquotes}
 \addbibresource{Literatur.bib}
 
@@ -79,6 +79,8 @@
 \pagenumbering{roman}
 \addchap{Abstract}
 \input{Abstract}
+\chapter*{Kurzfassung}
+\input{Kurzfassung}
 \chapter*{Eidesstattliche Erklärung}
 \input{Eidesstattliche Erklaerung}
 \chapter*{Acknowledgements}
