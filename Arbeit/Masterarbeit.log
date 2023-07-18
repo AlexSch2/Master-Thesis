@@ -1,41 +1,42 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.3.21)  15 JUL 2023 18:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.7.17)  18 JUL 2023 13:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **./Masterarbeit.tex
 (Masterarbeit.tex
-LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-02-22>
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-06-30>
+
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrbook.
 cls
-Document Class: scrbook 2022/10/12 v3.38 KOMA-Script document class (book)
+Document Class: scrbook 2023/04/24 v3.40 KOMA-Script document class (book)
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrkbase
 .sty
-Package: scrkbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-dependent b
+Package: scrkbase 2023/04/24 v3.40 KOMA-Script package (KOMA-Script-dependent b
 asics and keyval usage)
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrbase.
 sty
-Package: scrbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-independent 
+Package: scrbase 2023/04/24 v3.40 KOMA-Script package (KOMA-Script-independent 
 basics and keyval usage)
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrlfile
 .sty
-Package: scrlfile 2022/10/12 v3.38 KOMA-Script package (file load hooks)
+Package: scrlfile 2023/04/24 v3.40 KOMA-Script package (file load hooks)
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrlfile
 -hook.sty
-Package: scrlfile-hook 2022/10/12 v3.38 KOMA-Script package (using LaTeX hooks)
+Package: scrlfile-hook 2023/04/24 v3.40 KOMA-Script package (using LaTeX hooks)
 
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrlogo.
 sty
-Package: scrlogo 2022/10/12 v3.38 KOMA-Script package (logo)
+Package: scrlogo 2023/04/24 v3.40 KOMA-Script package (logo)
 )))
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 )
 Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
 Already applied: [0000/00/00] Usage of raw or classic option list on input line
@@ -43,13 +44,13 @@ Already applied: [0000/00/00] Usage of raw or classic option list on input line
 ))
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\tocbasic
 .sty
-Package: tocbasic 2022/10/12 v3.38 KOMA-Script package (handling toc-files)
+Package: tocbasic 2023/04/24 v3.40 KOMA-Script package (handling toc-files)
 \scr@dte@tocline@numberwidth=\skip48
 \scr@dte@tocline@numbox=\box51
 )
 Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `toc' on input line 137.
+(tocbasic)             for `toc' on input line 135.
 Package scrbook Info: You've used standard option `12pt'.
 (scrbook)             This is correct!
 (scrbook)             Internally I'm using `fontsize=12pt'.
@@ -57,16 +58,16 @@ Package scrbook Info: You've used standard option `12pt'.
 (scrbook)             you'd have to use `fontsize=12pt' there
 (scrbook)             instead of `12pt', too.
 Class scrbook Info: File `scrsize12pt.clo' used to setup font sizes on input li
-ne 2617.
+ne 2671.
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrsize1
 2pt.clo
-File: scrsize12pt.clo 2022/10/12 v3.38 KOMA-Script font size class option (12pt
+File: scrsize12pt.clo 2023/04/24 v3.40 KOMA-Script font size class option (12pt
 )
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\typearea
 .sty
-Package: typearea 2022/10/12 v3.38 KOMA-Script package (type area)
+Package: typearea 2023/04/24 v3.40 KOMA-Script package (type area)
 \ta@bcor=\skip49
 \ta@div=\count185
 Package typearea Info: You've used standard option `a4paper'.
@@ -95,7 +96,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 12.0pt
 (typearea)              \footskip       = 50.75pt
 (typearea)              \baselineskip   = 14.5pt
-(typearea)              on input line 1767.
+(typearea)              on input line 1798.
 )
 \c@part=\count186
 \c@chapter=\count187
@@ -106,53 +107,53 @@ Package typearea Info: These are the values describing the layout:
 \c@subparagraph=\count192
 \scr@dte@chapter@maxnumwidth=\skip54
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\chapter on input line 5898.
+(scrbook)           for `\chapter on input line 5957.
 \scr@dte@section@maxnumwidth=\skip55
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\section on input line 5909.
+(scrbook)           for `\section on input line 5968.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\section on input line 5909.
+(scrbook)           for `\section on input line 5968.
 \scr@dte@part@maxnumwidth=\skip56
 Class scrbook Info: using compatibility default `afterindent=true'
-(scrbook)           for `\part on input line 5918.
+(scrbook)           for `\part on input line 5977.
 \scr@dte@subsection@maxnumwidth=\skip57
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subsection on input line 5928.
+(scrbook)           for `\subsection on input line 5987.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subsection on input line 5928.
+(scrbook)           for `\subsection on input line 5987.
 \scr@dte@subsubsection@maxnumwidth=\skip58
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subsubsection on input line 5938.
+(scrbook)           for `\subsubsection on input line 5997.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subsubsection on input line 5938.
+(scrbook)           for `\subsubsection on input line 5997.
 \scr@dte@paragraph@maxnumwidth=\skip59
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\paragraph on input line 5949.
+(scrbook)           for `\paragraph on input line 6008.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\paragraph on input line 5949.
+(scrbook)           for `\paragraph on input line 6008.
 \scr@dte@subparagraph@maxnumwidth=\skip60
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subparagraph on input line 5959.
+(scrbook)           for `\subparagraph on input line 6018.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subparagraph on input line 5959.
+(scrbook)           for `\subparagraph on input line 6018.
 \abovecaptionskip=\skip61
 \belowcaptionskip=\skip62
 \c@pti@nb@sid@b@x=\box52
 Package tocbasic Info: omitting babel extension for `lof'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 7142.
+(tocbasic)             for `lof' on input line 7201.
 \scr@dte@figure@maxnumwidth=\skip63
 \c@figure=\count193
 Package tocbasic Info: omitting babel extension for `lot'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 7159.
+(tocbasic)             for `lot' on input line 7218.
 \scr@dte@table@maxnumwidth=\skip64
 \c@table=\count194
-Class scrbook Info: Redefining `\numberline' on input line 7330.
+Class scrbook Info: Redefining `\numberline' on input line 7389.
 \bibindent=\dimen140
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.sty
-Package: babel 2023/02/13 3.86 The Babel package
+Package: babel 2023/06/26 v3.90 The Babel package
 \babel@savecnt=\count195
 \U@D=\dimen141
 \l@unhyphenated=\language83
@@ -209,8 +210,8 @@ Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks17
-\inpenc@posthook=\toks18
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
@@ -321,12 +322,12 @@ Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
 \col@sep=\dimen154
 \ar@mcellbox=\box53
 \extrarowheight=\dimen155
-\NC@list=\toks19
+\NC@list=\toks20
 \extratabsurround=\skip65
 \backup@length=\skip66
 \ar@cellbox=\box54
 )
-\everycr=\toks20
+\everycr=\toks21
 \minrowclearance=\skip67
 \rownum=\count267
 )
@@ -343,7 +344,7 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsmath.sty
-Package: amsmath 2022/04/08 v2.17n AMS math features
+Package: amsmath 2023/05/13 v2.17o AMS math features
 \@mathmargin=\skip68
 
 For additional information on amsmath, use the `?' option.
@@ -352,7 +353,7 @@ Package: amstext 2021/08/26 v2.01 AMS text
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks21
+\@emptytoks=\toks22
 \ex@=\dimen156
 )) (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbsy.st
 y
@@ -391,41 +392,41 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \dotsspace@=\muskip16
 \c@parentequation=\count275
 \dspbrk@lvl=\count276
-\tag@help=\toks22
+\tag@help=\toks23
 \row@=\count277
 \column@=\count278
 \maxfields@=\count279
-\andhelp@=\toks23
+\andhelp@=\toks24
 \eqnshift@=\dimen159
 \alignsep@=\dimen160
 \tagshift@=\dimen161
 \tagwidth@=\dimen162
 \totwidth@=\dimen163
 \lineht@=\dimen164
-\@envbody=\toks24
+\@envbody=\toks25
 \multlinegap=\skip69
 \multlinetaggap=\skip70
-\mathdisplay@stack=\toks25
+\mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 ) (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks26
-\thm@bodyfont=\toks27
-\thm@headfont=\toks28
-\thm@notefont=\toks29
-\thm@headpunct=\toks30
+\thm@style=\toks27
+\thm@bodyfont=\toks28
+\thm@headfont=\toks29
+\thm@notefont=\toks30
+\thm@headpunct=\toks31
 \thm@preskip=\skip71
 \thm@postskip=\skip72
 \thm@headsep=\skip73
-\dth@everypar=\toks31
+\dth@everypar=\toks32
 ) (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xpatch\xpatch.sty
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3kernel\expl3.sty
-Package: expl3 2023-02-22 L3 programming layer (loader) 
+Package: expl3 2023-06-30 L3 programming layer (loader) 
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backend-
 pdftex.def
-File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count280
 \l__pdf_internal_box=\box57
 ))
@@ -433,7 +434,7 @@ Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xparse\xp
 arse.sty
-Package: xparse 2023-01-16 L3 Experimental document command parser
+Package: xparse 2023-02-02 L3 Experimental document command parser
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/etoolbox\etoolbox.st
 y
@@ -774,7 +775,7 @@ File: biblatex.cfg
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Document encoding is UTF8 ....
 Package biblatex Info: ... and expl3
-(biblatex)             2023-02-22 L3 programming layer (loader) 
+(biblatex)             2023-06-30 L3 programming layer (loader) 
 (biblatex)             is new enough (at least 2020/04/06),
 (biblatex)             setting 'casechanger=expl3'.
 
@@ -791,7 +792,7 @@ Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
 \csq@qlevel=\count418
 \csq@maxlvl=\count419
 \csq@tshold=\count420
-\csq@ltx@everypar=\toks32
+\csq@ltx@everypar=\toks33
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/csquotes\csquotes.de
 f
@@ -806,7 +807,7 @@ File: csquotes.cfg
 ))
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hyperref.st
 y
-Package: hyperref 2023-02-07 v7.00v Hypertext links for LaTeX
+Package: hyperref 2023-06-25 v7.01a Hypertext links for LaTeX
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvdefinekeys\kvdef
 inekeys.sty
@@ -827,7 +828,7 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.sty
-Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
+Package: nameref 2023-06-18 v2.52 Cross-referencing by name of section
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/refcount\refcount.st
 y
@@ -844,7 +845,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 \Hy@pagecounter=\count423
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\pd1enc.def
-File: pd1enc.def 2023-02-07 v7.00v Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2023-06-25 v7.01a Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -852,26 +853,22 @@ Now handling font encoding PD1 ...
 y
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-(C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/generic/etexcmds\etexcmds.
-sty
-Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
-)
 \Hy@SavedSpaceFactor=\count424
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\puenc.def
-File: puenc.def 2023-02-07 v7.00v Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2023-06-25 v7.01a Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Hyper figures OFF on input line 4177.
-Package hyperref Info: Link nesting OFF on input line 4182.
-Package hyperref Info: Hyper index ON on input line 4185.
-Package hyperref Info: Plain pages OFF on input line 4192.
-Package hyperref Info: Backreferencing OFF on input line 4197.
+Package hyperref Info: Hyper figures OFF on input line 4167.
+Package hyperref Info: Link nesting OFF on input line 4172.
+Package hyperref Info: Hyper index ON on input line 4175.
+Package hyperref Info: Plain pages OFF on input line 4182.
+Package hyperref Info: Backreferencing OFF on input line 4187.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4425.
+Package hyperref Info: Bookmarks ON on input line 4434.
 \c@Hy@tempcnt=\count425
-LaTeX Info: Redefining \url on input line 4763.
+LaTeX Info: Redefining \url on input line 4772.
 \XeTeXLinkMargin=\dimen176
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/generic/bitset\bitset.sty
@@ -885,13 +882,13 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 \Fld@menulength=\count426
 \Field@Width=\dimen177
 \Fld@charsize=\dimen178
-Package hyperref Info: Hyper figures OFF on input line 6042.
-Package hyperref Info: Link nesting OFF on input line 6047.
-Package hyperref Info: Hyper index ON on input line 6050.
-Package hyperref Info: backreferencing OFF on input line 6057.
-Package hyperref Info: Link coloring OFF on input line 6062.
-Package hyperref Info: Link coloring with OCG OFF on input line 6067.
-Package hyperref Info: PDF/A mode OFF on input line 6072.
+Package hyperref Info: Hyper figures OFF on input line 6051.
+Package hyperref Info: Link nesting OFF on input line 6056.
+Package hyperref Info: Hyper index ON on input line 6059.
+Package hyperref Info: backreferencing OFF on input line 6066.
+Package hyperref Info: Link coloring OFF on input line 6071.
+Package hyperref Info: Link coloring with OCG OFF on input line 6076.
+Package hyperref Info: PDF/A mode OFF on input line 6081.
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\atbegshi-ltx.st
 y
@@ -905,7 +902,7 @@ package with kernel methods
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hpdftex.def
-File: hpdftex.def 2023-02-07 v7.00v Hyperref driver for pdfTeX
+File: hpdftex.def 2023-06-25 v7.01a Hyperref driver for pdfTeX
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\atveryend-ltx.s
 ty
@@ -938,7 +935,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'british'.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 70
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 77
 .
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -946,34 +943,34 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 (Masterarbeit.aux)
 \openout1 = `Masterarbeit.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-Package scrbase Info: activating british \partname on input line 70.
-Package scrbase Info: activating british \chaptername on input line 70.
-Package scrbase Info: activating british \appendixname on input line 70.
-Package scrbase Info: activating british \figurename on input line 70.
-Package scrbase Info: activating british \tablename on input line 70.
-Package scrbase Info: activating british \contentsname on input line 70.
-Package scrbase Info: activating british \listfigurename on input line 70.
-Package scrbase Info: activating british \listtablename on input line 70.
-Package scrbase Info: activating british \bibname on input line 70.
-Package scrbase Info: activating british \indexname on input line 70.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+Package scrbase Info: activating british \partname on input line 77.
+Package scrbase Info: activating british \chaptername on input line 77.
+Package scrbase Info: activating british \appendixname on input line 77.
+Package scrbase Info: activating british \figurename on input line 77.
+Package scrbase Info: activating british \tablename on input line 77.
+Package scrbase Info: activating british \contentsname on input line 77.
+Package scrbase Info: activating british \listfigurename on input line 77.
+Package scrbase Info: activating british \listtablename on input line 77.
+Package scrbase Info: activating british \bibname on input line 77.
+Package scrbase Info: activating british \indexname on input line 77.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
@@ -986,12 +983,12 @@ Package caption Info: End \AtBeginDocument code.
 \scratchbox=\box59
 \nofMPsegments=\count433
 \nofMParguments=\count434
-\everyMPshowfont=\toks33
+\everyMPshowfont=\toks34
 \MPscratchCnt=\count435
 \MPscratchDim=\dimen180
 \MPnumerator=\count436
 \makeMPintoPDFobject=\count437
-\everyMPtoPDFconversion=\toks34
+\everyMPtoPDFconversion=\toks35
 )
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\epstopd
 f-base.sty
@@ -1031,9 +1028,9 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Masterarbeit.bbl' found.
  (Masterarbeit.bbl)
-Package biblatex Info: Reference section=0 on input line 70.
-Package biblatex Info: Reference segment=0 on input line 70.
-Package hyperref Info: Link coloring OFF on input line 70.
+Package biblatex Info: Reference section=0 on input line 77.
+Package biblatex Info: Reference segment=0 on input line 77.
+Package hyperref Info: Link coloring OFF on input line 77.
  (Masterarbeit.out) (Masterarbeit.out)
 \@outlinefile=\write5
 \openout5 = `Masterarbeit.out'.
@@ -1045,7 +1042,7 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 70.
+(scrbook)           before \begin{document} on input line 77.
 
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/bookmark\bookmark.st
 y
@@ -1121,14 +1118,15 @@ Overfull \hbox (6.24463pt too wide) in paragraph at lines 39--43
 
 
 
-{C:/Users/Alex/AppData/Local/MiKTeX/2.9/fonts/map/pdftex/pdftex.map} <./TULogo-
-eps-converted-to.pdf>] [2
+{C:/Users/Alex/AppData/Local/MiKTeX/2.9/fonts/map/pdftex/pdftex.map}{C:/Users/A
+lex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc} <./TULogo-e
+ps-converted-to.pdf>] [2
 
 
 ])
 chapter without number
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 8
-0.
+7.
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1152,15 +1150,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
 
 ] (Eidesstattliche Erklaerung.tex
-<Graphiken//Unterschrift003.jpg, id=42, 157.5486pt x 46.9755pt>
-File: Graphiken//Unterschrift003.jpg Graphic file (type jpg)
-<use Graphiken//Unterschrift003.jpg>
-Package pdftex.def Info: Graphiken//Unterschrift003.jpg  used on input line 16.
-
+<Graphiken/Unterschrift003.jpg, id=42, 157.5486pt x 46.9755pt>
+File: Graphiken/Unterschrift003.jpg Graphic file (type jpg)
+<use Graphiken/Unterschrift003.jpg>
+Package pdftex.def Info: Graphiken/Unterschrift003.jpg  used on input line 16.
 (pdftex.def)             Requested size: 142.26378pt x 42.41803pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <12> on input line 17.
-) [5 <./Graphiken//Unterschrift003.jpg>] [6
+) [5 <./Graphiken/Unterschrift003.jpg>] [6
 
 
 ] (Danksagung.tex) [7] [8
@@ -1170,21 +1167,25 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@toc=\write6
 \openout6 = `Masterarbeit.toc'.
 
- [10]
+ [10{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-math
+sy.enc}]
 chapter 1.
 (Einleitung.tex [1
 
 
 
 
-]
+{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.e
+nc}]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [2]
+ [2{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathe
+x.enc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm
+.enc}]
 [3] [4
 
 
@@ -1194,7 +1195,7 @@ chapter 2.
 Underfull \vbox (badness 2486) has occurred while \output is active []
 
  [6]
-Underfull \vbox (badness 1348) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7]
 [8]
@@ -1212,28 +1213,24 @@ b/it/12 Y[] \OT1/lmr/m/n/12 = (\OML/lmm/m/it/12 Y[]; [] ; Y[]\OT1/lmr/m/n/12 )[
 ]$
  []
 
-[10] (Other_CountTS.tex [11]
-Underfull \vbox (badness 7064) has occurred while \output is active []
-
- [12]
-[13] [14]
+[10] (Other_CountTS.tex [11] [12] [13] [14]
 Overfull \hbox (12.62259pt too wide) in paragraph at lines 135--136
 []\T1/lmr/m/n/12 The one step ahead pre-dictor is again given by the con-di-tio
 nal ex-pect-a-tion $\U/msb/m/n/12 E\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 Y[]\OMS/lm
 sy/m/n/12 jF[]\OT1/lmr/m/n/12 ] =
  []
 
-[15]
-Underfull \vbox (badness 1490) has occurred while \output is active []
-
- [16]
-[17] [18] [19] [20])) [21] [22
+[15] [16] [17] [18] [19] [20])) [21] [22
 
 
 ]
 chapter 3.
-(Methode_Coda.tex [23] [24] [25]
+(Methode_Coda.tex [23]
 Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24]
+[25]
+Underfull \vbox (badness 1565) has occurred while \output is active []
 
  [26]
 Overfull \hbox (24.49345pt too wide) in paragraph at lines 149--150
@@ -1257,7 +1254,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [27]
-Underfull \vbox (badness 1205) has occurred while \output is active []
+Underfull \vbox (badness 4072) has occurred while \output is active []
 
  [28]
 Overfull \hbox (16.25833pt too wide) in paragraph at lines 251--254
@@ -1268,126 +1265,124 @@ lmr/m/n/12 (\OML/lmm/b/it/12 x\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ; \OMS/lmsy/m/n
  []
 
 [29] [30] [31]
-Overfull \hbox (11.14816pt too wide) in paragraph at lines 325--326
+Overfull \hbox (11.14816pt too wide) in paragraph at lines 326--327
 []\T1/lmr/m/n/12 Third, which is the main res-ult of []J. A. Martín-Fernández, 
 Barceló-Vidal and Pawlowsky-
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
-42.
+43.
 (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-[32] [33] [34]
-Overfull \hbox (5.34746pt too wide) in paragraph at lines 408--409
-\T1/lmr/m/n/12 and Bren ([]2006[]) and ex-ten-ded in the R-package \T1/lmr/m/it
-/12 com-pos-i-tions []\T1/lmr/m/n/12 van den Boogaart, Tolosana-
- []
-
-
-Overfull \hbox (3.41373pt too wide) in paragraph at lines 417--420
+[32{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.e
+nc}] [33] [34]
+Overfull \hbox (3.41373pt too wide) in paragraph at lines 418--421
 \T1/lmr/m/n/12 The sub-sequent $\OML/lmm/m/it/12 ilr$ \T1/lmr/m/n/12 trans-form
 -a-tion is then based on this mod-i-fied ap-proach with $\OML/lmm/m/it/12 ilr[]
 \OT1/lmr/m/n/12 ([]) =
  []
 
-) [35] [36
+)
+Underfull \vbox (badness 1997) has occurred while \output is active []
+
+ [35]
+[36]
+chapter 4.
+(Model_Specification.tex [37
 
 
 ]
-chapter 4.
-(Model_Specification.tex [37]
 Underfull \vbox (badness 1478) has occurred while \output is active []
 
  [38]
 [39]) (Examples_Applications.tex
-<Graphiken//Raw_Timeseries_ID4.png, id=739, 1445.4pt x 1084.05pt>
-File: Graphiken//Raw_Timeseries_ID4.png Graphic file (type png)
-<use Graphiken//Raw_Timeseries_ID4.png>
-Package pdftex.def Info: Graphiken//Raw_Timeseries_ID4.png  used on input line 
-11.
+<Graphiken/Raw_Timeseries_ID4.png, id=746, 1445.4pt x 1084.05pt>
+File: Graphiken/Raw_Timeseries_ID4.png Graphic file (type png)
+<use Graphiken/Raw_Timeseries_ID4.png>
+Package pdftex.def Info: Graphiken/Raw_Timeseries_ID4.png  used on input line 1
+1.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Raw_Timeseries_ID24.png, id=740, 1445.4pt x 1084.05pt>
-File: Graphiken//Raw_Timeseries_ID24.png Graphic file (type png)
-<use Graphiken//Raw_Timeseries_ID24.png>
-Package pdftex.def Info: Graphiken//Raw_Timeseries_ID24.png  used on input line
- 17.
+<Graphiken/Raw_Timeseries_ID24.png, id=747, 1445.4pt x 1084.05pt>
+File: Graphiken/Raw_Timeseries_ID24.png Graphic file (type png)
+<use Graphiken/Raw_Timeseries_ID24.png>
+Package pdftex.def Info: Graphiken/Raw_Timeseries_ID24.png  used on input line 
+17.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
  [40]
-<Graphiken//Coda_Timeseries_ID4.png, id=757, 1445.4pt x 1084.05pt>
-File: Graphiken//Coda_Timeseries_ID4.png Graphic file (type png)
-<use Graphiken//Coda_Timeseries_ID4.png>
-Package pdftex.def Info: Graphiken//Coda_Timeseries_ID4.png  used on input line
- 33.
+<Graphiken/Coda_Timeseries_ID4.png, id=763, 1445.4pt x 1084.05pt>
+File: Graphiken/Coda_Timeseries_ID4.png Graphic file (type png)
+<use Graphiken/Coda_Timeseries_ID4.png>
+Package pdftex.def Info: Graphiken/Coda_Timeseries_ID4.png  used on input line 
+33.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Coda_timeseries_ID24.png, id=758, 1445.4pt x 1084.05pt>
-File: Graphiken//Coda_timeseries_ID24.png Graphic file (type png)
-<use Graphiken//Coda_timeseries_ID24.png>
-Package pdftex.def Info: Graphiken//Coda_timeseries_ID24.png  used on input lin
-e 39.
+<Graphiken/Coda_timeseries_ID24.png, id=764, 1445.4pt x 1084.05pt>
+File: Graphiken/Coda_timeseries_ID24.png Graphic file (type png)
+<use Graphiken/Coda_timeseries_ID24.png>
+Package pdftex.def Info: Graphiken/Coda_timeseries_ID24.png  used on input line
+ 39.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Ingarch_timeseries_ID4.png, id=762, 1445.4pt x 1084.05pt>
-File: Graphiken//Ingarch_timeseries_ID4.png Graphic file (type png)
-<use Graphiken//Ingarch_timeseries_ID4.png>
-Package pdftex.def Info: Graphiken//Ingarch_timeseries_ID4.png  used on input l
-ine 52.
+<Graphiken/Ingarch_timeseries_ID4.png, id=768, 1445.4pt x 1084.05pt>
+File: Graphiken/Ingarch_timeseries_ID4.png Graphic file (type png)
+<use Graphiken/Ingarch_timeseries_ID4.png>
+Package pdftex.def Info: Graphiken/Ingarch_timeseries_ID4.png  used on input li
+ne 52.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Ingarch_Timeseries_ID24.png, id=763, 1445.4pt x 1084.05pt>
-File: Graphiken//Ingarch_Timeseries_ID24.png Graphic file (type png)
-<use Graphiken//Ingarch_Timeseries_ID24.png>
-Package pdftex.def Info: Graphiken//Ingarch_Timeseries_ID24.png  used on input 
-line 58.
+<Graphiken/Ingarch_Timeseries_ID24.png, id=769, 1445.4pt x 1084.05pt>
+File: Graphiken/Ingarch_Timeseries_ID24.png Graphic file (type png)
+<use Graphiken/Ingarch_Timeseries_ID24.png>
+Package pdftex.def Info: Graphiken/Ingarch_Timeseries_ID24.png  used on input l
+ine 58.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//Predictions_timeseries_ID4.png, id=765, 1445.4pt x 1084.05pt>
-File: Graphiken//Predictions_timeseries_ID4.png Graphic file (type png)
-<use Graphiken//Predictions_timeseries_ID4.png>
-Package pdftex.def Info: Graphiken//Predictions_timeseries_ID4.png  used on inp
-ut line 72.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//Predictions_timeseries_ID24.png, id=766, 1445.4pt x 1084.05pt>
-File: Graphiken//Predictions_timeseries_ID24.png Graphic file (type png)
-<use Graphiken//Predictions_timeseries_ID24.png>
-Package pdftex.def Info: Graphiken//Predictions_timeseries_ID24.png  used on in
-put line 78.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
 
 Underfull \vbox (badness 1478) has occurred while \output is active []
 
- [41 <./Graphiken//Raw_Timeseries_ID4.png> <./Graphiken//Raw_Timeseries_ID24.pn
-g>]
-<Graphiken//BothPI_timeseries_ID4.png, id=778, 1445.4pt x 1084.05pt>
-File: Graphiken//BothPI_timeseries_ID4.png Graphic file (type png)
-<use Graphiken//BothPI_timeseries_ID4.png>
-Package pdftex.def Info: Graphiken//BothPI_timeseries_ID4.png  used on input li
-ne 91.
+ [41 <./Graphiken/Raw_Timeseries_ID4.png> <./Graphiken/Raw_Timeseries_ID24.png>
+]
+<Graphiken/Predictions_timeseries_ID4.png, id=781, 1445.4pt x 1084.05pt>
+File: Graphiken/Predictions_timeseries_ID4.png Graphic file (type png)
+<use Graphiken/Predictions_timeseries_ID4.png>
+Package pdftex.def Info: Graphiken/Predictions_timeseries_ID4.png  used on inpu
+t line 72.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//BothPI_timeseries_ID24.png, id=779, 1445.4pt x 1084.05pt>
-File: Graphiken//BothPI_timeseries_ID24.png Graphic file (type png)
-<use Graphiken//BothPI_timeseries_ID24.png>
-Package pdftex.def Info: Graphiken//BothPI_timeseries_ID24.png  used on input l
-ine 97.
+<Graphiken/Predictions_timeseries_ID24.png, id=782, 1445.4pt x 1084.05pt>
+File: Graphiken/Predictions_timeseries_ID24.png Graphic file (type png)
+<use Graphiken/Predictions_timeseries_ID24.png>
+Package pdftex.def Info: Graphiken/Predictions_timeseries_ID24.png  used on inp
+ut line 78.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+<Graphiken/BothPI_timeseries_ID4.png, id=785, 1445.4pt x 1084.05pt>
+File: Graphiken/BothPI_timeseries_ID4.png Graphic file (type png)
+<use Graphiken/BothPI_timeseries_ID4.png>
+Package pdftex.def Info: Graphiken/BothPI_timeseries_ID4.png  used on input lin
+e 91.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+<Graphiken/BothPI_timeseries_ID24.png, id=786, 1445.4pt x 1084.05pt>
+File: Graphiken/BothPI_timeseries_ID24.png Graphic file (type png)
+<use Graphiken/BothPI_timeseries_ID24.png>
+Package pdftex.def Info: Graphiken/BothPI_timeseries_ID24.png  used on input li
+ne 97.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
 )
 (RCode.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [42 <./Graphiken//Coda_Timeseries_ID4.png> <./Graphiken//Coda_timeseries_ID24.
-png> <./Graphiken//Ingarch_timeseries_ID4.png> <./Graphiken//Ingarch_Timeseries
-_ID24.png>]
+ [42 <./Graphiken/Coda_Timeseries_ID4.png> <./Graphiken/Coda_timeseries_ID24.pn
+g> <./Graphiken/Ingarch_timeseries_ID4.png> <./Graphiken/Ingarch_Timeseries_ID2
+4.png>]
 
 LaTeX Warning: Text page 43 contains only floats.
 
-[43 <./Graphiken//Predictions_timeseries_ID4.png> <./Graphiken//Predictions_tim
-eseries_ID24.png>]
+[43 <./Graphiken/Predictions_timeseries_ID4.png> <./Graphiken/Predictions_times
+eries_ID24.png>]
 
 LaTeX Warning: Text page 44 contains only floats.
 
-[44 <./Graphiken//BothPI_timeseries_ID4.png> <./Graphiken//BothPI_timeseries_ID
-24.png>]
+[44 <./Graphiken/BothPI_timeseries_ID4.png> <./Graphiken/BothPI_timeseries_ID24
+.png>]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
 .
-
-(C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd
+ (C:\Users\Alex\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1401,37 +1396,37 @@ Overfull \hbox (34.68849pt too wide) in paragraph at lines 84--85
  []
 
 [47] [48] [49] [50] [51] [52] [53]) (Results.tex [54]
-<Graphiken//All_ErrorMeasure_combined_zoomed_ZIMFALSE.png, id=911, 1445.4pt x 1
-084.05pt>
-File: Graphiken//All_ErrorMeasure_combined_zoomed_ZIMFALSE.png Graphic file (ty
-pe png)
-<use Graphiken//All_ErrorMeasure_combined_zoomed_ZIMFALSE.png>
-Package pdftex.def Info: Graphiken//All_ErrorMeasure_combined_zoomed_ZIMFALSE.p
-ng  used on input line 18.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//Quantile_Plot_Split_all_models_ZIMFALSE.png, id=912, 1445.4pt x 108
-4.05pt>
-File: Graphiken//Quantile_Plot_Split_all_models_ZIMFALSE.png Graphic file (type
- png)
-<use Graphiken//Quantile_Plot_Split_all_models_ZIMFALSE.png>
-Package pdftex.def Info: Graphiken//Quantile_Plot_Split_all_models_ZIMFALSE.png
-  used on input line 24.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//All_ErrorMeasure_combined_zoomed_ZIMTRUE.png, id=917, 1445.4pt x 10
+<Graphiken/All_ErrorMeasure_combined_zoomed_ZIMFALSE.png, id=918, 1445.4pt x 10
 84.05pt>
-File: Graphiken//All_ErrorMeasure_combined_zoomed_ZIMTRUE.png Graphic file (typ
+File: Graphiken/All_ErrorMeasure_combined_zoomed_ZIMFALSE.png Graphic file (typ
 e png)
-<use Graphiken//All_ErrorMeasure_combined_zoomed_ZIMTRUE.png>
-Package pdftex.def Info: Graphiken//All_ErrorMeasure_combined_zoomed_ZIMTRUE.pn
-g  used on input line 40.
+<use Graphiken/All_ErrorMeasure_combined_zoomed_ZIMFALSE.png>
+Package pdftex.def Info: Graphiken/All_ErrorMeasure_combined_zoomed_ZIMFALSE.pn
+g  used on input line 18.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//Quantile_Plot_Split_all_models_ZIMTRUE.png, id=918, 1445.4pt x 1084
+<Graphiken/Quantile_Plot_Split_all_models_ZIMFALSE.png, id=919, 1445.4pt x 1084
 .05pt>
-File: Graphiken//Quantile_Plot_Split_all_models_ZIMTRUE.png Graphic file (type 
+File: Graphiken/Quantile_Plot_Split_all_models_ZIMFALSE.png Graphic file (type 
 png)
-<use Graphiken//Quantile_Plot_Split_all_models_ZIMTRUE.png>
-Package pdftex.def Info: Graphiken//Quantile_Plot_Split_all_models_ZIMTRUE.png 
- used on input line 46.
+<use Graphiken/Quantile_Plot_Split_all_models_ZIMFALSE.png>
+Package pdftex.def Info: Graphiken/Quantile_Plot_Split_all_models_ZIMFALSE.png 
+ used on input line 24.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+<Graphiken/All_ErrorMeasure_combined_zoomed_ZIMTRUE.png, id=924, 1445.4pt x 108
+4.05pt>
+File: Graphiken/All_ErrorMeasure_combined_zoomed_ZIMTRUE.png Graphic file (type
+ png)
+<use Graphiken/All_ErrorMeasure_combined_zoomed_ZIMTRUE.png>
+Package pdftex.def Info: Graphiken/All_ErrorMeasure_combined_zoomed_ZIMTRUE.png
+  used on input line 40.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+<Graphiken/Quantile_Plot_Split_all_models_ZIMTRUE.png, id=925, 1445.4pt x 1084.
+05pt>
+File: Graphiken/Quantile_Plot_Split_all_models_ZIMTRUE.png Graphic file (type p
+ng)
+<use Graphiken/Quantile_Plot_Split_all_models_ZIMTRUE.png>
+Package pdftex.def Info: Graphiken/Quantile_Plot_Split_all_models_ZIMTRUE.png  
+used on input line 46.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
 
 Underfull \vbox (badness 4792) has occurred while \output is active []
@@ -1440,230 +1435,233 @@ Underfull \vbox (badness 4792) has occurred while \output is active []
 
 LaTeX Warning: Text page 56 contains only floats.
 
-[56 <./Graphiken//All_ErrorMeasure_combined_zoomed_ZIMFALSE.png> <./Graphiken//
-Quantile_Plot_Split_all_models_ZIMFALSE.png>]
+[56 <./Graphiken/All_ErrorMeasure_combined_zoomed_ZIMFALSE.png> <./Graphiken/Qu
+antile_Plot_Split_all_models_ZIMFALSE.png>]
 
 LaTeX Warning: Text page 57 contains only floats.
 
-[57 <./Graphiken//All_ErrorMeasure_combined_zoomed_ZIMTRUE.png> <./Graphiken//Q
-uantile_Plot_Split_all_models_ZIMTRUE.png>]
-<Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png, id=939, 1445.4
-pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png Graphic fi
-le (type png)
-<use Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_his
-tory.png  used on input line 95.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png, id=940, 
-1445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png Grap
-hic file (type png)
-<use Graphiken//ErrorMeasureCombined_Histogram_all__Variation_history.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
-on_history.png  used on input line 101.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png, id=941, 1445
-.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png Graphic 
-file (type png)
-<use Graphiken//ErrorMeasureCombined_Quant_all__Variation_history.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_h
-istory.png  used on input line 107.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png, id=947, 1445.4pt
- x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png Graphic file
- (type png)
-<use Graphiken//ErrorMeasureCombined_Box_all__Variation_frame.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_fra
-me.png  used on input line 126.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png, id=948, 14
-45.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png Graphi
-c file (type png)
-<use Graphiken//ErrorMeasureCombined_Histogram_all__Variation_frame.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
-on_frame.png  used on input line 132.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png, id=949, 1445.4
-pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png Graphic fi
-le (type png)
-<use Graphiken//ErrorMeasureCombined_Quant_all__Variation_frame.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_f
-rame.png  used on input line 138.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png, id=954, 1
-445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png Graph
-ic file (type png)
-<use Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Box_all__Variation_win
-dowMethod.png  used on input line 160.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png, id=
-955, 1445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png
- Graphic file (type png)
-<use Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png>
-
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Histogram_all__Variati
-on_windowMethod.png  used on input line 166.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png, id=956,
- 1445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png Gra
-phic file (type png)
-<use Graphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCombined_Quant_all__Variation_w
-indowMethod.png  used on input line 172.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
- [58]
-<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_distribution.png, id=972, 14
-45.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_distribution.png Graphi
-c file (type png)
-<use Graphiken//ErrorMeasureINGARCH_Box_all__Variation_distribution.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_dist
-ribution.png  used on input line 194.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png, id=9
-73, 1445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png 
-Graphic file (type png)
-<use Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variatio
-n_distribution.png  used on input line 200.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
- [59 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_history.png> <./Grap
-hiken//ErrorMeasureCombined_Histogram_all__Variation_history.png> <./Graphiken/
-/ErrorMeasureCombined_Quant_all__Variation_history.png>] [60 <./Graphiken//Erro
-rMeasureCombined_Box_all__Variation_frame.png> <./Graphiken//ErrorMeasureCombin
-ed_Histogram_all__Variation_frame.png> <./Graphiken//ErrorMeasureCombined_Quant
-_all__Variation_frame.png>]
-<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastMean.png, id=995, 1445.4
-pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastMean.png Graphic fi
-le (type png)
-<use Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastMean.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_past
-Mean.png  used on input line 226.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png, id=996, 
-1445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png Grap
-hic file (type png)
-<use Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variatio
-n_pastMean.png  used on input line 232.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png, id=997, 1445
-.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png Graphic 
-file (type png)
-<use Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pa
-stMean.png  used on input line 238.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-
-[61 <./Graphiken//ErrorMeasureCombined_Box_all__Variation_windowMethod.png> <./
-Graphiken//ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png> <./G
-raphiken//ErrorMeasureCombined_Quant_all__Variation_windowMethod.png>]
-<Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png, id=1010, 1445.4p
+[57 <./Graphiken/All_ErrorMeasure_combined_zoomed_ZIMTRUE.png> <./Graphiken/Qua
+ntile_Plot_Split_all_models_ZIMTRUE.png>]
+<Graphiken/ErrorMeasureCombined_Box_all__Variation_history.png, id=946, 1445.4p
 t x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png Graphic file
- (type png)
-<use Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Box_all__Variation_past
-Ob.png  used on input line 252.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png, id=1011, 1
+File: Graphiken/ErrorMeasureCombined_Box_all__Variation_history.png Graphic fil
+e (type png)
+<use Graphiken/ErrorMeasureCombined_Box_all__Variation_history.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Box_all__Variation_hist
+ory.png  used on input line 95.
+(pdftex.def)             Requested size: 179.24963pt x 134.43073pt.
+<Graphiken/ErrorMeasureCombined_Histogram_all__Variation_history.png, id=947, 1
 445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png Graphi
-c file (type png)
-<use Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Histogram_all__Variatio
-n_pastOb.png  used on input line 258.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png, id=1012, 1445.
+File: Graphiken/ErrorMeasureCombined_Histogram_all__Variation_history.png Graph
+ic file (type png)
+<use Graphiken/ErrorMeasureCombined_Histogram_all__Variation_history.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Histogram_all__Variatio
+n_history.png  used on input line 101.
+(pdftex.def)             Requested size: 179.24963pt x 134.43073pt.
+<Graphiken/ErrorMeasureCombined_Quant_all__Variation_history.png, id=948, 1445.
 4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png Graphic fi
-le (type png)
-<use Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureINGARCH_Quant_all__Variation_pa
-stOb.png  used on input line 264.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png, id=1016, 1445
-.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png Graphic f
+File: Graphiken/ErrorMeasureCombined_Quant_all__Variation_history.png Graphic f
 ile (type png)
-<use Graphiken//ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Box_all__Variation_zeroHan
-dling.png  used on input line 287.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png, id=1017
-, 1445.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png Gra
-phic file (type png)
-<use Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_z
-eroHandling.png  used on input line 293.
-(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png, id=1018, 14
-45.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png Graphic
+<use Graphiken/ErrorMeasureCombined_Quant_all__Variation_history.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Quant_all__Variation_hi
+story.png  used on input line 107.
+(pdftex.def)             Requested size: 268.8813pt x 201.65437pt.
+ [58 <./Graphiken/ErrorMeasureCombined_Box_all__Variation_history.png> <./Graph
+iken/ErrorMeasureCombined_Histogram_all__Variation_history.png> <./Graphiken/Er
+rorMeasureCombined_Quant_all__Variation_history.png>]
+<Graphiken/ErrorMeasureCombined_Box_all__Variation_frame.png, id=965, 1445.4pt 
+x 1084.05pt>
+File: Graphiken/ErrorMeasureCombined_Box_all__Variation_frame.png Graphic file 
+(type png)
+<use Graphiken/ErrorMeasureCombined_Box_all__Variation_frame.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Box_all__Variation_fram
+e.png  used on input line 126.
+(pdftex.def)             Requested size: 179.24963pt x 134.43073pt.
+<Graphiken/ErrorMeasureCombined_Histogram_all__Variation_frame.png, id=966, 144
+5.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCombined_Histogram_all__Variation_frame.png Graphic
  file (type png)
-<use Graphiken//ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Quant_all__Variation_zeroH
-andling.png  used on input line 299.
+<use Graphiken/ErrorMeasureCombined_Histogram_all__Variation_frame.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Histogram_all__Variatio
+n_frame.png  used on input line 132.
+(pdftex.def)             Requested size: 179.24963pt x 134.43073pt.
+<Graphiken/ErrorMeasureCombined_Quant_all__Variation_frame.png, id=967, 1445.4p
+t x 1084.05pt>
+File: Graphiken/ErrorMeasureCombined_Quant_all__Variation_frame.png Graphic fil
+e (type png)
+<use Graphiken/ErrorMeasureCombined_Quant_all__Variation_frame.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Quant_all__Variation_fr
+ame.png  used on input line 138.
+(pdftex.def)             Requested size: 268.8813pt x 201.65437pt.
+ [59 <./Graphiken/ErrorMeasureCombined_Box_all__Variation_frame.png> <./Graphik
+en/ErrorMeasureCombined_Histogram_all__Variation_frame.png> <./Graphiken/ErrorM
+easureCombined_Quant_all__Variation_frame.png>]
+<Graphiken/ErrorMeasureCombined_Box_all__Variation_windowMethod.png, id=982, 14
+45.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCombined_Box_all__Variation_windowMethod.png Graphi
+c file (type png)
+<use Graphiken/ErrorMeasureCombined_Box_all__Variation_windowMethod.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Box_all__Variation_wind
+owMethod.png  used on input line 160.
+(pdftex.def)             Requested size: 179.24963pt x 134.43073pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--161
+[][][]|\T1/lmr/m/n/10.95 Box-plot for dif-fer-ent win-dow
+ []
+
+<Graphiken/ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png, id=9
+83, 1445.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png 
+Graphic file (type png)
+<use Graphiken/ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Histogram_all__Variatio
+n_windowMethod.png  used on input line 166.
+(pdftex.def)             Requested size: 179.24963pt x 134.43073pt.
+<Graphiken/ErrorMeasureCombined_Quant_all__Variation_windowMethod.png, id=984, 
+1445.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCombined_Quant_all__Variation_windowMethod.png Grap
+hic file (type png)
+<use Graphiken/ErrorMeasureCombined_Quant_all__Variation_windowMethod.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCombined_Quant_all__Variation_wi
+ndowMethod.png  used on input line 172.
+(pdftex.def)             Requested size: 224.06548pt x 168.04256pt.
+[60 <./Graphiken/ErrorMeasureCombined_Box_all__Variation_windowMethod.png> <./G
+raphiken/ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png> <./Gra
+phiken/ErrorMeasureCombined_Quant_all__Variation_windowMethod.png>]
+<Graphiken/ErrorMeasureINGARCH_Box_all__Variation_distribution.png, id=998, 144
+5.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Box_all__Variation_distribution.png Graphic
+ file (type png)
+<use Graphiken/ErrorMeasureINGARCH_Box_all__Variation_distribution.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Box_all__Variation_distr
+ibution.png  used on input line 194.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png, id=99
+9, 1445.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png G
+raphic file (type png)
+<use Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation
+_distribution.png  used on input line 200.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastMean.png, id=1002, 1445.4
+pt x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastMean.png Graphic fil
+e (type png)
+<use Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastMean.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastM
+ean.png  used on input line 226.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png, id=1003, 
+1445.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png Graph
+ic file (type png)
+<use Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation
+_pastMean.png  used on input line 232.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png, id=1004, 1445
+.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png Graphic f
+ile (type png)
+<use Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pas
+tMean.png  used on input line 238.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
- [62 <./Graphiken//ErrorMeasureINGARCH_Box_all__Variation_distribution.png> <./
-Graphiken//ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png>]
-<Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png, id=1031, 1445.4pt x 1084
+<Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastOb.png, id=1006, 1445.4pt
+ x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastOb.png Graphic file 
+(type png)
+<use Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastOb.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastO
+b.png  used on input line 252.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png, id=1007, 14
+45.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png Graphic
+ file (type png)
+<use Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Histogram_all__Variation
+_pastOb.png  used on input line 258.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png, id=1008, 1445.4
+pt x 1084.05pt>
+File: Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png Graphic fil
+e (type png)
+<use Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pastOb.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureINGARCH_Quant_all__Variation_pas
+tOb.png  used on input line 264.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+ [61 <./Graphiken/ErrorMeasureINGARCH_Box_all__Variation_distribution.png> <./G
+raphiken/ErrorMeasureINGARCH_Histogram_all__Variation_distribution.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [62 <./Graphiken/ErrorMeasureINGARCH_Box_all__Variation_pastMean.png> <./Graph
+iken/ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png> <./Graphiken/Er
+rorMeasureINGARCH_Quant_all__Variation_pastMean.png>] [63 <./Graphiken/ErrorMea
+sureINGARCH_Box_all__Variation_pastOb.png> <./Graphiken/ErrorMeasureINGARCH_His
+togram_all__Variation_pastOb.png> <./Graphiken/ErrorMeasureINGARCH_Quant_all__V
+ariation_pastOb.png>]
+<Graphiken/ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png, id=1040, 1445.
+4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png Graphic fi
+le (type png)
+<use Graphiken/ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Box_all__Variation_zeroHand
+ling.png  used on input line 287.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png, id=1041,
+ 1445.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png Grap
+hic file (type png)
+<use Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_ze
+roHandling.png  used on input line 293.
+(pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
+<Graphiken/ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png, id=1042, 144
+5.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png Graphic 
+file (type png)
+<use Graphiken/ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Quant_all__Variation_zeroHa
+ndling.png  used on input line 299.
+(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
+ [64 <./Graphiken/ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png> <./Grap
+hiken/ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png> <./Graphiken/
+ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png>]
+<Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png, id=1054, 1445.4pt x 1084
 .05pt>
 File: Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png Graphic file (type p
 ng)
 <use Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png>
 Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png  
 used on input line 313.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken/ErrorMeasureCoDA_Box_all__Variation_dLcat4.png, id=1032, 1445.4pt x 
+(pdftex.def)             Requested size: 268.8813pt x 201.65437pt.
+<Graphiken/ErrorMeasureCoDA_Box_all__Variation_dLcat4.png, id=1055, 1445.4pt x 
 1084.05pt>
 File: Graphiken/ErrorMeasureCoDA_Box_all__Variation_dLcat4.png Graphic file (ty
 pe png)
 <use Graphiken/ErrorMeasureCoDA_Box_all__Variation_dLcat4.png>
 Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Box_all__Variation_dLcat4.p
 ng  used on input line 320.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [63 <./Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastMean.png> <./Grap
-hiken//ErrorMeasureINGARCH_Histogram_all__Variation_pastMean.png> <./Graphiken/
-/ErrorMeasureINGARCH_Quant_all__Variation_pastMean.png>]
-<Graphiken/Coda_Timeseries_VariationdL100402.png, id=1043, 1445.4pt x 1084.05pt
+(pdftex.def)             Requested size: 268.8813pt x 201.65437pt.
+ [65 <./Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png> <./Graphiken/Erro
+rMeasureCoDA_Box_all__Variation_dLcat4.png>]
+<Graphiken/Coda_Timeseries_VariationdL100402.png, id=1066, 1445.4pt x 1084.05pt
 >
 File: Graphiken/Coda_Timeseries_VariationdL100402.png Graphic file (type png)
 <use Graphiken/Coda_Timeseries_VariationdL100402.png>
 Package pdftex.def Info: Graphiken/Coda_Timeseries_VariationdL100402.png  used 
 on input line 332.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [64 <./Graphiken//ErrorMeasureINGARCH_Box_all__Variation_pastOb.png> <./Graphi
-ken//ErrorMeasureINGARCH_Histogram_all__Variation_pastOb.png> <./Graphiken//Err
-orMeasureINGARCH_Quant_all__Variation_pastOb.png>]
-<Graphiken/Coda_Timeseries_VariationdL100403.png, id=1053, 1445.4pt x 1084.05pt
+<Graphiken/Coda_Timeseries_VariationdL100403.png, id=1068, 1445.4pt x 1084.05pt
 >
 File: Graphiken/Coda_Timeseries_VariationdL100403.png Graphic file (type png)
 <use Graphiken/Coda_Timeseries_VariationdL100403.png>
 Package pdftex.def Info: Graphiken/Coda_Timeseries_VariationdL100403.png  used 
 on input line 341.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken/Coda_Timeseries_VariationdL100191.png, id=1055, 1445.4pt x 1084.05pt
+<Graphiken/Coda_Timeseries_VariationdL100191.png, id=1070, 1445.4pt x 1084.05pt
 >
 File: Graphiken/Coda_Timeseries_VariationdL100191.png Graphic file (type png)
 <use Graphiken/Coda_Timeseries_VariationdL100191.png>
@@ -1683,138 +1681,142 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 357.
 
-
-Underfull \vbox (badness 5388) has occurred while \output is active []
-
- [65 <./Graphiken//ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png> <./Gra
-phiken//ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png> <./Graphike
-n//ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png>] [66 <./Graphiken/Er
-rorMeasureCoDA_Box_all__Variation_dL.png> <./Graphiken/ErrorMeasureCoDA_Box_all
-__Variation_dLcat4.png>] [67 <./Graphiken/Coda_Timeseries_VariationdL100402.png
-> <./Graphiken/Coda_Timeseries_VariationdL100403.png>]
-<Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.png, id=1079, 1445.4pt x
- 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.png Graphic file (t
-ype png)
-<use Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Box_all__Variation_tSpace.
-png  used on input line 365.
+<Graphiken/ErrorMeasureCoDA_Box_all__Variation_tSpace.png, id=1073, 1445.4pt x 
+1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Box_all__Variation_tSpace.png Graphic file (ty
+pe png)
+<use Graphiken/ErrorMeasureCoDA_Box_all__Variation_tSpace.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Box_all__Variation_tSpace.p
+ng  used on input line 365.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png, id=1080, 1445
-.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png Graphic f
-ile (type png)
-<use Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_t
-Space.png  used on input line 371.
+<Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png, id=1074, 1445.
+4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png Graphic fi
+le (type png)
+<use Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_tS
+pace.png  used on input line 371.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCoDA_Quant_all__Variation_tSpace.png, id=1081, 1445.4pt
- x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Quant_all__Variation_tSpace.png Graphic file 
-(type png)
-<use Graphiken//ErrorMeasureCoDA_Quant_all__Variation_tSpace.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Quant_all__Variation_tSpac
-e.png  used on input line 377.
+<Graphiken/ErrorMeasureCoDA_Quant_all__Variation_tSpace.png, id=1075, 1445.4pt 
+x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Quant_all__Variation_tSpace.png Graphic file (
+type png)
+<use Graphiken/ErrorMeasureCoDA_Quant_all__Variation_tSpace.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Quant_all__Variation_tSpace
+.png  used on input line 377.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken/Coda_Timeseries_VariationtSpace100321.png, id=1083, 1445.4pt x 1084.
+[66 <./Graphiken/Coda_Timeseries_VariationdL100402.png>] [67 <./Graphiken/Coda_
+Timeseries_VariationdL100403.png> <./Graphiken/Coda_Timeseries_VariationdL10019
+1.png>]
+<Graphiken/Coda_Timeseries_VariationtSpace100321.png, id=1092, 1445.4pt x 1084.
 05pt>
 File: Graphiken/Coda_Timeseries_VariationtSpace100321.png Graphic file (type pn
 g)
 <use Graphiken/Coda_Timeseries_VariationtSpace100321.png>
 Package pdftex.def Info: Graphiken/Coda_Timeseries_VariationtSpace100321.png  u
 sed on input line 389.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken/Coda_Timeseries_VariationtSpace20.png, id=1085, 1445.4pt x 1084.05pt
+(pdftex.def)             Requested size: 268.8813pt x 201.65437pt.
+ [68 <./Graphiken/ErrorMeasureCoDA_Box_all__Variation_tSpace.png> <./Graphiken/
+ErrorMeasureCoDA_Histogram_all__Variation_tSpace.png> <./Graphiken/ErrorMeasure
+CoDA_Quant_all__Variation_tSpace.png>]
+<Graphiken/Coda_Timeseries_VariationtSpace20.png, id=1103, 1445.4pt x 1084.05pt
 >
 File: Graphiken/Coda_Timeseries_VariationtSpace20.png Graphic file (type png)
 <use Graphiken/Coda_Timeseries_VariationtSpace20.png>
 Package pdftex.def Info: Graphiken/Coda_Timeseries_VariationtSpace20.png  used 
 on input line 398.
-(pdftex.def)             Requested size: 358.50612pt x 268.878pt.
-<Graphiken//ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png, id=1088, 1445.4pt
- x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png Graphic file 
-(type png)
-<use Graphiken//ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Box_all__Variation_oneVSAl
-l.png  used on input line 411.
+(pdftex.def)             Requested size: 268.8813pt x 201.65437pt.
+<Graphiken/ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png, id=1106, 1445.4pt 
+x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png Graphic file (
+type png)
+<use Graphiken/ErrorMeasureCoDA_Box_all__Variation_oneVSAll.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Box_all__Variation_oneVSAll
+.png  used on input line 411.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_oneVSAll.png, id=1089, 14
-45.4pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_oneVSAll.png Graphic
- file (type png)
-<use Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_oneVSAll.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Histogram_all__Variation_o
-neVSAll.png  used on input line 417.
+<Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_oneVSAll.png, id=1107, 144
+5.4pt x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_oneVSAll.png Graphic 
+file (type png)
+<use Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_oneVSAll.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_on
+eVSAll.png  used on input line 417.
 (pdftex.def)             Requested size: 201.65755pt x 151.23665pt.
-<Graphiken//ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png, id=1090, 1445.4
-pt x 1084.05pt>
-File: Graphiken//ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png Graphic fil
-e (type png)
-<use Graphiken//ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png>
-Package pdftex.def Info: Graphiken//ErrorMeasureCoDA_Quant_all__Variation_oneVS
-All.png  used on input line 423.
+<Graphiken/ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png, id=1108, 1445.4p
+t x 1084.05pt>
+File: Graphiken/ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png Graphic file
+ (type png)
+<use Graphiken/ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png>
+Package pdftex.def Info: Graphiken/ErrorMeasureCoDA_Quant_all__Variation_oneVSA
+ll.png  used on input line 423.
 (pdftex.def)             Requested size: 358.50612pt x 268.878pt.
- [68 <./Graphiken/Coda_Timeseries_VariationdL100191.png>]) [69 <./Graphiken//Er
-rorMeasureCoDA_Box_all__Variation_tSpace.png> <./Graphiken//ErrorMeasureCoDA_Hi
-stogram_all__Variation_tSpace.png> <./Graphiken//ErrorMeasureCoDA_Quant_all__Va
-riation_tSpace.png>] [70 <./Graphiken/Coda_Timeseries_VariationtSpace100321.png
-> <./Graphiken/Coda_Timeseries_VariationtSpace20.png>] [71 <./Graphiken//ErrorM
-easureCoDA_Box_all__Variation_oneVSAll.png> <./Graphiken//ErrorMeasureCoDA_Hist
-ogram_all__Variation_oneVSAll.png> <./Graphiken//ErrorMeasureCoDA_Quant_all__Va
-riation_oneVSAll.png>] [72
+ [69 <./Graphiken/Coda_Timeseries_VariationtSpace100321.png> <./Graphiken/Coda_
+Timeseries_VariationtSpace20.png>]) [70 <./Graphiken/ErrorMeasureCoDA_Box_all__
+Variation_oneVSAll.png> <./Graphiken/ErrorMeasureCoDA_Histogram_all__Variation_
+oneVSAll.png> <./Graphiken/ErrorMeasureCoDA_Quant_all__Variation_oneVSAll.png>]
 
-
-]
 chapter without number
-[73]
-Overfull \hbox (17.51978pt too wide) in paragraph at lines 127--127
-\T1/lmtt/m/n/12 s11749 -[] 017 -[] 0552 -[] 4$[]\T1/lmr/m/n/12 . \T1/lmr/m/sc/1
-2 url\T1/lmr/m/n/12 : []$\T1/lmtt/m/n/12 https : / / ideas . repec . org / a / 
-spr / testjl / v27y2018i2d10 .
+
+Overfull \hbox (12.80627pt too wide) in paragraph at lines 134--134
+[][]\T1/lmr/m/n/12 `  An Integer-Valued pth-Order Autore-gress-ive Struc-ture (
+INAR(p)) Pro-cess' (1990). \T1/lmr/m/it/12 Journal
  []
 
 
-Overfull \hbox (7.2189pt too wide) in paragraph at lines 127--127
+Overfull \hbox (0.10713pt too wide) in paragraph at lines 134--134
+[][]\T1/lmr/m/n/12 Bollerslev, T. (1986). `  Gen-er-al-ized autore-gress-ive co
+n-di-tional het-ero-ske-dasti-city'. \T1/lmr/m/it/12 Journal
+ []
+
+[71
+
+
+] [72]
+Overfull \hbox (7.2259pt too wide) in paragraph at lines 134--134
 \T1/lmr/m/sc/12 url\T1/lmr/m/n/12 : []$\T1/lmtt/m/n/12 https : / / www . scienc
-edirect . com / science / article / pii / S0167715212000259$[]\T1/lmr/m/n/12 . 
+edirect . com / science / article / pii / S2452306221001374$[]\T1/lmr/m/n/12 . 
 
  []
 
-[74] [75] [76]
-Overfull \hbox (4.53757pt too wide) in paragraph at lines 127--127
-[][]\T1/lmr/m/n/12 Martín-Fernández, Josep-Antoni et al. (2015). `  Bayesian-mu
-ltiplicative treat-ment of count
+[73]
+Overfull \hbox (13.75pt too wide) in paragraph at lines 134--134
+\T1/lmtt/m/n/12 / / doi . org / 10 . 1111 / j . 1467 -[] 9892 . 1991 . tb00073 
+. x$[]\T1/lmr/m/n/12 . eprint: []$\T1/lmtt/m/n/12 https : / / onlinelibrary .
  []
 
-[77]
-Overfull \hbox (1.55397pt too wide) in paragraph at lines 127--127
-[][]\T1/lmr/m/n/12 Templ, Mat-thias, Karel Hron and Peter Filzmoser (2011). \T1
-/lmr/m/it/12 rob-Com-pos-i-tions: an R-package
+[74]
+Overfull \hbox (14.59743pt too wide) in paragraph at lines 134--134
+\T1/lmr/m/n/12 puta-tion'. \T1/lmr/m/it/12 Math-em-at-ical Geosciences \T1/lmr/
+m/n/12 35.3, pp. 253^^U278. \T1/lmr/m/sc/12 doi\T1/lmr/m/n/12 : []$\T1/lmtt/m/n
+/12 10 . 1023 / A : 1023866030544$[]\T1/lmr/m/n/12 . 
  []
 
-[78]
-Overfull \hbox (0.37271pt too wide) in paragraph at lines 127--127
-[][]\T1/lmr/m/n/12 Zhu, Fukang (2012). `  Zero-inflated Pois-son and neg-at-ive
- bi-no-mial integer-valued GARCH
+[75]
+Overfull \hbox (1.28223pt too wide) in paragraph at lines 134--134
+[][]\T1/lmr/m/n/12 Silva, N., I. Pereira and M. Silva (May 2009). `  Fore-cast-
+ing in INAR (1) model'. \T1/lmr/m/it/12 REVSTAT
  []
 
-[79] [80
+[76] [77] [78
 
 
 ] (Masterarbeit.lof)
 \tf@lof=\write7
 \openout7 = `Masterarbeit.lof'.
 
- [81] [82
+ [79] [80
 
 
 ] (Masterarbeit.lot)
 \tf@lot=\write8
 \openout8 = `Masterarbeit.lot'.
 
- [83]
+ [81]
 (Masterarbeit.aux)
+ ***********
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2020/03/25>
+ ***********
 Package rerunfilecheck Info: File `Masterarbeit.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
@@ -1822,47 +1824,41 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27366 strings out of 476300
- 527841 string characters out of 5784939
- 1868382 words of memory out of 5000000
- 46928 multiletter control sequences out of 15000+600000
- 636175 words of font info for 129 fonts, out of 8000000 for 9000
+ 27362 strings out of 475516
+ 526179 string characters out of 5759501
+ 1936238 words of memory out of 5000000
+ 47777 multiletter control sequences out of 15000+600000
+ 681957 words of font info for 133 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 108i,14n,106p,10609b,2363s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc
-}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.
-enc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.
-enc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-math
-sy.enc}{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-r
-m.enc} <C:\Users\Alex\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dpi60
-0\bbm12.pk>{C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
-lm-mathex.enc}<C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
-ic/lm/lmbsy10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/lm/lmbx12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
-e1/public/lm/lmbx8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/t
-ype1/public/lm/lmcsc10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/lm/lmex10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/lm/lmmi10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2
-.9/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Alex/AppData/Local/Programs/MiK
-TeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Alex/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Alex/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/Alex/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/Alex/AppData/Local/Pr
-ograms/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/Alex/AppData/Local/
-Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/Alex/AppData/Local
-/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/Alex/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/Alex/AppData/L
-ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Alex/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Alex/A
-ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Alex
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Al
-ex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users
-/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb>
-Output written on Masterarbeit.pdf (95 pages, 8593720 bytes).
+ 108i,14n,107p,10909b,2367s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Alex\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/bbm/dpi600\bb
+m12.pk><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/l
+mbsy10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
+lm/lmbx12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
+ic/lm/lmbx8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
+blic/lm/lmcsc10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/type
+1/public/lm/lmex10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/fonts/t
+ype1/public/lm/lmmi10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/font
+s/type1/public/lm/lmmi12.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/lm/lmmi6.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Alex/AppData/Local/Programs/MiKTeX 2
+.9/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Alex/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/Alex/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/Alex/AppData/Local/Programs/
+MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/Alex/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/Alex/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/Alex/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/Alex/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Alex/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Alex/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Alex/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppD
+ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+>
+Output written on Masterarbeit.pdf (93 pages, 8599214 bytes).
 PDF statistics:
- 1690 PDF objects out of 1728 (max. 8388607)
+ 1691 PDF objects out of 1728 (max. 8388607)
  401 named destinations out of 1000 (max. 500000)
  686 words of extra memory for PDF output out of 10000 (max. 10000000)
 

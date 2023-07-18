@@ -1,7 +1,7 @@
 \section{Results}
 \label{sec:Results}
 
-In this section, we present and describe the results for our methods with their variations. For this we use the previously introduced error measure, calculate it for all available fridges and summarise the results. We show the results as graphics for easier interpretation. Since we focus on the CoDA and INGARCH models, we only present the in detail results for them. For a general comparison, the ZIM and INAR model are included as well. 
+In this section, we present and describe the results of our methods with their variations. For this we use the previously introduced error measure, calculate it for all available fridges and summarise the results. We show the results as graphics for easier interpretation. For a general comparison, we use the CoDA, INGARCH, ZIM and INAR models. Since we focus on the CoDA and INGARCH models, we additionally analyse their results in more detail as well. 
 
 \subsection{Model Comparison}
 \label{sec: Model Comparison}
@@ -10,8 +10,8 @@ Here we compare the INGARCH(1,1) model with the CoDA and INAR(1) model. For all 
 
 In Figure \ref{fig:models Comp1} we see a boxplot and quantile plot. In the boxplot the error measure is calculated for all groups and all fridges for each model. The result is then shown in a boxplot. In the quantile plot, the error measure for each fridge, each model and each category is calculated and sorted according to their size. The dot size indicates the length of the respective time series and the vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile.
 
-In the Boxplot \ref{fig:box distributions models} we can see that their performance is pretty similar. They all seem to outperform the the naive random walk model, which is especially true for the count data models. 
-In the Quantile Plot \ref{fig: quantile distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonable well and similar, differences emerge for category 3 and 4. CoDA seems to be the clear favourite in category 4, followed by INGARCH and then INAR. However, for all models there are again time series with errors that are either too high to be shown, or that couldn't get calculated at all. 
+In the Boxplot \ref{fig:box distributions models} we can see that their performance is pretty similar. They all seem to outperform the naive random walk model, which is especially true for the count data models. 
+In the Quantile Plot \ref{fig: quantile distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonably well and similar, differences emerge for category 3 and 4. CoDA seems to be the clear favourite in category 4, followed by INGARCH and then INAR. However, for all models there are again time series with errors that are either too high to be shown, or that couldn't get calculated at all. 
 \begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
@@ -87,23 +87,23 @@ First, we start with specifications which can be chosen for both CoDA and INGARC
 \subsubsection{History}
 \label{sec:History}
 
-As mentioned various times throughout this thesis, the the history is one of the parameters which can be adjusted. In Figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot  and additionally an histogram to get a feeling for the error distribution. 
+As mentioned various times throughout this thesis, the history is one of the parameters which can be adjusted. In Figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot  and additionally a histogram to get a feeling for the error distribution. 
 
 \begin{figure}[htb!]
 \centering
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{subfigure}[b]{0.4\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_history.png}
 \caption{Boxplot of different $h$}
 \label{fig:History Box}
 \end{subfigure}
 \hfill
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{subfigure}[b]{0.4\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Histogram_all__Variation_history.png}
 \caption{Histogram of different $h$}
 \label{fig:History Hist}
 \end{subfigure}
 \hfill
-\begin{subfigure}[b]{0.8\textwidth}
+\begin{subfigure}[b]{0.6\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Quant_all__Variation_history.png}
 \caption{Quantiles Plot of different $h$}
 \label{fig:History Quant}
@@ -122,19 +122,19 @@ For INGARCH, the results are similar as well. For $h=1$ we get slightly higher v
 Next, we vary the initial frame length $w_f$. We choose to extend the frame with each new data point. For this we vary the value $w$ in $w_f=w\cdot T$. The results are portrayed in \ref{fig:Frame Comp1}. In general, there is not much difference between the different frames. INGARCH seems to perform better for all three values.
 \begin{figure}[htb!]
 \centering
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{subfigure}[b]{0.4\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_frame.png}
 \caption{Boxplot of different $w$}
 \label{fig:Frame Box}
 \end{subfigure}
 \hfill
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{subfigure}[b]{0.4\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Histogram_all__Variation_frame.png}
 \caption{Histogram of different $w$}
 \label{fig:Frame Hist}
 \end{subfigure}
 \hfill
-\begin{subfigure}[b]{0.8\textwidth}
+\begin{subfigure}[b]{0.6\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Quant_all__Variation_frame.png}
 \caption{Quantiles of different $w$}
 \label{fig:Frame Quant}
@@ -144,7 +144,7 @@ Next, we vary the initial frame length $w_f$. We choose to extend the frame with
 \end{figure}
 
 
-In the Boxplot \ref{fig:Frame Box} it looks like INGARCH performs worst for $w=0.5$. However, in the Quantile Plot \ref{fig:Frame Quant} we can see that for $w=0.3,0.7$ the last errors are not included  in the plot. This could either be a result of them being to high, or that the model couldn't be fit on those fridges. 
+In the Boxplot \ref{fig:Frame Box} it looks like INGARCH performs worst for $w=0.5$. However, in the Quantile Plot \ref{fig:Frame Quant} we can see that for $w=0.3,0.7$ the last errors are not included  in the plot. This could either be a result of them being too high, or that the model couldn't be fit on those fridges. 
 
 For CoDA there seems not to be much difference. The best results are obtained with $w=0.3$, but the differences are only marginal. 
 
@@ -152,23 +152,23 @@ For CoDA there seems not to be much difference. The best results are obtained wi
 \subsubsection{Window Shape}
 \label{sec:Window Shape}
 
-We also vary the shape of the window. As explained in \ref{sec: Model Specification} we either use a fixed amount of points and add and remove points as time goes on, or we continuously add points to the window. The results are in Figures \ref{fig:window methods Comp1}. We can see that there are no big differences between the methods. For both, CoDA and INGARCH, there are no notable difference. 
+We also vary the shape of the window. As explained in Section \ref{sec: Model Specification} we either use a fixed amount of points and add and remove points as time goes on, or we continuously add points to the window. The results are in Figure \ref{fig:window methods Comp1}. We can see that there are no big differences between the methods. For both, CoDA and INGARCH, there are no notable differences. 
 
 \begin{figure}[htb!]
 \centering
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{subfigure}[b]{0.4\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Box_all__Variation_windowMethod.png}
 \caption{Boxplot for different window shapes}
 \label{fig:window methods Box}
 \end{subfigure}
 \hfill
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{subfigure}[b]{0.4\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Histogram_all__Variation_windowMethod.png}
 \caption{Histogram for different window shapes}
 \label{fig:window methods Hist}
 \end{subfigure}
 \hfill
-\begin{subfigure}[b]{0.8\textwidth}
+\begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCombined_Quant_all__Variation_windowMethod.png}
 \caption{Quantiles for different window shapes}
 \label{fig:window methods Quant}
@@ -186,7 +186,7 @@ Next we will investigate the INGARCH specific options. As before, we use the sta
 \subsubsection{Distribution}
 \label{sec:Distribution}
 
-As mentioned in Section \ref{sec: Ingarch Specifications} we can replace the Poisson distribution with a Negative Binomial Distribution in (\ref{eq:Ingarch Distribution}). The results are shown in Figure \ref{fig:distributions Comp1}. 
+As mentioned in Section \ref{sec: Ingarch Specifications} we can replace the Poisson distribution with a Negative Binomial Distribution in Equation (\ref{eq:Ingarch Distribution}). The results are shown in Figure \ref{fig:distributions Comp1}. 
 
 \begin{figure}[htb!]
 \centering
@@ -274,7 +274,7 @@ As we saw, there is not much difference between the INGARCH(1,1), INGARCH(2,1) a
 \subsection{CoDA Specifications Results}
 \label{sec: CoDA Specifications Results}
 
-Last, we will compare different CoDA Specifications as mentioned in Section \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $h=1$, an initial window length of $w=0.5$, use the simple replacement strategy with $\delta=0.1$, no $\Tsp$-spaces and the one-vs-all method. 
+Last, we will compare different CoDA specifications as mentioned in Section \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $h=1$, an initial window length of $w=0.5$, use the simple replacement strategy with $\delta=0.1$, no $\Tsp$-spaces and the one-vs-all method. 
 
 \subsection{Zero Handling}
 \label{sec: Zero Handling}
@@ -304,20 +304,20 @@ First we compare the different options of handling zeros as explained in Section
 \label{fig:Coda zero handling Comp1}
 \end{figure}
 
-For the simple replacement strategy, one can also vary the parameter $\delta$. In Figure \ref{fig:ErrorMeasureCoDA_Box_all__Variation_dL} we plotted the results for $\delta=0.01,0.1,0.5$. While the difference don't seem big at first, when we calculate the error measure only for category 4, the category with most zeros, we can see a drastic rise in performance \ref{fig:ErrorMeasureCoDA_Box_all__Variation_dLcat4}. While we seem to get better results for smaller values of $\delta$, one should remember, that CoDA cannot predict actual zeros, but instead the predictions get rounded to the nearest integer. 
+For the simple replacement strategy, one can also vary the parameter $\delta$. In Figure \ref{fig:ErrorMeasureCoDA_Box_all__Variation_dL} we plotted the results for $\delta=0.01,0.1,0.5$. While the difference does not seem big at first, when we calculate the error measure only for category 4, the category with most zeros, we can see a drastic rise in performance, see Figure \ref{fig:ErrorMeasureCoDA_Box_all__Variation_dLcat4}. While we seem to get better results for smaller values of $\delta$, one should remember, that CoDA cannot predict actual zeros, but instead the predictions get rounded to the nearest integer. 
 
 %One possible remedy to this problem is to vary the value of $\delta$ in the simple replacement method \ref{eq:simple replacement strategy}. While for the above results we used $\delta = 0.5$, in figure \ref{fig:ErrorMeasureCoDA_Box_all__Variation_dLcat4} one can see that we get considerable better results if we use a smaller $\delta$ value. With those configurations, CoDA predicts zero values faster than before however, the difference in total is not huge as seen in figure \ref{fig:ErrorMeasureCoDA_Box_all__Variation_dL} since after all, the absolute difference is only 1 in most cases.
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=0.80\textwidth]{Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png}
+		\includegraphics[width=0.6\textwidth]{Graphiken/ErrorMeasureCoDA_Box_all__Variation_dL.png}
 	\caption{Error Measure for all categories}
 	\label{fig:ErrorMeasureCoDA_Box_all__Variation_dL}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=0.80\textwidth]{Graphiken/ErrorMeasureCoDA_Box_all__Variation_dLcat4.png}
+		\includegraphics[width=0.6\textwidth]{Graphiken/ErrorMeasureCoDA_Box_all__Variation_dLcat4.png}
 	\caption{Error Measure for Category 4}
 	\label{fig:ErrorMeasureCoDA_Box_all__Variation_dLcat4}
 \end{figure}
@@ -382,11 +382,11 @@ Next we compare CoDA for $\Tsp-$Spaces. The results are shown in \ref{fig:Coda T
 \label{fig:Coda T-Spaces Comp1}
 \end{figure}
 
-To further investigate the reason of this difference in performance, we picked out the two time series with the highest error. The fridge with the highest error had Id 100321. Its time series can be seen in Figure \ref{fig:Coda_Timeseries_VariationtSpace100321}. As we can seen, CoDA with $\Tsp$-Spaces performs worse for category 1 and 2. However, the time series is also short by nature with only 14 recorded points in time.  
+To further investigate the reason of this difference in performance, we picked out the two time series with the highest error. The fridge with the highest error had Id 100321. Its time series can be seen in Figure \ref{fig:Coda_Timeseries_VariationtSpace100321}. As we can see, CoDA with $\Tsp$-Spaces performs worse for category 1 and 2. However, the time series is also short by nature with only 14 recorded points in time.  
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=0.80\textwidth]{Graphiken/Coda_Timeseries_VariationtSpace100321.png}
+		\includegraphics[width=0.6\textwidth]{Graphiken/Coda_Timeseries_VariationtSpace100321.png}
 	\caption{Time series of fridge 100321}
 	\label{fig:Coda_Timeseries_VariationtSpace100321}
 \end{figure}
@@ -395,7 +395,7 @@ The second highest error measure has fridge 20, shown in \ref{fig:Coda_Timeserie
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=0.80\textwidth]{Graphiken/Coda_Timeseries_VariationtSpace20.png}
+		\includegraphics[width=0.6\textwidth]{Graphiken/Coda_Timeseries_VariationtSpace20.png}
 	\caption{Time series of fridge 20}
 	\label{fig:Coda_Timeseries_VariationtSpace20}
 \end{figure}
@@ -403,7 +403,7 @@ The second highest error measure has fridge 20, shown in \ref{fig:Coda_Timeserie
 \subsection{One-vs-All Method}
 \label{sec: One-vs-All}
 
-Now we analyse the one-vs-all method. Figure \ref{fig:Coda One-vs-All Comp1} shows the results. We can clearly seen, that the one-vs-all method performs better over all time series. This difference is highlighted in Figure \ref{fig:Coda One-vs-All Quant}. 
+Now we analyse the one-vs-all method. Figure \ref{fig:Coda One-vs-All Comp1} shows the results. We can clearly see, that the one-vs-all method performs better over all time series. This difference is highlighted in Figure \ref{fig:Coda One-vs-All Quant}. 
 
 \begin{figure}[htb!]
 \centering

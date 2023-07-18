@@ -3,7 +3,7 @@
 
 To improve understanding of our data and the models we show some application of the models on some exemplary fridges. We choose fridges 4 and 24 so $f \in \left\{4,24\right\}$. Furthermore we start with analysing the aggregated 4 main categories which means $K=4$. 
 
-We first begin with plotting the values of time series. The x-axis shows the time and the y-axis the number of units sold. Since we have four main categorie for each fridge, we have four subplots. 
+We first begin with plotting the values of time series. The x-axis shows the time and the y-axis the number of units sold. Since we have four main categories for each fridge, we have four subplots. 
 
 \begin{figure}[htb]
 \centering
@@ -25,9 +25,9 @@ We first begin with plotting the values of time series. The x-axis shows the tim
 
 The two plots in \ref{fig:TS raw} are good examples of the composition of our data. The scales of the sold units within a fridge vary widely. For example in Figure \ref{fig:TS Fridge 24} the values for category 1 vary from above 50 to as low as 10, while for category 4 we only have values in the range of 0 to 2. In both Subfigures \ref{fig:TS raw} for category 4, we can see the excessive amount of zero values in our data, which makes the previously mentioned transformations necessary. 
 
-Next, in Figure \ref{fig:TS Coda}, we add the predictions of the CoDA model. For this model we used the whole history $h=1$ and half of the data for the window length $w=0.5$. In addition, we extend the window at every time point, use the simple replacement strategy with $\delta=0.1$ use no $\Tsp-$Spaces and use the one-vs-all method. We can see that this captures the general trend well however, struggles with unexpected high peaks. In addition, it is able to handle the difference in scales as seen in Figure \ref{fig:Coda Fridge 4}. Both, categories 1 and 2 with bigger values and categories 3 and 4 with lower values, are in general modelled well. Also in time series with less data available, as in fridge 24 \ref{fig:Coda Fridge 24}, the model works well. Especially category 3 with its low values is predicted well. 
+Next, in Figure \ref{fig:TS Coda}, we add the predictions of the CoDA model. For this model we used the whole history $h=1$ and half of the data for the window length $w=0.5$. In addition, we extend the window at every time point, use the simple replacement strategy with $\delta=0.1$, use no $\Tsp-$Spaces and use the one-vs-all method. We can see that this captures the general trend well however, struggles with unexpected high peaks. In addition, it is able to handle the difference in scales as seen in Figure \ref{fig:Coda Fridge 4}. Both, categories 1 and 2 with bigger values and categories 3 and 4 with lower values, are in general modelled well. Also in time series with less data available, as in fridge 24 \ref{fig:Coda Fridge 24}, the model works well. Especially category 3 with its low values is predicted well. 
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{Coda_Timeseries_ID4.png}
@@ -44,7 +44,7 @@ Next, in Figure \ref{fig:TS Coda}, we add the predictions of the CoDA model. For
 \label{fig:TS Coda}
 \end{figure}
 
-In Figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. For this, we used the whole history $h=1$, half of the data for the initial window length $w=0.5$, extend the window at every time point, add nothing to the zero values and use the poisson distribution. We use no external factors and set $p=1, q=1$ in Model (\ref{eq:Ingarch model with external effect}). The general trend is again captured well and in the instance of Figure \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
+In Figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. For this, we used the whole history $h=1$, half of the data for the initial window length $w=0.5$, extend the window at every time point, add nothing to the zero values and use the Poisson distribution. We use no external factors and set $p=1, q=1$ in Model (\ref{eq:Ingarch model with external effect}). The general trend is again captured well and in the instance of Figure \ref{fig:Ingarch Fridge 4} it seems to be more reactive to sudden peaks, as often the value predicted after such a peak is heavily influenced by it.
 
 \begin{figure}[htb]
 \centering
@@ -64,7 +64,7 @@ In Figure \ref{fig:TS Ingarch} we apply the INGARCH model to the time series. Fo
 \end{figure}
 
 
-To directly compare both models, we plot the predictions in one Figure \ref{fig:TS Both}. The model specifications are the same as above. We can see that the models produce similar results to each other. In this instances it appears that INGARCH predicts slightly higher values than CoDA. 
+To directly compare both models, we plot the predictions in one Figure \ref{fig:TS Both}. The model specifications are the same as above. We can see that the models produce similar results to each other. In these instances it appears that INGARCH predicts slightly higher values than CoDA. 
 
 \begin{figure}[htb!]
 \centering

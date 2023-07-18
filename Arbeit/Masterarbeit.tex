@@ -35,7 +35,14 @@
 \usepackage[toc, title, titletoc]{appendix}
 
 %Biblatex
-\usepackage[citestyle=authoryear,bibstyle=authoryear]{biblatex}
+\usepackage[backend=biber, citestyle=authoryear,bibstyle=authoryear,giveninits=true,uniquename=init]{biblatex}
+\renewbibmacro{in:}{%
+  \ifboolexpr{%
+     test {\ifentrytype{article}}%
+     or
+     test {\ifentrytype{incollection}}%
+  }{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
 \usepackage{csquotes}
 \addbibresource{Literatur.bib}
 

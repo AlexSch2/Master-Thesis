@@ -35,7 +35,7 @@
 \contentsline {chapter}{\numberline {3}Compositional Data Models}{23}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Motivation}{23}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Preliminaries}{23}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Common Transformations}{24}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Common Transformations}{25}{section.3.3}%
 \contentsline {subsubsection}{\nonumberline alr Coordinates}{25}{subsubsection*.11}%
 \contentsline {subsubsection}{\nonumberline clr Coefficients}{25}{subsubsection*.13}%
 \contentsline {subsubsection}{\nonumberline ilr Coordinates}{25}{subsubsection*.15}%
@@ -71,16 +71,16 @@
 \contentsline {subsection}{\numberline {4.5.1}Model Comparison}{55}{subsection.4.5.1}%
 \contentsline {subsection}{\numberline {4.5.2}General Specifications}{58}{subsection.4.5.2}%
 \contentsline {subsubsection}{\nonumberline History}{58}{subsubsection*.52}%
-\contentsline {subsubsection}{\nonumberline Frame}{58}{subsubsection*.55}%
-\contentsline {subsubsection}{\nonumberline Window Shape}{58}{subsubsection*.58}%
-\contentsline {subsection}{\numberline {4.5.3}INGARCH Specifications Results}{59}{subsection.4.5.3}%
-\contentsline {subsubsection}{\nonumberline Distribution}{60}{subsubsection*.61}%
+\contentsline {subsubsection}{\nonumberline Frame}{59}{subsubsection*.55}%
+\contentsline {subsubsection}{\nonumberline Window Shape}{60}{subsubsection*.58}%
+\contentsline {subsection}{\numberline {4.5.3}INGARCH Specifications Results}{61}{subsection.4.5.3}%
+\contentsline {subsubsection}{\nonumberline Distribution}{61}{subsubsection*.61}%
 \contentsline {subsubsection}{\nonumberline Number of Past Means and Observations}{61}{subsubsection*.64}%
-\contentsline {subsection}{\numberline {4.5.4}CoDA Specifications Results}{62}{subsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.5.5}Zero Handling}{62}{subsection.4.5.5}%
-\contentsline {subsection}{\numberline {4.5.6}$\mathcal {T}$-spaces}{68}{subsection.4.5.6}%
-\contentsline {subsection}{\numberline {4.5.7}One-vs-All Method}{68}{subsection.4.5.7}%
-\contentsline {chapter}{\nonumberline Bibliography}{73}{chapter*.77}%
-\contentsline {chapter}{\nonumberline List of Figures}{81}{chapter*.78}%
-\contentsline {chapter}{\nonumberline List of Tables}{83}{chapter*.79}%
+\contentsline {subsection}{\numberline {4.5.4}CoDA Specifications Results}{63}{subsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.5.5}Zero Handling}{64}{subsection.4.5.5}%
+\contentsline {subsection}{\numberline {4.5.6}$\mathcal {T}$-spaces}{66}{subsection.4.5.6}%
+\contentsline {subsection}{\numberline {4.5.7}One-vs-All Method}{69}{subsection.4.5.7}%
+\contentsline {chapter}{\nonumberline Bibliography}{71}{chapter*.77}%
+\contentsline {chapter}{\nonumberline List of Figures}{79}{chapter*.78}%
+\contentsline {chapter}{\nonumberline List of Tables}{81}{chapter*.79}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
