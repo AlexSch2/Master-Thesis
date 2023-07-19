@@ -7,7 +7,7 @@ Another varying factor is the history. We define the history $h$ as the proporti
 
 Closely related to the length of the history, is the shape of the window used. The window determines which values are used to estimate the parameters at each point in time. The shape includes both the initial length of the window and the way new values are handled. As the different time series vary in length, we choose the possible window length as a fraction of the time series history. Hence, we define the initial window length as $w_f=w \cdot T$ with $0 < w \leq 1$. For the way how new values are handled, we focus on two different approaches. The first one uses a fixed window length. This means when a new time point is available, it will be included in the estimation while simultaneously the oldest time point will be removed from the estimation. This has the advantage of only using the most recent and relevant information. The second approach extends the window at each point in time. When a new value is available, it is included in the estimation of the parameter. With this approach we have more data available at each step and combined with the varying history length we don't have to rely on information that is too old.
 
-The optimal one step ahead prediction for the different models is given in their respective theoretical sections. However, since none of the models return integer valued results, we round the predicted values to the nearest integer. 
+The optimal one step ahead prediction for the different models is given in their respective theoretical sections. However, since none of the models return integer-valued results, we round the predicted values to the nearest integer. 
 
 \subsection{CoDA Specifications}
 \label{sec: Coda Specifications}
@@ -39,7 +39,7 @@ As already hinted in the description of the methodology, we consider the use of 
 %
 with $t(\bm{Y}_t) = \sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t) = \log\left(\sum_{k=1}^K Y_{kt}\right)$ and we get Model (\ref{eq:VAR model Tspace}).
 
-%The optimal one step ahead prediction is described in section \ref{sec: AR Estimation and Forecasting}. However, since we only have integer valued data, we round the predicted values to the nearest integer. 
+%The optimal one step ahead prediction is described in section \ref{sec: AR Estimation and Forecasting}. However, since we only have integer-valued data, we round the predicted values to the nearest integer. 
 
 \subsection{INGARCH Specifications}
 \label{sec: Ingarch Specifications}

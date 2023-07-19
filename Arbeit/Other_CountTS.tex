@@ -4,7 +4,7 @@
 \section{GARCH Models}
 \label{sec: Garch Models}
 
-INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle, see \textcite{Engle:1982}, in an economic context, model the variance conditional on past values. Since we no longer assume our data to be integer valued, our time series has the form $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$. Denote again with $\SigA_{k,t}$ the information available at time $t$. Then the ARCH(1) model is given by \textcite{Engle:1982}
+INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle, see \textcite{Engle:1982}, in an economic context, model the variance conditional on past values. Since we no longer assume our data to be integer-valued, our time series has the form $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$. Denote again with $\SigA_{k,t}$ the information available at time $t$. Then the ARCH(1) model is given by \textcite{Engle:1982}
 
 \begin{equation}
 \begin{gathered}
@@ -252,7 +252,7 @@ are zero, i.e. if process $\left\{\bm{\epsilon}_t\right\}$ follows an AR(h) stru
 \section{INAR(p) Models}
 \label{sec: Inar Models}
 
-Integer valued autoregressive models of order p (INAR(p)) are another option to handle univariate count data. To define them, we first need to define the generalised thinning operator. Take an integer valued, non-negative random variable $X$ and $\alpha \in [0,1]$. Further, take a sequence of i.i.d. integer valued, non-negative random variables $(Z_i)_{i=1}^X$ with finite mean $\alpha$ and variance $\sigma^2<\infty $ which are independent of $X$. Then the generalised thinning operator $\circ$ is defined as
+integer-valued autoregressive models of order p (INAR(p)) are another option to handle univariate count data. To define them, we first need to define the generalised thinning operator. Take an integer-valued, non-negative random variable $X$ and $\alpha \in [0,1]$. Further, take a sequence of i.i.d. integer-valued, non-negative random variables $(Z_i)_{i=1}^X$ with finite mean $\alpha$ and variance $\sigma^2<\infty $ which are independent of $X$. Then the generalised thinning operator $\circ$ is defined as
 
 \begin{equation}
 \alpha \circ X = \sum_{i=1}^X Z_i .
@@ -261,7 +261,7 @@ Integer valued autoregressive models of order p (INAR(p)) are another option to 
 %
 The sequence  $\left\{Z_i \right\}_{i=1}^X$ is called the counting series of $X$, see \textcite{Silva:2005}. 
 
-We can then define the INAR(p) model for a positive integer valued time series $\left\{X_t \right\}$ as
+We can then define the INAR(p) model for a positive integer-valued time series $\left\{X_t \right\}$ as
 
 \begin{equation}
 X_t = \alpha_1 \circ X_{t-1} + \alpha_2 \circ X_{t-2} + \ldots + \alpha_p X_{t-p} +\epsilon_t ,
@@ -271,7 +271,7 @@ X_t = \alpha_1 \circ X_{t-1} + \alpha_2 \circ X_{t-2} + \ldots + \alpha_p X_{t-p
 where
 
 \begin{enumerate}
-	\item $\left\{\epsilon_t\right\}$ is a sequence of integer valued i.i.d. random variables, called innovations, with finite first, second and third moment, 
+	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second and third moment, 
 	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
 	\item $\alpha_i \in (0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$,
 	\item $\sum_{j=1}^p \alpha_j < 1$,

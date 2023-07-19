@@ -80,7 +80,9 @@
 \contentsline {subsection}{\numberline {4.5.5}Zero Handling}{64}{subsection.4.5.5}%
 \contentsline {subsection}{\numberline {4.5.6}$\mathcal {T}$-spaces}{66}{subsection.4.5.6}%
 \contentsline {subsection}{\numberline {4.5.7}One-vs-All Method}{69}{subsection.4.5.7}%
-\contentsline {chapter}{\nonumberline Bibliography}{71}{chapter*.77}%
-\contentsline {chapter}{\nonumberline List of Figures}{79}{chapter*.78}%
-\contentsline {chapter}{\nonumberline List of Tables}{81}{chapter*.79}%
+\contentsline {chapter}{\numberline {5}Conclusion}{71}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Summary}{73}{chapter.6}%
+\contentsline {chapter}{\nonumberline Bibliography}{75}{chapter*.77}%
+\contentsline {chapter}{\nonumberline List of Figures}{83}{chapter*.78}%
+\contentsline {chapter}{\nonumberline List of Tables}{85}{chapter*.79}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
