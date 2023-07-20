@@ -8,7 +8,7 @@
  pages = {314--324},
  publisher = {Applied Probability Trust},
  title = {An Integer-Valued pth-Order Autoregressive Structure (INAR(p)) Process},
- urldate = {2023-07-17},
+ urldate = {2023-07-20},
  volume = {27},
  year = {1990}
 }

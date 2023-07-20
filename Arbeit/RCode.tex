@@ -4,11 +4,11 @@
 \subsection{R-Packages}
 \label{sec:R-Packages}
 
-We conducted our analysis in the statistical software R, see \textcite{R:2022}. For our data cleansing, data handling and plotting we use the \textit{tidyverse} package of \textcite{Tidyverse:2019}. Further we use the packages \textit{here} of \textcite{here:2020}, \textit{miceadds} of \textcite{Miceadds:2023} and \textit{parallel}, which is part of core R, to facilitate our analysis.  
+We conduct our analysis in the statistical software R, see \textcite{R:2022}. For our data cleansing, data handling and plotting we use the \textit{tidyverse} package of \textcite{Tidyverse:2019}. Further we use the packages \textit{here} of \textcite{here:2020}, \textit{miceadds} of \textcite{Miceadds:2023} and \textit{parallel}, which is part of core R, to facilitate our analysis.  
 
-For building our CoDA model we use the packages \textit{vars} of \textcite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} of \textcite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the ilr transformation described in Section \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in Section \ref{sec:The VAR Model}, and \texttt{pivotCoordInv} which performs the necessary back transformation to get predictions in the desired space. The INGARCH analysis is mainly done with the package \textit{tscount}, see \textcite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm} which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated models were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} of \textcite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} of \textcite{RVGAM:2010}. To fit the INAR model we use two packages. First \textit{ZINAp} to calculate our predictions with the Bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \textcite{Silva:2009}. Second, the classical approach was done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
+For building our CoDA model we use the packages \textit{vars} of \textcite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} of \textcite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the $ilr$ transformation described in Section \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in Section \ref{sec:The VAR Model}, and \texttt{pivotCoordInv}, which performs the necessary back transformation to get predictions in the desired space. The INGARCH analysis is mainly done with the package \textit{tscount}, see \textcite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm}, which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated models were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} of \textcite{Pscl:2008}. For the VGAM we used the package \textit{VGAM} of \textcite{RVGAM:2010}. To fit the INAR model we use two packages. First, \textit{ZINAp} to calculate our predictions with the Bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \textcite{Silva:2009}. Second, the classical approach is done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}.
 
-In general, all functions can be grouped into three categories: general, count data model specific and CoDA specific. General functions are used for both, the count data models and the CoDA model. Count data models and CoDA specific functions are only used for their respective methods.
+In general, all other functions can be grouped into three categories: general, count data model specific and CoDA specific. General functions are used for both, the count data models and the CoDA model. Count data models and CoDA specific functions are only used for their respective methods.
 \subsection{Handbook}
 \label{sec:Handbook}
 
@@ -41,7 +41,7 @@ A list of all windows is returned. A window is a list with the following element
 \subsubsection{Data.Preparation}
 \label{sec:Data.Preparation}
 
-The function \texttt{Data.Preparation} brings the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transforms the data into the right format needed for the one-vs-all method.
+The function \texttt{Data.Preparation} transforms the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transforms the data into the right format needed for the one-vs-all method.
 
 \textbf{Arguments}:
 
@@ -52,7 +52,7 @@ The function \texttt{Data.Preparation} brings the data in the right format, repl
   \item Category: The categories to consider for the transformation.
   \item NA\_to: The value with which NA values should be replaced with.
   \item HistoryLength: The length of the history. Can be an absolute number or a ratio $0<h\leq 1$. 
-  \item TakeSubCategory: When TRUE, then we transform the data for the subcategories instead of the main categories. 
+  \item TakeSubCategory: When TRUE, we transform the data for the subcategories instead of the main categories. 
 \end{itemize}
 
 \textbf{Values}:
@@ -76,7 +76,7 @@ When the argument OneVsAll is TRUE, then a tibble with three columns is returned
 \subsubsection{Model.Error}
 \label{sec:Model.Error}
 
-The function \texttt{Model.Error} calculates the specified error measure for each time series and category. Since we want to compare the performance of a method with the one of the naive model in Section \ref{sec: Naive Random Walk} we calculate the errors for this model as well. 
+The function \texttt{Model.Error} calculates the specified error measure for each time series and category. Since we want to compare the performance of a method with the naive model in Section \ref{sec: Naive Random Walk}, we calculate the errors for this model as well. 
 
 \textbf{Arguments}:
 
@@ -135,7 +135,7 @@ The function \texttt{CountModel.DataPreparation} transforms the data into the ri
 	\item Data: The data to be transformed.
 	\item ZeroHandling: Method for zero handling. Currently there is no treatment or them being replaced with 1. 
 	\item HistoryLength: The length of the history. Can be an absolute number or a ratio $0<h\leq 1$. 
-	\item TakeSubCategory: When TRUE, then we transform the data for the subcategories instead of the main categories. 
+	\item TakeSubCategory: When TRUE, we transform the data for the subcategories instead of the main categories. 
 \end{itemize}
 
 \textbf{Values}:
@@ -150,7 +150,7 @@ A tibble with two or more columns is returned, depending on the number of catego
 \subsubsection{CountModel.Prediction}
 \label{sec:CountModel.Prediction}
 
-The function \texttt{CountModel.Prediction} is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions mentioned in Section \ref{sec:R-Packages} to fit the INGARCH,INAR or ZIM model for each window and predicts the next value. 
+The function \texttt{CountModel.Prediction} is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions mentioned in Section \ref{sec:R-Packages} to fit the INGARCH, INAR or ZIM model for each window and predicts the next value. 
 
 \textbf{Arguments}:
 
@@ -198,7 +198,7 @@ The function \texttt{CountModel.Analysis} acts as a wrapper function to streamli
   \item TakeSubCategory: When TRUE, then we transform the data for the subcategories instead of the main categories. 
   \item Category\_Sub: The sub categories to choose.
   \item Frame: The window length.
-  \item WindowMethod: Method for splitting up the time series. For example if the windows are be extended at each step or kept at a fixed length.
+  \item WindowMethod: Method for splitting up the time series. For example if the windows are extended at each step or kept at a fixed length.
   \item ZeroHandling: Method for zero handling. Currently there is no treatment or them being replaced with 1. 
   \item PastOb: For INGARCH. How many past observations should be used. Equals $p$ in Equation (\ref{eq:Ingarch model}).
   \item PastMean: For INGARCH. How many past means should be used. Equals $q$ in Equation (\ref{eq:Ingarch model}).
@@ -298,7 +298,7 @@ Again \texttt{Coda.Analysis} is the wrapper function. This is again the only fun
 	\item PivotGroup: When one-vs-all is used, this specifies the pivot category.
 	\item HistoryLength: The length of the history. Can be an absolute number or a ratio $0<h\leq 1$. 
 	\item ModelType: Model to be fit. Currently only ``coda'' and ``coda\_OneVsAll'' can be chosen.
-	\item WindowMethod: Method for splitting up the time series. For example if the windows are be extended at each step or kept at a fixed length.
+	\item WindowMethod: Method for splitting up the time series. For example if the windows are extended at each step or kept at a fixed length.
 	\item DL: The value $\delta$ for the simple replacement strategy in (\ref{eq:simple replacement strategy}). 
 \end{itemize}
 

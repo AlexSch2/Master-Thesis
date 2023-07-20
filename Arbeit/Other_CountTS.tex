@@ -16,7 +16,8 @@ h_{kt} = a_0 + a_1 Y_{k,t-1}^2,
 %
 with $a_0\geq0$, $a_1>0$. 
 
-The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$, where $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ is the parameter vector with $a_p>0$, and $p \in \mathbbm{N}$ is the order of the ARCH process. 
+The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$, where $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ is the parameter vector with $a_p>0$, and $p \in \mathbbm{N}$ is the order of the ARCH process, see \textcite{Engle:1982}. 
+
 The GARCH model generalises this approach by adding the past variances as another source of information. The GARCH(p,q) model for non-negative parameters $a_0>0$, $\bm{a}=(a_1,\ldots,a_q)^T\geq 0$ and $\bm{b}=(b_1,\ldots,b_p)^T\geq0$ with $p,q \in \mathbbm{N}$, $p\geq0, q>0$ is given by \textcite{Bollerslev:1986}
 
 \begin{equation}
@@ -46,7 +47,7 @@ To decide whether to use a GARCH model, one can test for volatility or the valid
 \subsection{Applications}
 \label{sec: Garch Applications}
 
-The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures such as inflation rates but since then have been used in a variety of fields. GARCH models generalised the ARCH model approach to allow the modelling of a more flexible lag structure, see \textcite{Bollerslev:1986}. They have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments. 
+The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures such as inflation rates but since then have been used in a variety of fields. GARCH models generalised the ARCH model approach to allow the modelling of a more flexible lag structure, see \textcite{Bollerslev:1986}. They have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments, see \textcite{Kreiss:2006}. 
 
 Since the ARCH and GARCH models are used to model and forecast volatility or the conditional variance, but not values, we will not use it in our application. In addition, the INGARCH model also accounts for the discrete nature of our data, which makes it the preferred choice. 
 
@@ -54,36 +55,36 @@ Since the ARCH and GARCH models are used to model and forecast volatility or the
 \section{Naive Random Walk}
 \label{sec: Naive Random Walk}
 
-The Naive Random Walk model is one of the simplest and most comprehensive forecasting models, which makes it a popular benchmark model. In addition, it is what is currently employed, so using it enables us to directly see if our models outperform the current model. It assumes that the 1-step difference between two values is i.i.d distributed with mean 0. Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be our univariate time series. Then the Naive Random Walk model is given as
+The Naive Random Walk model is one of the simplest and most comprehensive forecasting models, which makes it a popular benchmark model. In addition, it is what is currently employed, so using it enables us to directly see if our models outperform the current model. It assumes that the 1-step difference between two values is i.i.d distributed with mean 0. We again no longer assume our data to be integer-valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}_0\right\}_f$. Then the Naive Random Walk model is given as
 
 \begin{equation}
 Y_{k,t+1}= Y_{kt} + \epsilon_{kt}, 
 \label{eq: Random Walk Model}
 \end{equation}
  %
-where $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$ is a white noise process with variance $\sigma_k^2 \in \mathbb{R}_+$. It can be shown easily, that the optimal 1-step ahead forecast with regard to the mean squared error (MSE) is given by
+where $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$ is a white noise process with variance $\sigma_k^2 \in \mathbb{R}_+$, see \textcite{Nau:14}. It can be shown easily, that the optimal 1-step ahead forecast with regard to the mean squared error (MSE) is given by
 
 \begin{equation}
 \hat{Y}_{k,t+1}= Y_{kt},
 \label{eq: Random Walk Model Prediction}
 \end{equation}
 %
-where $\hat{Y}_{k,t+1}$ is the predicted value at time $t+1$. In other words, the predicted value is the last known value.  
+where $\hat{Y}_{k,t+1}$ is the predicted value at time $t+1$, see \textcite{Scherrer:2021}. In other words, the predicted value is the last known value.  
 
 
 \section{Zero-Inflated Models}
 \label{sec: Zim}
 
-Since we encounter a large number of zeros, we also consider zero-inflated models. Zero inflation means that the proportion of observed zeros is bigger than that of the underlying distribution and hence would not be expected. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function, which enables one to explain the large amount of zero values. The probability mass function of a $ZIP(\lambda,\omega)$ distribution for a random variable $Y$ is defined as, see \textcite{Zhu:2012}
+Since we encounter a large number of zeros, we also consider zero-inflated models. Zero inflation means that the proportion of observed zeros is bigger than that of the underlying distribution and hence would not be expected. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function, which enables one to explain the large amount of zero values, see \textcite{Zhu:2012}. The probability mass function of a $ZIP(\lambda,\omega)$ distribution for a random variable $Y$ is defined as
 
 \begin{equation}
-\mathbb{P}(Y=y) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda^y \exp(-\lambda)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0.
+\mathbb{P}(Y=y) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda^y \exp(-\lambda)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0,
 \label{eq:ZIP Distribution}
 \end{equation}
 %
-where $0 < \omega < 1$ is the zero-inflation parameter, $\lambda$ is the Poisson parameter and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources, see \textcite{Zhu:2012}. The first part of Equation (\ref{eq:ZIP Distribution}) $\delta_{y,0}$ is the degenerated point mass distribution.
+see \textcite{Zhu:2012}, where $0 < \omega < 1$ is the zero-inflation parameter, $\lambda$ is the Poisson parameter and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources, see \textcite{Zhu:2012}. The first part of Equation (\ref{eq:ZIP Distribution}) $\delta_{y,0}$ is the degenerated point mass distribution.
 
-Let $\SigA_{k,t-1}$ be the $\sigma$-field generated by $\left\{Y_{k,t-1},Y_{k,t-2},\ldots\right\}$. Assume, conditionally on $\SigA_{k,t-1}$, that $Y_{k,1},\ldots,Y_{k,T}$ are independent. Now we can define the Zero-Inflated Poisson (ZIP) INGARCH(p,q) as
+Let $\SigA_{k,t-1}$ be the $\sigma$-field generated by $\left\{Y_{k,t-1},Y_{k,t-2},\ldots\right\}$. Assume, conditionally on $\SigA_{k,t-1}$, that $Y_{k,1},\ldots,Y_{k,T}$ are independent. Now we can define the zero-inflated Poisson (ZIP) INGARCH(p,q) as
 
 \begin{equation}
 \begin{gathered}
@@ -165,11 +166,11 @@ with $\bm{\eta} \in \mathbb{R}^r$. Additionally, because of the updated definiti
 The parameter estimation for the log-linear model is done similarly to the INGARCH model in Section \ref{sec: Estimation of the Ingarch Model}. Only the parameter space $\Theta$ is different
 
 \begin{equation}
-\Theta = \left\{ \bm{\theta} \in \mathbb{R}^{p+q+r+1}: \abs{\beta_1},\ldots,\abs{\beta_p},\abs{\alpha_1},\ldots,\abs{\alpha_q} < 1, \abs{\sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j } < 1 \right\}.
+\Theta = \left\{ \bm{\theta} \in \mathbb{R}^{p+q+r+1}: \abs{\beta_1},\ldots,\abs{\beta_p},\abs{\alpha_1},\ldots,\abs{\alpha_q} < 1, \abs{\sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j } < 1 \right\},
 \label{eq:Parameter Space log-linear}
 \end{equation}
 %
-Just like parameter estimation, forecasting is also performed in the same way as the INGARCH model. The optimal one-step ahead prediction with regards to the mean squared error is given by the conditional expectation $\lambda_{k,t+1}=\mathbb{E}\left[Y_{k,t+1} | \SigA_{kt} \right]$. The h-step ahead predictions for $h>1$ are calculated iteratively again, see \textcite{Liboschik:2016}. 
+see \textcite{Liboschik:2016}. Just like parameter estimation, forecasting is also performed in the same way as the INGARCH model. The optimal one-step ahead prediction with regards to the mean squared error is given by the conditional expectation $\lambda_{k,t+1}=\mathbb{E}\left[Y_{k,t+1} | \SigA_{kt} \right]$. The h-step ahead predictions for $h>1$ are calculated iteratively again, see \textcite{Liboschik:2016}. 
 
 Log-Linear models are further discussed in \textcite{Fokianos:2011,Woodard:2011,Douc:2013}.
 
@@ -197,7 +198,7 @@ Log-Linear models are further discussed in \textcite{Fokianos:2011,Woodard:2011,
 \section{AR Models}
 \label{sec: Ar Models}
 
-Autoregressive models of order p (AR(p)) are one of the most simple time series models, which makes them very popular. Assuming again our time series is real valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$, taking coefficients $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$, called innovations, they are defined as 
+Autoregressive models of order p (AR(p)) are one of the most simple time series models, which makes them very popular. Assuming again our time series is real-valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$, taking coefficients $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$, called innovations, they are defined as 
 
 \begin{equation}
 Y_{kt} = a_1Y_{k,t-1} + \ldots + a_p Y_{k,t-p} + \epsilon_{kt},
@@ -216,7 +217,7 @@ where $\bm{a}_j \in \mathbbm{R}^{K \times K}$ are the coefficient matrices and $
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: AR Estimation and Forecasting}
 
-The simplicity of AR models makes parameter estimation and forecasting easy. There are various ways to estimate the parameters in Model (\ref{eq: Var Model}) such as the Yule-Walker equations, the ordinary least squares (OLS) estimator and if the innovations $\left\{\bm{\epsilon}_t\right\}$ are multivariate normal distributed, then the maximum likelihood estimator can be used as well. Further properties and comparison of their estimators can be found in \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. 
+The simplicity of AR models makes parameter estimation and forecasting easy. There are various ways to estimate the parameters in Model (\ref{eq: Var Model}) such as the Yule-Walker equations, the ordinary least squares (OLS) estimator and if the innovations $\left\{\bm{\epsilon}_t\right\}$ are multivariate normal distributed, then the maximum likelihood estimator can be used as well, see \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. %Further properties and comparison of their estimators can be found in \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. 
 
 Like parameter estimation, forecasting is also simple in the AR model. We use the mean squared error as an error measure and only consider affine forecasts with $m\geq p,m \in \mathbbm{N}$ past values, hence the forecast has the form
 \begin{equation}
@@ -224,21 +225,21 @@ Like parameter estimation, forecasting is also simple in the AR model. We use th
 \label{eq:Forecasting general}
 \end{equation}
 %
-with coefficients $\bm{c}_i \in \mathbbm{R}^{K \times K}$. Under some additional assumptions for $\left\{\bm{Y}_t\right\}$, which can be found in chapter 5.1 and 5.2 of \textcite{Scherrer:2021}, it turns out that the optimal one-step ahead prediction is simply, see \textcite{Scherrer:2021}
+with coefficients $\bm{c}_i \in \mathbbm{R}^{K \times K}$. Under some additional assumptions for $\left\{\bm{Y}_t\right\}$, which can be found in chapter 5.1 and 5.2 of \textcite{Scherrer:2021}, it turns out that the optimal one-step ahead prediction is simply
 
 \begin{equation}
-\hat{\bm{Y}}_{t+1} = \bm{a}_1\bm{Y}_{t} + \ldots + \bm{a}_p\bm{Y}_{t-p+1}.
+\hat{\bm{Y}}_{t+1} = \bm{a}_1\bm{Y}_{t} + \ldots + \bm{a}_p\bm{Y}_{t-p+1},
 \label{eq:AR 1step Forecasting}
 \end{equation}
 %
-So the optimal one step ahead forecast consists exactly of the coefficients of the AR model. For $h>1$, one simply continues recursively, using $\hat{\bm{Y}}_{t+1}$, $\hat{\bm{Y}}_{t+2},\ldots$, see \textcite{Scherrer:2021}. Since we normally do not know the exact coefficients $\bm{a}_i$, their estimations $\hat{\bm{a}}_i$ can be plugged into Equation (\ref{eq:AR 1step Forecasting}). 
+see \textcite{Scherrer:2021}. So the optimal one step ahead forecast consists exactly of the coefficients of the AR model. For $h>1$, one simply continues recursively, using $\hat{\bm{Y}}_{t+1}$, $\hat{\bm{Y}}_{t+2},\ldots$. Since we normally do not know the exact coefficients $\bm{a}_i$, their estimations $\hat{\bm{a}}_i$ can be plugged into Equation (\ref{eq:AR 1step Forecasting}), see \textcite{Scherrer:2021}. 
 
 \subsection{Testing for AR Models}
 \label{sec: Testing for ar models}
 
 To test whether or not a time series follows an AR(p) process, the estimates of the white noise process $\left\{\hat{\bm{\epsilon}}_t\right\}$ can be used. These estimates should follow a white noise process and hence should show no signs of serial correlation. Popular tests are the Portmanteau and the Breusch-Godfrey Test, see \textcite{Lütkepohl:2007}. 
 
-The Portmanteau Test tests the null hypothesis $H_0: \mathbbm{E}[\bm{\epsilon}_t \bm{\epsilon}_{t-m}^T]=0$, i.e. if the estimated innovations are uncorrelated. Under the assumption that $\left\{\bm{Y}_t\right\}$ is an AR(p) process and an AR(p) model has been fit, the used test statistic converges against a chi-squared distribution, see \textcite{Lütkepohl:2007}. 
+The Portmanteau Test tests the null hypothesis $H_0: \mathbbm{E}[\bm{\epsilon}_t \bm{\epsilon}_{t-m}^T]=\bm{0}$, i.e. if the estimated innovations are uncorrelated. Under the assumption that $\left\{\bm{Y}_t\right\}$ is an AR(p) process and an AR(p) model has been fit, the used test statistic converges against a chi-squared distribution, see \textcite{Lütkepohl:2007}. 
 
 The Breusch-Godfrey Test tests if the coefficients $(b_1,\ldots,b_h)$ in the model 
 
@@ -252,7 +253,7 @@ are zero, i.e. if process $\left\{\bm{\epsilon}_t\right\}$ follows an AR(h) stru
 \section{INAR(p) Models}
 \label{sec: Inar Models}
 
-integer-valued autoregressive models of order p (INAR(p)) are another option to handle univariate count data. To define them, we first need to define the generalised thinning operator. Take an integer-valued, non-negative random variable $X$ and $\alpha \in [0,1]$. Further, take a sequence of i.i.d. integer-valued, non-negative random variables $(Z_i)_{i=1}^X$ with finite mean $\alpha$ and variance $\sigma^2<\infty $ which are independent of $X$. Then the generalised thinning operator $\circ$ is defined as
+Integer-valued autoregressive models of order p (INAR(p)) are another option to handle univariate count data. To define them, we first need to define the generalised thinning operator. Take an integer-valued, non-negative random variable $X$ and $\alpha \in [0,1]$. Further, take a sequence of i.i.d. integer-valued, non-negative random variables $(Z_i)_{i=1}^X$ with finite mean $\alpha$ and variance $\sigma^2<\infty $ which are independent of $X$. Then the generalised thinning operator $\circ$ is defined as
 
 \begin{equation}
 \alpha \circ X = \sum_{i=1}^X Z_i .
@@ -293,7 +294,7 @@ For simplicity, we will consider INAR(1) models, although the optimal choice of 
 \subsection{Distributional Assumptions}
 \label{sec: Inar Distributional assumptions}
 
-While we will mainly assume that the innovations $\left\{\epsilon_t\right\}$ follow a Poisson distribution, they can also follow other distributions. One interesting option is, that one can choose a zero-inflated distribution. This could make the model adequate for our data. 
+While we will mainly assume that the innovations $\left\{\epsilon_t\right\}$ follow a Poisson distribution, they can also follow other distributions. One interesting option is, that one can choose a zero-inflated distribution, see \textcite{Garay:2022}. This could make the model adequate for our data. 
 
 
 \subsection{Parameter Estimation and Forecasting}

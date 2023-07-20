@@ -97,13 +97,34 @@
       \field{year}{2003}
     \endentry
     \entry{Alzaid:1990}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=6d5621cf7ef8547aa3705893425adce8}{%
+           family={Alzaid},
+           familyi={A\bibinitperiod},
+           given={A.\bibnamedelimi A.},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4240d3c06dfae7cf97f74008c48c5605}{%
+           family={Al-Osh},
+           familyi={A\bibinithyphendelim O\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
       \list{publisher}{1}{%
         {Applied Probability Trust}%
       }
+      \strng{namehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{fullhash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{bibnamehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{authorbibnamehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{authornamehash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
+      \strng{authorfullhash}{7f796f8bdec31bbdfd701f79ba1c1f0a}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
+      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{00219002}
       \field{journaltitle}{Journal of Applied Probability}
@@ -1153,6 +1174,88 @@
       \verb 10.1016/S0169-2070(03)00014-1
       \endverb
     \endentry
+    \entry{Garay:2022}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=054ec6e6dc94005b89bab4b8d9286aed}{%
+           family={Garay},
+           familyi={G\bibinitperiod},
+           given={Aldo\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eddfabdf9da20cc9f169fcd5699788ef}{%
+           family={Medina},
+           familyi={M\bibinitperiod},
+           given={Francyelle\bibnamedelima L.},
+           giveni={F\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e0daf35e04325345d2d3b9f1a078cf09}{%
+           family={Jales\bibnamedelimb C.\bibnamedelimi S.},
+           familyi={J\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Isaac},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=983bf634342801c59da547aeeb04e949}{%
+           family={Bertail},
+           familyi={B\bibinitperiod},
+           given={Patrice},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{5}{}{%
+        {{hash=0462611438cf4464ee93bd6f80fa9596}{%
+           family={Chaari},
+           familyi={C\bibinitperiod},
+           given={Fakher},
+           giveni={F\bibinitperiod}}}%
+        {{hash=be632b5f558a3ac6afc11fcf3000cb08}{%
+           family={Leskow},
+           familyi={L\bibinitperiod},
+           given={Jacek},
+           giveni={J\bibinitperiod}}}%
+        {{hash=88f67527650b9f0ae750d67f2e639566}{%
+           family={Wylomanska},
+           familyi={W\bibinitperiod},
+           given={Agnieszka},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c83d7103ec1837cf698231e6b3adaa27}{%
+           family={Zimroz},
+           familyi={Z\bibinitperiod},
+           given={Radoslaw},
+           giveni={R\bibinitperiod}}}%
+        {{hash=1c75cef0bb7df2ac6b5f5c3cdba20e44}{%
+           family={Napolitano},
+           familyi={N\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{f8efd24e5cfd0b3835386dfaf994bd35}
+      \strng{fullhash}{81747555ecc7a5614584269ded09b842}
+      \strng{bibnamehash}{f8efd24e5cfd0b3835386dfaf994bd35}
+      \strng{authorbibnamehash}{f8efd24e5cfd0b3835386dfaf994bd35}
+      \strng{authornamehash}{f8efd24e5cfd0b3835386dfaf994bd35}
+      \strng{authorfullhash}{81747555ecc7a5614584269ded09b842}
+      \strng{editorbibnamehash}{aadc721036a355834dec4d540558e688}
+      \strng{editornamehash}{aadc721036a355834dec4d540558e688}
+      \strng{editorfullhash}{2b6490e462b074578edb36d39b3a4c86}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Nonstationary Systems: Theory and Applications}
+      \field{isbn}{978-3-030-82110-4}
+      \field{title}{First-Order Integer Valued AR Processes with Zero-Inflated Innovations}
+      \field{year}{2022}
+      \field{pages}{19\bibrangedash 40}
+      \range{pages}{22}
+    \endentry
     \entry{Hamilton:1994}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=f1528bc518ebb8f6103311513805ac7d}{%
@@ -1361,6 +1464,47 @@
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.1991.tb00073.x
       \endverb
       \keyw{Discrete time series,INAR model,conditional least-squares estimation}
+    \endentry
+    \entry{Kreiss:2006}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=7f9ae6195f387e6748f2ce612f52eb87}{%
+           family={Krei{ß}},
+           familyi={K\bibinitperiod},
+           given={J.P.},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a05e29c5116d3efe1e31556281f6957b}{%
+           family={Neuhaus},
+           familyi={N\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{09a257902abd4df5e770622972624e0a}
+      \strng{fullhash}{09a257902abd4df5e770622972624e0a}
+      \strng{bibnamehash}{09a257902abd4df5e770622972624e0a}
+      \strng{authorbibnamehash}{09a257902abd4df5e770622972624e0a}
+      \strng{authornamehash}{09a257902abd4df5e770622972624e0a}
+      \strng{authorfullhash}{09a257902abd4df5e770622972624e0a}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783540335719}
+      \field{series}{Statistik und ihre Anwendungen}
+      \field{title}{Einführung in die Zeitreihenanalyse}
+      \field{year}{2006}
+      \verb{urlraw}
+      \verb https://books.google.at/books?id=NGUkBAAAQBAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.at/books?id=NGUkBAAAQBAJ
+      \endverb
     \endentry
     \entry{Kynclova:2015}{article}{}
       \name{author}{3}{}{%
@@ -1990,6 +2134,34 @@
       \verb{url}
       \verb https://CRAN.R-project.org/package=here
       \endverb
+    \endentry
+    \entry{Nau:14}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7a83ef281b6fce63fd50696cdaa9ff8b}{%
+           family={Nau},
+           familyi={N\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Fuqua School of Business, Duke University}%
+      }
+      \strng{namehash}{7a83ef281b6fce63fd50696cdaa9ff8b}
+      \strng{fullhash}{7a83ef281b6fce63fd50696cdaa9ff8b}
+      \strng{bibnamehash}{7a83ef281b6fce63fd50696cdaa9ff8b}
+      \strng{authorbibnamehash}{7a83ef281b6fce63fd50696cdaa9ff8b}
+      \strng{authornamehash}{7a83ef281b6fce63fd50696cdaa9ff8b}
+      \strng{authorfullhash}{7a83ef281b6fce63fd50696cdaa9ff8b}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{Notes on the random walk model}
+      \field{year}{2014}
     \endentry
     \entry{Palarea-Albaladejo:2015}{article}{}
       \name{author}{2}{}{%

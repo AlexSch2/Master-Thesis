@@ -12,7 +12,7 @@ The optimal one step ahead prediction for the different models is given in their
 \subsection{CoDA Specifications}
 \label{sec: Coda Specifications}
 
-As mentioned above, the CoDA model must not include any zero values, since in this context, a value of zero is not defined. In order to keep things simple, we consider two options. The first one adds $0.5$ to all time series values. The second one only replaces zero values with a chosen value $\delta$, which is the simple replacement strategy in (\ref{eq:simple replacement strategy}). Due to the fact that we have essential zeros and want to use the specific $ilr$ coordinates, we opt for these options. 
+As mentioned above, the CoDA model must not include any zero values, since in this context, a value of zero is not defined. In order to keep things simple, we consider two options. The first one adds $0.5$ to all time series values. The second one only replaces zero values with a chosen value $\delta$, which is the simple replacement strategy in (\ref{eq:simple replacement strategy}). Due to the fact that we have essential zeros and want to use the specific ilr coordinates, we opt for these options. 
 
 Another way to handle the zero values and the low values for some categories is a method we will call in the following one-vs-all. The principle is the following. A category $k$ is chosen as the pivot category $k_{pivot}$. For all the chosen time points, at each point, the values of the other categories get summed up
 
@@ -67,7 +67,7 @@ The values $p$ and $q$ are also varying parameters which have to be chosen. One 
 
 In order to compare the results of the methods with each other, we will introduce a new error measure. The goal of this measure is to get a performance indicator for each fridge, which can be used for comparison and summarisation. Since the scales of the fridges vary, the measure should be scale independent but because our data contains many zeros, we cannot use a percentage error measure. In addition, we want to penalise big absolute differences between the predicted values and actual values. These requirements lead us to the following measure.
 
-For a fridge $f$, let $t = 1,\ldots,T$ denote the point in time and $k=1,\ldots,K$ the category. Then $y_{ftk}$ is the $t$-th measured value of the time series for category $k$ and fridge $f$, $\hat{y}_{ftk}$ the predicted value and $y_{naive_{ftk}}$ the value predicted by the naive random walk model (\ref{sec: Naive Random Walk}). Then we define our measure as
+For a fridge $f$, let $t = 1,\ldots,T$ denote the point in time and $k=1,\ldots,K$ the category. Then $y_{ftk}$ is the $t$-th measured value of the time series for category $k$ and fridge $f$, $\hat{y}_{ftk}$ the predicted value and $\hat{y}_{naive_{ftk}}$ the value predicted by the naive random walk model (\ref{sec: Naive Random Walk}). Then we define our measure as
 
 \begin{equation}
 E_f=\frac{\sum_{k=1}^{K}\sum_{t=1}^T(y_{ftk}-\hat{y}_{ftk})^2}{\sum_{k=1}^{K}\sum_{t=1}^T(y_{ftk}-\hat{y}_{naive_{ftk}})^2}.
@@ -89,7 +89,7 @@ If the ratio is below 1, the mean of the MSEs of our method is lower than that o
 The measure in (\ref{eq: Error Measure}) can be further extended. For example, by allowing to use a subset of all possible categories instead of all. Let $G_K \subset \left\{1,\ldots,K\right\}$ then
 
 \begin{equation}
-E^{GK}_{f}=\frac{\sum_{k \in G_K}\sum_{t=1}^T(y_{ftk}-\hat{y}_{ftk})^2}{\sum_{k \in G_K}\sum_{t=1}^T(y_{ftk}-y_{naive_{ftk}})^2}.
+E^{GK}_{f}=\frac{\sum_{k \in G_K}\sum_{t=1}^T(y_{ftk}-\hat{y}_{ftk})^2}{\sum_{k \in G_K}\sum_{t=1}^T(y_{ftk}-\hat{y}_{naive_{ftk}})^2}.
 \label{eq: Error Measure Subsets}
 \end{equation}
 %
@@ -98,7 +98,7 @@ This allows us to compare the performance on the subset of categories over vario
 Another possible extension is to take the square root
 
 \begin{equation}
-\widetilde{E}_f=\frac{\sum_{k=1}^{K}\sqrt{\sum_{t=1}^T(y_{ftk}-\hat{y}_{ftk})^2}}{\sum_{k=1}^{K}\sqrt{\sum_{t=1}^T(y_{ftk}-y_{naive_{ftk}})^2}}.
+\widetilde{E}_f=\frac{\sum_{k=1}^{K}\sqrt{\sum_{t=1}^T(y_{ftk}-\hat{y}_{ftk})^2}}{\sum_{k=1}^{K}\sqrt{\sum_{t=1}^T(y_{ftk}-\hat{y}_{naive_{ftk}})^2}}.
 \label{eq: Error Measure Sqrt} 
 \end{equation}
 %

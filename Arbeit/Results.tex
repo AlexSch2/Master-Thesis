@@ -30,7 +30,7 @@ In the Quantile Plot \ref{fig: quantile distributions models} we see the error m
 \label{fig:models Comp1}
 \end{figure}
 
-In Figure \ref{fig:models Comp2} we also include the ZIM model. One drawback about the ZIM model is, that it needs to have zero values in the fitted window. Because of the lack of them in category 1 and 2, we couldn't manage to fit it. Hence the Models in (\ref{fig:models Comp2}) were only fitted on categories 3 and 4. 
+In Figure \ref{fig:models Comp2} we also include the ZIM model. One drawback about the ZIM model is, that it needs to have zero values in the fitted window. Because of the lack of them in category 1 and 2, we couldn't manage to fit it. Hence the Models in \ref{fig:models Comp2} were only fitted on categories 3 and 4. 
 
 In \ref{fig:box distributions models Zim} we again see the boxplot for the summarised error. The ZIM is close to INGARCH, but all three models still lag behind CoDA. In \ref{fig: quantile distributions models Zim} we see again the error measure for each category. While the models perform similar for category 3, the CoDA still outperforms all models for category 4. Here it is worth mentioning, that category 4 is the main category with the most amount of zeros in our data. It should be mentioned here again, that all models don't predict integer values, but rather real values which then get rounded to the nearest integer value. Especially CoDA cannot predict zero values but only small positive values which get rounded to zero.
 
@@ -112,7 +112,7 @@ As mentioned various times throughout this thesis, the history is one of the par
 \label{fig:History Comp1}
 \end{figure}
 
-In Figure \ref{fig:History Comp1} we can see that the results for CoDA do not vary too much for the different histories. However, one can see in the Quantile Plot \ref{fig:History Quant} that we have 8 less values for  $h=0.5$ than for $h=1$. This probably results from the fact, that if we only take half of the history for an already short time series, then we have too little values for estimating. 
+In Figure \ref{fig:History Comp1} we can see that the results for CoDA do not vary too much for the different histories. However, one can see in the Quantile Plot \ref{fig:History Quant} that we have 8 less values for  $h=0.5$ than for $h=1$. This probably results from the fact, that if we only take half of the history for an already short time series, then we have too little values for estimation. 
 
 For INGARCH, the results are similar as well. For $h=1$ we get slightly higher values for the error measure as seen in \ref{fig:History Box}. But again in \ref{fig:History Quant} we see that we have less values for the shorter history for the same reason as above. 
 
@@ -217,7 +217,7 @@ As we can see, we get the exactly the same results for both distributions. Howev
 \subsubsection{Number of Past Means and Observations}
 \label{sec: Number of Past Means and Observations}
 
-The order in the INGARCH(p,q) model is another parameter which can be chosen. For simplicities sake we only compare our INGARCH(1,1) with an INGARCH(1,2) and INGARCH(2,1) model. However, further models could be tried out and compared. 
+The order in the INGARCH(p,q) model is another parameter which can be chosen. For simplicities sake, we only compare our INGARCH(1,1) with an INGARCH(1,2) and an INGARCH(2,1) model. However, further models could be tried out and compared. 
 
 In Figure \ref{fig:past means Comp1} we compare the INGARCH(1,1) model (red) with the INGARCH(1,2) model (blue). We can see that the performance is very similar. Hence we prefer the smaller model. 
 \begin{figure}[htb!]
@@ -239,7 +239,7 @@ In Figure \ref{fig:past means Comp1} we compare the INGARCH(1,1) model (red) wit
 \caption{Quantiles for a different number of past means}
 \label{fig:past means Quant}
 \end{subfigure}
-\caption{Comparison of a different number of past means}
+\caption{Comparison for a different number of past means}
 \label{fig:past means Comp1}
 \end{figure}
 
@@ -265,11 +265,11 @@ In Figure \ref{fig:past obs Comp1} we compare the INGARCH(1,1) (red) model with 
 \caption{Quantiles for a different number of past observations}
 \label{fig:past obs Quant}
 \end{subfigure}
-\caption{Comparison of a different number of past observations}
+\caption{Comparison for a different number of past observations}
 \label{fig:past obs Comp1}
 \end{figure}
 
-As we saw, there is not much difference between the INGARCH(1,1), INGARCH(2,1) and INGARCH(1,2) model. One could compare the AIC or some other measure for the different models and base their choice on that. However, this is not further explored here and hence the INGARCH(1,1) model is taken because it is the smallest.
+As we see, there is not much difference between the INGARCH(1,1), INGARCH(2,1) and INGARCH(1,2) model. One could compare the AIC or some other measure for the different models and base their choice on that. However, this is not further explored here and hence the INGARCH(1,1) model is taken because it is the smallest.
 
 \subsection{CoDA Specifications Results}
 \label{sec: CoDA Specifications Results}
@@ -279,25 +279,25 @@ Last, we will compare different CoDA specifications as mentioned in Section \ref
 \subsection{Zero Handling}
 \label{sec: Zero Handling}
 
-First we compare the different options of handling zeros as explained in Section \ref{sec: Coda Specifications}. The results are shown in Figure \ref{fig:Coda zero handling Comp1}. It seems that the simple replacement strategy with $\delta_j = 0.1$, $\forall j$ results in marginally better performance.
+First, we compare the different options of handling zeros as explained in Section \ref{sec: Coda Specifications}. The results are shown in Figure \ref{fig:Coda zero handling Comp1}. It seems that the simple replacement strategy with $\delta_j = 0.1$, $\forall j$ results in marginally better performance.
 
 \begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCoDA_Box_all__Variation_zeroHandling.png}
-\caption{Boxplot for a different methods of zero handling}
+\caption{Boxplot of different zero handling methods}
 \label{fig:Coda zero handling Box}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCoDA_Histogram_all__Variation_zeroHandling.png}
-\caption{Histogram for a different methods of zero handling}
+\caption{Histogram of different zero handling methods}
 \label{fig:Coda zero handling Hist}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.8\textwidth}
 \includegraphics[width=\textwidth]{ErrorMeasureCoDA_Quant_all__Variation_zeroHandling.png}
-\caption{Quantiles for a different methods of zero handling}
+\caption{Quantiles of different zero handling methods}
 \label{fig:Coda zero handling Quant}
 \end{subfigure}
 \caption{Comparison of different zero handling methods}
@@ -324,7 +324,7 @@ For the simple replacement strategy, one can also vary the parameter $\delta$. I
 
 
 
-To further investigate the differences, we look in detail at the time series with the highest error measures for $\delta=0.5$. The fridge with the highest error is 100402, shown in Figure \ref{fig:Coda_Timeseries_ID100402}. We can see that for $\delta=0.5$ in category 4, the predictions stay at 1, even after a repeated amount of zero values. With the smaller $\delta$-values on the other hand, CoDA starts to predict zero values after one or two time points. While the absolute difference is only one, the error measure is so high because the naive random walk model predicts all values correctly as zero and therefore the nominator in Equation (\ref{eq: Error Measure Subsets}) is theoretically zero. In practice, we implemented a fail-safe and set the nominator to 1e-6 to avoid division by 0. 
+To further investigate the differences, we look in detail at the time series with the highest error measures for $\delta=0.5$. The fridge with the highest error is $f=100402$, shown in Figure \ref{fig:Coda_Timeseries_ID100402}. We can see that for $\delta=0.5$ in category 4, the predictions stay at 1, even after a repeated amount of zero values. With the smaller $\delta$-values on the other hand, CoDA starts to predict zero values after one or two time points. While the absolute difference is only one, the error measure is so high because the naive random walk model predicts all values correctly as zero and therefore the nominator in Equation (\ref{eq: Error Measure Subsets}) is theoretically zero. In practice, we implemented a fail-safe and set the nominator to 1e-6 to avoid division by 0. 
 
 
 \begin{figure}[htbp]
@@ -334,7 +334,7 @@ To further investigate the differences, we look in detail at the time series wit
 	\label{fig:Coda_Timeseries_ID100402}
 \end{figure}
 
-The second highest error for CoDA is for fridge 100403, shown in \ref{fig:Coda_Timeseries_ID100403}. Again, we only have zero values for category 4 and for $\delta=0.5$ CoDA never predicts zero. The same reasoning as above can be used to explain the high error value. 
+The second highest error for CoDA is for fridge 100403, shown in \ref{fig:Coda_Timeseries_ID100403}. Again, we only have zero values for category 4 and for $\delta=0.5$, CoDA never predicts zero. The same reasoning as above can be used to explain the high error value. 
 
 \begin{figure}[htbp]
 	\centering
@@ -343,7 +343,7 @@ The second highest error for CoDA is for fridge 100403, shown in \ref{fig:Coda_T
 	\label{fig:Coda_Timeseries_ID100403}
 \end{figure}
 
-The same thing happens for time series 100191 in Figure \ref{fig:Coda_Timeseries_ID100191}. We have an excessive amount of zero values and if $\delta$ is too high, CoDA fails to predict the correct value. 
+The same thing happens for fridge 100191 in Figure \ref{fig:Coda_Timeseries_ID100191}. We have an excessive amount of zero values and if $\delta$ is too high, CoDA fails to predict the correct value. 
 
 \begin{figure}[htbp]
 	\centering
@@ -382,7 +382,7 @@ Next we compare CoDA for $\Tsp-$Spaces. The results are shown in \ref{fig:Coda T
 \label{fig:Coda T-Spaces Comp1}
 \end{figure}
 
-To further investigate the reason of this difference in performance, we picked out the two time series with the highest error. The fridge with the highest error had Id 100321. Its time series can be seen in Figure \ref{fig:Coda_Timeseries_VariationtSpace100321}. As we can see, CoDA with $\Tsp$-Spaces performs worse for category 1 and 2. However, the time series is also short by nature with only 14 recorded points in time.  
+To further investigate the reason of this difference in performance, we picked out the two time series with the highest error. The fridge with the highest error is $f=100321$. Its time series can be seen in Figure \ref{fig:Coda_Timeseries_VariationtSpace100321}. As we can see, CoDA with $\Tsp$-Spaces performs worse for category 1 and 2. However, the time series is also short by nature with only 14 recorded points in time.  
 
 \begin{figure}[htbp]
 	\centering
