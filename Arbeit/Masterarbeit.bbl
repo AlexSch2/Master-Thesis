@@ -2410,10 +2410,15 @@
       \strng{authorfullhash}{0f82bdecb8d74c95a9bb27eaac85569b}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labeldatesource}{nodate}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{day}{21}
+      \field{month}{7}
       \field{title}{{Master Thesis Software}}
+      \field{year}{2023}
+      \field{dateera}{ce}
       \verb{urlraw}
       \verb https://github.com/AlexSch2/Master-Thesis
       \endverb
@@ -2901,38 +2906,6 @@
       \field{year}{2012}
       \field{pages}{viii\bibrangessep 74 pages}
       \range{pages}{-1}
-    \endentry
-    \entry{RVGAM:2010}{article}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=7467dc5e783b7611642bfcd1c127db99}{%
-           family={Yee},
-           familyi={Y\bibinitperiod},
-           given={Thomas\bibnamedelima W.},
-           giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{7467dc5e783b7611642bfcd1c127db99}
-      \strng{fullhash}{7467dc5e783b7611642bfcd1c127db99}
-      \strng{bibnamehash}{7467dc5e783b7611642bfcd1c127db99}
-      \strng{authorbibnamehash}{7467dc5e783b7611642bfcd1c127db99}
-      \strng{authornamehash}{7467dc5e783b7611642bfcd1c127db99}
-      \strng{authorfullhash}{7467dc5e783b7611642bfcd1c127db99}
-      \field{sortinit}{Y}
-      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of Statistical Software}
-      \field{number}{10}
-      \field{title}{The {VGAM} Package for Categorical Data Analysis}
-      \field{volume}{32}
-      \field{year}{2010}
-      \field{pages}{1\bibrangedash 34}
-      \range{pages}{34}
-      \verb{doi}
-      \verb 10.18637/jss.v032.i10
-      \endverb
     \endentry
     \entry{Qaqish:1988}{article}{}
       \name{author}{1}{}{%

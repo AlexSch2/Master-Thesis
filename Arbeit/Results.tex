@@ -11,7 +11,7 @@ Here we compare the INGARCH(1,1) model with the CoDA and INAR(1) model. For all 
 In Figure \ref{fig:models Comp1} we see a boxplot and quantile plot. In the boxplot the error measure is calculated for all groups and all fridges for each model. The result is then shown in a boxplot. In the quantile plot, the error measure for each fridge, each model and each category is calculated and sorted according to their size. The dot size indicates the length of the respective time series and the vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile.
 
 In the Boxplot \ref{fig:box distributions models} we can see that their performance is pretty similar. They all seem to outperform the naive random walk model, which is especially true for the count data models. 
-In the Quantile Plot \ref{fig: quantile distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonably well and similar, differences emerge for category 3 and 4. CoDA seems to be the clear favourite in category 4, followed by INGARCH and then INAR. However, for all models there are again time series with errors that are either too high to be shown, or that couldn't get calculated at all. 
+In the Quantile Plot \ref{fig: quantile distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonably well and similar, differences emerge for category 3 and 4. CoDA seems to be the clear favourite in category 4, followed by INGARCH and then INAR. However, for all models there are time series with errors that are either too high to be shown, or that couldn't get calculated at all. 
 \begin{figure}[htb!]
 \centering
 \begin{subfigure}[b]{0.8\textwidth}
@@ -26,13 +26,13 @@ In the Quantile Plot \ref{fig: quantile distributions models} we see the error m
 \label{fig: quantile distributions models}
 \end{subfigure}
 \hfill
-\caption{Comparison of the different models}
+\caption{Comparison of the different models for all main categories}
 \label{fig:models Comp1}
 \end{figure}
 
 In Figure \ref{fig:models Comp2} we also include the ZIM model. One drawback about the ZIM model is, that it needs to have zero values in the fitted window. Because of the lack of them in category 1 and 2, we couldn't manage to fit it. Hence the Models in \ref{fig:models Comp2} were only fitted on categories 3 and 4. 
 
-In \ref{fig:box distributions models Zim} we again see the boxplot for the summarised error. The ZIM is close to INGARCH, but all three models still lag behind CoDA. In \ref{fig: quantile distributions models Zim} we see again the error measure for each category. While the models perform similar for category 3, the CoDA still outperforms all models for category 4. Here it is worth mentioning, that category 4 is the main category with the most amount of zeros in our data. It should be mentioned here again, that all models don't predict integer values, but rather real values which then get rounded to the nearest integer value. Especially CoDA cannot predict zero values but only small positive values which get rounded to zero.
+In \ref{fig:box distributions models Zim} we again see the boxplot for the summarised error. The ZIM is close to INGARCH, but all three models still lag behind CoDA. In \ref{fig: quantile distributions models Zim} we see again the error measure for each category. While the models perform similar for category 3, the CoDA still outperforms all models for category 4. Here it is worth mentioning, that category 4 is the main category with the most amount of zeros in our data. It should be pointed out here again, that all models don't predict integer values, but rather real values which then get rounded to the nearest integer value. Especially CoDA cannot predict zero values but only small positive values which get rounded to zero.
 
 \begin{figure}[htb!]
 \centering
@@ -48,7 +48,7 @@ In \ref{fig:box distributions models Zim} we again see the boxplot for the summa
 \label{fig: quantile distributions models Zim}
 \end{subfigure}
 \hfill
-\caption{Comparison of the different models }
+\caption{Comparison of the different models for main categories 3 and 4}
 \label{fig:models Comp2}
 \end{figure}
 

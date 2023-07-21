@@ -4,8 +4,7 @@
 \section{GARCH Models}
 \label{sec: Garch Models}
 
-INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle, see \textcite{Engle:1982}, in an economic context, model the variance conditional on past values. Since we no longer assume our data to be integer-valued, our time series has the form $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$. Denote again with $\SigA_{k,t}$ the information available at time $t$. Then the ARCH(1) model is given by \textcite{Engle:1982}
-
+INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle, see \textcite{Engle:1982}, in an economic context, model the variance conditional on past values. Since we no longer assume our data to be integer-valued, our time series has the form $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$. Denote again with $\SigA_{k,t}$ the information available at time $t$. Then the ARCH(1) model is given by 
 \begin{equation}
 \begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim N(0,h_{kt}),\\
@@ -14,12 +13,9 @@ h_{kt} = a_0 + a_1 Y_{k,t-1}^2,
 \end{gathered}
 \end{equation}
 %
-with $a_0\geq0$, $a_1>0$. 
+with $a_0\geq0$, $a_1>0$. The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$, where $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ is the parameter vector with $a_p>0$, and $p \in \mathbbm{N}$ is the order of the ARCH process, see \textcite{Engle:1982}. 
 
-The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$, where $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ is the parameter vector with $a_p>0$, and $p \in \mathbbm{N}$ is the order of the ARCH process, see \textcite{Engle:1982}. 
-
-The GARCH model generalises this approach by adding the past variances as another source of information. The GARCH(p,q) model for non-negative parameters $a_0>0$, $\bm{a}=(a_1,\ldots,a_q)^T\geq 0$ and $\bm{b}=(b_1,\ldots,b_p)^T\geq0$ with $p,q \in \mathbbm{N}$, $p\geq0, q>0$ is given by \textcite{Bollerslev:1986}
-
+The GARCH model generalises this approach by adding the past variances as another source of information. The GARCH(p,q) model for non-negative parameters $a_0>0$, $\bm{a}=(a_1,\ldots,a_q)^T\geq 0$ and $\bm{b}=(b_1,\ldots,b_p)^T\geq0$ with $p,q \in \mathbbm{N}$, $p\geq0, q>0$ is given by 
 \begin{equation}
 \begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim N(0,h_{kt}); \forall t \in \mathbbm{N}, \\
@@ -28,7 +24,7 @@ Y_{kt} | \SigA_{k,t-1} \sim N(0,h_{kt}); \forall t \in \mathbbm{N}, \\
 \end{gathered}
 \end{equation}
 %
-Other distributions than the normal distributions can be taken as well. 
+Other distributions than the normal distributions can be taken as well, see \textcite{Bollerslev:1986}. 
 
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: GARCH Parameter Estimation and Forecasting}
@@ -47,7 +43,7 @@ To decide whether to use a GARCH model, one can test for volatility or the valid
 \subsection{Applications}
 \label{sec: Garch Applications}
 
-The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures such as inflation rates but since then have been used in a variety of fields. GARCH models generalised the ARCH model approach to allow the modelling of a more flexible lag structure, see \textcite{Bollerslev:1986}. They have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments, see \textcite{Kreiss:2006}. 
+The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures such as inflation rates but since then have been used in a variety of fields. GARCH models generalised the ARCH model approach to allow the modelling of a more flexible lag structure. They have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments, see \textcite{Bollerslev:1986} and \textcite{Kreiss:2006}. 
 
 Since the ARCH and GARCH models are used to model and forecast volatility or the conditional variance, but not values, we will not use it in our application. In addition, the INGARCH model also accounts for the discrete nature of our data, which makes it the preferred choice. 
 
@@ -62,27 +58,27 @@ Y_{k,t+1}= Y_{kt} + \epsilon_{kt},
 \label{eq: Random Walk Model}
 \end{equation}
  %
-where $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$ is a white noise process with variance $\sigma_k^2 \in \mathbb{R}_+$, see \textcite{Nau:14}. It can be shown easily, that the optimal 1-step ahead forecast with regard to the mean squared error (MSE) is given by
+where $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$ is a white noise process with variance $\sigma_k^2 \in \mathbb{R}_+$. It can be shown easily, that the optimal 1-step ahead forecast with regard to the mean squared error (MSE) is given by
 
 \begin{equation}
 \hat{Y}_{k,t+1}= Y_{kt},
 \label{eq: Random Walk Model Prediction}
 \end{equation}
 %
-where $\hat{Y}_{k,t+1}$ is the predicted value at time $t+1$, see \textcite{Scherrer:2021}. In other words, the predicted value is the last known value.  
+where $\hat{Y}_{k,t+1}$ is the predicted value at time $t+1$. In other words, the predicted value is the last known value, see \textcite{Nau:14} and \textcite{Scherrer:2021}.  
 
 
 \section{Zero-Inflated Models}
 \label{sec: Zim}
 
-Since we encounter a large number of zeros, we also consider zero-inflated models. Zero inflation means that the proportion of observed zeros is bigger than that of the underlying distribution and hence would not be expected. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function, which enables one to explain the large amount of zero values, see \textcite{Zhu:2012}. The probability mass function of a $ZIP(\lambda,\omega)$ distribution for a random variable $Y$ is defined as
+Since we encounter a large number of zeros, we also consider zero-inflated models. Zero inflation means that the proportion of observed zeros is bigger than that of the underlying distribution and hence would not be expected. The idea of zero-inflated models is to add a degenerated distribution with mass at zero to the probability mass function, which enables one to explain the large amount of zero values. The probability mass function of a $ZIP(\lambda,\omega)$ distribution for a random variable $Y$ is defined as
 
 \begin{equation}
 \mathbb{P}(Y=y) = \omega \delta_{y,0}+ (1-\omega) \frac{\lambda^y \exp(-\lambda)}{y!}, \hspace{0.2cm} y \in \mathbb{N}_0,
 \label{eq:ZIP Distribution}
 \end{equation}
 %
-see \textcite{Zhu:2012}, where $0 < \omega < 1$ is the zero-inflation parameter, $\lambda$ is the Poisson parameter and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources, see \textcite{Zhu:2012}. The first part of Equation (\ref{eq:ZIP Distribution}) $\delta_{y,0}$ is the degenerated point mass distribution.
+where $0 < \omega < 1$ is the zero-inflation parameter, $\lambda$ is the Poisson parameter and $\delta_{y,0}$ is the Kronecker delta for which $\delta_{y,0}=1$ if $y=0$ and $\delta_{y,0}=0$ else. This way our zeros can come from two different sources. The first part of Equation (\ref{eq:ZIP Distribution}) $\delta_{y,0}$ is the degenerated point mass distribution, see \textcite{Zhu:2012}.
 
 Let $\SigA_{k,t-1}$ be the $\sigma$-field generated by $\left\{Y_{k,t-1},Y_{k,t-2},\ldots\right\}$. Assume, conditionally on $\SigA_{k,t-1}$, that $Y_{k,1},\ldots,Y_{k,T}$ are independent. Now we can define the zero-inflated Poisson (ZIP) INGARCH(p,q) as
 
@@ -94,16 +90,16 @@ Y_{kt} | \SigA_{k,t-1} \sim ZIP(\lambda_{kt},\omega_k); \forall t \in \mathbb{N}
 \end{gathered}
 \end{equation}
 %
-with $0<\omega_k<1$, $\beta_0>0$, $\beta_i\geq 0$, $\alpha_j \geq 0$ for $i=1,\ldots,p$, $j=1,\ldots,q$, $p\geq 1$, $q\geq 0$, see \textcite{Zhu:2012}. If $\omega_k =0$ then we get the standard INGARCH(p,q) model discussed above. It can be shown that the conditional mean and variance are given by
+with $0<\omega_k<1$, $\beta_0>0$, $\beta_i\geq 0$, $\alpha_j \geq 0$ for $i=1,\ldots,p$, $j=1,\ldots,q$, $p\geq 1$, $q\geq 0$. If $\omega_k =0$ then we get the standard INGARCH(p,q) model discussed above. It can be shown that the conditional mean and variance are given by
 
 \begin{equation}
 \mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_k)\lambda_{kt}, \hspace{1cm} \mathbb{V}[Y_{kt} | \SigA_{k,t-1}] =(1-\omega_k)\lambda_{kt}(1+\omega_k \lambda_{kt}),
 \label{eq:Conditional Mean and Variance ZIP}
 \end{equation}
 %
-which implies $ \mathbb{V}[Y_{kt} | \SigA_{k,t-1}] > \mathbb{E}[Y_{kt} | \SigA_{k,t-1}]$, see \textcite{Zhu:2012}. This means that Model (\ref{eq:ZIP model}) can handle overdispersion in our data. More details about zero-inflated models and especially the zero-inflated INGARCH(p,q) model can be found in \textcite{Zhu:2012}.
+which implies $ \mathbb{V}[Y_{kt} | \SigA_{k,t-1}] > \mathbb{E}[Y_{kt} | \SigA_{k,t-1}]$. This means that Model (\ref{eq:ZIP model}) can handle overdispersion in our data, see \textcite{Zhu:2012}. More details about zero-inflated models and especially the zero-inflated INGARCH(p,q) model can be found in \textcite{Zhu:2012}.
 
-However, due to a lack of available R-packages for zero-inflated Poisson INGARCH models, we use a zero-inflated Poisson autoregressive model. We assume that we have discrete count data $\left\{Y_{kt}\right\}$ which is conditionally $ZIP(\lambda_{kt},\omega_{kt})$ distributed. For the parameters $\lambda_{kt}$ and $\omega_{kt}$, the ZIP autoregressive model is given by \textcite{Yang:2012}
+However, due to a lack of available R-packages for zero-inflated Poisson INGARCH models, we use a zero-inflated Poisson autoregressive model. We assume that we have discrete count data $\left\{Y_{kt}\right\}$ which is conditionally $ZIP(\lambda_{kt},\omega_{kt})$ distributed. For the parameters $\lambda_{kt}$ and $\omega_{kt}$, the ZIP autoregressive model is given by 
 
 \begin{equation}
 \begin{gathered}
@@ -114,7 +110,7 @@ Y_{kt} | \SigA_{k,t-1} \sim ZIP(\lambda_{kt},\omega_{kt}); \forall t \in \mathbb
 \end{gathered}
 \end{equation}
 %
-where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_q)^T$ are the parameters to be estimated and the vectors $\bm{B}^k_t=(b^k_{tj})$ and $\bm{Z}^k_{t}=(z^k_{tj})$ are the explanatory covariates. In Model (\ref{eq:ZIP Autoregressive model}) a logit link function has been used although, it can be replaced with other link functions like the probit or log link. 
+where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_q)^T$ are the parameters to be estimated and the vectors $\bm{B}^k_t=(b^k_{tj})$ and $\bm{Z}^k_{t}=(z^k_{tj})$ are the explanatory covariates. In Model (\ref{eq:ZIP Autoregressive model}) a logit link function has been used although, it can be replaced with other link functions like the probit or log link, see \textcite{Yang:2012}. 
 
 In our case we regress on the past values of our time series. In that case Model (\ref{eq:ZIP Autoregressive model}) becomes
 
@@ -131,9 +127,9 @@ In our case we regress on the past values of our time series. In that case Model
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: ZIM Parameter Estimation and Forecasting}
 
-Parameter estimation for Model (\ref{eq:ZIP Autoregressive model timeseries}) is done with the maximum partial likelihood estimate. However, since there exists no closed form solution, iterative algorithms like the Expectation-Maximisation (EM), Newton-Raphson (NR) or Fisher Scoring (FS) can be used.  Further details can be found in \textcite{Yang:2012}.
+Parameter estimation for Model (\ref{eq:ZIP Autoregressive model timeseries}) is done with the maximum partial likelihood estimate. However, since there exists no closed form solution, iterative algorithms like the Expectation-Maximisation (EM), Newton-Raphson (NR) or Fisher Scoring (FS) can be used, see \textcite{Yang:2012}.  Further details can be found in \textcite{Yang:2012}.
 
-The one step ahead predictor is again given by the conditional expectation $\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_{kt})\lambda_{kt} $ with the estimated coefficients plugged in. 
+The one-step ahead predictor is again given by the conditional expectation $\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_{kt})\lambda_{kt} $ with the estimated coefficients plugged in. 
 
 \section{Log-Linear Models}
 \label{sec: Log-Linear Models}
@@ -148,7 +144,9 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \end{gathered}
 \end{equation}
 %
-The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm, see \textcite{Liboschik:2016,Fokianos:2011}. We consider the log-linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of the definition of the parameter space, Equation (\ref{eq:Ingarch parameter space}), we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative, see \textcite{Fokianos:2011}. However, in the log-linear case we can extend this to
+The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm, see \textcite{Liboschik:2016,Fokianos:2011}. 
+
+We consider the log-linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of the definition of the parameter space, Equation (\ref{eq:Ingarch parameter space}), we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative. However, in the log-linear case we can extend this to
 
 \begin{equation}
 \begin{gathered}
@@ -158,7 +156,7 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \end{gathered}
 \end{equation}
 %
-with $\bm{\eta} \in \mathbb{R}^r$. Additionally, because of the updated definition of the parameter space, Equation (\ref{eq:Parameter Space log-linear}), it also allows for negative autocorrelation, see \textcite{Liboschik:2016}. 
+with $\bm{\eta} \in \mathbb{R}^r$. Additionally, because of the updated definition of the parameter space, see Equation (\ref{eq:Parameter Space log-linear}), it also allows for negative autocorrelation, see \textcite{Liboschik:2016} and \textcite{Fokianos:2011}. 
 
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: Log-Linear Parameter Estimation and Forecasting}
@@ -166,11 +164,11 @@ with $\bm{\eta} \in \mathbb{R}^r$. Additionally, because of the updated definiti
 The parameter estimation for the log-linear model is done similarly to the INGARCH model in Section \ref{sec: Estimation of the Ingarch Model}. Only the parameter space $\Theta$ is different
 
 \begin{equation}
-\Theta = \left\{ \bm{\theta} \in \mathbb{R}^{p+q+r+1}: \abs{\beta_1},\ldots,\abs{\beta_p},\abs{\alpha_1},\ldots,\abs{\alpha_q} < 1, \abs{\sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j } < 1 \right\},
+\Theta = \left\{ \bm{\theta} \in \mathbb{R}^{p+q+r+1}: \abs{\beta_1},\ldots,\abs{\beta_p},\abs{\alpha_1},\ldots,\abs{\alpha_q} < 1, \abs{\sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j } < 1 \right\}.
 \label{eq:Parameter Space log-linear}
 \end{equation}
 %
-see \textcite{Liboschik:2016}. Just like parameter estimation, forecasting is also performed in the same way as the INGARCH model. The optimal one-step ahead prediction with regards to the mean squared error is given by the conditional expectation $\lambda_{k,t+1}=\mathbb{E}\left[Y_{k,t+1} | \SigA_{kt} \right]$. The h-step ahead predictions for $h>1$ are calculated iteratively again, see \textcite{Liboschik:2016}. 
+Just like parameter estimation, forecasting is also performed in the same way as the INGARCH model. The optimal one-step ahead prediction with regards to the mean squared error is given by the conditional expectation $\lambda_{k,t+1}=\mathbb{E}\left[Y_{k,t+1} | \SigA_{kt} \right]$. The h-step ahead predictions for $h>1$ are calculated iteratively again, see \textcite{Liboschik:2016}. 
 
 Log-Linear models are further discussed in \textcite{Fokianos:2011,Woodard:2011,Douc:2013}.
 
@@ -201,11 +199,11 @@ Log-Linear models are further discussed in \textcite{Fokianos:2011,Woodard:2011,
 Autoregressive models of order p (AR(p)) are one of the most simple time series models, which makes them very popular. Assuming again our time series is real-valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$, taking coefficients $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$, called innovations, they are defined as 
 
 \begin{equation}
-Y_{kt} = a_1Y_{k,t-1} + \ldots + a_p Y_{k,t-p} + \epsilon_{kt},
+Y_{kt} = a_1Y_{k,t-1} + \ldots + a_p Y_{k,t-p} + \epsilon_{kt}.
 \label{eq: Ar model}
 \end{equation}
 %
-see \textcite{Scherrer:2021}. If $\left\{ Y_{kt} \right\}$ is stationary, it is an autoregressive process of order p (AR(p) process). The multivariate version for  $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ , also called vectorised autoregressive model (VAR(p)), is defined as 
+If $\left\{ Y_{kt} \right\}$ is stationary, it is an autoregressive process of order p (AR(p) process). The multivariate version for  $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ , also called vectorised autoregressive model (VAR(p)), is defined as 
 
 \begin{equation}
 \bm{Y}_{t} = \bm{a_1 Y_{t-1}}+ \ldots + \bm{a_p Y_{t-p}} + \bm{\epsilon}_{t},
@@ -228,11 +226,11 @@ Like parameter estimation, forecasting is also simple in the AR model. We use th
 with coefficients $\bm{c}_i \in \mathbbm{R}^{K \times K}$. Under some additional assumptions for $\left\{\bm{Y}_t\right\}$, which can be found in chapter 5.1 and 5.2 of \textcite{Scherrer:2021}, it turns out that the optimal one-step ahead prediction is simply
 
 \begin{equation}
-\hat{\bm{Y}}_{t+1} = \bm{a}_1\bm{Y}_{t} + \ldots + \bm{a}_p\bm{Y}_{t-p+1},
+\hat{\bm{Y}}_{t+1} = \bm{a}_1\bm{Y}_{t} + \ldots + \bm{a}_p\bm{Y}_{t-p+1}.
 \label{eq:AR 1step Forecasting}
 \end{equation}
 %
-see \textcite{Scherrer:2021}. So the optimal one step ahead forecast consists exactly of the coefficients of the AR model. For $h>1$, one simply continues recursively, using $\hat{\bm{Y}}_{t+1}$, $\hat{\bm{Y}}_{t+2},\ldots$. Since we normally do not know the exact coefficients $\bm{a}_i$, their estimations $\hat{\bm{a}}_i$ can be plugged into Equation (\ref{eq:AR 1step Forecasting}), see \textcite{Scherrer:2021}. 
+So the optimal one-step ahead forecast consists exactly of the coefficients of the AR model. For $h>1$, one simply continues recursively, using $\hat{\bm{Y}}_{t+1}$, $\hat{\bm{Y}}_{t+2},\ldots$. Since we normally do not know the exact coefficients $\bm{a}_i$, their estimations $\hat{\bm{a}}_i$ can be plugged into Equation (\ref{eq:AR 1step Forecasting}), see \textcite{Scherrer:2021}. 
 
 \subsection{Testing for AR Models}
 \label{sec: Testing for ar models}
@@ -241,7 +239,7 @@ To test whether or not a time series follows an AR(p) process, the estimates of 
 
 The Portmanteau Test tests the null hypothesis $H_0: \mathbbm{E}[\bm{\epsilon}_t \bm{\epsilon}_{t-m}^T]=\bm{0}$, i.e. if the estimated innovations are uncorrelated. Under the assumption that $\left\{\bm{Y}_t\right\}$ is an AR(p) process and an AR(p) model has been fit, the used test statistic converges against a chi-squared distribution, see \textcite{Lütkepohl:2007}. 
 
-The Breusch-Godfrey Test tests if the coefficients $(b_1,\ldots,b_h)$ in the model 
+The Breusch-Godfrey Test tests if the coefficients $(d_1,\ldots,d_h)$ in the model 
 
 \begin{equation}
 \bm{\epsilon}_t = d_1\bm{\epsilon}_{t-1} +\ldots d_h \bm{\epsilon}_{t-h} + \bm{\eta}_t,
@@ -275,12 +273,10 @@ where
 	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second and third moment, 
 	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
 	\item $\alpha_i \in (0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$,
-	\item $\sum_{j=1}^p \alpha_j < 1$,
+	\item $\sum_{j=1}^p \alpha_j < 1$.
 \end{enumerate}
 %
-see \textcite{Silva:2005}. 
-
-The last condition ensures the existence and stationary of the process. 
+The last condition ensures the existence and stationary of the process, see \textcite{Silva:2005}. 
 
 Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then the INAR(p) model is given by
 
@@ -308,16 +304,15 @@ The authors in \textcite{Silva:2005} present two types of forecasting methods fo
 \hat{Y}_{k,n+h} = \mathbb{E}[Y_{k,n+h} | \bm{Y}_k] = \alpha_k^h \left[Y_{kn}- \frac{\lambda_k}{1-\alpha_k} \right] + \frac{\lambda_k}{1-\alpha_k}.
 \label{eq:Forecasting Classic}
 \end{equation}
-
-
-However, this forecast hardly ever produce integer values. One option to counter this problem, is to take the value which minimises the absolute expected error $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$ instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$, see \textcite{Silva:2005,Freeland:2004}. Another option is a Bayesian approach presented in \textcite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha_k,\lambda_k)$ are random, see \textcite{Silva:2005}. Since the complexity of the posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are again given in \textcite{Silva:2005}. The estimator for the conditional expectation is then given by
+%
+However, this forecast hardly ever produces integer values. One option to counter this problem, is to take the value which minimises the absolute expected error $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$ instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$. Another option is a Bayesian approach presented in \textcite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha_k,\lambda_k)$ are random. Since the complexity of the posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are given in \textcite{Silva:2005}. The estimator for the conditional expectation is then given by
 
 \begin{equation}
 \hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_{ki}^m\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_{ki}^h}{1-\alpha_{ki}}\lambda_{ki}\right),
 \label{eq:Forecasting Bayesian}
 \end{equation}
 %
-where $m$ is the sampling size and the pairs $(\alpha_{ki},\lambda_{ki})$ for $i=1,\ldots,m$ and a fixed $k$ with $k=1,\ldots,K$ are the sampled parameters. 
+where $m$ is the sampling size and the pairs $(\alpha_{ki},\lambda_{ki})$ for $i=1,\ldots,m$ and a fixed $k$ with $k=1,\ldots,K$ are the sampled parameters, see \textcite{Silva:2005,Freeland:2004}. 
 
 \subsection{Testing for INAR(1) Models}
 \label{sec:Testing for INAR(1) Models}

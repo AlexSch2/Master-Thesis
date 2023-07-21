@@ -15,14 +15,14 @@ CoDA, which is short for ``Compositional Data Analysis'', works with composition
 	\label{eq:Simplex Definition}
 	\end{equation}
 %
-where $\kappa$ is a positive constant, see \textcite{Kynclova:2015}. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A $D$-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next, we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $b \in \mathbb{R}$ they are defined respectively as 
+where $\kappa$ is a positive constant. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A $D$-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next, we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $b \in \mathbb{R}$ they are defined respectively as 
 
 \begin{equation}
-\textbf{x}\oplus_a \textbf{z} = \ClOp(x_1z_1,x_2z_2,\ldots,x_Dz_D)^T, \hspace{0.5cm} b \odot_a \textbf{x} = \ClOp(x_1^b,x_2^b,\ldots,x_D^b)^T,
+\textbf{x}\oplus_a \textbf{z} = \ClOp(x_1z_1,x_2z_2,\ldots,x_Dz_D)^T, \hspace{0.5cm} b \odot_a \textbf{x} = \ClOp(x_1^b,x_2^b,\ldots,x_D^b)^T.
 \label{eq:Simplex Operationen}
 \end{equation}
 %
-see \textcite{Kynclova:2015}. Since we will use these operations to induce a geometry called the Aitchison geometry, we will mark them with the subscript $a$. Here $\ClOp$ is the closure operation that maps each compositional vector from the real value space $\mathbbm{R}_+^D$ into its representation in $\mathbbm{S}^D$
+Since we will use these operations to induce a geometry called the Aitchison geometry, we will mark them with the subscript $a$. Here $\ClOp$ is the closure operation that maps each compositional vector from the real value space $\mathbbm{R}_+^D$ into its representation in $\mathbbm{S}^D$
 
 \begin{equation}
 \ClOp \left(\bm{x}\right) = \left(\frac{\kappa x_1}{\sum_{i=1}^D x_i},\ldots, \frac{\kappa x_D}{\sum_{i=1}^D x_i}\right)^T.
@@ -51,14 +51,14 @@ In addition, a norm and distance measure can be defined
 \label{eq:Simplex Norm and Distance}
 \end{equation}
 %
-With this, we induced the Aitchison geometry and it allows us to express a composition $\textbf{x} \in \mathbbm{S}^D$ as a perturbation-linear combination of a basis of $\mathbbm{S}^D$.
+With this, we induced the Aitchison geometry and it allows us to express a composition $\textbf{x} \in \mathbbm{S}^D$ as a perturbation-linear combination of a basis of $\mathbbm{S}^D$, see \textcite{Filzmoser:2020} and \textcite{Kynclova:2015}.
 
 However, in order to use standard statistical tools, it is desirable to move from this geometry to the Euclidean real space, see \textcite{Filzmoser:2020}. There are various ways to map the data from the simplex $\mathbbm{S}^D$ to the real space $\mathbb{R}^D$. A review of the most common transformations is provided in the following section.
 
 \section{Common Transformations}
 \label{sec: Common Transformations}
 
-Let $\textbf{x}, \textbf{z} \in \mathbbm{S}^D$ be D-part compositions.
+Let $\textbf{x}, \textbf{z} \in \mathbbm{S}^D$ be $D$-part compositions.
 \subsubsection{alr Coordinates}
 \label{sec:alr Coordinates}
 
@@ -69,7 +69,7 @@ The additive log-ratio (alr) Coordinates are defined as
 \label{eq:alr Coordinates}
 \end{equation}
 %
-see \textcite{Kynclova:2015}, and map the composition $\textbf{x}$ to the real space $\mathbb{R}^D$. They are mainly mentioned for historic purposes since they are an intuitive way of transformation. However, limitations are posed by their dependence on the choice of the denominator $x_k$ and the fact that they are not orthogonal to each other, see \textcite{Filzmoser:2020}. 
+and map the composition $\textbf{x}$ to the real space $\mathbb{R}^D$, see \textcite{Kynclova:2015}. They are mainly mentioned for historic purposes since they are an intuitive way of transformation. However, limitations are posed by their dependence on the choice of the denominator $x_k$ and the fact that they are not orthogonal to each other, see \textcite{Filzmoser:2020}. 
 
 \subsubsection{clr Coefficients}
 \label{sec:clr Coefficients}
@@ -99,23 +99,22 @@ The isometric log-ratio (ilr) are closely related to the clr coefficients. Assum
 \label{eq:ilr Coordinates}
 \end{equation}
 %
-see, \textcite{Kynclova:2015}. In addition to being isometric, the $ilr$ transformation is also isomorph. Let $\textbf{x}, \textbf{z}$ be two compositions and $a, b  \in \mathbbm{R}$. Then,
+In addition to being isometric, the $ilr$ transformation is also isomorph. Let $\textbf{x}, \textbf{z}$ be two compositions and $a, b  \in \mathbbm{R}$. Then
 
 \begin{equation}
 ilr(a \odot_a \textbf{x} \oplus_a b \odot_a \textbf{z}) = a \cdot ilr(\textbf{x}) + b \cdot ilr(\textbf{z}),
 \label{eq:ilr coordinates isomorph}
 \end{equation}
-
 as well as,
 
 \begin{gather}
 \left\langle  \textbf{x},\textbf{z} \right\rangle_a = \left\langle  ilr(\textbf{x}), ilr(\textbf{z}) \right\rangle, \\
 d_a(\textbf{x},\textbf{z}) = d(ilr(\textbf{x}),ilr(\textbf{z})),\\
-\norm{\bm{x}}_a = \norm{ilr(\bm{x})}.
+\norm{\bm{x}}_a = \norm{ilr(\bm{x})},
 \label{eq:ilr coordinates isometric }
 \end{gather}
 %
-From the definition of the ilr coordinates it can be seen, that they can be expressed as a linear combination of the basis induced by the clr coefficients as seen above. Let $\textbf{V}$ be a $D \times (D-1)$ matrix with columns $\textbf{v}_i = clr(\textbf{e}_i)$. For a composition $\textbf{x}$, the vector of ilr coordinates associated with $\textbf{V}$ is given by,
+see \textcite{Kynclova:2015}. From the definition of the ilr coordinates it can be seen, that they can be expressed as a linear combination of the basis induced by the clr coefficients as seen above. Let $\textbf{V}$ be a $D \times (D-1)$ matrix with columns $\textbf{v}_i = clr(\textbf{e}_i)$. For a composition $\textbf{x}$, the vector of ilr coordinates associated with $\textbf{V}$ is given by
 
 \begin{equation}
 \textbf{u}_{\textbf{V}} = ilr_{\textbf{V}}(\textbf{x}) = \textbf{V}^T clr(\textbf{x}) = \textbf{V}^T \log(\textbf{x}). 
@@ -132,16 +131,17 @@ u_j = \sqrt{\frac{D-j}{D-j+1}}\log\left(\frac{x_j}{\sqrt[D-j]{\prod_{l=j+1}^D x_
 \end{gathered}
 \end{equation}
 %
-With this choice, the problem of interpretation, which arises from the relative nature of the compositional data and the dimension of the simplex, can be solved. The part $x_1$ is only contained in $z_1$ and therefore contains all relative information of $x_1$, see \textcite{Filzmoser:2020}. 
+With this choice, the problem of interpretation, which arises from the relative nature of the compositional data and the dimension of the simplex, can be solved. The part $x_1$ is only contained in $z_1$ and therefore contains all relative information of $x_1$, see \textcite{Kynclova:2015} and \textcite{Filzmoser:2020}. 
 
-To transform the data back in the simplex, the inverse transformation is given by, 
+To transform the data back in the simplex, the inverse transformation is given by 
 
 \begin{align}
 x_1 &= \exp\left(\sqrt{\frac{D-1}{D}}u_1\right), \\
 x_i &= \exp\left(- \sum_{j=1}^{i-1}\frac{1}{\sqrt{(D-j+1)(D-j)}}u_j + \sqrt{\frac{D-i}{D-i+1}u_i} \right), \hspace{0.2cm} i=2,\ldots, D-1, \\
-x_D &= \exp\left(- \sum_{j=1}^{D-1} \frac{1}{\sqrt{(D-j+1)(D-j)}}u_j \right).
+x_D &= \exp\left(- \sum_{j=1}^{D-1} \frac{1}{\sqrt{(D-j+1)(D-j)}}u_j \right),
 \label{eq: Inverse Transformation}
 \end{align}
+see \textcite{Kynclova:2015}. 
 
 \section{The VAR Model}
 \label{sec:The VAR Model}
@@ -149,18 +149,20 @@ x_D &= \exp\left(- \sum_{j=1}^{D-1} \frac{1}{\sqrt{(D-j+1)(D-j)}}u_j \right).
 Since we have established the basic setting, we can now introduce compositional time series (CTS). A CTS $\left\{\bm{x}_t:t=1,\ldots,n \right\}$ can be defined as a series where $\bm{x}_t = \left(x_{1t},\ldots,x_{Dt}\right)^T \in \mathbbm{S}^D$. They are thus characterised by their positive components which sum up to a constant $\kappa_t$ for each point in time $t=1,\ldots,n$ 
 
 \begin{equation}
-\sum_{i=1}^D x_{it} = \kappa_t, \hspace{0.5cm} x_i > 0, i=1,\ldots D \hspace{0.1cm}; t=1,\ldots, n. 
+\sum_{i=1}^D x_{it} = \kappa_t, \hspace{0.5cm} x_i > 0, i=1,\ldots D \hspace{0.1cm}; t=1,\ldots, n.
 \label{eq:CTS characterisation}
 \end{equation} 
 %
-Since we do not assume our data to be real-valued we have $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ for fridge $f$. Further, assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a $K$-dimensional compositional vector measured at time $t, t=1,\ldots,T$ and let $\textbf{u}_t = ilr_{\bm{V}}(\bm{Y}_t)$ be its $ilr$ transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by
+Since we do not assume our data to be integer-valued, we have $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ for fridge $f$. Further, assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a $K$-dimensional compositional vector measured at time $t, t=1,\ldots,T$ and let $\textbf{u}_t = ilr_{\bm{V}}(\bm{Y}_t)$ be its $ilr$ transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by
 
 \begin{equation}
 \textbf{u}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{u}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{u}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{u}_{t-p} + \bm{\epsilon}_{t},
 \label{eq:VAR model}
 \end{equation}
 %
-see \textcite{Kynclova:2015}, where $\textbf{c}_{\textbf{V}} \in \mathbb{R}^{K-1}$ is a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{(K-1) \times (K-1)}$ are parameter matrices and $\left\{\bm{\epsilon}_t\right\}$ is a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. The observation $\textbf{u}_t$ therefore depends on the p past observations $\textbf{u}_{t-1},\ldots,\textbf{u}_{t-p}$. It can be shown, that two VAR(p) models resulting from different $ilr$ transformations are compositionally equivalent, which means that the same predictions are obtained, see \textcite{Kynclova:2015}. 
+where $\textbf{c}_{\textbf{V}} \in \mathbb{R}^{K-1}$ is a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{(K-1) \times (K-1)}$ are parameter matrices and $\left\{\bm{\epsilon}_t\right\}$ is a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. The observation $\textbf{u}_t$ therefore depends on the p past observations $\textbf{u}_{t-1},\ldots,\textbf{u}_{t-p}$, see \textcite{Kynclova:2015}. 
+
+It can be shown, that two VAR(p) models resulting from different $ilr$ transformations are compositionally equivalent, which means that the same predictions are obtained, see \textcite{Kynclova:2015}. 
 
 
 %\subsubsection{Estimation and Forecasting of the VAR Model}
@@ -187,7 +189,7 @@ Estimation and forecasting of Model (\ref{eq:VAR model}) can be done with the me
 
 As we have seen, the focus in compositional data analysis lies in the relative information encoded in the observations. However, as is often the case in practice, the absolute information is of interest as well. To retain this information, usually two practices are used. First, for a vector $\bm{x} \in \mathbb{R}^D_+$ the component wise logarithm $\log(\bm{x})$ is considered. Second, the total sum, or some other function, of $\bm{x}$ is added as an additional variable, see \textcite{Pawlowsky:2013}. Here, we will dive deeper into the second method mentioned. An overview over the first method can be found in \textcite{Pawlowsky:2013}. 
 
-Let $\bm{x} \in \mathbb{R}^D_+$ be a positive vector and $\ClOp(\bm{x})$ the projection onto $\mathbbm{S}^D$. Further, take a function $t:\mathbb{R}^D_+ \longrightarrow \mathbb{R}_+$ (i.e. the sum, product,...). Then define the product space  $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^D$ as the space of all possible elements $(t(\bm{x}),\ClOp(\bm{x}))^T$, see \textcite{Pawlowsky:2013}. To define a $D$-dimensional Euclidean vector space structure on $\Tsp$, we define an Abelian inner group operation, an external multiplication, and an inner product, see \textcite{Pawlowsky:2013}. However, first we need to induce the Euclidean structure on $\mathbb{R}_+^D$ with the same operations. For $\bm{x},\bm{y} \in \mathbbm{R}_+^D$ and $\alpha \in \mathbbm{R}$ define the Abelian inner group operation, the external multiplication, and an inner product respectively as 
+Let $\bm{x} \in \mathbb{R}^D_+$ be a positive vector and $\ClOp(\bm{x})$ the projection onto $\mathbbm{S}^D$. Further, take a function $t:\mathbb{R}^D_+ \longrightarrow \mathbb{R}_+$ (i.e. the sum, product,...). Then define the product space  $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^D$ as the space of all possible elements $(t(\bm{x}),\ClOp(\bm{x}))^T$. To define a $D$-dimensional Euclidean vector space structure on $\Tsp$, we define an Abelian inner group operation, an external multiplication, and an inner product. However, first we need to induce the Euclidean structure on $\mathbb{R}_+^D$ with the same operations. For $\bm{x},\bm{y} \in \mathbbm{R}_+^D$ and $\alpha \in \mathbbm{R}$ define the Abelian inner group operation, the external multiplication, and an inner product respectively as 
 
 \begin{gather}
 \bm{x} \oplus_+ \bm{y}= (x_1\cdot y_1,\ldots,x_D \cdot y_D)^T, \label{eq:oplus on Rdplus} \\
@@ -196,7 +198,7 @@ Let $\bm{x} \in \mathbb{R}^D_+$ be a positive vector and $\ClOp(\bm{x})$ the pro
 \label{eq:innerproduct on Rdplus}
 \end{gather}
 %
-see, \textcite{Pawlowsky:2013}. Here, $\left\langle ,\right\rangle$ denotes the usual Euclidean inner product on $\mathbbm{R}^D$. 
+Here, $\left\langle ,\right\rangle$ denotes the usual Euclidean inner product on $\mathbbm{R}^D$, see \textcite{Pawlowsky:2013}. 
 
 Now we can define for $\tilde{\bm{x}},\tilde{\bm{y}} \in \Tsp$ and $\alpha \in \mathbbm{R}$ the Abelian inner group operation as 
 
@@ -212,7 +214,7 @@ and the external multiplication as
 \label{eq:external multiplication}
 \end{equation}
 %
-where $\oplus_a$ and $\odot_a$ are the perturbation and power transformation defined in Equation (\ref{eq:Simplex Operationen}) and $\oplus_+$ and $\odot_+$ the respective operations defined for $\mathbbm{R}_+$ (\ref{eq:oplus on Rdplus})(\ref{eq:otimes on Rdplus}).
+where $\oplus_a$ and $\odot_a$ are the perturbation and power transformation defined in Equation (\ref{eq:Simplex Operationen}) and $\oplus_+$ and $\odot_+$ the respective operations defined for $\mathbbm{R}_+$ (\ref{eq:oplus on Rdplus})(\ref{eq:otimes on Rdplus}), see \textcite{Pawlowsky:2013}.
 
 The inner product is defined as 
 
@@ -230,7 +232,7 @@ d_T^2(\tilde{\bm{x}},\tilde{\bm{y}}) = d_+^2(t(\bm{x}),t(\bm{y})) + d_a^2(\ClOp(
 \label{eq:distance Tspace}
 \end{gather}
 %
-with $d_+^2(\bm{x},\bm{y}) = d(\log(\bm{x}),\log(\bm{y}))$ and $d$ is the Euclidean distance. 
+with $d_+^2(\bm{x},\bm{y}) = d(\log(\bm{x}),\log(\bm{y}))$ and $d$ is the Euclidean distance, see \textcite{Pawlowsky:2013}. 
 
 To ensure that the operations performed on $\ClOp(\bm{x})$ are compatible with the ones performed on $\Tsp$ we need to impose some conditions on the function $h:\mathbbm{R}_+^D \rightarrow \Tsp$, $h(\bm{x})=(t(\bm{x}),\ClOp(\bm{x}))^T$. First, the function $h$ needs to be a one-to-one function since otherwise information could be lost by applying $h$ or $h^{-1}$. Since we can write $\bm{x} \in \mathbbm{R}_+^D$ as $\bm{x} = \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x})$, the function $t$ must be related to the sum of the components. This allows the reconstruction of $\bm{x}$ from the composition and total. To see this, write $ \frac{\sum_{i=1}^D x_i}{\kappa} \cdot \ClOp(\bm{x}) = h^{-1}((t(\bm{x}),\ClOp(\bm{x}))^T)$, see \textcite{Pawlowsky:2013}. 
 
@@ -246,11 +248,11 @@ This means for the function $t$ that
 
 \begin{gather}
 t(\bm{x} \oplus_+ \bm{y}) = t(\bm{x}) \cdot t(\bm{y}), \\
-t(\alpha \odot_+ \bm{x}) = (t(\bm{x}))^{\alpha}. 
+t(\alpha \odot_+ \bm{x}) = (t(\bm{x}))^{\alpha}.
 \label{eq:Vector Space Properties for t}
 \end{gather}
 %
-In \textcite{Pawlowsky:2013} the authors show that $h_s=((t_s(\bm{x}),\ClOp(\bm{x}))^T)$ with $t_s(\bm{x}) = \sum_{i=1}^D x_i$ is a one-to-one function, but not compatible with $\oplus_+,\odot_+$ and $\oplus_T,\odot_T$. However, as $h_s$ is a one-to-one function between $\mathbbm{R}_+^D$ and $\Tsp$, there exists a Euclidean structure in $\mathbbm{R}_+^D$ that is isometric to the one in $\Tsp$, see \textcite{Pawlowsky:2013}. The vector space operations can be defined as
+In \textcite{Pawlowsky:2013} the authors show that $h_s=((t_s(\bm{x}),\ClOp(\bm{x}))^T)$ with $t_s(\bm{x}) = \sum_{i=1}^D x_i$ is a one-to-one function, but not compatible with $\oplus_+,\odot_+$ and $\oplus_T,\odot_T$. However, as $h_s$ is a one-to-one function between $\mathbbm{R}_+^D$ and $\Tsp$, there exists a Euclidean structure in $\mathbbm{R}_+^D$ that is isometric to the one in $\Tsp$. The vector space operations can be defined as
 
 \begin{gather}
 \bm{x} \oplus_{+s} \bm{y} = h_s^{-1}(\tilde{\bm{x}}) \oplus_T  h_s^{-1}(\tilde{\bm{y}}), \\
@@ -259,7 +261,7 @@ d_{+s}^2(\bm{x},\bm{y}) = d_T^2(h_s(\bm{x},\bm{y})),
 \label{eq:Vector Space Operations sum}
 \end{gather}
 %
-where $\oplus_{+s}$ and $\odot_{+s}$ are the new operations in $\mathbbm{R}_+^D$ that are compatible with the operations in $\Tsp$ and $d^2$ is the squared distance in $\Tsp$. 
+where $\oplus_{+s}$ and $\odot_{+s}$ are the new operations in $\mathbbm{R}_+^D$ that are compatible with the operations in $\Tsp$ and $d^2$ is the squared distance in $\Tsp$, see \textcite{Pawlowsky:2013}. 
 
 With the structure established, we can model the relative structure and total sum in one model.  We have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=(t(\bm{Y}_t),\ClOp(\bm{Y}_t))^T$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr_{\bm{V}}(\bm{Y}_t))^T$ take the $ilr$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices and $\left\{\bm{\epsilon}_t\right\}$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. Then we get the model 
 
@@ -270,7 +272,7 @@ With the structure established, we can model the relative structure and total su
 %
 In our application, we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t)=\log(\sum_{k=1}^K Y_{kt})$ since we are interested in the total sum at time $t$. The logarithmic sum is a popular choice in the time series context as it prevents the sum of being too big, see \textcite{Kynclova:2015}. The estimation of Model (\ref{eq:VAR model Tspace}) is carried out analogous to \ref{sec: AR Estimation and Forecasting}. 
 
-\section{Zero-Handling}
+\section{Zero Handling}
 \label{sec: Zero-Handling}
 
 As we can see in the definition of the Simplex (\ref{eq:Simplex Definition}), a compositional vector can only consist of positive parts and since we have a considerable amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data but first, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them to perform compositional data analysis. In our data, we have essential zeros. In the following we summarise the methods presented in \textcite{Lubbe:2021} and \textcite{Josep:2003}. 
@@ -295,8 +297,8 @@ Additionally \textcite{Josep:2003} mention two other methods. First, the Additiv
 \begin{equation}
 r_j = 
 \begin{cases}
-\frac{\delta(m+1)(D-m)}{D^2} & \text{,if } x_j=0, \\
-x_j - \frac{\delta(m+1)m}{D^2} & \text{,if } x_j>0.
+\frac{\delta(m+1)(D-m)}{D^2}, & \text{if } x_j=0, \\
+x_j - \frac{\delta(m+1)m}{D^2}, & \text{if } x_j>0,
 \end{cases}
 \label{eq:additive replacement strategy}
 \end{equation}
@@ -308,21 +310,21 @@ As we can see in (\ref{eq:additive replacement strategy}), both zero and non-zer
 	\item The replacement value $r_j$ depends on both, the amount of zeros $m$ and the dimension $D$.
 	\item For two vectors $\bm{x},\bm{y} \in \mathbbm{S}^D$ with common zeros, i.e. $x_j= 0 \leftrightarrow y_j=0, j=1,\ldots,D$, their sub compositions $\bm{x}_s,\bm{y}_s$  on their non-zero parts and their replacements $\bm{r}^x,\bm{r}^y$, the Aitchison distance is not preserved $d_a(\bm{r}^x,\bm{r}^y) \neq d_a(\bm{x}_s,\bm{y}_s)$. 
 	\item Ratios are not preserved. If $\bm{x}$ has more than one zero, then $\frac{r_j}{r_k} \neq \frac{x_j}{x_k}$ for $x_j,x_k > 0$.
-	\item The value $\frac{r_j}{r_k}$ depends on $\delta$. Therefore, the covariance structure of the sub compositions of the non-zero parts is not preserved, see \textcite{Josep:2003}.
+	\item The value $\frac{r_j}{r_k}$ depends on $\delta$. Therefore, the covariance structure of the sub compositions of the non-zero parts is not preserved, 
 \end{enumerate}
-
+see \textcite{Josep:2003}. 
 Second, the Simple Replacement Strategy, which formalises the procedure of replacing the zeros in $\bm{x}$ with a small positive value $\delta$, obtaining a strictly positive vector $\bm{w} \in \mathbbm{R}_+$ and applying the closure operation $\bm{r}=\ClOp(\bm{w})$
 
 \begin{equation}
 r_j = 
 \begin{cases}
-\frac{\kappa}{\kappa + \sum_{i| x_i=0}\delta_i } \delta_j & \text{,if } x_j=0, \\
-\frac{\kappa}{\kappa + \sum_{i| x_i=0}\delta_i } x_j & \text{,if } x_j>0.
+\frac{\kappa}{\kappa + \sum_{i| x_i=0}\delta_i } \delta_j, & \text{if } x_j=0, \\
+\frac{\kappa}{\kappa + \sum_{i| x_i=0}\delta_i } x_j, & \text{if } x_j>0.
 \end{cases}
 \label{eq:simple replacement strategy}
 \end{equation}
 %
-This method depends again on $\delta_j$ and the number of zeros $m$. 
+This method depends again on $\delta_j$ and the number of zeros $m$, see \textcite{Josep:2003}. 
 
 Third, which is the main result of \textcite{Josep:2003}, is the multiplicative replacement strategy. The proposed replacement is 
 
@@ -335,7 +337,7 @@ r_j =
 \label{eq:multiplicative replacement strategy}
 \end{equation}
 %
-where $\delta_j$ is the imputed value. It has the following properties, see \textcite{Josep:2003} 
+where $\delta_j$ is the imputed value. It has the following properties 
 
 \begin{enumerate}
 	\item It is a more intuitive approach. If $\delta_j$ is close to the actual censored value, then $\bm{r}$ recovers the true composition. Further it does not depend on the number of zeros $m$ or the dimension $D$. 
@@ -346,24 +348,25 @@ where $\delta_j$ is the imputed value. It has the following properties, see \tex
 		\item Power transformation Invariance: $\forall \alpha \in \mathbbm{R}: (\alpha \odot_a \bm{r})_s = (\alpha \odot_a \bm{x})_s$. 
 	\end{itemize}
 	\item Ratios are preserved, which implies that the covariance structure for non-zero components is preserved. For  $x_j,x_k >0$ it holds $\frac{r_j}{r_k} = \frac{x_j}{x_k}$. 
-	\item Let again $\bm{x},\bm{y} \in \mathbbm{S}^D$ be two vectors with common zeros and their replacements $\bm{r}^x,\bm{r}^y$ which were obtained with the same imputation $\delta_j$. Then it holds $\frac{r^x_j}{r^y_j}=\frac{x_j}{y_j}$ for $x_j,y_j>0$ and $d_a(\bm{r}^x,\bm{r}^y)$ does not depend on the imputed values.
+	\item Let again $\bm{x},\bm{y} \in \mathbbm{S}^D$ be two vectors with common zeros and their replacements $\bm{r}^x,\bm{r}^y$ which were obtained with the same imputation $\delta_j$. Then it holds $\frac{r^x_j}{r^y_j}=\frac{x_j}{y_j}$ for $x_j,y_j>0$ and $d_a(\bm{r}^x,\bm{r}^y)$ does not depend on the imputed values,
 \end{enumerate}
+see \textcite{Josep:2003}.
 
 Another method proposed in \textcite{Lubbe:2021} is to replace rounded zeros with values drawn from a continuous uniform distribution $U(0.1\cdot DL,DL)$. Setting the lower limit to $0.1\cdot DL$ makes sure that the values are not getting too close to zero and not using a constant prevents underestimation of the variability. They further present the R-package \textit{zCompositions} by \textcite{Palarea-Albaladejo:2015}. 
 
-The authors in \textcite{Palarea-Albaladejo:2015} focus on the case of rounded zeros which can be seen as left censored data. Their package includes some more advanced methods which are based on Markov Chain Monte Carlo (MCMC), the EM algorithm or multiple imputation to perform imputation. They assume the data is left-censored, or Type 1 censored, and follows a multivariate normal distribution in $\mathbbm{R}^D$. We review some of their methods presented and refer for more details to \textcite{Palarea-Albaladejo:2015}.
+The authors in \textcite{Palarea-Albaladejo:2015} focus on the case of rounded zeros which can be seen as left censored data. Their package includes some more advanced methods which are based on Markov Chain Monte Carlo (MCMC), the EM-algorithm or multiple imputation to perform imputation. They assume the data is left-censored, or Type 1 censored, and follows a multivariate normal distribution in $\mathbbm{R}^D$. We review some of their methods presented and refer for more details to \textcite{Palarea-Albaladejo:2015}.
 
 \subsubsection{EM-based algorithm}
-\label{sec:EM Algorithm}
+\label{sec:EM-algorithm}
 
-The Expectation-Maximisation (EM) algorithm of \textcite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses the information in the covariance structure to conditionally estimate the censored values, see \textcite{Palarea-Albaladejo:2015}. Given a censoring pattern with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components of a composition $\bm{x}$, the EM-algorithm consists of two steps. At the t-th iteration
+The Expectation-Maximisation (EM) algorithm of \textcite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses the information in the covariance structure to conditionally estimate the censored values. Given a censoring pattern with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components of a composition $\bm{x}$, the EM-algorithm consists of two steps. At the t-th iteration
 
 \begin{enumerate}
 	\item E-Step: Given a parameter estimate $\hat{\bm{\theta}}^{(t)}$, compute $\mathbbm{E}[\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\bm{\theta}}^{(t)}]$.
 	\item M-Step: Compute a new estimate $\hat{\bm{\theta}}^{(t+1)}$ based on $[\hat{\bm{x}}_{non},\bm{x}_{obs}]$.
 \end{enumerate}
-
-Here, $DL$ is the mapped censoring threshold, see \textcite{Palarea-Albaladejo:2015}. Assuming a multivariate normal distribution, the conditional expected value of $\bm{x}_{non}$ at step $t$ is given by
+%
+Here, $DL$ is the mapped censoring threshold. Assuming a multivariate normal distribution, the conditional expected value of $\bm{x}_{non}$ at step $t$ is given by
 
 \begin{equation}
 \hat{\bm{x}}_{non}^{(t)^T} = \bm{x}_{obs}^T\hat{\bm{\beta}}^{(t)} - \hat{\sigma}^{(t)}\hat{\lambda}^{(t)},
@@ -378,13 +381,13 @@ As seen, an initial estimation is required to kick start the iteration. This can
 \subsubsection{MCMC data augmentation}
 \label{sec:MCMC data augmentation}
 
-The Markov Chain Monte Carlo (MCMC) algorithm can be seen as the Bayesian counter part to the EM algorithm. While, with the use of priors, external information can be incorporated, in general, non-informative priors are used. With the same notation as above, the algorithm consists of two steps again
+The Markov Chain Monte Carlo (MCMC) algorithm can be seen as the Bayesian counter part to the EM-algorithm. While, with the use of priors, external information can be incorporated, in general, non-informative priors are used. With the same notation as above, the algorithm consists of two steps again
 
 \begin{enumerate}
 	\item Imputation-Step: Given $\hat{\bm{\theta}}_t$ , simulate from $\mathbb{P}(\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\bm{\theta}}_t)$.
 	\item Posterior-Step: Generate $\hat{\bm{\theta}}_{t+1}$ by simulating from $\mathbb{P}(\bm{\theta}|\hat{\bm{x}}_{non},\bm{x}_{obs})$. 
 \end{enumerate}
-
+%
 In the imputation step, the value $\hat{\bm{x}}_{non}$ is drawn from the conditional, right-truncated normal distribution with estimated mean $\bm{x}_{obs}^T\hat{\beta}$, variance $\hat{\sigma}^2$ and truncation point given by $DL$. The posterior step simulates the parameter $\bm{\theta}=(\bm{\mu},\bm{\Sigma})$ where $\bm{\Sigma}$ is the covariance matrix. This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement, see \textcite{Palarea-Albaladejo:2015}. %The posterior step simulates the parameters $\theta = (\mu,\Sigma)$, where $\Sigma$ denotes the covariance matrix from the data posterior distribution.
 
 
@@ -395,19 +398,19 @@ A method for count data is the Bayesian-multiplicative replacement. For multivar
 
 
 \begin{equation}
-\mathbbm{E}[\pi_j|x_j=0]=t_j \frac{s}{n+s},
+\mathbbm{E}[\pi_j|x_j=0]=t_j \frac{s}{n+s}.
 \label{eq:BMR}
 \end{equation}
 %
-see \textcite{Palarea-Albaladejo:2015}. Depending on the settings for $s$ and $\bm{t}$ and based on (\ref{eq:BMR}), the imputation can be performed by geometric Bayesian multiplicative (BM), square root BM or Bayes–Laplace, see \textcite{Palarea-Albaladejo:2015}. The details of those methods can be found in \textcite{Fernandez:2015}. 
+Depending on the settings for $s$ and $\bm{t}$ and based on (\ref{eq:BMR}), the imputation can be performed by geometric Bayesian multiplicative (BM), square root BM or Bayes–Laplace, see \textcite{Palarea-Albaladejo:2015}. The details of those methods can be found in \textcite{Fernandez:2015}. 
 
 
 \subsection{Essential Zeros}
 \label{sec: Essential Zeros}
 
-The case of essential zeros is not as straightforward because zero is the true value of the observation. In \textcite{Aitchison:2003}, the authors question the experimental design in case of many essential zeros. They point out to overly fine division of the data or the insignificance of the category as possible design faults. A solution in that case would be the amalgamation of categories with low counts. Further, they also introduce a two stage model. The first stage models the appearance of essential zeros, while in the second stage the non zero components are generated. The maximum likelihood estimates of the parameters are suggested to be done via an MCMC algorithm. After this is done, hypothesis testing and statistical analysis can be performed. 
+The case of essential zeros is not as straightforward because zero is the true value of the observation. In \textcite{Aitchison:2003}, the authors question the experimental design in case of many essential zeros. They point out to overly fine division of the data or the insignificance of the category as possible design faults. A solution in that case would be the amalgamation of categories with low counts. Further, they also introduce a two stage model. The first stage models the appearance of essential zeros, while in the second stage the non-zero components are generated. The maximum likelihood estimates of the parameters are suggested to be done via an MCMC algorithm. After this is done, hypothesis testing and statistical analysis can be performed, see \textcite{Aitchison:2003}. 
 
-A vector space approach for the simplex is presented in \textcite{Boogaart:2006} and extended in the R-package \textit{compositions}, see \textcite{Compositions:2023}. The idea is based on the clr coefficients (\ref{eq:clr Coefficients}) and the spanned subspace. Let M contain the indices of the missing parts. Then according to \textcite{Egozcue:2005}, a subcomposition can be seen as a projection of the $clr$ transformed composition into the orthogonal complement of the vectors $\left\{\bm{w}_i: i \in M\right\}$, with $\bm{w}_i = \bm{e}_i - \frac{1}{D}\bm{1} \in V$ and $V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$ where $\bm{e}_i$ are the unit vectors and $\bm{1}=(1,\ldots,1)^T \in \mathbbm{R}^D$. Hence, one only observes a projection of the true composition. Let $P_M$ be the projection onto the orthogonal complement of $\left\{\bm{w}_i: i \in M\right\}$ and $\bm{x}$ a composition with zeros. Then the idea is to represent the information of $\bm{x}$ by the projected values $P_M(clr(\bm{x}))$ and $P_M$ itself, see \textcite{Boogaart:2006}. If $M^C$ denotes the complement of M, so the indices of the non-zero parts, and $\bm{x}_s$ is the sub composition of $\bm{x}$ of $M^C$ then for this sub composition it holds 
+A vector space approach for the simplex is presented in \textcite{Boogaart:2006} and extended in the R-package \textit{compositions}, see \textcite{Compositions:2023}. The idea is based on the clr coefficients (\ref{eq:clr Coefficients}) and the spanned subspace. Let M contain the indices of the missing parts. Then according to \textcite{Egozcue:2005}, a subcomposition can be seen as a projection of the $clr$ transformed composition into the orthogonal complement of the vectors $\left\{\bm{w}_i: i \in M\right\}$, with $\bm{w}_i = \bm{e}_i - \frac{1}{D}\bm{1} \in V$ and $V = \left\{\textbf{w} \in \mathbb{R}^D: \sum_{i=1}^D w_i=0\right\} \subset \mathbb{R}^D$ where $\bm{e}_i$ are the unit vectors and $\bm{1}=(1,\ldots,1)^T \in \mathbbm{R}^D$. Hence, one only observes a projection of the true composition. Let $P_M$ be the projection onto the orthogonal complement of $\left\{\bm{w}_i: i \in M\right\}$ and $\bm{x}$ a composition with zeros. Then the idea is to represent the information of $\bm{x}$ by the projected values $P_M(clr(\bm{x}))$ and $P_M$ itself. If $M^C$ denotes the complement of M, so the indices of the non-zero parts, and $\bm{x}_s$ is the sub composition of $\bm{x}$ of $M^C$ then for this sub composition it holds 
 
 \begin{equation}
 P_M(clr(\bm{x}))_i =

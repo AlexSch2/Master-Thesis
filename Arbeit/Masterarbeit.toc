@@ -15,7 +15,7 @@
 \contentsline {section}{\numberline {2.2}INGARCH Model}{7}{section.2.2}%
 \contentsline {subsubsection}{\nonumberline Parameter Estimation and Forecasting}{8}{subsubsection*.9}%
 \contentsline {subsection}{\numberline {2.2.1}Multivariate INGARCH Model}{9}{subsection.2.2.1}%
-\contentsline {section}{\numberline {2.3}GARCH Models}{11}{section.2.3}%
+\contentsline {section}{\numberline {2.3}GARCH Models}{12}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Parameter Estimation and Forecasting}{12}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Testing for GARCH Models}{13}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Applications}{13}{subsection.2.3.3}%
@@ -41,11 +41,11 @@
 \contentsline {subsubsection}{\nonumberline ilr Coordinates}{26}{subsubsection*.15}%
 \contentsline {section}{\numberline {3.4}The VAR Model}{27}{section.3.4}%
 \contentsline {section}{\numberline {3.5}$\mathcal {T}$-Spaces}{28}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Zero-Handling}{30}{section.3.6}%
+\contentsline {section}{\numberline {3.6}Zero Handling}{31}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Rounded Zeros}{31}{subsection.3.6.1}%
-\contentsline {subsubsection}{\nonumberline EM-based algorithm}{33}{subsubsection*.17}%
+\contentsline {subsubsection}{\nonumberline EM-based algorithm}{34}{subsubsection*.17}%
 \contentsline {subsubsection}{\nonumberline MCMC data augmentation}{34}{subsubsection*.19}%
-\contentsline {subsubsection}{\nonumberline Bayesian-multiplicative replacement}{34}{subsubsection*.21}%
+\contentsline {subsubsection}{\nonumberline Bayesian-multiplicative replacement}{35}{subsubsection*.21}%
 \contentsline {subsection}{\numberline {3.6.2}Essential Zeros}{35}{subsection.3.6.2}%
 \contentsline {chapter}{\numberline {4}Application}{37}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Model Specifications}{37}{section.4.1}%
