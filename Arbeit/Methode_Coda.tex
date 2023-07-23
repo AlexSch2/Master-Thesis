@@ -9,7 +9,7 @@ Another way to see our data is as a compositional time series. Compositional dat
 \label{sec: Coda Preliminaries}
 The basis of this section is given by \textcite{Kynclova:2015}, \textcite{Egozcue:2003} and \textcite{Filzmoser:2020}.
 
-CoDA, which is short for ``Compositional Data Analysis'', works with compositional data. The key to compositional data analysis is the fact that only the relative relation of the parts to each other is important. To define compositional data, we first need to define the $(D-1)$-dimensional simplex,
+CoDA, which is short for ``Compositional Data Analysis'', works with compositional data. The key to compositional data analysis is the fact that only the relative relation of the parts to each other is important. To define compositional data, we first need to define the $(D-1)$-dimensional simplex
 	\begin{equation}
 	\mathbbm{S}^D = \left\{(x_1,\ldots, x_D)^T: x_i > 0, i =1,\ldots,D; \sum_{i=1}^{D}x_i=\kappa  \right\},
 	\label{eq:Simplex Definition}
@@ -153,14 +153,14 @@ Since we have established the basic setting, we can now introduce compositional 
 \label{eq:CTS characterisation}
 \end{equation} 
 %
-Since we do not assume our data to be integer-valued, we have $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ for fridge $f$. Further, assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a $K$-dimensional compositional vector measured at time $t, t=1,\ldots,T$ and let $\textbf{u}_t = ilr_{\bm{V}}(\bm{Y}_t)$ be its $ilr$ transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by
+Since we do not assume our data to be integer-valued, we have $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ for fridge $f$. Further, assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a $K$-dimensional compositional vector measured at time $t=1,\ldots,T$ and let $\textbf{u}_t = ilr_{\bm{V}}(\bm{Y}_t)$ be its $ilr$ transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by
 
 \begin{equation}
 \textbf{u}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{u}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{u}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{u}_{t-p} + \bm{\epsilon}_{t},
 \label{eq:VAR model}
 \end{equation}
 %
-where $\textbf{c}_{\textbf{V}} \in \mathbb{R}^{K-1}$ is a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{(K-1) \times (K-1)}$ are parameter matrices and $\left\{\bm{\epsilon}_t\right\}$ is a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. The observation $\textbf{u}_t$ therefore depends on the p past observations $\textbf{u}_{t-1},\ldots,\textbf{u}_{t-p}$, see \textcite{Kynclova:2015}. 
+where $\textbf{c}_{\textbf{V}} \in \mathbb{R}^{K-1}$ is a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{(K-1) \times (K-1)}$ are parameter matrices, and $\left\{\bm{\epsilon}_t\right\}$ is a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. The observation $\textbf{u}_t$ therefore depends on the p past observations $\textbf{u}_{t-1},\ldots,\textbf{u}_{t-p}$, see \textcite{Kynclova:2015}. 
 
 It can be shown, that two VAR(p) models resulting from different $ilr$ transformations are compositionally equivalent, which means that the same predictions are obtained, see \textcite{Kynclova:2015}. 
 
@@ -223,7 +223,7 @@ The inner product is defined as
 \label{eq:inner product Tspace}
 \end{equation}
 %
-where $\left\langle ,\right\rangle_+$ is the inner product in $\mathbbm{R}_+$, and $\left\langle ,\right\rangle_a$ is the Aitchison inner product defined in (\ref{eq:Aitchon inner product}), see \textcite{Pawlowsky:2013}.
+where $\left\langle ,\right\rangle_+$ is the inner product in $\mathbbm{R}_+$ and $\left\langle ,\right\rangle_a$ is the Aitchison inner product defined in (\ref{eq:Aitchon inner product}), see \textcite{Pawlowsky:2013}.
 
 Further we can define a distance on $\Tsp$ with 
 
@@ -263,7 +263,7 @@ d_{+s}^2(\bm{x},\bm{y}) = d_T^2(h_s(\bm{x},\bm{y})),
 %
 where $\oplus_{+s}$ and $\odot_{+s}$ are the new operations in $\mathbbm{R}_+^D$ that are compatible with the operations in $\Tsp$ and $d^2$ is the squared distance in $\Tsp$, see \textcite{Pawlowsky:2013}. 
 
-With the structure established, we can model the relative structure and total sum in one model.  We have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=(t(\bm{Y}_t),\ClOp(\bm{Y}_t))^T$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr_{\bm{V}}(\bm{Y}_t))^T$ take the $ilr$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices and $\left\{\bm{\epsilon}_t\right\}$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. Then we get the model 
+With the structure established, we can model the relative structure and total sum in one model.  We have again $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ and hence $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^K$. So $\tilde{\bm{Y}}_t=h(\bm{Y}_t)=(t(\bm{Y}_t),\ClOp(\bm{Y}_t))^T$ with $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$. For $\bm{w}_t =(t(\bm{Y}_t),ilr_{\bm{V}}(\bm{Y}_t))^T$ take the $ilr$ transformation determined by matrix $\bm{V}$. Further, let $\bm{c}_{\bm{V}} \in \mathbbm{R}^K$ be a real vector, $\textbf{A}_{\textbf{V}}^{(i)} \in \mathbb{R}^{K \times K}$ parameter matrices, and $\left\{\bm{\epsilon}_t\right\}$ be a white noise process with covariance matrix $\bm{\Sigma_\epsilon}$. Then we get the model 
 
 \begin{equation}
 \textbf{w}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{w}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{w}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{w}_{t-p} + \bm{\epsilon}_{t}.
@@ -275,7 +275,7 @@ In our application, we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t
 \section{Zero Handling}
 \label{sec: Zero-Handling}
 
-As we can see in the definition of the Simplex (\ref{eq:Simplex Definition}), a compositional vector can only consist of positive parts and since we have a considerable amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data but first, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them to perform compositional data analysis. In our data, we have essential zeros. In the following we summarise the methods presented in \textcite{Lubbe:2021} and \textcite{Josep:2003}. 
+As we can see in the definition of the Simplex (\ref{eq:Simplex Definition}), a compositional vector can only consist of positive parts and since we have a considerable amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data but first, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them to perform compositional data analysis. In our data we have essential zeros. In the following we summarise the methods presented in \textcite{Lubbe:2021} and \textcite{Josep:2003}. 
 
 \subsection{Rounded Zeros}
 \label{sec:Rounded Zeros}
@@ -292,7 +292,9 @@ x_j, & \text{if } x_j>0.
 \label{eq:DL065}
 \end{equation}
 %
-Additionally \textcite{Josep:2003} mention two other methods. First, the Additive Replacement Strategy, which was first introduced by Aitchison in \textcite{Aitchison:1986}, and is given by
+Additionally \textcite{Josep:2003} mention three other methods. 
+
+First, the Additive Replacement Strategy, which was first introduced by Aitchison in \textcite{Aitchison:1986}, and is given by
 
 \begin{equation}
 r_j = 
@@ -304,15 +306,16 @@ x_j - \frac{\delta(m+1)m}{D^2}, & \text{if } x_j>0,
 \end{equation}
 %
 where $D$ is the dimension and $m$ the amount of zeros in $\bm{x}$. 
-As we can see in (\ref{eq:additive replacement strategy}), both zero and non-zero values are modified. In addition, this rule can be extended by using a different $\delta_j$ for each component $x_j$. However, the additive replacement strategy is additive for non-zero values and hence not coherent with the basic operations of $\mathbbm{S}^D$, see \textcite{Josep:2003}. Other properties include:
+As we can see in (\ref{eq:additive replacement strategy}), both zero and non-zero values are modified. In addition, this rule can be extended by using a different $\delta_j$ for each component $x_j$. However, the additive replacement strategy is additive for non-zero values and hence not coherent with the basic operations of $\mathbbm{S}^D$. Other properties include:
 
 \begin{enumerate}
 	\item The replacement value $r_j$ depends on both, the amount of zeros $m$ and the dimension $D$.
-	\item For two vectors $\bm{x},\bm{y} \in \mathbbm{S}^D$ with common zeros, i.e. $x_j= 0 \leftrightarrow y_j=0, j=1,\ldots,D$, their sub compositions $\bm{x}_s,\bm{y}_s$  on their non-zero parts and their replacements $\bm{r}^x,\bm{r}^y$, the Aitchison distance is not preserved $d_a(\bm{r}^x,\bm{r}^y) \neq d_a(\bm{x}_s,\bm{y}_s)$. 
+	\item For two vectors $\bm{x},\bm{y} \in \mathbbm{S}^D$ with common zeros, i.e. $x_j= 0 \leftrightarrow y_j=0, j=1,\ldots,D$, their sub compositions $\bm{x}_s,\bm{y}_s$  on their non-zero parts, and their replacements $\bm{r}^x,\bm{r}^y$, the Aitchison distance is not preserved $d_a(\bm{r}^x,\bm{r}^y) \neq d_a(\bm{x}_s,\bm{y}_s)$. 
 	\item Ratios are not preserved. If $\bm{x}$ has more than one zero, then $\frac{r_j}{r_k} \neq \frac{x_j}{x_k}$ for $x_j,x_k > 0$.
 	\item The value $\frac{r_j}{r_k}$ depends on $\delta$. Therefore, the covariance structure of the sub compositions of the non-zero parts is not preserved, 
 \end{enumerate}
 see \textcite{Josep:2003}. 
+
 Second, the Simple Replacement Strategy, which formalises the procedure of replacing the zeros in $\bm{x}$ with a small positive value $\delta$, obtaining a strictly positive vector $\bm{w} \in \mathbbm{R}_+$ and applying the closure operation $\bm{r}=\ClOp(\bm{w})$
 
 \begin{equation}
@@ -381,7 +384,7 @@ As seen, an initial estimation is required to kick start the iteration. This can
 \subsubsection{MCMC data augmentation}
 \label{sec:MCMC data augmentation}
 
-The Markov Chain Monte Carlo (MCMC) algorithm can be seen as the Bayesian counter part to the EM-algorithm. While, with the use of priors, external information can be incorporated, in general, non-informative priors are used. With the same notation as above, the algorithm consists of two steps again
+The Markov Chain Monte Carlo (MCMC) algorithm can be seen as the Bayesian counter part to the EM-algorithm. While with the use of priors, external information can be incorporated, in general, non-informative priors are used. With the same notation as above, the algorithm consists of two steps again
 
 \begin{enumerate}
 	\item Imputation-Step: Given $\hat{\bm{\theta}}_t$ , simulate from $\mathbb{P}(\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\bm{\theta}}_t)$.
@@ -402,7 +405,7 @@ A method for count data is the Bayesian-multiplicative replacement. For multivar
 \label{eq:BMR}
 \end{equation}
 %
-Depending on the settings for $s$ and $\bm{t}$ and based on (\ref{eq:BMR}), the imputation can be performed by geometric Bayesian multiplicative (BM), square root BM or Bayes–Laplace, see \textcite{Palarea-Albaladejo:2015}. The details of those methods can be found in \textcite{Fernandez:2015}. 
+Depending on the settings for $s$ and $\bm{t}$ and based on (\ref{eq:BMR}), the imputation can be performed by geometric Bayesian multiplicative (BM), square root BM, or Bayes–Laplace, see \textcite{Palarea-Albaladejo:2015}. The details of those methods can be found in \textcite{Fernandez:2015}. 
 
 
 \subsection{Essential Zeros}

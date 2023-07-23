@@ -1,14 +1,14 @@
 \section{Results}
 \label{sec:Results}
 
-In this section, we present and describe the results of our methods with their variations. For this we use the previously introduced error measure, calculate it for all available fridges and summarise the results. We show the results as graphics for easier interpretation. For a general comparison, we use the CoDA, INGARCH, ZIM and INAR models. Since we focus on the CoDA and INGARCH models, we additionally analyse their results in more detail as well. 
+In this section, we present and describe the results of our methods with their variations. For this we use the previously introduced error measure, calculate it for all available fridges and summarise the results. We show the results as graphics for easier interpretation. For a general comparison, we use the CoDA, INGARCH, ZIM, and INAR models. Since we focus on the CoDA and INGARCH models, we additionally analyse their results in more detail as well. 
 
 \subsection{Model Comparison}
 \label{sec: Model Comparison}
 
-Here we compare the INGARCH(1,1) model with the CoDA and INAR(1) model. For all three models we use the same parameter values, namely a window factor of $w=0.5$, the whole history $h=1$ and extending windows. For CoDA, the settings are no $\Tsp$-Space, one-vs-all method and the simple replacement strategy with $\delta=0.1$. For INGARCH(p,q) we use $p=q=1$, assume it is Poisson distributed, use no external factors and have no zero handling. For INAR(1) we use the classical forecasting method described in Section \ref{sec: Inar Parameter Estimation and Forecasting}. When we speak of standard settings or values in the following, we mean these settings. 
+Here we compare the INGARCH(1,1) model with the CoDA and INAR(1) model. For all three models we use the same parameter values, namely a window factor of $w=0.5$, the whole history $h=1$, and extending windows. For CoDA, the settings are no $\Tsp$-Space, one-vs-all method, and the simple replacement strategy with $\delta=0.1$. For INGARCH(p,q) we use $p=q=1$, assume it is Poisson distributed, use no external factors, and have no zero handling. For INAR(1) we use the classical forecasting method described in Section \ref{sec: Inar Parameter Estimation and Forecasting}. When we speak of standard settings or values in the following, we mean these settings. 
 
-In Figure \ref{fig:models Comp1} we see a boxplot and quantile plot. In the boxplot the error measure is calculated for all groups and all fridges for each model. The result is then shown in a boxplot. In the quantile plot, the error measure for each fridge, each model and each category is calculated and sorted according to their size. The dot size indicates the length of the respective time series and the vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile.
+In Figure \ref{fig:models Comp1} we see a boxplot and quantile plot. In the boxplot the error measure is calculated for all groups and all fridges for each model. The result is then shown in a boxplot. In the quantile plot, the error measure for each fridge, each model, and each category is calculated and sorted according to their size. The dot size indicates the length of the respective time series and the vertical lines are the 0\%,25\%,50\%,75\% and 100\% quantile.
 
 In the Boxplot \ref{fig:box distributions models} we can see that their performance is pretty similar. They all seem to outperform the naive random walk model, which is especially true for the count data models. 
 In the Quantile Plot \ref{fig: quantile distributions models} we see the error measure split up by category. While for category 1 and 2 all models perform reasonably well and similar, differences emerge for category 3 and 4. CoDA seems to be the clear favourite in category 4, followed by INGARCH and then INAR. However, for all models there are time series with errors that are either too high to be shown, or that couldn't get calculated at all. 
@@ -87,7 +87,7 @@ First, we start with specifications which can be chosen for both CoDA and INGARC
 \subsubsection{History}
 \label{sec:History}
 
-As mentioned various times throughout this thesis, the history is one of the parameters which can be adjusted. In Figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot  and additionally a histogram to get a feeling for the error distribution. 
+As mentioned various times throughout this thesis, the history is one of the parameters which can be adjusted. In Figure \ref{fig:History Comp1} we visualise the results as a boxplot, a quantile plot, and additionally a histogram to get a feeling for the error distribution. 
 
 \begin{figure}[htb!]
 \centering
@@ -274,7 +274,7 @@ As we see, there is not much difference between the INGARCH(1,1), INGARCH(2,1) a
 \subsection{CoDA Specifications Results}
 \label{sec: CoDA Specifications Results}
 
-Last, we will compare different CoDA specifications as mentioned in Section \ref{sec: Coda Specifications}. Like above we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $h=1$, an initial window length of $w=0.5$, use the simple replacement strategy with $\delta=0.1$, no $\Tsp$-spaces and the one-vs-all method. 
+Last, we will compare different CoDA specifications as mentioned in Section \ref{sec: Coda Specifications}. Like above, we choose one standard model for comparison and always only change one setting. For CoDA our standard model uses extending windows, the full history $h=1$, an initial window length of $w=0.5$, use the simple replacement strategy with $\delta=0.1$, no $\Tsp$-spaces, and the one-vs-all method. 
 
 \subsection{Zero Handling}
 \label{sec: Zero Handling}

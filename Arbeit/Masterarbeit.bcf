@@ -2492,39 +2492,38 @@
     <bcf:citekey order="121" intorder="1">Josep:2003</bcf:citekey>
     <bcf:citekey order="122" intorder="1">Josep:2003</bcf:citekey>
     <bcf:citekey order="123" intorder="1">Josep:2003</bcf:citekey>
-    <bcf:citekey order="124" intorder="1">Josep:2003</bcf:citekey>
-    <bcf:citekey order="125" intorder="1">Lubbe:2021</bcf:citekey>
+    <bcf:citekey order="124" intorder="1">Lubbe:2021</bcf:citekey>
+    <bcf:citekey order="125" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
     <bcf:citekey order="126" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
     <bcf:citekey order="127" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
-    <bcf:citekey order="128" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
-    <bcf:citekey order="129" intorder="1">Dempster:1977</bcf:citekey>
+    <bcf:citekey order="128" intorder="1">Dempster:1977</bcf:citekey>
+    <bcf:citekey order="129" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
     <bcf:citekey order="130" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
     <bcf:citekey order="131" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
     <bcf:citekey order="132" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
-    <bcf:citekey order="133" intorder="1">Palarea-Albaladejo:2015</bcf:citekey>
-    <bcf:citekey order="134" intorder="1">Fernandez:2015</bcf:citekey>
+    <bcf:citekey order="133" intorder="1">Fernandez:2015</bcf:citekey>
+    <bcf:citekey order="134" intorder="1">Aitchison:2003</bcf:citekey>
     <bcf:citekey order="135" intorder="1">Aitchison:2003</bcf:citekey>
-    <bcf:citekey order="136" intorder="1">Aitchison:2003</bcf:citekey>
-    <bcf:citekey order="137" intorder="1">Boogaart:2006</bcf:citekey>
-    <bcf:citekey order="138" intorder="1">Compositions:2023</bcf:citekey>
-    <bcf:citekey order="139" intorder="1">Egozcue:2005</bcf:citekey>
-    <bcf:citekey order="140" intorder="1">Compositions:2023</bcf:citekey>
+    <bcf:citekey order="136" intorder="1">Boogaart:2006</bcf:citekey>
+    <bcf:citekey order="137" intorder="1">Compositions:2023</bcf:citekey>
+    <bcf:citekey order="138" intorder="1">Egozcue:2005</bcf:citekey>
+    <bcf:citekey order="139" intorder="1">Compositions:2023</bcf:citekey>
+    <bcf:citekey order="140" intorder="1">Leininger:2013</bcf:citekey>
     <bcf:citekey order="141" intorder="1">Leininger:2013</bcf:citekey>
-    <bcf:citekey order="142" intorder="1">Leininger:2013</bcf:citekey>
-    <bcf:citekey order="143" intorder="1">Aitchison:2003</bcf:citekey>
-    <bcf:citekey order="144" intorder="1">R:2022</bcf:citekey>
-    <bcf:citekey order="145" intorder="1">Tidyverse:2019</bcf:citekey>
-    <bcf:citekey order="146" intorder="1">here:2020</bcf:citekey>
-    <bcf:citekey order="147" intorder="1">Miceadds:2023</bcf:citekey>
-    <bcf:citekey order="148" intorder="1">VAR:2008</bcf:citekey>
-    <bcf:citekey order="148" intorder="2">CoDAR2:2008</bcf:citekey>
-    <bcf:citekey order="149" intorder="1">RobComp:2011</bcf:citekey>
-    <bcf:citekey order="149" intorder="2">CoDAR4:2018</bcf:citekey>
-    <bcf:citekey order="150" intorder="1">Tscount:2017</bcf:citekey>
-    <bcf:citekey order="150" intorder="2">Tscount:2020</bcf:citekey>
-    <bcf:citekey order="151" intorder="1">Pscl:2008</bcf:citekey>
-    <bcf:citekey order="152" intorder="1">Silva:2009</bcf:citekey>
-    <bcf:citekey order="153" intorder="1">GitHub</bcf:citekey>
+    <bcf:citekey order="142" intorder="1">Aitchison:2003</bcf:citekey>
+    <bcf:citekey order="143" intorder="1">R:2022</bcf:citekey>
+    <bcf:citekey order="144" intorder="1">Tidyverse:2019</bcf:citekey>
+    <bcf:citekey order="145" intorder="1">here:2020</bcf:citekey>
+    <bcf:citekey order="146" intorder="1">Miceadds:2023</bcf:citekey>
+    <bcf:citekey order="147" intorder="1">VAR:2008</bcf:citekey>
+    <bcf:citekey order="147" intorder="2">CoDAR2:2008</bcf:citekey>
+    <bcf:citekey order="148" intorder="1">RobComp:2011</bcf:citekey>
+    <bcf:citekey order="148" intorder="2">CoDAR4:2018</bcf:citekey>
+    <bcf:citekey order="149" intorder="1">Tscount:2017</bcf:citekey>
+    <bcf:citekey order="149" intorder="2">Tscount:2020</bcf:citekey>
+    <bcf:citekey order="150" intorder="1">Pscl:2008</bcf:citekey>
+    <bcf:citekey order="151" intorder="1">Silva:2009</bcf:citekey>
+    <bcf:citekey order="152" intorder="1">GitHub</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

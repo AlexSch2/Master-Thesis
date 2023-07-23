@@ -43,7 +43,7 @@ To decide whether to use a GARCH model, one can test for volatility or the valid
 \subsection{Applications}
 \label{sec: Garch Applications}
 
-The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures such as inflation rates but since then have been used in a variety of fields. GARCH models generalised the ARCH model approach to allow the modelling of a more flexible lag structure. They have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments, see \textcite{Bollerslev:1986} and \textcite{Kreiss:2006}. 
+The introduction of ARCH and subsequently GARCH models in the 1980s has been revolutionary. ARCH models have originally been introduced for modelling macroeconomic key figures, such as inflation rates, but since then have been used in a variety of fields. GARCH models generalised the ARCH model approach to allow the modelling of a more flexible lag structure. They have found wide applications in finance mathematical problems, especially for the modelling of a changing variance and volatility in financial markets. They are often used to estimate volatility of various financial instruments, see \textcite{Bollerslev:1986} and \textcite{Kreiss:2006}. 
 
 Since the ARCH and GARCH models are used to model and forecast volatility or the conditional variance, but not values, we will not use it in our application. In addition, the INGARCH model also accounts for the discrete nature of our data, which makes it the preferred choice. 
 
@@ -127,7 +127,7 @@ In our case we regress on the past values of our time series. In that case Model
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: ZIM Parameter Estimation and Forecasting}
 
-Parameter estimation for Model (\ref{eq:ZIP Autoregressive model timeseries}) is done with the maximum partial likelihood estimate. However, since there exists no closed form solution, iterative algorithms like the Expectation-Maximisation (EM), Newton-Raphson (NR) or Fisher Scoring (FS) can be used, see \textcite{Yang:2012}.  Further details can be found in \textcite{Yang:2012}.
+Parameter estimation for Model (\ref{eq:ZIP Autoregressive model timeseries}) is done with the maximum partial likelihood estimate. However, since there exists no closed form solution, iterative algorithms like the Expectation-Maximisation (EM), Newton-Raphson (NR), or Fisher Scoring (FS) can be used, see \textcite{Yang:2012}.  Further details can be found in \textcite{Yang:2012}.
 
 The one-step ahead predictor is again given by the conditional expectation $\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_{kt})\lambda_{kt} $ with the estimated coefficients plugged in. 
 
@@ -196,7 +196,7 @@ Log-Linear models are further discussed in \textcite{Fokianos:2011,Woodard:2011,
 \section{AR Models}
 \label{sec: Ar Models}
 
-Autoregressive models of order p (AR(p)) are one of the most simple time series models, which makes them very popular. Assuming again our time series is real-valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$, taking coefficients $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$ and a white noise process $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$, called innovations, they are defined as 
+Autoregressive models of order p (AR(p)) are one of the most simple time series models, which makes them very popular. Assuming again our time series is real-valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$, taking coefficients $\bm{a}=(a_1,\ldots,a_p)^T \in \mathbbm{R}^p$, and a white noise process $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$, called innovations, they are defined as 
 
 \begin{equation}
 Y_{kt} = a_1Y_{k,t-1} + \ldots + a_p Y_{k,t-p} + \epsilon_{kt}.
@@ -215,7 +215,7 @@ where $\bm{a}_j \in \mathbbm{R}^{K \times K}$ are the coefficient matrices and $
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: AR Estimation and Forecasting}
 
-The simplicity of AR models makes parameter estimation and forecasting easy. There are various ways to estimate the parameters in Model (\ref{eq: Var Model}) such as the Yule-Walker equations, the ordinary least squares (OLS) estimator and if the innovations $\left\{\bm{\epsilon}_t\right\}$ are multivariate normal distributed, then the maximum likelihood estimator can be used as well, see \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. %Further properties and comparison of their estimators can be found in \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. 
+The simplicity of AR models makes parameter estimation and forecasting easy. There are various ways to estimate the parameters in Model (\ref{eq: Var Model}) such as the Yule-Walker equations, the ordinary least squares (OLS) estimator, and if the innovations $\left\{\bm{\epsilon}_t\right\}$ are multivariate normal distributed, then the maximum likelihood estimator can be used as well, see \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. %Further properties and comparison of their estimators can be found in \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. 
 
 Like parameter estimation, forecasting is also simple in the AR model. We use the mean squared error as an error measure and only consider affine forecasts with $m\geq p,m \in \mathbbm{N}$ past values, hence the forecast has the form
 \begin{equation}
@@ -270,15 +270,15 @@ X_t = \alpha_1 \circ X_{t-1} + \alpha_2 \circ X_{t-2} + \ldots + \alpha_p X_{t-p
 where
 
 \begin{enumerate}
-	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second and third moment, 
-	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$ and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
+	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second, and third moment, 
+	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$, and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
 	\item $\alpha_i \in (0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$,
 	\item $\sum_{j=1}^p \alpha_j < 1$.
 \end{enumerate}
 %
 The last condition ensures the existence and stationary of the process, see \textcite{Silva:2005}. 
 
-Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then the INAR(p) model is given by
+Let $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{N}_0\right\}_f$ be again the univariate integer-valued time series for category $k$ for $k=1,\ldots,K$ and fridge $f$. Then the INAR(p) model is given by
 
 \begin{equation}
 Y_{kt} = \alpha_{k1} \circ Y_{k,t-1} + \alpha_{k2} \circ Y_{k,t-2} + \ldots + \alpha_{kp} \circ Y_{k,t-p} +\epsilon_{kt}.
@@ -296,7 +296,7 @@ While we will mainly assume that the innovations $\left\{\epsilon_t\right\}$ fol
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: Inar Parameter Estimation and Forecasting}
 
-Parameter estimation can be done in several ways. Possible methods are: moment based estimators (MM), regression based or conditional least squares (CLS) and maximum likelhood (ML) based estimators. Especially for the Poisson model, those methods have been studied in detail in literature, see \textcite{Silva:2005} for more details. 
+Parameter estimation can be done in several ways. Possible methods are: moment based estimators (MM), regression based or conditional least squares (CLS), and maximum likelhood (ML) based estimators. Especially for the Poisson model, those methods have been studied in detail in literature, see \textcite{Silva:2005} for more details. 
 
 The authors in \textcite{Silva:2005} present two types of forecasting methods for INAR(1) models. The first approach is a classical method for performing predictions in a time series context and makes use of the conditional expectation. It was obtained by \textcite{Bre:1993} and \textcite{Freeland:2004}. Assuming that $\left\{\epsilon_{kt}\right\} \sim_{i.i.d} P(\lambda_k)$ is Poisson distributed with parameter $\lambda_k$, the $h$-step ahead predictor, for $h\in \mathbbm{N}$, based on $n$ past observations $\bm{Y}_k=(Y_{k1},\ldots,Y_{kn})$ is given by
 

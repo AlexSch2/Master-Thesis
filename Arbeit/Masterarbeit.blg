@@ -1,20 +1,20 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'Masterarbeit.blg'
-[133] biber-MSWIN64:340> INFO - === 
-[194] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
-[355] Biber.pm:979> INFO - Found 66 citekeys in bib section 0
-[370] Biber.pm:4419> INFO - Processing section 0
-[383] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
-[469] bibtex.pm:1713> INFO - LaTeX decoding ...
-[574] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
-[992] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
-[992] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[992] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-GB'
-[992] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
-[1064] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
-[1113] bbl.pm:763> INFO - Output to Masterarbeit.bbl
-[1113] Biber.pm:131> WARN - legacy month field 'July' in entry 'Liboschik:2016' is not an integer - this will probably not sort properly.
-[1113] Biber.pm:131> WARN - legacy month field 'June' in entry 'Cui:2018' is not an integer - this will probably not sort properly.
-[1113] Biber.pm:131> WARN - legacy month field 'April' in entry 'Nau:14' is not an integer - this will probably not sort properly.
-[1113] Biber.pm:131> WARN - legacy month field 'Apr' in entry 'Hamilton:1994' is not an integer - this will probably not sort properly.
-[1113] Biber.pm:133> INFO - WARNINGS: 4
+[130] biber-MSWIN64:340> INFO - === 
+[186] Biber.pm:419> INFO - Reading 'Masterarbeit.bcf'
+[346] Biber.pm:979> INFO - Found 66 citekeys in bib section 0
+[362] Biber.pm:4419> INFO - Processing section 0
+[374] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
+[458] bibtex.pm:1713> INFO - LaTeX decoding ...
+[565] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
+[987] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'variable = shifted' with 'variable = non-ignorable'
+[987] UCollate.pm:68> INFO - Overriding locale 'en-GB' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[987] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-GB'
+[987] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-GB'
+[1060] bbl.pm:660> INFO - Writing 'Masterarbeit.bbl' with encoding 'UTF-8'
+[1107] bbl.pm:763> INFO - Output to Masterarbeit.bbl
+[1107] Biber.pm:131> WARN - legacy month field 'July' in entry 'Liboschik:2016' is not an integer - this will probably not sort properly.
+[1107] Biber.pm:131> WARN - legacy month field 'June' in entry 'Cui:2018' is not an integer - this will probably not sort properly.
+[1108] Biber.pm:131> WARN - legacy month field 'April' in entry 'Nau:14' is not an integer - this will probably not sort properly.
+[1108] Biber.pm:131> WARN - legacy month field 'Apr' in entry 'Hamilton:1994' is not an integer - this will probably not sort properly.
+[1108] Biber.pm:133> INFO - WARNINGS: 4

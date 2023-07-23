@@ -4,11 +4,11 @@
 \subsection{R-Packages}
 \label{sec:R-Packages}
 
-We conduct our analysis in the statistical software R, see \textcite{R:2022}. For our data cleansing, data handling and plotting we use the \textit{tidyverse} package of \textcite{Tidyverse:2019}. Further we use the packages \textit{here} of \textcite{here:2020}, \textit{miceadds} of \textcite{Miceadds:2023} and \textit{parallel}, which is part of core R, to facilitate our analysis.  
+We conduct our analysis in the statistical software R, see \textcite{R:2022}. For our data cleansing, data handling, and plotting we use the \textit{tidyverse} package of \textcite{Tidyverse:2019}. Further we use the packages \textit{here} of \textcite{here:2020}, \textit{miceadds} of \textcite{Miceadds:2023}, and \textit{parallel}, which is part of core R, to facilitate our analysis.  
 
 For building our CoDA model we use the packages \textit{vars} of \textcite{VAR:2008,CoDAR2:2008} and \textit{robCompositions} of \textcite{RobComp:2011,CoDAR4:2018}. Especially the functions \texttt{pivotCoord}, which performs the $ilr$ transformation described in Section \ref{sec: Coda Preliminaries},\texttt{VAR}, which builds the VAR model described in Section \ref{sec:The VAR Model}, and \texttt{pivotCoordInv}, which performs the necessary back transformation to get predictions in the desired space. The INGARCH analysis is mainly done with the package \textit{tscount}, see \textcite{Tscount:2017,Tscount:2020}. The core function used is \texttt{tsglm}, which we use to fit the INGARCH(p,q) model as well as the log-linear model. The zero-inflated models were fitted using the function \texttt{zeroinfl} from the package \textit{pscl} of \textcite{Pscl:2008}. To fit the INAR model we use two packages. First, \textit{ZINAp} to calculate our predictions with the Bayesian approach. The function \texttt{estimate\_zinarp} is used to estimate the coefficients and the values are then calculated according to the formula in \textcite{Silva:2009}. Second, the classical approach is done using the function \texttt{EST\_ZINAR} from the package \textit{ZINA1}. % For the VGAM we used the package \textit{VGAM} of \textcite{RVGAM:2010}.
 
-In general, all other functions can be grouped into three categories: general, count data model specific and CoDA specific. General functions are used for both, the count data models and the CoDA model. Count data models and CoDA specific functions are only used for their respective methods.
+In general, all other functions can be grouped into three categories: general, count data model specific, and CoDA specific. General functions are used for both, the count data models and the CoDA model. Count data models and CoDA specific functions are only used for their respective methods.
 \subsection{Handbook}
 \label{sec:Handbook}
 
@@ -34,19 +34,19 @@ The function \texttt{Data.Window} splits the time series in the specified window
 A list of all windows is returned. A window is a list with the following elements: 
 
 \begin{itemize}
-	\item timeSeriesValue\_window: The values of the window
+	\item timeSeriesValue\_window: The values of the window.
 	\item timeSeriesValue\_future: The value which should be predicted by this window. 
 \end{itemize}
 
 \subsubsection{Data.Preparation}
 \label{sec:Data.Preparation}
 
-The function \texttt{Data.Preparation} transforms the data in the right format, replaces missing values with 0 and accounts for the length of the history chosen. In addition, for CoDA it also transforms the data into the right format needed for the one-vs-all method.
+The function \texttt{Data.Preparation} transforms the data in the right format, replaces missing values with 0, and accounts for the length of the history chosen. In addition, for CoDA it also transforms the data into the right format needed for the one-vs-all method.
 
 \textbf{Arguments}:
 
 \begin{itemize}
-	\item Data\_Raw: The Data to be transformed in the right format.
+	\item Data\_Raw: The data to be transformed in the right format.
   \item OneVsAll: When TRUE, then the one-vs-all method is used.
   \item PivotGroup: When one-vs-all is used, this specifies the pivot category.
   \item Category: The categories to consider for the transformation.
@@ -60,7 +60,7 @@ The function \texttt{Data.Preparation} transforms the data in the right format, 
 A tibble with two or more columns is returned, depending on the number of categories: 
 
 \begin{itemize}
-	\item week\_date: The values of the window
+	\item week\_date: The values of the window.
 	\item \textit{Name of Category 1}: The number of sold items belonging to \textit{Name of Category 1}.
 \end{itemize}
 
@@ -68,7 +68,7 @@ When the argument OneVsAll is TRUE, then a tibble with three columns is returned
 
 
 \begin{itemize}
-	\item week\_date: The values of the window
+	\item week\_date: The values of the window.
 	\item PivotGroup: The amount of sold items belonging to the pivot group.
 	\item other: The amount of all other sold items belonging to the other categories. 
 \end{itemize}
@@ -143,14 +143,14 @@ The function \texttt{CountModel.DataPreparation} transforms the data into the ri
 A tibble with two or more columns is returned, depending on the number of categories: 
 
 \begin{itemize}
-	\item week\_date: The values of the window
+	\item week\_date: The values of the window.
 	\item \textit{Name of Category 1}: The number of sold items belonging to \textit{Name of Category 1}.
 \end{itemize}
 
 \subsubsection{CountModel.Prediction}
 \label{sec:CountModel.Prediction}
 
-The function \texttt{CountModel.Prediction} is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions mentioned in Section \ref{sec:R-Packages} to fit the INGARCH, INAR or ZIM model for each window and predicts the next value. 
+The function \texttt{CountModel.Prediction} is the function where the model is fit and the predicted value is calculated. It uses the corresponding functions mentioned in Section \ref{sec:R-Packages} to fit the INGARCH, INAR, or ZIM model for each window and predicts the next value. 
 
 \textbf{Arguments}:
 
