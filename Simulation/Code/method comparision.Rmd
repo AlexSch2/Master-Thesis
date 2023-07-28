@@ -69,12 +69,12 @@ if(save_results){
 }
 
 
-ingarch_result <-
+inarbayes_result <-
   CountModel.Analysis(
     Data_Raw= weekly_category_data,
     Id = 4,
     Frame = 0.5,
-    Distribution = "poisson",
+    Distribution = "Poisson",
     Category_Main = c("1","2","3","4"),
     WindowMethod = "extending",
     ZeroHandling = "none",
@@ -85,7 +85,7 @@ ingarch_result <-
     PastMean = 1,
     HistoryLength = 1,
     TakeSubCategory = F,
-    ModelType = "ingarch"
+    ModelType = "inar_bayes"
   )
   
   if(T){

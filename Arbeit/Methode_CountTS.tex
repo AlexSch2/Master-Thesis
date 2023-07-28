@@ -35,7 +35,7 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \end{gathered}
 \end{equation}
 %
-where $p,q \in \mathbb{N}$ and $P(\lambda_{kt})$ is a Poisson distribution with mean $\lambda_{kt}$. The integer $p$ defines the number of past values to regress on, whereas $q$ does the same for the past conditional means. In order to account for external effects as well, we add the covariate vector $\textbf{X}_{kt}$
+where $p,q \in \mathbb{N}$ and $P(\lambda_{kt})$ is a Poisson distribution with mean $\lambda_{kt}$. The integer $p$ defines the number of past values to regress on, whereas $q$ does the same for the past conditional means. In order to account for external effects as well, we can add the covariate vector $\textbf{X}_{kt}$
 
 \begin{equation}
 \begin{gathered}
@@ -45,7 +45,7 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 \end{gathered}
 \end{equation}
 %
-where $\bm{\eta}$ is the parameter for the covariates such that $\bm{\eta}^T\textbf{X}_{kt} \geq 0$.
+where $\bm{\eta}$ is the parameter for the covariates such that $\bm{\eta}^T\textbf{X}_{kt} \geq 0$. In this case $\SigA_{k,t}$ also includes the past information from $\textbf{X}_{kt}$ up to time $t+1$. 
 From the distributional assumption $Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt})$ it follows
 
 \begin{equation}
@@ -93,7 +93,7 @@ G_{kT}(\bm{\theta};\sigma_k^2) &= \sum_{t=1}^T Cov\left(\frac{\partial \loglik_k
 \end{aligned}
 \end{equation}
 %
-In the case of the Poisson distribution, we have $\sigma_k^2=0$. If the Negative Binomial distribution is used, see Section \ref{sec: Ingarch Specifications}, then we have $\sigma_k^2=\frac{1}{\phi_k}$ where $\phi_k$ is the dispersion parameter of the Negative Binomial distribution. 
+In the case of the Poisson distribution, we have $\sigma_k^2=0$. If the Negative Binomial distribution is used, see Section \ref{sec: Ingarch Specifications}, then we have $\sigma_k^2=\frac{1}{\phi_k}$ where $\phi_k$ is the dispersion parameter of the Negative Binomial distribution.
 Finally, assuming that the quasi maximum likelihood estimator (QMLE) $\hat{\bm{\theta}}_T$ of $\bm{\theta}$ exists, it is the solution to 
 
 \begin{equation}
@@ -101,6 +101,15 @@ Finally, assuming that the quasi maximum likelihood estimator (QMLE) $\hat{\bm{\
 \label{eq:ingarch qmle}
 \end{equation}
 %
+The dispersion parameter can be estimated using
+
+\begin{equation}
+\sum_{t=1}^T \frac{(Y_{kt}-\hat{\lambda}_{kt})^2}{\hat{\lambda}_{kt}+\hat{\lambda}^2_{kt}/\hat{\phi}_k} = T - (p+q+r+1)
+\label{eq:Dispersion Parameter Estimation}
+\end{equation}
+%
+where $\hat{\lambda}_{kt} = \lambda_{kt}(\hat{\bm{\theta}})$ is the fitted value. The variance is then $\hat{\sigma}_k^2=\frac{1}{\hat{\phi}_k}$, see \textcite{Fokianos:2014}, \textcite{Liboschik:2016}. 
+
 The optimal one-step ahead forecast with regard to the mean squared error is the conditional expectation $\lambda_{k,t+1}=\mathbb{E}\left[Y_{k,t+1} | \SigA_{kt} \right]$. The h-step ahead prediction for $h>1$ is calculated iteratively with the one-step ahead predictions of $Y_{k,t+1},Y_{k,t+2},\ldots$, see \textcite{Liboschik:2016}. 
 
 \subsection{Multivariate INGARCH Model}

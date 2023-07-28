@@ -148,10 +148,16 @@ CountModel.Prediction <- function(Data_Window,
       
       Model <- estimate_zinarp(TimeSeriesValue_Window[[Category]],p=1,innovation = Distribution,iter = 500)
       
-      Alpha <- mean(Model$alpha)
-      Lambda <- mean(Model$lambda)
+      #Alpha <- mean(Model$alpha)
+      #Lambda <- mean(Model$lambda)
+      #ValuePredict <- Alpha^PredictionStep * (TimeSeriesValue_LastKnown-(Lambda)/(1-Alpha))+Lambda/(1-Alpha)
       
-      ValuePredict <- Alpha^PredictionStep * (TimeSeriesValue_LastKnown-(Lambda)/(1-Alpha))+Lambda/(1-Alpha)
+      Alpha <- Model$alpha
+      Lambda <- Model$lambda
+      m <- length(Model$alpha)
+      
+     
+      ValuePredict <-  TimeSeriesValue_LastKnown*(1/m *sum(Alpha^PredictionStep)) + (1/m*sum((1-Alpha^PredictionStep)/(1-Alpha)*Lambda))
       
       PredictionInterval_Lower <- NA
       PredictionInterval_Upper <- NA

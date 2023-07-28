@@ -4,16 +4,16 @@
 \section{GARCH Models}
 \label{sec: Garch Models}
 
-INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle, see \textcite{Engle:1982}, in an economic context, model the variance conditional on past values. Since we no longer assume our data to be integer-valued, our time series has the form $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$. Denote again with $\SigA_{k,t}$ the information available at time $t$. Then the ARCH(1) model is given by 
+INGARCH models are structurally derived from the generalised autoregressive conditional heteroscedasticity (GARCH) models, which themselves are generalisations of the autoregressive conditional heteroscedasticity (ARCH) model. ARCH models, which were first developed by Engle, see \textcite{Engle:1982}, in an economic context, model the variance conditional on past values. Since we no longer assume our data to be integer-valued, our time series has the form $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}\right\}_f$. Denote again with $\SigA_{k,t}$ the information available at time $t$. Then the ARCH(q) model is given by 
 \begin{equation}
 \begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim N(0,h_{kt}),\\
-h_{kt} = a_0 + a_1 Y_{k,t-1}^2,
+h_{kt} = a_0 + a_1 Y_{k,t-1}^2 + \ldots + a_q Y_{k,t-q}^2,
 \label{eq:ARCH model}
 \end{gathered}
 \end{equation}
 %
-with $a_0\geq0$, $a_1>0$. The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$, where $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ is the parameter vector with $a_p>0$, and $p \in \mathbbm{N}$ is the order of the ARCH process, see \textcite{Engle:1982}. 
+with $a_0 > 0$, $a_i\geq 0, i = 1,\ldots,q$, see \textcite{Bera:1993}. %The variance function can be generally formulated as $h_{kt} = h(Y_{k,t-1},\ldots,Y_{k,t-p},\bm{a})$, where $\bm{a}=(a_1,\ldots,a_p)^T\geq 0$ is the parameter vector with $a_p>0$, and $p \in \mathbbm{N}$ is the order of the ARCH process, see \textcite{Engle:1982}. 
 
 The GARCH model generalises this approach by adding the past variances as another source of information. The GARCH(p,q) model for non-negative parameters $a_0>0$, $\bm{a}=(a_1,\ldots,a_q)^T\geq 0$ and $\bm{b}=(b_1,\ldots,b_p)^T\geq0$ with $p,q \in \mathbbm{N}$, $p\geq0, q>0$ is given by 
 \begin{equation}
@@ -29,9 +29,9 @@ Other distributions than the normal distributions can be taken as well, see \tex
 \subsection{Parameter Estimation and Forecasting}
 \label{sec: GARCH Parameter Estimation and Forecasting}
 
-Estimation of the parameters can be done with maximum likelihood and an iterative algorithm. First, the model is rewritten and the logarithm of the likelihood function is taken. Second, after differentiation with respect to its variance and mean parameters, the Berndt, Hall Hall and Hausman algorithm, see \textcite{Berndt:1974}, is used to obtain the maximum likelihood estimates. Further details and assumptions can be found in \textcite{Bollerslev:1986}. 
+Estimation of the parameters can be done with maximum likelihood and an iterative algorithm. First, the model is rewritten and the logarithm of the likelihood function is taken. Second, after differentiation with respect to its variance and mean parameters, the Berndt, Hall Hall and Hausman algorithm, see \textcite{Berndt:1974}, is used to obtain the maximum likelihood estimates, see \textcite{Bollerslev:1986}. Further details and assumptions can be found in \textcite{Bollerslev:1986}. 
 
-If one is interested in forecasting $\left\{Y_{kt}\right\}$, then the minimum mean squared one-step error forecast is $\mathbbm{E}[Y_{k,t+h}|\SigA_{k,t}]=0$ where $\SigA_{k,t}$ is the information available at time $t$. One should note, that the forecast is independent of the model parameters. If the conditional variance should be forecasted, the parameters are estimated and the known values are plugged in. For $h>1$, $h$-step predictions are computed recursively with plugging in the forecasts for $h-1,h-2,\ldots$ in the model, see \textcite{Zivot:2009}. 
+If one is interested in forecasting $\left\{Y_{kt}\right\}$, then the minimum mean squared one-step error forecast is $\mathbbm{E}[Y_{k,t+1}|\SigA_{k,t}]=0$ where $\SigA_{k,t}$ is the information available at time $t$. One should note, that the forecast is independent of the model parameters. If the conditional variance should be forecasted, the parameters are estimated and the known values are plugged in. For $h>1$, $h$-step predictions are computed recursively with plugging in the forecasts for $h-1,h-2,\ldots$ in the model, see \textcite{Zivot:2009}. 
 
 
 \subsection{Testing for GARCH Models}
@@ -51,14 +51,14 @@ Since the ARCH and GARCH models are used to model and forecast volatility or the
 \section{Naive Random Walk}
 \label{sec: Naive Random Walk}
 
-The Naive Random Walk model is one of the simplest and most comprehensive forecasting models, which makes it a popular benchmark model. In addition, it is what is currently employed, so using it enables us to directly see if our models outperform the current model. It assumes that the 1-step difference between two values is i.i.d distributed with mean 0. We again no longer assume our data to be integer-valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}_0\right\}_f$. Then the Naive Random Walk model is given as
+The Naive Random Walk model is one of the simplest and most comprehensive forecasting models, which makes it a popular benchmark model. In addition, it is what is currently employed, so using it enables us to directly see if our models outperform the current model. It assumes that the one-step difference between two values is i.i.d distributed with mean 0. We again no longer assume our data to be integer-valued $\left\{Y_{kt}:t=1,\ldots T; Y_{kt} \in \mathbb{R}_0\right\}_f$. Then the Naive Random Walk model is given as
 
 \begin{equation}
 Y_{k,t+1}= Y_{kt} + \epsilon_{kt}, 
 \label{eq: Random Walk Model}
 \end{equation}
  %
-where $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$ is a white noise process with variance $\sigma_k^2 \in \mathbb{R}_+$. It can be shown easily, that the optimal 1-step ahead forecast with regard to the mean squared error (MSE) is given by
+where $\left\{\epsilon_{kt}\right\} \sim WN(\sigma_k^2)$ is a white noise process with variance $\sigma_k^2 \in \mathbb{R}_+$. It can be shown easily, that the optimal one-step ahead forecast with regard to the mean squared error (MSE) is given by
 
 \begin{equation}
 \hat{Y}_{k,t+1}= Y_{kt},
@@ -246,7 +246,7 @@ The Breusch-Godfrey Test tests if the coefficients $(d_1,\ldots,d_h)$ in the mod
 \label{eq:Breusch-Godfrey Test model}
 \end{equation}
 %
-are zero, i.e. if process $\left\{\bm{\epsilon}_t\right\}$ follows an AR(h) structure or not. Under the null hypothesis the test statistic follows a chi-squared distribution again, see \textcite{Lütkepohl:2007}. 
+are zero. The process $\left\{\bm{\eta}_t\right\}$ is a white noise process and hence we test if $\left\{\bm{\epsilon}_t\right\}$ follows an AR(h) structure or not. Under the null hypothesis the test statistic follows a chi-squared distribution again, see \textcite{Lütkepohl:2007}. 
 
 \section{INAR(p) Models}
 \label{sec: Inar Models}
@@ -308,7 +308,7 @@ The authors in \textcite{Silva:2005} present two types of forecasting methods fo
 However, this forecast hardly ever produces integer values. One option to counter this problem, is to take the value which minimises the absolute expected error $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$ instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$. Another option is a Bayesian approach presented in \textcite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha_k,\lambda_k)$ are random. Since the complexity of the posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are given in \textcite{Silva:2005}. The estimator for the conditional expectation is then given by
 
 \begin{equation}
-\hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_{ki}^m\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_{ki}^h}{1-\alpha_{ki}}\lambda_{ki}\right),
+\hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_{ki}^h\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_{ki}^h}{1-\alpha_{ki}}\lambda_{ki}\right),
 \label{eq:Forecasting Bayesian}
 \end{equation}
 %

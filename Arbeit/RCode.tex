@@ -60,7 +60,7 @@ The function \texttt{Data.Preparation} transforms the data in the right format, 
 A tibble with two or more columns is returned, depending on the number of categories: 
 
 \begin{itemize}
-	\item week\_date: The values of the window.
+	\item week\_date: The dates of the recorded values of the window.
 	\item \textit{Name of Category 1}: The number of sold items belonging to \textit{Name of Category 1}.
 \end{itemize}
 
@@ -68,7 +68,7 @@ When the argument OneVsAll is TRUE, then a tibble with three columns is returned
 
 
 \begin{itemize}
-	\item week\_date: The values of the window.
+	\item week\_date: The dates of the recorded values of the window.
 	\item PivotGroup: The amount of sold items belonging to the pivot group.
 	\item other: The amount of all other sold items belonging to the other categories. 
 \end{itemize}
@@ -143,7 +143,7 @@ The function \texttt{CountModel.DataPreparation} transforms the data into the ri
 A tibble with two or more columns is returned, depending on the number of categories: 
 
 \begin{itemize}
-	\item week\_date: The values of the window.
+	\item week\_date: The dates of the recorded values of the window.
 	\item \textit{Name of Category 1}: The number of sold items belonging to \textit{Name of Category 1}.
 \end{itemize}
 
@@ -239,14 +239,14 @@ The function \texttt{Coda.DataPreparation} is analog to CountModel.Preparation
 The result is a tibble. The columns are the ilr transformed data and hence the number of columns depends on the dimension of the data:
 
 \begin{itemize}
-	\item week\_date: The values of the window.
+	\item week\_date: The dates of the recorded values of the window.
 	\item \textit{Name of ilr transformed category 1}: The ilr transformed values.
 \end{itemize}
 
 If $\Tsp$-Spaces are used then an additional column with the sum or log-sum is added:
 
 \begin{itemize}
-	\item week\_date: The values of the window.
+	\item week\_date: The dates of the recorded values of the window.
 	\item \textit{Name of ilr transformed category 1}: The ilr transformed values.
 	\item tsum: Either the total sum or log-sum. 
 \end{itemize}
