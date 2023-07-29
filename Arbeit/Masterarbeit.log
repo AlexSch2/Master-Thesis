@@ -1279,8 +1279,8 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [30]
 [31]
 Overfull \hbox (14.67326pt too wide) in paragraph at lines 332--333
-[]\T1/lmr/m/n/12 Third, which is the main res-ult of []J. A. Martín-Fernández, 
-Barceló-Vidal, and Pawlowsky-
+[]\T1/lmr/m/n/12 Third, which is the main res-ult of []J. A. Martï¿½n-Fernï¿½ndez, 
+Barcelï¿½-Vidal, and Pawlowsky-
  []
 
 [32]
@@ -1844,7 +1844,7 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 Here is how much of TeX's memory you used:
  27429 strings out of 475516
  527699 string characters out of 5759501
- 1936238 words of memory out of 5000000
+ 1935238 words of memory out of 5000000
  47827 multiletter control sequences out of 15000+600000
  681957 words of font info for 133 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
