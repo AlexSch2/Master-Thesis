@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.7.17)  28 JUL 2023 17:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.7.17)  29 JUL 2023 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1844,7 +1844,7 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 Here is how much of TeX's memory you used:
  27429 strings out of 475516
  527699 string characters out of 5759501
- 1936238 words of memory out of 5000000
+ 1935238 words of memory out of 5000000
  47827 multiletter control sequences out of 15000+600000
  681957 words of font info for 133 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
@@ -1874,7 +1874,7 @@ a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/A
 ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 >
-Output written on Masterarbeit.pdf (97 pages, 8615335 bytes).
+Output written on Masterarbeit.pdf (97 pages, 8615930 bytes).
 PDF statistics:
  1743 PDF objects out of 2073 (max. 8388607)
  412 named destinations out of 1000 (max. 500000)
