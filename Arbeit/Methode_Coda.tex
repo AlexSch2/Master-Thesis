@@ -362,7 +362,7 @@ The authors in \textcite{Palarea-Albaladejo:2015} focus on the case of rounded z
 \subsubsection{EM-based algorithm}
 \label{sec:EM-algorithm}
 
-The Expectation-Maximisation (EM) algorithm of \textcite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses the information in the covariance structure to conditionally estimate the censored values. Given a censoring pattern with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components of a composition $\bm{x}$, the EM-algorithm consists of two steps. At the t-th iteration
+The Expectation-Maximisation (EM) algorithm of \textcite{Dempster:1977} is a widely used method in imputation. In the setting of multivariate compositional data, it uses the information in the covariance structure to conditionally estimate the censored values. Given a censoring pattern with observed $\bm{x}_{obs}$ and unobserved $\bm{x}_{non}$ components of a composition $\bm{x}$. Denote with $m$ the number of unobserved components. Then the EM-algorithm consists of two steps with the t-th iteration given by
 
 \begin{enumerate}
 	\item E-Step: Given a parameter estimate $\hat{\bm{\theta}}^{(t)}$, compute $\mathbbm{E}[\bm{x}_{non}|\bm{x}_{obs},\bm{x}_{non} < DL; \hat{\bm{\theta}}^{(t)}]$.
@@ -372,11 +372,11 @@ The Expectation-Maximisation (EM) algorithm of \textcite{Dempster:1977} is a wid
 Here, $DL$ is the mapped censoring threshold. Assuming a multivariate normal distribution, the conditional expected value of $\bm{x}_{non}$ at step $t$ is given by
 
 \begin{equation}
-\hat{\bm{x}}_{non}^{(t)^T} = \bm{x}_{obs}^T\hat{\bm{\beta}}^{(t)} - \hat{\sigma}^{(t)}\hat{\lambda}^{(t)},
+\hat{\bm{x}}_{non}^{(t)^T} = \bm{x}_{obs}^T\hat{\bm{\beta}}^{(t)} - \bm{1} \hat{\sigma}^{(t)}\hat{\lambda}^{(t)},
 \label{eq:E-step}
 \end{equation}
 %
-where $\hat{\lambda}^{(t)}=\frac{\phi((DL-\bm{x}_{obs}^T\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}{\Phi((DL-\bm{x}_{obs}^T\hat{\beta}^{(t)})/\hat{\sigma}^{(t)})}$ is the inverse Mills ratio. The function $\phi$ denotes the standard normal density and $\Phi$ is its distribution. The parameter $\hat{\bm{\beta}}$ is the ML estimate of the regression parameters and $\hat{\sigma}^2$ is the ML estimate of the variance, see \textcite{Palarea-Albaladejo:2015}. % and $\hat{\theta}^{(t)}=(\hat{\beta}^{(t)},\hat{\sigma}^{(t)})$
+where $\hat{\lambda}^{(t)}=\frac{\phi((DL-\bm{x}_{obs}^T\hat{\bm{\beta}}^{(t)})/\hat{\sigma}^{(t)})}{\Phi((DL-\bm{x}_{obs}^T\hat{\bm{\beta}}^{(t)})/\hat{\sigma}^{(t)})}$ is the inverse Mills ratio and $\bm{1} \in \mathbbm{R}^{1 \times m}$. The function $\phi$ denotes the standard normal density and $\Phi$ is its distribution. The parameter $\hat{\bm{\beta}}$ is the ML estimate of the regression parameters and $\hat{\sigma}^2$ is the ML estimate of the variance, see \textcite{Palarea-Albaladejo:2015}. % and $\hat{\theta}^{(t)}=(\hat{\beta}^{(t)},\hat{\sigma}^{(t)})$
 
 As seen, an initial estimation is required to kick start the iteration. This can be done by either using a subset of the data which was fully observed or by using other imputation methods, see \textcite{Palarea-Albaladejo:2015}. 
 
@@ -391,7 +391,7 @@ The Markov Chain Monte Carlo (MCMC) algorithm can be seen as the Bayesian counte
 	\item Posterior-Step: Generate $\hat{\bm{\theta}}_{t+1}$ by simulating from $\mathbb{P}(\bm{\theta}|\hat{\bm{x}}_{non},\bm{x}_{obs})$. 
 \end{enumerate}
 %
-In the imputation step, the value $\hat{\bm{x}}_{non}$ is drawn from the conditional, right-truncated normal distribution with estimated mean $\bm{x}_{obs}^T\hat{\beta}$, variance $\hat{\sigma}^2$ and truncation point given by $DL$. The posterior step simulates the parameter $\bm{\theta}=(\bm{\mu},\bm{\Sigma})$ where $\bm{\Sigma}$ is the covariance matrix. This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement, see \textcite{Palarea-Albaladejo:2015}. %The posterior step simulates the parameters $\theta = (\mu,\Sigma)$, where $\Sigma$ denotes the covariance matrix from the data posterior distribution.
+In the imputation step, the value $\hat{\bm{x}}_{non}$ is drawn from the conditional, right-truncated normal distribution with estimated mean $\bm{x}_{obs}^T\hat{\bm{\beta}}$, variance $\hat{\sigma}^2$ and truncation point given by $DL$. The posterior step simulates the parameter $\bm{\theta}=(\bm{\mu},\bm{\Sigma})$ where $\bm{\Sigma}$ is the covariance matrix. This generates a Markov Chain with the posterior distribution of the transformed censored data as the stationary distribution. After enough iterations, suitable random values can then be drawn from the chain as a replacement, see \textcite{Palarea-Albaladejo:2015}. %The posterior step simulates the parameters $\theta = (\mu,\Sigma)$, where $\Sigma$ denotes the covariance matrix from the data posterior distribution.
 
 
 \subsubsection{Bayesian-multiplicative replacement}

@@ -271,7 +271,7 @@ where
 
 \begin{enumerate}
 	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second, and third moment, 
-	\item $\alpha_i \circ X_{t-i}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$, and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
+	\item $\alpha_i \circ X_{t-i} = \sum_{j=1}^{X_{t-i}} Z_{i,j}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$, and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
 	\item $\alpha_i \in (0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$,
 	\item $\sum_{j=1}^p \alpha_j < 1$.
 \end{enumerate}
