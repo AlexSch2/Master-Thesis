@@ -134,7 +134,7 @@ data_prep<-cbind(test_data_prep[-1,-1],test_data_prep[-raw_length,-1])
 names(data_prep)<-c("y1","y2","y3","y4",
                     "x1","x2","x3","x4")
 
-model_zeroinfl <- zeroinfl(cbind(y3,y4)~x3+x4,data=data_prep,dist = "poisson")
+model_zeroinfl <- zeroinfl(y1~x1,data=data_prep[2:10,],dist = "poisson")
 
 yhat <- predict(model_zeroinfl,newdata = data.frame(week_date="2022-07-18",data.frame(x3=0,x4=0)))
 
@@ -185,7 +185,7 @@ switch(a,
        "A"= stopifnot(x>10),
        "B"= stopifnot(x<5))
 
-X <- matrix(c(26.91,8.08,12.59,31.58,6.45,14.39,
+X <- matrix(c(11.85,45.40,36.84,10.86,0.00,0.00,
               39.73,26.20,0.00,15.22,6.80,12.05,
               10.76,31.36,0.00,12.74,31.34,6.70,
               10.85,46.40,31.89,10.86,0.00,0.00,
@@ -196,4 +196,4 @@ X <- matrix(c(26.91,8.08,12.59,31.58,6.45,14.39,
               11.50,30.33,6.85,13.92,30.82,6.58,
               19.04,42.59,0.00,38.37,0.00,0.00),byrow=TRUE,ncol=6)
 
-X_lrEM <- lrEM(X,label=0,dl=rep(1,6),ini.cov="multRepl")
+X_lrDA <- lrDA(X,label=0,dl=rep(1,6),ini.cov="multRepl")

@@ -21,16 +21,16 @@
 \contentsline {subsection}{\numberline {2.3.3}Applications}{13}{subsection.2.3.3}%
 \contentsline {section}{\numberline {2.4}Naive Random Walk}{13}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Zero-Inflated Models}{14}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Parameter Estimation and Forecasting}{15}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.1}Parameter Estimation and Forecasting}{16}{subsection.2.5.1}%
 \contentsline {section}{\numberline {2.6}Log-Linear Models}{16}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Parameter Estimation and Forecasting}{16}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.1}Parameter Estimation and Forecasting}{17}{subsection.2.6.1}%
 \contentsline {section}{\numberline {2.7}AR Models}{17}{section.2.7}%
 \contentsline {subsection}{\numberline {2.7.1}Parameter Estimation and Forecasting}{17}{subsection.2.7.1}%
 \contentsline {subsection}{\numberline {2.7.2}Testing for AR Models}{18}{subsection.2.7.2}%
-\contentsline {section}{\numberline {2.8}INAR(p) Models}{18}{section.2.8}%
-\contentsline {subsection}{\numberline {2.8.1}Distributional Assumptions}{19}{subsection.2.8.1}%
+\contentsline {section}{\numberline {2.8}INAR(p) Models}{19}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Distributional Assumptions}{20}{subsection.2.8.1}%
 \contentsline {subsection}{\numberline {2.8.2}Parameter Estimation and Forecasting}{20}{subsection.2.8.2}%
-\contentsline {subsection}{\numberline {2.8.3}Testing for INAR(1) Models}{20}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.3}Testing for INAR(1) Models}{21}{subsection.2.8.3}%
 \contentsline {subsection}{\numberline {2.8.4}Difference to AR(p) Models}{21}{subsection.2.8.4}%
 \contentsline {chapter}{\numberline {3}Compositional Data Models}{23}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Motivation}{23}{section.3.1}%

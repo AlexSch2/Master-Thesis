@@ -105,12 +105,12 @@ However, due to a lack of available R-packages for zero-inflated Poisson INGARCH
 \begin{gathered}
 Y_{kt} | \SigA_{k,t-1} \sim ZIP(\lambda_{kt},\omega_{kt}); \forall t \in \mathbb{N}, \\
 \log(\lambda_{kt}) = \sum_{i=1}^p\beta_i b^k_{t-1,i},\\ %\bm{B}^T_{k,t-1} \bm{\beta},\\
-\log\left(\frac{\omega_{kt}}{1-\omega_{kt}}\right)=\sum_{i=1}^q\gamma_i z^k_{t-1,j},%\bm{Z}_{k,t-1}^T\bm{\gamma},
+\log\left(\frac{\omega_{kt}}{1-\omega_{kt}}\right)=\sum_{i=1}^q\gamma_i z^k_{t-1,i},%\bm{Z}_{k,t-1}^T\bm{\gamma},
 \label{eq:ZIP Autoregressive model}
 \end{gathered}
 \end{equation}
 %
-where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_q)^T$ are the parameters to be estimated and the vectors $\bm{B}^k_t=(b^k_{tj})$ and $\bm{Z}^k_{t}=(z^k_{tj})$ are the explanatory covariates. In Model (\ref{eq:ZIP Autoregressive model}) a logit link function has been used although, it can be replaced with other link functions like the probit or log link, see \textcite{Yang:2012}. 
+where $\bm{\beta} = (\beta_1,\ldots,\beta_p)^T$ and $\bm{\gamma}=(\gamma_1,\ldots,\gamma_q)^T$ are the parameters to be estimated and the vectors $\bm{B}^k_t=(b^k_{ti})$ and $\bm{Z}^k_{t}=(z^k_{ti})$ are the explanatory covariates. In Model (\ref{eq:ZIP Autoregressive model}) a logit link function has been used although, it can be replaced with other link functions like the probit or log link, see \textcite{Yang:2012}. 
 
 In our case we regress on the past values of our time series. In that case Model (\ref{eq:ZIP Autoregressive model}) becomes
 
@@ -129,7 +129,7 @@ In our case we regress on the past values of our time series. In that case Model
 
 Parameter estimation for Model (\ref{eq:ZIP Autoregressive model timeseries}) is done with the maximum partial likelihood estimate. However, since there exists no closed form solution, iterative algorithms like the Expectation-Maximisation (EM), Newton-Raphson (NR), or Fisher Scoring (FS) can be used, see \textcite{Yang:2012}.  Further details can be found in \textcite{Yang:2012}.
 
-The one-step ahead predictor is again given by the conditional expectation $\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_{kt})\lambda_{kt} $ with the estimated coefficients plugged in. 
+The one-step ahead predictor is again given by $\mathbb{E}[Y_{kt} | \SigA_{k,t-1}] = (1-\omega_{kt})\lambda_{kt} $ with the estimated coefficients plugged in. 
 
 \section{Log-Linear Models}
 \label{sec: Log-Linear Models}
@@ -146,7 +146,8 @@ Y_{kt} | \SigA_{k,t-1} \sim P(\lambda_{kt}); \forall t \in \mathbb{N}, \\
 %
 The past values get transformed by $h(x)=\log(x+1)$ to get them on the same scale as $\nu_{kt}$ and avoid zero values in the logarithm, see \textcite{Liboschik:2016,Fokianos:2011}. 
 
-We consider the log-linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, as a result of the definition of the parameter space, Equation (\ref{eq:Ingarch parameter space}), we have $0 < \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$. Second, when we include covariates, they can only have a positive regression term because otherwise the mean $\lambda_{kt}$ becomes negative. However, in the log-linear case we can extend this to
+We consider the log-linear model because it provides solutions to at least two drawbacks from the INGARCH(p,q) model. First, Model (\ref{eq:Ingarch model}) only allows positive serial correlation. Second, when we include covariates, they can only have a non-negative regression term because otherwise the mean $\lambda_{kt}$ can become negative. However, in the log-linear case we can extend this to
+% First, as a result of the definition of the parameter space, Equation (\ref{eq:Ingarch parameter space}), we have $0 \geq \sum_{i=1}^p\beta_i + \sum_{j=1}^q\alpha_j < 1$ and hence it follows for $h\in \mathbb{N}$ that $Cov(Y_{k,t+h},Y_{kt})>0$.
 
 \begin{equation}
 \begin{gathered}
@@ -217,7 +218,7 @@ where $\bm{a}_j \in \mathbbm{R}^{K \times K}$ are the coefficient matrices and $
 
 The simplicity of AR models makes parameter estimation and forecasting easy. There are various ways to estimate the parameters in Model (\ref{eq: Var Model}) such as the Yule-Walker equations, the ordinary least squares (OLS) estimator, and if the innovations $\left\{\bm{\epsilon}_t\right\}$ are multivariate normal distributed, then the maximum likelihood estimator can be used as well, see \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. %Further properties and comparison of their estimators can be found in \textcite{Scherrer:2021} and \textcite{Hamilton:1994}. 
 
-Like parameter estimation, forecasting is also simple in the AR model. We use the mean squared error as an error measure and only consider affine forecasts with $m\geq p,m \in \mathbbm{N}$ past values, hence the forecast has the form
+Like parameter estimation, forecasting is also straightforward in the AR model. We use the mean squared error as an error measure and only consider affine forecasts with $m\geq p,m \in \mathbbm{N}$ past values, hence the forecast has the form
 \begin{equation}
 \hat{\bm{Y}}_{t+h} = \bm{c}_1\bm{Y}_{t} + \ldots + \bm{c}_m\bm{Y}_{t-m+1},
 \label{eq:Forecasting general}
@@ -271,9 +272,9 @@ where
 
 \begin{enumerate}
 	\item $\left\{\epsilon_t\right\}$ is a sequence of integer-valued i.i.d. random variables, called innovations, with finite first, second, and third moment, 
-	\item $\alpha_i \circ X_{t-i} = \sum_{j=1}^{X_{t-i}} Z_{i,j}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$, and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
+	\item $\alpha_i \circ X_{t-i} = \sum\limits_{j=1}^{X_{t-i}} Z_{i,j}$ for $i= 1,\ldots,p$ and for each $i$ the counting series $\left\{Z_{i,j}\right\}$ with $j=1,\ldots,X_{t-i}$ are mutually independent, independent of $\left\{\epsilon_t\right\}$, and it holds $\mathbb{E}[Z_{i,j}]=\alpha_i$, as well as $\mathbb{V}[Z_{i,j}] = \sigma_i^2$ and $\mathbb{E}[Z_{i,j}^3] = \gamma_i$,
 	\item $\alpha_i \in (0,1]$ for $i=1,\ldots,p-1$ and $0 < \alpha_p < 1$,
-	\item $\sum_{j=1}^p \alpha_j < 1$.
+	\item $\sum\limits_{j=1}^p \alpha_j < 1$.
 \end{enumerate}
 %
 The last condition ensures the existence and stationary of the process, see \textcite{Silva:2005}. 
@@ -305,7 +306,7 @@ The authors in \textcite{Silva:2005} present two types of forecasting methods fo
 \label{eq:Forecasting Classic}
 \end{equation}
 %
-However, this forecast hardly ever produces integer values. One option to counter this problem, is to take the value which minimises the absolute expected error $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$ instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$. Another option is a Bayesian approach presented in \textcite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha_k,\lambda_k)$ are random. Since the complexity of the posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are given in \textcite{Silva:2005}. The estimator for the conditional expectation is then given by
+However, this forecast hardly ever produces integer values. One option to counter this problem, is to take the value which minimises $\mathbbm{E}[\abs{Y_{k,n+h} - \hat{Y}_{k,n+h}}|Y_{k,n}]$, the absolute expected error, instead of the MSE. This turns out to be the median $\hat{m}_{n+h}$ of the h-step ahead conditional distribution of $Y_{k,n+h}|Y_{k,n}$. Another option is a Bayesian approach presented in \textcite{Silva:2005}. It is based on the assumption that both, the future prediction $Y_{k,n+h}$ and the vector of unknown parameters $\bm{\theta}=(\alpha_k,\lambda_k)$ are random. Since the complexity of the posterior probability density function makes it difficult to work with it directly, a sampling algorithm can be deployed for estimation. The details are given in \textcite{Silva:2005}. The estimator for the conditional expectation is then given by
 
 \begin{equation}
 \hat{Y}_{k,n+h}= Y_{kn}\left(\frac{1}{m} \sum_{i=1}^m\alpha_{ki}^h\right) + \left(\frac{1}{m} \sum_{i=1}^m \frac{1-\alpha_{ki}^h}{1-\alpha_{ki}}\lambda_{ki}\right),

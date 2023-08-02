@@ -15,7 +15,7 @@ CoDA, which is short for ``Compositional Data Analysis'', works with composition
 	\label{eq:Simplex Definition}
 	\end{equation}
 %
-where $\kappa$ is a positive constant. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A $D$-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next, we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For compositions $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $b \in \mathbb{R}$ they are defined respectively as 
+where $\kappa$ is a positive constant. The choice of $\kappa$ is not relevant, as the relative information in the compositional parts stays the same.  A $D$-dimensional vector $\textbf{x} = (x_1,\ldots,x_D)^T$ is said to be compositional if it is part of $\mathbbm{S}^D$. Next, we can induce a $(D-1)$-dimensional vector space on $\mathbbm{S}^D$ by perturbation and power transformation. For $\textbf{x},\textbf{z} \in \mathbbm{S}^D$ and $b \in \mathbb{R}$ they are defined respectively as 
 
 \begin{equation}
 \textbf{x}\oplus_a \textbf{z} = \ClOp(x_1z_1,x_2z_2,\ldots,x_Dz_D)^T, \hspace{0.5cm} b \odot_a \textbf{x} = \ClOp(x_1^b,x_2^b,\ldots,x_D^b)^T.
@@ -53,7 +53,7 @@ In addition, a norm and distance measure can be defined
 %
 With this, we induced the Aitchison geometry and it allows us to express a composition $\textbf{x} \in \mathbbm{S}^D$ as a perturbation-linear combination of a basis of $\mathbbm{S}^D$, see \textcite{Filzmoser:2020} and \textcite{Kynclova:2015}.
 
-However, in order to use standard statistical tools, it is desirable to move from this geometry to the Euclidean real space, see \textcite{Filzmoser:2020}. There are various ways to map the data from the simplex $\mathbbm{S}^D$ to the real space $\mathbb{R}^D$. A review of the most common transformations is provided in the following section.
+However, in order to use standard statistical tools, it is desirable to move from this geometry to the Euclidean real space, see \textcite{Filzmoser:2020}. There are various ways to map the data from the simplex $\mathbbm{S}^D$ to the Euclidean real space. A review of the most common transformations is provided in the following section.
 
 \section{Common Transformations}
 \label{sec: Common Transformations}
@@ -69,7 +69,7 @@ The additive log-ratio (alr) Coordinates are defined as
 \label{eq:alr Coordinates}
 \end{equation}
 %
-and map the composition $\textbf{x}$ to the real space $\mathbb{R}^D$, see \textcite{Kynclova:2015}. They are mainly mentioned for historic purposes since they are an intuitive way of transformation. However, limitations are posed by their dependence on the choice of the denominator $x_k$ and the fact that they are not orthogonal to each other, see \textcite{Filzmoser:2020}. 
+and map the composition $\textbf{x}$ to the real space $\mathbb{R}^{D-1}$, see \textcite{Kynclova:2015}. They are mainly mentioned for historic purposes since they are an intuitive way of transformation. However, limitations are posed by their dependence on the choice of the denominator $x_k$ and the fact that they are not orthogonal to each other, see \textcite{Filzmoser:2020}. 
 
 \subsubsection{clr Coefficients}
 \label{sec:clr Coefficients}
@@ -92,7 +92,7 @@ d_a(\textbf{x},\textbf{z}) = d(clr(\textbf{x}),clr(\textbf{z})).
 \subsubsection{ilr Coordinates}
 \label{sec:ilr Coordinates}
 
-The isometric log-ratio (ilr) are closely related to the clr coefficients. Assume the inverse $clr$ transformation is isometric. Let $\left\{\bm{v}_1,\ldots,\bm{v}_{D-1}\right\}$ be an orthonormal base in the hyperplane $V$. Then $\textbf{e}_i = clr^{-1}(\bm{v}_i), i=1,\ldots,D-1$ is an orthonormal basis of the simplex $\mathbbm{S}^D$. For $\textbf{x} \in \mathbbm{S}^D$, the $ilr$ transformation can then be defined as 
+The isometric log-ratio (ilr) are closely related to the clr coefficients. Assume the inverse $clr$ transformation is isometric. Let $\left\{\bm{v}_1,\ldots,\bm{v}_{D-1}\right\}$ be an orthonormal base in the hyperplane $V$. Then $\textbf{e}_i = clr^{-1}(\bm{v}_i), i=1,\ldots,D-1$ is an orthonormal basis in the simplex $\mathbbm{S}^D$. For $\textbf{x} \in \mathbbm{S}^D$, the $ilr$ transformation can then be defined as 
 
 \begin{equation}
 \textbf{u} = ilr(\textbf{x}) = \left(\left\langle \textbf{x},\textbf{e}_1\right\rangle_a,\ldots,\left\langle \textbf{x},\textbf{e}_{D-1}\right\rangle_a\right)^T.
@@ -133,7 +133,7 @@ u_j = \sqrt{\frac{D-j}{D-j+1}}\log\left(\frac{x_j}{\sqrt[D-j]{\prod_{l=j+1}^D x_
 %
 With this choice, the problem of interpretation, which arises from the relative nature of the compositional data and the dimension of the simplex, can be solved. The part $x_1$ is only contained in $z_1$ and therefore contains all relative information of $x_1$, see \textcite{Kynclova:2015} and \textcite{Filzmoser:2020}. 
 
-To transform the data back in the simplex, the inverse transformation is given by 
+Since the $ilr$ transformation is defined as a one-to-one mapping, we can transform the data back in the simplex. The inverse transformation is given by 
 
 \begin{align}
 x_1 &= \exp\left(\sqrt{\frac{D-1}{D}}u_1\right), \\
@@ -146,14 +146,14 @@ see \textcite{Kynclova:2015}.
 \section{The VAR Model}
 \label{sec:The VAR Model}
 
-Since we have established the basic setting, we can now introduce compositional time series (CTS). A CTS $\left\{\bm{x}_t:t=1,\ldots,n \right\}$ can be defined as a series where $\bm{x}_t = \left(x_{1t},\ldots,x_{Dt}\right)^T \in \mathbbm{S}^D$. They are thus characterised by their positive components which sum up to a constant $\kappa_t$ for each point in time $t=1,\ldots,n$ 
+Since we have established the basic setting, we can now introduce compositional time series (CTS). A CTS $\left\{\bm{x}_t\right\}_{t=1}^n$ can be defined as a series where $\bm{x}_t = \left(x_{1t},\ldots,x_{Dt}\right)^T \in \mathbbm{S}^D$. They are thus characterised by their positive components which sum up to a constant $\kappa_t$ for each point in time $t=1,\ldots,n$ 
 
 \begin{equation}
 \sum_{i=1}^D x_{it} = \kappa_t, \hspace{0.5cm} x_i > 0, i=1,\ldots D \hspace{0.1cm}; t=1,\ldots, n.
 \label{eq:CTS characterisation}
 \end{equation} 
 %
-Since we do not assume our data to be integer-valued, we have $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ for fridge $f$. Further, assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a $K$-dimensional compositional vector measured at time $t=1,\ldots,T$ and let $\textbf{u}_t = ilr_{\bm{V}}(\bm{Y}_t)$ be its $ilr$ transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by
+Since we do not assume our data to be integer-valued, our time series has the form $\left\{\bm{Y}_t:t=1,\ldots,T; \bm{Y}_t \in \mathbb{R}_0^K \right\}_f$ for fridge $f$. Further, assume that $\bm{Y}_t=(Y_{1t},\ldots,Y_{Kt})^T$ is a $K$-dimensional compositional vector measured at time $t=1,\ldots,T$ and let $\textbf{u}_t = ilr_{\bm{V}}(\bm{Y}_t)$ be its $ilr$ transformation determined by the matrix $\textbf{V}$. Then the VAR model with lag order $p$ is given by
 
 \begin{equation}
 \textbf{u}_t = \textbf{c}_{\textbf{V}} + \textbf{A}_{\textbf{V}}^{(1)}\textbf{u}_{t-1} + \textbf{A}_{\textbf{V}}^{(2)}\textbf{u}_{t-2} + \ldots + \textbf{A}_{\textbf{V}}^{(p)}\textbf{u}_{t-p} + \bm{\epsilon}_{t},
@@ -187,7 +187,7 @@ Estimation and forecasting of Model (\ref{eq:VAR model}) can be done with the me
 \section{$\Tsp$-Spaces}
 \label{sec: Tspaces}
 
-As we have seen, the focus in compositional data analysis lies in the relative information encoded in the observations. However, as is often the case in practice, the absolute information is of interest as well. To retain this information, usually two practices are used. First, for a vector $\bm{x} \in \mathbb{R}^D_+$ the component wise logarithm $\log(\bm{x})$ is considered. Second, the total sum, or some other function, of $\bm{x}$ is added as an additional variable, see \textcite{Pawlowsky:2013}. Here, we will dive deeper into the second method mentioned. An overview over the first method can be found in \textcite{Pawlowsky:2013}. 
+As we have seen, the focus in compositional data analysis lies in the relative information encoded in the observations. However, as is often the case in practice, the absolute information is of interest as well. To retain this information, usually two practices are used. First, for a vector $\bm{x} \in \mathbb{R}^D_+$ the component wise logarithm $\log(\bm{x})$ is considered. Second, the total sum, or some other function, of $\bm{x}$ is added as an additional variable. Here, we will dive deeper into the second method mentioned. For more details see \textcite{Pawlowsky:2013}. %An overview over the first method can be found in \textcite{Pawlowsky:2013}. 
 
 Let $\bm{x} \in \mathbb{R}^D_+$ be a positive vector and $\ClOp(\bm{x})$ the projection onto $\mathbbm{S}^D$. Further, take a function $t:\mathbb{R}^D_+ \longrightarrow \mathbb{R}_+$ (i.e. the sum, product,...). Then define the product space  $\Tsp = \mathbb{R}_+ \times \mathbbm{S}^D$ as the space of all possible elements $(t(\bm{x}),\ClOp(\bm{x}))^T$. To define a $D$-dimensional Euclidean vector space structure on $\Tsp$, we define an Abelian inner group operation, an external multiplication, and an inner product. However, first we need to induce the Euclidean structure on $\mathbb{R}_+^D$ with the same operations. For $\bm{x},\bm{y} \in \mathbbm{R}_+^D$ and $\alpha \in \mathbbm{R}$ define the Abelian inner group operation, the external multiplication, and an inner product respectively as 
 
@@ -252,7 +252,7 @@ t(\alpha \odot_+ \bm{x}) = (t(\bm{x}))^{\alpha}.
 \label{eq:Vector Space Properties for t}
 \end{gather}
 %
-In \textcite{Pawlowsky:2013} the authors show that $h_s=((t_s(\bm{x}),\ClOp(\bm{x}))^T)$ with $t_s(\bm{x}) = \sum_{i=1}^D x_i$ is a one-to-one function, but not compatible with $\oplus_+,\odot_+$ and $\oplus_T,\odot_T$. However, as $h_s$ is a one-to-one function between $\mathbbm{R}_+^D$ and $\Tsp$, there exists a Euclidean structure in $\mathbbm{R}_+^D$ that is isometric to the one in $\Tsp$. The vector space operations can be defined as
+In \textcite{Pawlowsky:2013} it is shown that $h_s=((t_s(\bm{x}),\ClOp(\bm{x}))^T)$ with $t_s(\bm{x}) = \sum_{i=1}^D x_i$ is a one-to-one function, but not compatible with $\oplus_+,\odot_+$ and $\oplus_T,\odot_T$. However, as $h_s$ is a one-to-one function between $\mathbbm{R}_+^D$ and $\Tsp$, there exists a Euclidean structure in $\mathbbm{R}_+^D$ that is isometric to the one in $\Tsp$. The vector space operations can be defined as
 
 \begin{gather}
 \bm{x} \oplus_{+s} \bm{y} = h_s^{-1}(\tilde{\bm{x}}) \oplus_T  h_s^{-1}(\tilde{\bm{y}}), \\
@@ -275,7 +275,7 @@ In our application, we will use $t(\bm{Y}_t)=\sum_{k=1}^K Y_{kt}$ or $t(\bm{Y}_t
 \section{Zero Handling}
 \label{sec: Zero-Handling}
 
-As we can see in the definition of the Simplex (\ref{eq:Simplex Definition}), a compositional vector can only consist of positive parts and since we have a considerable amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data but first, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them to perform compositional data analysis. In our data we have essential zeros. In the following we summarise the methods presented in \textcite{Lubbe:2021} and \textcite{Josep:2003}. 
+As we can see in the definition of the simplex (\ref{eq:Simplex Definition}), a compositional vector can only consist of positive parts and since we have a considerable amount of zeros in our data, we need to take care of them. There have been various methods proposed in literature to handle zero values in compositional data but first, a distinction must be made in the type of zeros present. One can differentiate between two types of zeros. The first type of zeros is called structural zeros or essential zeros. Those values are truly zero. The second type is called rounded zeros or count zeros. They appear due to imprecision when measuring data or if the detected value is below the detection limit. Those values are not truly zero and hence it makes sense to replace them to perform compositional data analysis. In our data we have essential zeros. In the following we summarise the methods presented in \textcite{Lubbe:2021} and \textcite{Josep:2003}. 
 
 \subsection{Rounded Zeros}
 \label{sec:Rounded Zeros}
@@ -329,7 +329,7 @@ r_j =
 %
 This method depends again on $\delta_j$ and the number of zeros $m$, see \textcite{Josep:2003}. 
 
-Third, which is the main result of \textcite{Josep:2003}, is the multiplicative replacement strategy. The proposed replacement is 
+Third is the multiplicative replacement strategy, which is the main result of \textcite{Josep:2003}. The proposed replacement is 
 
 \begin{equation}
 r_j = 
@@ -373,12 +373,12 @@ Here, $DL$ is the mapped censoring threshold. Assuming a multivariate normal dis
 
 \begin{equation}
 %\hat{\bm{x}}_{non}^{(t)} = \bm{x}_{obs}^T\hat{\bm{\beta}}^{(t)} -\hat{\sigma}^{(t)}\hat{\lambda}^{(t)},
-\hat{\bm{x}}_{non_j}^{(t)} = \hat{\bm{\beta}}_{1j} + \sum_{i=1}^{r} x_{obs_{i}}\hat{\bm{\beta}}_{(i+1),j} - \hat{\sigma}_{j}\hat{\lambda}_{j} \hspace{0.5cm} \text{for } j=1,\ldots,m,
+\hat{\bm{x}}_{non_j}^{(t)} = \hat{\beta}_{1j} + \sum_{i=1}^{r} x_{obs_{i}}\hat{\beta}_{(i+1),j} - \hat{\sigma}_{j}\hat{\lambda}_{j} \hspace{0.5cm} \text{for } j=1,\ldots,m,
 \label{eq:E-step}
 \end{equation}
 %
 where $\hat{\lambda}_j^{(t)}=\frac{\phi((DL-(1,\bm{x}_{obs}^T)\hat{\bm{\beta}}_{j}^{(t)})/\hat{\sigma}_j^{(t)})}{\Phi((DL-(1,\bm{x}_{obs}^T)\hat{\bm{\beta}}_{j}^{(t)})/\hat{\sigma}_j^{(t)})}$ is the inverse Mills ratio. The function $\phi$ denotes the standard normal density and $\Phi$ is its distribution. The parameter $\hat{\bm{B}} = (\hat{\bm{\beta}}_1,\ldots,\hat{\bm{\beta}}_m) \in \mathbbm{R}^{(r+1) \times m}$ is the ML estimate of the regression parameters and $\hat{\sigma}_j^2$ is the ML estimate of the conditional variance for $j=1,\ldots,m$, see \textcite{Palarea-Albaladejo:2015}. % and $\hat{\theta}^{(t)}=(\hat{\beta}^{(t)},\hat{\sigma}^{(t)})$
-
+%$\hat{\bm{B}} = (\hat{\bm{\beta}}_1,\ldots,\hat{\bm{\beta}}_m) \in \mathbbm{R}^{(r+1) \times m}$
 As seen, an initial estimation is required to kick start the iteration. This can be done by either using a subset of the data which was fully observed or by using other imputation methods, see \textcite{Palarea-Albaladejo:2015}. 
 
 
