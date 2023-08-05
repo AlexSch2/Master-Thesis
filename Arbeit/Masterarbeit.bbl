@@ -126,24 +126,13 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{00219002}
       \field{journaltitle}{Journal of Applied Probability}
       \field{number}{2}
-      \field{title}{An Integer-Valued pth-Order Autoregressive Structure (INAR(p)) Process}
-      \field{urlday}{17}
-      \field{urlmonth}{7}
-      \field{urlyear}{2023}
+      \field{title}{An integer-valued pth-order autoregressive structure (INAR(p)) process}
       \field{volume}{27}
       \field{year}{1990}
-      \field{urldateera}{ce}
       \field{pages}{314\bibrangedash 324}
       \range{pages}{11}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/3214650
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/3214650
-      \endverb
     \endentry
     \entry{Bera:1993}{article}{}
       \name{author}{2}{}{%
@@ -174,22 +163,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Economic Surveys}
       \field{number}{4}
-      \field{title}{ARCH MODELS: PROPERTIES, ESTIMATION AND TESTING}
+      \field{title}{ARCH models: properties, estimation and testing}
       \field{volume}{7}
       \field{year}{1993}
       \field{pages}{305\bibrangedash 366}
       \range{pages}{62}
       \verb{doi}
       \verb https://doi.org/10.1111/j.1467-6419.1993.tb00170.x
-      \endverb
-      \verb{eprint}
-      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-6419.1993.tb00170.x
-      \endverb
-      \verb{urlraw}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-6419.1993.tb00170.x
-      \endverb
-      \verb{url}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-6419.1993.tb00170.x
       \endverb
       \keyw{ARCH,GARCH,nonlinearity,nonnormality,persistence,random coefficient model,volatility}
     \endentry
@@ -234,9 +214,11 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Annals of Economic and Social Measurement}
       \field{month}{01}
-      \field{title}{Estimation and Inference in Non-Linear Structural Models}
+      \field{title}{Estimation and inference in non-linear structural models}
       \field{volume}{4}
       \field{year}{1974}
+      \field{pages}{653\bibrangedash 665}
+      \range{pages}{13}
     \endentry
     \entry{Biswas:2009}{article}{}
       \name{author}{2}{}{%
@@ -265,7 +247,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0167-7152}
       \field{journaltitle}{Statistics \& Probability Letters}
       \field{number}{17}
       \field{title}{Discrete-valued ARMA processes}
@@ -275,12 +256,6 @@
       \range{pages}{6}
       \verb{doi}
       \verb https://doi.org/10.1016/j.spl.2009.05.025
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0167715209001977
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0167715209001977
       \endverb
     \endentry
     \entry{Bollerslev:1986}{article}{}
@@ -304,7 +279,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0304-4076}
       \field{journaltitle}{Journal of Econometrics}
       \field{number}{3}
       \field{title}{Generalized autoregressive conditional heteroskedasticity}
@@ -314,12 +288,6 @@
       \range{pages}{21}
       \verb{doi}
       \verb https://doi.org/10.1016/0304-4076(86)90063-1
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/0304407686900631
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/0304407686900631
       \endverb
     \endentry
     \entry{Boogaart:2006}{inproceedings}{}
@@ -386,7 +354,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Umeå Economic Studies}
       \field{month}{01}
-      \field{title}{Estimation and Testing in Integer-valued AR(1) Models}
+      \field{title}{Estimation and testing in integer-valued AR(1) models}
       \field{year}{1993}
     \endentry
     \entry{Chang:1987}{article}{}
@@ -422,22 +390,15 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0022-1694}
       \field{journaltitle}{Journal of Hydrology}
       \field{number}{1}
-      \field{title}{Application of Discrete Autoregressive Moving Average models for estimation of daily runoff}
+      \field{title}{Application of discrete autoregressive moving average models for estimation of daily runoff}
       \field{volume}{91}
       \field{year}{1987}
       \field{pages}{119\bibrangedash 135}
       \range{pages}{17}
       \verb{doi}
       \verb https://doi.org/10.1016/0022-1694(87)90132-6
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/0022169487901326
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/0022169487901326
       \endverb
     \endentry
     \entry{Fokianos:2014}{article}{}
@@ -469,22 +430,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Time Series Analysis}
       \field{number}{1}
-      \field{title}{QUASI-LIKELIHOOD INFERENCE FOR NEGATIVE BINOMIAL TIME SERIES MODELS}
+      \field{title}{Quasi-likelihood inference for negative binomial time series models}
       \field{volume}{35}
       \field{year}{2014}
       \field{pages}{55\bibrangedash 78}
       \range{pages}{24}
       \verb{doi}
       \verb https://doi.org/10.1111/jtsa.12050
-      \endverb
-      \verb{eprint}
-      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/jtsa.12050
-      \endverb
-      \verb{urlraw}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/jtsa.12050
-      \endverb
-      \verb{url}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/jtsa.12050
       \endverb
       \keyw{Autocorrelation,diagnostics,ergodicity,generalized linear models,link function,mixed Poisson processes,observation-driven model,prediction,weak dependence}
     \endentry
@@ -526,12 +478,6 @@
       \verb{doi}
       \verb 10.1007/s11749-017-0552-4
       \endverb
-      \verb{urlraw}
-      \verb https://ideas.repec.org/a/spr/testjl/v27y2018i2d10.1007_s11749-017-0552-4.html
-      \endverb
-      \verb{url}
-      \verb https://ideas.repec.org/a/spr/testjl/v27y2018i2d10.1007_s11749-017-0552-4.html
-      \endverb
       \keyw{Bivariate; GARCH model; MLE; Negative cross-correlation; Poisson; Time series of counts}
     \endentry
     \entry{Scherrer:2021}{book}{}
@@ -570,12 +516,6 @@
       \verb{doi}
       \verb 10.1007/978-3-319-68664-6
       \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1007/978-3-319-68664-6
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1007/978-3-319-68664-6
-      \endverb
     \endentry
     \entry{Dempster:1977}{article}{}
       \name{author}{3}{}{%
@@ -612,22 +552,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of the Royal Statistical Society: Series B (Methodological)}
       \field{number}{1}
-      \field{title}{Maximum Likelihood from Incomplete Data Via the EM Algorithm}
+      \field{title}{Maximum likelihood from incomplete data via the EM algorithm}
       \field{volume}{39}
       \field{year}{1977}
       \field{pages}{1\bibrangedash 22}
       \range{pages}{22}
       \verb{doi}
       \verb https://doi.org/10.1111/j.2517-6161.1977.tb01600.x
-      \endverb
-      \verb{eprint}
-      \verb https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.2517-6161.1977.tb01600.x
-      \endverb
-      \verb{urlraw}
-      \verb https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1977.tb01600.x
-      \endverb
-      \verb{url}
-      \verb https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1977.tb01600.x
       \endverb
       \keyw{maximum likelihood,incomplete data,em algorithm,posterior mode}
     \endentry
@@ -664,7 +595,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0304-4149}
       \field{journaltitle}{Stochastic Processes and their Applications}
       \field{note}{A Special Issue on the Occasion of the 2013 International Year of Statistics}
       \field{number}{7}
@@ -675,12 +605,6 @@
       \range{pages}{28}
       \verb{doi}
       \verb https://doi.org/10.1016/j.spa.2013.04.010
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0304414913001051
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0304414913001051
       \endverb
       \keyw{Consistency,Ergodicity,Time series of counts,Maximum likelihood,Observation-driven models,Stationarity}
     \endentry
@@ -717,22 +641,15 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0167-7152}
       \field{journaltitle}{Statistics \& Probability Letters}
       \field{number}{5}
-      \field{title}{On weak dependence conditions for Poisson autoregressions}
+      \field{title}{On weak dependence conditions for poisson autoregressions}
       \field{volume}{82}
       \field{year}{2012}
       \field{pages}{942\bibrangedash 948}
       \range{pages}{7}
       \verb{doi}
       \verb https://doi.org/10.1016/j.spl.2012.01.015
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0167715212000259
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0167715212000259
       \endverb
       \keyw{Autocorrelation,Generalized linear models,Limit theorems,Prediction,Stationarity}
     \endentry
@@ -765,7 +682,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Mathematical Geology}
       \field{month}{10}
-      \field{title}{Groups of Parts and Their Balances in Compositional Data Analysis}
+      \field{title}{Groups of parts and their balances in compositional data analysis}
       \field{volume}{37}
       \field{year}{2005}
       \field{pages}{795\bibrangedash 828}
@@ -815,7 +732,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Mathematical Geology}
       \field{month}{04}
-      \field{title}{Isometric Logratio Transformations for Compositional Data Analysis}
+      \field{title}{Isometric logratio transformations for compositional data analysis}
       \field{volume}{35}
       \field{year}{2003}
       \field{pages}{279\bibrangedash 300}
@@ -848,24 +765,13 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{00129682, 14680262}
       \field{journaltitle}{Econometrica}
       \field{number}{4}
-      \field{title}{Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of United Kingdom Inflation}
-      \field{urlday}{17}
-      \field{urlmonth}{7}
-      \field{urlyear}{2023}
+      \field{title}{Autoregressive conditional heteroscedasticity with estimates of the variance of united kingdom inflation}
       \field{volume}{50}
       \field{year}{1982}
-      \field{urldateera}{ce}
       \field{pages}{987\bibrangedash 1007}
       \range{pages}{21}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/1912773
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/1912773
-      \endverb
     \endentry
     \entry{Ferland:2006}{article}{}
       \name{author}{3}{}{%
@@ -902,22 +808,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Time Series Analysis}
       \field{number}{6}
-      \field{title}{Integer-Valued GARCH Process}
+      \field{title}{Integer-valued GARCH process}
       \field{volume}{27}
       \field{year}{2006}
       \field{pages}{923\bibrangedash 942}
       \range{pages}{20}
       \verb{doi}
       \verb https://doi.org/10.1111/j.1467-9892.2006.00496.x
-      \endverb
-      \verb{eprint}
-      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-9892.2006.00496.x
-      \endverb
-      \verb{urlraw}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.2006.00496.x
-      \endverb
-      \verb{url}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.2006.00496.x
       \endverb
       \keyw{Integer-valued time series,GARCH model,heteroskedastic}
     \endentry
@@ -984,12 +881,6 @@
       \verb{doi}
       \verb https://doi.org/10.1016/B978-0-12-409547-2.14591-3
       \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/B9780124095472145913
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/B9780124095472145913
-      \endverb
       \keyw{Aitchison geometry,Bootstrap,Classification,Compositional data,Linear discriminant analysis,Partial least squares,PLS-DA,Principal component analysis,Regression,Relative information,Validation}
     \endentry
     \entry{CoDAR4:2018}{book}{}
@@ -1054,18 +945,11 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{2452-3062}
       \field{journaltitle}{Econometrics and Statistics}
-      \field{title}{Multivariate Count Time Series Modelling}
+      \field{title}{Multivariate count time series modelling}
       \field{year}{2021}
       \verb{doi}
       \verb https://doi.org/10.1016/j.ecosta.2021.11.006
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S2452306221001374
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S2452306221001374
       \endverb
       \keyw{auto-correlation,covariates,copula,estimation,multivariate count distribution,prediction}
     \endentry
@@ -1107,22 +991,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of the American Statistical Association}
       \field{number}{488}
-      \field{title}{Poisson Autoregression}
+      \field{title}{Poisson autoregression}
       \field{volume}{104}
       \field{year}{2009}
       \field{pages}{1430\bibrangedash 1439}
       \range{pages}{10}
       \verb{doi}
       \verb 10.1198/jasa.2009.tm08270
-      \endverb
-      \verb{eprint}
-      \verb https://doi.org/10.1198/jasa.2009.tm08270
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1198/jasa.2009.tm08270
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1198/jasa.2009.tm08270
       \endverb
     \endentry
     \entry{Fokianos:2020}{article}{}
@@ -1178,12 +1053,6 @@
       \verb{doi}
       \verb 10.3150/19-BEJ1132
       \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.3150/19-BEJ1132
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.3150/19-BEJ1132
-      \endverb
       \keyw{Autocorrelation,copula,ergodicity,generalized linear models,perturbation,prediction,stationarity,Volatility}
     \endentry
     \entry{Fokianos:2011}{article}{}
@@ -1213,22 +1082,15 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0047-259X}
       \field{journaltitle}{Journal of Multivariate Analysis}
       \field{number}{3}
-      \field{title}{Log-linear Poisson autoregression}
+      \field{title}{Log-linear poisson autoregression}
       \field{volume}{102}
       \field{year}{2011}
       \field{pages}{563\bibrangedash 578}
       \range{pages}{16}
       \verb{doi}
       \verb https://doi.org/10.1016/j.jmva.2010.11.002
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0047259X10002320
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0047259X10002320
       \endverb
       \keyw{Autocorrelation,Covariates,Ergodicity,Generalized linear models,Perturbation,Prediction,Stationarity,Volatility}
     \endentry
@@ -1411,24 +1273,13 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{07350015}
       \field{journaltitle}{Journal of Business \& Economic Statistics}
       \field{number}{4}
-      \field{title}{Time Series Models for Count or Qualitative Observations}
-      \field{urlday}{4}
-      \field{urlmonth}{4}
-      \field{urlyear}{2023}
+      \field{title}{Time series models for count or qualitative observations}
       \field{volume}{7}
       \field{year}{1989}
-      \field{urldateera}{ce}
       \field{pages}{407\bibrangedash 417}
       \range{pages}{11}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/1391639
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/1391639
-      \endverb
     \endentry
     \entry{Heinen:2003}{report}{}
       \name{author}{1}{}{%
@@ -1459,11 +1310,8 @@
       \field{title}{{Modelling Time Series Count Data: An Autoregressive Conditional Poisson Model}}
       \field{type}{MPRA Paper}
       \field{year}{2003}
-      \verb{urlraw}
-      \verb https://ideas.repec.org/p/pra/mprapa/8113.html
-      \endverb
-      \verb{url}
-      \verb https://ideas.repec.org/p/pra/mprapa/8113.html
+      \verb{doi}
+      \verb http://dx.doi.org/10.2139/ssrn.1117187
       \endverb
       \keyw{Forecast; volatility; transactions data}
     \endentry
@@ -1494,22 +1342,15 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{2096-2320}
       \field{journaltitle}{Journal of Management Science and Engineering}
       \field{number}{1}
-      \field{title}{A General Approach to Testing Volatility Models in Time Series}
+      \field{title}{A general approach to testing volatility models in time series}
       \field{volume}{2}
       \field{year}{2017}
       \field{pages}{1\bibrangedash 33}
       \range{pages}{33}
       \verb{doi}
       \verb https://doi.org/10.3724/SP.J.1383.201001
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S2096232019300162
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S2096232019300162
       \endverb
       \keyw{GARCH models,Nonlinear volatility dynamics,Specification testing}
     \endentry
@@ -1542,22 +1383,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Time Series Analysis}
       \field{number}{2}
-      \field{title}{THE INTEGER-VALUED AUTOREGRESSIVE (INAR(p)) MODEL}
+      \field{title}{The integer-valued autoregressive (INAR(p)) model}
       \field{volume}{12}
       \field{year}{1991}
       \field{pages}{129\bibrangedash 142}
       \range{pages}{14}
       \verb{doi}
       \verb https://doi.org/10.1111/j.1467-9892.1991.tb00073.x
-      \endverb
-      \verb{eprint}
-      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-9892.1991.tb00073.x
-      \endverb
-      \verb{urlraw}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.1991.tb00073.x
-      \endverb
-      \verb{url}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.1991.tb00073.x
       \endverb
       \keyw{Discrete time series,INAR model,conditional least-squares estimation}
     \endentry
@@ -1595,12 +1427,6 @@
       \field{series}{Statistik und ihre Anwendungen}
       \field{title}{Einführung in die Zeitreihenanalyse}
       \field{year}{2006}
-      \verb{urlraw}
-      \verb https://books.google.at/books?id=NGUkBAAAQBAJ
-      \endverb
-      \verb{url}
-      \verb https://books.google.at/books?id=NGUkBAAAQBAJ
-      \endverb
     \endentry
     \entry{Kynclova:2015}{article}{}
       \name{author}{3}{}{%
@@ -1637,22 +1463,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Forecasting}
       \field{number}{4}
-      \field{title}{Modeling Compositional Time Series with Vector Autoregressive Models}
+      \field{title}{Modeling compositional time series with vector autoregressive models}
       \field{volume}{34}
       \field{year}{2015}
       \field{pages}{303\bibrangedash 314}
       \range{pages}{12}
       \verb{doi}
       \verb https://doi.org/10.1002/for.2336
-      \endverb
-      \verb{eprint}
-      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/for.2336
-      \endverb
-      \verb{urlraw}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/for.2336
-      \endverb
-      \verb{url}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/for.2336
       \endverb
       \keyw{VAR model,compositional data,isometric log-ratio transformation,Granger causality}
     \endentry
@@ -1680,24 +1497,13 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{00401706}
       \field{journaltitle}{Technometrics}
       \field{number}{1}
-      \field{title}{Zero-Inflated Poisson Regression, with an Application to Defects in Manufacturing}
-      \field{urlday}{25}
-      \field{urlmonth}{5}
-      \field{urlyear}{2023}
+      \field{title}{Zero-inflated poisson regression, with an application to defects in manufacturing}
       \field{volume}{34}
       \field{year}{1992}
-      \field{urldateera}{ce}
       \field{pages}{1\bibrangedash 14}
       \range{pages}{14}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/1269547
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/1269547
-      \endverb
     \endentry
     \entry{Lee:2023}{article}{}
       \name{author}{3}{}{%
@@ -1732,7 +1538,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0167-9473}
       \field{journaltitle}{Computational Statistics \& Data Analysis}
       \field{title}{Modeling and inference for multivariate time series of counts based on the INGARCH scheme}
       \field{volume}{177}
@@ -1741,12 +1546,6 @@
       \range{pages}{1}
       \verb{doi}
       \verb https://doi.org/10.1016/j.csda.2022.107579
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0167947322001591
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0167947322001591
       \endverb
       \keyw{Multivariate time series of counts,MINGARCH model,QMLE,MDPDE,Change point test}
     \endentry
@@ -1792,24 +1591,13 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{10857117}
       \field{journaltitle}{Journal of Agricultural, Biological, and Environmental Statistics}
       \field{number}{3}
-      \field{title}{Spatial Regression Modeling for Compositional Data With Many Zeros}
-      \field{urlday}{19}
-      \field{urlmonth}{5}
-      \field{urlyear}{2023}
+      \field{title}{Spatial regression modeling for compositional data with many zeros}
       \field{volume}{18}
       \field{year}{2013}
-      \field{urldateera}{ce}
       \field{pages}{314\bibrangedash 334}
       \range{pages}{21}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/26452944
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/26452944
-      \endverb
     \endentry
     \entry{Liboschik:2016}{thesis}{}
       \name{author}{1}{}{%
@@ -1878,7 +1666,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Statistical Software}
       \field{number}{5}
-      \field{title}{{tscount}: An {R} Package for Analysis of Count Time Series Following Generalized Linear Models}
+      \field{title}{{tscount}: An {R} package for analysis of count time series following generalized linear models}
       \field{volume}{82}
       \field{year}{2017}
       \field{pages}{1\bibrangedash 51}
@@ -1929,12 +1717,6 @@
       \field{note}{R package version 1.4.3}
       \field{title}{tscount: Analysis of Count Time Series}
       \field{year}{2020}
-      \verb{urlraw}
-      \verb https://CRAN.R-project.org/package=tscount
-      \endverb
-      \verb{url}
-      \verb https://CRAN.R-project.org/package=tscount
-      \endverb
     \endentry
     \entry{Liu:2012}{book}{}
       \name{author}{1}{}{%
@@ -1999,7 +1781,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0169-7439}
       \field{journaltitle}{Chemometrics and Intelligent Laboratory Systems}
       \field{title}{Comparison of zero replacement strategies for compositional data with large numbers of zeros}
       \field{volume}{210}
@@ -2008,12 +1789,6 @@
       \range{pages}{1}
       \verb{doi}
       \verb https://doi.org/10.1016/j.chemolab.2021.104248
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0169743921000162
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0169743921000162
       \endverb
       \keyw{Imputation,Compositional data analysis,ZeroSum regression,Microbiome data}
     \endentry
@@ -2081,12 +1856,6 @@
       \field{series}{Chapman \& Hall/CRC Monographs on Statistics \& Applied Probability}
       \field{title}{Hidden Markov and Other Models for Discrete- valued Time Series}
       \field{year}{1997}
-      \verb{urlraw}
-      \verb https://books.google.at/books?id=ji0LKM5\_kWQC
-      \endverb
-      \verb{url}
-      \verb https://books.google.at/books?id=ji0LKM5%5C_kWQC
-      \endverb
     \endentry
     \entry{Josep:2003}{article}{}
       \name{author}{3}{}{%
@@ -2126,7 +1895,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Mathematical Geosciences}
       \field{number}{3}
-      \field{title}{Dealing with Zeros and Missing Values in Compositional Data Sets Using Nonparametric Imputation}
+      \field{title}{Dealing with zeros and missing values in compositional data sets using nonparametric imputation}
       \field{volume}{35}
       \field{year}{2003}
       \field{pages}{253\bibrangedash 278}
@@ -2190,15 +1959,6 @@
       \verb{doi}
       \verb 10.1177/1471082X14535524
       \endverb
-      \verb{eprint}
-      \verb https://doi.org/10.1177/1471082X14535524
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1177/1471082X14535524
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1177/1471082X14535524
-      \endverb
     \endentry
     \entry{here:2020}{manual}{}
       \name{author}{1}{}{%
@@ -2224,12 +1984,6 @@
       \field{note}{R package version 1.0.1}
       \field{title}{here: A Simpler Way to Find Your Files}
       \field{year}{2020}
-      \verb{urlraw}
-      \verb https://CRAN.R-project.org/package=here
-      \endverb
-      \verb{url}
-      \verb https://CRAN.R-project.org/package=here
-      \endverb
     \endentry
     \entry{Nau:14}{misc}{}
       \name{author}{1}{}{%
@@ -2286,7 +2040,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0169-7439}
       \field{journaltitle}{Chemometrics and Intelligent Laboratory Systems}
       \field{title}{zCompositions — R package for multivariate imputation of left-censored data under a compositional approach}
       \field{volume}{143}
@@ -2295,12 +2048,6 @@
       \range{pages}{12}
       \verb{doi}
       \verb https://doi.org/10.1016/j.chemolab.2015.02.019
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0169743915000490
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0169743915000490
       \endverb
       \keyw{Censored data,Nondetects,Zeros,Compositional data,Imputation,Log-ratio analysis}
     \endentry
@@ -2339,7 +2086,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Proceedings of the 5th International Workshop on Compositional Data Analysis}
       \field{month}{06}
-      \field{title}{The product space T (tools for compositional data with a total)}
+      \field{title}{The product space {$\mathcal{T}$} (tools for compositional data with a total)}
       \field{year}{2013}
       \field{pages}{143\bibrangedash 152}
       \range{pages}{10}
@@ -2377,12 +2124,6 @@
       \field{note}{ISBN 0-387-27960-1}
       \field{title}{Analysis of Integrated and Cointegrated Time Series with R}
       \field{year}{2008}
-      \verb{urlraw}
-      \verb https://www.pfaffikus.de
-      \endverb
-      \verb{url}
-      \verb https://www.pfaffikus.de
-      \endverb
     \endentry
     \entry{VAR:2008}{article}{}
       \name{author}{1}{}{%
@@ -2409,14 +2150,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Statistical Software}
       \field{number}{4}
-      \field{title}{VAR, SVAR and SVEC Models: Implementation Within {R} Package {vars}}
+      \field{title}{VAR, SVAR and SVEC models: implementation within {R} package {vars}}
       \field{volume}{27}
       \field{year}{2008}
-      \verb{urlraw}
-      \verb https://www.jstatsoft.org/v27/i04/
-      \endverb
-      \verb{url}
-      \verb https://www.jstatsoft.org/v27/i04/
+      \field{pages}{1\bibrangedash 32}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.18637/jss.v027.i04
       \endverb
     \endentry
     \entry{R:2022}{manual}{}
@@ -2445,12 +2185,6 @@
       \field{labeltitlesource}{title}
       \field{title}{R: A Language and Environment for Statistical Computing}
       \field{year}{2022}
-      \verb{urlraw}
-      \verb https://www.R-project.org/
-      \endverb
-      \verb{url}
-      \verb https://www.R-project.org/
-      \endverb
     \endentry
     \entry{Miceadds:2023}{manual}{}
       \name{author}{2}{}{%
@@ -2482,12 +2216,6 @@
       \field{note}{R package version 3.16-18}
       \field{title}{miceadds: Some Additional Multiple Imputation Functions, Especially for 'mice'}
       \field{year}{2023}
-      \verb{urlraw}
-      \verb https://CRAN.R-project.org/package=miceadds
-      \endverb
-      \verb{url}
-      \verb https://CRAN.R-project.org/package=miceadds
-      \endverb
     \endentry
     \entry{GitHub}{software}{}
       \name{author}{1}{}{%
@@ -2601,7 +2329,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Time Series Analysis}
       \field{month}{01}
-      \field{title}{Difference Equations for the Higher Order Moments and Cumulants of the INAR(p) Model}
+      \field{title}{Difference equations for the higher order moments and cumulants of the INAR(p) model}
       \field{volume}{26}
       \field{year}{2005}
       \field{pages}{17\bibrangedash 36}
@@ -2735,12 +2463,6 @@
       \field{note}{R package version 2.0-6}
       \field{title}{compositions: Compositional Data Analysis}
       \field{year}{2023}
-      \verb{urlraw}
-      \verb https://CRAN.R-project.org/package=compositions
-      \endverb
-      \verb{url}
-      \verb https://CRAN.R-project.org/package=compositions
-      \endverb
     \endentry
     \entry{Tidyverse:2019}{article}{}
       \name{author}{24}{}{%
@@ -2959,12 +2681,6 @@
       \verb{doi}
       \verb 10.1214/11-EJS627
       \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1214/11-EJS627
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1214/11-EJS627
-      \endverb
       \keyw{drift conditions,Ergodic,Feller,irreducibility,stationary,time series}
     \endentry
     \entry{Yang:2012}{thesis}{}
@@ -3027,24 +2743,13 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{00063444}
       \field{journaltitle}{Biometrika}
       \field{number}{4}
-      \field{title}{A Regression Model for Time Series of Counts}
-      \field{urlday}{4}
-      \field{urlmonth}{4}
-      \field{urlyear}{2023}
+      \field{title}{A regression model for time series of counts}
       \field{volume}{75}
       \field{year}{1988}
-      \field{urldateera}{ce}
       \field{pages}{621\bibrangedash 629}
       \range{pages}{9}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/2336303
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/2336303
-      \endverb
     \endentry
     \entry{Pscl:2008}{article}{}
       \name{author}{3}{}{%
@@ -3081,14 +2786,13 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Statistical Software}
       \field{number}{8}
-      \field{title}{Regression Models for Count Data in {R}}
+      \field{title}{Regression models for count data in {R}}
       \field{volume}{27}
       \field{year}{2008}
-      \verb{urlraw}
-      \verb http://www.jstatsoft.org/v27/i08/
-      \endverb
-      \verb{url}
-      \verb http://www.jstatsoft.org/v27/i08/
+      \field{pages}{1\bibrangedash 25}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.18637/jss.v027.i08
       \endverb
     \endentry
     \entry{Zhu:2012}{article}{}
@@ -3112,10 +2816,9 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0378-3758}
       \field{journaltitle}{Journal of Statistical Planning and Inference}
       \field{number}{4}
-      \field{title}{Zero-inflated Poisson and negative binomial integer-valued GARCH models}
+      \field{title}{Zero-inflated poisson and negative binomial integer-valued GARCH models}
       \field{volume}{142}
       \field{year}{2012}
       \field{pages}{826\bibrangedash 839}
@@ -3123,15 +2826,9 @@
       \verb{doi}
       \verb https://doi.org/10.1016/j.jspi.2011.10.002
       \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S037837581100379X
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S037837581100379X
-      \endverb
       \keyw{EM algorithm,Integer-valued GARCH model,Negative binomial,Poisson,Time series of counts,Zero inflation}
     \endentry
-    \entry{Zivot:2009}{article}{}
+    \entry{Zivot:2009}{inbook}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=18c76c6967bbfc2643e8d0c125beac31}{%
            family={Zivot},
@@ -3140,22 +2837,55 @@
            giveni={E\bibinitperiod},
            givenun=0}}%
       }
+      \name{editor}{4}{}{%
+        {{hash=48ccd2a7477afd13776060380f483d57}{%
+           family={Mikosch},
+           familyi={M\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=01dbe3e75a7dcb6ba65969e910135818}{%
+           family={Krei{ß}},
+           familyi={K\bibinitperiod},
+           given={Jens-Peter},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=8a2bb053c938a3254c68ec9fb886a907}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Richard\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=8a4670fbb0cfadae9bd2d5516104f66a}{%
+           family={Andersen},
+           familyi={A\bibinitperiod},
+           given={Torben\bibnamedelima Gustav},
+           giveni={T\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
       \strng{namehash}{18c76c6967bbfc2643e8d0c125beac31}
       \strng{fullhash}{18c76c6967bbfc2643e8d0c125beac31}
       \strng{bibnamehash}{18c76c6967bbfc2643e8d0c125beac31}
       \strng{authorbibnamehash}{18c76c6967bbfc2643e8d0c125beac31}
       \strng{authornamehash}{18c76c6967bbfc2643e8d0c125beac31}
       \strng{authorfullhash}{18c76c6967bbfc2643e8d0c125beac31}
+      \strng{editorbibnamehash}{a898ba7f29049bc4b5adc2d6113f0545}
+      \strng{editornamehash}{a898ba7f29049bc4b5adc2d6113f0545}
+      \strng{editorfullhash}{61a8af58533442f4feb0ae9bbb2f2de6}
       \field{sortinit}{Z}
       \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Handbook of Financial Time Series}
-      \field{month}{05}
+      \field{booktitle}{Handbook of Financial Time Series}
+      \field{isbn}{978-3-540-71297-8}
       \field{title}{Practical Issues in the Analysis of Univariate GARCH Models}
-      \field{year}{2008}
+      \field{year}{2009}
+      \field{pages}{113\bibrangedash 155}
+      \range{pages}{43}
       \verb{doi}
       \verb 10.1007/978-3-540-71297-8_5
       \endverb

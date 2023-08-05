@@ -83,6 +83,6 @@
 \contentsline {chapter}{\numberline {5}Conclusion}{71}{chapter.5}%
 \contentsline {chapter}{\numberline {6}Summary}{73}{chapter.6}%
 \contentsline {chapter}{\nonumberline Bibliography}{75}{chapter*.77}%
-\contentsline {chapter}{\nonumberline List of Figures}{83}{chapter*.78}%
-\contentsline {chapter}{\nonumberline List of Tables}{85}{chapter*.79}%
+\contentsline {chapter}{\nonumberline List of Figures}{81}{chapter*.78}%
+\contentsline {chapter}{\nonumberline List of Tables}{83}{chapter*.79}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

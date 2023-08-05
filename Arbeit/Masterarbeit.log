@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.7.17)  2 AUG 2023 12:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.7.17)  3 AUG 2023 12:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1749,46 +1749,33 @@ Overfull \hbox (0.10713pt too wide) in paragraph at lines 140--140
 n-di-tional het-ero-ske-dasti-city'. \T1/lmr/m/it/12 Journal
  []
 
-[75] [76]
-Overfull \hbox (7.2259pt too wide) in paragraph at lines 140--140
-\T1/lmr/m/sc/12 url\T1/lmr/m/n/12 : []$\T1/lmtt/m/n/12 https : / / www . scienc
-edirect . com / science / article / pii / S2452306221001374$[]\T1/lmr/m/n/12 . 
-
- []
-
-[77]
-Overfull \hbox (13.75pt too wide) in paragraph at lines 140--140
-\T1/lmtt/m/n/12 / / doi . org / 10 . 1111 / j . 1467 -[] 9892 . 1991 . tb00073 
-. x$[]\T1/lmr/m/n/12 . eprint: []$\T1/lmtt/m/n/12 https : / / onlinelibrary .
- []
-
-[78]
+[75] [76] [77]
 Overfull \hbox (1.4189pt too wide) in paragraph at lines 140--140
 [][]\T1/lmr/m/n/12 Lubbe, S., P. Filzmoser, and M. Templ (2021). `  Com-par-iso
 n of zero re-place-ment strategies
  []
 
-[79] [80]
+[78]
 Overfull \hbox (4.55013pt too wide) in paragraph at lines 140--140
 [][]\T1/lmr/m/n/12 Silva, N., I. Pereira, and M. Silva (May 2009). `  Fore-cast
 -ing in INAR (1) model'. \T1/lmr/m/it/12 REVSTAT
  []
 
-[81] [82
-
-
-] (Masterarbeit.lof)
+[79] [80] (Masterarbeit.lof)
 \tf@lof=\write7
 \openout7 = `Masterarbeit.lof'.
 
- [83] [84
+ [81
+
+
+] [82
 
 
 ] (Masterarbeit.lot)
 \tf@lot=\write8
 \openout8 = `Masterarbeit.lot'.
 
- [85]
+ [83]
 (Masterarbeit.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
@@ -1801,10 +1788,10 @@ Package logreq Info: Writing requests to 'Masterarbeit.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27433 strings out of 475516
- 527725 string characters out of 5759501
- 1935238 words of memory out of 5000000
- 47831 multiletter control sequences out of 15000+600000
+ 27432 strings out of 475516
+ 527728 string characters out of 5759501
+ 1934238 words of memory out of 5000000
+ 47832 multiletter control sequences out of 15000+600000
  681957 words of font info for 133 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  108i,14n,107p,10909b,2365s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1833,9 +1820,9 @@ a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Alex/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Alex/A
 ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 >
-Output written on Masterarbeit.pdf (97 pages, 8616422 bytes).
+Output written on Masterarbeit.pdf (95 pages, 8590582 bytes).
 PDF statistics:
- 1744 PDF objects out of 2073 (max. 8388607)
- 412 named destinations out of 1000 (max. 500000)
+ 1656 PDF objects out of 1728 (max. 8388607)
+ 410 named destinations out of 1000 (max. 500000)
  702 words of extra memory for PDF output out of 10000 (max. 10000000)
 
